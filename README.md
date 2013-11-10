@@ -1,4 +1,4 @@
-wordpress-theme
+Thème Museomix
 ===============
 
-Thème du site Wordpress de Museomix 2013
+Thème du site Museomix.org 2013
