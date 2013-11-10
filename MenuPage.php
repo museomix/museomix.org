@@ -19,6 +19,7 @@
 					'galerie'=> 'Gallery'
 				);
 
+
 			} else {
 				$SectionsPage = array(
 					'presentation'=> 'Présentation',
@@ -34,7 +35,7 @@
 
 		if(('prototype')==$post->post_type){
 			if($langage=="en") {
-				$SectionsPage = array(
+				$menu_default_items = array(
 					'scenario'=> 'User case',
 					'intentions'=> 'Goals',
 					'materiel'=> 'Tools & techs',
@@ -42,9 +43,17 @@
 					'faq'=> 'FAQ',
 					'equipe'=> 'Team',
 				);
-
+				foreach($menu_default_items as $t => $v):
+					if ($t === "equipe"):
+						if (get_field("description_equipe", $post->ID) !== '' && get_field("description_equipe", $post->ID) !== false || get_field("photo_equipe", $post->ID) !== '' && get_field("photo_equipe", $post->ID) !== false):
+							$SectionsPage[$t] = $v;
+						endif;
+					elseif (get_field($t, $post->ID) !== '' && get_field($t, $post->ID) !== false):
+						$SectionsPage[$t] = $v;
+					endif;
+				endforeach;
 			} else {
-				$SectionsPage = array(
+				$menu_default_items = array(
 					'scenario'=> 'Scénario utilisateur',
 					'intentions'=> 'Objectifs',
 					'materiel'=> 'Outils & techniques',
@@ -52,6 +61,15 @@
 					'faq'=> 'FAQ',
 					'equipe'=> 'Equipe',
 				);
+				foreach($menu_default_items as $t => $v):
+					if ($t === "equipe"):
+						if (get_field("description_equipe", $post->ID) !== '' && get_field("description_equipe", $post->ID) !== false || get_field("photo_equipe", $post->ID) !== '' && get_field("photo_equipe", $post->ID) !== false):
+							$SectionsPage[$t] = $v;
+						endif;
+					elseif (get_field($t, $post->ID) !== '' && get_field($t, $post->ID) !== false):
+						$SectionsPage[$t] = $v;
+					endif;
+				endforeach;
 			}
 		}
 	}

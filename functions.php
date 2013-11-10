@@ -178,17 +178,13 @@ function ListePrototypes($atts){
 	if(empty($atts['lieu'])) {
 		$musId = $post->ID;
 	} else {
-		$musId = icl_object_id($atts['lieu'],'museomix',true);
+		$musId = intval($atts['lieu']);
 	}
 	$protos = get_posts(array('post_type'=>'prototype','posts_per_page' => -1));
-	$do_not_duplicate = array();
 	foreach($protos as $proto){
 		$id = $proto->ID;
-		if(in_array($id,$do_not_duplicate,true)){
-		
-		}else{
-
-		if(get_field('museomix',$id)->ID==$musId || $musId=="all" || (is_null(icl_object_id($id,'any',false,'en')) && get_field('museomix',$id)->ID == $atts['lieu']) || (is_null(icl_object_id($id,'any',false,'fr')) && get_field('museomix',$id)->ID==icl_object_id($atts['lieu'],'any',false,'en')) ) {
+	
+		if(get_field('museomix',$id)->ID==$musId || $musId=="all" || (is_null(icl_object_id($id,'any',false,'en')) && get_field('museomix',$id)->ID == icl_object_id($atts['lieu'],'museomix',true)) || (is_null(icl_object_id($id,'any',false,'fr')) && get_field('museomix',$id)->ID==icl_object_id($atts['lieu'],'museomix',true)) ) {
 			$titre = str_replace(' &#8211; ','<br />',$proto->post_title);
 			$imag=get_field('visuel_prototype',$id);
 			if(empty($imag)) {
@@ -202,7 +198,6 @@ function ListePrototypes($atts){
 				$imag[0] = get_bloginfo('template_directory').'/images/logo_museomix_prototype.png';
 			$r[] = '<a class="ln-bloc-lieu btn btn-large" style="background: #ffffff url('.$imag[0].') no-repeat center center;" href="'.get_permalink($id).'"><span class="titre-bloc-lieu" ><span class="tx-bloc-lieu">'.$titre.'</span></span></a>';
 
-		}
 		}
 	}
 	if(!$r) return '';

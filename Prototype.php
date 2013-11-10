@@ -162,7 +162,7 @@ function ContenuSection($id){
 		}
 	}
 
-	echo $contenu; 
+	return $contenu; 
 }
 
 ?>
@@ -192,7 +192,7 @@ function ContenuSection($id){
 						?>
 					</section>
 				<?php foreach($SectionsPage as $id => $titre):  ?>
-	 			
+	 				<?php if(!is_null(ContenuSection($id))): ?>
 					<section class="section-1 liste-prototype-lieu" id="<?php echo $id; ?>" style="min-height: 300px; position: relative;"> 
 						
 						<?php #if('presentation'!=$id&&'participer'!=$id): ?>
@@ -205,10 +205,10 @@ function ContenuSection($id){
 						
 						<?php #endif; ?>
 						
-						<?php ContenuSection($id); ?>
+						<?php echo ContenuSection($id); ?>
 	
 					</section>
-				 
+				 	<?php endif; ?>
 				<?php endforeach; ?>
 
 	<?php global $withcomments;

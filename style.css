@@ -586,6 +586,9 @@ body.home .navbar {
 	float:none;
 	display:inline-block;
 }
+body#lieux .lst-bloc-lieux .elm-bloc-lieu,body#locations .lst-bloc-lieux .elm-bloc-lieu {
+	width:33%;
+}
 .lst-bloc-lieux .elm-bloc-lieu>a {
 	width:95%;
 	background-size:100% auto !important;
