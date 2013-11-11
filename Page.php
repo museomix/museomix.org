@@ -235,20 +235,41 @@ function ContenuSection($id){
 	}
 	elseif('partenaires'==$id){
 		if($partenaires=get_field('sponsor')){
-			foreach($partenaires as $part){
-				//$lien = get_permalink($part->ID);
-				$lien = get_field('lien',$part->ID);
-				$logo = get_field('logo',$part->ID);
-				$logo = wp_get_attachment_image_src($logo,'thumbnail');
-				if($logo) $logo = '<img class="logo-elm-part" src="'.$logo[0].'" /><br />';
-				else $logo = '<img class="logo-elm-part" src="'.get_template_directory_uri().'/images/pas-de-logo.png" /><br />';
-				$elm = '<a class="ln-elm-part" href="'.$lien.'">'.$logo.$part->post_title.'</a>';
-				$liste[] = $elm;
+			$liste = array();
+
+			foreach($partenaires as $partner){
+
+		$ids = icl_object_id($partner->ID,'sponsor',true);
+
+
+
+		$logo = get_field('logo', $ids);
+		$titre = get_the_title($ids);
+		if(get_field('texte_de_lien', $ids)):
+		$texte_lien = get_field('texte_de_lien', $ids);
+		else:
+		$texte_lien = "Visiter le site";
+		endif;
+		$lien = get_field('lien', $ids);
+		$description = get_field('description_de_partenaire', $ids);
+
+			$list = get_field('partenariat', $ids);
+			if (is_array($list)):
+				$part = "<p class='type'>".implode(', ', array_map("unslug",$list))."</p>";
+			else:
+				$part = "<p class='type'>".$list."</p>";
+			endif;
+
+		$elm = '<div class="partenaire-image-container">'.wp_get_attachment_image($logo,"large").'</div><div class="partenaire-content"><h3>'.$titre.'</h3>'.$part.'<p>'.$description.'</p><a href="'.$lien.'" target="blank">'.$texte_lien.'</a></div>';
+array_push($liste,$elm);
+
 			}
-			$contenu = '<ul class="lst-part"><li class="li-part">'.implode('</li><li class="li-part">',$liste).'</li></ul>';
+			$contenu = '<ul class="landscape"><li>'.implode('</li><li>',$liste).'</li></ul>';
 		}else{
 			$contenu = '<span style="margin-left: 25px;color: #999;">pas de partenaires (champ: partenaires)</span>';		
 		}
+
+
 	}
 	elseif('equipe'==$id){
 		$contenu .= '<div class="row-fluid">';
