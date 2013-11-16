@@ -188,9 +188,11 @@ class Maze(FloatLayout):
         self.add_widget(self.zoneStick)
 
     def checkDropZone(self, instance, value):
+        #True check is value == 5
         if value <= 5 and not self.bell:
             self.bell = True
             instance.source = 'images/drop_zone_VALID.png'
+        #True check is value == 8
         elif value <= 8 and not self.stick:
             self.stick = True
             instance.source = 'images/drop_zone_VALID.png'
@@ -281,8 +283,6 @@ class WolfAttack(FloatLayout):
             instance.source = 'images/drop_zone_VALID.png'
 
     def startAttack(self, widget):
-        sound = SoundLoader.load('musics/wolf.mp3')
-        sound.play()
         self.remove_widget(self.collarZone)
         anim = Animation(x=310, y=300,t='in_out_circ', d=3)
         anim.on_complete = self.attack
