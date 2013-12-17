@@ -52,6 +52,10 @@ blockquote {
 .clear {
 	clear: both;
 }
+.size-full {
+display:block;
+width:100%;
+}
 
 .lst {
 	list-style-type: none;
@@ -468,7 +472,7 @@ body.home .navbar {
 }
 
 .section-1 > blockquote, .section-1 > p,  .section-1 > ul {
-	max-width: 650px;
+	/*max-width: 650px;*/
 }
 
 .section-1 > blockquote {
@@ -574,7 +578,7 @@ body.home .navbar {
 
 .lst-bloc-lieux {
 	background: #eee;
-	padding: 30px 20px 20px 30px;
+
 	max-width: none !important;
 }
 
@@ -583,14 +587,19 @@ body.home .navbar {
 }
 .lst-bloc-lieux .elm-bloc-lieu {
 	width:50%;
-	float:none;
-	display:inline-block;
+	float:left;
 }
 body#lieux .lst-bloc-lieux .elm-bloc-lieu,body#locations .lst-bloc-lieux .elm-bloc-lieu {
-	width:33%;
+	width:249px;
+	margin:0 20px 10px 0;
 }
+
+.elm-bloc-lieu:nth-child(3n){
+    margin-right: 0 !important;
+}
+
 .lst-bloc-lieux .elm-bloc-lieu>a {
-	width:95%;
+	width:100%;
 	background-size:100% auto !important;
 }
 #les-prototypes .elm-bloc-lieu {
