@@ -1,0 +1,60 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Museomix config\n"
+"POT-Creation-Date: 2014-01-28 23:54+0100\n"
+"PO-Revision-Date: 2014-01-28 23:54+0100\n"
+"Last-Translator: Samy Rabih <contact@lahaut.info>\n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.3\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Poedit-KeywordsList: _e;__\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: TypesPages.php:63 TypesPages.php:75
+msgid "Locations"
+msgstr "Lieux"
+
+#: TypesPages.php:64
+msgid "Location"
+msgstr "Lieu"
+
+#: TypesPages.php:65
+msgid "Add"
+msgstr "Ajouter"
+
+#: TypesPages.php:66
+msgid "Add a location"
+msgstr "Ajouter un lieu"
+
+#: TypesPages.php:67
+msgid "Edit the location"
+msgstr "Modifier le lieu"
+
+#: TypesPages.php:68
+msgid "New"
+msgstr "Nouveau lieu"
+
+#: TypesPages.php:69
+msgid "All the locations"
+msgstr "Tous les lieux"
+
+#: TypesPages.php:70
+msgid "View the location"
+msgstr "Voir le lieu"
+
+#: TypesPages.php:71
+msgid "Search"
+msgstr "Rechercher"
+
+#: TypesPages.php:72
+msgid "No element"
+msgstr "Aucun élément"
+
+#: TypesPages.php:73
+msgid "No element in the trash"
+msgstr "Aucun élément dans la corbeille"

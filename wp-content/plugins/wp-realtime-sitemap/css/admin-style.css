@@ -1,0 +1,17 @@
+.wprs-update-nag {
+	line-height: 19px;
+	padding: 5px 0; /*padding:4px 10px 6px;*/
+	font-size: 12px;
+	text-align: center;
+	margin: 20px 15px 0 15px;
+	border: 1px solid #E6DB55;
+	background-color: #FFFBCC;
+	color: #555;
+	-moz-border-radius: 0 0 6px 6px;
+	-webkit-border-bottom-right-radius: 6px;
+	-webkit-border-bottom-left-radius: 6px;
+	-khtml-border-bottom-right-radius: 6px;
+	-khtml-border-bottom-left-radius: 6px;
+	border-bottom-right-radius: 6px;
+	border-bottom-left-radius: 6px;
+}

@@ -1,0 +1,3909 @@
+# Translation of BackWPup Pro in German
+# This file is distributed under the same license as the BackWPup Pro package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2013-12-22 00:54+0100\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Poedit 1.6.3\n"
+"Project-Id-Version: BackWPup Pro\n"
+"POT-Creation-Date: \n"
+"Last-Translator: Daniel Hüsken <mail@danielhuesken.de>\n"
+"Language-Team: \n"
+"Language: de_DE\n"
+
+msgid "Backup database structure \"%s\""
+msgstr "Backup Datenbank Struktur \"%s\""
+
+msgid "Backup database table \"%s\" with \"%d\" records"
+msgstr "Sichere Datenbank-Tabelle \"%s\" mit \"%d\" Einträgen"
+
+msgid "Backup only WordPress Database tables"
+msgstr "Nur die WordPress Datenbank Tabellen sichern"
+
+msgid "Backup table \"%s\" data"
+msgstr "Sichere Tabelle \"%s\" Daten"
+
+msgid "Cannot open backup file"
+msgstr "Konnte Backup nicht öffnen"
+
+msgid "Creates an .sql database backup file"
+msgstr "Erstellt ein Datenbank-Backup (.sql, .xml)"
+
+msgid "Database XML backup done!"
+msgstr "Datenbank XML Backup erstellt!"
+
+msgid "Backup database create view \"%s\""
+msgstr "Datenbank Backup für View \"%s\""
+
+msgid "'Backup file compression"
+msgstr "Kompression der Backup-Datei"
+
+msgctxt "Plugin name; Plugin Version"
+msgid "[INFO] %1$s version %2$s; A project of Inpsyde GmbH"
+msgstr "[INFO] %1$s Version %2$s; Ein Projekt der Inpsyde GmbH"
+
+msgctxt "WordPress Version"
+msgid "[INFO] WordPress version %s"
+msgstr "[INFO] WordPress Version %s"
+
+msgid ""
+"Use your backup archives to save your entire WordPress installation "
+"including <code>/wp-content/</code>. Push them to an external storage "
+"service if you don’t want to save the backups on the same server. With a "
+"single backup archive you are able to restore an installation. Use a tool "
+"like phpMyAdmin or a plugin like <a href=\"http://wordpress.org/plugins/"
+"adminer/\" target=\"_blank\">Adminer</a> to restore your database backup "
+"files."
+msgstr ""
+"Benutze deine Backup-Archive, um deine gesamte WordPress-Installation zu "
+"sichern, einschließlich <code>/wp-content/</code>. Lade sie zu einem "
+"externen Dienst hoch, wenn du deine Backups nicht auf demselben Server "
+"speichern möchtest. Mit einem einzigen Backup-Archiv kannst du deine "
+"Installation wiederherstellen. Benutze ein serverseitiges Tool wie "
+"phpMyAdmin, oder ein Plugin wie <a href=\"http://wordpress.org/plugins/"
+"adminer/\" target=\"_blank\">Adminer</a>, um deine Datenbanksicherung "
+"wiederherzustellen."
+
+msgid "Length for table backup is not correctly set: %1$s "
+msgstr "Länge des Tabellen Backups ist nicht richtig gesetzt: %1$s "
+
+msgid "Database backup done!"
+msgstr "Datenbank-Backup fertig!"
+
+msgid "No tables for XML backup"
+msgstr "Es gibt keine Tabellen für einen XML Backup"
+
+msgid "No tables to backup."
+msgstr "Es gibt keine Tabellen zu sichern"
+
+msgid "'Backup file name"
+msgstr "Name der Backup-Datei"
+
+msgid "Start for table backup is not correctly set: %1$s "
+msgstr "Start für den Tabellen Backup ist nicht richtig gesetzt: %1$s "
+
+msgid "Added database XML backup \"%1$s\" with %2$s to backup file list"
+msgstr ""
+"XML Datenbank Backup \"%1$s\" mit %2$s zur Backup-Datei-Liste hinzugefügt"
+
+msgid "Added database backup \"%1$s\" with %2$s to backup file list"
+msgstr "Datenbank-Backup \"%1$s\" mit %2$s zur Backup-Datei-Liste hinzugefügt"
+
+msgid ""
+"With a single backup archive you are able to restore an installation. Use a "
+"tool like phpMyAdmin or a plugin like <a href=\"http://wordpress.org/plugins/"
+"adminer/\" target=\"_blank\">Adminer</a> to restore your database backup "
+"files."
+msgstr ""
+"Mit einem einzigen Backup-Archiv kannst du deine Installation "
+"wiederherstellen. Benutze ein serverseitiges Tool wie phpMyAdmin, oder ein "
+"Plugin wie <a href=\"http://wordpress.org/plugins/adminer/\" target=\"_blank"
+"\">Adminer</a>, um deine Datenbanksicherung wiederherzustellen."
+
+msgid "Temporary folder %s is not writable."
+msgstr "Temporärer Ordner %s ist nicht beschreibbar."
+
+msgid "%d. Try to backup database as XML&#160;&hellip;"
+msgstr "%d. Versuche, Datenbank als XML zu sichern&#160;&hellip;"
+
+msgid ""
+"Display folder sizes in the files tab when editing a job. (Might increase "
+"loading time of files tab.)"
+msgstr ""
+"Ordnergrößen im Tab Dateien anzeigen, wenn ein Auftrag bearbeitet wird. "
+"(Kann die Ladezeit des Tab erhöhen.)"
+
+msgid "Could not generate a WordPress export file."
+msgstr "Konnte keine WordPress-Exportdatei erstellen."
+
+msgctxt "Archive compression method"
+msgid "Compressing files as %s. Please be patient, this may take a moment."
+msgstr "Komprimiere Dateien als %s. Bitte habe einen Moment Geduld."
+
+msgid "<a class=\"backwpup-get-pro\" href=\"%s\">Get BackWPup Pro now.</a>"
+msgstr ""
+"<a class=\"backwpup-get-pro\" href=\"%s\">Wechsle jetzt zu BackWPup Pro.</a>"
+
+msgid "[INFO] Maximum PHP script execution time is %1$d seconds"
+msgstr "[INFO] Maximum PHP script execution time ist %1$d Sekunden"
+
+msgid ""
+"BackWPup’s job wizards make planning and scheduling your backup jobs a "
+"breeze."
+msgstr ""
+"Die Assistenten in BackWPup machen das Planen und terminieren deiner "
+"Sicherungen zu einem Spaziergang."
+
+msgid ""
+"Ready to <a href=\"%1$s\">set up a backup job</a>? You can <a href=\"%2$s"
+"\">use the wizards</a> or plan your backup in expert mode."
+msgstr ""
+"<a href=\"%1$s\">Bereit, einen Backup-Auftrag anzulegen</a>? Benutze die <a "
+"href=\"%2$s\">Assistenten</a>, oder plane dein Backup im Expertenmodus."
+
+msgid ""
+"Ready to set up a backup job? Use one of the wizards to plan what you want "
+"to save."
+msgstr ""
+"Bereit, einen Backup-Auftrag anzulegen? Benutze einen der Assistenten, um "
+"deine Sicherung zu planen."
+
+msgid "Backup Files"
+msgstr "Backup-Dateien"
+
+msgid ""
+"Use your backup archives to save your entire WordPress installation "
+"including <code>/wp-content/</code>. Push them to an external storage "
+"service if you don’t want to save the backups on the same server."
+msgstr ""
+"Benutze deine Backup-Archive, um deine gesamte WordPress-Installation zu "
+"sichern, einschließlich <code>/wp-content/</code>. Lade sie zu einem "
+"externen Dienst hoch, wenn du deine Backups nicht auf demselben Server "
+"speichern möchtest."
+
+msgid ""
+"Use one of the wizards to plan a backup, or use <a href=\"%s\">expert mode</"
+"a> for full control over all options."
+msgstr ""
+"Verwende einen der Assistenten, um dein Backup zu planen, oder den <a href="
+"\"%s\">Expertenmodus</a> für die volle Übersicht über alle Optionen."
+
+msgid ""
+"<strong>Please note: You are solely responsible for the security of your "
+"data; the authors of this plugin are not.</strong>"
+msgstr ""
+"<strong>Bitte beachte: Für die Sicherheit deiner Daten bist du allein "
+"verantwortlich; die Autoren dieses Plugins sind es nicht.</strong>"
+
+msgid ""
+"Use the short links in the <strong>First steps</strong> box to plan and "
+"schedule backup jobs."
+msgstr ""
+"Benutze die Schnellverweise in <strong>Erste Schritte</strong>, um einen "
+"Backup-Auftrag zu planen und zu terminieren."
+
+msgid "<a href=\"%s\">Add a new backup job</a> and plan what you want to save."
+msgstr ""
+"<a href=\"%s\">Erstelle einen Backup-Auftrag</a> und plane deine Sicherung."
+
+msgctxt "Pro teaser box"
+msgid "Thank you for using BackWPup!"
+msgstr "Danke, dass du BackWPup benutzt!"
+
+msgctxt "Pro teaser box"
+msgid "Get access to:"
+msgstr "Erhalte Zugang zu:"
+
+msgctxt "Pro teaser box"
+msgid "First-class <strong>dedicated support</strong> at MarketPress Helpdesk."
+msgstr ""
+"Erstklassigem <strong>persönlichen Support</strong> im Helpdesk bei "
+"MarketPress."
+
+msgctxt "Pro teaser box"
+msgid "Differential backups to Google Drive and other cloud storage service."
+msgstr "Differenzielle Backups zu Google Drive anderen Cloud-Storage-Diensten."
+
+msgctxt "Pro teaser box"
+msgid "Easy-peasy wizards to create and schedule backup jobs."
+msgstr ""
+"Kinderleichte Assistenten zum Erstellen und Planen von Backup-Aufträgen."
+
+msgctxt "Pro teaser box, link text"
+msgid "And more…"
+msgstr "Und mehr…"
+
+msgctxt "Pro teaser box, link title"
+msgid "Get BackWPup Pro now"
+msgstr "Wechsle jetzt zu BackWPup Pro"
+
+msgctxt "Pro teaser box, link text"
+msgid "Get BackWPup Pro now"
+msgstr "Wechsle jetzt zu BackWPup Pro"
+
+msgid "Job ID: %d"
+msgstr "Auftrags-ID: %d"
+
+msgid "Job completed"
+msgstr "Auftrag vollständig"
+
+msgid ""
+"Looks like you haven’t set up any API keys yet. Head over to <a href=\"%s"
+"\">Settings | API-Keys</a> and get Google Drive all set up, then come back "
+"here."
+msgstr ""
+"Sieht so aus, als hättest du bis jetzt noch keine API-Schlüssel erstellt. "
+"Gehe zu <a href=\"%s\">Einstellungen | API-Schlüssel</a> und setze die "
+"Verbindung zu Google Drive auf, kann komm’ hierhin zurück."
+
+msgid "Folder in Google Drive"
+msgstr "Ordner in Google Drive"
+
+msgid "Next ›"
+msgstr "Weiter ›"
+
+msgid "‹ Previous"
+msgstr "‹ Zurück"
+
+msgid "Error transfering backup to %$1s."
+msgstr "Fehler beim Übertragen des Backups zu %$1s."
+
+msgid "Error transfering file chunks to %$1s."
+msgstr "Fehler beim Übertragen von Datei-Teilen zu %$1s."
+
+msgid "Google Drive"
+msgstr "Google Drive"
+
+msgid ""
+"Number of files to keep in folder. (Archives deleted before 3 months after "
+"they have been stored may cause extra costs when deleted.)"
+msgstr ""
+"Anzahl der im Ordner verbleibenden Dateien. (Archive, die vor Ablauf von 3 "
+"Monaten gelöscht werden, können zusätzliche Kosten verursachen.)"
+
+msgid "%d. Try to backup database&#160;&hellip;"
+msgstr "%d. Versuche, die Datenbank zu sichern&#160;&hellip;"
+
+msgctxt "Dashboard heading"
+msgid "Planning backups"
+msgstr "Backups planen"
+
+msgctxt "Dashboard heading"
+msgid "Restoring backups"
+msgstr "Backups wiederherstellen"
+
+msgctxt "Dashboard heading"
+msgid "Ready to set up a backup job?"
+msgstr "Bereit, einen Backup-Auftrag zu erstellen?"
+
+msgid ""
+"Job will restart on every main step if the last restart has been longer than "
+"3 seconds ago. This is to prevent running in an execution timeout. It will "
+"not work with CLI. If <code>ALTERNATE_WP_CRON</code> has been defined, "
+"WordPress Cron will be used."
+msgstr ""
+"Der Auftrag wird bei jedem Hauptschritt neu gestartet, sofern der letzte "
+"Neustart länger als 3 Sekunden zurück liegt. Dies soll das das Auftreten von "
+"Zeitüberschreitungen verhindern. Es funktioniert nicht in Verbindung mit "
+"CLI. Wenn <code>ALTERNATE_WP_CRON</code> definiert wurde, wird der WordPress-"
+"Cron verwendet."
+
+msgid ""
+"Job will restart before hitting maximum execution time. It will not work "
+"with CLI and not on every step during execution. If <code>ALTERNATE_WP_CRON</"
+"code> has been defined, WordPress Cron will be used."
+msgstr ""
+"Auftrag wird neu gestartet, bevor die Maximal Execution Time erreicht wird. "
+"Es funktioniert nicht in Verbindung mit CLI. Wenn <code>ALTERNATE_WP_CRON</"
+"code> definiert wurde, wird der WordPress-Cron verwendet."
+
+msgid "%d. Try to backup MySQL system&#160;&hellip;"
+msgstr "%d. Versuche, das MySQL-System zu sichern&#160;&hellip;"
+
+msgid ""
+"PHP cURL extension must be installed to use the full plugin functionality."
+msgstr ""
+"Die cURL-Erweiterung für PHP muss installiert sein, um das Plugin im Vollem "
+"Umfang zu nutzen."
+
+msgid ""
+"The HTTP response test result is a wrong HTTP status: %s. It should be "
+"status 200."
+msgstr ""
+"Der HTTP-Response-Test hat einen falschen HTTP-Status ergeben: %s. Es sollte "
+"Status 200 sein."
+
+msgid ""
+"- Use site settings: retrieve the email settings of your site.<br />-PHP "
+"mail(): needs more PHP memory"
+msgstr ""
+"- Verwende Seiteneinstellungen: Rufe die E-Mail-Einstellungen von deiner "
+"Seite ab.<br />-PHP mail():benötigt mehr PHP-Speicher"
+
+msgid "Log of running job"
+msgstr "Protokoll des laufenden Auftrags"
+
+msgid ""
+"Is your blog protected with HTTP basic authentication (.htaccess)? If yes, "
+"please set the username and password for authentication here."
+msgstr ""
+"Ist deine Wesbite mit einer HTTP-Authentifizierung geschützt (.htaccess)? "
+"Wenn ja, trage hier bitte die Zugangsdaten ein."
+
+msgid "The BackWPup HTTP response header returns a false value: \"%s\""
+msgstr ""
+"Der HTTP Response Header in BackWPup gibt einen fehlerhaften Wert zurück: "
+"\"%s\""
+
+msgid "Log folder:"
+msgstr "Protokoll-Ordner:"
+
+msgid "Log folder %s is not writable."
+msgstr "Protokoll-Ordner %s ist nicht beschreibbar."
+
+msgid "File %s moved to trash in Google Drive"
+msgstr "Datei %s in den Papierkorb bei Google Drive verschoben"
+
+msgid "Folder %s moved to trash in Google Drive"
+msgstr "Ordner %s in den Papierkorb bei Google Drive verschoben"
+
+msgid "Select a region:"
+msgstr "Wähle eine Region:"
+
+msgid "Connected to Glacier vault \"%1$s\" with %2$d archives and size of %3$d"
+msgstr ""
+"Verbunden mit Glacier-Vault \"%1$s\" mit %2$d archives einer Größe von %3$d"
+
+msgid "New job %s generated."
+msgstr "Neuer Auftrag %s erstellt."
+
+msgid "https://marketpress.com/product/backwpup-pro/"
+msgstr "https://marketpress.de/product/backwpup-pro/"
+
+msgid "WordPress Backup Plugin"
+msgstr "WordPress Backup Plugin"
+
+msgid "Inpsyde GmbH"
+msgstr "Inpsyde GmbH"
+
+msgid "http://inpsyde.com"
+msgstr "http://inpsyde.com"
+
+msgid "3.1"
+msgstr "3.1"
+
+msgid "Backup to Google Drive"
+msgstr "Backup zu Google Drive"
+
+msgid "Backup to Amazon Glacier"
+msgstr "Backup zu Amazon Glacier"
+
+msgid "Last log"
+msgstr "Letztes Log"
+
+msgid "GDrive API: %s"
+msgstr "GDrive API: %s"
+
+msgid "GDrive: Authenticated."
+msgstr "GDrive: Authentifiziert."
+
+msgid "%d. Try to send backup file to Google Drive&#160;&hellip;"
+msgstr "%d. Versuche das Backup zu Google Drive zu senden&#160;&hellip;"
+
+msgid "Uploading to Google Drive&#160;&hellip;"
+msgstr "Upload zu Google Drive&#160;&hellip;"
+
+msgid "Google Drive API: could not create resumable file"
+msgstr "Google Drive API: kann keine fortsetzbare Datei generieren"
+
+msgid "Can not resume transfer backup to Google Drive!"
+msgstr "Kann den Backup-Transfer zu Google Drive nicht fortsetzen!"
+
+msgid "Error while deleting file from Google Drive: %s"
+msgstr "Fehler beim Löschen der Datei von Google Drive: %s"
+
+msgid "One file deleted from Google Drive"
+msgid_plural "%d files deleted on Google Drive"
+msgstr[0] "Eine Datei von Google Drive gelöscht"
+msgstr[1] "%d Dateien von Google Drive gelöscht"
+
+msgid "Google Drive API: %s"
+msgstr "Google Drive API: %s"
+
+msgid "%d. Try to sync files to Google Drive&#160;&hellip;"
+msgstr "%d. Versuche Dateien mit Google Drive zu synchronisieren&#160;&hellip;"
+
+msgid "Retrieving folder list from Google Drive"
+msgstr "Abrufen der Ordnerliste von Google Drive"
+
+msgid "Syncing changed files to Google Drive"
+msgstr "Synchronisiere geänderte Dateien mit Google Drive"
+
+msgid "File %s updated on Google Drive"
+msgstr "Datei %s auf Google Drive aktualisiert"
+
+msgid "File %s uploaded to Google Drive"
+msgstr "Datei %s zu Google Drive hochgeladen"
+
+msgid "Extra file %s updated on Google Drive"
+msgstr "Extra Datei %s auf Google Drive aktualisiert"
+
+msgid "Extra file %s uploaded to Google Drive"
+msgstr "Extra Datei %s auf Google Drive hochgeladen"
+
+msgid "Amazon Glacier"
+msgstr "Amazon Glacier"
+
+msgid "Amazon Glacier Region"
+msgstr "Amazon Glacier Region"
+
+msgid "US Standard"
+msgstr "US Standard"
+
+msgid "US West (Northern California)"
+msgstr "US West (Northern California)"
+
+msgid "US West (Oregon)"
+msgstr "US West (Oregon)"
+
+msgid "EU (Ireland)"
+msgstr "EU (Ireland)"
+
+msgid "Asia Pacific (Tokyo)"
+msgstr "Asia Pacific (Tokyo)"
+
+msgid "Asia Pacific (Singapore)"
+msgstr "Asia Pacific (Singapore)"
+
+msgid "Asia Pacific (Sydney)"
+msgstr "Asia Pacific (Sydney)"
+
+msgid "South America (Sao Paulo)"
+msgstr "South America (Sao Paulo)"
+
+msgid "Amazon Access Keys"
+msgstr "Amazon Zugriffsschlüssel"
+
+msgid "Vault"
+msgstr "Tresor"
+
+msgid "Vault selection"
+msgstr "Tresorauswahl"
+
+msgid "Create a new vault"
+msgstr "Neuen Tresor erstellen"
+
+msgid "Glacier Backup settings"
+msgstr "Glacier Backup Einstellungen"
+
+msgid "Vault %1$s created."
+msgstr "Tresor %1$s erstellt."
+
+msgid "Vault %s could not be created."
+msgstr "Tresor %s konnte nicht erstellt werden."
+
+msgid "Select an Amazon Glacier region:"
+msgstr "Wähle Amazon Glacier Region:"
+
+msgid "Vault:"
+msgstr "Tresor:"
+
+msgid "New Vault:"
+msgstr "Neuer Tresor:"
+
+msgid "AWS API: %s"
+msgstr "AWS API: %s"
+
+msgid "%d. Trying to send backup file to Amazon Glacier&#160;&hellip;"
+msgstr "%d. Versuche Backup-Datei zu Amazon Glacier zu senden&#160;&hellip;"
+
+msgid "Glacier vault \"%s\" does not exist!"
+msgstr "Glacier Tresor \"%s\" existiert nicht!"
+
+msgid "Starting upload to Amazon Glacier&#160;&hellip;"
+msgstr "Upload zu Amazon Glacier wird gestartet&#160;&hellip;"
+
+msgid "Archive ID: %s"
+msgstr "Archiv ID: %s"
+
+msgid "Cannot delete archive from %s."
+msgstr "Kann das Archiv aus %s nicht löschen."
+
+msgid "One file deleted on vault."
+msgid_plural "%d files deleted on vault"
+msgstr[0] "Eine Datei aus Tresor entfernt."
+msgstr[1] "%d Dateien aus Tresor entfernt"
+
+msgid "No vault found!"
+msgstr "Kein Tresor gefunden!"
+
+msgid "Glacier"
+msgstr "Glacier"
+
+msgid "GDrive"
+msgstr "GDrive"
+
+msgid "Tar (fast and memory less) uncompressed"
+msgstr "Tar (schnell und speicherschonend) unkomprimiert"
+
+msgid "Cron: %s"
+msgstr "Cron: %s"
+
+msgid "Database Backup type"
+msgstr "Datenbank Backup Typ"
+
+msgid "Show BackWPup links in admin bar."
+msgstr "BackWPup-Links in der Adminbar anzeigen."
+
+msgid "Temp folder:"
+msgstr "Temp Verzeichnis:"
+
+msgid "Hash key"
+msgstr "Hash key"
+
+msgid "Absolute path to folder for backup files:"
+msgstr "Absoluter Ordner-Pfad für Backup-Dateien:"
+
+msgid "XML File (phpMyAdmin schema)"
+msgstr "XML Datei (phpMyAdmin Schema)"
+
+msgid "Path to <em>mysqldump</em> file"
+msgstr "Pfad zur <em>mysqldump</em> Datei"
+
+msgid ""
+"Path to mysqldump file, so a backup can be made with it. If it is correct "
+"and <em>shell_exec</em> is active, the backup will be generated with a "
+"system command. If <em>shell_exec</em> ist not active, this is disabled"
+msgstr ""
+"Pfad zur MySQL-Dump Datei zum erstellen eines Backups. Wenn diese in Ordnung "
+"ist und <em>shell_exec</em> aktiviert wurde, wird ein Backup per "
+"Systembefehl generiert. Wenn <em>shell_exec</em> nicht aktiviert wurde, ist "
+"dieser Befehl deaktiviert."
+
+msgid "SQL File"
+msgstr "SQL Datei"
+
+msgid "Running for: %s seconds"
+msgstr "Läuft seit %s Sekunden"
+
+msgid "August"
+msgstr "August"
+
+msgid "Save changes"
+msgstr "Änderungen speichern"
+
+msgid "%1$s at %2$s by WP-Cron"
+msgstr "%1$s um %2$s mit WP-Cron"
+
+msgid "Runtime: %d seconds"
+msgstr "Ausführungszeit: %d Sekunden"
+
+msgid "not yet"
+msgstr "noch nicht"
+
+msgid "Download last backup"
+msgstr "Letztes Backup herunterladen"
+
+msgid "The HTTP response test get an error \"%s\""
+msgstr "Der HTTP Antwort Test bekommt diesen Fehler \"%s\""
+
+msgid "The HTTP response test get a false http status (%s)"
+msgstr "Der HTTP Antwort Test bekommt den falschen http Status (%s)"
+
+msgid "Job \"%s\" started."
+msgstr "Auftrag \"%s\" wurde gestartet."
+
+msgid "%s Jobs"
+msgstr "%s Aufträge"
+
+msgid "Job currently running: %s"
+msgstr "Aktueller Auftrag wird bearbeitet: %s"
+
+msgid "Close working screen"
+msgstr "Arbeitsfläche schließen"
+
+msgid "close"
+msgstr "schließen"
+
+msgid "1 ERROR"
+msgid_plural "%d ERRORS"
+msgstr[0] "1 FEHLER"
+msgstr[1] "%d FEHLER"
+
+msgid "1 WARNING"
+msgid_plural "%d WARNINGS"
+msgstr[0] "1 WARNUNG"
+msgstr[1] "%d WARNUNGEN"
+
+msgid "Log only"
+msgstr "Nur Log"
+
+msgid "%s Logs"
+msgstr "%s Logs"
+
+msgid "Settings reset to default"
+msgstr "Die Einstellungen wurden zurückgesetzt."
+
+msgid "%s Settings"
+msgstr "%s Einstellungen"
+
+msgid "Display Settings"
+msgstr "Einstellungen anzeigen"
+
+msgid "Do you want to see BackWPup in the WordPress admin bar?"
+msgstr "Möchten Sie BackWPup-Menüpunkte in der WordPress-Adminbar sehen?"
+
+msgid "Admin bar"
+msgstr "Adminbar"
+
+msgid "Folder sizes"
+msgstr "Verzeichnisgrößen"
+
+msgid "Security"
+msgstr "Sicherheit"
+
+msgid "Security option for BackWPup"
+msgstr "Sicherheitseinstellungen für BackWPup"
+
+msgid "Protect folders"
+msgstr "Ordner schützen"
+
+msgid ""
+"Protect BackWPup folders ( Temp, Log and Backups ) with <code>.htaccess</"
+"code> and <code>index.php</code>"
+msgstr ""
+"Schütze BackWPup-Verzeichnis (Temp, Log und Backups) mit den Dateien ."
+"htaccess und index.php"
+
+msgid ""
+"Every time BackWPup runs a backup job, a log file is being generated. Choose "
+"where to store your log files and how many of them."
+msgstr ""
+"Jedes Mal, wenn BackWPup einen Auftrag ausführt, wird eine Protokolldatei "
+"erzeugt. Wählen Sie aus, wo und wie viele dieser Protokolldateien Sie "
+"speichern möchten."
+
+msgid "Log file folder"
+msgstr "Protokolldateien-Ordner"
+
+msgid "Maximum number of log files in folder"
+msgstr "Anzahl der Dateien, die im Ordner behalten werden"
+
+msgid "Oldest files will be deleted first."
+msgstr "(Älteste Dateien werden zuerst gelöscht.)"
+
+msgid "Compress log files with GZip."
+msgstr "Komprimiere Logdateien mit Gzip."
+
+msgid "There are a couple of general options for backup jobs. Set them here."
+msgstr ""
+"Es gibt einige allgemeine Optionen für Backup-Aufträge, die Sie hier setzen "
+"können."
+
+msgid "Maximum number of retries for job steps"
+msgstr "Maximale Anzahl für Neuversuche der Arbeitsschritte"
+
+msgid "Restart the job on every main step on a running job"
+msgstr "Starte den Auftrag bei jedem Hauptschritt neu"
+
+msgid "Maximum script execution time"
+msgstr "Maximale Script Ausführungszeit"
+
+msgid "Maximum PHP Script execution time"
+msgstr "Maximale PHP-Script Ausführungszeit"
+
+msgid "seconds. 0 = disabled."
+msgstr "Sekunden. 0 = deaktiviert."
+
+msgid "Method for creating ZIP archive"
+msgstr "Methode für ZIP-Erstellung"
+
+msgid "Auto"
+msgstr "Auto"
+
+msgid "ZipArchive"
+msgstr "ZipArchive"
+
+msgid "PclZip"
+msgstr "PclZip"
+
+msgid ""
+"Auto = Uses PHP class ZipArchive if available; otherwise uses PclZip.<br /"
+">ZipArchive = Uses less memory, but many open files at a time.<br />PclZip = "
+"Uses more memory, but only 2 open files at a time."
+msgstr ""
+"Auto = Nutzt die PHP-Klasse ZipArchive falls verfügbar; andernfalls wird "
+"PclZip genutzt.<br />ZipArchive = Benötigt weniger Memory, aber viele offene "
+"Dateien gleichzeitig.<br />PclZip = Benötigt mehr Memory, aber nur 2 zur "
+"gleichen Zeit offene Dateien."
+
+msgid "Key to start jobs externally with an URL"
+msgstr "Schlüssel für den Start eines Auftrags über eine externe URL"
+
+msgid ""
+"empty = deactivated. Will be used to protect job starts from unauthorized "
+"person."
+msgstr ""
+"leer = deaktiviert. Wird verwendet, damit niemand sonst die Auftragsstart-"
+"URLs nutzen kann."
+
+msgid "No translation"
+msgstr "Keine Übersetzung"
+
+msgid "No translation for the job, the log will be written in English"
+msgstr ""
+"Keine Übersetzung für diesen Auftrag verwenden, die Log-Dateien werden in "
+"Englisch geschrieben. "
+
+msgid "Reduce server load"
+msgstr "Reduziere Server-Auslastung"
+
+msgid "maximum"
+msgstr "maximum"
+
+msgid ""
+"This adds short pauses to the process. Can be used to reduce the CPU load. "
+"Disabled = off, minimum = shortest sleep, maximum = longest sleep"
+msgstr ""
+"Dies baut kurze Pausen in den Prozess ein. Sollte genutzt werden, um die CPU "
+"zu entlasten. Deaktiviert = aus, minimum = kürzeste Pause, maximum = längste "
+"Pause."
+
+msgid "Setting"
+msgstr "Einstellung"
+
+msgid "WordPress version"
+msgstr "WordPress-Version"
+
+msgid "BackWPup version"
+msgstr "BackWPup-Version"
+
+msgid "BackWPup Pro version"
+msgstr "BackWPup-Pro-Version"
+
+msgid "PHP version"
+msgstr "PHP-Version"
+
+msgid "MySQL version"
+msgstr "MySQL-Version"
+
+msgid "cURL version"
+msgstr "cURL-Version"
+
+msgid "cURL SSL version"
+msgstr "cURL-SSL-Version"
+
+msgid "WP-Cron url:"
+msgstr "WP-Cron URL:"
+
+msgid "Server self connect:"
+msgstr "Verbindung zum Server selbst:"
+
+msgid "Temp folder %s doesn't exist and can't be created."
+msgstr "Temp Verzeichnis %s existiert nicht und konnte nicht erstellt werden."
+
+msgid "Logs folder %s not exist and can't created."
+msgstr ""
+"Logdateien Verzeichnis %s existiert nicht und kann nicht erstellt werden"
+
+msgid "Maximum execution time"
+msgstr "Max. Ausführungszeit"
+
+msgid "Disabled WP Cron"
+msgstr "WP Cron abgeschaltet"
+
+msgid "WP memory limit"
+msgstr "WordPress-Memory-Limit"
+
+msgid "WP maximum memory limit"
+msgstr "Maximales WordPress-Memory-Limit"
+
+msgid "Reset all settings to default"
+msgstr "Alle Einstellungen zurücksetzen"
+
+msgid "A job is already running."
+msgstr "Ein Auftrag läuft gerade."
+
+msgid "No job ID specified!"
+msgstr "Keine Auftragsnummer angegeben!"
+
+msgid "Job ID does not exist!"
+msgstr "Auftragsnummer existiert nicht!"
+
+msgid "Nothing to abort!"
+msgstr "Es gibt nichts abzubrechen!"
+
+msgid "List of jobs"
+msgstr "Auftragsliste"
+
+msgid "ID: %1$d Name: %2$s"
+msgstr "ID: %1$d Name: %2$s"
+
+msgid "Running job"
+msgstr "Laufender Auftrag"
+
+msgid "Warnings: %1$d Errors: %2$d"
+msgstr "Warnungen: %1$d Fehler: %2$d"
+
+msgid "Steps in percent: %1$d percent of step: %2$d"
+msgstr "Schritte in Prozent: %1$d Prozent des Schritts: %2$d"
+
+msgid "On step: %s"
+msgstr "Bei Schritt: %s"
+
+msgid "Last message: %s"
+msgstr "Letzte Nachricht: %s"
+
+msgctxt "%s = plugin name"
+msgid ""
+"Your license for the plugin %s is not valid. The auto-update has been "
+"deactivated. Please insert a valid key on MarketPress Dashboard. Or if you "
+"want to add an other valid code use the form below."
+msgstr ""
+"Dein Lizenzschlüssel für das Plugin %s ist ungültig. Automatische Updates "
+"wurden deaktiviert. Gib bitte einen gültigen Schlüssel im MarketPress "
+"Dashboard ein. Wenn du einen anderen gültigen Schlüssel hinzufügen möchtest, "
+"nutze bitte das Formular (unten)."
+
+msgctxt "%s = plugin name"
+msgid ""
+"Your license for the plugin %s is not valid. The auto-update has been "
+"deactivated."
+msgstr ""
+"Deine Lizenz für das Plugin %s ist ungültig. Automatische Updates wurden "
+"deaktiviert."
+
+msgid "Dropbox authentication not approved!"
+msgstr "Authentifizierung für Dropbox nicht anerkannt!"
+
+msgid "%d. Try to sync files to Dropbox&#160;&hellip;"
+msgstr "%d. Versuche Dateien mit Dropbox zu synchronisieren&#160;&hellip;"
+
+msgid "Retrieving file list from Dropbox"
+msgstr "Empfange Dateiliste von Dropbox"
+
+msgid "Extra file %s uploaded to Dropbox"
+msgstr "Extra Datei %s zu Dropbox hochgeladen"
+
+msgid "Delete not existing files from Dropbox"
+msgstr "Lösche nicht existierende Dateien aus Dropbox"
+
+msgid "Folder %s deleted from Dropbox"
+msgstr "Ordner %s aus Dropbox gelöscht"
+
+msgid "File %s deleted from Dropbox"
+msgstr "Datei %s aus Dropbox gelöscht"
+
+msgid "%d. Try to sync files to folder&#160;&hellip;"
+msgstr "%d. Versuche Dateien mit Ordner zu synchronisieren&#160;&hellip;"
+
+msgid "Retrieving file list from folder"
+msgstr "Ruft Datei-Liste vom Ordner ab"
+
+msgid "Copy changed files to folder"
+msgstr "Kopiere geänderte Dateien in den Ordner"
+
+msgid "Delete not existing files from folder"
+msgstr "Lösche nicht existierende Dateien aus dem Ordner"
+
+msgid "Extra file %s copied"
+msgstr "Extra Datei %s kopiert"
+
+msgid "File %s deleted from folder"
+msgstr "File %s aus Ordner gelöscht"
+
+msgid "Folder on server:"
+msgstr "Ordner auf dem Server:"
+
+msgid "Maximum number of backup files to keep in folder:"
+msgstr "Maximale Anzahl an Backup-Dateien im Ordner:"
+
+msgid "Create container:"
+msgstr "Container erstellen:"
+
+msgid "%d. Trying to sync files with Microsoft Azure (Blob) &hellip;"
+msgstr ""
+"%d. Versuche Dateien mit Microsoft Azure (Blob) zu synchronisieren &hellip;"
+
+msgid "Retrieving file list from MS Azure."
+msgstr "Rufe Dateiliste von MS Azure ab."
+
+msgid "Upload changed files to MS Azure."
+msgstr "Upload der geänderten Dateien zu MS Azure."
+
+msgid "File %s uploaded to MS Azure."
+msgstr "Datei %s zu MS Azure hochgeladen."
+
+msgid "Extra file %s uploaded to MS Azure."
+msgstr "Extra Datei %s zu MS Azure hochgeladen."
+
+msgid "Delete nonexistent files on MS Azure."
+msgstr "Lösche nicht existierende Dateien auf MS Azure."
+
+msgid "File %s deleted from MS Azure."
+msgstr "Datei %s von MS Azure gelöscht."
+
+msgid "Select region:"
+msgstr "Region wählen:"
+
+msgid "%d. Trying to sync files to Rackspace cloud&#160;&hellip;"
+msgstr ""
+"%d. Versuche Dateien mit der Rackspace Cloud zu synchronisieren&#160;&hellip;"
+
+msgid "Connected to Rackspace cloud files container %s."
+msgstr "Verbunden mit Rackspace Cloud Datei-Container %s."
+
+msgid "Retrieving files list from Rackspace Cloud."
+msgstr "Rufe Dateiliste von Rackspace Cloud ab."
+
+msgid "Upload changed files to Rackspace Cloud."
+msgstr "Upload der geänderten Dateien zur Rackspace Cloud."
+
+msgid "File %s uploaded to Rackspace Cloud."
+msgstr "Datei %s zu zur Rackspace Cloud hochgeladen."
+
+msgid "Extra file %s uploaded to Rackspace Cloud."
+msgstr "Extra Datei %s zur Rackspace Cloud hochgeladen."
+
+msgid "Delete nonexistent files from Rackspace Cloud."
+msgstr "Lösche nicht existierende Dateien von Rackspace Cloud."
+
+msgid "File %s deleted from Rackspace Cloud."
+msgstr "File %s von Rackspace Cloud gelöscht."
+
+msgid "Select a S3 service:"
+msgstr "Wähle einen S3 Service:"
+
+msgid "or set an S3 Server URL:"
+msgstr "oder setze eine S3 Server URL:"
+
+msgid "%d. Trying to sync files to S3 Service&#160;&hellip;"
+msgstr ""
+"%d. Versuche Dateien mit dem S3 Service zu synchronisieren&#160;&hellip;"
+
+msgid "Retrieving file list from S3."
+msgstr "Rufe Dateiliste von S3 ab."
+
+msgid "Upload changed files to S3."
+msgstr "Upload der geänderten Dateien zu S3."
+
+msgid "File %s uploaded to S3."
+msgstr "Datei %s zu S3 hochgeladen."
+
+msgid "Extra file %s uploaded to S3."
+msgstr "Extra Datei %s zu S3 hochgeladen."
+
+msgid "Delete nonexistent files on S3"
+msgstr "Lösche nicht existierende Dateien von S3"
+
+msgid "File %s deleted from S3."
+msgstr "Datei %s von S3 gelöscht."
+
+msgctxt "Executed shell_exec() command"
+msgid "CLI Exec: %s"
+msgstr "CLI Exec: %s"
+
+msgctxt "Output of a shell_exec()"
+msgid "CLI Exec output: %s"
+msgstr "CLI Exec Ausgabe: %s"
+
+msgid "Backup WordPress main files"
+msgstr "Backup der Wordpress Hauptdateien"
+
+msgid "Backup blog content folder"
+msgstr "Backup des Blog-Content Ordners"
+
+msgid "Backup blog plugins"
+msgstr "Backup Blog Plugins"
+
+msgid "Backup blog themes"
+msgstr "Backup der Blog-Themes"
+
+msgid "Backup blog uploads folder"
+msgstr "Backup der Blog-Uploads Ordner"
+
+msgid "Items to export:"
+msgstr "Zu exportierendes Item:"
+
+msgctxt "%s = Remote Code"
+msgid "Could not connect to remote host, code %d. Please try again later."
+msgstr ""
+"Verbindung zum Remote Host nicht möglich, Code %d. Bitte versuche es später "
+"noch einmal."
+
+msgid "Could not find content for this page. Please try again later."
+msgstr ""
+"Für diese Seite konnten kein Inhalte gefunden werden. Bitte versuche es "
+"später nocheinmal."
+
+msgid "No BackWPup Wizard Session found!"
+msgstr "Keine BackWPup-Assistent-Sitzung gefunden!"
+
+msgid "Cancel"
+msgstr "Abbrechen"
+
+msgctxt "Plugin Name"
+msgid "%s Wizards"
+msgstr "%s Assistenten"
+
+msgctxt "Plugin Name"
+msgid "%s Wizard:"
+msgstr "%s Assistent:"
+
+msgid "Back to overview"
+msgstr "Zurück zur Übersicht"
+
+msgid ""
+"Hash Key for BackWPup. It will be used to have hashes in folder and file "
+"names. It must at least 6 chars long."
+msgstr ""
+"Hash Key für BackWPup. Es wird für Hashes in Ordner- und Dateinamen "
+"verwendet und muss mindestens 6 Zeichen lang sein."
+
+msgid "Hash key:"
+msgstr "Hash key:"
+
+msgid ""
+"If you want to set your own Dropbox API Keys, you can do it here. Leave "
+"empty for default."
+msgstr ""
+"Wenn du deinen eigenen Dropbox API Schlüssel setzen willst, kannst du es "
+"hier tun. Lass es leer für Standard-Einstellungen."
+
+msgid ""
+"If you want to set your own SugarSync API keys you can do that here. Leave "
+"empty for default."
+msgstr ""
+"Wenn du deinen eigenen SugarSync API Schlüssel setzen willst, kannst du es "
+"hier tun. Lass es leer für Standard-Einstellungen."
+
+msgid "Google API Keys"
+msgstr "Google API Keys"
+
+msgid "Client ID:"
+msgstr "Client ID:"
+
+msgid "Client secret:"
+msgstr "Client secret:"
+
+msgid "Redirect URIs:"
+msgstr "Redirect URIs:"
+
+msgid "Add this URI in a new line to the field."
+msgstr "Füge diese URI in einer neuen Zeile zum Feld hinzu."
+
+msgid "Create a job"
+msgstr "Job erstellen"
+
+msgid "Choose a job"
+msgstr "Job auswählen"
+
+msgid "Select a task for your job."
+msgstr "Wähle eine Aufgabe für deinen Auftrag."
+
+msgid "Where would you like to store the backup file?"
+msgstr "Wo wollen Sie die Backup-Datei speichern?"
+
+msgid "When would you like to start the job?"
+msgstr "Wann soll der Auftrag gestartet werden?"
+
+msgid "Select one or more tasks for your backup job."
+msgstr "Wähle eine zusätzliche Aufgabe für deinen Backup-Auftrag."
+
+msgid "Database Check (Weekly)"
+msgstr "Datenbank Überprüfung (wöchentlich)"
+
+msgid "Essential files + list of plugins"
+msgstr "Wichtige Dateien + Pluginliste"
+
+msgid "Backup essential files and folders, plus a list of installed plugins."
+msgstr ""
+"Backup von wichtigen Dateien und Ordner, plus einer Liste von installierten "
+"Plugins."
+
+msgid "Custom configuration"
+msgstr "Angepasste Konfiguration"
+
+msgid "Wizard for importing BackWPup jobs from an XML file"
+msgstr "Assistent zum Importieren von BackWPup Aufträgen aus einer XML Datei"
+
+msgid "Select items to import"
+msgstr "Wähle ein Item für den Import"
+
+msgid "Select which job should be imported or overwritten."
+msgstr "Wähle einen Auftrag, der importiert oder überschrieben werden soll."
+
+msgid ""
+"Please upload your BackWPup job XML export file and we&#8217;ll import the "
+"jobs into BackWPup."
+msgstr ""
+"Bitte lade deine BackWPup-Auftrags-XML-Export-Datei hoch und wir importieren "
+"sie in BackWPup."
+
+msgid ""
+"The export file could not be found at <code>%s</code>. This is likely due to "
+"an issue with permissions."
+msgstr ""
+"Die Export-Datei konnte nicht gefunden werden <code>%s</code>. Das liegt "
+"möglicherweise an Problemen mit der Berechtigung."
+
+msgid "Sorry, there has been a phrase error."
+msgstr "Sorry, es gab ein Problem mit dem Begriff."
+
+msgid "This is not a BackWPup XML file"
+msgstr "Das ist keine BackWPup XML Datei"
+
+msgid "Test if BackWPup can work without problems."
+msgstr "Teste, ob BackWPup problemlos funktioniert."
+
+msgid ""
+"You must run WordPress version 3.4 or higher to use this plugin. You are "
+"using version %s now."
+msgstr ""
+"Um dieses Plugin nutzen zu können, benötigst du mindestens WordPress 3.4, du "
+"verwendest derzeit die Version %s."
+
+msgid ""
+"You must run PHP version 5.2.6 or higher to use this plugin. You are using "
+"version %s now."
+msgstr ""
+"Es wird die PHP Version 5.2.6 oder höher benötigt um dieses Plugin nutzen zu "
+"können. Du benutzt Version %s."
+
+msgid ""
+"We recommend to run a PHP version above 5.3.2 to get the full plugin "
+"functionality. You are using version %s now."
+msgstr ""
+"Wir empfehlen eine PHP Version von 5.3.2 oder höher um die volle "
+"Funktionalität des Plugins nutzen zu können. Du nutzt Version %s."
+
+msgid ""
+"You must have the MySQLi extension installed and a MySQL server version of "
+"5.0.7 or higher to use this plugin. You are using version %s now."
+msgstr ""
+"Um dieses Plugin nutzen zu können, muss die MySQLi Erweiterung und der MySQL "
+"Server der Version 5.0.7 oder höher vorhanden sein. Du nutzt Version %s."
+
+msgctxt "%1 = extension name, %2 = file suffix"
+msgid "We recommend to install the %1$s extension to generate %2$s archives."
+msgstr "Wir empfehlen die %1$s Erweiterung um %2$s Archive zu generieren."
+
+msgctxt "Link to PHP manual"
+msgid "Please disable the deprecated <a href=\"%s\">PHP safe mode</a>."
+msgstr "Bitte schalte den veralteten <a href=\"%s\">PHP Safe-Mode</a>."
+
+msgid ""
+"We recommend to install the PHP FTP extension to use the FTP backup "
+"destination."
+msgstr ""
+"Wir empfehlen die PHP FTP Erweiterung zu installieren um FTP als Backup-Ziel "
+"nutzen zu können."
+
+msgid ""
+"Temp folder %s is not read or writable. Please set proper writing "
+"permissions."
+msgstr ""
+"Temporärer Ordner %s ist weder lesbar noch beschreibbar. Bitte setze "
+"passende Berechtigungen."
+
+msgid ""
+"Temp folder %s does not exist and cannot be created. Please create it and "
+"set proper writing permissions."
+msgstr ""
+"Temporärer Ordner %s existiert nicht oder kann nicht erstellt werden. Bitte "
+"erstelle ihn und setze passende Berechtigungen."
+
+msgid ""
+"Log folder %s is not readable or writable. Please set proper writing "
+"permissions."
+msgstr ""
+"Log-Ordner %s ist weder lesbar noch beschreibbar. Bitte setze passende "
+"Berechtigungen."
+
+msgid ""
+"Log folder %s does not exist and cannot be created. Please create it and set "
+"proper writing permissions."
+msgstr ""
+"Log-Ordner %s existiert nicht oder kann nicht erstellt werden. Bitte "
+"erstelle ihn und setze passende Berechtigungen."
+
+msgid "The HTTP response test result is an error: \"%s\"."
+msgstr "Das Ergebnis des HTTP-Response-Tests ist ein Fehler: \"%s\"."
+
+msgid "WP-Cron seems to be broken. But it is needed to run scheduled jobs."
+msgstr ""
+"WP-Cron scheint beschädigt zu sein. Aber es wird benötigt um Aufträge "
+"planmäßig ausführen zu können."
+
+msgid "All tests passed without errors."
+msgstr "Alle Tests fehlerfrei bestanden."
+
+msgid ""
+"There is no error, but some warnings. BackWPup will work, but with "
+"limitations."
+msgstr ""
+"Keine Fehler, nur Warnungen. BackWPup funktioniert mit Einschränkungen."
+
+msgid "There are errors. Please correct them, or BackWPup cannot work."
+msgstr ""
+"Es sind Fehler aufgetreten. Bitte behebe sie, damit BackWPup ordnungsgemäß "
+"funktioniert."
+
+msgid "No tables to check."
+msgstr "Keine Tabellen zum checken."
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Backup archive too big to be sent by email!"
+msgstr "Das Backup Archiv ist zu groß zum Senden via E-Mail!"
+
+msgid "Cannot transfer backup to Rackspace cloud."
+msgstr "Kann das Backup nicht zur Rackspace Cloud transferieren"
+
+msgid "A container could not be found!"
+msgstr "Kein Container gefunden!"
+
+msgid "Backup content folder"
+msgstr "Sicherung des Content Verzeichnisses"
+
+msgid "Backup plugins"
+msgstr "Plugins sichern"
+
+msgid ""
+"You are about to delete this backup archive. \n"
+"  'Cancel' to stop, 'OK' to delete."
+msgstr ""
+"Sie sind dabei dieses Backup Archiv zu löschen. \n"
+" 'Abbrechen' um zu stoppen, 'OK' um zu löschen."
+
+msgid "Email"
+msgstr "E-Mail"
+
+msgid "Sending email to %s&hellip;"
+msgstr "Sende E-Mail an %s&hellip;"
+
+msgid "%d. Try to send backup file to Dropbox&#160;&hellip;"
+msgstr "%d. Versuche, das Backup zur Dropbox zu senden&#160;&hellip;"
+
+msgid "Authenticated with Dropbox of user %s"
+msgstr "Authentifiziert mit Dropbox von Benutzer %s"
+
+msgid "Cannot connect to FTP server: %s"
+msgstr "Kann nicht mit dem FTP-Server verbinden: %s"
+
+msgid "FTP Folder \"%s\" cannot be created!"
+msgstr "FTP-Ordner \"%s\" kann nicht erstellt werden!"
+
+msgid "Cannot delete \"%s\" on FTP server!"
+msgstr "Kann \"%s\" auf dem FTP-Server nicht löschen!"
+
+msgid "Error while sending email!"
+msgstr "Fehler beim Senden der E-Mail"
+
+msgctxt "Plugin name and link; Plugin Version"
+msgid ""
+"%1$s version %2$s. A project by <a href=\"http://inpsyde.com\">Inpsyde GmbH</"
+"a>."
+msgstr ""
+"%1$s Version %2$s. Ein Projekt von <a href=\"http://inpsyde.com\">Inpsyde "
+"GmbH</a>."
+
+msgid "Uploaded file size and local file size don't match."
+msgstr "Größe der lokalen und der hochgeladenen Datei ist nicht identisch."
+
+msgid "https://marketpress.com/support/forum/plugins/backwpup-pro/"
+msgstr "https://marketpress.de/support/forum/plugins/backwpup-pro/"
+
+msgid "Error while deleting file from Dropbox: %s"
+msgstr "Fehler beim Löschen der Datei aus der Dropbox: %s"
+
+msgid "%d. Trying to create a WordPress export to XML file&#160;&hellip;"
+msgstr ""
+"%d. Versuche, einen WordPress-Export als XML-Datei zu erstellen&#160;&hellip;"
+
+msgid "WP Export file could not generated."
+msgstr "WP Exportdatei konnte nicht generiert werden."
+
+msgid "Check WP Export file&#160;&hellip;"
+msgstr "Prüfe WP Export-Datei&#160;&hellip;"
+
+msgid "No files/folder for the backup."
+msgstr "Keine Dateien/Ordner für das Backup."
+
+msgid "%1$d folders to backup."
+msgstr "%1$d Ordner für Backup."
+
+msgid "Added plugin list file \"%1$s\" with %2$s to backup file list."
+msgstr ""
+"Plugin Listendatei \"%1$s\" mit %2$s zur Backup-Datei-Liste hinzugefügt."
+
+msgid ""
+"Working as <a href=\"http://wikipedia.org/wiki/Cron\">Cron</a> schedule:"
+msgstr ""
+"Als <a href=\\\"http://de.wikipedia.org/wiki/Cron\\\">Cron-Job</a> ausführen:"
+
+msgid "Do not delete files while syncing to destination!"
+msgstr "Keine Dateien im Sync-Zielverzeichnis löschen!"
+
+msgid "Number of files to keep in folder."
+msgstr "Anzahl der Dateien, die im Ordner behalten werden"
+
+msgid "Backup to an S3 Service v1"
+msgstr "Backup auf S3 Service v1"
+
+msgid "Folder to store files in"
+msgstr "Order für Dateien"
+
+msgid "seconds"
+msgstr "Sekunden"
+
+msgid "Entering passive mode"
+msgstr "Passivmodus gestartet"
+
+msgid "Maximum file size to be included in an email. 0 = unlimited"
+msgstr "Maximale Dateigröße für den E-Mail-Versand. 0 = unbegrenzt"
+
+msgid "SMTP host name"
+msgstr "SMTP Hostname"
+
+msgid "%d. Try to send backup with email&#160;&hellip;"
+msgstr "%d. Versuche, Backup als E-Mail zu senden&#160;&hellip;"
+
+msgid "Missing function \"%s\"."
+msgstr "Fehlende Funktion \"%s\"."
+
+msgid "Create a new bucket"
+msgstr "Neues Bucket erstellen"
+
+msgid "File deletion"
+msgstr "Datei Löschung"
+
+msgid "%d. Try sending backup to a Microsoft Azure (Blob)&#160;&hellip;"
+msgstr ""
+"%d. Versuche, das Backup zu Microsoft Azure (Blob) zu senden&#160;&hellip;"
+
+msgid "Amazon specific settings"
+msgstr "Amazon spezifische Einstellungen"
+
+msgid "Backup to an S3 Service"
+msgstr "Backup zu einem S3 Service"
+
+msgid "Checking for not aborted multipart Uploads&#160;&hellip;"
+msgstr "Prüfe auf nicht abgebrochene, mehrteilige Uploads&#160;&hellip;"
+
+msgid "PHP Version %1$s is to low, you need Version %2$s or above."
+msgstr ""
+"Du nutzt die veraltete PHP Version %1$s. Es wird aber mindestens die Version "
+"%2$s benötigt."
+
+msgid "Create Sugarsync account"
+msgstr "SugarSync-Konto erstellen"
+
+msgid "SugarSync Root"
+msgstr "SugarSync-Wurzelverzeichnis"
+
+msgid "Email address:"
+msgstr "E-Mail-Adresse"
+
+msgid "%d. Try to send backup to SugarSync&#160;&hellip;"
+msgstr "%d. Versuche, ein Backup zu SugarSync zu senden&#160;&hellip;"
+
+msgid "WordPress tables only"
+msgstr "Nur WordPress Tabellen"
+
+msgid "Try to repair defect table"
+msgstr "Versuche, definierte Tabellen zu reparieren"
+
+msgid "DB Backup"
+msgstr "Datenbank-Backup"
+
+msgid "XML Export file name"
+msgstr "XML Export Datei Name"
+
+msgid "Plugin list file name"
+msgstr "Dateiname der Plugin-Liste"
+
+msgid "%d. Trying to send backup file to Rackspace cloud &hellip;"
+msgstr "%d. Versuche, ein Backup zur Rackspace Cloud zu senden &hellip;"
+
+msgid "London (LON)"
+msgstr "London (LON)"
+
+msgid "Sydney (SYD)"
+msgstr "Sydney (SYD)"
+
+msgid "Upload to Rackspace cloud started &hellip;"
+msgstr "Upload zur Rackspace Cloud nun gestartet &hellip;"
+
+msgid "Log folder does not exist or is not writable for BackWPup"
+msgstr "Log-Ordner existiert nicht oder ist nicht beschreibbar für BackWPup"
+
+msgid ""
+"If this message reaches your inbox, sending backup archives via email should "
+"work for you."
+msgstr ""
+"Wenn dich diese Nachricht erreicht, funktioniert das Senden der "
+"Sicherungsarchive per E-Mail."
+
+msgid ""
+"BackWPup requires PHP version 5.2.6 with spl extension or greater and "
+"WordPress 3.4 or greater."
+msgstr ""
+"BackWPup benötigt PHP Version 5.2.6 oder höher mit der SPL Erweiterung und "
+"WordPress 3.4 oder höher."
+
+msgid "Backup sent via email"
+msgstr "Backup als E-Mail versendet"
+
+msgid "Missing class \"%s\"."
+msgstr "Fehlende Klasse \"%s\"."
+
+msgid "https://marketpress.com/documentation/backwpup-pro/"
+msgstr "https://marketpress.de/dokumentation/backwpup-pro/"
+
+msgid "Pro Support"
+msgstr "Pro-Support"
+
+msgid "http://wordpress.org/support/plugin/backwpup/"
+msgstr "http://wordpress.org/support/plugin/backwpup/"
+
+msgid "About"
+msgstr "Über"
+
+msgid "Cheating, huh?"
+msgstr "Mogeln, wie?"
+
+msgid "MarketPress"
+msgstr "MarketPress"
+
+msgid "http://marketpress.com/product/backwpup-pro/"
+msgstr "http://marketpress.de/product/backwpup-pro/"
+
+msgid "version %s"
+msgstr "Version %s"
+
+msgid "BackWPup Role"
+msgstr "BackWPup Rolle"
+
+msgid "&mdash; No role for BackWPup &mdash;"
+msgstr "&mdash; Keine Rolle für BackWPup &mdash;"
+
+msgid "Role that the user have on BackWPup"
+msgstr "Rolle die dieser Benutzer hat bei BackWPup"
+
+msgid ""
+"<strong>Important:</strong> before updating, please <a href=\"%1$s\">back up "
+"your database and files</a> with <a href=\"http://marketpress.de/product/"
+"backwpup-pro/\">%2$s</a>. For help with updates, visit the <a href=\"http://"
+"codex.wordpress.org/Updating_WordPress\">Updating WordPress</a> Codex page."
+msgstr ""
+"<strong>Wichtig:</strong> Bitte erstelle ein Backup <a href=\"%1$s\">von der "
+"Datenbank und den Dateien</a> mit <a href=\"http://marketpress.de/product/"
+"backwpup-pro/\">%2$s</a> vor der Installation dieses Plugins. Um Hilfe für "
+"die Updates zu erhalten, besuche bitte die <a href=\"http://codex.wordpress."
+"org/Updating_WordPress\">Updating WordPress</a> Codex-Seite."
+
+msgid ""
+"<strong>Important:</strong> before installing this plugin, please <a href="
+"\"%1$s\">back up your database and files</a> with <a href=\"http://"
+"marketpress.de/product/backwpup-pro/\">%2$s</a>."
+msgstr ""
+"<strong>Wichtig:</strong> Bitte erstelle ein Backup <a href=\"%1$s\">von der "
+"Datenbank und den Dateien</a> mit <a href=\"http://marketpress.de/product/"
+"backwpup-pro/\">%2$s</a> vor der Installation dieses Plugins."
+
+msgid "Dismiss"
+msgstr "Verwerfen"
+
+msgid "Learn More"
+msgstr "Erfahre mehr"
+
+msgid ""
+"It’s time to upgrade your <strong>BackWPup</strong> to <strong>PRO</strong> "
+"version!"
+msgstr ""
+"Es ist an der Zeit dein <strong>BackWPup</strong> zur <strong>PRO</strong>-"
+"Version upzugraden!"
+
+msgid "Extend standard plugin functionality with new great options."
+msgstr ""
+"Erweitere die Standard-Plugin Funktionalität mit neuen großartigen Optionen."
+
+msgid "The file name of an archive cannot be empty."
+msgstr "Der Dateiname eines Archivs kann nicht leer sein."
+
+msgctxt "%s = Folder name"
+msgid "Folder %s for archive not found"
+msgstr "Ordner %s für Archiv nicht gefunden"
+
+msgid "Functions for gz compression not available"
+msgstr "Die Funktionen für die Gzip-Kompression sind nicht verfügbar."
+
+msgid "Functions for bz2 compression not available"
+msgstr "Die Funktionen für die Bz2-Kompression sind nicht verfügbar."
+
+msgctxt "ZipArchive open() result"
+msgid "Cannot create zip archive: %d"
+msgstr "Konte ZIP-Datei %d nicht erstellen"
+
+msgctxt "%s = file name"
+msgid "Method to archive file %s not detected"
+msgstr "Methode zum Archivieren der Datei %s nicht gefunden"
+
+msgid "Cannot open archive file"
+msgstr "Kann Archivdatei nicht öffnen"
+
+msgid "PclZip archive add error: %s"
+msgstr "Fehler beim Hinzufügen zum PclZip-Archive: %s"
+
+msgid "File name cannot be empty"
+msgstr "Der Dateiname kann nicht leer sein."
+
+msgctxt "File to add to archive"
+msgid "File %s does not exist or is not readable"
+msgstr "Datei %s existiert nicht oder ist nicht lesbar"
+
+msgid "This archive method can only add one file"
+msgstr "Diese Archive-Methode kann nur eine einziges Datei sichern."
+
+msgid "Cannot open source file %s to archive"
+msgstr "Konnte Quelle %s zum Archivieren nicht öffnen"
+
+msgid "Cannot add \"%s\" to zip archive!"
+msgstr "\"%s\" kann dem ZIP-Archiv nicht hinzugefügt werden!"
+
+msgid "Folder name cannot be empty"
+msgstr "Der Verzeichnis Name darf nicht leer sein"
+
+msgctxt "Folder path to add to archive"
+msgid "Folder %s does not exist or is not readable"
+msgstr "Verzeichnis %s existiert nicht oder ist nicht lesbar"
+
+msgctxt "Text of ZipArchive status Message"
+msgid "ZipArchive returns status: %s"
+msgstr "Das Zip-Archive liefert den Status: %s"
+
+msgid "File name \"%1$s\" is too long to be saved correctly in %2$s archive!"
+msgstr ""
+"Dateiname \"%1$s\" ist zu lang, um korrekt im %2$s Archiv zu speichern."
+
+msgid "File path \"%1$s\" is too long to be saved correctly in %2$s archive!"
+msgstr "Dateipfad \"%1$s\" ist zu lang, um korrekt in %2$s Archiv zu speichern"
+
+msgid "Folder name \"%1$s\" is too long to be saved correctly in %2$s archive!"
+msgstr ""
+"Verzeichnis Name \"%1$s\" ist zu lang um ihn koreckt zu speichern im %2$s "
+"Archiv"
+
+msgid "Folder path \"%1$s\" is too long to be saved correctly in %2$s archive!"
+msgstr ""
+"Verzeichnis Pfad \"%1$s\" ist zu lang um ihn koreckt zu speichern im %2$s "
+"Archiv"
+
+msgid "Aborted, because no progress for one hour!"
+msgstr ""
+"Abgebrochen, aufgrund keines Fortschrittes innerhalb der letzten Stunde!"
+
+msgid "Dropbox authentication not approved"
+msgstr "Dropbox authentifizierung nicht akzeptiert"
+
+msgid "Your Dropbox appears to be full."
+msgstr "Deine Dropbox scheint voll zu sein."
+
+msgid "%s available on your Dropbox"
+msgstr "%s verfügbar in deiner Dropbox"
+
+msgid "Uploading to Dropbox&#160;&hellip;"
+msgstr "Hochladen zur Dropbox hat begonnen&#160;&hellip;"
+
+msgid "One file deleted from Dropbox"
+msgid_plural "%d files deleted on Dropbox"
+msgstr[0] "Eine Datei aus der Dropbox gelöscht"
+msgstr[1] "%d Dateien aus der Dropbox gelöscht"
+
+msgid "Email address"
+msgstr "E-Mail-Adresse"
+
+msgid "Email address to which Backups are sent."
+msgstr "E-Mail-Adresse, zu der Backups gesendet werden."
+
+msgid "Send test email"
+msgstr "Test-E-Mail senden"
+
+msgid "Send email settings"
+msgstr "Absende-Einstellungen für E-Mails"
+
+msgid "Maximum file size"
+msgstr "Maximale Dateigröße"
+
+msgid "Sender email address"
+msgstr "E-Mail-Adresse des Absenders"
+
+msgid "Sender name"
+msgstr "Absender NAme"
+
+msgid "Name of email sender"
+msgstr "Name des Absenders"
+
+msgid "Sending method"
+msgstr "E-Mail-Versandmethode"
+
+msgid "Use site settings"
+msgstr "Verwende Blogeinstellungen"
+
+msgid "Email sent."
+msgstr "E-Mail gesendet."
+
+msgid "Folder to store backups in"
+msgstr "Order für Dateien"
+
+msgid "FTP server and login"
+msgstr "FTP-Server und -Anmeldung"
+
+msgid "FTP server"
+msgstr "FTP-Server"
+
+msgid "Maximum number of files to keep in folder."
+msgstr "Maximale Anzahl von Dateien im Ordner."
+
+msgid "FTP specific settings"
+msgstr "FTP-Einstellungen"
+
+msgid "SSL-FTP connection"
+msgstr "SSL-FTP-Verbindung"
+
+msgid "Use explicit SSL-FTP connection."
+msgstr "Nutze explizit SSL-FTP Verbindung"
+
+msgid "FTP Passive Mode"
+msgstr "FTP-Passivmodus"
+
+msgid "Use FTP Passive Mode."
+msgstr "Nutze FTP-Passivmodus"
+
+msgid "FTP: Login failure!"
+msgstr "FTP: Anmeldung fehlgeschlagen!"
+
+msgid "%d. Try to send backup file to an FTP server&#160;&hellip;"
+msgstr "%d. Versuche, Backup an FTP-Server zu senden&#160;&hellip;"
+
+msgid "Connected via explicit SSL-FTP to server: %s"
+msgstr "Durch explizite SSL-FTP-Verbindung zum Server verbunden: %s"
+
+msgid "Cannot connect via explicit SSL-FTP to server: %s"
+msgstr "Kann nicht mit explizit SSL-FTP zum Server verbinden: %s"
+
+msgid "PHP function to connect with explicit SSL-FTP to server does not exist!"
+msgstr ""
+"PHP-Funktion für die Verbindung mit explizit SSL-FTP zum Server existiert "
+"nicht!"
+
+msgid "FTP client command: %s"
+msgstr "FTP-Client-Befehl: %s"
+
+msgid "FTP server response: %s"
+msgstr "FTP-Server Antwort: %s"
+
+msgid "FTP server reply: %s"
+msgstr "Antwort des FTP-Servers: %s"
+
+msgid "Cannot enter passive mode"
+msgstr "Starten des passiven Modus’ nicht möglich"
+
+msgid "Entering normal mode"
+msgstr "Starte Normalmodus"
+
+msgid "Cannot enter normal mode"
+msgstr "Normalmodus kann nicht gestartet werden"
+
+msgid "Starting upload to FTP &#160;&hellip;"
+msgstr "Hochladen ins FTP-Verzeichnis hat begonnen&#160;&hellip;"
+
+msgid "Cannot transfer backup to FTP server!"
+msgstr "Backup kann nicht zum FTP-Server übertragen werden!"
+
+msgid "One file deleted on FTP server"
+msgid_plural "%d files deleted on FTP server"
+msgstr[0] "Eine Datei vom FTP-Server gelöscht"
+msgstr[1] "%d Dateien vom FTP-Server gelöscht"
+
+msgid "MS Azure access keys"
+msgstr "MS Azure Zugriff Schlüssel"
+
+msgid "Account name"
+msgstr "Account Name"
+
+msgid "Access key"
+msgstr "Access Key"
+
+msgid "Blob container"
+msgstr "Blob Container"
+
+msgid "MS Azure container \"%s\" does not exist!"
+msgstr "MS Azure Container \"%s\" existiert nicht!"
+
+msgid "Connected to MS Azure container \"%s\"."
+msgstr "Verbunden mit MS Azure container \"%s\""
+
+msgid "Starting upload to MS Azure&#160;&hellip;"
+msgstr "Hochladen zu MS Azure hat begonnen&#160;&hellip;"
+
+msgid "One file deleted on Microsoft Azure container."
+msgid_plural "%d files deleted on Microsoft Azure container."
+msgstr[0] "Eine Datei im Microsoft-Azure-Container gelöscht"
+msgstr[1] "%d Dateien im Microsoft-Azure-Container gelöscht"
+
+msgid "Missing account name!"
+msgstr "Kontoname (Benutzername) nicht angegeben!"
+
+msgid "No container found!"
+msgstr "Kein Container gefunden!"
+
+msgid "Northern Virginia (IAD)"
+msgstr "Northern Virginia (IAD)"
+
+msgid "One file deleted on Rackspace cloud container."
+msgid_plural "%d files deleted on Rackspace cloud container."
+msgstr[0] "Eine Datei im Rackspace-Container gelöscht"
+msgstr[1] "%d Dateien im Rackspace-Container gelöscht"
+
+msgid "Missing username!"
+msgstr "Fehlender Benutzername!"
+
+msgid "Select a S3 service"
+msgstr "Wähle einen S3 Service"
+
+msgid "Or a S3 Server URL"
+msgstr "oder eine S3 Server URL"
+
+msgid "Server side encryption"
+msgstr "Serverseitige Enkryption"
+
+msgid "Save files encrypted (AES256) on server."
+msgstr "Speicher Dateien Server Side Encrypted (AES256)"
+
+msgid "Bucket %1$s created in %2$s."
+msgstr "Bucket %1$s in %2$s erstellt."
+
+msgid "Bucket %s could not be created."
+msgstr "Bucket %s konnte nicht erstellt werden."
+
+msgid "%d. Trying to send backup file to S3 Service&#160;&hellip;"
+msgstr "%d. Versuche, ein Backup zum S3-Service zu senden&#160;&hellip;"
+
+msgid "Connected to S3 Bucket \"%1$s\" in %2$s"
+msgstr "Verbunden zum S3 Bucket \"%1$s\" in %2$s"
+
+msgid "S3 Bucket \"%s\" does not exist!"
+msgstr "Amazon S3 Bucket \"%s\" existiert nicht!"
+
+msgid "Starting upload to S3 Service&#160;&hellip;"
+msgstr "Upload zum S3 Service begonnen&#160;&hellip;"
+
+msgid "Backup transferred to %s."
+msgstr "Backup übertragen zu %s"
+
+msgid "Cannot transfer backup to S3! (%1$d) %2$s"
+msgstr "Backup kann nicht zu Amazon S3 übertragen werden! (%1$d) %2$s"
+
+msgid "Cannot delete backup from %s."
+msgstr "Kann das Backup auf %s nicht löschen"
+
+msgid "One file deleted on S3 Bucket."
+msgid_plural "%d files deleted on S3 Bucket"
+msgstr[0] "Eine Datei im S3-Bucket gelöscht"
+msgstr[1] "%d Dateien im S3-Bucket gelöscht"
+
+msgid "Multipart Upload"
+msgstr "Multipart Upload"
+
+msgid "Use multipart upload for uploading a file"
+msgstr "Benutze Multipart Upload zu hochladen der Datei"
+
+msgid ""
+"Multipart splits file into multiple chunks while uploading. This is "
+"necessary for displaying the upload process and to transfer bigger files. "
+"Works without a problem on Amazon. Other services might have issues."
+msgstr ""
+"Multipart splittet den Upload in mehrere Teile auf. Dies ist notwendig für "
+"die Fortschrittsanzeige und um große Dateien hochzuladen. Funktioniert ohne "
+"Probleme mit Amazon. Bei anderen Services kann es nicht funktioniren."
+
+msgid "Upload for %s aborted."
+msgstr "Upload für %s abgebrochen."
+
+msgid "Storage Class: %s"
+msgstr "Speicher-Klasse: %s"
+
+msgid "Authenticated to SugarSync with nickname %s"
+msgstr "Authentifiziert bei SugarSync mit dem Namen %s"
+
+msgctxt "Available space on SugarSync"
+msgid "Not enough disk space available on SugarSync. Available: %s."
+msgstr "Nicht genug Speicherplatz verfügbar bei SugarSync. Verfügbar: %s."
+
+msgid "%s available at SugarSync"
+msgstr "%s verfügbar bei SugarSync"
+
+msgid "Starting upload to SugarSync&#160;&hellip;"
+msgstr "Hochladen zu SugarSync hat begonnen&#160;&hellip;"
+
+msgid "Cannot transfer backup to SugarSync!"
+msgstr "Backup kann nicht zu SugarSync übertragen werden!"
+
+msgid "Plugin on wordpress.org"
+msgstr "Plugin auf wordpress.org"
+
+msgid "https://marketpress.com/news/"
+msgstr "https://marketpress.de/news/"
+
+msgid "Manual"
+msgstr "Handbuch"
+
+msgid "Starting job"
+msgstr "Auftrag starten"
+
+msgid "Job Start"
+msgstr "Auftragsstart"
+
+msgid "Creates manifest file"
+msgstr "Erstellt Manifest-Datei"
+
+msgid "Creates archive"
+msgstr "erstellt Archiv"
+
+msgid "[INFO] Blog url: %s"
+msgstr "[INFO] Blog URL: %s"
+
+msgid "[INFO] BackWPup cron: %s; Next: %s "
+msgstr "[INFO] BackWPup Cron: %s; Nächste: %s "
+
+msgid "[INFO] BackWPup job start with link is active"
+msgstr "[INFO] BackWPup Auftragsstart mit aktivem Link gestartet"
+
+msgid "[INFO] BackWPup no automatic job start configured"
+msgstr "[INFO] BackWPup kein automatischer Auftragsstart konfiguriert"
+
+msgid "[INFO] BackWPup job started form commandline interface"
+msgstr "[INFO] BackWPup-Auftrag per Kommandozeile gestartet"
+
+msgid "[INFO] Script restart time is configured to %1$d seconds"
+msgstr "[INFO] Skript-Restart-Zeit ist auf %1$d Sekunden konfiguriert"
+
+msgid "[INFO] Script restarts on every main step is activated"
+msgstr "[INFO] Skriptneustart bei jedem Hauptschritt ist aktiviert."
+
+msgid "[INFO] Logfile is: %s"
+msgstr "[INFO] Logfile ist: %s"
+
+msgid ""
+"No destination correctly defined for backup! Please correct job settings."
+msgstr ""
+"Es wurde kein korrektes Backupziel definiert! Bitte überprüfe die "
+"Auftragseinstellungen."
+
+msgid "Temp folder does not exist or is not writable for BackWPup"
+msgstr "Temp Ordner existiert nicht oder ist nicht beschreibbar für BackWPup!"
+
+msgid "A BackWPup job is already running"
+msgstr "Es läuft bereits ein BackWPup-Auftrag"
+
+msgid "Job restarts due to inactivity for more than 5 minutes."
+msgstr "Auftrag durch Inaktivität von mehr als 5 Minuten neu gestartet"
+
+msgid "Step aborted: too many attempts!"
+msgstr "Schritt abgebrochen durch zu viele Versuche!"
+
+msgid "Restart will be executed now."
+msgstr "Neustart wird jetzt ausgeführt."
+
+msgid "Restart after %1$d seconds."
+msgstr "Neustart nach %1$s Sekunden."
+
+msgid "Signal %d is sent to script!"
+msgstr "Signal %d wurde zum Script gesendet!"
+
+msgid "Folder %1$s not allowed, please use another folder."
+msgstr "Ordner %1$s ist nicht erlaubt, bitte wähle einen anderen."
+
+msgid "Cannot create folder: %1$s"
+msgstr "Kann keinen Ordner erstellen: %1$s"
+
+msgid "Folder \"%1$s\" is not writable"
+msgstr "Ordner \"%1$s\" ist nicht beschreibbar"
+
+msgid ""
+"Job has ended with errors in %s seconds. You must resolve the errors for "
+"correct execution."
+msgstr ""
+"Job mit Fehlern beendet in %s Sekunden. Sie müssen die Fehler für eine "
+"korrekte Ausführung beheben."
+
+msgid ""
+"Job finished with warnings in %s seconds. Please resolve them for correct "
+"execution."
+msgstr ""
+"Job mit Warnungen beendet in %s Sekunden. Bitte beheben Sie die Warnungen "
+"für eine korrekte Ausführung."
+
+msgid "Job done in %s seconds."
+msgstr "Auftrag erledigt in %s Sekunden."
+
+msgctxt "Folder name"
+msgid "Folder %s not exists"
+msgstr "Verzeichnis %s existiert nicht"
+
+msgctxt "Folder name"
+msgid "Folder %s not readable"
+msgstr "Verzeichnis %s ist nicht lesbar"
+
+msgid "Link \"%s\" not following."
+msgstr "Link \"%s\" wird nicht gefolgt"
+
+msgid "%d. Trying to generate a manifest file&#160;&hellip;"
+msgstr "%d. Versuche eine Manifest-Datei zu generieren&#160;&hellip;"
+
+msgid "You may have noticed the manifest.json file in this archive."
+msgstr "Du wirst manifest.json in diesem Archiv bemerkt haben."
+
+msgid ""
+"manifest.json might be needed for later restoring a backup from this archive."
+msgstr ""
+"manifest.json könnte für das spätere Wiederherstellen des Backups aus diesem "
+"Archiv benötigt werden."
+
+msgid ""
+"Please leave manifest.json untouched and in place. Otherwise it is safe to "
+"be ignored."
+msgstr ""
+"Bitte lasse die manifest.json unberührt an ihrem Platz. Du kannst sie "
+"ansonsten einfach ignorieren."
+
+msgid "Added manifest.json file with %1$s to backup file list."
+msgstr "manifest.json mit %1$s wurde zur Backup-Datei-Liste hinzugefügt."
+
+msgid "%d. Trying to create backup archive &hellip;"
+msgstr "%d. Versuche, Backup zu erstellen …"
+
+msgid "Backup archive created."
+msgstr "Backup wurde erstellt."
+
+msgid "Archive size is %s."
+msgstr "Archivgröße ist %s"
+
+msgid "%1$d Files with %2$s in Archive."
+msgstr "%1$d Dateien mit %2$s in Archiven."
+
+msgid "Check WordPress database tables only"
+msgstr "Teste nur die WordPress-Tabellen"
+
+msgid "%d. Trying to check database&#160;&hellip;"
+msgstr "%d. Versuche, die Datenbank zu prüfen&#160;&hellip;"
+
+msgid "Table %1$s is a view. Not checked."
+msgstr "Tabelle %1$s ist ein View. Nicht geprüft."
+
+msgid "Settings for database backup"
+msgstr "Einstellungen für das Datenbank Backup"
+
+msgid "Tables to backup"
+msgstr "Tabellen zu sichern"
+
+msgid "Folders to backup"
+msgstr "Zu sichernde Verzeichnisse"
+
+msgid "Backup root folder"
+msgstr "Root Verzeichnis sichern"
+
+msgid "Path as set by user (symlink?): %s"
+msgstr "Pfad, wie vom User gesetzt (symlink?): %s"
+
+msgid "Backup themes"
+msgstr "Themes sichern"
+
+msgid "Backup uploads folder"
+msgstr "Uploads Verzeichnis sichern"
+
+msgid "Extra folders to backup"
+msgstr "Weitere Verzeichnisse sichern"
+
+msgid ""
+"Separate folder names with a line-break or a comma. Folders must be set with "
+"their absolute path!"
+msgstr ""
+"Trenne Verzeichnisnamen mit einer neuen Zeile oder einem Komma. Die "
+"Verzeichnisse müssen mit ihrem absoluten Pfad angegeben werden!"
+
+msgid "Exclude from backup"
+msgstr "Nicht mitsichern"
+
+msgid "Thumbnails in uploads"
+msgstr "Thumbnails in uploads"
+
+msgid "Don't backup thumbnails from the site's uploads folder."
+msgstr "Thumbnails im Uploads-Verzeichnis der Website nicht mitsichern."
+
+msgid ""
+"All images with -???x???. will be excluded. Use a plugin like Regenerate "
+"Thumbnails to rebuild them after a restore."
+msgstr ""
+"Alle Bilder mit -???x??? im Dateinamen werden nicht mitgesichert. Benutze "
+"ein Plugin wir Regenerate Thumbnails um die Thumbnails wiederherzustellen."
+
+msgid "Exclude files/folders from backup"
+msgstr "Datein/Verzeichnisse nicht mitsichern."
+
+msgid ""
+"Separate file / folder name parts with a line-break or a comma. For example /"
+"logs/,.log,.tmp"
+msgstr ""
+"Trenne Dateien / Verzeichnisse mit einer neuen Zeile oder einem Komma. Zum "
+"Beispiel: /logs/,.log,.tmp"
+
+msgid "Special option"
+msgstr "Spezialoption"
+
+msgid "Include special files"
+msgstr "Spezielle Dateien einschließen"
+
+msgid ""
+"Backup wp-config.php, robots.txt, .htaccess, .htpasswd and favicon.ico from "
+"root."
+msgstr ""
+"Sichere wp-config.php, robots.txt, .htaccess, .htpasswd und favicon.ico vom "
+"Root"
+
+msgid ""
+"If the WordPress root folder is not included in this backup job, check this "
+"option to additionally include wp-config.php, robots.txt, .htaccess, ."
+"htpasswd and favicon.ico into the backup. Your wp-config.php will be "
+"included even if you placed it in the parent directory of your root folder."
+msgstr ""
+"Sofern das WordPress-Wurzelverzeichnis nicht sowieso im Backup inkludiert "
+"ist, aktiviere diese Option, um zusätzlich die Dateien wp-config.php, robots."
+"txt, .htaccess, .htpasswd und favicon.ico mitzusichern. Die wp-config-php-"
+"Datei wird in diesem Fall auch dann mitgesichert, wenn sie sich eine Ordner-"
+"Ebene höher als WordPress befindet."
+
+msgid "%d. Trying to make a list of folders to back up&#160;&hellip;"
+msgstr ""
+"%d. Versuche, eine Liste der Ordner für das Backup zu erstellen&#160;&hellip;"
+
+msgid "Items to export"
+msgstr "Objekte zum Exportieren"
+
+msgid "File compression"
+msgstr "Dateikomprimierung"
+
+msgid "XML WARNING (%s): %s"
+msgstr "XML WARNUNG (%s): %s"
+
+msgid "XML RECOVERABLE (%s): %s"
+msgstr "XML RECOVERABLE (%s): %s"
+
+msgid "XML ERROR (%s): %s"
+msgstr "XML FEHLER (%s): %s"
+
+msgid "There was an error when reading this WXR file"
+msgstr "Fehler beim Lesen der WXR Datei"
+
+msgid ""
+"This does not appear to be a WXR file, missing/invalid WXR version number"
+msgstr ""
+"Es scheint nicht eine WXR Datei zu sein. Fehlende/ungültige Versionsnummer"
+
+msgid "WP Export file is a valid WXR file."
+msgstr "WP Export-Datei ist eine gültige WXR Datei."
+
+msgid ""
+"WP Export file can not checked, because no XML extension loaded with the "
+"file can checked."
+msgstr ""
+"WP Export-Datei kann nicht geprüft werden, da keine XML Erweiterung geladen "
+"wurde."
+
+msgid "Compressing file&#160;&hellip;"
+msgstr "Komprimiere Datei&#160;&hellip;"
+
+msgid "Added XML export \"%1$s\" with %2$s to backup file list."
+msgstr "XML Export \"%1$s\" mit %2$s zur Backup-Datei-Liste hinzugefügt"
+
+msgid "%d. Trying to generate a file with installed plugin names&#160;&hellip;"
+msgstr ""
+"%d. Versuche, eine Liste der installierten Plugins zu erstellen&#160;&hellip;"
+
+msgid "All plugin information:"
+msgstr "Alle Plugin-Informationen"
+
+msgid "No MySQLi extension found. Please install it."
+msgstr "Keine MySQLi Erweiterung gefunden. Bitte installieren Sie diese"
+
+msgid "Cannot init MySQLi database connection"
+msgstr "MySQLi Datenbank-Verbindung kann nicht initialisiert werden."
+
+msgid "Setting of MySQLi init command \"%s\" failed"
+msgstr ""
+"Einstellung vom MySQLi Initialisierungsbefehl \"%s\" ist fehlgeschlagen"
+
+msgid "Setting of MySQLi connection timeout failed"
+msgstr ""
+"Einstellung von der MySQLi Verbindungs-Zeitüberschreitung ist fehlgeschlagen"
+
+msgid "Cannot connect to MySQL database %1$d: %2$s"
+msgstr "Kann keine Verbindung zur Datenbank %1$d herstellen: %2$s"
+
+msgctxt "Database Charset"
+msgid "Cannot set DB charset to %s"
+msgstr "Kann Datenbank-Zeichenkodierung nicht auf %s setzen."
+
+msgid "Error while writing file!"
+msgstr "Fehler beim Schreiben!"
+
+msgid "New Job"
+msgstr "Bitte geben Sie einen Namen ein"
+
+msgid "%s Welcome"
+msgstr "%s Willkommen"
+
+msgid "Heads up! You have updated from version 2.x"
+msgstr "Achtung! Sie haben von Version 2.x aktualisiert"
+
+msgid ""
+"Please <a href=\"%s\">check your settings</a> after updating from version 2."
+"x:"
+msgstr ""
+"Bitte <a href=\"%s\">prüfen Sie Ihre Einstellungen</a> nach dem Update von "
+"Version 2.x."
+
+msgid "Dropbox authentication must be re-entered"
+msgstr "Die Drohbox-Authentifizierung muss wiederholt werden."
+
+msgid "SugarSync authentication must be re-entered"
+msgstr "Die SugarSync-Authentifizierung muss wiederholt werden"
+
+msgid "S3 Settings"
+msgstr "S3-Einstellungen"
+
+msgid "Google Storage is now a part of S3 service settings"
+msgstr "Google Storage ist jetzt Teil der S3-Einstellungen"
+
+msgid "All your passwords"
+msgstr "All Ihre Passwörter"
+
+msgid "Welcome to BackWPup Pro"
+msgstr "Willkommen zu BackWPup Pro"
+
+msgid "Please activate your license"
+msgstr "Bitte aktivieren Sie Ihre Lizenz."
+
+msgid ""
+"Please go to your plugin page and active the license to have the autoupdates "
+"enabled."
+msgstr ""
+"Bitte gehen Sie auf die Plugin-Seite, und aktivieren Sie die Lizenz, um "
+"automatische Aktualisierungen zu aktivieren."
+
+msgid "Save your database"
+msgstr "Sichern Sie Ihre Datenbank"
+
+msgid "Save your database regularly"
+msgstr "Sichern Sie Ihre Datenbank regelmäßig"
+
+msgid ""
+"With BackWPup you can schedule the database backup to run automatically. "
+"With a single backup file you can restore your database. You should <a href="
+"\"%s\">set up a backup job</a>, so you will never forget it. There is also "
+"an option to repair and optimize the database after each backup."
+msgstr ""
+"Mit BackWPup können Sie automatische Datenbank-Backups planen. Mit einer "
+"einzigen Backup-Datei können Sie Ihre Datenbank wiederherstellen. Sie "
+"sollten einen <a href=\\\"%s\\\">Backup-Auftrag einrichten</a>, damit Sie es "
+"nie mehr vergessen. Es gibt auch eine Option, um die Datenbank anschließend "
+"zu reparieren und zu optimieren."
+
+msgid "WordPress XML Export"
+msgstr "WordPress-XML-Export"
+
+msgid ""
+"You can choose the built-in WordPress export format in addition or exclusive "
+"to save your data. This works in automated backups too of course. The "
+"advantage is: you can import these files into a blog with the regular "
+"WordPress importer."
+msgstr ""
+"Sie können das interne WordPress-Export-Format zusätzlich oder "
+"ausschließlich wählen, um Ihre Daten zu sichern. Das funktioniert natürlich "
+"auch in automatischen Backups. Der Vorteil: Sie können dieses Format mit dem "
+"normalen WordPress-Importer-Plugin importieren."
+
+msgid "Save all data from the webserver"
+msgstr "Sichern Sie alle Daten vom Webserver"
+
+msgid "Save all files"
+msgstr "Sichern Sie alle Dateien"
+
+msgid ""
+"You can backup all your attachments, also all system files, plugins and "
+"themes in a single file. You can <a href=\"%s\">create a job</a> to update a "
+"backup copy of your file system only when files are changed."
+msgstr ""
+"Sie können all Ihre Anhänge sichern, ebenso alle Systemdateien, Plugins und "
+"Themes – in einer einzigen Datei. Sie können einen <a href=\\\"%s\\"
+"\">Auftrag erstellen</a>, um die Sicherungskopie nur dann zu aktualisieren, "
+"wenn sich tatsächlich eine Datei geändert hat."
+
+msgid "Security!"
+msgstr "Sicherheit!"
+
+msgid ""
+"By default everything is encrypted: connections to external services, local "
+"files and access to directories."
+msgstr ""
+"In der Grundeinstellung ist alles verschlüsselt: Verbindungen zu externen "
+"Diensten, lokale Dateien und der Zugriff auf die Verzeichnisse."
+
+msgid "Cloud Support"
+msgstr "Cloud-Support"
+
+msgid ""
+"BackWPup supports multiple cloud services in parallel. This ensures backups "
+"are redundant."
+msgstr ""
+"BackWPup unterstützt mehrere Cloud-Dienste parallel. Damit wird "
+"sichergestellt, dass Sie redundante Backups anlegen können."
+
+msgid "Features / differences between Free and Pro"
+msgstr "Features / Unterschiede zwischen Free und Pro"
+
+msgid "Features"
+msgstr "Features"
+
+msgid "FREE"
+msgstr "FREE"
+
+msgid "PRO"
+msgstr "PRO"
+
+msgid "Complete database backup"
+msgstr "Vollständige Datenbanksicherung"
+
+msgid "Complete file backup"
+msgstr "Vollständige Dateisicherung"
+
+msgid "Database check"
+msgstr "Datenbanküberprüfung"
+
+msgid "Data compression"
+msgstr "Datenbankoptimierung"
+
+msgid "List of installed plugins"
+msgstr "Liste installierter Plugins"
+
+msgid "Backup archives management"
+msgstr "Verwaltung der Backup-Archive"
+
+msgid "Log file management"
+msgstr "Verwaltung der Log-Dateien"
+
+msgid "Start jobs per WP-Cron, URL, system, backend or WP-CLI"
+msgstr "Start der Aufträge über WP-Cron, URL, System, Backend, WP-CLI"
+
+msgid "Log report via email"
+msgstr "Log-Report via E-Mail"
+
+msgid "Backup to Microsoft Azure"
+msgstr "Backup zu Microsoft Azure"
+
+msgid "Send Backup by email"
+msgstr "Backup via E-Mail"
+
+msgid ""
+"Backup to S3 services <small>(Amazon, Google Storage, Hosteurope and more)</"
+"small>"
+msgstr ""
+"Backup zu S3-Dienstleistern <small>(Amazon, Google Storage, Hosteurope, "
+"usw)</small>"
+
+msgid "Backup to FTP server"
+msgstr "Backup auf FTP-Server"
+
+msgid "Backup to your web space"
+msgstr "Backup auf eigenem Webspace"
+
+msgid "Custom API keys for DropBox and SugarSync"
+msgstr "Eigene API-Keys für DropBox und SugarSync hinterlegen"
+
+msgid "XML database backup as PHPMyAdmin schema"
+msgstr "XML-Datenbanksicherung der Datenbank nach PHPMyAdmin-Schema"
+
+msgid "Database backup as mysqldump per command line"
+msgstr "Datenbanksicherung mit System-Kommando mysqldump"
+
+msgid "Database backup for additional MySQL databases"
+msgstr "Datenbanksicherung weiterer MySQL-Datenbanken"
+
+msgid "Import and export job settings as XML"
+msgstr "Auftragseinstellungen als XML ex- und importieren"
+
+msgid "Wizard for system tests"
+msgstr "Assistent zur Ausführung eines Systemtests"
+
+msgid "Wizard for scheduled backup jobs"
+msgstr "Assistent zur Einrichtung von Sicherungsaufträgen"
+
+msgid "Wizard to import settings and backup jobs"
+msgstr "Assistent zum Importieren von Einstellungen und Aufträgen"
+
+msgid "Differential backup of changed directories to Dropbox"
+msgstr "Sicherung geänderter Verzeichnisse in einer Dropbox"
+
+msgid "Differential backup of changed directories to Rackspace Cloud Files"
+msgstr "Sicherung geänderter Verzeichnisse nach Rackspace Cloud Files"
+
+msgid "Differential backup of changed directories to S3"
+msgstr "Sicherung geänderter Verzeichnisse nach S3"
+
+msgid "Differential backup of changed directories to MS Azure"
+msgstr "Sicherung geänderter Verzeichnisse nach MS Azure"
+
+msgid "<strong>Premium support</strong>"
+msgstr "<strong>Premium-Support</strong>"
+
+msgid "<strong>Dynamically loaded documentation</strong>"
+msgstr "<strong>Integration einer dynamischen Dokumentation</strong>"
+
+msgid "<strong>Automatic update from MarketPress</strong>"
+msgstr "<strong>Automatische Aktualisierung durch MarketPress</strong>"
+
+msgid "GET PRO"
+msgstr "GET PRO"
+
+msgid "No files could be found. (List will be generated during next backup.)"
+msgstr "Keine Dateien gefunden. (Liste wird beim nächsten Backup generiert.)"
+
+msgid "Change destination"
+msgstr "Ziel ändern"
+
+msgid "%1$s at %2$s"
+msgstr "%1$s um %2$s"
+
+msgid "Sorry, you don't have permissions to do that."
+msgstr "Sie haben nicht die notwendigen Berechtigungen für diese Aktion."
+
+msgid "%s Manage Backup Archives"
+msgstr "%s Sicherungsarchive verwalten"
+
+msgid "%s Dashboard"
+msgstr "%s Dashboard"
+
+msgid "First Steps"
+msgstr "Erste Schritte"
+
+msgid "Check the installation"
+msgstr "Überprüfe die Installation"
+
+msgid "Check the job log"
+msgstr "Logs des Auftrages prüfen"
+
+msgid "One click backup"
+msgstr "Ein-Klick-Backup"
+
+msgid ""
+"Generate a database backup of WordPress tables and download it right away!"
+msgstr ""
+"Generieren Sie ein Datenbank-Backup der WordPress-Tabellen und laden Sie es "
+"gleich herunter!"
+
+msgid "Download database backup"
+msgstr "Datenbank-Backup herunterladen"
+
+msgid "working since %d seconds"
+msgstr "in Arbeit seit %d Sek."
+
+msgid "ATTENTION: Job runs every %d minutes!"
+msgstr "ACHTUNG: Auftrag läuft alle %d Minuten!"
+
+msgid "ATTENTION: Job runs every %d hours!"
+msgstr "ACHTUNG: Auftrag läuft alle %d Stunden!"
+
+msgid "%s Job:"
+msgstr "%s Auftrag: "
+
+msgid "Please name this job."
+msgstr "Bitte benennen Sie diesen Auftrag."
+
+msgid "Job Tasks"
+msgstr "Auftragsdetails"
+
+msgid "This job is a&#160;&hellip;"
+msgstr "Dieser Auftrag ist ein&#160;&hellip;"
+
+msgid "Backup File Creation"
+msgstr "Erstellen der Backup-Datei"
+
+msgid "Synchronize file by file to destination"
+msgstr "Synchronisiere Datei für Datei zum Auftragsziel"
+
+msgid "Archive name"
+msgstr "Archivname"
+
+msgid "%d = Two digit day of the month, with leading zeros"
+msgstr "%d = Zweistelliger Tag des Monats, mit führenden Nullen"
+
+msgid "%j = Day of the month, without leading zeros"
+msgstr "%j = Tag des Monats, ohne führende Nullen"
+
+msgid "%m = Day of the month, with leading zeros"
+msgstr "%m = Tag des Monats, mit führenden Nullen"
+
+msgid "%n = Representation of the month (without leading zeros)"
+msgstr "%n = Monat als Zahl (ohne führende Nullen)"
+
+msgid "%Y = Four digit representation for the year"
+msgstr "%Y = Vierstellige Jahreszahl"
+
+msgid "%y = Two digit representation of the year"
+msgstr "%y = Zweistellige Jahreszahl"
+
+msgid "%a = Lowercase ante meridiem (am) and post meridiem (pm)"
+msgstr "%a = Kleingeschriebenes ante meridiem (am) und post meridiem (pm)"
+
+msgid "%A = Uppercase ante meridiem (AM) and post meridiem (PM)"
+msgstr "%A = Großgeschriebenes ante meridiem (AM) and post meridiem (PM)"
+
+msgid "%B = Swatch Internet Time"
+msgstr "%B = Swatch Internet Time"
+
+msgid "%g = Hour in 12-hour format, without leading zeros"
+msgstr "%g = Stunde im Zwölfstunden-Format, ohne führende Nullen"
+
+msgid "%G = Hour in 24-hour format, without leading zeros"
+msgstr "%G = Stunde im 24-Stunden-Format, ohne führende Nullen"
+
+msgid "%h = Hour in 12-hour format, with leading zeros"
+msgstr "%h = Stunde im Zwölfstunden-Format, mit führenden Nullen"
+
+msgid "%H = Hour in 24-hour format, with leading zeros"
+msgstr "%H = Stunde im 24-Stunden-Format, mit führenden Nullen"
+
+msgid "%i = Two digit representation of the minute"
+msgstr "%i = Zweistellige Minute"
+
+msgid "%s = Two digit representation of the second"
+msgstr "%s = Zweistellige Sekunde"
+
+msgid "Replacement patterns:"
+msgstr "Ersetzungsmuster:"
+
+msgid "Archive Format"
+msgstr "Archiv Format"
+
+msgid ""
+"PHP Zip functions will be used if available (needs less memory). Otherwise "
+"the PCLZip class will be used."
+msgstr ""
+"PHP-Zip-Funktionen werden verwendet, sofern verfügbar (schneller). Ansonsten "
+"wird die Klasse PCLZip verwendet."
+
+msgid "Disabled due to missing PHP function."
+msgstr "Deaktiviert wegen nicht verfügbarer PHP-Funktion."
+
+msgid "A tarballed, not compressed archive (fast and less memory)"
+msgstr "Ein TAR-Archiv, nicht komprimiert (schnell und speicherschonend)"
+
+msgid "A tarballed, GZipped archive (fast and less memory)"
+msgstr "Ein TAR-GZ-Archiv (schnell und speicherschonend)"
+
+msgid "A tarballed, BZipped archive (fast and less memory)"
+msgstr "Ein TAR-BZ-Archiv (schnell und speicherschonend)"
+
+msgid "Job Destination"
+msgstr "Zielordner des Auftrags"
+
+msgid "Where should your backup file be stored?"
+msgstr "Wo soll die Backup-Datei gespeichert werden?"
+
+msgid "Log Files"
+msgstr "Protokoll-Dateien"
+
+msgid "Send log to email address"
+msgstr "Protokoll-Datei an E-Mail-Adresse senden"
+
+msgid "Leave empty to not have log sent."
+msgstr "Leer lassen, um kein Protokoll zu senden."
+
+msgid "Email FROM field"
+msgstr "VON-Feld der E-Mail"
+
+msgid ""
+"Email \"From\" field (Name &lt;&#160;you@your-email-address.tld&#160;&gt;)"
+msgstr "\"VON\"-Feld der E-Mail (Name &lt;&#160;email@adresse.tld&#160;&gt;)"
+
+msgid "Errors only"
+msgstr "Nur Fehler"
+
+msgid "Send email with log only when errors occur during job execution."
+msgstr ""
+"Sende eine E-Mail mit Protokoll nur, wenn während des Auftrags ein Fehler "
+"aufgetreten ist."
+
+msgid "Job Schedule"
+msgstr "Auftragsplanung"
+
+msgid "manually only"
+msgstr "nur manuell"
+
+msgid "with WordPress cron"
+msgstr "mit WordPress Cron"
+
+msgid ""
+"Copy the link for an external start. This option has to be activated to make "
+"the link work."
+msgstr ""
+"Kopieren Sie den Link für einen externen Auftragsstart. Diese Option muss "
+"erst aktiviert werden, damit der Link funktioniert."
+
+msgid "Start job with CLI"
+msgstr "Auftrag per CLI starten"
+
+msgid ""
+"Use <a href=\"http://wp-cli.org/\">WP-CLI</a> to run jobs from commandline "
+"or <a href=\"%s\">get the start script</a>."
+msgstr ""
+"Verwenden Sie <a href=\"http://wp-cli.org/\">WP-CLI</a>, um Aufträge per "
+"Kommandozeile auszulösen, oder <a href=\"%s\">dieses Start-Script</a>."
+
+msgid ""
+"Generate a server script file to let the job start with the server’s cron on "
+"command line interface. Alternatively use WP-CLI commands."
+msgstr ""
+"Erzeugen Sie ein Serverscript, um einen Auftrag per Kommandoziele "
+"auszulösen, oder benutzen Sie WP-CLI."
+
+msgid "Minutes:"
+msgstr "Minuten:"
+
+msgid "Display working log"
+msgstr "Zeige Auftragslog"
+
+msgid "Add new job"
+msgstr "Neuer Auftrag"
+
+msgid "(ER_MULTIDISK) Multi-disk zip archives not supported"
+msgstr "(ER_MULTIDISK) Multi-Disk .zip Archive werden nicht unterstützt"
+
+msgid "(ER_RENAME) Renaming temporary file failed"
+msgstr "(ER_RENAME) Umbenennen der temporärern Dateien gescheitert."
+
+msgid "(ER_CLOSE) Closing zip archive failed"
+msgstr "(ER_CLOSE)Schließen der .zip Archive gescheitert"
+
+msgid "(ER_SEEK) Seek error"
+msgstr "(ER_SEEK) Such-Fehler"
+
+msgid "(ER_READ) Read error"
+msgstr "(ER_READ) Lese-Fehler"
+
+msgid "(ER_WRITE) Write error"
+msgstr "(ER_WRITE) Schreib-Fehler"
+
+msgid "(ER_CRC) CRC error"
+msgstr "(ER_CRC) CRC Fehler"
+
+msgid "(ER_ZIPCLOSED) Containing zip archive was closed"
+msgstr "(ER_ZIPCLOSED) beinhaltetendes .zip Archiv war geschlossen"
+
+msgid "(ER_NOENT) No such file"
+msgstr "(ER_NOENT) keine passende Datei"
+
+msgid "(ER_EXISTS) File already exists"
+msgstr "(ER_EXISTS) Datei exisitiert bereits"
+
+msgid "(ER_OPEN) Can't open file"
+msgstr "(ER_OPEN) Kann die Datei nicht öffnen"
+
+msgid "(ER_TMPOPEN) Failure to create temporary file"
+msgstr "(ER_TMPOPEN) Erstellen einer temporären Datei fehlgeschlagen"
+
+msgid "(ER_ZLIB) Zlib error"
+msgstr "(ER_ZLIB) Zlib Fehler"
+
+msgid "(ER_MEMORY) Malloc failure"
+msgstr "(ER_MEMORY) Malloc Fehler"
+
+msgid "(ER_CHANGED) Entry has been changed"
+msgstr "(ER_CHANGED) Eintrag wurde geändert"
+
+msgid "(ER_COMPNOTSUPP) Compression method not supported"
+msgstr "(ER_COMPNOTSUPP) Kompressionsmethode nicht unterstützt"
+
+msgid "(ER_EOF) Premature EOF"
+msgstr "(ER_EOF) verfrühtes EOF"
+
+msgid "(ER_INVAL) Invalid argument"
+msgstr "(ER_INVAL) ungültiges Argument"
+
+msgid "(ER_NOZIP) Not a zip archive"
+msgstr "(ER_NOZIP) kein .zip Archiv"
+
+msgid "(ER_INTERNAL) Internal error"
+msgstr "(ER_INTERNAL) Interner Fehler"
+
+msgid "(ER_INCONS) Zip archive inconsistent"
+msgstr "(ER_INCONS) .zip Archiv inkonsistent"
+
+msgid "(ER_REMOVE) Can't remove file"
+msgstr "(ER_REMOVE) Datei kann nicht entfernt werden"
+
+msgid "(ER_DELETED) Entry has been deleted"
+msgstr "(ER_DELETED) Eintrag wurde gelöscht"
+
+msgid "disabled"
+msgstr "deaktiviert"
+
+msgid "minimum"
+msgstr "minimum"
+
+msgid "medium"
+msgstr "medium"
+
+msgid "BackWPup archive sending TEST Message"
+msgstr "BackWPup Archiv TEST Nachricht senden"
+
+msgid "Rackspace Cloud Files Region"
+msgstr "Rackspace Cloud Verzeichnis"
+
+msgid "Wizard: %1$s"
+msgstr "Assistent: %1$s"
+
+msgid "Database Backup and XML Export (Daily)"
+msgstr "DB Sicherung & XML Export (täglich)"
+
+msgid "Backup all files"
+msgstr "Sicherung aller Dateien"
+
+msgid "Support"
+msgstr "Support"
+
+msgid "ERROR"
+msgstr "FEHLER"
+
+msgid "Backup to Rackspace Cloud Files"
+msgstr "Backup in die Rackspace Cloud"
+
+msgid "Select region"
+msgstr "Wähle Region"
+
+msgid "Dallas (DFW)"
+msgstr "Dallas (DFW)"
+
+msgid "Chicago (ORD)"
+msgstr "Chicago (ORD)"
+
+msgid "Connected to Rackspace cloud files container %s"
+msgstr "Verbunden mit Rackspace Cloud Container %s"
+
+msgid "News"
+msgstr "Neuigkeiten"
+
+msgid "Wrong BackWPup JobID"
+msgstr "Falsche BackWPup JobID"
+
+msgid "SUCCESSFUL"
+msgstr "ERFOLGREICH"
+
+msgid "WARNING"
+msgstr "WARNUNG"
+
+msgid "Connected to database %1$s on %2$s"
+msgstr "Mit Datenbank %1$s auf %2$s verbunden"
+
+msgid "Aborted by user!"
+msgstr "Abgebrochen vom Benutzer!"
+
+msgid "No Translation"
+msgstr "Keine Übersetzung"
+
+msgid "Dream Host Cloud Storage"
+msgstr "Dream Host Cloud Storage"
+
+msgid "Loading Menu ..."
+msgstr "Lade Menü..."
+
+msgid "Could not connect to remote host. Please try again later."
+msgstr ""
+"Konnte nicht zum Remote-Host verbinden. Bitte versuche es später noch einmal."
+
+msgid "Loading Content ..."
+msgstr "Lade Inhalt..."
+
+msgid "Amazon S3: Asia Pacific (Singapore)"
+msgstr "Amazon S3: Asia Pacific (Singapore)"
+
+msgid "Amazon S3: Asia Pacific (Sydney)"
+msgstr "Amazon S3: Asia Pacific (Sydney)"
+
+msgid "Amazon S3: South America (Sao Paulo)"
+msgstr "Amazon S3: South America (Sao Paulo)"
+
+msgid "Google Storage (Interoperable Access)"
+msgstr "Google Storage (Interoperable Access)"
+
+msgid "Hosteurope Cloud Storage"
+msgstr "Hosteurope Cloud Storage"
+
+msgid "Secret Key:"
+msgstr "Secret Key:"
+
+msgid "New Bucket:"
+msgstr "Neues Bucket: "
+
+msgid "S3 Access Keys"
+msgstr "S3 Access Keys"
+
+msgid "Secret Key"
+msgstr "Secret Key"
+
+msgid "S3 Bucket"
+msgstr "S3 Bucket"
+
+msgid "Bucket selection"
+msgstr "Bucket Auswahl"
+
+msgid "Reduced Redundancy"
+msgstr "Reduzierte Redundanz"
+
+msgid " %s is not a valid bucket name."
+msgstr "%s ist kein gültiger Bucket Name"
+
+msgid "S3 Service API: %s"
+msgstr "S3 Service API: %s"
+
+msgid "No bucket found!"
+msgstr "Kein Bucket gefunden!"
+
+msgid "SugarSync"
+msgstr "SugarSync"
+
+msgid "Authenticate with Sugarsync!"
+msgstr "Mit SugarSync authentifizieren!"
+
+msgid "Delete Sugarsync authentication!"
+msgstr "Lösche SugarSync Authentifizierung"
+
+msgid "Sugarsync Login"
+msgstr "SugarSync Login"
+
+msgid "Authentication"
+msgstr "Authentifizierung"
+
+msgid "Sync folder selection"
+msgstr "Sync Ordner Auswahl"
+
+msgid "Folder in root"
+msgstr "Ordner im Wurzelverzeichnis"
+
+msgid "[INFO] BackWPup job: %1$s; %2$s"
+msgstr "[INFO] BackWPup-Auftrag: %1$s; %2$s"
+
+msgid "DB Check"
+msgstr "DB Check"
+
+msgid "Settings for database check"
+msgstr "Einstellungen für den Datenbank Check"
+
+msgid "Check only WordPress Database tables"
+msgstr "Teste nur die WordPress Datenbank Tabellen"
+
+msgid "Repair"
+msgstr "Reparieren"
+
+msgid "Table %1$s is not a MyISAM/InnoDB table. Not checked."
+msgstr "Tabelle %1$s ist keine MyISAM/InnoDB Tabelle. Nicht geprüft"
+
+msgid "Result of table check for %1$s is: %2$s"
+msgstr "Ergebnis der Tabellenprüfung für %1$s ist: %2$s"
+
+msgid "Result of table repair for %1$s is: %2$s"
+msgstr "Ergebnis der Tabellenreparatur für %1$s ist: %2$s"
+
+msgid "Files"
+msgstr "Dateien"
+
+msgid "XML export"
+msgstr "XML Export"
+
+msgid "WordPress XML export"
+msgstr "WordPress XML Export"
+
+msgid "All content"
+msgstr "Gesamter Inhalt"
+
+msgid "Posts"
+msgstr "Beiträge"
+
+msgid "Pages"
+msgstr "Seiten"
+
+msgid "Installed plugins list"
+msgstr "Liste der installierten Plugins"
+
+msgid "Nothing to configure"
+msgstr "Nichts zu konfiguieren"
+
+msgid "Destinations"
+msgstr "Zielordner"
+
+msgid "Not needed or set"
+msgstr "Nicht gebraucht oder eingestellt"
+
+msgid "Changes for job <i>%s</i> saved."
+msgstr "Änderungen für den Auftrag <i>%s</i> gesichert."
+
+msgid "ATTENTION: Can't calculate cron!"
+msgstr "ACHTUNG: Kann cron nicht berechnen!"
+
+msgid "General"
+msgstr "Allgemein"
+
+msgid "Schedule"
+msgstr "Planen"
+
+msgid "To: %s"
+msgstr "Zu: %s"
+
+msgid "Job tasks"
+msgstr "Auftragsdetails"
+
+msgid "Backup type"
+msgstr "Backup Typ"
+
+msgid "Sync file by file to destination"
+msgstr "Synchronisiere Datei für Datei zum Zielverzeichnis"
+
+msgid "Create a backup archive"
+msgstr "Backup erstellen"
+
+msgid ""
+"PHP Zip functions will be used if available (memory lees). Else PCLZip Class "
+"will used."
+msgstr ""
+"PHP Zip Funktionen wird verwendent, sofern verfügbar (memory lees). "
+"Ansosnten wird PCLZip Class verwendet."
+
+msgid "Disabled because missing PHP function."
+msgstr "Aufgrund fehlender PHP Funktion deaktiviert."
+
+msgid "A tared and GZipped archive (fast and memory less)"
+msgstr "Ein .tar und .gz Archiv (schnell und schlank)"
+
+msgid "A tared and BZipped archive (fast and memory less)"
+msgstr "Ein .tar und .bz Archiv (schnell und schlank)"
+
+msgid "Where to store the files"
+msgstr "Wo die Dateien abgelegt werden"
+
+msgid "Start job"
+msgstr "Auftrag starten"
+
+msgid "with a link"
+msgstr "mit einem Link"
+
+msgid "Schedule execution time"
+msgstr "Plane Ausführungszeit"
+
+msgid "Scheduler type"
+msgstr "Planungstyp"
+
+msgid "Scheduler"
+msgstr "Planer"
+
+msgid "Disabled PHP Functions:"
+msgstr "Deaktivierte PHP Funktionen:"
+
+msgid "Loaded PHP Extensions:"
+msgstr "Geladene PHP Erweiterungen"
+
+msgid "http://marketpress.com"
+msgstr "http://marketpress.com"
+
+msgid "Get pro."
+msgstr "Pro-Version kaufen"
+
+msgid "BackWPup Pro"
+msgstr "BackWPup Pro"
+
+msgid "Operating System"
+msgstr "Betriebssystem"
+
+msgid "Current PHP user"
+msgstr "Aktueller PHP user"
+
+msgid "%s hours"
+msgstr "%s Stunden"
+
+msgid "Job Types"
+msgstr "Arbeitsauftrag Typen"
+
+msgid "Network"
+msgstr "Netzwerk"
+
+msgid "API Keys"
+msgstr "API-Schlüssel"
+
+msgid "Restart on every main step"
+msgstr "Neustarten bei jedem Hauptschritt"
+
+msgid "Start wizard"
+msgstr "Assistenten starten"
+
+msgid "Create Job"
+msgstr "Erstelle Auftrag"
+
+msgid "Archive Settings"
+msgstr "Archiv Einstellungen"
+
+msgid "Settings for the Backup Archive"
+msgstr "Einstellungen für das Backup Archiv"
+
+msgid "Scheduling"
+msgstr "Planung"
+
+msgid "Activate scheduling"
+msgstr "Aktive Planung"
+
+msgid "Select a compression type for the backup archive"
+msgstr "Wähle einen Kompressions-Typ für das Backup Archiv"
+
+msgid "Archive compression type"
+msgstr "Archiv Kompressions-Typ"
+
+msgid "Database connection"
+msgstr "Datenbank Verbindung"
+
+msgid "Use WordPress database connection."
+msgstr "Nutze WordPress-Datenbankverbindung"
+
+msgid "Dropbox API Keys"
+msgstr "Dropbox API Keys"
+
+msgid "Full Dropbox App key:"
+msgstr "Voller Dropbox app Key"
+
+msgid "Full Dropbox App secret:"
+msgstr "Voller Dropbox App secret:"
+
+msgid "Sandbox App key:"
+msgstr "Sandbox App key:"
+
+msgid "Sandbox App secret:"
+msgstr "Sandbox App secret:"
+
+msgid "SugarSync API Keys"
+msgstr "SugarSync API Keys"
+
+msgid "Private Access Key:"
+msgstr "Private Access Key:"
+
+msgid "App ID:"
+msgstr "App ID:"
+
+msgid "Import File"
+msgstr "Import-Datei"
+
+msgid "Upload XML job file for import"
+msgstr "XML Arbeitsauftrag Datei hochladen zum Importieren"
+
+msgid "Choose a file from your computer:"
+msgstr "Wähle eine Datei von deinem Computer:"
+
+msgid "Maximum size: %s"
+msgstr "Maximale Größe: %s"
+
+msgid "Import Jobs"
+msgstr "Importiere Aufträge"
+
+msgid "Import Config"
+msgstr "Konfiguration importieren"
+
+msgid "Import BackWPup configuration"
+msgstr "Importiere BackWPup Konfiguration"
+
+msgid ""
+"File is empty. Please upload something more substantial. This error could "
+"also caused by uploads being disabled in your php.ini or by post_max_size "
+"being defined as smaller than upload_max_filesize in php.ini."
+msgstr ""
+"Datei ist leer. Bitte lade etwas mit Substanz hoch. Dieser Fehler kann "
+"begründet sein weil uploads in der php.ini oder durch post_max_size kleiner "
+"definiert sind als upload_max_filesize in php.ini."
+
+msgid ""
+"This Export file (version %s) may not be supported by this version of the "
+"importer."
+msgstr ""
+"Die Export Datei (version %s) wird wahrscheinlich nicht von dieser Version "
+"des Importers unterstützt"
+
+msgid "Job %1$s with id %2$d imported"
+msgstr "Job %1$s mit ID %2$d wurde importiert"
+
+msgid "BackWPup config imported"
+msgstr "BackWPup Konfiguration wurde importiert"
+
+msgid "Dashboard"
+msgstr "Dashboard"
+
+msgid "BackWPup Admin"
+msgstr "BackWPup Admin"
+
+msgid "BackWPup jobs checker"
+msgstr "BackWPup Auftragsprüfung"
+
+msgid "BackWPup jobs helper"
+msgstr "BackWPup Auftragshelfer"
+
+msgid "Test the installation"
+msgstr "Die Installation testen"
+
+msgid "Create a Job"
+msgstr "Auftrag erstellen"
+
+msgid "Run the created job"
+msgstr "Erstellten Auftrag starten"
+
+msgid "Next scheduled jobs"
+msgstr "Nächste geplante Aufträge"
+
+msgid "Abort"
+msgstr "Abbrechen"
+
+msgid "Last logs"
+msgstr "Letzte Logs"
+
+msgid "Result"
+msgstr "Ergebnis"
+
+msgid "Wizard to test if BackWPup can work properly"
+msgstr "Dieser Assistent testet, ob BackWPup problemlos arbeiten kann."
+
+msgid "Run tests"
+msgstr "Starte die Tests"
+
+msgid "Environment"
+msgstr "Voraussetzungen"
+
+msgid "System Environment"
+msgstr "System Voraussetzungen"
+
+msgid "BackWPup Dashboard"
+msgstr "BackWPup Dashboard"
+
+msgid "Folder in Dropbox"
+msgstr "Ordner in Dropbox"
+
+msgid "Upload changed files to Dropbox"
+msgstr "Lade geänderte Datei in die Dropbox"
+
+msgid "File %s uploaded to Dropbox"
+msgstr "Datei %s zu Dropbox hochgeladen"
+
+msgid "File %s copied"
+msgstr "Datei %s kopiert"
+
+msgid "Empty folder %s deleted"
+msgstr "Leerer Ordner %s gelöscht"
+
+msgid "Rackspace Cloud container \"%s\" created."
+msgstr "Rackspace Cloud Container\"%s\" erstellt."
+
+msgid "Rackspace Cloud API: %s"
+msgstr "Rackspace Cloud API: %s"
+
+msgid "Amazon: Storage Class"
+msgstr "Amazon: Storage Class"
+
+msgid "[INFO] Temp folder is: %s"
+msgstr "[INFO] Temp Ordner ist: %s"
+
+msgid "[INFO] Backup file is: %s"
+msgstr "[INFO] Backup Datei ist: %s"
+
+msgid "Welcome to BackWPup"
+msgstr "Willkommen bei BackWPup"
+
+msgid "System Test"
+msgstr "System Test"
+
+msgid ""
+"You are currently using a valid key for this plugin. You are able to renew "
+"the key in MarketPress Dashboard. Or if you want to add another valid code "
+"use the form below."
+msgstr ""
+"Du verwendest derzeit einen gültigen Lizenzschlüssel für dieses Plugin. Du "
+"kannst die Lizenzen im MarketPress Dashboard erneuern. Oder einen anderen "
+"gültigen Schlüssel eintragen."
+
+msgid ""
+"You are currently using a valid key for this plugin. You are able to renew "
+"the key below or you can delete the key by <a href=\"%s\">clicking here</a>."
+msgstr ""
+"Du verwendest einen gültigen Lizenzschlüssel für dieses Plugin. Du kannst "
+"den Schlüssel unten erneuern oder Löschen <a href=\"%s\">zum Löschen hier "
+"klicken</a>."
+
+msgid "License Key"
+msgstr "Lizenzschlüssel"
+
+msgid "Activate"
+msgstr "Aktivieren"
+
+msgid "The License has been deleted."
+msgstr "Die Lizenz wurde gelöscht."
+
+msgid "Plugin successfully activated."
+msgstr "Plugin erfolgreich aktiviert."
+
+msgid "The entered license key is wrong."
+msgstr "Der eingegebene Lizenzschlüssel ist falsch."
+
+msgid ""
+"You have reached the limit of urls. Please update your license at <a href="
+"\"http://marketpress.com\">marketpress.com</a>."
+msgstr ""
+"Du hast das Limit der URLs erreicht. Bitte aktualisiere deine Lizenz auf <a "
+"href=\"http://marketpress.de\">marketpress.de</a>."
+
+msgid ""
+"Something went wrong. Please try again later or contact the <a href=\"http://"
+"marketpress.com/support/\">MarketPress Team</a>."
+msgstr ""
+"Etwas ist falsch gelaufen. Bitte versuche es erneut oder kontaktiere das <a "
+"href=\"http://marketpress.de/support/\">MarketPress Team</a>."
+
+msgid ""
+"Due to a wrong license you are not allowed to activate this plugin. Please "
+"update your license at <a href=\"http://marketpress.com\">marketpress.com</"
+"a>."
+msgstr ""
+"Dir ist nicht erlaubt, das Plugin zu aktivieren, mit einer falschen Lizenz. "
+"Bitte aktualisiere deine Lizenz auf <a href=\"http://marketpress.de"
+"\">MarketPress.de</a>."
+
+msgid "XML job import"
+msgstr "XML Auftrag Import"
+
+msgid "Database check done!"
+msgstr "Datenbank-Check fertig!"
+
+msgid "Errors:"
+msgstr "Fehler:"
+
+msgid "Warnings:"
+msgstr "Warnungen:"
+
+msgid "Job"
+msgstr "Auftrag"
+
+msgid "Type"
+msgstr "Typ"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Size"
+msgstr "Größe"
+
+msgid "Runtime"
+msgstr "Laufzeit"
+
+msgid "Job Name"
+msgstr "Auftragsname"
+
+msgid "Next Run"
+msgstr "Nächster Durchlauf"
+
+msgid "Last Run"
+msgstr "Letzter Durchlauf"
+
+msgid "Settings"
+msgstr "Einstellungen"
+
+msgid "none"
+msgstr "keine"
+
+msgid "Edit Job"
+msgstr "Auftrag bearbeiten"
+
+msgid "Delete"
+msgstr "Löschen"
+
+msgid "Save Changes"
+msgstr "Änderungen speichern"
+
+msgid "January"
+msgstr "Januar"
+
+msgid "February"
+msgstr "Februar"
+
+msgid "March"
+msgstr "März"
+
+msgid "April"
+msgstr "April"
+
+msgid "May"
+msgstr "Mai"
+
+msgid "June"
+msgstr "Juni"
+
+msgid "July"
+msgstr "Juli"
+
+msgid "September"
+msgstr "September"
+
+msgid "October"
+msgstr "Oktober"
+
+msgid "November"
+msgstr "November"
+
+msgid "December"
+msgstr "Dezember"
+
+msgid "Hostname:"
+msgstr "Hostname:"
+
+msgid "Username:"
+msgstr "Benutzername:"
+
+msgid "Password:"
+msgstr "Passwort:"
+
+msgid "Access Key ID:"
+msgstr "Access Key ID (Zugangsschl&uuml;ssel-ID):"
+
+msgid "Bucket:"
+msgstr "Bucket:"
+
+msgid "Jobs"
+msgstr "Aufträge"
+
+msgid "Logs"
+msgstr "Protokolle"
+
+msgid "View"
+msgstr "Ansehen"
+
+msgid "Settings saved"
+msgstr "Einstellungen gespeichert"
+
+msgid "Copy of"
+msgstr "Kopie von"
+
+msgid "Sendmail"
+msgstr "Sendmail"
+
+msgid "Add new"
+msgstr "Erstellen"
+
+msgid "Edit"
+msgstr "Bearbeiten"
+
+msgid "Copy"
+msgstr "Kopieren"
+
+msgid "Inactive"
+msgstr "Inaktiv"
+
+msgid "ERROR:"
+msgstr "FEHLER:"
+
+msgid "Backup File transferred to RSC://"
+msgstr "Backup Archiv übertragen zu RSC://"
+
+msgid "Backups"
+msgstr "Backups"
+
+msgid "Missing API Key!"
+msgstr "API-Schlüssel wird fehlt!"
+
+msgid "No Jobs."
+msgstr "Keine Aufträge."
+
+msgid "Information"
+msgstr "Informationen"
+
+msgid "No Logs."
+msgstr "Keine Protokolldateien."
+
+msgid "Download"
+msgstr "Herunterladen"
+
+msgid "?"
+msgstr "?"
+
+msgid "Any (*)"
+msgstr "Alle (*)"
+
+msgid "Hours:"
+msgstr "Stunden:"
+
+msgid "Sunday"
+msgstr "Sonntag"
+
+msgid "Monday"
+msgstr "Montag"
+
+msgid "Tuesday"
+msgstr "Dienstag"
+
+msgid "Wednesday"
+msgstr "Mittwoch"
+
+msgid "Thursday"
+msgstr "Donnerstag"
+
+msgid "Friday"
+msgstr "Freitag"
+
+msgid "Saturday"
+msgstr "Samstag"
+
+msgid "Next runtime:"
+msgstr "Nächster Durchlauf:"
+
+msgid "Zip"
+msgstr "Zip"
+
+msgid "Tar"
+msgstr "Tar"
+
+msgid "Tar GZip"
+msgstr "Tar GZip"
+
+msgid "Tar BZip2"
+msgstr "Tar BZip2"
+
+msgid "Exclude:"
+msgstr "Ausschließen:"
+
+msgid "Plugins"
+msgstr "Plugins"
+
+msgid "API Key:"
+msgstr "API-Schl&uuml;ssel"
+
+msgid "Container:"
+msgstr "Container:"
+
+msgid "Error getting SYSTYPE"
+msgstr "Fehler, SYSTYPE wird angezeigt"
+
+msgid "Backup to Dropbox"
+msgstr "Backup in die Dropbox"
+
+msgid "Export"
+msgstr "Export"
+
+msgid "Log"
+msgstr "Protokoll"
+
+msgid "Import Type"
+msgstr "Import-Typ"
+
+msgid "No Import"
+msgstr "Kein Import"
+
+msgid "Overwrite"
+msgstr "&Uuml;berschreiben"
+
+msgid "Append"
+msgstr "Anh&auml;ngen"
+
+msgid "Import"
+msgstr "Import"
+
+msgid "Host:"
+msgstr "Host (Server):"
+
+msgid "Account Name:"
+msgstr "Kontoname/ Benutzername:"
+
+msgid "Access Key:"
+msgstr "Zugangsschl&uuml;ssel (Access Key):"
+
+msgid "Create Account"
+msgstr "Konto erstellen"
+
+msgid "Day of Month:"
+msgstr "Tag des Monats:"
+
+msgid "Day of Week:"
+msgstr "Wochentag:"
+
+msgid "(Oldest files will be deleted first.)"
+msgstr "(&Auml;lteste Dateien werden zuerst gel&ouml;scht.)"
+
+msgid "Login:"
+msgstr "Anmelden:"
+
+msgid "Not authenticated!"
+msgstr "Nicht authentifiziert!"
+
+msgid "Authenticated!"
+msgstr "Authentifiziert!"
+
+msgid "Backup to SugarSync"
+msgstr "Backup zu SugarSync"
+
+msgid "Root:"
+msgstr "Root:"
+
+msgid "No Syncfolders found!"
+msgstr "Keine Sync-Ordner gefunden!"
+
+msgid "Dropbox authentication complete!"
+msgstr "Dropbox-Authentifizierung vollständig!"
+
+msgid "%d ERROR"
+msgid_plural "%d ERRORS"
+msgstr[0] "%d FEHLER"
+msgstr[1] "%d FEHLER"
+
+msgid "%d WARNING"
+msgid_plural "%d WARNINGS"
+msgstr[0] "%d WARNUNG"
+msgstr[1] "%d WARNUNGEN"
+
+msgid "O.K."
+msgstr "O.K."
+
+msgid "File"
+msgstr "Datei"
+
+msgid "Folder"
+msgstr "Ordner"
+
+msgid "Time"
+msgstr "Zeit"
+
+msgid "Month:"
+msgstr "Monat:"
+
+msgid "Job will be terminated."
+msgstr "Auftrag wird beendet."
+
+msgid "Compression"
+msgstr "Komprimierung"
+
+msgid "Admin Bar"
+msgstr "Adminbar"
+
+msgid "Folder in bucket:"
+msgstr "Ordner im Bucket:"
+
+msgid "Folder in container:"
+msgstr "Ordner im Container:"
+
+msgid "Folder:"
+msgstr "Ordner:"
+
+msgid "Backup to Folder"
+msgstr "Backup in Ordner"
+
+msgid "Port:"
+msgstr "Port:"
+
+msgid "For more information:"
+msgstr "Für weitere Informationen:"
+
+msgid ""
+"BackWPup comes with ABSOLUTELY NO WARRANTY. This is a free software, and you "
+"are welcome to redistribute it under certain conditions."
+msgstr ""
+"BackWPup erhalten Sie OHNE JEDWEDE GARANTIE. Dies ist freie Software "
+"(quelloffen, im Sinne von Open Source) und Sie sind eingeladen, sie unter "
+"bestimmten Bedingungen weiterzugeben."
+
+msgid "advanced"
+msgstr "erweitert"
+
+msgid "basic"
+msgstr "einfach"
+
+msgid "Hour"
+msgstr "Stunde"
+
+msgid "Minute"
+msgstr "Minute"
+
+msgid "monthly"
+msgstr "monatlich"
+
+msgid "on"
+msgstr "am"
+
+msgid "weekly"
+msgstr "wöchentlich"
+
+msgid "daily"
+msgstr "täglich"
+
+msgid "hourly"
+msgstr "stündlich"
+
+msgid "Database error %1$s for query %2$s"
+msgstr "Datenbankfehler %1$s für die Abfrage (Query) %2$s"
+
+msgid "Dropbox API: %s"
+msgstr "Dropbox-API: %s"
+
+msgid "One backup file deleted"
+msgid_plural "%d backup files deleted"
+msgstr[0] "Eine Sicherungsdatei gelöscht"
+msgstr[1] "%d Sicherungsdateien gelöscht"
+
+msgid "Connected to FTP server: %s"
+msgstr "Verbunden mit dem FTP-Server: %s"
+
+msgid "FTP Folder \"%s\" created!"
+msgstr "FTP-Ordner \"%s\" erstellt!"
+
+msgid "Backup transferred to FTP server: %s"
+msgstr "Backup Archiv übertragen zum FTP-Server: %s"
+
+msgid "BackWPup archive from %1$s: %2$s"
+msgstr "BackWPup-Archiv vom %1$s: %2$s"
+
+msgid "Backup archive: %s"
+msgstr "Backup Archiv: %s"
+
+msgid "Microsoft Azure API: %s"
+msgstr "Microsoft Azure API: %s"
+
+msgid "One file deleted on SugarSync folder"
+msgid_plural "%d files deleted on SugarSync folder"
+msgstr[0] "Eine Datei im SugarSync-Ordner gelöscht"
+msgstr[1] "%d Dateien im SugarSync-Ordner gelöscht"
+
+msgid "SugarSync API: %s"
+msgstr "SugarSync API: %s"
+
+msgid "One old log deleted"
+msgid_plural "%d old logs deleted"
+msgstr[0] "Eine alte Log-Datei gelöscht"
+msgstr[1] "%d alte Log-Dateien gelöscht"
+
+msgid "BackWPup log for %1$s from %2$s at %3$s"
+msgstr "BackWPup-Protokoll für %1$s von %2$s am %3$s"
+
+msgid "Backup transferred to %s"
+msgstr "Backup übertragen zu %s"
+
+msgid "Missing access key!"
+msgstr "Der Zugangsschlüssel (Access Key) fehlt!"
+
+msgid "Missing secret access key!"
+msgstr "Der geheime Zugangsschlüssel (Secret Access Key) fehlt!"
+
+msgid "Documentation"
+msgstr "Dokumentation"
+
+msgid "Database backup"
+msgstr "Datenbank Backup"
+
+msgid "File backup"
+msgstr "Dateien Backup"
+
+msgid "Check database tables"
+msgstr "Datenbank-Tabellen prüfen"
+
+msgid "Plugin Info"
+msgstr "Plugin Info"
+
+msgid "End of Job"
+msgstr "Auftragsende"
+
+msgid "[INFO] BackWPup job started from wp-cron"
+msgstr "[INFO] BackWPup-Auftrag wurde per wp-cron gestartet"
+
+msgid "[INFO] BackWPup job started manually"
+msgstr "[INFO] BackWPup-Auftrag wurde manuell gestartet"
+
+msgid "[INFO] BackWPup job started from external url"
+msgstr "[INFO] BackWPup Auftrag wurde von externer URL gestartet"
+
+msgid "[INFO] PHP ver.:"
+msgstr "[INFO] PHP ver.:"
+
+msgid "[INFO] MySQL ver.: %s"
+msgstr "[INFO] MySQL ver.: %s"
+
+msgid "[INFO] curl ver.: %1$s; %2$s"
+msgstr "[INFO] curl ver.: %1$s; %2$s"
+
+msgid "[INFO] Backup type is: %s"
+msgstr "[INFO] Backup Typ ist: %s"
+
+msgid "Exception caught in %1$s: %2$s"
+msgstr "Ausnahme eingefangen in %1$s: %2$s"
+
+msgid "WARNING:"
+msgstr "WARNUNG:"
+
+msgid "DEPRECATED:"
+msgstr "ABGELEHNT:"
+
+msgid "STRICT NOTICE:"
+msgstr "EXAKTE NOTIZ:"
+
+msgid "RECOVERABLE ERROR:"
+msgstr "WIEDERHERSTELLUNGS FEHLER:"
+
+msgid "[%3$s] BackWPup log %1$s: %2$s"
+msgstr "[%3$s] BackWPup Log %1$s: %2$s"
+
+msgid "File \"%s\" is not readable!"
+msgstr "Datei \"%s\" ist nicht lesbar!"
+
+msgid "Unknown"
+msgstr "Unbekannt"
+
+msgid "User:"
+msgstr "Benutzer: "
+
+msgid "Charset:"
+msgstr "Charset: "
+
+msgid "Database:"
+msgstr "Datenbank:"
+
+msgid "all"
+msgstr "alle"
+
+msgid "GZip"
+msgstr "GZip"
+
+msgid "BZip2"
+msgstr "BZip2"
+
+msgid "Compressing done."
+msgstr "Komprimierung erledigt."
+
+msgid "Added \"%s\" to backup file list"
+msgstr "\"%s\" zur Backup-Datei-Liste hinzugefügt."
+
+msgid "Folder \"%s\" is not readable!"
+msgstr "Ordner \"%s\" ist nicht beschreibbar!"
+
+msgid "from %s"
+msgstr "von %s"
+
+msgid "Active plugins:"
+msgstr "Aktive Plugins:"
+
+msgid "Inactive plugins:"
+msgstr "Inaktive Plugins:"
+
+msgid "Overview"
+msgstr "Überblick"
+
+msgid "Run now"
+msgstr "Jetzt starten"
+
+msgid "Not scheduled!"
+msgstr "Nicht geplant!"
+
+msgid "Jobs overview"
+msgstr "Auftragsübersicht"
+
+msgid "Value"
+msgstr "Wert"
+
+msgid "PHP SAPI"
+msgstr "PHP SAPI"
+
+msgid "Server"
+msgstr "Server"
+
+msgid "unavailable"
+msgstr "unerreichbar"
+
+msgid "On"
+msgstr "An"
+
+msgid "Off"
+msgstr "Aus"
+
+msgid "Safe Mode"
+msgstr "Safe Mode"
+
+msgid "Alternative WP Cron"
+msgstr "Alternative WP Cron"
+
+msgid "CHMOD Dir"
+msgstr "CHMOD Verzeichnis"
+
+msgid "Server Time"
+msgstr "Server Zeit"
+
+msgid "Blog Time"
+msgstr "Webseite Zeit"
+
+msgid "Blog Timezone"
+msgstr "Webseite Zeitzone"
+
+msgid "Blog Time offset"
+msgstr "Webseite Zeitversetzung"
+
+msgid "Blog language"
+msgstr "Webseiten Sprache"
+
+msgid "MySQL Client encoding"
+msgstr "MySQL Client Encoding"
+
+msgid "Blog charset"
+msgstr "Webseiten Charset"
+
+msgid "PHP Memory limit"
+msgstr "PHP Memory Limit"
+
+msgid "Memory in use"
+msgstr "Speicher in Benutzung"
+
+msgid "Response Test O.K."
+msgstr "Response Test O.K."
+
+msgid "No job running"
+msgstr "Kein laufender Auftrag"
+
+msgid "running"
+msgstr "läuft"
+
+msgid "Now Running"
+msgstr "Jetzt läuft"
+
+msgid "Abort!"
+msgstr "Abbrechen!"
+
+msgid "Wizards"
+msgstr "Assistenten"
+
+msgid "Dropbox"
+msgstr "Dropbox"
+
+msgid "Authenticate"
+msgstr "Authentifizieren"
+
+msgid "Reauthenticate"
+msgstr "Neu authentifizieren"
+
+msgid "Oldest files will be deleted first. 0 = no deletion"
+msgstr "Älteste Dateien werden als erstes gelöscht. 0 = keine Löschung"
+
+msgid "Login"
+msgstr "Anmelden"
+
+msgid "Reauthenticate (Sandbox)"
+msgstr "Neu authentifizieren (Sandbox)"
+
+msgid "Reauthenticate (full Dropbox)"
+msgstr "Neu authentifizieren (volle Dropbox)"
+
+msgid "Backup settings"
+msgstr "Backup-Einstellungen"
+
+msgid "Folder in bucket"
+msgstr "Ordner im Bucket"
+
+msgid "File Deletion"
+msgstr "Dateilöschung"
+
+msgid "FTP"
+msgstr "FTP"
+
+msgid "Backup to FTP"
+msgstr "Backup zu FTP"
+
+msgid "Username"
+msgstr "Benutzername"
+
+msgid "Password"
+msgstr "Passwort"
+
+msgid "Timeout for FTP connection"
+msgstr "Zeitüberschreitung bei der FTP-Verbindung"
+
+msgid "FTP current folder is: %s"
+msgstr "Aktueller FTP-Ordner ist: %s"
+
+msgid "MB"
+msgstr "MB"
+
+msgid "PHP: mail()"
+msgstr "PHP: mail()"
+
+msgid "SMTP"
+msgstr "SMTP"
+
+msgid "Sendmail path"
+msgstr "Sendmail Pfad"
+
+msgid "SMTP secure connection"
+msgstr "SMTP Sichere Verbindung"
+
+msgid "SSL"
+msgstr "SSL"
+
+msgid "TLS"
+msgstr "TLS"
+
+msgid "SMTP username"
+msgstr "SMTP Benutzername"
+
+msgid "SMTP password"
+msgstr "SMTP Passwort"
+
+msgid "MS Azure"
+msgstr "MS Azure"
+
+msgid "Backup to Microsoft Azure (Blob)"
+msgstr "Backup zu Microsoft Azure (Blob)"
+
+msgid "Access Key"
+msgstr "Access Key"
+
+msgid "Container selection"
+msgstr "Container Auswahl"
+
+msgid "Create a new container"
+msgstr "Neuen Container erstellen"
+
+msgid "Folder in container"
+msgstr "Ordner im Container"
+
+msgid "MS Azure container \"%s\" created."
+msgstr "MS Azure Container \"%s\" erstellt."
+
+msgid "MS Azure container create: %s"
+msgstr "MS Azure Container erstellen: %s"
+
+msgid "RSC"
+msgstr "RSC"
+
+msgid "Rack Space Cloud Keys"
+msgstr "Rack Space Cloud Keys"
+
+msgid "API Key"
+msgstr "API Key"
+
+msgid "S3 Backup settings"
+msgstr "S3 Backup Einstellungen"
+
+msgid "S3 Service"
+msgstr "S3 Service"
+
+msgid "Amazon S3 Region"
+msgstr "Amazon S3 Region"
+
+msgid "Amazon S3: US Standard"
+msgstr "Amazon S3: US Standard"
+
+msgid "Amazon S3: US West (Northern California)"
+msgstr "Amazon S3: US West (Northern California)"
+
+msgid "Amazon S3: US West (Oregon)"
+msgstr "Amazon S3: US West (Oregon)"
+
+msgid "Amazon S3: EU (Ireland)"
+msgstr "Amazon S3: EU (Ireland)"
+
+msgid "Amazon S3: Asia Pacific (Tokyo)"
+msgstr "Amazon S3: Asia Pacific (Tokyo)"

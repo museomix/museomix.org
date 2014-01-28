@@ -1,0 +1,1 @@
+jQuery(document).ready(function(e){e(".action-send-test-editor").click(function(){return tb_show(wysijatrans.processqueue,e(this).attr("href")+"&KeepThis=true&TB_iframe=true&height=400&width=600",null),tb_showIframe(),!1}),e(".pause-edit").click(function(){return confirm(wysijatrans.confirmpauseedit)})});

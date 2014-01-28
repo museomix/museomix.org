@@ -1,0 +1,17 @@
+
+
+#menu-posts-edition > a > .wp-menu-image,
+#menu-posts-museomix > a > .wp-menu-image,
+#menu-posts-museum > a > .wp-menu-image,
+#menu-posts-prototype > a > .wp-menu-image,
+#menu-posts-sponsor > a > .wp-menu-image{
+	background-position: -330px -33px !important;
+}
+
+#acf-field-infos_config {
+	height: 300px !important;
+}
+
+#colonne_id {
+	width: 30px !important;
+}
