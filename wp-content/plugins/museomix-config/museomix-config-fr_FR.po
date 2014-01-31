@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Museomix config\n"
-"POT-Creation-Date: 2014-01-28 23:54+0100\n"
-"PO-Revision-Date: 2014-01-28 23:54+0100\n"
+"POT-Creation-Date: 2014-01-31 22:30+0100\n"
+"PO-Revision-Date: 2014-01-31 22:30+0100\n"
 "Last-Translator: Samy Rabih <contact@lahaut.info>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -15,6 +15,59 @@ msgstr ""
 "X-Poedit-KeywordsList: _e;__\n"
 "X-Poedit-SearchPath-0: .\n"
 
+#: InterfaceAdmin.php:59
+msgid "Theme"
+msgstr "Thème"
+
+#: TypesPages.php:28 TypesPages.php:29
+msgid "Edition"
+msgstr "Edition"
+
+#: TypesPages.php:30 TypesPages.php:65 TypesPages.php:109 TypesPages.php:152
+#: TypesPages.php:193 TypesPages.php:223 TypesPages.php:266 TypesPages.php:275
+#: TypesPages.php:276
+msgid "Add"
+msgstr "Ajouter"
+
+#: TypesPages.php:31
+msgid "Add an edition"
+msgstr "Ajouter une édition"
+
+#: TypesPages.php:32
+msgid "Edit edition"
+msgstr "Modifier l'édition"
+
+#: TypesPages.php:33
+msgid "New edition"
+msgstr "Nouvelle édition"
+
+#: TypesPages.php:34
+msgid "All editions"
+msgstr "Toutes les éditions"
+
+#: TypesPages.php:35
+msgid "Show edition"
+msgstr "Afficher l'édition"
+
+#: TypesPages.php:36 TypesPages.php:71 TypesPages.php:115 TypesPages.php:158
+#: TypesPages.php:199 TypesPages.php:229 TypesPages.php:281
+msgid "Search"
+msgstr "Rechercher"
+
+#: TypesPages.php:37 TypesPages.php:72 TypesPages.php:116 TypesPages.php:159
+#: TypesPages.php:200 TypesPages.php:230 TypesPages.php:282
+msgid "No element"
+msgstr "Aucun élément"
+
+#: TypesPages.php:38 TypesPages.php:73 TypesPages.php:117 TypesPages.php:160
+#: TypesPages.php:201 TypesPages.php:231 TypesPages.php:283
+msgid "No element in trash"
+msgstr "Aucun élément dans la corbeille"
+
+#: TypesPages.php:40
+msgid "Editions"
+msgstr "Editions"
+
 #: TypesPages.php:63 TypesPages.php:75
 msgid "Locations"
 msgstr "Lieux"
@@ -22,10 +75,6 @@ msgstr "Lieux"
 #: TypesPages.php:64
 msgid "Location"
 msgstr "Lieu"
-
-#: TypesPages.php:65
-msgid "Add"
-msgstr "Ajouter"
 
 #: TypesPages.php:66
 msgid "Add a location"
@@ -35,7 +84,8 @@ msgstr "Ajouter un lieu"
 msgid "Edit the location"
 msgstr "Modifier le lieu"
 
-#: TypesPages.php:68
+#: TypesPages.php:68 TypesPages.php:112 TypesPages.php:155 TypesPages.php:196
+#: TypesPages.php:226 TypesPages.php:278
 msgid "New"
 msgstr "Nouveau lieu"
 
@@ -47,14 +97,118 @@ msgstr "Tous les lieux"
 msgid "View the location"
 msgstr "Voir le lieu"
 
-#: TypesPages.php:71
-msgid "Search"
-msgstr "Rechercher"
+#: TypesPages.php:107 TypesPages.php:108
+msgid "Museum"
+msgstr "Musée"
 
-#: TypesPages.php:72
-msgid "No element"
-msgstr "Aucun élément"
+#: TypesPages.php:110
+msgid "Add a museum"
+msgstr "Ajouter un musée"
 
-#: TypesPages.php:73
-msgid "No element in the trash"
-msgstr "Aucun élément dans la corbeille"
+#: TypesPages.php:111
+msgid "Edit the museum"
+msgstr "Modifier le musée"
+
+#: TypesPages.php:113
+msgid "All museums"
+msgstr "Tous les musées"
+
+#: TypesPages.php:114
+msgid "Show museum"
+msgstr "Afficher le musée"
+
+#: TypesPages.php:119
+msgid "Museums"
+msgstr "Musées"
+
+#: TypesPages.php:150 TypesPages.php:151
+msgid "Prototype"
+msgstr "Prototype"
+
+#: TypesPages.php:153
+msgid "Add a prototype"
+msgstr "Ajouter un prototype"
+
+#: TypesPages.php:154
+msgid "Edit the prototype"
+msgstr "Modifier le prototype"
+
+#: TypesPages.php:156
+msgid "All prototypes"
+msgstr "Tous les prototypes"
+
+#: TypesPages.php:157
+msgid "Show prototype"
+msgstr "Afficher le prototype"
+
+#: TypesPages.php:162
+msgid "Prototypes"
+msgstr "Prototypes"
+
+#: TypesPages.php:191 TypesPages.php:192
+msgid "Component"
+msgstr "Composant"
+
+#: TypesPages.php:194
+msgid "Add a component"
+msgstr "Ajouter un composant"
+
+#: TypesPages.php:195
+msgid "Edit component"
+msgstr "Modifier le composant"
+
+#: TypesPages.php:197
+msgid "All components"
+msgstr "Tous les composants"
+
+#: TypesPages.php:198
+msgid "Show component"
+msgstr "Afficher le composant"
+
+#: TypesPages.php:203
+msgid "Components"
+msgstr "Composants"
+
+#: TypesPages.php:221 TypesPages.php:222
+msgid "Partner"
+msgstr "Partenaire"
+
+#: TypesPages.php:224
+msgid "Add a partner"
+msgstr "Ajouter un partenaire"
+
+#: TypesPages.php:225
+msgid "Edit partner"
+msgstr "Modifier le partenaire"
+
+#: TypesPages.php:227
+msgid "All partners"
+msgstr "Tous les partenaires"
+
+#: TypesPages.php:228
+msgid "Show partner"
+msgstr "Afficher le partenaire"
+
+#: TypesPages.php:233
+msgid "Partners"
+msgstr "Partenaires"
+
+#: TypesPages.php:264 TypesPages.php:273 TypesPages.php:274 TypesPages.php:284
+msgid "News"
+msgstr "Actualités"
+
+#: TypesPages.php:265 TypesPages.php:279
+msgid "All news"
+msgstr "Toutes les actualités"
+
+#: TypesPages.php:267
+msgid "keywords"
+msgstr "mots-clés"
+
+#: TypesPages.php:277
+msgid "Edit"
+msgstr "Modifier"
+
+#: TypesPages.php:280
+msgid "Show"
+msgstr "Afficher"
