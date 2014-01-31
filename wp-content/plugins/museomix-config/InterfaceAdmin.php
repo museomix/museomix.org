@@ -56,7 +56,7 @@ function ReordonnerMenu($menu_ord) {
 	    remove_menu_page( 'separator2' ); 
     }
     if(RoleEst('administrator')){
-    	add_menu_page( 'éditeur du thème', 'Thème', 'edit_theme_options', 'theme-editor.php');
+    	add_menu_page( 'éditeur du thème', __('Theme','museomix-config'), 'edit_theme_options', 'theme-editor.php');
     }
     return $menu;
 }  

@@ -25,19 +25,19 @@ function TypesPagesEditions(){
 		'edition',
 		array( 
 			'labels' => array(
-				'name' => 'Editions',
-				'singular_name' => 'Edition',
-				'add_new' => 'Ajouter',
-				'add_new_item' => 'ajouter une Edition',
-				'edit_item' => 'éditer l\'Edition',
-				'new_item' => 'nouvelle édition',
-				'all_items' => 'Toutes les Editions',
-				'view_item' => 'voir l\'édition',
-				'search_items' => 'rechercher',
-				'not_found' =>  'aucun élément',
-				'not_found_in_trash' => 'aucun élément dans la poubelle', 
+				'name' => __('Edition','museomix-config'),
+				'singular_name' => __('Edition','museomix-config'),
+				'add_new' => __('Add','museomix-config'),
+				'add_new_item' => __('Add an edition','museomix-config'),
+				'edit_item' => __('Edit edition','museomix-config'),
+				'new_item' => __('New edition','museomix-config'),
+				'all_items' => __('All editions','museomix-config'),
+				'view_item' => __('Show edition','museomix-config'),
+				'search_items' => __('Search','museomix-config'),
+				'not_found' => __('No element','museomix-config'),
+				'not_found_in_trash' => __('No element in trash','museomix-config'), 
 				'parent_item_colon' => '',
-				'menu_name' => 'Editions' 
+				'menu_name' => __('Editions','museomix-config') 
 			),
 			'public' => true,
 			'menu_position' => 20,
@@ -70,7 +70,7 @@ function TypesPagesMuseomix(){
 				'view_item' => __('View the location','museomix-config'),
 				'search_items' => __('Search','museomix-config'),
 				'not_found' =>  __('No element','museomix-config'),
-				'not_found_in_trash' => __('No element in the trash','museomix-config'), 
+				'not_found_in_trash' => __('No element in trash','museomix-config'), 
 				'parent_item_colon' => '',
 				'menu_name' => __('Locations','museomix-config') 
 			),
@@ -104,19 +104,19 @@ function TypesPagesMuseum(){
 		'museum',
 		array( 
 			'labels' => array(
-				'name' => 'Musée',
-				'singular_name' => 'Musée',
-				'add_new' => 'Ajouter',
-				'add_new_item' => 'ajouter un Musée',
-				'edit_item' => 'éditer le Musée',
-				'new_item' => 'nouveau',
-				'all_items' => 'Tous les Musées',
-				'view_item' => 'voir le Musée',
-				'search_items' => 'rechercher',
-				'not_found' =>  'aucun élément',
-				'not_found_in_trash' => 'aucun élément dans la poubelle', 
+				'name' => __('Museum','museomix-config'),
+				'singular_name' => __('Museum','museomix-config'),
+				'add_new' => __('Add','museomix-config'),
+				'add_new_item' => __('Add a museum','museomix-config'),
+				'edit_item' => __('Edit the museum','museomix-config'),
+				'new_item' => __('New','museomix-config'),
+				'all_items' => __('All museums','museomix-config'),
+				'view_item' => __('Show museum','museomix-config'),
+				'search_items' => __('Search','museomix-config'),
+				'not_found' =>  __('No element','museomix-config'),
+				'not_found_in_trash' => __('No element in trash','museomix-config'), 
 				'parent_item_colon' => '',
-				'menu_name' => 'Musées' 
+				'menu_name' => __('Museums','museomix-config') 
 			),
 			'public' => true,
 			'hierarchical' => true,
@@ -147,19 +147,19 @@ function TypesPagesPrototype(){
 		'prototype',
 		array( 
 			'labels' => array(
-				'name' => 'Prototype',
-				'singular_name' => 'Prototype',
-				'add_new' => 'Ajouter',
-				'add_new_item' => 'ajouter un Prototype',
-				'edit_item' => 'éditer le Prototype',
-				'new_item' => 'nouveau',
-				'all_items' => 'Tous les Prototypes',
-				'view_item' => 'voir le Prototype',
-				'search_items' => 'rechercher',
-				'not_found' =>  'aucun élément',
-				'not_found_in_trash' => 'aucun élément dans la poubelle', 
+				'name' => __('Prototype','museomix-config'),
+				'singular_name' =>	__('Prototype','museomix-config'),
+				'add_new' => __('Add','museomix-config'),
+				'add_new_item' => __('Add a prototype','museomix-config'),
+				'edit_item' => __('Edit the prototype','museomix-config'),
+				'new_item' => __('New','museomix-config'),
+				'all_items' => __('All prototypes','museomix-config'),
+				'view_item' => __('Show prototype','museomix-config'),
+				'search_items' => __('Search','museomix-config'),
+				'not_found' =>  __('No element','museomix-config'),
+				'not_found_in_trash' => __('No element in trash','museomix-config'), 
 				'parent_item_colon' => '',
-				'menu_name' => 'Prototypes' 
+				'menu_name' => __('Prototypes','museomix-config') 
 			),
 			'public' => true,
 			'hierarchical' => true,
@@ -188,19 +188,19 @@ function TypesPagesConfiguration(){
 		'config',
 		array( 
 			'labels' => array(
-				'name' => 'Composant',
-				'singular_name' => 'Composant',
-				'add_new' => 'Ajouter',
-				'add_new_item' => 'ajouter un Composant',
-				'edit_item' => 'éditer le Composant',
-				'new_item' => 'nouveau',
-				'all_items' => 'Tous les composants',
-				'view_item' => 'voir l\'élément',
-				'search_items' => 'rechercher',
-				'not_found' =>  'aucun élément',
-				'not_found_in_trash' => 'aucun élément dans la poubelle', 
+				'name' => __('Component','museomix-config'),
+				'singular_name' => __('Component','museomix-config'),
+				'add_new' => __('Add','museomix-config'),
+				'add_new_item' => __('Add a component','museomix-config'),
+				'edit_item' => __('Edit component','museomix-config'),
+				'new_item' => __('New','museomix-config'),
+				'all_items' => __('All components','museomix-config'),
+				'view_item' => __('Show component','museomix-config'),
+				'search_items' => __('Search','museomix-config'),
+				'not_found' =>  __('No element','museomix-config'),
+				'not_found_in_trash' => __('No element in trash','museomix-config'), 
 				'parent_item_colon' => '',
-				'menu_name' => 'Composants' 
+				'menu_name' => __('Components','museomix-config') 
 			),
 			'public' => false,
 			'hierarchical' => true,
@@ -218,19 +218,19 @@ function TypesPagesSponsor(){
 		'sponsor',
 		array( 
 			'labels' => array(
-				'name' => 'Partenaire',
-				'singular_name' => 'Partenaire',
-				'add_new' => 'Ajouter',
-				'add_new_item' => 'ajouter un Partenaire',
-				'edit_item' => 'éditer le Partenaire',
-				'new_item' => 'nouveau',
-				'all_items' => 'Tous les Partenaires',
-				'view_item' => 'voir le Partenaire',
-				'search_items' => 'rechercher',
-				'not_found' =>  'aucun élément',
-				'not_found_in_trash' => 'aucun élément dans la poubelle', 
+				'name' => __('Partner','museomix-config'),
+				'singular_name' => __('Partner','museomix-config'),
+				'add_new' => __('Add','museomix-config'),
+				'add_new_item' => __('Add a partner','museomix-config'),
+				'edit_item' => __('Edit partner','museomix-config'),
+				'new_item' =>	__('New','museomix-config'),
+				'all_items' => __('All partners','museomix-config'),
+				'view_item' => __('Show partner','museomix-config'),
+				'search_items' => __('Search','museomix-config'),
+				'not_found' =>  __('No element','museomix-config'),
+				'not_found_in_trash' => __('No element in trash','museomix-config'), 
 				'parent_item_colon' => '',
-				'menu_name' => 'Partenaires' 
+				'menu_name' => __('Partners','museomix-config') 
 			),
 			'public' => true,
 			'hierarchical' => true,
@@ -261,27 +261,27 @@ add_action( 'admin_menu', 'RenommerMenuPost' );
 function RenommerMenuPost(){
 	global $menu;
 	global $submenu;
-	$menu[5][0] = 'News';
-	$submenu['edit.php'][5][0] = 'Toutes les News';
-	$submenu['edit.php'][10][0] = 'ajouter une News';
-	$submenu['edit.php'][16][0] = 'mots-clés';
+	$menu[5][0] = __('News','museomix-config');
+	$submenu['edit.php'][5][0] = __('All news','museomix-config');
+	$submenu['edit.php'][10][0] = __('Add','museomix-config');
+	$submenu['edit.php'][16][0] = __('keywords','museomix-config');
 }
 
 function RenommerObjetPost() {
 	global $wp_post_types;
 	$labels = &$wp_post_types['post']->labels;
-	$labels->name = 'News';
-	$labels->singular_name = 'News';
-	$labels->add_new = 'Ajouter';
-	$labels->add_new_item = 'ajouter une News';
-	$labels->edit_item = 'éditer';
-	$labels->new_item = 'nouveau';
-	$labels->all_item = 'Toutes les News';
-	$labels->view_item = 'voir la News';
-	$labels->search_items = 'recherche une News';
-	$labels->not_found = 'aucun élément.';
-	$labels->not_found_in_trash = 'aucun élément dans la poubelle';
-	$labels->menu_name = 'Actualités';
+	$labels->name = __('News','museomix-config');
+	$labels->singular_name = __('News','museomix-config');
+	$labels->add_new = __('Add','museomix-config');
+	$labels->add_new_item = __('Add','museomix-config');
+	$labels->edit_item = __('Edit','museomix-config');
+	$labels->new_item = __('New','museomix-config');
+	$labels->all_item = __('All news','museomix-config');
+	$labels->view_item = __('Show','museomix-config');
+	$labels->search_items = __('Search','museomix-config');
+	$labels->not_found = __('No element','museomix-config');
+	$labels->not_found_in_trash = __('No element in trash','museomix-config');
+	$labels->menu_name = __('News','museomix-config');
 }
 
 
@@ -293,41 +293,37 @@ add_action( 'admin_menu', 'RenommerMenuPage' );
 function RenommerMenuPage(){
 	global $menu;
 	global $submenu;
-	$menu[20][0] = 'À Propos';
-	$submenu['edit.php?post_type=page'][5][0] = 'Tous les À Propos';
-	$submenu['edit.php?post_type=page'][10][0] = 'ajouter un À Propos';
-	$submenu['edit.php?post_type=page'][16][0] = 'mots-clés';
 }
 
-function RenommerObjetPage() {
-	global $wp_post_types;
-	$labels = &$wp_post_types['page']->labels;
-	$labels->name = 'À Propos';
-	$labels->singular_name = 'À Propos';
-	$labels->add_new = 'ajouter un À Propos';
-	$labels->add_new_item = 'ajouter un À Propos';
-	$labels->edit_item = 'éditer le À Propos';
-	$labels->new_item = 'nouveau';
-	$labels->all_item = 'Tous les À Propos';
-	$labels->view_item = 'voir le À Propos';
-	$labels->search_items = 'recherche un À Propos';
-	$labels->not_found = 'aucun élément';
-	$labels->not_found_in_trash = 'aucun élément dans la poubelle';
-	$labels->menu_name = 'Infos';
-}
+// function RenommerObjetPage() {
+	// global $wp_post_types;
+	// $labels = &$wp_post_types['page']->labels;
+	// $labels->name = 'À Propos';
+	// $labels->singular_name = 'À Propos';
+	// $labels->add_new = 'ajouter un À Propos';
+	// $labels->add_new_item = 'ajouter un À Propos';
+	// $labels->edit_item = 'éditer le À Propos';
+	// $labels->new_item = 'nouveau';
+	// $labels->all_item = 'Tous les À Propos';
+	// $labels->view_item = 'voir le À Propos';
+	// $labels->search_items = 'recherche un À Propos';
+	// $labels->not_found = 'aucun élément';
+	// $labels->not_found_in_trash = 'aucun élément dans la poubelle';
+	// $labels->menu_name = 'Infos';
+// }
 
 /* renommer menu ACF
    ================= */
-add_action( 'admin_menu', 'RenommerMenuACF' );
+// add_action( 'admin_menu', 'RenommerMenuACF' );
 
-function RenommerMenuACF(){
-	global $menu;
-	global $submenu;
-	$menu[81][0] = 'Modèles';
+// function RenommerMenuACF(){
+	// global $menu;
+	// global $submenu;
+	// $menu[81][0] = 'Modèles';
 #	$submenu['edit.php?post_type=acf'][5][0] = 'Tous les modèles';
 #	$submenu['edit.php'][10][0] = 'ajouter une News';
 #	$submenu['edit.php'][16][0] = 'mots-clés';
-}
+// }
 
 /* calcul automatique des titres
    ============================= */
