@@ -14,7 +14,6 @@ function creer_posts_types(){
 	TypesPagesPrototype();
 	TypesPagesConfiguration();
 	TypesPagesSponsor();
-#	flush_rewrite_rules();
 }
 add_action( 'init', 'creer_posts_types' );
 
@@ -255,7 +254,7 @@ function TypesPagesSponsor(){
 
 /* renommer post en news
    ===================== */
-add_action( 'init', 'RenommerObjetPost' );
+add_action( 'init', 'NewsMenu' );
 add_action( 'admin_menu', 'RenommerMenuPost' );
 
 function RenommerMenuPost(){
@@ -267,7 +266,7 @@ function RenommerMenuPost(){
 	$submenu['edit.php'][16][0] = __('keywords','museomix-config');
 }
 
-function RenommerObjetPost() {
+function NewsMenu() {
 	global $wp_post_types;
 	$labels = &$wp_post_types['post']->labels;
 	$labels->name = __('News','museomix-config');
@@ -283,68 +282,3 @@ function RenommerObjetPost() {
 	$labels->not_found_in_trash = __('No element in trash','museomix-config');
 	$labels->menu_name = __('News','museomix-config');
 }
-
-
-/* renommer pages en infos
-   ======================= */
-add_action( 'init', 'RenommerObjetPage' );
-add_action( 'admin_menu', 'RenommerMenuPage' );
-
-function RenommerMenuPage(){
-	global $menu;
-	global $submenu;
-}
-
-// function RenommerObjetPage() {
-	// global $wp_post_types;
-	// $labels = &$wp_post_types['page']->labels;
-	// $labels->name = 'À Propos';
-	// $labels->singular_name = 'À Propos';
-	// $labels->add_new = 'ajouter un À Propos';
-	// $labels->add_new_item = 'ajouter un À Propos';
-	// $labels->edit_item = 'éditer le À Propos';
-	// $labels->new_item = 'nouveau';
-	// $labels->all_item = 'Tous les À Propos';
-	// $labels->view_item = 'voir le À Propos';
-	// $labels->search_items = 'recherche un À Propos';
-	// $labels->not_found = 'aucun élément';
-	// $labels->not_found_in_trash = 'aucun élément dans la poubelle';
-	// $labels->menu_name = 'Infos';
-// }
-
-/* renommer menu ACF
-   ================= */
-// add_action( 'admin_menu', 'RenommerMenuACF' );
-
-// function RenommerMenuACF(){
-	// global $menu;
-	// global $submenu;
-	// $menu[81][0] = 'Modèles';
-#	$submenu['edit.php?post_type=acf'][5][0] = 'Tous les modèles';
-#	$submenu['edit.php'][10][0] = 'ajouter une News';
-#	$submenu['edit.php'][16][0] = 'mots-clés';
-// }
-
-/* calcul automatique des titres
-   ============================= */
-#add_filter( 'wp_insert_post_data' , 'CalculTitreAuto' , '99', 2 );
-
-function CalculTitreAuto($data , $postarr){
-	global $post;
-	$id = $post->ID;
-	/*if($data['post_type']=='museomix'){ 
-		if( ! isset($_POST['fields']) ){ return $data; }
-		$edition = $_POST['fields']['field_516d858ee3c69'];
-		$edition = get_the_title($edition);
-		$ville = $_POST['fields']['field_516d845564f8b'];
-		$titre = $ville.' '.$edition;
-		#$data['post_title'] = $titre;
-		#$data['post_name'] = sanitize_title( $titre ).'-'.$id;
-	}*/
-	#add_action("save_post", "flush");
-	return $data;
-}
-
-
-
-
