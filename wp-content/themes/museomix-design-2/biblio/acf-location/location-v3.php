@@ -171,7 +171,7 @@ class acf_field_location extends acf_Field
 		<tr class="field_option field_option_<?php echo $this->name; ?>">
 			<td class="label">
 				<label><?php _e('Map zoom','acf-location-field'); ?></label>
-				<p class="description"><?php _e('','acf-location-field'); ?></p>
+				<p class="description"></p>
 			</td>
 			<td>
 				<?php

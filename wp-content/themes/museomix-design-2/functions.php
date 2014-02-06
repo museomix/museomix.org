@@ -3,6 +3,10 @@ add_action('init', 'my_custom_init');
 function my_custom_init() {
 	add_post_type_support( 'prototype', 'comments' );
 }
+add_action('after_setup_theme', 'my_theme_setup');
+function my_theme_setup(){
+    load_theme_textdomain('my_theme', get_template_directory());
+}
 /* initiation des menus personnalisés 
    ================================== */
 register_nav_menus( array(
