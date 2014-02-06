@@ -55,7 +55,7 @@
 		<a href="<?php 
 		//We use here the ID of the "about page", 78, to get the translated URL
 		echo get_permalink(icl_object_id(78, 'page', false));
-		?>"><img src="<?php echo get_template_directory_uri(); ?>/images/museomix_banner.png" alt="Museomix" />
+		?>"><img src="<?php header_image(); ?>"  alt="Museomix" />
 		<img src="<?php echo get_template_directory_uri(); ?>/images/museomix_banner_circle.png" alt="People make museum" id="museomix_circle" /></a>
 	</div>
 <?php endif; ?>

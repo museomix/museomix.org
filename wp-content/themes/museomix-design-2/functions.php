@@ -409,6 +409,10 @@ function mix_pagination() {
 		'total' => $wp_query->max_num_pages
 	) )."</div>";
 }
+
+/* Ajout support fonction "en-tête" de WordPress */
+add_theme_support('custom-header');
+
 /* Lister les commentaires */
 function mytheme_comment($comment, $args, $depth) {
 		$GLOBALS['comment'] = $comment;
