@@ -1216,7 +1216,7 @@ height: auto;
 
 /* Home page animation (Arthur) */
 #anim-hp {
-	margin: 0 auto;
+	margin: 30px auto 0;
     max-width: 800px;
     text-align: center;
     width: 90%;
