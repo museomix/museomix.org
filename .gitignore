@@ -213,3 +213,5 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+wp-content/uploads/*
+wp-config.php
