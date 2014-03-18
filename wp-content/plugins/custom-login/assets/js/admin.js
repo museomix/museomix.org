@@ -28,6 +28,17 @@ jQuery(document).ready(function($) {
 		}
 	});
 	
+	// Allow tab key
+	if ( $('div.img').length ) {
+		$('div.img').each(function() {
+			var $size = $(this).parent().width();
+			$(this).css({
+				'max-width'	: $size,
+				'width'		: $size
+			}).slideDown('fast');
+		});
+	}
+	
 	// Remote API helper
 	$('#custom_login a[data-toggle]').on('click',function(e) {
 		e.preventDefault();

@@ -4,8 +4,28 @@
 #adminmenu #toplevel_page_bws_plugins.wp-has-current-submenu div.wp-menu-image {
 	background: url("../images/icon_16_single.png") no-repeat scroll center center transparent;
 }
+#adminmenu #toplevel_page_bws_plugins.wp-not-current-submenu div.wp-menu-image {
+    opacity: 0.7;
+}
 #toplevel_page_bws_plugins .wp-submenu .wp-first-item {
 	display: none;
+}
+.bws_go_pro_tab {
+    background-color: #2A95C5;
+    border-color: #11688F;
+    color: #FFFFFF;
+    font-weight: normal;
+    text-shadow: none;
+}
+.bws_go_pro_tab:hover {
+    background-color: #2080AB;
+    color: #FFFFFF;
+    border-color: #11688F;
+}
+.bws_go_pro_tab.nav-tab-active {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border-color: #CCCCCC #CCCCCC #F1F1F1;
+    color: #000000;
 }
 /*
 * styles for rate-support div on the settings page

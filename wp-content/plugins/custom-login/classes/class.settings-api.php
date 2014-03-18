@@ -14,7 +14,7 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
 	/**
 	 * Version
 	 */
-	var $api_version = '1.0.12';
+	var $api_version = '1.0.13';
 
     /**
      * settings sections array
@@ -535,8 +535,8 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
      */
     function callback_wysiwyg( $args ) {
 
-        $value = wpautop( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
-        $size = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : '500px';
+        $value	= wpautop( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
+        $size	= isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : '500px';
 
         echo '<div style="width: ' . $size . ';">';
 
@@ -555,12 +555,12 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
     function callback_file( $args ) {
 		static $counter = 0;
 		
-        $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
-        $size = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
-        $id = $args['section']  . '[' . $args['id'] . ']';
-        $html = sprintf( '<input type="text" class="%1$s-text" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s"/>', $size, $args['section'], $args['id'], $value );
-        $html .= '<input type="button" class="button extendd-browse" id="'. $id .'_button" value="Browse" style="margin-left:5px" />';
-        $html .= '<input type="button" class="button extendd-clear" id="'. $id .'_clear" value="Clear" style="margin-left:5px" />';
+        $value	= esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
+        $size	= isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
+        $id		= $args['section']  . '[' . $args['id'] . ']';
+        $html 	= sprintf( '<input type="text" class="%1$s-text" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s"/>', $size, $args['section'], $args['id'], $value );
+        $html  .= '<input type="button" class="button extendd-browse" id="'. $id .'_button" value="Browse" style="margin-left:5px" />';
+        $html  .= '<input type="button" class="button extendd-clear" id="'. $id .'_clear" value="Clear" style="margin-left:5px" />';
 		
 		$counter++;
 		if ( 1 === $counter ) {
@@ -620,12 +620,12 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
 					});
 		
 					// When an image is selected, run a callback.
-					file_frame.on( 'insert', function() {
-		
+					file_frame.on( 'insert', function() {	
 						var attachment = file_frame.state().get('selection').first().toJSON();
 					//	console.log(attachment);
+					
 						window.formfield.find('input[type="text"]').val(attachment.url);
-					//	window.formfield.find('').val(attachment.title);
+						window.formfield.find('#<?php echo $id; ?>_preview').html('<div class="img" style="width:250px"><img src="'+attachment.url+'" alt="" /><a href="#" class="remove_file_button" rel="<?php echo $id; ?>">Remove Image</a></div>');
 					});
 		
 					// Finally, open the modal
@@ -637,15 +637,33 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
 				window.formfield = ''; 
 				
 				$('input[type="button"].button.extendd-clear').on('click', function(e) {  
-					e.preventDefault();		
-					var $this = $(this);
-					$this.closest('td').find('input[type="text"]').val('');
+					e.preventDefault();
+					$(this).closest('td').find('input[type="text"]').val('');
+					$(this).closest('td').find('#' + $(this).prop('id').replace( '_clear', '_preview') + ' div.image').remove();
+				});
+				$('a.remove_file_button').on( 'click', function(e) {
+					e.preventDefault();
+					$(this).closest('td').find('input[type="text"]').val('');
+					$(this).parent().slideUp().remove();
 				});
 			});
 			</script><?php
 			$html .= ob_get_clean();
 		}
         $html .= sprintf( '<br><span class="description"> %s</span>', $args['desc'] );
+		
+		/* Image */
+		$html .= '<div id="' . $id . '_preview" class="' . $id . '_preview">';	
+			if ( $value != '' ) { 
+				$check_image = preg_match( '/(^.*\.jpg|jpeg|png|gif|ico*)/i', $value );
+				if ( $check_image ) {
+					$html .= '<div class="img" style="display:none">';
+					$html .= '<img src="' . $value . '" alt="" />';
+					$html .= '<a href="#" class="remove_file_button" rel="' . $id . '">Remove Image</a>';
+					$html .= '</div>';
+				}
+			}
+		$html .= '</div>';
 
         echo $html;
     }

@@ -26,7 +26,9 @@ Custom Login 2.0 now has many extensions to make your login page better!
 
 **Available Now**
 
-* <a href="http://extendd.com/plugin/custom-login-stealth-login/" title="Custom Login Stealth Login">Stealth Login</a> - obscure your login URL. *In Custom Login > version 2.2 you can auto-install all extensions within the settings page with an active licence key.*
+* *In Custom Login > version 2.2 you can auto-install all extensions within the settings page with an active licence key.*
+* <a href="http://extendd.com/plugin/custom-login-stealth-login/" title="Custom Login Stealth Login">Stealth Login</a> - obscure your login URL.
+* <a href="http://extendd.com/plugin/custom-login-page-template/" title="Custom Login Page Template">Page Template</a> - add a login form to any WordPress page. 
 
 **In Development**
 
@@ -99,6 +101,10 @@ Screenshots of working example in our [Flickr group](http://flickr.com/groups/cu
 2. Example of a custom login page using the nyan.cat as a animated background! [see user generated designs](http://flickr.com/groups/custom-login/).
 
 == Changelog ==
+
+= Version 2.2.3 (1/28/14) =
+
+* Added image previews after file fields.
 
 = Version 2.2.2 (1/28/14) =
 
