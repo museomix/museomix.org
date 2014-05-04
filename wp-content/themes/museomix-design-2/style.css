@@ -556,7 +556,11 @@ body.home .navbar {
 	padding: 0;
 	position: relative;
 }
-
+.ln-bloc-archive .edition_thumbnail {
+	background: none repeat scroll 0 0 #FFFFFF;
+    border-radius: 10px;
+    line-height: 200px;
+}
 .titre-bloc-archive {
 	position: absolute;
 	bottom: 0;

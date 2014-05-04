@@ -22,16 +22,13 @@ function TitreArchive(){
 			
 			<a class="ln-bloc-archive btn btn-large" href="<?php the_permalink(); ?>">
 				<?php
-				if (is_user_logged_in())
+				//We check if the "Edition" has a thumbnail and we display it
+				if ($post->post_type == 'edition')
 				{
-					//We check if the "Edition" has a thumbnail and we display it
-					if ($post->post_type == 'edition')
+					$thumb = get_field('visuel_listitem_edition');
+					if (!empty($thumb))
 					{
-						$thumb = get_field('visuel_listitem_edition');
-						if (!empty($thumb))
-						{
-							echo wp_get_attachment_image($thumb['id'], 'edition_thumbnail');
-						}
+						echo '<div class="edition_thumbnail">'.wp_get_attachment_image($thumb['id'], 'edition_thumbnail').'</div>';
 					}
 				}
 				?>
