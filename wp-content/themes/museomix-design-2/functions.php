@@ -265,7 +265,7 @@ function pre_get_posts_hook($wp_query) {
 
 /* Nouvelle taille d'image */
 add_image_size('vignette_prototype',400,400);
-add_image_size('edition_thumbnail',250,250, true);
+add_image_size('edition_thumbnail',200,200);
 
 /* types de pages à trier selon le menu
    ==================================== */
