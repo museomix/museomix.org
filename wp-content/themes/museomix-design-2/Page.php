@@ -330,9 +330,11 @@ array_push($liste,$elm);
 ?>
 
 <?php 
+remove_filter ('the_content', 'wpautop');
 
-	global $ContenuPage, $SectionsPage;  
-	if(!$ContenuPage){ $ContenuPage = apply_filters('the_content',get_the_content());} 
+global $ContenuPage, $SectionsPage;  
+
+if(!$ContenuPage){ $ContenuPage = apply_filters('the_content',get_the_content());} 
 		
 ?>
 
@@ -375,7 +377,6 @@ array_push($liste,$elm);
 				<?php } ; ?>
 	 
 			<?php else: ?>
-				
 				<?php the_content(); ?>
 			
 				<?php
