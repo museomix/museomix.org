@@ -33,6 +33,15 @@ abstract class CPAC_Storage_Model {
 	public $type;
 
 	/**
+	 * Menu Type
+	 *
+	 * Groups the storage model in the menu.
+	 *
+	 * @since 2.0.0
+	 */
+	public $menu_type;
+
+	/**
 	 * Page
 	 *
 	 * @since 2.0.0
@@ -75,6 +84,21 @@ abstract class CPAC_Storage_Model {
 	 * @return array Column Name | Column Label
 	 */
 	abstract function get_default_columns();
+
+	/**
+	 * Construct
+	 *
+	 * @since 2.1.2
+	 */
+	function __construct() {
+
+		// set columns paths
+		$this->set_columns_filepath();
+
+		// Populate columns variable.
+		// This is used for manage_value. By storing these columns we greatly improve performance.
+		add_action( 'admin_init', array( $this, 'set_columns' ) );
+	}
 
 	/**
 	 * Checks if menu type is currently viewed
@@ -132,7 +156,24 @@ abstract class CPAC_Storage_Model {
 			}
 		}
 
-		return apply_filters( "cac/meta_keys/storage_key={$this->key}", $keys, $this );
+		/**
+		 * Filter the available custom field meta keys
+		 * If showing hidden fields is enabled, they are prefixed with "cpachidden" in the list
+		 *
+		 * @since 2.0.0
+		 *
+		 * @param array $keys Available custom field keys
+		 * @param CPAC_Storage_Model $storage_model Storage model class instance
+		 */
+		$keys = apply_filters( 'cac/storage_model/meta_keys', $keys, $this );
+
+		/**
+		 * Filter the available custom field meta keys for this storage model type
+		 *
+		 * @since 2.0.0
+		 * @see Filter cac/storage_model/meta_keys
+		 */
+		return apply_filters( "cac/storage_model/meta_keys/storage_key={$this->key}", $keys, $this );
     }
 
 	/**
@@ -207,7 +248,7 @@ abstract class CPAC_Storage_Model {
 
 			// Santize Label: Need to replace the url for images etc, so we do not have url problem on exports
 			// this can not be done by CPAC_Column::sanitize_storage() because 3rd party plugins are not available there
-			$columns[ $name ]['label'] = stripslashes( str_replace( site_url(), '[cpac_site_url]', trim( $options['label'] ) ) );
+			$columns[ $name ]['label'] = stripslashes( str_replace( site_url(), '[cpac_site_url]', trim( $columns[ $name ]['label'] ) ) );
 		}
 
 		// store columns
@@ -243,33 +284,62 @@ abstract class CPAC_Storage_Model {
 
 		$columns  = array(
 			'CPAC_Column_Custom_Field' 	=> CPAC_DIR . 'classes/column/custom-field.php',
-			'CPAC_Column_Taxonomy' => CPAC_DIR . 'classes/column/taxonomy.php'
+			'CPAC_Column_Taxonomy' 		=> CPAC_DIR . 'classes/column/taxonomy.php'
 		);
 
-		$iterator = new DirectoryIterator( CPAC_DIR . 'classes/column/' . $this->type );
+		// Directory to iterate
+		$columns_dir = CPAC_DIR . 'classes/column/' . $this->type;
 
-		foreach( $iterator as $leaf ) {
+		// check if directory exists
+		if ( is_dir( $columns_dir ) ) {
 
-			if ( $leaf->isDot() || $leaf->isDir() )
-				continue;
+			$iterator = new DirectoryIterator( $columns_dir );
 
-			// only allow php files, exclude .SVN .DS_STORE and such
-			if ( substr( $leaf->getFilename(), -4 ) !== '.php' )
-    			continue;
+			foreach( $iterator as $leaf ) {
 
-			// build classname from filename
-			$class_name = 'CPAC_Column_' . ucfirst( $this->type ) . '_'  . implode( '_', array_map( 'ucfirst', explode( '-', basename( $leaf->getFilename(), '.php' ) ) ) );
+				if ( $leaf->isDot() || $leaf->isDir() )
+					continue;
 
-			// classname | filepath
-			$columns[ $class_name ] = $leaf->getPathname();
+				// only allow php files, exclude .SVN .DS_STORE and such
+				if ( substr( $leaf->getFilename(), -4 ) !== '.php' )
+	    			continue;
+
+				// build classname from filename
+				$class_name = 'CPAC_Column_' . ucfirst( $this->type ) . '_'  . implode( '_', array_map( 'ucfirst', explode( '-', basename( $leaf->getFilename(), '.php' ) ) ) );
+
+				// classname | filepath
+				$columns[ $class_name ] = $leaf->getPathname();
+			}
 		}
 
-		// cac/columns/custom - filter to register column
-		$this->columns_filepath = apply_filters( 'cac/columns/custom', $columns, $this );
+		/**
+		 * Filter the available custom column types
+		 * Use this to register a custom column type
+		 *
+		 * @since 2.0.0
+		 *
+		 * @param array $columns Available custom columns ([class_name] => [class file path])
+		 * @param CPAC_Storage_Model $storage_model Storage model class instance
+		 */
+		$columns = apply_filters( 'cac/columns/custom', $columns, $this );
 
-		// cac/columns/custom/type={$type} - filter to register column based on it's content type
-		// type can be either a posttype or wp-users/wp-comments/wp-links/wp-media
-		$this->columns_filepath = apply_filters( 'cac/columns/custom/type=' . $this->type, $columns, $this );
+		/**
+		 * Filter the available custom column types for a specific type
+		 *
+		 * @since 2.0.0
+		 * @see Filter cac/columns/custom
+		 */
+		$columns = apply_filters( 'cac/columns/custom/type=' . $this->type, $columns, $this );
+
+		/**
+		 * Filter the available custom column types for a specific type
+		 *
+		 * @since 2.0.0
+		 * @see Filter cac/columns/custom
+		 */
+		$columns = apply_filters( 'cac/columns/custom/post_type=' . $this->key, $columns, $this );
+
+		$this->columns_filepath = $columns;
 	}
 
 	/**
@@ -406,12 +476,14 @@ abstract class CPAC_Storage_Model {
 	 * Set Columns
 	 *
 	 * @since 2.0.2
+	 *
+	 * @param bool $ignore_check This will allow (3rd party plugins) to populate columns outside the approved screens.
 	 */
-	function set_columns() {
+	public function set_columns( $ignore_screen_check = false ) {
 
 		// only set columns on allowed screens
 		// @todo_minor: maybe add exception for AJAX calls
-		if ( ! $this->is_doing_ajax() && ! $this->is_columns_screen() && ! $this->is_settings_page() )
+		if ( ! $ignore_screen_check && ! $this->is_doing_ajax() && ! $this->is_columns_screen() && ! $this->is_settings_page() )
 			return;
 
 		$this->custom_columns   = $this->get_custom_registered_columns();
@@ -441,10 +513,6 @@ abstract class CPAC_Storage_Model {
 		do_action( 'cac/get_columns', $this );
 
 		$columns = array();
-
-		// get columns
-		//$default_columns = $this->get_default_registered_columns();
-		//$custom_columns  = $this->get_custom_registered_columns();
 
 		// get columns
 		$default_columns = $this->default_columns;
@@ -555,7 +623,17 @@ abstract class CPAC_Storage_Model {
 		// add active stored headings
 		foreach( $stored_columns as $column_name => $options ) {
 
-			// label needs stripslashes() for HTML tagged labels, like icons and checkboxes
+			/**
+			 * Filter the column headers label for use in a WP_List_Table
+			 * Label needs stripslashes() for HTML tagged labels, like icons and checkboxes
+			 *
+			 * @since 2.0.0
+			 *
+			 * @param string $label Label
+			 * @param string $column_name Column name
+			 * @param array $options Column options
+			 * @param CPAC_Storage_Model $storage_model Storage model class instance
+			 */
 			$label = apply_filters( 'cac/headings/label', stripslashes( $options['label'] ), $column_name, $options, $this );
 
 			// maybe need site_url replacement
@@ -646,7 +724,7 @@ abstract class CPAC_Storage_Model {
 	 */
 	function is_columns_screen() {
 
-		global $pagenow, $current_screen;
+		global $pagenow;
 
 		if ( $this->page . '.php' != $pagenow )
 			return false;
@@ -659,9 +737,13 @@ abstract class CPAC_Storage_Model {
 				return false;
 		}
 
-		// @todo: current_screen is still empty at this point...
-		//if ( ! empty( $current_screen->post_type ) && $this->key != $current_screen->post_type )
-		//	return false;
+		// taxonomy
+		if ( 'taxonomy' == $this->type ) {
+			$taxonomy = isset( $_GET['taxonomy'] ) ? $_GET['taxonomy'] : '';
+
+			if ( $this->taxonomy != $taxonomy )
+				return false;
+		}
 
 		return true;
 	}

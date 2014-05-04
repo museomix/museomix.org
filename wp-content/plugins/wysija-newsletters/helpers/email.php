@@ -91,7 +91,7 @@ class WYSIJA_help_email extends WYSIJA_object{
         $mailer->testemail=true;
         $mailer->wp_user=&$current_user->data;
 
-        $res=$mailer->sendSimple($current_user->data->user_email,str_replace('[send_method]',$send_method,__('[send_method] works with Wysija',WYSIJA)),$content_email);
+        $res=$mailer->sendSimple($current_user->data->user_email,str_replace('[send_method]',$send_method,__('[send_method] works with MailPoet',WYSIJA)),$content_email);
 
         if($res){
             $this->notice(sprintf(__('Test email successfully sent to %s',WYSIJA),'<b><i>'.$current_user->data->user_email.'</i></b>'));
@@ -103,9 +103,9 @@ class WYSIJA_help_email extends WYSIJA_object{
                 $this->error(__('The PHP Extension openssl is not enabled on your server. Ask your host to enable it if you want to use an SSL connection.',WYSIJA));
             }elseif(!empty($bounce) AND !in_array($config->getValue('sending_method'),array('smtp_com','elasticemail'))){
                 $this->error(sprintf(__('The bounce email address "%1$s" might actually cause the problem. Leave the field empty and try again.',WYSIJA),$bounce));
-            //Case 2 : you are using SMTP but you didn't add an authentification
+            //Case 2 : you are using SMTP but you didn't add an authentication
             }elseif(in_array($config->getValue('sending_method'),array('smtp','gmail')) AND !$config->getValue('smtp_auth') AND strlen($config->getValue('smtp_password')) > 1){
-                $this->error(__('You specified an SMTP password but you don\'t require an authentification, you might want to turn the SMTP authentification ON.',WYSIJA));
+                $this->error(__('You specified an SMTP password but you don\'t require an authentication, you might want to turn the SMTP authentication ON.',WYSIJA));
             //Case 3 : you are on localhost!
             }elseif((strpos(WYSIJA_URL,'localhost') || strpos(WYSIJA_URL,'127.0.0.1')) && in_array($config->getValue('sending_method'),array('sendmail','qmail','mail'))){
                 $this->error(__('Your localhost may not have a mail server. To verify, please log out and click on the "Lost your password?" link on the login page. Do you receive the reset password email from your WordPress?',WYSIJA));
@@ -118,17 +118,19 @@ class WYSIJA_help_email extends WYSIJA_object{
 
     /**
      * get view in browser link
-     * @param array $dataEmail
+     * @param array/stdClass $data_email
      * @return string url
      */
-    function getVIB($dataEmail){
-        if(false && isset($dataEmail['params']['vib_id'])) return WYSIJA::get_permalink($dataEmail['params']['vib_id'],false);
+    function getVIB($data_email){
+        if (!is_array($data_email) && is_object($data_email))
+            $data_email = (array) $data_email;
+        if(false && isset($data_email['params']['vib_id'])) return WYSIJA::get_permalink($data_email['params']['vib_id'],false);
         else{
            $paramsurl=array(
                 'wysija-page'=>1,
                 'controller'=>'email',
                 'action'=>'view',
-                'email_id'=>$dataEmail['email_id']
+                'email_id'=>$data_email['email_id']
                 );
 
             $modelConf=WYSIJA::get('config','model');
@@ -160,4 +162,5 @@ class WYSIJA_help_email extends WYSIJA_object{
 
         return $follow_ups_per_list;
     }
+
 }

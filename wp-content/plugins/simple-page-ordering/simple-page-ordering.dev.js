@@ -63,11 +63,16 @@ sortable_post_table.sortable({
 	cursor: 'move',
 	axis: 'y',
 	containment: 'table.widefat',
-	scrollSensitivity: 40,
 	cancel:	'.inline-edit-row',
-	distance: 5,
-	opacity: .85,
-	forceHelperSize: true,
+	distance: 2,
+	opacity: .8,
+	tolerance: 'pointer',
+	start: function(e, ui){
+		if ( typeof(inlineEditPost) !== 'undefined' ) {
+			inlineEditPost.revert();
+		}
+		ui.placeholder.height(ui.item.height());
+	},
 	update: function(event, ui) {
 		sortable_post_table.sortable('disable').addClass('spo-updating');
 		ui.item.addClass('spo-updating-row');
@@ -99,5 +104,6 @@ sortable_post_table.sortable({
 				jQuery( table_rows[table_row_count]).removeClass('alternate');
 			}
 		}
+		// fix quick edit
 	}
 });

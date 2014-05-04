@@ -7,7 +7,7 @@ Requires at least: 3.5
 Tested up to: 3.5.1
 Stable tag: trunk
 Homepage: http://www.advancedcustomfields.com/add-ons/gallery-field/
-Version: 1.1.0
+Version: 1.1.1
 
 
 == Copyright ==
@@ -54,6 +54,9 @@ include_once('acf-gallery/acf-gallery.php');
 
 
 == Changelog ==
+
+= 1.1.1 =
+* Fixed Bug where upload popup would appear when editing an image
 
 = 1.1.0 =
 * IMPORTANT: ACF Gallery Field now requires a minimum WordPress version of 3.5.0

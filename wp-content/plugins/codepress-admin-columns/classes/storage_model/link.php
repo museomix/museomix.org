@@ -13,17 +13,15 @@ class CPAC_Storage_Model_Link extends CPAC_Storage_Model {
 		$this->label 	= __( 'Links' );
 		$this->type 	= 'link';
 		$this->page 	= 'link-manager';
-
-		$this->set_columns_filepath();
-
-		// populate columns variable
-		add_action( 'admin_init', array( $this, 'set_columns' ) );
+		$this->menu_type = 'other';
 
 		// headings
-		add_filter( "manage_{$this->page}_columns",  array( $this, 'add_headings' ) );
+		add_filter( "manage_{$this->page}_columns",  array( $this, 'add_headings' ), 100 );
 
 		// values
-		add_action( 'manage_link_custom_column', array( $this, 'manage_value' ), 10, 2 );
+		add_action( 'manage_link_custom_column', array( $this, 'manage_value' ), 100, 2 );
+
+		parent::__construct();
 	}
 
 	/**
@@ -43,7 +41,7 @@ class CPAC_Storage_Model_Link extends CPAC_Storage_Model {
 
 		// get columns
 		$table 		= _get_list_table( 'WP_Links_List_Table', array( 'screen' => 'link-manager' ) );
-		$columns 	= $table->get_columns();
+		$columns 	= (array) $table->get_columns();
 
 		return $columns;
 	}

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Captcha v2.30\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-03 17:20+0300\n"
-"PO-Revision-Date: 2014-02-03 17:20+0300\n"
+"POT-Creation-Date: 2014-04-11 11:14+0300\n"
+"PO-Revision-Date: 2014-04-11 11:14+0300\n"
 "Last-Translator: bestwebsoft.com <plugins@bestwebsoft.com>\n"
 "Language-Team: Sagive SEO <info@sagive.co.il>\n"
 "Language: he_IL\n"
@@ -19,564 +19,569 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 
 # @ captcha
-#: captcha.php:32
-#: captcha.php:382
+#: captcha.php:72
+#: captcha.php:403
 #, fuzzy
 msgid "Captcha Settings"
 msgstr "אפשרויות קוד אימות"
 
 # @ captcha
-#: captcha.php:32
+#: captcha.php:72
 msgid "Captcha"
 msgstr "קוד אימות"
 
-#: captcha.php:49
+#: captcha.php:160
 msgid "requires"
 msgstr ""
 
-#: captcha.php:49
+#: captcha.php:160
 msgid "or higher, that is why it has been deactivated! Please upgrade WordPress and try again."
 msgstr ""
 
-#: captcha.php:49
+#: captcha.php:160
 msgid "Back to the WordPress"
 msgstr ""
 
 # @ captcha
-#: captcha.php:49
+#: captcha.php:160
 #, fuzzy
 msgid "Plugins page"
 msgstr "תוספים מומלצים"
 
 # @ captcha
-#: captcha.php:57
+#: captcha.php:233
 msgid "Login form"
 msgstr "טופס התחברות"
 
 # @ captcha
-#: captcha.php:58
-#: captcha.php:424
+#: captcha.php:234
+#: captcha.php:448
 #, fuzzy
 msgid "Registration form"
 msgstr "טופס רישום לאתר"
 
 # @ captcha
-#: captcha.php:58
+#: captcha.php:234
 msgid "Register form"
 msgstr "טופס רישום לאתר"
 
 # @ captcha
-#: captcha.php:59
+#: captcha.php:235
 #, fuzzy
 msgid "Reset Password form"
 msgstr "טופס שחזור סיסמה"
 
 # @ captcha
-#: captcha.php:59
+#: captcha.php:235
 msgid "Lost password form"
 msgstr "טופס שחזור סיסמה"
 
 # @ captcha
-#: captcha.php:60
-#: captcha.php:425
+#: captcha.php:236
+#: captcha.php:449
 msgid "Comments form"
 msgstr "טופס תגובות"
 
 # @ captcha
-#: captcha.php:61
+#: captcha.php:237
 msgid "Hide CAPTCHA for registered users"
 msgstr "הסתר את קוד האימות ממשתמשים רשומים"
 
 # @ captcha
-#: captcha.php:66
+#: captcha.php:242
 msgid "Plus (&#43;)"
 msgstr "חיבור (&#43;)"
 
 # @ captcha
-#: captcha.php:66
+#: captcha.php:242
 msgid "Plus"
 msgstr "חיבור"
 
 # @ captcha
-#: captcha.php:67
+#: captcha.php:243
 msgid "Minus (&minus;)"
 msgstr "חיסור (&minus;)"
 
 # @ captcha
-#: captcha.php:67
+#: captcha.php:243
 msgid "Minus"
 msgstr "חיסור (&minus;)"
 
 # @ captcha
-#: captcha.php:68
+#: captcha.php:244
 #, fuzzy
 msgid "Multiplication (&times;)"
 msgstr "הכפלה (&times;)"
 
 # @ captcha
-#: captcha.php:68
+#: captcha.php:244
 #, fuzzy
 msgid "Multiply"
 msgstr "הכפלה (&times;)"
 
 # @ captcha
-#: captcha.php:73
+#: captcha.php:249
 msgid "Numbers"
 msgstr "מספרים"
 
 # @ captcha
-#: captcha.php:74
+#: captcha.php:250
 msgid "Words"
 msgstr "מילים"
 
 # @ captcha
-#: captcha.php:192
-#: captcha.php:204
-#: captcha.php:384
-msgid "Settings"
-msgstr "הגדרות"
-
-# @ captcha
-#: captcha.php:205
-msgid "FAQ"
-msgstr "שאלות נפוצות"
-
-# @ captcha
-#: captcha.php:206
-msgid "Support"
-msgstr "תמיכה"
-
-# @ captcha
-#: captcha.php:248
+#: captcha.php:281
 #, fuzzy
 msgid "Please select one item in the block Arithmetic and Complexity for CAPTCHA"
 msgstr "אנא בחרו את אחת האפשרויות מתוך רשימת הפעולות המתמטיות וגם את רמת הקושי של קוד האימות"
 
 # @ captcha
-#: captcha.php:252
+#: captcha.php:285
 #, fuzzy
 msgid "Settings saved."
 msgstr "ההגדרות נשמרו"
 
-#: captcha.php:275
-#: captcha.php:314
+#: captcha.php:298
+#: captcha.php:336
 msgid "Wrong license key"
 msgstr ""
 
-#: captcha.php:307
+#: captcha.php:329
 msgid "Something went wrong. Try again later. If the error will appear again, please, contact us <a href=http://support.bestwebsoft.com>BestWebSoft</a>. We are sorry for inconvenience."
 msgstr ""
 
-#: captcha.php:316
+#: captcha.php:338
 msgid "This license key is bind to another site"
 msgstr ""
 
-#: captcha.php:318
-#: captcha.php:540
+#: captcha.php:340
+#: captcha.php:568
 msgid "Unfortunately, you have exceeded the number of available tries per day. Please, upload the plugin manually."
 msgstr ""
 
-#: captcha.php:336
+#: captcha.php:357
 msgid "Failed to open the zip archive. Please, upload the plugin manually"
 msgstr ""
 
-#: captcha.php:342
+#: captcha.php:363
 msgid "Your server does not support either ZipArchive or Phar. Please, upload the plugin manually"
 msgstr ""
 
-#: captcha.php:346
-#: captcha.php:355
+#: captcha.php:367
+#: captcha.php:376
 msgid "Failed to download the zip archive. Please, upload the plugin manually"
 msgstr ""
 
-#: captcha.php:359
+#: captcha.php:380
 msgid "Something went wrong. Try again later or upload the plugin manually. We are sorry for inconvienience."
 msgstr ""
 
-#: captcha.php:374
+#: captcha.php:395
 msgid "Please, enter Your license key"
 msgstr ""
 
-#: captcha.php:385
+# @ captcha
+#: captcha.php:405
+#: captcha.php:1414
+#: captcha.php:1426
+msgid "Settings"
+msgstr "הגדרות"
+
+#: captcha.php:406
 msgid "Go PRO"
 msgstr ""
 
-#: captcha.php:387
+#: captcha.php:408
 msgid "Notice:"
 msgstr ""
 
-#: captcha.php:387
+#: captcha.php:408
 msgid "The plugin's settings have been changed. In order to save them please don't forget to click the 'Save Changes' button."
 msgstr ""
 
 # @ captcha
-#: captcha.php:394
-#: captcha.php:421
+#: captcha.php:415
+#: captcha.php:445
 #, fuzzy
 msgid "Enable CAPTCHA for:"
 msgstr "אפשר קוד אימות ב:"
 
 # @ captcha
-#: captcha.php:406
-#: captcha.php:408
-#: captcha.php:411
+#: captcha.php:427
+#: captcha.php:429
+#: captcha.php:432
 msgid "Contact form"
 msgstr "טופס יצירת קשר"
 
-#: captcha.php:406
-#: captcha.php:408
-#: captcha.php:411
+#: captcha.php:427
+#: captcha.php:429
+#: captcha.php:432
 msgid "powered by"
 msgstr ""
 
 # @ captcha
-#: captcha.php:408
+#: captcha.php:429
 msgid "Activate contact form"
 msgstr "הפעלת טופס יצירת קשר"
 
 # @ captcha
-#: captcha.php:411
+#: captcha.php:432
 msgid "Download contact form"
 msgstr "הורדת טופס יצירת קשר"
 
 # @ captcha
-#: captcha.php:413
+#: captcha.php:434
 #, fuzzy
 msgid "If you would like to customize this plugin for a custom form, please see"
 msgstr "אם תרצו להתאים תוסף זה לטופס מותאם אישית אתם מוזמנים ליצור עמנו קשר במייל <a href=\"Mailto:plugin@bestwebsoft.com\">plugin@bestwebsoft.com</a> או בטופס יצירת הקשר באתר שלנו"
 
-#: captcha.php:426
+#: captcha.php:450
 msgid "\"Create a Group\" form"
 msgstr ""
 
 # @ captcha
-#: captcha.php:432
+#: captcha.php:456
 #, fuzzy
 msgid "Enable CAPTCHA:"
 msgstr "אפשר קוד אימות ב:"
 
-#: captcha.php:440
+#: captcha.php:464
 msgid "If you upgrade to Pro version all your settings will be saved."
 msgstr ""
 
-#: captcha.php:445
-msgid "This functionality is available in the Pro version of the plugin. For more details, please follow the link"
+#: captcha.php:471
+msgid "Unlock premium options by upgrading to a PRO version."
+msgstr ""
+
+#: captcha.php:472
+#: captcha.php:1487
+msgid "Learn More"
+msgstr ""
+
+#: captcha.php:475
+msgid "Go"
 msgstr ""
 
 # @ captcha
-#: captcha.php:454
+#: captcha.php:482
 #, fuzzy
 msgid "Title for CAPTCHA in the form"
 msgstr "כותרת קוד האימות בטופס"
 
-#: captcha.php:458
+#: captcha.php:486
 msgid "Required symbol"
 msgstr ""
 
 # @ captcha
-#: captcha.php:464
+#: captcha.php:492
 msgid "Arithmetic actions for CAPTCHA"
 msgstr "פעולות מתמטיות עבור קוד האימות"
 
-#: captcha.php:478
+#: captcha.php:506
 msgid "CAPTCHA complexity level"
 msgstr ""
 
 # @ default
-#: captcha.php:494
+#: captcha.php:522
 msgid "Save Changes"
 msgstr "שמור שינויים"
 
-#: captcha.php:500
+#: captcha.php:528
 msgid "If you enjoy our plugin, please give it 5 stars on WordPress"
 msgstr ""
 
 # @ captcha
-#: captcha.php:501
+#: captcha.php:529
 #, fuzzy
 msgid "Rate the plugin"
 msgstr "תוספים מומלצים"
 
-#: captcha.php:504
+#: captcha.php:532
 msgid "If there is something wrong about it, please contact us"
 msgstr ""
 
-#: captcha.php:515
+#: captcha.php:543
 msgid "Congratulations! The PRO version of the plugin is successfully download and activated."
 msgstr ""
 
-#: captcha.php:517
+#: captcha.php:545
 msgid "Please, go to"
 msgstr ""
 
-#: captcha.php:517
+#: captcha.php:545
 msgid "the setting page"
 msgstr ""
 
-#: captcha.php:518
+#: captcha.php:546
 msgid "You will be redirected automatically in 5 seconds."
 msgstr ""
 
-#: captcha.php:523
+#: captcha.php:551
 msgid "You can download and activate"
 msgstr ""
 
-#: captcha.php:525
+#: captcha.php:553
 msgid "version of this plugin by entering Your license key."
 msgstr ""
 
-#: captcha.php:527
+#: captcha.php:555
 msgid "You can find your license key on your personal page Client area, by clicking on the link"
 msgstr ""
 
-#: captcha.php:529
+#: captcha.php:557
 msgid "(your username is the email you specify when purchasing the product)."
 msgstr ""
 
-#: captcha.php:537
-#: captcha.php:547
+#: captcha.php:565
+#: captcha.php:575
 msgid "Go!"
 msgstr ""
 
-# @ captcha
-#: captcha.php:597
-#: captcha.php:604
-#: captcha.php:783
-#: captcha.php:791
-#: captcha.php:806
-#: captcha.php:814
-msgid "ERROR"
-msgstr "שגיאה"
-
-#: captcha.php:597
-#: captcha.php:744
-#: captcha.php:783
-#: captcha.php:806
-#: captcha.php:835
-msgid "Please fill the form."
-msgstr ""
-
-# @ captcha
-#: captcha.php:604
-#: captcha.php:791
-#: captcha.php:814
-#, fuzzy
-msgid "Please enter a valid CAPTCHA value."
-msgstr "אנא השלימו את קוד האימות"
-
-#: captcha.php:623
+#: captcha.php:642
 msgid "<strong>ERROR</strong>: Please fill the form."
 msgstr ""
 
 # @ captcha
-#: captcha.php:633
+#: captcha.php:656
 #, fuzzy
 msgid "<strong>ERROR</strong>: Please enter a valid CAPTCHA value."
 msgstr "אנא השלימו את קוד האימות"
 
+#: captcha.php:767
+#: captcha.php:806
+#: captcha.php:829
+#: captcha.php:858
+msgid "Please fill the form."
+msgstr ""
+
 # @ captcha
-#: captcha.php:750
-#: captcha.php:843
+#: captcha.php:773
+#: captcha.php:866
 #, fuzzy
 msgid "Error: You have entered an incorrect CAPTCHA value. Click the BACK button on your browser, and try again."
 msgstr "שגיאה: הזנתם קוד אימות  שגוי. נא ללחוץ על כפתור אחורה בדפדפן ולנסות שוב."
 
 # @ captcha
-#: captcha.php:862
-#: captcha.php:1161
-msgid "zero"
-msgstr "אפס"
+#: captcha.php:806
+#: captcha.php:814
+#: captcha.php:829
+#: captcha.php:837
+msgid "ERROR"
+msgstr "שגיאה"
 
 # @ captcha
-#: captcha.php:863
-#: captcha.php:1162
-#: captcha.php:1375
-msgid "one"
-msgstr "אחד"
-
-# @ captcha
-#: captcha.php:864
-#: captcha.php:1163
-msgid "two"
-msgstr "שתיים"
-
-# @ captcha
-#: captcha.php:865
-#: captcha.php:1164
-msgid "three"
-msgstr "שלוש"
-
-# @ captcha
-#: captcha.php:866
-#: captcha.php:1165
-msgid "four"
-msgstr "ארבע"
-
-# @ captcha
-#: captcha.php:867
-#: captcha.php:1166
-msgid "five"
-msgstr "חמש"
-
-# @ captcha
-#: captcha.php:868
-#: captcha.php:1167
-#: captcha.php:1375
-msgid "six"
-msgstr "שש"
-
-# @ captcha
-#: captcha.php:869
-#: captcha.php:1168
-#: captcha.php:1363
-#: captcha.php:1369
-msgid "seven"
-msgstr "שבע"
-
-# @ captcha
-#: captcha.php:870
-#: captcha.php:1169
-#: captcha.php:1366
-msgid "eight"
-msgstr "שמונה"
-
-# @ captcha
-#: captcha.php:871
-#: captcha.php:1170
-msgid "nine"
-msgstr "תשע"
-
-# @ captcha
-#: captcha.php:874
-#: captcha.php:1173
-msgid "eleven"
-msgstr "אחת עשרה"
-
-# @ captcha
-#: captcha.php:875
-#: captcha.php:1174
-msgid "twelve"
-msgstr "שתיים עשרה"
-
-# @ captcha
-#: captcha.php:876
-#: captcha.php:1175
-msgid "thirteen"
-msgstr "שלוש עשרה"
-
-# @ captcha
-#: captcha.php:877
-#: captcha.php:1176
-msgid "fourteen"
-msgstr "ארבע עשרה"
-
-# @ captcha
-#: captcha.php:878
-#: captcha.php:1177
-msgid "fifteen"
-msgstr "חמש עשרה"
-
-# @ captcha
-#: captcha.php:879
-#: captcha.php:1178
-msgid "sixteen"
-msgstr "שש עשרה"
-
-# @ captcha
-#: captcha.php:880
-#: captcha.php:1179
-msgid "seventeen"
-msgstr "שבע עשרה"
-
-# @ captcha
-#: captcha.php:881
-#: captcha.php:1180
-msgid "eighteen"
-msgstr "שמונה עשרה"
-
-# @ captcha
-#: captcha.php:882
-#: captcha.php:1181
-msgid "nineteen"
-msgstr "תשע עשרה"
+#: captcha.php:814
+#: captcha.php:837
+#, fuzzy
+msgid "Please enter a valid CAPTCHA value."
+msgstr "אנא השלימו את קוד האימות"
 
 # @ captcha
 #: captcha.php:885
 #: captcha.php:1184
-msgid "ten"
-msgstr "עשר"
+msgid "zero"
+msgstr "אפס"
 
 # @ captcha
 #: captcha.php:886
 #: captcha.php:1185
-msgid "twenty"
-msgstr "עשרים"
+#: captcha.php:1391
+msgid "one"
+msgstr "אחד"
 
 # @ captcha
 #: captcha.php:887
 #: captcha.php:1186
-msgid "thirty"
-msgstr "שלושים"
+msgid "two"
+msgstr "שתיים"
 
 # @ captcha
 #: captcha.php:888
 #: captcha.php:1187
-msgid "forty"
-msgstr "ארבעים"
+msgid "three"
+msgstr "שלוש"
 
 # @ captcha
 #: captcha.php:889
 #: captcha.php:1188
-msgid "fifty"
-msgstr "חמישים"
+msgid "four"
+msgstr "ארבע"
 
 # @ captcha
 #: captcha.php:890
 #: captcha.php:1189
-msgid "sixty"
-msgstr "שישים"
+msgid "five"
+msgstr "חמש"
 
 # @ captcha
 #: captcha.php:891
 #: captcha.php:1190
-msgid "seventy"
-msgstr "שבעים"
+#: captcha.php:1391
+msgid "six"
+msgstr "שש"
 
 # @ captcha
 #: captcha.php:892
 #: captcha.php:1191
-msgid "eighty"
-msgstr "שמונים"
+#: captcha.php:1379
+#: captcha.php:1385
+msgid "seven"
+msgstr "שבע"
 
 # @ captcha
 #: captcha.php:893
 #: captcha.php:1192
+#: captcha.php:1382
+msgid "eight"
+msgstr "שמונה"
+
+# @ captcha
+#: captcha.php:894
+#: captcha.php:1193
+msgid "nine"
+msgstr "תשע"
+
+# @ captcha
+#: captcha.php:897
+#: captcha.php:1196
+msgid "eleven"
+msgstr "אחת עשרה"
+
+# @ captcha
+#: captcha.php:898
+#: captcha.php:1197
+msgid "twelve"
+msgstr "שתיים עשרה"
+
+# @ captcha
+#: captcha.php:899
+#: captcha.php:1198
+msgid "thirteen"
+msgstr "שלוש עשרה"
+
+# @ captcha
+#: captcha.php:900
+#: captcha.php:1199
+msgid "fourteen"
+msgstr "ארבע עשרה"
+
+# @ captcha
+#: captcha.php:901
+#: captcha.php:1200
+msgid "fifteen"
+msgstr "חמש עשרה"
+
+# @ captcha
+#: captcha.php:902
+#: captcha.php:1201
+msgid "sixteen"
+msgstr "שש עשרה"
+
+# @ captcha
+#: captcha.php:903
+#: captcha.php:1202
+msgid "seventeen"
+msgstr "שבע עשרה"
+
+# @ captcha
+#: captcha.php:904
+#: captcha.php:1203
+msgid "eighteen"
+msgstr "שמונה עשרה"
+
+# @ captcha
+#: captcha.php:905
+#: captcha.php:1204
+msgid "nineteen"
+msgstr "תשע עשרה"
+
+# @ captcha
+#: captcha.php:908
+#: captcha.php:1207
+msgid "ten"
+msgstr "עשר"
+
+# @ captcha
+#: captcha.php:909
+#: captcha.php:1208
+msgid "twenty"
+msgstr "עשרים"
+
+# @ captcha
+#: captcha.php:910
+#: captcha.php:1209
+msgid "thirty"
+msgstr "שלושים"
+
+# @ captcha
+#: captcha.php:911
+#: captcha.php:1210
+msgid "forty"
+msgstr "ארבעים"
+
+# @ captcha
+#: captcha.php:912
+#: captcha.php:1211
+msgid "fifty"
+msgstr "חמישים"
+
+# @ captcha
+#: captcha.php:913
+#: captcha.php:1212
+msgid "sixty"
+msgstr "שישים"
+
+# @ captcha
+#: captcha.php:914
+#: captcha.php:1213
+msgid "seventy"
+msgstr "שבעים"
+
+# @ captcha
+#: captcha.php:915
+#: captcha.php:1214
+msgid "eighty"
+msgstr "שמונים"
+
+# @ captcha
+#: captcha.php:916
+#: captcha.php:1215
 msgid "ninety"
 msgstr "תשעים"
 
 # @ captcha
-#: captcha.php:980
-#: captcha.php:1279
+#: captcha.php:1003
+#: captcha.php:1302
 msgid "and"
 msgstr "ו"
 
 # @ captcha
-#: captcha.php:1055
+#: captcha.php:1078
 #, fuzzy
 msgid "Encryption password is not set"
 msgstr "סיסמת פענוח הקידוד איננה מוגדרת"
 
 # @ captcha
-#: captcha.php:1075
+#: captcha.php:1098
 #, fuzzy
 msgid "Decryption password is not set"
 msgstr "סיסמת פענוח הקידוד איננה מוגדרת"
 
-#: captcha.php:1437
+# @ captcha
+#: captcha.php:1427
+msgid "FAQ"
+msgstr "שאלות נפוצות"
+
+# @ captcha
+#: captcha.php:1428
+msgid "Support"
+msgstr "תמיכה"
+
+#: captcha.php:1489
 msgid "It's time to upgrade your <strong>Captcha plugin</strong> to <strong>PRO</strong> version"
 msgstr ""
 
-#: captcha.php:1438
+#: captcha.php:1490
 msgid "Extend standard plugin functionality with new great options"
 msgstr ""
 

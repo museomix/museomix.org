@@ -20,6 +20,7 @@ function pre_load_wordpress_seo_class_metabox() {
 		( defined('DOING_AJAX') && DOING_AJAX && ! empty( $_POST['type'] ) )
 		) {
 			require_once WPSEO_PATH.'admin/class-metabox.php';
+			new WPSEO_Metabox;
 		}
 	}
 }

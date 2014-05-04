@@ -179,6 +179,13 @@
 			// open
 			_media.frame.on('open',function() {
 				
+				// set to browse
+				if( _media.frame.content._mode != 'browse' )
+				{
+					_media.frame.content.mode('browse');
+				}
+				
+				
 				// add class
 				_media.frame.$el.closest('.media-modal').addClass('acf-media-modal acf-expanded');
 			

@@ -3,8 +3,8 @@ Contributors: bestwebsoft
 Donate link: https://www.2checkout.com/checkout/purchase?sid=1430388&quantity=10&product_id=13
 Tags: captcha, match captcha, text captcha, spam, antispam, login, registration, comment, lost password, capcha, catcha, captha
 Requires at least: 3.0
-Tested up to: 3.8.1
-Stable tag: 3.9.5
+Tested up to: 3.8.2
+Stable tag: 3.9.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -96,7 +96,7 @@ We can fix some things for free for the users who provide translation of our plu
 2. Activate the plugin via the 'Plugins' menu in WordPress.
 3. Plugin settings are located in "BWS Plugins" > "Captcha".
 
-<a href="http://bestwebsoft.com/wp-content/uploads/manual/wp_plugin/captcha/Captcha_Installation_step-by-step_instruction.pdf" target="_blank">View a PDF version of Step-by-step Instruction on Captcha Installation</a>.
+<a href="https://docs.google.com/document/d/1DN2yYCvDyK2LqmbWw6xmUNLbb0awOVDZ_dOgIXod-Jw/edit" target="_blank">View a Step-by-step Instruction on Captcha Installation</a>.
 
 http://www.youtube.com/watch?v=svcdSfwlb2c
 
@@ -166,7 +166,7 @@ Please make sure that the problem hasn't been discussed yet on our forum (<a hre
 1. the link to the page where the problem occurs
 2. the name of the plugin and its version. If you are using a pro version - your order number.
 3. the version of your WordPress installation
-4. copy and paste into the message your system status report. Please read more here: <a href="http://bestwebsoft.com/wp-content/uploads/manual/wp_plugin/general/System_Status.pdf" target="_blank">System_Status.pdf</a>
+4. copy and paste into the message your system status report. Please read more here: <a href="https://docs.google.com/document/d/1Wi2X8RdRGXk9kMszQy1xItJrpN0ncXgioH935MaBKtc/edit" target="_blank">Instuction on System Status</a>
 
 == Screenshots ==
 
@@ -175,9 +175,23 @@ Please make sure that the problem hasn't been discussed yet on our forum (<a hre
 3. Registration form with Captcha.
 4. Lost password form with Captcha.
 5. Login form with Captcha.
-5. Contact form with Captcha.
+6. Contact form with Captcha.
 
 == Changelog ==
+
+= V3.9.9 - 11.04.2014 =
+* Update : We updated all functionality for wordpress 3.8.2.
+
+= V3.9.8 - 10.03.2014 =
+* Bugfix : We fixed error related to custom plugins folder.
+
+= V3.9.7 - 10.03.2014 =
+* Budfix : Plugin optimization is done.
+* Update : The French language file is updated.
+
+= V3.9.6 - 12.02.2014 =
+* Bugfix : Comflict with plugin Limit Login Attempts is fixed (a false login when logging out of the WP backend).
+* Bugfix : We fixed displaying captcha in contact form.
 
 = V3.9.5 - 03.02.2014 =
 * Update : We updated all functionality for wordpress 3.8.1.
@@ -447,6 +461,18 @@ Please make sure that the problem hasn't been discussed yet on our forum (<a hre
 * Select functionality of mathematical actions and level of their difficulty are implemented.
 
 == Upgrade Notice ==
+
+= V3.9.9 =
+We updated all functionality for wordpress 3.8.2.
+
+= V3.9.8 =
+We fixed error related to custom plugins folder.
+
+= V3.9.7 =
+Plugin optimization is done. The French language file is updated.
+
+= V3.9.6 =
+Comflict with plugin Limit Login Attempts is fixed (a false login when logging out of the WP backend). We fixed displaying captcha in contact form.
 
 = V3.9.5 =
 We updated all functionality for wordpress 3.8.1. Changed filter for captcha in the login form.

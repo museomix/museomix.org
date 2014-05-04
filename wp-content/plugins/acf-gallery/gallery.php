@@ -48,7 +48,7 @@ class acf_field_gallery extends acf_field
 		$this->settings = array(
 			'path' => apply_filters('acf/helpers/get_path', __FILE__),
 			'dir' => apply_filters('acf/helpers/get_dir', __FILE__),
-			'version' => '1.1.0'
+			'version' => '1.1.1'
 		);
 	}
 	
@@ -301,7 +301,7 @@ class acf_field_gallery extends acf_field
 		
 		
 		// empty?
-		if( empty($value) )
+		if( empty($value) || !is_array($value) )
 		{
 			return $value;
 		}
