@@ -65,7 +65,8 @@ function SectionDePage($atts){
 		'first' => ''
 	),$atts));
 	if(!isset($atts['first'])){
-		$r .= '</section>';
+		if (!empty($r))
+			$r .= '</section>';
 	}
 	
 	$id = preg_replace('/\\W/','-',$atts['titre']);
@@ -266,6 +267,7 @@ function pre_get_posts_hook($wp_query) {
 /* Nouvelle taille d'image */
 add_image_size('vignette_prototype',400,400);
 add_image_size('edition_thumbnail',200,200);
+add_image_size('edition_banner',790);
 
 /* types de pages à trier selon le menu
    ==================================== */

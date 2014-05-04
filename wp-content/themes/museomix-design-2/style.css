@@ -561,6 +561,9 @@ body.home .navbar {
     border-radius: 10px;
     line-height: 200px;
 }
+.bloc-contenu .attachment-edition_banner {
+	margin-bottom: -50px;
+}
 .titre-bloc-archive {
 	position: absolute;
 	bottom: 0;

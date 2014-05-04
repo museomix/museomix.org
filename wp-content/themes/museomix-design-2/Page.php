@@ -377,6 +377,17 @@ if(!$ContenuPage){ $ContenuPage = apply_filters('the_content',get_the_content())
 				<?php } ; ?>
 	 
 			<?php else: ?>
+				<?php
+				//We check if the "Edition" has a banner and we display it
+				if ($post->post_type == 'edition')
+				{
+					$thumb = get_field('visuel_page_edition');
+					if (!empty($thumb))
+					{
+						echo wp_get_attachment_image($thumb['id'], 'edition_banner', array('class' => 'edition_banner'));
+					}
+				}
+				?>
 				<?php the_content(); ?>
 			
 				<?php
