@@ -84,11 +84,13 @@
 
 		<?php foreach($SectionsPage as $id => $titre): ?>
 
-			<?php $titre = preg_replace('/^\\d+\\.\\s*/','',$titre); ?>
-
-			<li><a class="ln-nav-page" style="width: 190px;" href="#<?php echo $id ?>"><i class="icon-chevron-right"></i> <?php echo $titre; ?></a></li>
-
-		<?php endforeach; 
+			<?php $titre = preg_replace('/^\\d+\\.\\s*/','',$titre);
+			if (mb_strlen(ContenuSection($id, false))>0){
+			?>
+				<li><a class="ln-nav-page" style="width: 190px;" href="#<?php echo $id ?>"><i class="icon-chevron-right"></i> <?php echo $titre; ?></a></li>
+			<?
+			}
+		endforeach; 
 		?>
 
         </ul>
