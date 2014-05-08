@@ -1,5 +1,4 @@
 <?php
-
 /* distribution des listes de relations
    ==================================== */
 function Relations(){
@@ -106,6 +105,7 @@ function TitreSection($id,$langage){
 
 
 
+
 ?>
 
 <?php 
@@ -132,8 +132,11 @@ function TitreSection($id,$langage){
 					}
 						?>
 					</section>
-				<?php foreach($SectionsPage as $id => $titre):  ?>
-	 				<?php if(!is_null(ContenuSection($id))): ?>
+				<?php				
+				foreach($SectionsPage as $id => $titre):  ?>
+	 				<?php
+					$section = ContenuSectionProto($id);
+					if(!empty($section)): ?>
 					<section class="section-1 liste-prototype-lieu" id="<?php echo $id; ?>" style="min-height: 300px; position: relative;"> 
 						
 						<?php #if('presentation'!=$id&&'participer'!=$id): ?>
@@ -146,7 +149,7 @@ function TitreSection($id,$langage){
 						
 						<?php #endif; ?>
 						
-						<?php echo ContenuSection($id); ?>
+						<?php echo ContenuSectionProto($id); ?>
 	
 					</section>
 				 	<?php endif; ?>

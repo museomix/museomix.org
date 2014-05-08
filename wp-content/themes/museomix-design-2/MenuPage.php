@@ -9,7 +9,7 @@
 		global $post, $SectionsPage;
 		if('museomix'==$post->post_type){
 			if(ICL_LANGUAGE_CODE=="en") {
-				$SectionsPage = array(
+				$menu_default_items = array(
 					'presentation'=> 'Presentation',
 					'prototypes'=> 'Prototypes',
 					'actualites'=> 'News',
@@ -21,7 +21,7 @@
 
 
 			} else {
-				$SectionsPage = array(
+				$menu_default_items = array(
 					'presentation'=> 'Présentation',
 					'prototypes'=> 'Prototypes',
 					'actualites'=> 'Actualités',
@@ -31,6 +31,12 @@
 					'galerie'=> 'Galerie'
 				);
 			}
+			foreach($menu_default_items as $t => $v):
+				$length = mb_strlen(strip_tags(ContenuSection($t, false)));
+				if ($length > 0):
+					$SectionsPage[$t] = $v;
+				endif;
+			endforeach;
 		}
 
 		if(('prototype')==$post->post_type){
@@ -45,7 +51,7 @@
 				);
 				foreach($menu_default_items as $t => $v):
 					if ($t === "equipe"):
-						if (get_field("description_equipe", $post->ID) !== '' && get_field("description_equipe", $post->ID) !== false || get_field("photo_equipe", $post->ID) !== '' && get_field("photo_equipe", $post->ID) !== false):
+						if (get_field("descriptif_equipe", $post->ID) || get_field("photo_equipe", $post->ID)):
 							$SectionsPage[$t] = $v;
 						endif;
 					elseif (get_field($t, $post->ID) !== '' && get_field($t, $post->ID) !== false):
@@ -63,10 +69,11 @@
 				);
 				foreach($menu_default_items as $t => $v):
 					if ($t === "equipe"):
-						if (get_field("description_equipe", $post->ID) !== '' && get_field("description_equipe", $post->ID) !== false || get_field("photo_equipe", $post->ID) !== '' && get_field("photo_equipe", $post->ID) !== false):
+						
+						if (get_field("descriptif_equipe", $post->ID) || get_field("photo_equipe", $post->ID)):
 							$SectionsPage[$t] = $v;
 						endif;
-					elseif (get_field($t, $post->ID) !== '' && get_field($t, $post->ID) !== false):
+					elseif (get_field($t, $post->ID)):
 						$SectionsPage[$t] = $v;
 					endif;
 				endforeach;
@@ -85,7 +92,13 @@
 		<?php foreach($SectionsPage as $id => $titre): ?>
 
 			<?php $titre = preg_replace('/^\\d+\\.\\s*/','',$titre);
-			if (mb_strlen(ContenuSection($id, false))>0){
+			if ('prototype' == $post->post_type)
+			{
+				$menuItemTest = mb_strlen(ContenuSectionProto($id));
+			}
+			else
+				$menuItemTest = mb_strlen(ContenuSection($id, false));
+			if ($menuItemTest>0){
 			?>
 				<li><a class="ln-nav-page" style="width: 190px;" href="#<?php echo $id ?>"><i class="icon-chevron-right"></i> <?php echo $titre; ?></a></li>
 			<?
