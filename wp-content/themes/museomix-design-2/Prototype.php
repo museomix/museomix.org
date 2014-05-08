@@ -105,65 +105,6 @@ function TitreSection($id,$langage){
 }
 
 
-function ContenuSection($id){
-	global $post;
-
-
-	if('scenario'==$id){
-		if($zone=get_field('scenario')){
-
-				$contenu .= $zone;
-		}
-	}
-	elseif('intentions'==$id){
-		if($zone=get_field('intentions')){
-			$contenu .= $zone;
-		}
-	}
-	elseif('materiel'==$id){
-		if($zone=get_field('materiel')){
-			$contenu .= $zone;
-		}
-	}
-	elseif('experience'==$id){
-		if($zone=get_field('experience')){
-			$contenu .= $zone;
-		}
-
-	}
-	elseif('faq'==$id){
-		if($zone=get_field('faq')){
-			$contenu .= $zone;
-		}
-
-	}
-	elseif('equipe'==$id){
-		if($photo=get_field('photo_equipe')){
-			$contenu .= '<img style="margin:30px;" src="'.$photo.'">';
-		}
-		if($zone=get_field('descriptif_equipe')){
-			$contenu .= '<p>'.$zone.'</p>';
-		}
-		if($equips=get_field('equipiers')){
-			foreach($equips as $equip){ 
-				$elm = '<td><strong>'.$equip['prenom'].' '.$equip['nom_de_famille'].'</strong></td>';
-				$elm = '<td>'.$equip['mission'].'</td><td>';
-				if(!empty($equip['compte_twitter'])) $elm .=  '<a href=http://twitter.com/@'.$equip['compte_twitter'].'>@'.$equip['compte_twitter'].'</a>';
-				$elm .=  '</td><td>'.$equip['email'].'</td>';
-				$elm = '<td>'.$equip['link'].'</td>';
-				$liste[] = $elm;
-			}		
-			//$contenu .= '<div class="span7 rond-5" style="float: left; background: #fff; padding: 10px; border: 1px solid #ccc; margin-bottom: 20px;">';
-			//$contenu .= '<h4 style="color: #666; padding-bottom: 10px; ">Co-organisateurs</h4>';
-			$contenu .= '<table class="table table-striped"><tr>'.implode('</tr><tr>',$liste).'</tr></table>';
-
-			//$contenu .= '<ul class="lst-coorg"><li class="li-coorg">'.implode('</li><li class="li-coorg">',$liste).'</li></ul>';
-			//$contenu .= '</div>'; 
-		}
-	}
-
-	return $contenu; 
-}
 
 ?>
 
