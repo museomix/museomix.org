@@ -3,8 +3,8 @@ Contributors: codepress, tschutter, davidmosterd, engelen
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZDZRSYLQ4Z76J
 Tags: plugins, wordpress, admin, column, columns, custom columns, custom fields, image, dashboard, sortable, filters, posts, media, users, pages, posttypes, manage columns, wp-admin
 Requires at least: 3.5
-Tested up to: 3.8.1
-Stable tag: 2.1.4
+Tested up to: 3.9
+Stable tag: 2.1.5
 
 Customise columns on the administration screens for post(types), pages, media, comments, links and users with an easy to use drag-and-drop interface.
 
@@ -15,6 +15,8 @@ Completely customise the columns on the administration screens with a nice drag 
 By default, WordPress only shows a few built-in columns. This plugin will give you many additional columns. You will have full control over all columns for pages, posts, posttypes, media, links, comments and users.
 
 Add or remove columns, change their label, change their width and reorder them.
+
+<a href="http://www.admincolumns.com">Admin Columns Pro</a> offers additional features such as direct inline editing (edit post data directly from your columns), sorting, filtering and Advanced Custom Fields integration.
 
 = Post Types Columns  =
 
@@ -103,9 +105,9 @@ With the custom field column you can display any custom field values. It can sho
 * Usernames
 * Checkmark Image ( for true or false values )
 
-= Sortable Custom Columns for all Screens =
+= Sortable & Filterable Columns for all Screens =
 
-All of the new columns will have support for sorting with the <a href="http://www.codepresshq.com/wordpress-plugins/admin-columns/pro-add-on/">Pro add-on</a>.
+All of the new columns will have support for sorting and filtering with <a href="http://www.admincolumns.com">Admin Columns Pro</a>.
 
 By default WordPress let's you only sort by Title, Date, Comments and Author. This will make you be able to <strong>sort by ALL columns of ANY type</strong>. (columns that are added by other plugins are not supported)
 
@@ -130,11 +132,11 @@ If you like to contrinute a language, please use <a href="https://www.transifex.
 
 **Feedback**
 
-You can leave any <a href='http://www.codepresshq.com/support/'>requests or feedback</a>.
+You can leave any <a href='http://www.admincolumns.com'>requests or feedback</a>.
 
 **Related Links:**
 
-* http://www.codepresshq.com/wordpress-plugins/admin-columns/
+* http://www.admincolumns.com
 
 == Installation ==
 
@@ -146,12 +148,12 @@ You can leave any <a href='http://www.codepresshq.com/support/'>requests or feed
 
 = Is there documentation for Admin Columns? =
 
-Yes, you will find all the documentation you need on <a href="http://www.codepresshq.com/documentation/codepress-admin-columns/">http://www.codepresshq.com/documentation/codepress-admin-columns/</a>.
+Yes, you will find all the documentation you need on <a href="http://www.admincolumns.com/documentation">http://www.admincolumns.com/documentation</a>.
 
 = I have an idea for a great way to improve this plugin =
 
 Great! I'd love to hear from you.
-Leave your feedback at http://www.codepresshq.com/support.
+Leave your feedback at http://www.admincolumns.com/support.
 
 = How can I change the thumbnail size of images? =
 
@@ -205,7 +207,7 @@ add_filter( 'cac/column/meta/value', 'my_custom_field_value', 10, 3 );
 
 = What filters and hooks can I use? =
 
-Here you will find an overview of filters and examples: http://www.codepresshq.com/documentation/codepress-admin-columns/
+Here you will find an overview of filters and examples: http://www.admincolumns.com/documentation
 
 == Screenshots ==
 
@@ -220,28 +222,11 @@ Here you will find an overview of filters and examples: http://www.codepresshq.c
 
 == Changelog ==
 
-= 2.1.4 =
-* [Added] CSS now is compiled with LESS
+= 2.2 =
+* [Updated] Added ajax check and improved loading.
 * [Updated] Menu is split between posttypes and media, comments and users.
-* [Fixed] WordPress SEO 1.5.2 columns support
-* [Updated] Refactored JS and cleanup
-* [Updated] Registered Date column now uses GMT date
-* [Updated] Display author as column has fallback to display_name
-* [Updated] Added conditional checks for featured-image-, ping-status and comment-status-columns
-* [Fixed] Fixed warning for available-sizes column
-* [Updated] Column labels can no longer contain ":" characters
-
-= 2.1.3 =
-* [Updated] Undo changes from 2.1.2, will be in the next major release
-* [Fixed] Moved assignment of capabilities to plugin activation hook
-* [Fixed] Hook into manage_columns filters later to prevent overwriting from other plugins
-* [Fixed] Filters for column_path
-
-= 2.1.2 =
-[Updated] Added ajax check and improved loading.
-[Updated] Menu is split between posttypes and media, comments and users.
-[Added] WooCommerce 2.1 columns support
-[Fixed] Filters for column_path
+* [Updated] Additional documentation was added to filters and actions
+* [Updated] Updated languages (from transifex)
 
 = 2.1.1 =
 * [Updated] Added page check to posttype edit screens
@@ -260,7 +245,7 @@ Here you will find an overview of filters and examples: http://www.codepresshq.c
 * [Added] Fieldtype "Counter" to Custom Fields
 * [Added] Column type ID when you hover over the column type label
 * [Added] Support for raw values
-* [Updated] Changed filter for cac/column/value. See: http://www.codepresshq.com/documentation.
+* [Updated] Changed filter for cac/column/value. See: http://www.admincolumns.com/documentation.
 
 = 2.0.2 =
 * [Fixed] Performance issue
@@ -306,7 +291,7 @@ Here you will find an overview of filters and examples: http://www.codepresshq.c
 * fixed bug: thirdparty columns that were previous loaded through load-edit.php will now use do_action( 'cpac-get-default-columns-{$type}' )
 
 = 1.4.8 =
-* [Fixed] Issue: removed acf posttype placed by Advaced Custom Fields from settings menu
+* [Fixed] Issue: removed acf posttype placed by Advanced Custom Fields from settings menu
 * [Fixed] Issue: removed bbPress posttypes topic, forum and reply from admin columns settings menu
 * [Fixed] Issue: license key could not activate properly
 

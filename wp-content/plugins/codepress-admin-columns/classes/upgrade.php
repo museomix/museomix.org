@@ -15,6 +15,7 @@ class CPAC_Upgrade {
 	 * CPAC class
 	 */
 	private $cpac;
+	private $discourage_upgrade;
 
 	/**
 	 * Constructor
@@ -29,6 +30,72 @@ class CPAC_Upgrade {
 		add_action( 'admin_init', array( $this, 'init' ) );
 		add_action( 'admin_menu', array( $this, 'admin_menu' ), 11 );
 		add_action( 'wp_ajax_cpac_upgrade', array( $this, 'ajax_upgrade' ) );
+
+		if ( ! $this->allow_upgrade() ) {
+			add_filter( 'site_transient_update_plugins', array( $this, 'transient_update_plugins_disable_update' ) );
+			add_action( 'admin_notices', array( $this, 'maybe_display_proaddon_notice' ) );
+		}
+	}
+
+	/**
+	 * Overwrite the update_plugins transient to disable updating Admin Columns
+	 *
+	 * @since 2.1.5
+	 */
+	public function transient_update_plugins_disable_update( $value ) {
+
+		if ( isset( $value->response['codepress-admin-columns/codepress-admin-columns.php'] ) ) {
+			$this->discourage_upgrade = true;
+		}
+
+		return $value;
+	}
+
+	/**
+	 * Display a notice about the deprecated pro add-on
+	 *
+	 * @since 2.1.5
+	 */
+	public function maybe_display_proaddon_notice() {
+
+		$screen = get_current_screen();
+
+		if ( $screen->base != 'plugins' ) {
+			return;
+		}
+
+		if ( $this->discourage_upgrade ) {
+			?>
+			<div class="message error">
+				<p>
+					<?php printf( __( 'An update to <strong>Codepress Admin Columns</strong> is available. As the <strong>Pro add-on</strong> is no longer officially supported after Admin Columns 2.1.5, we discourage upgrading Admin Columns now. A free upgrade to <strong>Admin Columns Pro</strong>, with loads of awesome new features, is available (%s).', 'cpac' ), '<a href="http://admincolumns.com/pro-addon-information/" target="_blank">' . __( 'learn more', 'cpac' ) . '</a>' ); ?>
+				</p>
+			</div>
+			<?php
+		}
+		else {
+			?>
+			<div class="message error">
+				<p>
+					<?php printf( __( 'Updates for <strong>Codepress Admin Columns</strong> might cause compatibility issues as you&#39;re using the <strong>Pro Add-on</strong>, which is no longer actively maintained and incompatible with new versions of Admin Columns. A free upgrade to <strong>Admin Columns Pro</strong> (with a bunch of cool new features) is available (%s).', 'cpac' ), '<a href="http://admincolumns.com/pro-addon-information/" target="_blank">' . __( 'learn more', 'cpac' ) . '</a>' ); ?>
+				</p>
+			</div>
+			<?php
+		}
+	}
+
+	/**
+	 * Whether upgrading is allowed
+	 *
+	 * @since 2.1.5
+	 *
+	 * @return bool Whether plugin upgrading is allowed
+	 */
+	public function allow_upgrade() {
+
+		require_once ABSPATH . 'wp-admin/includes/plugin.php';
+
+		return ! is_plugin_active( 'cac-addon-pro/cac-addon-pro.php' );
 	}
 
 	/**

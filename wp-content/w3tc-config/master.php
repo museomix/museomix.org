@@ -1,7 +1,7 @@
 <?php
 
 return array(
-	'version' => '0.9.3',
+	'version' => '0.9.4',
 	'cluster.messagebus.debug' => false,
 	'cluster.messagebus.enabled' => false,
 	'cluster.messagebus.sns.region' => '',
@@ -120,17 +120,22 @@ return array(
 		2 => 'wp-locations.php',
 	),
 	'pgcache.accept.qs' => array(
+		0 => '',
 	),
 	'pgcache.reject.front_page' => false,
 	'pgcache.reject.logged' => true,
-	'pgcache.reject.logged_roles' => false,
+	'pgcache.reject.logged_roles' => true,
 	'pgcache.reject.roles' => array(
+		0 => 'administrator',
+		1 => 'coordinateur_local',
+		2 => 'team_reporter',
 	),
 	'pgcache.reject.uri' => array(
 		0 => 'wp-.*\\.php',
 		1 => 'index\\.php',
 	),
 	'pgcache.reject.ua' => array(
+		0 => '',
 	),
 	'pgcache.reject.cookie' => array(
 		0 => 'wptouch_switch_toggle',
@@ -154,6 +159,7 @@ return array(
 	),
 	'pgcache.purge.postpages_limit' => 10,
 	'pgcache.purge.pages' => array(
+		0 => '',
 	),
 	'pgcache.purge.sitemap_regex' => '([a-z0-9_\\-]*?)sitemap([a-z0-9_\\-]*)?\\.xml',
 	'pgcache.prime.enabled' => false,
@@ -379,27 +385,6 @@ return array(
 	),
 	'cdn.reject.ssl' => false,
 	'cdncache.enabled' => false,
-	'cloudflare.enabled' => false,
-	'cloudflare.email' => 'samy',
-	'cloudflare.key' => 'zskvmj21',
-	'cloudflare.zone' => '',
-	'cloudflare.ips.ip4' => array(
-		0 => '204.93.240.0/24',
-		1 => '204.93.177.0/24',
-		2 => '199.27.128.0/21',
-		3 => '173.245.48.0/20',
-		4 => '103.22.200.0/22',
-		5 => '141.101.64.0/18',
-		6 => '108.162.192.0/18',
-		7 => '190.93.240.1/20',
-		8 => '188.114.96.0/20',
-		9 => '198.41.128.0/17',
-	),
-	'cloudflare.ips.ip6' => array(
-		0 => '2400:cb00::/32',
-		1 => '2606:4700::/32',
-		2 => '2803:f800::/32',
-	),
 	'varnish.enabled' => false,
 	'varnish.debug' => false,
 	'varnish.servers' => array(
@@ -441,7 +426,7 @@ return array(
 	'browsercache.other.etag' => true,
 	'browsercache.other.w3tc' => true,
 	'browsercache.other.replace' => false,
-	'browsercache.timestamp' => '1391860375',
+	'browsercache.timestamp' => '1399556284',
 	'browsercache.replace.exceptions' => array(
 		0 => '',
 	),
@@ -645,7 +630,7 @@ return array(
 	'notes.wp_content_perms' => true,
 	'notes.theme_changed' => false,
 	'notes.wp_upgraded' => false,
-	'notes.plugins_updated' => true,
+	'notes.plugins_updated' => false,
 	'notes.cdn_upload' => false,
 	'notes.cdn_reupload' => false,
 	'notes.need_empty_pgcache' => false,
@@ -654,13 +639,12 @@ return array(
 	'notes.root_rules' => true,
 	'notes.rules' => true,
 	'notes.pgcache_rules_wpsc' => true,
-	'notes.support_us' => true,
+	'notes.support_us' => false,
 	'notes.no_curl' => true,
 	'notes.no_zlib' => true,
 	'notes.zlib_output_compression' => true,
 	'notes.no_permalink_rules' => true,
 	'notes.browsercache_rules_no404wp' => true,
-	'notes.cloudflare_plugin' => true,
 	'timelimit.email_send' => 180,
 	'timelimit.varnish_purge' => 300,
 	'timelimit.cache_flush' => 600,
@@ -671,7 +655,6 @@ return array(
 	'timelimit.cdn_import' => 600,
 	'timelimit.cdn_test' => 300,
 	'timelimit.cdn_container_create' => 300,
-	'timelimit.cloudflare_api_request' => 180,
 	'timelimit.domain_rename' => 120,
 	'timelimit.minify_recommendations' => 600,
 	'minify.auto.filename_length' => 150,
@@ -711,13 +694,13 @@ return array(
 			'sidebar_excluded' => '',
 			'genesis_footer' => '1',
 			'wp_footer' => '0',
-			'fragment_reject_logged_roles' => '1',
-			'fragment_reject_logged_roles_on_actions' => array(
+			'reject_logged_roles' => '1',
+			'reject_logged_roles_on_actions' => array(
 				0 => 'genesis_loop',
 				1 => 'wp_head',
 				2 => 'wp_footer',
 			),
-			'fragment_reject_roles' => array(
+			'reject_roles' => array(
 				0 => 'administrator',
 			),
 		),

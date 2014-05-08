@@ -244,14 +244,14 @@ class CPAC_Settings {
 	 */
 	function get_url( $type ) {
 
-		$site_url = 'http://www.codepresshq.com';
+		$site_url = 'http://admincolumns.com';
 
 		$urls = array(
 			'codepress'		=> $site_url,
-			'admincolumns'	=> $site_url . '/wordpress-plugins/admin-columns/',
-			'pro_addon'		=> $site_url . '/wordpress-plugins/admin-columns/pro-add-on/',
-			'documentation'	=> $site_url . '/wordpress-plugins/admin-columns/',
-			'feedback'		=> $site_url . '/contact',
+			'admincolumns'	=> $site_url,
+			'pro_addon'		=> $site_url,
+			'documentation'	=> $site_url . '/documentation/',
+			'feedback'		=> $site_url . '/contact/',
 			'plugins'		=> 'http://wordpress.org/extend/plugins/codepress-admin-columns/',
 			'support'		=> 'http://wordpress.org/tags/codepress-admin-columns/',
 		);
@@ -703,20 +703,20 @@ class CPAC_Settings {
 
 						</div><!--form-actions-->
 
-						<?php if ( ! class_exists( 'CAC_Addon_Pro' ) ) : ?>
 						<div class="sidebox" id="pro-version">
 							<div class="padding-box cta">
 								<h3>
-									<a href="<?php echo $this->get_url('pro_addon'); ?>"><?php _e( 'Get the Pro Add-on', 'cpac' ) ?></a>
+									<a href="<?php echo $this->get_url('pro_addon'); ?>"><?php _e( 'Get Admin Columns Pro', 'cpac' ) ?></a>
 								</h3>
 								<div class="inside">
 									<ul>
+										<li><a href="<?php echo $this->get_url('pro_addon'); ?>"><?php _e( 'Add Direct Inline Editing', 'cpac' ); ?></a></li>
 										<li><a href="<?php echo $this->get_url('pro_addon'); ?>"><?php _e( 'Add Sorting', 'cpac' ); ?></a></li>
 										<li><a href="<?php echo $this->get_url('pro_addon'); ?>"><?php _e( 'Add Filtering', 'cpac' ); ?></a></li>
 										<li><a href="<?php echo $this->get_url('pro_addon'); ?>"><?php _e( 'Add Import/Export', 'cpac' ); ?></a></li>
 									</ul>
 									<p>
-										<?php printf( __( 'Check the <a href="%s">Pro Add-on</a> for more details!', 'cpac' ), $this->get_url('pro_addon') ); ?>
+										<?php printf( __( 'Check out <a href="%s">Admin Columns Pro</a> for more details!', 'cpac' ), $this->get_url('pro_addon') ); ?>
 									</p>
 								</div>
 							</div>
@@ -744,7 +744,6 @@ class CPAC_Settings {
 							</div>
 							<?php */ ?>
 						</div><!--pro-version-->
-						<?php endif; ?>
 
 						<div class="sidebox" id="plugin-support">
 							<h3><?php _e( 'Support', 'cpac' ); ?></h3>
