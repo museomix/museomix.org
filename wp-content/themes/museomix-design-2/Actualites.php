@@ -38,16 +38,7 @@
 		 
 	}
 
-	function ExtraitBillet(){
-		global $post;
-		$max = 100;
-		$texte = strip_tags($post->post_content);
-		if(strlen($texte)>($max-10)){
-			$texte = substr($texte,0,$max).'... ';
-			#$texte .= '<br /><a style="white-space: nowrap;" href="'.get_permalink().'">lire la suite</a>';
-		}
-		echo $texte;
-	}
+
 	
 	
 	
