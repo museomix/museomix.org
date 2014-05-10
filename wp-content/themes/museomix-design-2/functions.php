@@ -1,4 +1,10 @@
 <?
+if (!isset($SectionsPage) || !is_array($SectionsPage))
+	$SectionsPage = array();
+if (!isset($ContenusSections) || !is_array($ContenusSections))
+	$ContenusSections = array();
+	
+	
 add_action('init', 'my_custom_init');
 function my_custom_init() {
 	add_post_type_support( 'prototype', 'comments' );
@@ -65,8 +71,9 @@ function SectionDePage($atts){
 		'first' => ''
 	),$atts));
 	if(!isset($atts['first'])){
-		if (!empty($r))
-			$r .= '</section>';
+		// Seulement si on est pas à la première section
+		if (!empty($SectionsPage))
+			$r .= '</section>';			
 	}
 	
 	$id = preg_replace('/\\W/','-',$atts['titre']);
