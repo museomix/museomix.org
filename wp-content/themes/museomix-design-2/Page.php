@@ -76,32 +76,6 @@ function ListeRelationsObjets($typeCible){
 
 }
 
-function TitreSection($id,$langage){
-	global $post;
-	$titre = '';
-	if('actualites'==$id){
-		$titre = ($langage=="en") ? '<h1>News</h1>' : '<h1>Actualités</h1>';
-	}
-	elseif('presentation'==$id){
-		$titre = '<h1></h1>';
-	}
-	elseif('partenaires'==$id){
-		$titre = ($langage=="en") ? '<h1>Partners</h1>' : '<h1>Partenaires</h1>';
-	}
-	elseif('prototypes'==$id){
-		$titre = ($langage=="en") ? '<h1>Prototypes</h1>' : '<h1>Prototypes</h1>';
-	}
-	elseif('equipe'==$id){
-		$titre = ($langage=="en") ? '<h1>Team</h1>' : '<h1>Equipe</h1>';
-	}
-	elseif('galerie'==$id){
-		$titre = ($langage=="en") ? '<h1>Gallery</h1>' : '<h1>Galerie</h1>';
-	}
-	
-
-
-	echo $titre; 
-}
 
 
 
@@ -111,7 +85,7 @@ function TitreSection($id,$langage){
 <?php 
 remove_filter ('the_content', 'wpautop');
 
-global $ContenuPage, $SectionsPage;  
+global $ContenuPage, $SectionsPage, $ContenusSections;
 
 if(!$ContenuPage){ $ContenuPage = apply_filters('the_content',get_the_content());} 
 		
@@ -135,7 +109,7 @@ if(!$ContenuPage){ $ContenuPage = apply_filters('the_content',get_the_content())
 				<?php
 				$SectionsPageId = 0;
 				foreach($SectionsPage as $id => $titre) {
-					if (mb_strlen(ContenuSection($id))>0) {
+					if (isset($ContenusSections[$id]) && !empty($ContenusSections[$id]['txt'])) {
 					?>
 					
 						<section class="section-1 sec1" id="<?php echo $id; ?>" style="min-height: 300px; position: relative;"> 
@@ -144,13 +118,13 @@ if(!$ContenuPage){ $ContenuPage = apply_filters('the_content',get_the_content())
 							
 							<div class="page-header">
 							
-								<?php TitreSection($id,ICL_LANGUAGE_CODE); ?>
+								<h1><?php echo $ContenusSections[$id]['title']; ?></h1>
 							
 							</div>
 							
 							<?php #endif; ?>
 							
-							<?php ContenuSection($id); ?>
+							<?php echo $ContenusSections[$id]['txt']; ?>
 		
 						</section>
 					 

@@ -757,4 +757,65 @@ function ExtraitBillet($thePost){
 	return $contenu; 
 }
 
+
+function TitreSectionProto($id,$langage, $echo = true){
+	global $post;
+	$titre = '';
+
+	if('scenario'==$id){
+		$titre = ($langage=="en") ? '<h1>User case</h1>' : '<h1>Scénario utilisateur</h1>';
+	}
+	elseif('intentions'==$id){
+		$titre = ($langage=="en") ? '<h1>Goals</h1>' : '<h1>Objectifs</h1>';
+	}
+	elseif('materiel'==$id){
+		$titre = ($langage=="en") ? '<h1>Tools & techs</h1>' : '<h1>Outils & techniques</h1>';
+	}
+	elseif('experience'==$id){
+		$titre = ($langage=="en") ? '<h1>Things learned...</h1>' : '<h1>Retour d\'Expérience</h1>';
+	}
+	elseif('faq'==$id){
+		$titre = ($langage=="en") ? '<h1>FAQ</h1>' : '<h1>FAQ</h1>';
+	}
+	elseif('equipe'==$id){
+		$titre = ($langage=="en") ? '<h1>Team</h1>' : '<h1>Equipe</h1>';
+	}
+	
+
+
+	if ($echo)
+		echo $titre;
+	else
+		return $titre;
+}
+
+
+function TitreSection($id,$langage, $echo = true){
+	global $post;
+	$titre = '';
+	if('actualites'==$id){
+		$titre = ($langage=="en") ? '<h1>News</h1>' : '<h1>Actualités</h1>';
+	}
+	elseif('presentation'==$id){
+		$titre = '<h1></h1>';
+	}
+	elseif('partenaires'==$id){
+		$titre = ($langage=="en") ? '<h1>Partners</h1>' : '<h1>Partenaires</h1>';
+	}
+	elseif('prototypes'==$id){
+		$titre = ($langage=="en") ? '<h1>Prototypes</h1>' : '<h1>Prototypes</h1>';
+	}
+	elseif('equipe'==$id){
+		$titre = ($langage=="en") ? '<h1>Team</h1>' : '<h1>Equipe</h1>';
+	}
+	elseif('galerie'==$id){
+		$titre = ($langage=="en") ? '<h1>Gallery</h1>' : '<h1>Galerie</h1>';
+	}
+	
+	if ($echo)
+		echo $titre;
+	else
+		return $titre;
+}
+
 		?>
