@@ -27,7 +27,7 @@
 <?php wp_head(); ?>
 </head>
 
-<body style=" background: #eee;" data-spy="scroll" data-target=".sidebar-nav" class="<?php echo (is_front_page() ? ' home ' : ''); ?>"  id="<?php echo $post->post_name; ?>">
+<body style=" background: #eee;" data-spy="scroll" data-target=".sidebar-nav" id="<?php echo $post->post_name; ?>" <?php body_class((is_front_page() ? ' home ' : '')); ?>>
 
 	<!--div style="">
 
