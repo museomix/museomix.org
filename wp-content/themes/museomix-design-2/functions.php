@@ -818,4 +818,13 @@ function TitreSection($id,$langage, $echo = true){
 		return $titre;
 }
 
+
+//We sort by title (based on year) the editions archive page
+add_action( 'pre_get_posts', 'sorting_posts' );
+function sorting_posts( $q ) {
+   if( $q->is_main_query() && $q->get('post_type') == 'edition') {
+      $q->set( 'orderby', 'title' );
+      $q->set( 'order', 'DESC' );
+   }
+}
 		?>
