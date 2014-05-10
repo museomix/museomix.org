@@ -1,8 +1,8 @@
-<?php 
-	global $SectionsPage; 
-	
-	$ContenuPage = apply_filters('the_content',get_the_content()); 
-	 
+<?php
+$ContenuPage = apply_filters('the_content',get_the_content()); 
+
+global $SectionsPage;
+
 	InitGabaritPage(ICL_LANGUAGE_CODE);
 	
 	function InitGabaritPage($langage){
@@ -83,7 +83,9 @@
 	 
 ?>
 
-<?php if($SectionsPage) { ?>
+<?php if($SectionsPage) {
+
+	?>
 
 <div class="span3 hidden-phone hidden-tablet sidebar-nav" style="float: left; min-height: 1px;" >
       
@@ -96,6 +98,8 @@
 			{
 				$menuItemTest = mb_strlen(ContenuSectionProto($id));
 			}
+			else if ('page' == $post->post_type)
+				$menuItemTest = 1;
 			else
 				$menuItemTest = mb_strlen(ContenuSection($id, false));
 			if ($menuItemTest>0){
