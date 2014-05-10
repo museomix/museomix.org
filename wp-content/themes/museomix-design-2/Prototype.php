@@ -75,33 +75,6 @@ function ListeRelationsObjets($typeCible){
 
 }
 
-function TitreSection($id,$langage){
-	global $post;
-	$titre = '';
-
-	if('scenario'==$id){
-		$titre = ($langage=="en") ? '<h1>User case</h1>' : '<h1>Scénario utilisateur</h1>';
-	}
-	elseif('intentions'==$id){
-		$titre = ($langage=="en") ? '<h1>Goals</h1>' : '<h1>Objectifs</h1>';
-	}
-	elseif('materiel'==$id){
-		$titre = ($langage=="en") ? '<h1>Tools & techs</h1>' : '<h1>Outils & techniques</h1>';
-	}
-	elseif('experience'==$id){
-		$titre = ($langage=="en") ? '<h1>Things learned...</h1>' : '<h1>Retour d\'Expérience</h1>';
-	}
-	elseif('faq'==$id){
-		$titre = ($langage=="en") ? '<h1>FAQ</h1>' : '<h1>FAQ</h1>';
-	}
-	elseif('equipe'==$id){
-		$titre = ($langage=="en") ? '<h1>Team</h1>' : '<h1>Equipe</h1>';
-	}
-	
-
-
-	echo $titre; 
-}
 
 
 
@@ -110,7 +83,7 @@ function TitreSection($id,$langage){
 
 <?php 
 
-	global $ContenuPage, $SectionsPage;  
+	global $ContenuPage, $SectionsPage, $ContenusSections;  
 	if(!$ContenuPage){ $ContenuPage = apply_filters('the_content',get_the_content());} 
 		
 ?>
@@ -143,7 +116,7 @@ function TitreSection($id,$langage){
 						
 						<div class="page-header">
 						
-							<?php TitreSection($id,ICL_LANGUAGE_CODE); ?>
+							<h1><?php echo $ContenusSections[$id]['title']; ?></h1>
 						
 						</div>
 						

@@ -1,7 +1,7 @@
 <?php
 $ContenuPage = apply_filters('the_content',get_the_content()); 
 
-global $SectionsPage;
+global $SectionsPage, $ContenusSections;
 
 	InitGabaritPage(ICL_LANGUAGE_CODE);
 	
@@ -96,12 +96,24 @@ global $SectionsPage;
 			<?php $titre = preg_replace('/^\\d+\\.\\s*/','',$titre);
 			if ('prototype' == $post->post_type)
 			{
-				$menuItemTest = mb_strlen(ContenuSectionProto($id));
+				$tmpContent = ContenuSectionProto($id);
+				$ContenusSections[$id]['txt'] = $tmpContent;
+				$ContenusSections[$id]['title'] = strip_tags(trim(TitreSectionProto($id,ICL_LANGUAGE_CODE, false)));
+				if (empty($ContenusSections[$id]['title']))
+					$ContenusSections[$id]['title'] = $titre;
+				$menuItemTest = mb_strlen($tmpContent);
 			}
 			else if ('page' == $post->post_type)
 				$menuItemTest = 1;
 			else
-				$menuItemTest = mb_strlen(ContenuSection($id, false));
+			{
+				$tmpContent = ContenuSection($id, false);
+				$ContenusSections[$id]['txt'] = $tmpContent;
+				$ContenusSections[$id]['title'] = strip_tags(trim(TitreSection($id,ICL_LANGUAGE_CODE, false)));
+				if (empty($ContenusSections[$id]['title']))
+					$ContenusSections[$id]['title'] = $titre;
+				$menuItemTest = mb_strlen($tmpContent);
+			}
 			if ($menuItemTest>0){
 			?>
 				<li><a class="ln-nav-page" style="width: 190px;" href="#<?php echo $id ?>"><i class="icon-chevron-right"></i> <?php echo $titre; ?></a></li>
