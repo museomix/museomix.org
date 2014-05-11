@@ -76,7 +76,7 @@ function SectionDePage($atts){
 			$r .= '</section>';			
 	}
 	
-	$id = preg_replace('/\\W/','-',$atts['titre']);
+	$id = strtolower(preg_replace('/\\W/','-',$atts['titre']));
 	$cl = '';
 	if(trim($atts['titre'])=='') $cl = ' section-2';
 	elseif('sanstitre'==$atts['type']) $cl = ' section-3';
