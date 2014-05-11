@@ -101,7 +101,7 @@ if (!is_front_page())
 					$ContenusSections[$id]['title'] = $titre;
 				$menuItemTest = mb_strlen($tmpContent);
 			}
-			else if ('page' == $post->post_type)
+			elseif(in_array($post->post_type, array('page', 'edition')))
 				$menuItemTest = 1;
 			else
 			{
