@@ -1118,6 +1118,13 @@ td.hd {
 	background: #00B7E8 !important; 
 	color: #fff !important;
 }
+
+/* Home */
+body.home  > .container > .row > .bloc-page {
+	float:none;
+	margin: 0 auto;
+}
+
 @media screen and (max-width: 1024px) {
 		#museomix_circle {
 			right: 10px;
