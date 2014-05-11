@@ -61,8 +61,8 @@ function AfficheMenu($id){
 		
 		<script type="text/javascript">
 		
-		$(document).ready(function(){
-			$('.partage a').simpleShare();
+		jQuery(document).ready(function(){
+			jQuery('.partage a').simpleShare();
 		})
 		
 		</script>
