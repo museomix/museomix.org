@@ -83,7 +83,7 @@ function ListeRelationsObjets($typeCible){
 ?>
 
 <?php 
-remove_filter ('the_content', 'wpautop');
+//remove_filter ('the_content', 'wpautop');
 
 global $ContenuPage, $SectionsPage, $ContenusSections;
 
