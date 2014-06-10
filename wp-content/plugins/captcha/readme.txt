@@ -1,10 +1,10 @@
 === Captcha ===
 Contributors: bestwebsoft
-Donate link: https://www.2checkout.com/checkout/purchase?sid=1430388&quantity=10&product_id=13
-Tags: captcha, match captcha, text captcha, spam, antispam, login, registration, comment, lost password, capcha, catcha, captha
+Donate link: https://www.2checkout.com/checkout/purchase?sid=1430388&quantity=1&product_id=94
+Tags: add, antispam, anti-spam, anti-spam security, arithmetic actions, capcha, captcha, captha, catcha, cpatcha, captcha numbers, captcha plugin, captcha words, contact form with captcha, comment,  label, login, lost password, match captcha, math actions, multiply, registration, security, spam, spam protection, substract, text captcha, web form protection
 Requires at least: 3.0
-Tested up to: 3.8.2
-Stable tag: 3.9.9
+Tested up to: 3.9.1
+Stable tag: 4.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -16,7 +16,7 @@ The Captcha plugin allows you to implement a super security captcha form into we
 This captcha can be used for login, registration, password recovery, comments forms.
 There is also a premium version of the plugin, allowing compatibility with BuddyPress (Registration form, Comments form, "Create a Group" form) and Contact Form 7.
 
-http://www.youtube.com/watch?v=SBZhBkO6Szs
+http://www.youtube.com/watch?v=jxrvHaCmQfg
 
 <a href="http://www.youtube.com/watch?v=svcdSfwlb2c" target="_blank">Video instruction on Installation</a>
 
@@ -178,6 +178,14 @@ Please make sure that the problem hasn't been discussed yet on our forum (<a hre
 6. Contact form with Captcha.
 
 == Changelog ==
+
+= V4.0.1 - 12.05.2014 =
+* Bugfix : We fixed syntax error.
+
+= V4.0.0 - 12.05.2014 =
+* Update : We updated all functionality for wordpress 3.9.1
+* Update : The Ukrainian language is updated in the plugin.
+* Update : The French language file is updated.
 
 = V3.9.9 - 11.04.2014 =
 * Update : We updated all functionality for wordpress 3.8.2.
@@ -461,6 +469,12 @@ Please make sure that the problem hasn't been discussed yet on our forum (<a hre
 * Select functionality of mathematical actions and level of their difficulty are implemented.
 
 == Upgrade Notice ==
+
+= V4.0.1 =
+We fixed syntax error.
+
+= V4.0.0 =
+We updated all functionality for wordpress 3.9.1. The French language file is updated. The Ukrainian language is updated in the plugin.
 
 = V3.9.9 =
 We updated all functionality for wordpress 3.8.2.

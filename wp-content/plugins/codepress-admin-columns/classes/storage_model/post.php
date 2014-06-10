@@ -17,10 +17,12 @@ class CPAC_Storage_Model_Post extends CPAC_Storage_Model {
 		$this->menu_type = 'post';
 
 		// Headings
+
 		// Since 3.1
 		add_filter( "manage_{$post_type}_posts_columns", array( $this, 'add_headings' ), 100, 1 );
 
 		// Deprecated ( as of 3.1 ) Note: This one is still used by woocommerce.
+		// Priority set to 11 top make sure the WooCommerce headings are overwritten by CAC
 		// @todo_minor check compatibility issues for this deprecated filter
 		add_filter( "manage_{$this->page}-{$post_type}_columns",  array( $this, 'add_headings' ), 100, 1 );
 
@@ -40,6 +42,24 @@ class CPAC_Storage_Model_Post extends CPAC_Storage_Model {
 	protected function get_screen_link() {
 
 		return add_query_arg( array( 'post_type' => $this->key ), admin_url( $this->page . '.php' ) );
+	}
+
+	/**
+	 * @since 2.2
+	 *
+	 * @return bool
+	 */
+	public function is_columns_screen() {
+
+		$is_columns_screen = parent::is_columns_screen();
+
+		if ( ! $is_columns_screen ) {
+			if ( ! empty( $_REQUEST['_inline_edit'] ) && wp_verify_nonce( $_REQUEST['_inline_edit'], 'inlineeditnonce' ) ) {
+				$is_columns_screen = true;
+			}
+		}
+
+		return $is_columns_screen;
 	}
 
 	/**
@@ -68,6 +88,9 @@ class CPAC_Storage_Model_Post extends CPAC_Storage_Model {
 		if ( ! function_exists('_get_list_table') )
 			return array();
 
+		//if ( ! $this->is_columns_screen() && ! $this->is_settings_page() )
+			//return array();
+
 		// You can use this filter to add thirdparty columns by hooking into this.
 		// See classes/third_party.php for an example.
 		do_action( "cac/columns/default/posts" );
@@ -82,8 +105,11 @@ class CPAC_Storage_Model_Post extends CPAC_Storage_Model {
         //
 		// We have to make sure this filter only loads on the Admin Columns settings page. To prevent a loop
 		// when it's being called by CPAC_Storage_Model::add_headings()
-		if ( $this->is_settings_page() )
-			$columns = array_merge( get_column_headers( 'edit-' . $this->key ), $columns );
+		if ( $this->is_settings_page() || $this->is_doing_ajax() ) {
+			if ( function_exists( 'get_column_headers' ) && ! $this->is_doing_quick_edit() ) {
+				$columns = array_merge( get_column_headers( 'edit-' . $this->key ), $columns );
+			}
+		}
 
 		return array_filter( $columns );
 	}

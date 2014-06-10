@@ -1,7 +1,4 @@
 <?php
-
-// @dev_only: set_site_transient( 'update_plugins', null );
-
 /**
  * Upgrade
  *
@@ -15,11 +12,10 @@ class CPAC_Upgrade {
 	 * CPAC class
 	 */
 	private $cpac;
-	private $discourage_upgrade;
+
+	public $update_prevented = false;
 
 	/**
-	 * Constructor
-	 *
 	 * @since 2.0.0
 	 */
 	function __construct( $cpac ) {
@@ -32,56 +28,25 @@ class CPAC_Upgrade {
 		add_action( 'wp_ajax_cpac_upgrade', array( $this, 'ajax_upgrade' ) );
 
 		if ( ! $this->allow_upgrade() ) {
-			add_filter( 'site_transient_update_plugins', array( $this, 'transient_update_plugins_disable_update' ) );
-			add_action( 'admin_notices', array( $this, 'maybe_display_proaddon_notice' ) );
+			add_action( 'cpac_messages', array( $this, 'proaddon_notice' ) );
 		}
-	}
-
-	/**
-	 * Overwrite the update_plugins transient to disable updating Admin Columns
-	 *
-	 * @since 2.1.5
-	 */
-	public function transient_update_plugins_disable_update( $value ) {
-
-		if ( isset( $value->response['codepress-admin-columns/codepress-admin-columns.php'] ) ) {
-			$this->discourage_upgrade = true;
-		}
-
-		return $value;
 	}
 
 	/**
 	 * Display a notice about the deprecated pro add-on
 	 *
-	 * @since 2.1.5
+	 * @since 2.2
 	 */
-	public function maybe_display_proaddon_notice() {
+	public function proaddon_notice() {
 
-		$screen = get_current_screen();
-
-		if ( $screen->base != 'plugins' ) {
-			return;
-		}
-
-		if ( $this->discourage_upgrade ) {
-			?>
-			<div class="message error">
-				<p>
-					<?php printf( __( 'An update to <strong>Codepress Admin Columns</strong> is available. As the <strong>Pro add-on</strong> is no longer officially supported after Admin Columns 2.1.5, we discourage upgrading Admin Columns now. A free upgrade to <strong>Admin Columns Pro</strong>, with loads of awesome new features, is available (%s).', 'cpac' ), '<a href="http://admincolumns.com/pro-addon-information/" target="_blank">' . __( 'learn more', 'cpac' ) . '</a>' ); ?>
-				</p>
-			</div>
-			<?php
-		}
-		else {
-			?>
-			<div class="message error">
-				<p>
-					<?php printf( __( 'Updates for <strong>Codepress Admin Columns</strong> might cause compatibility issues as you&#39;re using the <strong>Pro Add-on</strong>, which is no longer actively maintained and incompatible with new versions of Admin Columns. A free upgrade to <strong>Admin Columns Pro</strong> (with a bunch of cool new features) is available (%s).', 'cpac' ), '<a href="http://admincolumns.com/pro-addon-information/" target="_blank">' . __( 'learn more', 'cpac' ) . '</a>' ); ?>
-				</p>
-			</div>
-			<?php
-		}
+		?>
+		<div class="message error">
+			<p>
+				<?php _e( '<strong>Important:</strong> We&#39;ve noticed that you&#39;re using the <em>Pro add-on</em>, which is no longer supported by Admin Columns 2.2+. However, a free license of <strong>Admin Columns Pro</strong> <a href="http://www.admincolumns.com/pro-addon-information/" target="_blank">is available</a>, which features a bunch of cool new features, including Direct Inline Editing!', 'cpac' ); ?>
+				<a href="http://www.admincolumns.com/pro-addon-information/" target="_blank"><?php _e( 'Learn more', 'cpac' ); ?></a>
+			</p>
+		</div>
+		<?php
 	}
 
 	/**
@@ -99,25 +64,22 @@ class CPAC_Upgrade {
 	}
 
 	/**
-	 * Add submenu page
+	 * Add submenu page & scripts
 	 *
 	 * @since 2.0.0
 	 */
 	public function admin_menu() {
 
 		// Don't run on plugin activate
-		if ( isset( $_GET['action'] ) && 'activate-plugin' == $_GET['action'] ) return;
+		if ( isset( $_GET['action'] ) && 'activate-plugin' === $_GET['action'] ) {
+			return;
+		}
 
-		// add settings page
 		$upgrade_page = add_submenu_page( 'options-general.php', __( 'Upgrade', 'cpac' ), __( 'Upgrade', 'cpac' ), 'manage_options', 'cpac-upgrade', array( $this, 'start_upgrade' ) );
-
-		// add scripts
 		add_action( "admin_print_scripts-{$upgrade_page}", array( $this, 'admin_scripts' ) );
 	}
 
 	/**
-	 * init
-	 *
 	 * @since 2.0.0
 	 */
 	public function init() {

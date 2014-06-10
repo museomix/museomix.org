@@ -13,9 +13,9 @@
 class GoogleSitemapGeneratorLoader {
 
 	/**
-	 * @var Version of the generator in SVN
+	 * @var string Version of the generator in SVN
 	 */
-	private static $svnVersion = '$Id: sitemap-loader.php 891809 2014-04-12 11:06:34Z arnee $';
+	private static $svnVersion = '$Id: sitemap-loader.php 925789 2014-06-03 17:03:07Z arnee $';
 
 
 	/**
@@ -45,9 +45,10 @@ class GoogleSitemapGeneratorLoader {
 		add_action('sm_ping_daily', array(__CLASS__, 'CallSendPingDaily'), 10, 1);
 
 		//Existing page was published
-		add_action('publish_post', array(__CLASS__, 'SchedulePing'), 999, 1);
+		add_action('publish_post', array(__CLASS__, 'SchedulePing'), 9999, 1);
 		add_action('publish_page', array(__CLASS__, 'SchedulePing'), 9999, 1);
 		add_action('delete_post', array(__CLASS__, 'SchedulePing'), 9999, 1);
+		add_action('post_updated', array(__CLASS__, 'SchedulePing'), 9999, 1);
 
 		//Robots.txt request
 		add_action('do_robots', array(__CLASS__, 'CallDoRobots'), 100, 0);
@@ -102,6 +103,8 @@ class GoogleSitemapGeneratorLoader {
 	/**
 	 * Registers the plugin specific rewrite rules
 	 *
+	 * Combined: sitemap(-+([a-zA-Z0-9_-]+))?\.(xml|html)(.gz)?$
+	 *
 	 * @since 4.0
 	 * @param $wpRules Array of existing rewrite rules
 	 * @return Array An array containing the new rewrite rules
@@ -149,6 +152,7 @@ class GoogleSitemapGeneratorLoader {
 	 * @uses WP_Rewrite::flush_rules()
 	 */
 	public static function ActivateRewrite() {
+		/** @var $wp_rewrite WP_Rewrite */
 		global $wp_rewrite;
 		$wp_rewrite->flush_rules(false);
 		update_option("sm_rewrite_done", self::$svnVersion);
@@ -189,13 +193,13 @@ class GoogleSitemapGeneratorLoader {
 	 * Handles the plugin output on template redirection if the xml_sitemap query var is present.
 	 *
 	 * @since 4.0
-	 * @global $wp_query  The WordPress query object
 	 */
 	public static function DoTemplateRedirect() {
+		/** @var $wp_query WP_Query */
 		global $wp_query;
 		if(!empty($wp_query->query_vars["xml_sitemap"])) {
 			$wp_query->is_404 = false;
-			$wp_query->is_feed = false;
+			$wp_query->is_feed = true;
 			self::CallShowSitemap($wp_query->query_vars["xml_sitemap"]);
 		}
 	}
@@ -229,10 +233,7 @@ class GoogleSitemapGeneratorLoader {
 	 * @uses add_options_page()
 	 */
 	public static function RegisterAdminPage() {
-
-		$p = add_options_page(__('XML-Sitemap Generator', 'sitemap'), __('XML-Sitemap', 'sitemap'), 'administrator', self::GetBaseName(), array(__CLASS__, 'CallHtmlShowOptionsPage'));
-		//add_action("load-$p",  array(__CLASS__, 'CallHtmlShowHelpList'));
-
+		add_options_page(__('XML-Sitemap Generator', 'sitemap'), __('XML-Sitemap', 'sitemap'), 'administrator', self::GetBaseName(), array(__CLASS__, 'CallHtmlShowOptionsPage'));
 	}
 
 	/**
@@ -254,6 +255,7 @@ class GoogleSitemapGeneratorLoader {
 	 * Registers the links if the $file param equals to the sitemap plugin
 	 * @param $links Array An array with the existing links
 	 * @param $file string The file to compare to
+	 * @return string[]
 	 */
 	public static function RegisterPluginLinks($links, $file) {
 		$base = self::GetBaseName();
@@ -270,10 +272,14 @@ class GoogleSitemapGeneratorLoader {
 	 * Schedules pinging the search engines
 	 *
 	 * @static
+	 *
+	 * @param $postID
+	 *
 	 * @return void
 	 */
-	public static function SchedulePing() {
-		wp_schedule_single_event(time(),'sm_ping');
+	public static function SchedulePing($postID) {
+		set_transient('sm_ping_post_id', $postID, 60);
+		wp_schedule_single_event(time(), 'sm_ping');
 	}
 
 	/**
@@ -346,8 +352,6 @@ class GoogleSitemapGeneratorLoader {
 	/**
 	 * Displays the help links in the upper Help Section of WordPress
 	 *
-	 * @param $filterVal Array The existing links
-	 * @param $screen Object The current screen object
 	 * @return Array The new links
 	 */
 	public static function CallHtmlShowHelpList() {
@@ -467,7 +471,7 @@ if(defined('ABSPATH') && defined('WPINC')) {
 	register_deactivation_hook(sm_GetInitFile(), array('GoogleSitemapGeneratorLoader', 'DeactivatePlugin'));
 
 	//Set up hooks for adding permalinks, query vars.
-	//Don't wait until unit with this, since other plugins might flush the rewrite rules in init already...
+	//Don't wait until init with this, since other plugins might flush the rewrite rules in init already...
 	GoogleSitemapGeneratorLoader::SetupQueryVars();
 	GoogleSitemapGeneratorLoader::SetupRewriteHooks();
 }

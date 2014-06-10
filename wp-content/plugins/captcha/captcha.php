@@ -4,7 +4,7 @@ Plugin Name: Captcha
 Plugin URI:  http://bestwebsoft.com/plugin/
 Description: Plugin Captcha intended to prove that the visitor is a human being and not a spam robot. Plugin asks the visitor to answer a math question.
 Author: BestWebSoft
-Version: 3.9.9
+Version: 4.0.1
 Author URI: http://bestwebsoft.com/
 License: GPLv2 or later
 */
@@ -28,7 +28,8 @@ License: GPLv2 or later
 if ( ! function_exists( 'cptch_admin_menu' ) ) {
 	function cptch_admin_menu() {
 		global $bstwbsftwppdtplgns_options, $wpmu, $bstwbsftwppdtplgns_added_menu;
-		$bws_menu_version = '1.2.6';
+		$bws_menu_info = get_plugin_data( plugin_dir_path( __FILE__ ) . "bws_menu/bws_menu.php" );
+		$bws_menu_version = $bws_menu_info["Version"];
 		$base = plugin_basename(__FILE__);
 
 		if ( ! isset( $bstwbsftwppdtplgns_options ) ) {
@@ -377,7 +378,7 @@ if ( ! function_exists( 'cptch_settings_page' ) ) {
 											}																				
 										}
 									} else {
-										$error = __( "Something went wrong. Try again later or upload the plugin manually. We are sorry for inconvienience.", 'captcha' ); 
+										$error = __( "Something went wrong. Try again later or upload the plugin manually. We are sorry for inconvenience.", 'captcha' ); 
 					 				}
 					 			}
 				 			}
@@ -395,14 +396,13 @@ if ( ! function_exists( 'cptch_settings_page' ) ) {
 		 			$error = __( "Please, enter Your license key", 'captcha' );
 		 		}
 		 	}
-		}
-		/* Display form on the setting page */
-		?>
+		} /* Display form on the setting page */ ?>
 		<div class="wrap">
 			<div class="icon32 icon32-bws" id="icon-options-general"></div>
 			<h2><?php _e( 'Captcha Settings', 'captcha' ); ?></h2>
 			<h2 class="nav-tab-wrapper">
 				<a class="nav-tab<?php if ( ! isset( $_GET['action'] ) ) echo ' nav-tab-active'; ?>"  href="admin.php?page=captcha.php"><?php _e( 'Settings', 'captcha' ); ?></a>
+				<a class="nav-tab" href="http://bestwebsoft.com/plugin/captcha-plugin/#faq" target="_blank"><?php _e( 'FAQ', 'captcha' ); ?></a>
 				<a class="nav-tab bws_go_pro_tab<?php if ( isset( $_GET['action'] ) && 'go_pro' == $_GET['action'] ) echo ' nav-tab-active'; ?>" href="admin.php?page=captcha.php&amp;action=go_pro"><?php _e( 'Go PRO', 'captcha' ); ?></a>
 			</h2>
 			<div id="cptch_settings_notice" class="updated fade" style="display:none"><p><strong><?php _e( "Notice:", 'captcha' ); ?></strong> <?php _e( "The plugin's settings have been changed. In order to save them please don't forget to click the 'Save Changes' button.", 'captcha' ); ?></p></div>
@@ -1437,8 +1437,11 @@ if ( ! function_exists ( 'cptch_plugin_banner' ) ) {
 		if ( 'plugins.php' == $hook_suffix ) {   
 			global $cptch_plugin_info, $bstwbsftwppdtplgns_cookie_add;
 			$banner_array = array(
+				array( 'sndr_hide_banner_on_plugin_page', 'sender/sender.php', '0.5' ),
+				array( 'srrl_hide_banner_on_plugin_page', 'user-role/user-role.php', '1.4' ),
 				array( 'pdtr_hide_banner_on_plugin_page', 'updater/updater.php', '1.12' ),
-				array( 'cntctfrmtdb_hide_banner_on_plugin_page', 'contact-form-to-db/contact_form_to_db.php', '1.2' ),		
+				array( 'cntctfrmtdb_hide_banner_on_plugin_page', 'contact-form-to-db/contact_form_to_db.php', '1.2' ),
+				array( 'cntctfrmmlt_hide_banner_on_plugin_page', 'contact-form-multi/contact-form-multi.php', '1.0.7' ),		
 				array( 'gglmps_hide_banner_on_plugin_page', 'bws-google-maps/bws-google-maps.php', '1.2' ),		
 				array( 'fcbkbttn_hide_banner_on_plugin_page', 'facebook-button-plugin/facebook-button-plugin.php', '2.29' ),
 				array( 'twttr_hide_banner_on_plugin_page', 'twitter-plugin/twitter.php', '2.34' ),

@@ -20,6 +20,8 @@ jQuery(document).ready(function() {
 	cpac_help();
 	cpac_add_column();
 	cpac_sidebar_scroll();
+	cpac_addons();
+	cpac_importexport();
 
 	// we start by binding the toggle and remove events.
 	jQuery('.cpac-column').each( function( i, col ) {
@@ -28,6 +30,22 @@ jQuery(document).ready(function() {
 		jQuery( col ).cpac_bind_container_addon_events();
 	});
 });
+
+function cpac_importexport() {
+	jQuery( '#php-export-results textarea' ).on( 'focus, mouseup', function() {
+		jQuery( this ).select();
+	} ).select().focus();
+}
+
+/**
+ * Handle addons settings screen
+ *
+ * @since 2.2
+ */
+function cpac_addons() {
+
+
+}
 
 /*
  * Submit Form
@@ -53,19 +71,20 @@ jQuery.fn.column_bind_toggle = function() {
 
 	var column = jQuery(this);
 
-	column.find('td.column_edit, td.column_label a.toggle, td.column_label .edit-button' ).click( function(){
+	column.find( 'td.column_type a, td.column_edit, td.column_label a.toggle, td.column_label .edit-button' ).click( function( e ) {
+		e.preventDefault();
 
-		column.toggleClass('opened').find('.column-form').slideToggle(150);
+		column.toggleClass( 'opened' ).find( '.column-form' ).slideToggle( 150 );
 
-		if ( ! column.hasClass('events-binded') ) {
+		if ( ! column.hasClass( 'events-binded' ) ) {
 			column.column_bind_events();
 		}
 
 		column.addClass('events-binded');
 
 		// hook for addons
-		jQuery(document).trigger( 'column_init', column );
-	});
+		jQuery( document ).trigger( 'column_init', column );
+	} );
 };
 
 /*
@@ -82,6 +101,37 @@ jQuery.fn.column_bind_remove = function() {
 	});
 };
 
+jQuery.fn.cpac_column_refresh = function() {
+	var el = jQuery( this );
+
+	// Mark column as loading
+	el.addClass( 'loading' );
+	el.find( '.column-form' ).prepend( '<span class="spinner" />' );
+
+	// Fetch new form HTML
+	jQuery.post( ajaxurl, {
+		action: 'cpac_column_refresh',
+		column: jQuery( this ).find( 'input.column-name' ).val(),
+		formdata: jQuery( this ).parents( 'form' ).serialize()
+	}, function( data ) {
+		// Replace current form by new form
+		var newel = jQuery( '<div>' + data + '</div>' ).children();
+		el.replaceWith( newel );
+		el = newel;
+
+		// Bind events
+		el.column_bind_toggle();
+		el.column_bind_remove();
+		el.column_bind_events();
+
+		// Remove "loading" marking from column
+		el.removeClass( 'loading' ).addClass( 'opened' ).find( '.column-form' ).show();
+
+		// Allow plugins to hook into this event
+		jQuery( document ).trigger( 'column_change', el );
+	} );
+};
+
 /*
  * Form Events
  *
@@ -89,58 +139,57 @@ jQuery.fn.column_bind_remove = function() {
  */
 jQuery.fn.column_bind_events = function() {
 
-	var column		= jQuery(this);
-	var container	= column.closest('.columns-container');
-	var storage_model = container.attr('data-type');
+	var column			= jQuery( this );
+	var container		= column.closest( '.columns-container ');
+	var storage_model	= container.attr( 'data-type' );
 
-	/** select column type */
-	var default_value =  column.find('.column_type select option:selected').val();
+	// Current column type
+	var default_value =  column.find( '.column_type select option:selected' ).val();
 
-	column.find('.column_type select').change( function() {
-
-		var option	= jQuery('optgroup', this).children(":selected");
+	column.find( '.column_type select' ).change( function() {
+		var option	= jQuery( 'optgroup', this ).children( ':selected' );
 		var type	= option.val();
 		var label	= option.text();
-		var msg		= jQuery(this).next('.msg').hide();
+		var msg		= jQuery( this ).next( '.msg' ).hide();
 
-		// create clone
-		var clone = container.find(".for-cloning-only .cpac-column[data-type='" + type + "']").clone();
-		if ( clone.length > 0 ) {
+		// Find template element for this field type
+		var template = container.find( '.for-cloning-only .cpac-column[data-type="' + type + '"]' );
 
-			// column can have only one instance of itself and should not have another instance present?
-			if ( 'undefined' === typeof clone.attr('data-clone') ) {
-				if ( jQuery( '.cpac-columns', container ).find("[data-type='" + type + "']").length > 0 ) {
-					msg.html( cpac_i18n.clone.replace( '%s', '<strong>' + label + '</strong>' ) ).show();
+		if ( template.length ) {
+			if ( template.find( '.is-disabled' ).length ) {
+				msg.html( template.find( '.is-disabled' ).html() ).show();
 
-					// set to default
-					jQuery(this).find('option').removeAttr('selected');
-					jQuery(this).find('option[value="' + default_value + '"]').attr('selected', 'selected');
-					return;
-				}
+				// Set to default
+				jQuery(this).find( 'option' ).removeAttr( 'selected' );
+				jQuery(this).find( 'option[value="' + default_value + '"]' ).attr( 'selected', 'selected' );
 			}
+			// Prevent column types that do not allow it to have multiple instances
+			else if ( typeof template.attr( 'data-clone' ) === 'undefined' && jQuery( '.cpac-columns', container ).find( '[data-type="' + type + '"]' ).length ) {
+				msg.html( cpac_i18n.clone.replace( '%s', '<strong>' + label + '</strong>' ) ).show();
 
-			// open settings
-			clone.addClass('opened').find('.column-form').show();
+				// Set to default
+				jQuery(this).find('option').removeAttr('selected');
+				jQuery(this).find('option[value="' + default_value + '"]').attr('selected', 'selected');
 
-			// increment clone id
-			clone.cpac_update_clone_id( storage_model );
+				return;
+			}
+			else {
+				var clone = template.clone();
 
-			// add to DOM
-			column.replaceWith( clone );
+				// Open settings
+				clone.addClass('opened').find('.column-form').show();
+				clone.find( '.column-meta' ).replaceWith( column.find( '.column-meta' ) );
+				clone.find( '.column-form' ).replaceWith( column.find( '.column-form' ) );
 
-			// rebind toggle events
-			clone.column_bind_toggle();
+				// Increment clone id
+				clone.cpac_update_clone_id( storage_model );
 
-			// rebind remove events
-			clone.column_bind_remove();
-
-			// rebind all other events
-			clone.column_bind_events();
-
-			// hook for addons
-			jQuery(document).trigger( 'column_change', clone );
+				// Load clone
+				column.replaceWith( clone );
+				clone.cpac_column_refresh();
+			}
 		}
-	});
+	} );
 
 	/** change label */
 	column.find('.column_label .input input').bind( 'keyup change', function() {
@@ -199,6 +248,12 @@ jQuery.fn.column_bind_events = function() {
 	},function(){
 		jQuery(this).find('p.description').hide();
 	});
+
+	if ( column.find( '.column_type select' ).val() == 'column-meta' ) {
+		column.find( '.column_field_type select' ).change( function() {
+			column.cpac_column_refresh();
+		} );
+	}
 };
 
 /*
@@ -250,6 +305,7 @@ jQuery.fn.cpac_update_clone_id = function( storage_model ) {
 	// set clone ID
 	el.attr( 'data-clone', id );
 	el.find( 'input.clone' ).val( id );
+	el.find( 'input.column-name' ).val( type + '-' + id );
 
 	// update input names with clone ID
 	var inputs = el.find( 'input, select, label' );
@@ -310,6 +366,8 @@ function cpac_add_column() {
 			clone.addClass('opened').find('.column-form').slideDown(150, function(){
 				jQuery('html, body').animate({ scrollTop: clone.offset().top - 58 }, 300);
 			});
+
+			cpac_sortable();
 
 			// hook for addons
 			jQuery(document).trigger( 'column_add', clone );
@@ -460,17 +518,16 @@ function cpac_pointer() {
  * @since 1.5
  */
 function cpac_sortable() {
-	jQuery('div.cpac-columns').sortable({
-		items					: '.cpac-column',
-		revert					: 250,
-		handle					: 'td.column_sort',
-		placeholder				: 'cpac-placeholder',
-		forcePlaceholderSize	: true,
-		sort: function(e,ui){
-			if ( jQuery(ui.placeholder).is(':empty') )
-				jQuery(ui.placeholder).html('<div class="inner-placeholder"></div>');
+	jQuery( 'div.cpac-columns' ).each( function() {
+		if ( jQuery( this ).hasClass( 'ui-sortable' ) ) {
+			jQuery( this ).sortable( 'refresh' );
 		}
-	});
+		else {
+			jQuery( this ).sortable( {
+				items					: '.cpac-column'
+			} );
+		}
+	} );
 }
 
 /*
@@ -565,41 +622,3 @@ jQuery.fn.cpac_bind_container_addon_events = function() {
 		}
 	});
 };
-
-
-/*
- * Display additional field options
- *
- * Usage: Add to option of the select elemtent the following data prop:
- * <option data-display-option="image_size" ... />
- */
-jQuery.fn.column_display_additional_column_options = function() {
-
-	jQuery( this ).change( function() {
-
-		var display = jQuery( this ).find(":selected").attr('data-display-option');
-
-		var table = jQuery( this ).closest('table');
-		var image_size = table.find('.column_image_size').hide();
-		var excerpt = table.find('.column_excerpt_length').hide();
-		var date = table.find('.column_date_format').hide();
-
-		if ( 'image_size' === display ) {
-			image_size.show();
-		}
-		if ( 'excerpt' === display ) {
-			excerpt.show();
-		}
-		if ( 'date' === display ) {
-			date.show();
-		}
-	});
-};
-
-// bind event
-jQuery(document).bind('column_init column_change column_add', function( e, column ){
-	console.log( 'column_init' );
-	jQuery( column ).find('tr.column_field_type select').column_display_additional_column_options();
-	jQuery( column ).find('tr.column_field select').column_display_additional_column_options();
-});
-

@@ -4,7 +4,7 @@
  * Plugin Name: Custom Login
  * Plugin URI: http://extendd.com/plugin/custom-login
  * Description: A simple way to customize your WordPress <code>wp-login.php</code> screen! Use the built in, easy to use <a href="./options-general.php?page=custom-login">settings</a> page to do the work for you. Share you designs on <a href="http://flickr.com/groups/custom-login/">Flickr</a> or get Custom Login extensions at <a href="http://extendd.com/plugins/tag/custom-login-extension">Extendd.com</a>.
- * Version: 2.3.2
+ * Version: 2.3.4
  * Author: Austin Passy
  * Author URI: http://austin.passy.co
  * Text Domain: custom-login
@@ -31,7 +31,7 @@ class Custom_Login {
 	 * Plugin vars
 	 * @return string
 	 */
-	var $version = '2.3.2',
+	var $version = '2.3.4',
 		$domain,
 		$id;
 	
@@ -259,10 +259,11 @@ class Custom_Login {
 	 *
 	 */
 	function required_classes() {
+		require_once( trailingslashit( plugin_dir_path( __FILE__ ) ) . 'classes/class.settings-api.php' );
+		$this->settings_api = EXTENDD_PLUGIN_SETTINGS_API();
+		
 		if ( is_admin() ) {
 			// Settings API
-			require_once( trailingslashit( plugin_dir_path( __FILE__ ) ) . 'classes/class.settings-api.php' );
-			$this->settings_api = new Extendd_Plugin_Settings_API;
 			$this->settings_api->set_prefix( $this->id );
 			$this->settings_api->set_domain( $this->domain );
 			$this->settings_api->set_version( $this->version );

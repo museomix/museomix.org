@@ -190,7 +190,7 @@ h2.cpac-nav-tab-wrapper {
   cursor: move;
 }
 .cpac-column .column-meta table tr td.column_label {
-  width: 55%;
+  width: 70%;
   font-weight: bold;
   vertical-align: middle;
   position: relative;
@@ -234,18 +234,41 @@ h2.cpac-nav-tab-wrapper {
   color: #b2b2b2;
   font-size: 12px;
 }
+.cpac-column .column-meta table tr td.column_label .inner .meta span {
+  cursor: pointer;
+  /*background: #ccc;
+									border-radius: 2px;
+									padding: 0 4px;
+									color: #fff;
+									display: inline-block;
+									height: 15px;
+									line-height: 15px;
+
+									&.on {
+										background: #1e8cbe;
+									}*/
+}
 .cpac-column .column-meta table tr td.column_label span.vers {
   float: left;
 }
 .cpac-column .column-meta table tr td.column_type {
   width: auto;
+  min-width: 120px;
   text-align: right;
   vertical-align: middle;
   color: #999999;
   padding-right: 0;
 }
+.cpac-column .column-meta table tr td.column_type .inner {
+  height: 18px;
+  overflow: hidden;
+}
+.cpac-column .column-meta table tr td.column_type .inner a {
+  color: #999999;
+}
 .cpac-column .column-meta table tr td.column_edit {
   width: 38px;
+  min-width: 38px;
   background: transparent url('../images/arrow.png') no-repeat 23px 18px;
   cursor: pointer;
 }
@@ -269,6 +292,7 @@ h2.cpac-nav-tab-wrapper {
   border-width: 1px 1px 0;
   border-style: solid;
   border-color: #dfdfdf;
+  position: relative;
 }
 .cpac-column .column-form table {
   border: none;
@@ -410,6 +434,24 @@ h2.cpac-nav-tab-wrapper {
 .cpac-column .column-form table tr:first-child td {
   border-top: none;
 }
+.cpac-column.loading .column-form > .spinner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 200;
+  margin-left: -10px;
+  margin-top: -10px;
+  display: block;
+}
+.cpac-column.loading .column-form:before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #FFF;
+  z-index: 100;
+  opacity: 0.5;
+}
 .cpac-column.opened .column-meta {
   background-color: #c7c7c7;
   background-image: -ms-linear-gradient(top, #e9e9e9, #c7c7c7);
@@ -435,8 +477,9 @@ h2.cpac-nav-tab-wrapper {
 .cpac-column.opened .column-meta table td.column_sort {
   background-position: 8px -39px;
 }
-.cpac-column.opened .column-meta table td.column_label .inner .meta {
+.cpac-column.opened .column-meta table td.column_label .inner .meta span {
   color: #808080;
+  text-shadow: none;
 }
 .cpac-column.opened .column-meta table td.column_type {
   color: #5C5C5C;
@@ -535,6 +578,21 @@ h2.cpac-nav-tab-wrapper {
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
 }
 /**
+ * Notifications
+ * ----------------------------------------------------------------------------
+ */
+.cac-notification.updated {
+  border-left-color: #0071aa;
+}
+.cac-notification.updated .learnmore {
+  float: right;
+}
+.cac-notification.updated .learnmore:after {
+  content: "\f139";
+  font: normal 20px/1 'dashicons';
+  float: right;
+}
+/**
  * Sidebar
  * ----------------------------------------------------------------------------
  */
@@ -602,6 +660,7 @@ h2.cpac-nav-tab-wrapper {
 }
 .columns-right .sidebox#pro-version .cta {
   background: transparent url(../images/get_the_addon.png) no-repeat 0 0;
+  background-size: cover;
 }
 .columns-right .sidebox#pro-version .padding-box {
   padding: 8px 15px 0;
@@ -798,4 +857,77 @@ body.rtl .cpac_export .ms-container .ms-selection {
     top: 0;
     width: 100%;
   }
+}
+/* =Addons
+-------------------------------------------------------------- */
+.cpac-addons li {
+  width: 200px;
+  background: #FFF;
+  float: left;
+  margin-right: 16px;
+  margin-bottom: 16px;
+  border: 1px solid #DDD;
+  -webkit-box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.15);
+}
+.cpac-addons li:hover {
+  -webkit-box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.25);
+}
+.cpac-addons li a {
+  color: #444;
+}
+.cpac-addons li .cpac-addon-content {
+  display: table;
+  width: 100%;
+  height: 125px;
+  text-align: center;
+  vertical-align: middle;
+  border-top: 1px solid #DDD;
+  background: #0069a4;
+  background: -moz-radial-gradient(center, ellipse cover, #0069a4 0%, #085079 100%);
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #0069a4), color-stop(100%, #085079));
+  background: -webkit-radial-gradient(center, ellipse cover, #0069a4 0%, #085079 100%);
+  background: -o-radial-gradient(center, ellipse cover, #0069a4 0%, #085079 100%);
+  background: -ms-radial-gradient(center, ellipse cover, #0069a4 0%, #085079 100%);
+  background: radial-gradient(ellipse at center, #0069a4 0%, #085079 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0069a4', endColorstr='#085079', GradientType=1);
+}
+.cpac-addons li .cpac-addon-content > * {
+  display: table-cell;
+  vertical-align: middle;
+}
+.cpac-addons li .cpac-addon-content h3 {
+  padding: 0 16px;
+  color: #FFF;
+  line-height: 150%;
+}
+.cpac-addons li .cpac-addon-content img {
+  width: 100%;
+}
+.cpac-addons li .cpac-addon-header {
+  width: 100%;
+  padding: 25px 15px;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.cpac-addons li .cpac-addon-header > *:first-child {
+  margin-top: 0;
+}
+.cpac-addons li .cpac-addon-header > *:last-child {
+  margin-bottom: 0;
+}
+.cpac-addons li .cpac-addon-actions {
+  background: #EEE;
+  border-top: 1px solid #DDD;
+  padding: 8px;
+}
+.cpac-addons li .cpac-addon-actions .cpac-installed:before {
+  content: "\f147";
+  font-family: 'dashicons';
+  vertical-align: middle;
+  margin-left: -5px;
+  margin-right: 3px;
 }

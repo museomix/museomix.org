@@ -79,7 +79,13 @@ class CPAC_Column_Custom_Field extends CPAC_Column {
 		// deprecated. do not use, will be removed.
 		$custom_field_types = apply_filters( 'cpac_custom_field_types', $custom_field_types );
 
-		// Filter
+		/**
+		 * Filter the available custom field types for the meta (custom field) field
+		 *
+		 * @since 2.0
+		 *
+		 * @param array $custom_field_types Available custom field types ([type] => [label])
+		 */
 		$custom_field_types = apply_filters( 'cac/column/meta/types', $custom_field_types );
 
 		return $custom_field_types;
@@ -369,7 +375,8 @@ class CPAC_Column_Custom_Field extends CPAC_Column {
 	 */
 	function display_settings() {
 
-		$show_hidden_meta = isset( $this->user_settings['show_hidden'] ) && '1' === $this->user_settings['show_hidden'] ? true : false;
+		//$show_hidden_meta = isset( $this->user_settings['show_hidden'] ) && '1' === $this->user_settings['show_hidden'] ? true : false;
+		$show_hidden_meta = true;
 
 		?>
 
@@ -395,45 +402,26 @@ class CPAC_Column_Custom_Field extends CPAC_Column {
 			<td class="input">
 				<select name="<?php $this->attr_name( 'field_type' ); ?>" id="<?php $this->attr_id( 'field_type' ); ?>">
 				<?php foreach ( $this->get_custom_field_types() as $fieldkey => $fieldtype ) : ?>
-					<?php
-					$display_option = '';
-					if ( in_array( $fieldkey, array( 'date' ) ) ) 					$display_option = 'date';
-					if ( in_array( $fieldkey, array( 'image', 'library_id' ) ) ) 	$display_option = 'image_size';
-					if ( in_array( $fieldkey, array( 'excerpt' ) ) ) 				$display_option = 'excerpt';
-					?>
-					<option data-display-option="<?php echo $display_option; ?>" value="<?php echo $fieldkey ?>"<?php selected( $fieldkey, $this->options->field_type ) ?>><?php echo $fieldtype; ?></option>
+					<option value="<?php echo $fieldkey ?>"<?php selected( $fieldkey, $this->options->field_type ) ?>><?php echo $fieldtype; ?></option>
 				<?php endforeach; ?>
 				</select>
 			</td>
 		</tr>
 
 		<?php
+		switch ( $this->options->field_type ) {
+			case 'date':
+				$this->display_field_date_format();
+				break;
+			 case 'image':
+			 case 'library_id':
+			 	$this->display_field_preview_size();
+			 	break;
+			 case 'excerpt':
+			 	$this->display_field_excerpt_length();
+			 	break;
+		}
 
-		/**
-		 * Add Date Format
-		 *
-		 */
-		$is_hidden = in_array( $this->options->field_type, array( 'date' ) ) ? false : true;
-		$this->display_field_date_format( $is_hidden );
-
-		/**
-		 * Add Preview size
-		 *
-		 */
-		$is_hidden = in_array( $this->options->field_type, array( 'image', 'library_id' ) ) ? false : true;
-		$this->display_field_preview_size( $is_hidden );
-
-		/**
-		 * Add Excerpt length
-		 *
-		 */
-		$is_hidden = in_array( $this->options->field_type, array( 'excerpt' ) ) ? false : true;
-		$this->display_field_excerpt_length( $is_hidden );
-
-		/**
-		 * Before / After
-		 *
-		 */
 		$this->display_field_before_after();
 	}
 }

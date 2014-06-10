@@ -102,6 +102,14 @@ Screenshots of working example in our [Flickr group](http://flickr.com/groups/cu
 
 == Changelog ==
 
+= Version 2.3.4 (6/3/14) =
+
+* Added `do_action( 'custom_login_admin_enqueue_scripts' )` for extenstions to hook into settings page `admin_enqueue_scripts`.
+
+= Version 2.3.3 (5/14/14) =
+
+* Attempt to fix `Fatal error: Call to a member function set_sections() on a non-object`.
+
 = Version 2.3.2 (4/24/14) =
 
 * Fixed Fatal Error. Sorry.

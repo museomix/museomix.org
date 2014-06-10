@@ -14,7 +14,7 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
 	/**
 	 * Version
 	 */
-	var $api_version = '1.0.13';
+	var $api_version = '1.0.15';
 
     /**
      * settings sections array
@@ -64,12 +64,28 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
      * @var object
      */
     private static $_instance;
+
+	/**
+	 * Main Instance
+	 *
+	 * @staticvar 	array 	$instance
+	 * @return 		The one true instance
+	 */
+	public static function instance() {
+		if ( ! isset( self::$_instance ) ) {
+			self::$_instance = new self;
+			self::$_instance->init();
+		}
+		return self::$_instance;
+	}
+	
+    function __construct() {}
 	
 	/**
 	 * Fire
 	 *
 	 */
-    public function __construct() {
+    function init() {
         add_action( 'admin_enqueue_scripts',	array( $this, 'admin_enqueue_scripts' ) );
 		add_action( 'init',						array( $this, 'late_init' ), 89 );
     }
@@ -143,6 +159,8 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
 		
 		/* Genericons */
 		wp_enqueue_style( 'genericons', plugins_url( 'assets/css/genericons.css', CUSTOM_LOGIN_FILE ), false, '3.0.3', 'screen' );
+			
+		do_action( 'custom_login_admin_enqueue_scripts' );
     }
 
     /**
@@ -1050,3 +1068,20 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
 
 }
 endif;
+
+/**
+ * The main function responsible for returning the one true
+ * Instance to functions everywhere.
+ *
+ * Use this function like you would a global variable, except without needing
+ * to declare the global.
+ *
+ * Example: <?php $custom_login = CUSTOMLOGIN(); ?>
+ *
+ * @return The one true Instance
+ */
+if ( !function_exists( 'EXTENDD_PLUGIN_SETTINGS_API' ) ) {
+	function EXTENDD_PLUGIN_SETTINGS_API() {
+		return Extendd_Plugin_Settings_API::instance();
+	}
+}
