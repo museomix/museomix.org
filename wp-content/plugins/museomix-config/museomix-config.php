@@ -27,7 +27,7 @@ if(is_admin()){
 
 /* cacher barre d'outil admin sur le site
    ====================================== */
-add_filter('show_admin_bar', '__return_false');   
+//add_filter('show_admin_bar', '__return_false');   
 
 add_filter('template', 'ThemeVariable');
 add_filter('stylesheet', 'ThemeVariable');

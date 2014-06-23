@@ -1285,3 +1285,6 @@ height: auto;
 		width: auto;	
 	}
 }
+.admin-bar .navbar-fixed-top {
+	top:30px;
+}
