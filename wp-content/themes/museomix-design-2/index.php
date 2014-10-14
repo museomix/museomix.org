@@ -24,7 +24,7 @@
 
 	<?php elseif(is_singular() || is_front_page() ): ?>
 
-    <div class="row">
+    <div class="row-fluid">
     
     	<?php while ( have_posts() ) : the_post(); ?>
 			<?php get_template_part('MenuPage'); ?>		
