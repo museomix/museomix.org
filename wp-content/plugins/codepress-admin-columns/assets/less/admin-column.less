@@ -433,6 +433,7 @@ h2.cpac-nav-tab-wrapper {
 							padding-left: 10px;
 							padding-right: 0;
 						}
+
 						div.msg {
 							margin-top: 5px;
 							display: none;
@@ -443,6 +444,10 @@ h2.cpac-nav-tab-wrapper {
 							-moz-border-radius: 3px;
 							-webkit-border-radius: 3px;
 							border-radius: 3px;
+						}
+
+						.section {
+							padding: 12px;
 						}
 					}
 				}
@@ -796,6 +801,7 @@ h2.cpac-nav-tab-wrapper {
 		&#pro-version {
 			.cta {
 				background: transparent url(../images/get_the_addon.png) no-repeat 0 0;
+				background-size: cover;
 			}
 			.padding-box {
 				padding: 8px 15px 0;
@@ -844,6 +850,103 @@ h2.cpac-nav-tab-wrapper {
 				}
 			}
 		}
+
+		&#direct-feedback {
+			#feedback-support,
+			#feedback-rate {
+				display: none;
+			}
+
+			.inside {
+				> a {
+					border-radius: 4px;
+					border: 1px solid #CCC;
+					width: 48%;
+					height: 64px;
+					text-align: center;
+					line-height: 64px;
+					font-weight: bold;
+					color: #222;
+					display: inline-block;
+					text-decoration: none;
+
+					&:hover {
+						background: #FAFAFA;
+					}
+				}
+
+				form {
+					textarea {
+						width: 100%;
+						height: 120px;
+					}
+
+					input[type="submit"] {
+						float: right;
+						border-radius: 4px;
+						border: 1px solid #CCC;
+						height: 32px;
+						text-align: center;
+						line-height: 32px;
+						font-weight: bold;
+						font-size: 12px;
+						padding: 0 32px;
+						color: #CCC;
+						display: inline-block;
+						background: none;
+						text-decoration: none;
+						cursor: pointer;
+
+						&:hover {
+							background: #FAFAFA;
+						}
+					}
+
+					p.description {
+						float: left;
+						font-size: 10px;
+					}
+				}
+
+				ul {
+					margin: 0;
+
+					&.share {
+						li {
+							margin: 0;
+							display: block;
+							float: left;
+							margin-left: 9px;
+							width: 30%;
+
+							a {
+								text-decoration: none;
+								vertical-align: middle;
+								line-height: 20px;
+								padding: 16px 0;
+								width: 100%;
+								text-align: center;
+								border: 1px solid #CCC;
+								border-radius: 4px;
+								display: block;
+
+								&:hover {
+									background: #FAFAFA;
+								}
+							}
+
+							&:first-child {
+								margin-left: 0;
+							}
+						}
+					}
+				}
+			}
+
+			#feedback-support .inside ul.share li {
+				width: 48%;
+			}
+		}
 	}
 }
 
@@ -889,6 +992,22 @@ table.cpac-form-table {
 						padding-bottom: 5px;
 					}
 				}
+			}
+		}
+	}
+
+	&.settings {
+		tr td {
+			padding-top: 74px;
+		}
+
+		tr:first-child {
+			th {
+				padding-top: 0;
+			}
+
+			td {
+				padding-top: 54px;
 			}
 		}
 	}

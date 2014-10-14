@@ -3,7 +3,7 @@
 Plugin Name: Redirection
 Plugin URI: http://urbangiraffe.com/plugins/redirection/
 Description: Manage all your 301 redirects and monitor 404 errors
-Version: 2.3.4
+Version: 2.3.6
 Author: John Godley
 Author URI: http://urbangiraffe.com
 ============================================================================================================
@@ -29,7 +29,7 @@ include dirname( __FILE__ ).'/models/action.php';
 include dirname( __FILE__ ).'/models/monitor.php';
 include dirname( __FILE__ ).'/modules/wordpress.php';
 
-define( 'REDIRECTION_VERSION', '2.3.1' );
+define( 'REDIRECTION_VERSION', '2.3.1' );     // DB schema version. Only change if DB needs changing
 
 if ( class_exists( 'Redirection' ) )
 	return;
@@ -37,13 +37,16 @@ if ( class_exists( 'Redirection' ) )
 class Redirection extends Redirection_Plugin {
 	var $hasMatched = false;
 
-	function Redirection() {
+	function __construct() {
 		$this->register_plugin( 'redirection', __FILE__ );
 
 		if ( is_admin() ) {
 			$this->add_action( 'admin_menu' );
 			$this->add_action( 'load-tools_page_redirection', 'redirection_head' );
 			$this->add_action( 'init', 'inject' );
+
+			add_filter( 'set-screen-option', array( $this, 'set_per_page' ), 10, 3 );
+			add_action( 'redirection_log_delete', array( $this, 'expire_logs' ) );
 
 			$this->register_activation( __FILE__ );
 			$this->register_plugin_settings( __FILE__ );
@@ -79,11 +82,17 @@ class Redirection extends Redirection_Plugin {
 		return true;
 	}
 
+	function set_per_page( $status, $option, $value ) {
+		if ( $option == 'redirection_log_per_page' )
+			return $value;
+		return $status;
+	}
+
 	function activate() {
 		if ( $this->update() === false ) {
 			$db = new RE_Database();
 			$db->remove( $version, REDIRECTION_VERSION );
-	    exit();
+	    	exit();
 		}
 	}
 
@@ -102,12 +111,15 @@ class Redirection extends Redirection_Plugin {
 	}
 
 	function redirection_head() {
+		if ( isset( $_GET['sub'] ) && ( in_array( $_GET['sub'], array( 'log', '404s', 'groups' ) ) ) )
+			add_screen_option( 'per_page', array( 'label' => __( 'Log entries', 'redirection' ), 'default' => 25, 'option' => 'redirection_log_per_page' ) );
+
 		wp_enqueue_script( 'redirection', plugin_dir_url( __FILE__ ).'js/redirection.js', array( 'jquery-form', 'jquery-ui-sortable' ), $this->version() );
 		wp_enqueue_style( 'redirection', plugin_dir_url( __FILE__ ).'admin.css', $this->version() );
 
 		wp_localize_script( 'redirection', 'Redirectioni10n', array(
 			'please_wait'  => __( 'Please wait...', 'redirection' ),
-			'type'         => 1,
+			'type'      => 1,
 			'progress'     => '<img src="'.plugin_dir_url( __FILE__ ).'/images/progress.gif" alt="loading" width="50" height="16"/>',
 		  	'are_you_sure' => __( 'Are you sure?', 'redirection' ),
 			'none_select'  => __( 'No items have been selected', 'redirection' )
@@ -115,28 +127,47 @@ class Redirection extends Redirection_Plugin {
 	}
 
 	function admin_menu() {
-  		add_management_page( __( "Redirection", 'redirection' ), __( "Redirection", 'redirection' ), "administrator", basename( __FILE__ ), array( &$this, "admin_screen" ) );
+  		add_management_page( __( "Redirection", 'redirection' ), __( "Redirection", 'redirection' ), apply_filters( 'redirection_role', 'administrator' ), basename( __FILE__ ), array( &$this, "admin_screen" ) );
 	}
 
 	function expire_logs() {
 		global $wpdb;
 
-		// Expire old entries
 		$options = $this->get_options();
-		if ( $options['expire'] != 0 ) {
-			$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->prefix}redirection_logs WHERE created < DATE_SUB(NOW(), INTERVAL %d DAY) LIMIT 1000", $options['expire'] ) );
-			$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->prefix}redirection_404 WHERE created < DATE_SUB(NOW(), INTERVAL %d DAY) LIMIT 1000", $options['expire'] ) );
+		$cleanup = false;
+
+		if ( $options['expire_redirect'] > 0 ) {
+			$cleanup = true;
+			$logs = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$wpdb->prefix}redirection_logs WHERE created < DATE_SUB(NOW(), INTERVAL %d DAY)", $options['expire'] ) );
+
+			if ( $logs > 0 )
+				$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->prefix}redirection_logs WHERE created < DATE_SUB(NOW(), INTERVAL %d DAY) LIMIT 1000", $options['expire'] ) );
+		}
+
+		if ( $options['expire_404'] > 0 ) {
+			$cleanup = true;
+			$l404 = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$wpdb->prefix}redirection_404 WHERE created < DATE_SUB(NOW(), INTERVAL %d DAY)", $options['expire'] ) );
+
+			if ( $l404 > 0 )
+				$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->prefix}redirection_404 WHERE created < DATE_SUB(NOW(), INTERVAL %d DAY) LIMIT 1000", $options['expire'] ) );
+		}
+
+		if ( $cleanup ) {
+			$rand = mt_rand( 1, 5000 );
+
+			if ( $rand == 11 )
+				$wpdb->query( "OPTIMIZE TABLE {$wpdb->prefix}redirection_logs" );
+			elseif ( $rand == 12 )
+				$wpdb->query( "OPTIMIZE TABLE {$wpdb->prefix}redirection_404" );
 		}
 	}
 
 	function admin_screen() {
 	  	$this->update();
-	  	$this->expire_logs();
-
-		// Decide what to do
-		$sub = isset( $_GET['sub'] ) ? $_GET['sub'] : '';
 
 		$options = $this->get_options();
+		if ( ( $options['expire_404'] > 0 || $options['expire_redirect'] > 0 ) && !wp_next_scheduled( 'redirection_log_delete' ) )
+			wp_schedule_event( time(), 'daily', 'redirection_log_delete' );
 
 		if ( isset($_GET['sub']) ) {
 			if ( $_GET['sub'] == 'log' )
@@ -168,15 +199,13 @@ class Redirection extends Redirection_Plugin {
 		if ( $options === false )
 			$options = array();
 
-		$defaults = array	(
-			'support'           => false,
-			'log_redirections'  => true,
-			'log_404s'          => true,
-			'expire'            => 0,
-			'token'             => '',
-			'monitor_new_posts' => false,
-			'monitor_post'      => 0,
-			'auto_target'       => '',
+		$defaults = array(
+			'support'         => false,
+			'token'           => '',
+			'monitor_post'    => 0,
+			'auto_target'     => '',
+			'expire_redirect' => 7,
+			'expire_404'      => 7,
 		);
 
 		foreach ( $defaults AS $key => $value ) {
@@ -184,7 +213,21 @@ class Redirection extends Redirection_Plugin {
 				$options[$key] = $value;
 		}
 
-		$options['lookup'] = 'http://geomaplookup.net/?ip=';
+		if ( isset( $options['expire'] ) ) {
+			if ( isset( $options['log_redirection'] ) )
+				$options['expire_redirect'] = $options['expire'];
+
+			if ( isset( $options['log_404s'] ) )
+				$options['expire_404'] = $options['expire'];
+
+			unset( $options['expire'] );
+			unset( $options['log_redirection'] );
+			unset( $options['log_404s'] );
+
+			update_option( 'redirection_options', $options );
+		}
+
+		$options['lookup'] = 'http://urbangiraffe.com/map/?ip=';
 
 		return $options;
 	}
@@ -192,26 +235,42 @@ class Redirection extends Redirection_Plugin {
 	function inject() {
 		$options = $this->get_options();
 
-		if ( isset($_GET['token'] ) && isset( $_GET['page'] ) && isset( $_GET['sub'] ) && $_GET['token'] == $options['token'] && $_GET['page'] == 'redirection.php' && in_array( $_GET['sub'], array( 'rss', 'xml', 'csv', 'apache' ) ) ) {
+		if ( isset( $_GET['token'] ) && isset( $_GET['page'] ) && isset( $_GET['sub'] ) && $_GET['token'] == $options['token'] && $_GET['page'] == 'redirection.php' ) {
 			include dirname( __FILE__ ).'/models/file_io.php';
 
-			$exporter = new Red_FileIO;
-			if ( $exporter->export( $_GET['sub'] ) )
+			$exporter = Red_FileIO::create( $_GET['sub'] );
+			if ( $exporter ) {
+				$items = Red_Item::get_all_for_module( intval( $_GET['module'] ) );
+
+				$exporter->export( $items );
 				die();
+			}
+		}
+		elseif ( isset( $_POST['export-csv'] ) && check_admin_referer( 'redirection-log_management' ) ) {
+			if ( isset( $_GET['sub'] ) && $_GET['sub'] == 'log' )
+				RE_Log::export_to_csv();
+			else
+				RE_404::export_to_csv();
+			die();
 		}
 	}
 
 	function admin_screen_options() {
-		if ( isset( $_POST['update'] ) && check_admin_referer( 'redirection-update_options' ) ) {
-			$options['monitor_post']      = stripslashes( $_POST['monitor_post'] );
-//			$options['monitor_category']  = stripslashes( $_POST['monitor_category'] );
-			$options['auto_target']       = stripslashes( $_POST['auto_target'] );
-			$options['support']           = isset( $_POST['support'] ) ? true : false;
-			$options['log_redirections']  = (bool) @ $_POST['log_redirections'];
-			$options['log_404s']          = (bool) @ $_POST['log_404s'];
-			$options['monitor_new_posts'] = isset( $_POST['monitor_new_posts'] ) ? true : false;
-			$options['expire']            = intval( $_POST['expire'] );
-			$options['token']             = stripslashes( $_POST['token'] );
+		if ( isset( $_POST['regenerate'] ) && check_admin_referer( 'redirection-update_options' ) ) {
+			$options = $this->get_options();
+			$options['token'] = md5( uniqid() );
+
+			update_option( 'redirection_options', $options );
+
+			$this->render_message( __( 'Your options were updated', 'redirection' ) );
+		}
+		elseif ( isset( $_POST['update'] ) && check_admin_referer( 'redirection-update_options' ) ) {
+			$options['monitor_post']    = stripslashes( $_POST['monitor_post'] );
+			$options['auto_target']     = stripslashes( $_POST['auto_target'] );
+			$options['support']         = isset( $_POST['support'] ) ? true : false;
+			$options['token']           = stripslashes( $_POST['token'] );
+			$options['expire_redirect'] = min( intval( $_POST['expire_redirect'] ), 31 );
+			$options['expire_404']      = min( intval( $_POST['expire_404'] ), 31 );
 
 			if ( trim( $options['token'] ) == '' )
 				$options['token'] = md5( uniqid() );
@@ -248,18 +307,12 @@ class Redirection extends Redirection_Plugin {
 	function admin_screen_log() {
 		include dirname( __FILE__ ).'/models/pager.php';
 
-		if ( isset( $_POST['deleteall'] ) && check_admin_referer( 'redirection-process_logs' ) ) {
-			if ( isset( $_GET['module'] ) )
-				RE_Log::delete_all( 'module', intval( $_GET['module'] ) );
-			else if (isset($_GET['group']))
-				RE_Log::delete_all( 'group', intval( $_GET['group_id'] ) );
-			else
-				RE_Log::delete_all();
+		$options = $this->get_options();
 
+		if ( isset( $_POST['delete-all'] ) && check_admin_referer( 'redirection-log_management' ) ) {
+			RE_Log::delete_all();
 			$this->render_message( __( 'Your logs have been deleted', 'redirection' ) );
 		}
-
-		$options = $this->get_options();
 
 		$table = new Redirection_Log_Table( $options );
 
@@ -272,13 +325,13 @@ class Redirection extends Redirection_Plugin {
 		else
 			$table->prepare_items();
 
-		$this->render_admin( 'log', array( 'options' => $options, 'table' => $table, 'lookup' => $options['lookup'] ) );
+		$this->render_admin( 'log', array( 'options' => $options, 'table' => $table, 'lookup' => $options['lookup'], 'type' => 'log' ) );
 	}
 
 	function admin_screen_404() {
 		include dirname( __FILE__ ).'/models/pager.php';
 
-		if ( isset( $_POST['deleteall'] ) && check_admin_referer( 'redirection-process_logs' ) ) {
+		if ( isset( $_POST['delete-all'] ) && check_admin_referer( 'redirection-log_management' ) ) {
 			RE_404::delete_all();
 			$this->render_message( __( 'Your logs have been deleted', 'redirection' ) );
 		}
@@ -288,7 +341,7 @@ class Redirection extends Redirection_Plugin {
 		$table = new Redirection_404_Table( $options );
 		$table->prepare_items( isset( $_GET['ip'] ) ? $_GET['ip'] : false );
 
-		$this->render_admin( 'log', array( 'options' => $options, 'table' => $table, 'lookup' => $options['lookup'] ) );
+		$this->render_admin( 'log', array( 'options' => $options, 'table' => $table, 'lookup' => $options['lookup'], 'type' => '404s' ) );
 	}
 
 	function admin_groups( $module ) {
@@ -357,14 +410,13 @@ class Redirection extends Redirection_Plugin {
 
 	/**
 	 * Matches 404s
-	 * @return [type] [description]
 	 */
 	function template_redirect() {
 		if ( is_404() )	{
 			$options = $this->get_options();
 
-			if ( $options['log_404s'] ) {
-				$log = RE_404::create( red_get_url(), red_user_agent(), red_ip(), red_http_referrer() );
+			if ( isset( $options['expire_404'] ) && $options['expire_404'] >= 0 ) {
+				RE_404::create( red_get_url(), red_user_agent(), red_ip(), red_http_referrer() );
 			}
 		}
 	}

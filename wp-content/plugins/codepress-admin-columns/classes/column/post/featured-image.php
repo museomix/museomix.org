@@ -1,24 +1,27 @@
 <?php
-
 /**
  * CPAC_Column_Post_Featured_Image
  *
- * @since 2.0.0
+ * @since 2.0
  */
 class CPAC_Column_Post_Featured_Image extends CPAC_Column {
 
-	function __construct( $storage_model ) {
+	/**
+	 * @see CPAC_Column::init()
+	 * @since 2.2.1
+	 */
+	public function init() {
 
-		// define properties
+		parent::init();
+
+		// Properties
 		$this->properties['type']	= 'column-featured_image';
 		$this->properties['label']	= __( 'Featured Image', 'cpac' );
 
-		// define additional options
+		// Options
 		$this->options['image_size']	= '';
 		$this->options['image_size_w']	= 80;
 		$this->options['image_size_h']	= 80;
-
-		parent::__construct( $storage_model );
 	}
 
 	/**
@@ -32,7 +35,7 @@ class CPAC_Column_Post_Featured_Image extends CPAC_Column {
 
 	/**
 	 * @see CPAC_Column::get_value()
-	 * @since 2.0.0
+	 * @since 2.0
 	 */
 	function get_value( $post_id ) {
 
@@ -62,7 +65,7 @@ class CPAC_Column_Post_Featured_Image extends CPAC_Column {
 
 	/**
 	 * @see CPAC_Column::display_settings()
-	 * @since 2.0.0
+	 * @since 2.0
 	 */
 	function display_settings() {
 

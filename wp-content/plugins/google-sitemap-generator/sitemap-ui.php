@@ -1,7 +1,7 @@
 <?php
 /*
 
- $Id: sitemap-ui.php 925850 2014-06-03 19:06:48Z arnee $
+ $Id: sitemap-ui.php 935247 2014-06-19 17:13:03Z arnee $
 
 */
 
@@ -622,6 +622,14 @@ HTML;
 			margin: 0;
 		}
 
+		.hndle {
+			cursor:auto!important;
+			-webkit-user-select:auto!important;
+			-moz-user-select:auto!important;
+			-ms-user-select:auto!important;
+			user-select:auto!important;
+		}
+
 
 		<?php if (version_compare($wp_version, "3.4", "<")): //Fix style for WP 3.4 (dirty way for now..) ?>
 
@@ -664,7 +672,7 @@ HTML;
 				<?php
 
 				if(get_option('blog_public')!=1) {
-					?><div class="error"><p><?php echo str_replace("%s","options-privacy.php",__('Your blog is currently blocking search engines! Visit the <a href="%s">privacy settings</a> to change this.','sitemap')); ?></p></div><?php
+					?><div class="error"><p><?php echo str_replace("%s","options-reading.php#blog_public",__('Your blog is currently blocking search engines! Visit the <a href="%s">Reading Settings</a> to change this.','sitemap')); ?></p></div><?php
 				}
 
 				?>

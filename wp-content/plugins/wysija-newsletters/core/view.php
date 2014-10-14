@@ -193,7 +193,13 @@ class WYSIJA_view extends WYSIJA_object{
 
                 if(count($messages)>0){
                    foreach($messages as $msg){
-                         $html.='<li>'.$msg.'</li>';
+                        // check type of msg variable
+                        if(is_array($msg)) {
+                            $msg = var_export($msg, true);
+                        }
+
+                        // display message
+                        $html.='<li>'.$msg.'</li>';
                     }
                 }
 
@@ -271,10 +277,10 @@ class WYSIJA_view extends WYSIJA_object{
         if(!$val) return '---';
 
         //offset the time to the time of the WP site not the server
-        $hToolbox = WYSIJA::get('toolbox','helper');
+        $helper_toolbox = WYSIJA::get('toolbox','helper');
         // get current time taking timezone into account.
 
-        $val = $hToolbox->servertime_to_localtime($val);
+        $val = $helper_toolbox->servertime_to_localtime($val);
 
         if($format) return date_i18n($format,$val);
         else return date_i18n(get_option('date_format'),$val);

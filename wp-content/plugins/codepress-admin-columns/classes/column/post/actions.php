@@ -1,61 +1,38 @@
 <?php
-
 /**
  * CPAC_Column_Post_Actions
  *
- * @since 2.0.0
+ * @since 2.0
  */
-class CPAC_Column_Post_Actions extends CPAC_Column {
-
-	function __construct( $storage_model ) {
-
-		// define properties
-		$this->properties['type']	 	= 'column-actions';
-		$this->properties['label']	 	= __( 'Actions', 'cpac' );
-
-		parent::__construct( $storage_model );
-	}
+class CPAC_Column_Post_Actions extends CPAC_Column_Actions {
 
 	/**
-	 * @see CPAC_Column::get_value()
-	 * @since 2.0.0
+	 * @see CPAC_Column_Actions::get_actions()
+	 * @since 2.2.6
 	 */
-	function get_value( $post_id ) {
-
-		return $this->get_raw_value( $post_id );
-	}
-
-	/**
-	 * @see CPAC_Column::get_value()
-	 * @since 2.0.0
-	 */
-	function get_raw_value( $post_id ) {
-
-		return $this->get_column_value_actions( $post_id );
-	}
-
-	/**
-	 * Get column value of post actions
-	 *
-	 * This part is copied from the Posts List Table class
-	 *
-	 * @since 1.4.2
-	 *
-	 * @param int $post_id
-	 * @return string Actions
-	 */
-	private function get_column_value_actions( $post_id ) {
-
+	public function get_actions( $item_id ) {
 		$actions = array();
 
-		$post 				= get_post($post_id);
+		$post 				= get_post( $item_id );
 		$title 				= _draft_or_post_title();
 		$post_type_object 	= get_post_type_object( $post->post_type );
 		$can_edit_post 		= current_user_can( $post_type_object->cap->edit_post, $post->ID );
+		$quickedit_enabled	= false;
+
+		$stored_columns = $this->storage_model->get_stored_columns();
+
+		foreach ( $stored_columns as $column ) {
+			if ( $column['type'] == 'title' ) {
+				$quickedit_enabled = true;
+			}
+		}
 
 		if ( $can_edit_post && 'trash' != $post->post_status ) {
 			$actions['edit'] = '<a href="' . get_edit_post_link( $post->ID, true ) . '" title="' . esc_attr( __( 'Edit this item' ) ) . '">' . __( 'Edit' ) . '</a>';
-			$actions['inline hide-if-no-js'] = '<a href="#" class="editinline" title="' . esc_attr( __( 'Edit this item inline' ) ) . '">' . __( 'Quick&nbsp;Edit' ) . '</a>';
+
+			if ( $quickedit_enabled ) {
+				$actions['inline hide-if-no-js'] = '<a href="#" class="editinline" title="' . esc_attr( __( 'Edit this item inline' ) ) . '">' . __( 'Quick&nbsp;Edit' ) . '</a>';
+			}
 		}
 		if ( current_user_can( $post_type_object->cap->delete_post, $post->ID ) ) {
 			if ( 'trash' == $post->post_status )
@@ -74,6 +51,7 @@ class CPAC_Column_Post_Actions extends CPAC_Column {
 			}
 		}
 
-		return implode(' | ', $actions);
+		return $actions;
 	}
+
 }

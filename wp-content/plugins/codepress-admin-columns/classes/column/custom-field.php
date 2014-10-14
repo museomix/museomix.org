@@ -1,23 +1,30 @@
 <?php
-
 /**
- * CPAC_Column_Custom_Field
+ * Custom field column, displaying the contents of meta fields.
+ * Suited for all storage models supporting WordPress' default way of handling meta data.
+ *
+ * Supports different types of meta fields, including dates, serialized data, linked content,
+ * and boolean values.
  *
  * @since 1.0
  */
 class CPAC_Column_Custom_Field extends CPAC_Column {
 
-	private $user_settings;
+	/**
+	 * @see CPAC_Column::init()
+	 * @since 2.2.1
+	 */
+	function init() {
 
-	function __construct( $storage_model ) {
+		parent::init();
 
-		// define properties
+		// Properties
 		$this->properties['type']	 		= 'column-meta';
 		$this->properties['label']	 		= __( 'Custom Field', 'cpac' );
 		$this->properties['classes']		= 'cpac-box-metafield';
 		$this->properties['is_cloneable']	= true;
 
-		// define additional options
+		// Options
 		$this->options['field']				= '';
 		$this->options['field_type']		= '';
 		$this->options['before']			= '';
@@ -31,12 +38,6 @@ class CPAC_Column_Custom_Field extends CPAC_Column {
 
 		$this->options['date_format']		= '';
 		$this->options['date_save_format']	= '';
-
-		// for retireving sorting preference
-		$this->user_settings = get_option( 'cpac_general_options' );
-
-		// call construct
-		parent::__construct( $storage_model );
 	}
 
 	/**
@@ -177,7 +178,7 @@ class CPAC_Column_Custom_Field extends CPAC_Column {
 	/**
 	 * Get meta value
 	 *
-	 * @since 2.0.0
+	 * @since 2.0
 	 *
 	 * @param string $meta Contains Meta Value
 	 * @param int $id Optional Object ID
@@ -224,8 +225,7 @@ class CPAC_Column_Custom_Field extends CPAC_Column {
 
 			case "color" :
 				if ( ! empty( $meta ) ) {
-					$text_color = $this->get_text_color( $meta );
-					$meta = "<div class='cpac-color'><span style='background-color:{$meta};color:{$text_color}'>{$meta}</span></div>";
+					$meta = $this->get_color_for_display( $meta );
 				}
 				break;
 
@@ -237,40 +237,6 @@ class CPAC_Column_Custom_Field extends CPAC_Column {
 		endswitch;
 
 		return $meta;
-	}
-
-	/**
-	 * Determines text color absed on bakground coloring.
-	 *
-	 * @since 1.0
-	 */
-	function get_text_color( $bg_color ) {
-
-		$rgb = $this->hex2rgb( $bg_color );
-
-		return $rgb && ( ( $rgb[0]*0.299 + $rgb[1]*0.587 + $rgb[2]*0.114 ) < 186 ) ? '#ffffff' : '#333333';
-	}
-
-	/**
-	 * Convert hex to rgb
-	 *
-	 * @since 1.0
-	 */
-	function hex2rgb( $hex ) {
-		$hex = str_replace( "#", "", $hex );
-
-		if(strlen($hex) == 3) {
-			$r = hexdec(substr($hex,0,1).substr($hex,0,1));
-			$g = hexdec(substr($hex,1,1).substr($hex,1,1));
-			$b = hexdec(substr($hex,2,1).substr($hex,2,1));
-		} else {
-			$r = hexdec(substr($hex,0,2));
-			$g = hexdec(substr($hex,2,2));
-			$b = hexdec(substr($hex,4,2));
-		}
-		$rgb = array($r, $g, $b);
-
-		return $rgb;
 	}
 
 	/**
@@ -288,7 +254,7 @@ class CPAC_Column_Custom_Field extends CPAC_Column {
 	/**
 	 * Get meta by ID
 	 *
-	 * @since 1.0.0
+	 * @since 1.0
 	 *
 	 * @param int $id ID
 	 * @return string Meta Value
@@ -310,26 +276,6 @@ class CPAC_Column_Custom_Field extends CPAC_Column {
 	}
 
 	/**
-	 * Get before value
-	 *
-	 * @since 1.0
-	 */
-	function get_before() {
-
-		return stripslashes( $this->options->before );
-	}
-
-	/**
-	 * Get after value
-	 *
-	 * @since 1.0
-	 */
-	function get_after() {
-
-		return stripslashes( $this->options->after );
-	}
-
-	/**
 	 * @see CPAC_Column::get_raw_value()
 	 * @since 2.0.3
 	 */
@@ -337,7 +283,7 @@ class CPAC_Column_Custom_Field extends CPAC_Column {
 
 		$field_key = $this->get_field_key();
 
-		$raw_value = get_metadata( $this->storage_model->type, $id, $field_key, $single );
+		$raw_value = get_metadata( $this->storage_model->meta_type, $id, $field_key, $single );
 
 		return apply_filters( 'cac/column/meta/raw_value', $raw_value, $id, $field_key, $this );
 	}
@@ -375,9 +321,7 @@ class CPAC_Column_Custom_Field extends CPAC_Column {
 	 */
 	function display_settings() {
 
-		//$show_hidden_meta = isset( $this->user_settings['show_hidden'] ) && '1' === $this->user_settings['show_hidden'] ? true : false;
 		$show_hidden_meta = true;
-
 		?>
 
 		<tr class="column_field">
@@ -424,4 +368,5 @@ class CPAC_Column_Custom_Field extends CPAC_Column {
 
 		$this->display_field_before_after();
 	}
+
 }

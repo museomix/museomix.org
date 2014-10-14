@@ -2,21 +2,26 @@
 /**
  * CPAC_Column_Comment_Reply_To
  *
- * @since 2.0.0
+ * @since 2.0
  */
 class CPAC_Column_Comment_Reply_To extends CPAC_Column {
 
-	function __construct( $storage_model ) {
+	/**
+	 * @see CPAC_Column::init()
+	 * @since 2.2.1
+	 */
+	public function init() {
 
+		parent::init();
+
+		// Properties
 		$this->properties['type']	 = 'column-reply_to';
 		$this->properties['label']	 = __( 'In Reply To', 'cpac' );
-
-		parent::__construct( $storage_model );
 	}
 
 	/**
 	 * @see CPAC_Column::get_value()
-	 * @since 2.0.0
+	 * @since 2.0
 	 */
 	function get_value( $id ) {
 

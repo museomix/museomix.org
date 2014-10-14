@@ -3,38 +3,45 @@
 /**
  * Storage Model
  *
- * @since 2.0.0
+ * @since 2.0
  */
 abstract class CPAC_Storage_Model {
 
 	/**
-	 * @since 2.0.0
+	 * @since 2.0
 	 */
 	public $label;
 
 	/**
 	 * Identifier for Storage Model; Posttype etc.
 	 *
-	 * @since 2.0.0
+	 * @since 2.0
 	 */
 	public $key;
 
 	/**
 	 * Type of storage model; Post, Media, User or Comments
 	 *
-	 * @since 2.0.0
+	 * @since 2.0
 	 */
 	public $type;
 
 	/**
+	 * Meta type of storage model; post, user, comment. Mostly used for custom field data.
+	 *
+	 * @since 3.0
+	 */
+	public $meta_type;
+
+	/**
 	 * Groups the storage model in the menu.
 	 *
-	 * @since 2.0.0
+	 * @since 2.0
 	 */
 	public $menu_type;
 
 	/**
-	 * @since 2.0.0
+	 * @since 2.0
 	 * @var string
 	 */
 	public $page;
@@ -70,13 +77,13 @@ abstract class CPAC_Storage_Model {
 	public $stored_columns = NULL;
 
 	/**
-	 * @since 2.3
+	 * @since 2.2
 	 * @var array
 	 */
 	public $column_types = array();
 
 	/**
-	 * @since 2.0.0
+	 * @since 2.0
 	 * @return array Column Name | Column Label
 	 */
 	abstract function get_default_columns();
@@ -89,15 +96,14 @@ abstract class CPAC_Storage_Model {
 		// set columns paths
 		$this->set_columns_filepath();
 
-		// Populate columns variable.
-		// This is used for manage_value. By storing these columns we greatly improve performance.
-		add_action( 'admin_init', array( $this, 'set_columns' ) );
+		// Populate columns for this screen.
+		add_action( 'admin_init', array( $this, 'set_columns_on_current_screen' ) );
 	}
 
 	/**
 	 * Checks if menu type is currently viewed
 	 *
-	 * @since 1.0.0
+	 * @since 1.0
 	 * @param string $key
 	 * @return bool
 	 */
@@ -118,7 +124,7 @@ abstract class CPAC_Storage_Model {
 	}
 
 	/**
-	 * @since 2.0.0
+	 * @since 2.0
 	 * @return array
      */
     public function get_meta_keys( $add_hidden_meta = false ) {
@@ -150,7 +156,7 @@ abstract class CPAC_Storage_Model {
 		 * Filter the available custom field meta keys
 		 * If showing hidden fields is enabled, they are prefixed with "cpachidden" in the list
 		 *
-		 * @since 2.0.0
+		 * @since 2.0
 		 *
 		 * @param array $keys Available custom field keys
 		 * @param CPAC_Storage_Model $storage_model Storage model class instance
@@ -160,14 +166,14 @@ abstract class CPAC_Storage_Model {
 		/**
 		 * Filter the available custom field meta keys for this storage model type
 		 *
-		 * @since 2.0.0
+		 * @since 2.0
 		 * @see Filter cac/storage_model/meta_keys
 		 */
 		return apply_filters( "cac/storage_model/meta_keys/storage_key={$this->key}", $keys, $this );
     }
 
 	/**
-	 * @since 2.0.0
+	 * @since 2.0
 	 * @param array $fields Custom fields.
 	 * @return array Custom fields.
 	 */
@@ -198,7 +204,7 @@ abstract class CPAC_Storage_Model {
 	}
 
 	/**
-	 * @since 2.0.0
+	 * @since 2.0
 	 */
 	function restore() {
 
@@ -207,18 +213,19 @@ abstract class CPAC_Storage_Model {
 		cpac_admin_message( "<strong>{$this->label}</strong> " . __( 'settings succesfully restored.',  'cpac' ), 'updated' );
 
 		// refresh columns otherwise the removed columns will still display
-		$this->set_columns();
+		$this->set_columns_on_current_screen();
 	}
 
 	/**
-	 * @since 2.0.0
+	 * @since 2.0
 	 */
 	function store( $columns = '' ) {
 
-		if ( ! empty( $_POST[ $this->key ] ) )
+		if ( ! empty( $_POST[ $this->key ] ) ) {
 			$columns = array_filter( $_POST[ $this->key ] );
+		}
 
-		if( ! $columns ) {
+		if ( ! $columns ) {
 			cpac_admin_message( __( 'No columns settings available.',  'cpac' ), 'error' );
 			return false;
 		}
@@ -247,7 +254,7 @@ abstract class CPAC_Storage_Model {
 		cpac_admin_message( sprintf( __( 'Settings for %s updated succesfully.',  'cpac' ), "<strong>{$this->label}</strong>" ), 'updated' );
 
 		// refresh columns otherwise the newly added columns will not be displayed
-		$this->set_columns();
+		$this->set_columns_on_current_screen();
 
 		return true;
 	}
@@ -262,9 +269,14 @@ abstract class CPAC_Storage_Model {
 
 		$columns  = array(
 			'CPAC_Column_Custom_Field' 		=> CPAC_DIR . 'classes/column/custom-field.php',
-			'CPAC_Column_ACF_Placeholder' 	=> CPAC_DIR . 'classes/column/acf-placeholder.php',
-			'CPAC_Column_Taxonomy' 			=> CPAC_DIR . 'classes/column/taxonomy.php'
+			'CPAC_Column_Taxonomy' 			=> CPAC_DIR . 'classes/column/taxonomy.php',
+			'CPAC_Column_Used_By_Menu' 		=> CPAC_DIR . 'classes/column/used-by-menu.php'
 		);
+
+		// Display ACF placeholder
+		if ( class_exists('acf') && ! class_exists( 'CAC_Addon_Pro' ) ) {
+			$columns[ 'CPAC_Column_ACF_Placeholder' ] = CPAC_DIR . 'classes/column/acf-placeholder.php';
+		}
 
 		// Directory to iterate
 		$columns_dir = CPAC_DIR . 'classes/column/' . $this->type;
@@ -272,8 +284,9 @@ abstract class CPAC_Storage_Model {
 			$iterator = new DirectoryIterator( $columns_dir );
 			foreach( $iterator as $leaf ) {
 
-				if ( $leaf->isDot() || $leaf->isDir() )
+				if ( $leaf->isDot() || $leaf->isDir() ) {
 					continue;
+				}
 
 				// only allow php files, exclude .SVN .DS_STORE and such
 				if ( substr( $leaf->getFilename(), -4 ) !== '.php' ) {
@@ -292,7 +305,7 @@ abstract class CPAC_Storage_Model {
 		 * Filter the available custom column types
 		 * Use this to register a custom column type
 		 *
-		 * @since 2.0.0
+		 * @since 2.0
 		 * @param array $columns Available custom columns ([class_name] => [class file path])
 		 * @param CPAC_Storage_Model $storage_model Storage model class instance
 		 */
@@ -301,7 +314,7 @@ abstract class CPAC_Storage_Model {
 		/**
 		 * Filter the available custom column types for a specific type
 		 *
-		 * @since 2.0.0
+		 * @since 2.0
 		 * @see Filter cac/columns/custom
 		 */
 		$columns = apply_filters( 'cac/columns/custom/type=' . $this->type, $columns, $this );
@@ -309,7 +322,7 @@ abstract class CPAC_Storage_Model {
 		/**
 		 * Filter the available custom column types for a specific type
 		 *
-		 * @since 2.0.0
+		 * @since 2.0
 		 * @see Filter cac/columns/custom
 		 */
 		$columns = apply_filters( 'cac/columns/custom/post_type=' . $this->key, $columns, $this );
@@ -318,7 +331,7 @@ abstract class CPAC_Storage_Model {
 	}
 
 	/**
-	 * @since 2.0.0
+	 * @since 2.0
 	 * @param $column_name
 	 * @param $label
 	 * @return object CPAC_Column
@@ -352,7 +365,7 @@ abstract class CPAC_Storage_Model {
 	}
 
 	/**
-	 * @since 2.0.0
+	 * @since 2.0
 	 * @return array Column Type | Column Instance
 	 */
 	public function get_default_registered_columns() {
@@ -363,8 +376,9 @@ abstract class CPAC_Storage_Model {
 		foreach ( $this->get_default_columns() as $column_name => $label ) {
 
 			// checkboxes are mandatory
-			if ( 'cb' == $column_name )
+			if ( 'cb' == $column_name ) {
 				continue;
+			}
 
 			$column = $this->create_column_instance( $column_name, $label );
 
@@ -378,7 +392,7 @@ abstract class CPAC_Storage_Model {
 	}
 
 	/**
-	 * @since 2.0.0
+	 * @since 2.0
 	 * @return array Column Type | Column Instance
 	 */
 	function get_custom_registered_columns() {
@@ -388,8 +402,9 @@ abstract class CPAC_Storage_Model {
 		foreach ( $this->columns_filepath as $classname => $path ) {
 			include_once $path;
 
-			if ( ! class_exists( $classname ) )
+			if ( ! class_exists( $classname ) ) {
 				continue;
+			}
 
 			$column = new $classname( $this );
 
@@ -408,20 +423,21 @@ abstract class CPAC_Storage_Model {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since 1.0
 	 * @param string $key
 	 * @return array Column options
 	 */
 	public function get_default_stored_columns() {
 
-		if ( ! $columns = get_option( "cpac_options_{$this->key}_default" ) )
+		if ( ! $columns = get_option( "cpac_options_{$this->key}_default" ) ) {
 			return array();
+		}
 
 		return $columns;
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since 1.0
 	 * @return array Column options
 	 */
 	public function get_stored_columns() {
@@ -444,7 +460,6 @@ abstract class CPAC_Storage_Model {
 	}
 
 	public function get_database_columns() {
-
 		return get_option( "cpac_options_{$this->key}" );
 	}
 
@@ -453,21 +468,30 @@ abstract class CPAC_Storage_Model {
 	}
 
 	/**
-	 * @since 2.0.2
-	 * @param bool $ignore_check This will allow (3rd party plugins) to populate columns outside the approved screens.
+	 * Only set columns on current screens
+	 *
+	 * @since 2.2.6
 	 */
-	public function set_columns( $ignore_screen_check = false ) {
+	public function set_columns_on_current_screen() {
 
-		// Only set columns on allowed screens
-		if ( ! $ignore_screen_check && ! $this->is_doing_ajax() && ! $this->is_columns_screen() && ! $this->is_settings_page() ) {
+		if ( ! $this->is_doing_ajax() && ! $this->is_columns_screen() && ! $this->is_settings_page() ) {
 			return;
 		}
 
+		$this->set_columns();
+	}
+
+	/**
+	 * @since 2.0.2
+	 * @param bool $ignore_check This will allow (3rd party plugins) to populate columns outside the approved screens.
+	 */
+	public function set_columns() {
+
+		do_action( 'cac/set_columns', $this );
+
 		$this->custom_columns = $this->get_custom_registered_columns();
 		$this->default_columns = $this->get_default_registered_columns();
-
 		$this->column_types = $this->get_grouped_column_types();
-
 		$this->columns = $this->get_columns();
 	}
 
@@ -504,7 +528,7 @@ abstract class CPAC_Storage_Model {
 		/**
 		 * Filter the available column type groups
 		 *
-		 * @since 2.3
+		 * @since 2.2
 		 *
 		 * @param array $groups Available groups ([groupid] => [label])
 		 * @param CPAC_Storage_Model $storage_model_instance Storage model class instance
@@ -530,7 +554,7 @@ abstract class CPAC_Storage_Model {
 	}
 
 	/**
-	 * @since 2.0.0
+	 * @since 2.0
 	 */
 	function get_columns() {
 
@@ -539,26 +563,26 @@ abstract class CPAC_Storage_Model {
 		$columns = array();
 
 		// get columns
-		$default_columns = $this->column_types['default'];
+		$default_columns = $this->get_default_columns();
 
 		// @todo check if this solves the issue with not displaying value when using "manage_{$post_type}_posts_columns" at CPAC_Storage_Model_Post
 		$registered_columns = $this->get_registered_columns();
 
 		if ( $stored_columns = $this->get_stored_columns() ) {
-
 			$stored_names = array();
-			foreach ( $stored_columns as $name => $options ) {
 
-				if ( ! isset( $options['type'] ) )
+			foreach ( $stored_columns as $name => $options ) {
+				if ( ! isset( $options['type'] ) ) {
 					continue;
+				}
 
 				$stored_names[] = $name;
 
 				// In case of a disabled plugin, we will skip column.
 				// This means the stored column type is not available anymore.
-				if ( ! in_array( $options['type'], array_keys( $registered_columns ) ) )
+				if ( ! in_array( $options['type'], array_keys( $registered_columns ) ) ) {
 					continue;
-
+				}
 
 				// add an clone number which defines the instance
 				$column = clone $registered_columns[ $options['type'] ];
@@ -573,30 +597,41 @@ abstract class CPAC_Storage_Model {
 
 			// In case of an enabled plugin, we will add that column.
 			// When $diff contains items, it means a default column has not been stored.
-			if( $diff = array_diff( array_keys( $default_columns ), $this->get_default_stored_columns() ) ) {
-				foreach( $diff as $name ) {
-
+			if ( $diff = array_diff( array_keys( $default_columns ), $this->get_default_stored_columns() ) ) {
+				foreach ( $diff as $name ) {
 					// because of the filter "manage_{$post_type}_posts_columns" the columns
 					// that are being added by CPAC will also appear in the $default_columns.
 					// this will filter out those columns.
-					if ( isset( $columns[ $name ] ) ) continue;
+					if ( isset( $columns[ $name ] ) ) {
+						continue;
+					}
 
 					// is the column registered?
-					if ( ! isset( $registered_columns[ $name ] ) ) continue;
+					if ( ! isset( $registered_columns[ $name ] ) ) {
+						continue;
+					}
 
 					$columns[ $name ] = clone $registered_columns[ $name ];
 				}
 			}
 		}
-
 		// When nothing has been saved yet, we return the default WP columns.
 		else {
-
-			foreach( array_keys( $default_columns ) as $name ) {
-				if( isset( $registered_columns[ $name ] ) ) {
+			foreach ( array_keys( $default_columns ) as $name ) {
+				if ( isset( $registered_columns[ $name ] ) ) {
 					$columns[ $name ] = clone $registered_columns[ $name ];
 				}
 			}
+
+			/**
+			 * Filter the columns that should be loaded if there were no stored columns
+			 *
+			 * @since 2.2.4
+			 *
+			 * @param array $columns List of columns ([column name] => [column instance])
+			 * @param CPAC_Storage_Model $storage_model_instance Storage model class instance
+			 */
+			$columns = apply_filters( 'cpac/storage_model/columns_default', $columns, $this );
 		}
 
 		do_action( "cac/columns", $columns );
@@ -606,18 +641,19 @@ abstract class CPAC_Storage_Model {
 	}
 
 	/**
-	 * @since 2.0.0
+	 * @since 2.0
 	 */
 	function get_column_by_name( $name ) {
 
-		if ( ! isset( $this->columns[ $name ] ) )
+		if ( ! isset( $this->columns[ $name ] ) ) {
 			return false;
+		}
 
 		return $this->columns[ $name ];
 	}
 
 	/**
-	 * @since 2.0.0
+	 * @since 2.0
 	 */
 	public function add_headings( $columns ) {
 
@@ -644,7 +680,7 @@ abstract class CPAC_Storage_Model {
 			 * Filter the column headers label for use in a WP_List_Table
 			 * Label needs stripslashes() for HTML tagged labels, like icons and checkboxes
 			 *
-			 * @since 2.0.0
+			 * @since 2.0
 			 * @param string $label Label
 			 * @param string $column_name Column name
 			 * @param array $options Column options
@@ -681,7 +717,7 @@ abstract class CPAC_Storage_Model {
 	}
 
 	/**
-	 * @since 2.0.0
+	 * @since 2.0
 	 * @return string Link
 	 */
 	protected function get_screen_link() {
@@ -690,7 +726,7 @@ abstract class CPAC_Storage_Model {
 	}
 
 	/**
-	 * @since 2.0.0
+	 * @since 2.0
 	 */
 	function screen_link() {
 
@@ -698,7 +734,7 @@ abstract class CPAC_Storage_Model {
 	}
 
 	/**
-	 * @since 2.0.0
+	 * @since 2.0
 	 */
 	function get_edit_link() {
 
@@ -706,23 +742,22 @@ abstract class CPAC_Storage_Model {
 	}
 
 	/**
+	 * Whether this request is an AJAX request and marked as admin-column-ajax request.
+	 * Mark your admin columns ajax request with plugin_id : 'cpac'.
+	 *
 	 * @since 2.0.5
      * @return boolean
 	 */
 	function is_doing_ajax() {
-		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+		if ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) {
+			return false;
+		}
+
+		if ( ( isset( $_POST['plugin_id'] ) && 'cpac' == $_POST['plugin_id'] ) || ( isset( $_GET['plugin_id'] ) && 'cpac' == $_GET['plugin_id'] ) ) {
 			return true;
 		}
 
 		return false;
-	}
-
-	/**
-	 * @since 2.0.5
-     * @return boolean
-	 */
-	function is_doing_quick_edit() {
-		return $this->is_doing_ajax() && isset( $_REQUEST['action'] ) && 'inline-save' == $_REQUEST['action'];
 	}
 
 	/**
@@ -735,23 +770,26 @@ abstract class CPAC_Storage_Model {
 
 		global $pagenow;
 
-		if ( $this->page . '.php' != $pagenow )
+		if ( $this->page . '.php' != $pagenow ) {
 			return false;
+		}
 
 		// posttypes
 		if ( 'post' == $this->type ) {
 			$post_type = isset( $_REQUEST['post_type'] ) ? $_REQUEST['post_type'] : $this->type;
 
-			if ( $this->key != $post_type )
+			if ( $this->key != $post_type ) {
 				return false;
+			}
 		}
 
 		// taxonomy
 		if ( 'taxonomy' == $this->type ) {
 			$taxonomy = isset( $_GET['taxonomy'] ) ? $_GET['taxonomy'] : '';
 
-			if ( $this->taxonomy != $taxonomy )
+			if ( $this->taxonomy != $taxonomy ) {
 				return false;
+			}
 		}
 
 		return true;
@@ -782,4 +820,17 @@ abstract class CPAC_Storage_Model {
 
     	return $options[ $option ];
     }
+
+	/**
+	 * @since 2.2.4
+	 */
+	public function is_table_header_fixed() {
+
+		/**
+		 * @since 2.2.4
+		 */
+		$fixed = apply_filters( 'cpac/storage_model/table_header_fixed', false, $this );
+
+		return $fixed;
+	}
 }

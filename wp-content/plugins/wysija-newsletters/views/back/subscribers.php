@@ -123,7 +123,7 @@ class WYSIJA_view_back_subscribers extends WYSIJA_view_back
 			//if(!(isset($_REQUEST['filter-list']) && $_REQUEST['filter-list']== $listK) && $list['is_enabled']){ // Commented by TNT
 			if ($list['is_enabled'])
 			{
-			    ?><option value="actionvar_movetolist-listid_<?php echo $listK ?>"><?php
+			    ?><option value="actionvar_movetolist-listid_<?php echo $listK ?>" data-nonce="<?php echo $this->secure(array('action' => "actionvar_movetolist-listid_" . $listK), true)?>"><?php
 				echo str_repeat('&nbsp;', 5).$list['name'];
 				if (isset($list['users']))
 				    echo ' ('.$list['users'].')';
@@ -138,7 +138,7 @@ class WYSIJA_view_back_subscribers extends WYSIJA_view_back
 			//if(!(isset($_REQUEST['filter-list']) && $_REQUEST['filter-list']== $listK) && $list['is_enabled']){ // Commented by TNT
 			if ($list['is_enabled'])
 			{
-			    ?><option value="actionvar_copytolist-listid_<?php echo $listK ?>"><?php
+			    ?><option value="actionvar_copytolist-listid_<?php echo $listK ?>" data-nonce="<?php echo $this->secure(array('action' => "actionvar_copytolist-listid_" . $listK), true)?>"><?php
 				echo str_repeat('&nbsp;', 5).$list['name'];
 				if (isset($list['users']))
 				    echo ' ('.$list['users'].')';
@@ -153,7 +153,7 @@ class WYSIJA_view_back_subscribers extends WYSIJA_view_back
 			//if(!(isset($_REQUEST['filter-list']) && $_REQUEST['filter-list']== $listK) && $list['is_enabled']){ // Commented by TNT
 			if ($list['is_enabled'])
 			{
-			    ?><option value="actionvar_removefromlist-listid_<?php echo $listK ?>"><?php
+			    ?><option value="actionvar_removefromlist-listid_<?php echo $listK ?>" data-nonce="<?php echo $this->secure(array('action' => "actionvar_removefromlist-listid_" . $listK), true)?>"><?php
 			    echo str_repeat('&nbsp;', 5).$list['name'];
 			    if (isset($list['users']))
 				echo ' ('.$list['users'].')';
@@ -161,15 +161,15 @@ class WYSIJA_view_back_subscribers extends WYSIJA_view_back
 			}
 		    }
 		    ?>
-		    <option value="actionvar_removefromalllists"><?php _e('Remove from all lists', WYSIJA); ?></option>
-		    <option value="exportlist"><?php _e('Export', WYSIJA); ?></option>
-		    <option value="deleteusers"><?php _e('Delete subscribers', WYSIJA); ?></option>
+		    <option value="actionvar_removefromalllists" data-nonce="<?php echo $this->secure(array('action' => "actionvar_removefromalllists" ), true)?>"><?php _e('Remove from all lists', WYSIJA); ?></option>
+		    <option value="exportlist" data-nonce="<?php echo $this->secure(array('action' => "exportlist" ), true)?>"><?php _e('Export', WYSIJA); ?></option>
+		    <option value="deleteusers" data-nonce="<?php echo $this->secure(array('action' => "deleteusers" ), true)?>"><?php _e('Delete subscribers', WYSIJA); ?></option>
 		    <?php
 		    $config_model = WYSIJA::get('config', 'model');
 		    if ($config_model->getValue('confirm_dbleoptin'))
 		    {
 			?>
-	    	    <option value="actionvar_confirmusers"><?php _e('Confirm unconfirmed subscribers', WYSIJA); ?></option>
+	    	    <option value="actionvar_confirmusers" data-nonce="<?php echo $this->secure(array('action' => "actionvar_confirmusers" ), true)?>"><?php _e('Confirm unconfirmed subscribers', WYSIJA); ?></option>
 		    <?php } ?>
 		</select>
 		<input type="submit" class="bulksubmit button-secondary action" name="doaction" value="<?php echo esc_attr(__('Apply', WYSIJA)); ?>">
@@ -182,28 +182,41 @@ class WYSIJA_view_back_subscribers extends WYSIJA_view_back
 	    </div>
 
 	    <div class="alignleft actions">
-		<select name="wysija[filter][filter_list]" class="global-filter mp-select-sort">
-		    <option selected="selected" value=""><?php _e('View all lists', WYSIJA); ?></option>
+		<select name="wysija[filter][filter_list]" class="global-filter">
 	<?php
+	$is_list_pre_selected = false;
+        $options_list = '';
 	foreach ($data['lists'] as $listK => $list)
 	{
-	    $selected = "";
-	    if (isset($_REQUEST['wysija']['filter']['filter_list']) && $_REQUEST['wysija']['filter']['filter_list'] == $listK)
-		$selected = ' selected="selected" ';
+			$selected = '';
+			if (in_array($listK, $data['selected_lists'])) {
+				$selected = ' selected="selected" ';
+				$is_list_pre_selected = true;
+			}
 	    if (isset($list['users']))
-		echo '<option '.$selected.' value="'.$list['list_id'].'">'.$list['name'].' ('.$list['users'].')'.'</option>';
+		$options_list .= '<option '.$selected.' value="'.$list['list_id'].'">'.$list['name'].' ('.$list['users'].')'.'</option>';
 	    else
-		echo '<option '.$selected.' value="'.$list['list_id'].'">'.$list['name'].'</option>';
+		$options_list .= '<option '.$selected.' value="'.$list['list_id'].'">'.$list['name'].'</option>';
 	}
+
 	?>
-	<?php
-	$orphaned_selected = '';
-	if (isset($_REQUEST['wysija']['filter']['filter_list']) && $_REQUEST['wysija']['filter']['filter_list'] === 'orphaned')
-	{
-	    $orphaned_selected = ' selected="selected" ';
-	}
-	?>
-		    <option <?php echo $orphaned_selected; ?> value="orphaned"><?php _e('Subscribers in no list', WYSIJA); ?></option>
+
+                    <?php
+                        // Now, if there is not any selected list, let's select "View all lists" by default.
+                        $selected = in_array('', $data['selected_lists']) ? ' selected="selected" ' : '';
+                    ?>
+			<option <?php echo $selected; ?> data-sort='0' value=""><?php _e('View all lists', WYSIJA); ?></option>
+                    <?php
+                        $selected = in_array('orphaned', $data['selected_lists']) ? ' selected="selected" ' : '';
+			if (in_array('orphaned', $data['selected_lists'])) {
+				$selected = ' selected="selected" ';
+				$is_list_pre_selected = true;
+			}
+                    ?>
+                    <option <?php echo $selected; ?> value="orphaned" data-sort='0'><?php _e('Subscribers in no list', WYSIJA); ?></option>
+
+
+                        <?php echo $options_list; ?>
 		</select>
 		<input type="submit" class="filtersubmit button-secondary action" name="doaction" value="<?php echo esc_attr(__('Filter', WYSIJA)); ?>">
 	    </div>
@@ -258,8 +271,8 @@ class WYSIJA_view_back_subscribers extends WYSIJA_view_back
 		    $header .='<th class="manage-column column-list-names" id="list-list" scope="col">'.__('Lists', WYSIJA).'</th>';
 		    $header .='<th class="manage-column column-status'.$status_sorting.'" id="status" scope="col" style="width:80px;"><a href="#" class="orderlink" ><span>'.__('Status', WYSIJA).'</span><span class="sorting-indicator"></span></a></th>';
 		    $header .= '<th class="manage-column column-date'.$created_at_sorting.'" id="created_at" scope="col"><a href="#" class="orderlink" ><span>'.__('Subscribed on', WYSIJA).'</span><span class="sorting-indicator"></span></a></th>';
-		    // $header .= '<th class="manage-column column-date' . $last_opened_sorting . '" id="last_opened" scope="col"><a href="#" class="orderlink" ><span>' . __('Last open', WYSIJA) . '</span><span class="sorting-indicator"></span></a></th>';
-		    // $header .= '<th class="manage-column column-date' . $last_clicked_sorting . '" id="last_clicked" scope="col"><a href="#" class="orderlink" ><span>' . __('Last click', WYSIJA) . '</span><span class="sorting-indicator"></span></a></th>';
+		    $header .= '<th class="manage-column column-date' . $last_opened_sorting . '" id="last_opened" scope="col"><a href="#" class="orderlink" ><span>' . __('Last open', WYSIJA) . '</span><span class="sorting-indicator"></span></a></th>';
+		    $header .= '<th class="manage-column column-date' . $last_clicked_sorting . '" id="last_clicked" scope="col"><a href="#" class="orderlink" ><span>' . __('Last click', WYSIJA) . '</span><span class="sorting-indicator"></span></a></th>';
 
 		    $header .= '</tr>';
 		    echo $header;
@@ -337,8 +350,8 @@ class WYSIJA_view_back_subscribers extends WYSIJA_view_back
 	    ?></td>
 	        <td><?php echo $statuses[$row['status']]; ?></td>
 	        <td><?php echo $this->fieldListHTML_created_at($row['created_at']) ?></td>
-	        <!--td><?php // echo $this->fieldListHTML_created_at($row['last_opened']) ?></td-->
-	        <!--td><?php // echo $this->fieldListHTML_created_at($row['last_clicked']) ?></td-->
+	        <td><?php echo $this->fieldListHTML_created_at($row['last_opened']) ?></td>
+	        <td><?php echo $this->fieldListHTML_created_at($row['last_clicked']) ?></td>
 	        </tr><?php
 			$alt = !$alt;
 		    }
@@ -441,6 +454,7 @@ class WYSIJA_view_back_subscribers extends WYSIJA_view_back
 	    <p class="submit">
 		<input type="hidden" name="wysija[export][user_ids]" id="user_ids" value="<?php if (isset($data['subscribers'])) echo base64_encode(serialize($data['subscribers'])) ?>" />
 		<input type="hidden" value="export_get" name="action" />
+                <?php $this->secure(array('action' => "export_get")); ?>
 		<input type="submit" value="<?php echo esc_attr(__('Export', WYSIJA)) ?>" class="button-primary wysija">
 	    </p>
 	</form>
@@ -727,7 +741,7 @@ class WYSIJA_view_back_subscribers extends WYSIJA_view_back
 	    	    <a href="admin.php?page=wysija_subscribers&id=<?php echo $columns['list_id'] ?>&action=editlist" class="submitedit"><?php _e('Edit', WYSIJA) ?></a> |
 	    	</span>
 	    	<span class="duplicate">
-	    	    <a href="admin.php?page=wysija_subscribers&id=<?php echo $columns['list_id'] ?>&action=duplicatelist" class="submitduplicate"><?php _e('Duplicate', WYSIJA) ?></a>
+	    	    <a href="admin.php?page=wysija_subscribers&id=<?php echo $columns['list_id'] ?>&action=duplicatelist&_wpnonce=<?php echo $this->secure(array("action" => "duplicatelist", "id" => $columns['list_id']), true); ?>" class="submitduplicate"><?php _e('Duplicate', WYSIJA) ?></a>
 	    	</span>
 	    <?php if ($columns['namekey'] != "users"): ?>
 			|
@@ -923,7 +937,7 @@ class WYSIJA_view_back_subscribers extends WYSIJA_view_back
 
 		<p class="submit">
 		    <input type="hidden" value="importmatch" name="action" />
-
+                    <?php $this->secure(array('action' => "importmatch")); ?>
 		    <input type="submit" value="<?php echo esc_attr(__('Next step', WYSIJA)) ?>" class="button-primary wysija">
 
 		</p>

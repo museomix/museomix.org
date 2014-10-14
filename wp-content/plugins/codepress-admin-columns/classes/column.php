@@ -2,7 +2,7 @@
 /**
  * CPAC_Column class
  *
- * @since 2.0.0
+ * @since 2.0
  *
  * @param object $storage_model CPAC_Storage_Model
  */
@@ -11,31 +11,32 @@ class CPAC_Column {
 	/**
 	 * A Storage Model can be a Posttype, User, Comment, Link or Media storage type.
 	 *
-	 * @since 2.0.0
-	 * @var object $storage_model contains a CPAC_Storage_Model object which the column belongs too.
+	 * @since 2.0
+	 * @var CPAC_Storage_Model $storage_model contains a CPAC_Storage_Model object which the column belongs too.
 	 */
 	public $storage_model;
 
 	/**
-	 * @since 2.0.0
+	 * @since 2.0
 	 * @var array $options contains the user set options for the CPAC_Column object.
 	 */
 	public $options = array();
 
 	/**
-	 * @since 2.0.0
+	 * @since 2.0
 	 * @var object $options_default contains the options for the CPAC_Column object before they are populated with user input.
 	 */
 	protected $options_default;
 
 	/**
-	 * @since 2.0.0
+	 * @since 2.0
 	 * @var array $properties describes the fixed properties for the CPAC_Column object.
 	 */
 	public $properties = array();
 
 	/**
-	 * @since 2.0.0
+	 * @since 2.0
+	 *
 	 * @param int $id ID
 	 * @return string Value
 	 */
@@ -46,13 +47,14 @@ class CPAC_Column {
 	 * Not suitable for direct display, use get_value() for that
 	 *
 	 * @since 2.0.3
+	 *
 	 * @param int $id ID
 	 * @return mixed Value
 	 */
 	public function get_raw_value( $id ) {}
 
 	/**
-	 * @since 2.0.0
+	 * @since 2.0
 	 */
 	protected function display_settings() {}
 
@@ -60,7 +62,8 @@ class CPAC_Column {
 	 * Overwrite this function in child class to sanitize
 	 * user submitted values.
 	 *
-	 * @since 2.0.0
+	 * @since 2.0
+	 *
 	 * @param $options array User submitted column options
 	 * @return array Options
 	 */
@@ -74,26 +77,48 @@ class CPAC_Column {
 	}
 
 	/**
+	 * Determine whether this column type should be available
+	 *
+	 * @since 2.2
+	 *
+	 * @return bool Whether the column type should be available
+	 */
+	public function apply_conditional() {
+
+		return true;
+	}
+
+	/**
 	 * An object copy (clone) is created for creating multiple column instances.
 	 *
-	 * @since 2.0.0
+	 * @since 2.0
 	 */
 	public function __clone() {
 
-        // Force a copy of this->object, otherwise it will point to same object.
+		// Force a copy of this->object, otherwise it will point to same object.
 		$this->options 		= clone $this->options;
 		$this->properties 	= clone $this->properties;
-    }
+	}
 
 	/**
-	 * @since 2.0.0
+	 * @since 2.0
+	 *
 	 * @param object $storage_model CPAC_Storage_Model
 	 */
-	function __construct( CPAC_Storage_Model $storage_model ) {
+	public function __construct( CPAC_Storage_Model $storage_model ) {
 
 		$this->storage_model = $storage_model;
 
-		// every column contains these default properties
+		$this->init();
+		$this->after_setup();
+	}
+
+	/**
+	 * @since 2.2
+	 */
+	public function init() {
+
+		// Default properties
 		$default_properties = array(
 			'clone'				=> null,	// Unique clone ID
 			'type'				=> null,  	// Unique type
@@ -104,51 +129,21 @@ class CPAC_Column {
 			'is_registered'		=> true,	// Should the column be registered based on conditional logic, example usage see: 'post/page-template.php'
 			'is_cloneable'		=> true,	// Should the column be cloneable
 			'default'			=> false,	// Is this a WP default column,
-			'group'				=> 'custom'
+			'group'				=> 'custom',
+			'hidden'			=> false
 		);
 
-		// merge arguments with defaults. turn into object for easy handling
-		$properties = array_merge( $default_properties, $this->properties );
-
-		// set column name to column type
-		$properties['name'] = $properties['type'];
-
-		// apply conditional statements wheter this column should be available or not.
-		if ( method_exists( $this, 'apply_conditional' ) ) {
-			$properties['is_registered'] = $this->apply_conditional();
+		foreach ( $default_properties as $property => $value ) {
+			$this->properties[ $property ] = $value;
 		}
 
-		/**
-		 * Filter the properties of a column type, such as type and is_cloneable
-		 * Property $column_instance added in Admin Columns 2.2
-		 *
-		 * @since 2.0.0
-		 * @param array $properties Column properties
-		 * @param CPAC_Column $column_instance Column class instance
-		 */
-		$properties = apply_filters( 'cac/column/properties', $properties, $this );
-
-		/**
-		 * Filter the properties of a column type for a specific storage model
-		 * Property $column_instance added in Admin Columns 2.2
-		 *
-		 * @since 2.0.0
-		 * @see Filter cac/column/properties
-		 */
-		$properties = apply_filters( "cac/column/properties/storage_key={$this->storage_model->key}", $properties, $this );
-
-		// convert to object for easy handling
-		$this->properties = (object) $properties;
-
-		// every column contains these default options
-		$default_options = array(
-			'label'	=> $this->properties->label,	// Label for this column.
-			'width'	=> null,						// Width for this column.
-			'state'	=> 'off'						// Active state for this column.
-		);
-
 		// Default options
-		$default_options = array_merge( $default_options, $this->options );
+		$default_options = array(
+			'before'	=> '', // Before field
+			'after'		=> '', // After field
+			'width'		=> null, // Width for this column.
+			'state'		=> 'off' // Active state for this column.
+		);
 
 		/**
 		 * Filter the default options for a column instance, such as label and width
@@ -159,21 +154,50 @@ class CPAC_Column {
 		 */
 		$default_options = apply_filters( 'cac/column/default_options', $default_options, $this );
 
+		foreach ( $default_options as $option => $value ) {
+			$this->options[ $option ] = $value;
+		}
+	}
+
+	public function after_setup() {
+
+		// Column name defaults to column type
+		if ( ! isset( $this->properties['name'] ) ) {
+			$this->properties['name'] = $this->properties['type'];
+		}
+
+		// Check whether the column should be available
+		$this->properties['is_registered'] = $this->apply_conditional();
+
 		/**
-		 * Filter the default options for a column instance for a specific storage model
+		 * Filter the properties of a column type, such as type and is_cloneable
+		 * Property $column_instance added in Admin Columns 2.2
 		 *
-		 * @since 2.2
-		 * @see Filter cac/column/options
+		 * @since 2.0
+		 * @param array $properties Column properties
+		 * @param CPAC_Column $column_instance Column class instance
 		 */
-		$default_options = apply_filters( "cac/column/default_options/storage_key={$this->storage_model->key}", $default_options, $this );
+		$this->properties = apply_filters( 'cac/column/properties', $this->properties, $this );
 
-		// merge arguments with defaults and stored options. turn into object for easy handling
-		$this->options = (object) $default_options;
+		/**
+		 * Filter the properties of a column type for a specific storage model
+		 * Property $column_instance added in Admin Columns 2.2
+		 *
+		 * @since 2.0
+		 * @see Filter cac/column/properties
+		 */
+		$this->properties = apply_filters( "cac/column/properties/storage_key={$this->storage_model->key}", $this->properties, $this );
 
-		// set default options before populating
-		$this->options_default = $this->options;
+		// Column label defaults to column type label
+		if ( ! isset( $this->options['label'] ) ) {
+			$this->options['label'] = $this->properties['label'];
+		}
 
-		// add stored options
+		// Convert properties and options arrays to object
+		$this->options = (object) $this->options;
+		$this->properties = (object) $this->properties;
+
+		// Read options from database
 		$this->populate_options();
 
 		$this->sanitize_label();
@@ -183,7 +207,7 @@ class CPAC_Column {
 	 * Populate Options
 	 * Added $options parameter in 2.2
 	 *
-	 * @since 2.0.0
+	 * @since 2.0
 	 * @param array $options Optional. Options to populate the storage model with. Defaults to options from database.
 	 */
 	public function populate_options( $options = NULL ) {
@@ -241,7 +265,7 @@ class CPAC_Column {
 	}
 
 	/**
-	 * @since 2.0.0
+	 * @since 2.0
 	 * @return array Column options
 	 */
 	public function read() {
@@ -255,10 +279,9 @@ class CPAC_Column {
 	}
 
 	/**
-	 * @since 2.0.0
+	 * @since 2.0
 	 */
 	public function sanitize_label() {
-
 		// check if original label has changed. Example WPML adds a language column, the column heading will have to display the added flag.
 		if ( $this->properties->hide_label && $this->properties->label !== $this->options->label ) {
 			$this->options->label = $this->properties->label;
@@ -269,7 +292,7 @@ class CPAC_Column {
 	}
 
 	/**
-	 * @since 2.0.0
+	 * @since 2.0
 	 * @param $options array User submitted column options
 	 * @return array Options
 	 */
@@ -287,7 +310,10 @@ class CPAC_Column {
 
 			// Label can not contains the character ':', because
 			// CPAC_Column::get_sanitized_label() will return an empty string
-			$options['label'] = str_replace( ':', '', $options['label'] );
+			// and make an exception for site_url()
+			if ( false === strpos( $options['label'], site_url() ) ) {
+				$options['label'] = str_replace( ':', '', $options['label'] );
+			}
 		}
 
 		// used by child classes for additional sanitizing
@@ -297,14 +323,14 @@ class CPAC_Column {
 	}
 
 	/**
-	 * @since 2.0.0
+	 * @since 2.0
 	 */
 	function get_label() {
 
 		/**
 		 * Filter the column instance label
 		 *
-		 * @since 2.0.0
+		 * @since 2.0
 		 *
 		 * @param string $label Column instance label
 		 * @param CPAC_Column $column_instance Column class instance
@@ -315,7 +341,7 @@ class CPAC_Column {
 	/**
 	 * Sanitizes label using intern wordpress function esc_url so it matches the label sorting url.
 	 *
-	 * @since 1.0.0
+	 * @since 1.0
 	 * @param string $string
 	 * @return string Sanitized string
 	 */
@@ -337,7 +363,7 @@ class CPAC_Column {
 	}
 
 	/**
-	 * @since 2.0.0
+	 * @since 2.0
 	 * @param $id Cache ID
 	 * @param $cache_object Cache Object
 	 */
@@ -351,7 +377,7 @@ class CPAC_Column {
 	}
 
 	/**
-	 * @since 2.0.0
+	 * @since 2.0
 	 * @param $id Cache ID ( could be a name of an addon for example )
 	 * @return false | mixed Returns either false or the cached objects
 	 */
@@ -366,7 +392,7 @@ class CPAC_Column {
 	}
 
 	/**
-	 * @since 2.0.0
+	 * @since 2.0
 	 * @param $id Cache ID
 	 */
 	function delete_cache( $id ) {
@@ -403,7 +429,7 @@ class CPAC_Column {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since 1.0
 	 * @param int $post_id Post ID
 	 * @return string Post Excerpt.
 	 */
@@ -429,7 +455,7 @@ class CPAC_Column {
 
 	/**
 	 * @see wp_trim_words();
-	 * @since 1.0.0
+	 * @since 1.0
 	 * @return string Trimmed text.
 	 */
 	protected function get_shortened_string( $text = '', $num_words = 30, $more = null ) {
@@ -473,7 +499,7 @@ class CPAC_Column {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since 1.0
 	 * @return array Image Sizes.
 	 */
 	public function get_all_image_sizes() {
@@ -494,7 +520,47 @@ class CPAC_Column {
 	}
 
 	/**
-	 * @since 2.0.0
+	 * Get post type
+	 *
+	 * @since 2.1.1
+	 */
+	function get_post_type() {
+		return isset( $this->storage_model->post_type ) ? $this->storage_model->post_type : false;
+	}
+
+	/**
+	 * @since 2.2.6
+	 */
+	public function get_terms_for_display( $term_ids, $taxonomy ) {
+		$values = array();
+		if ( $term_ids && ! is_wp_error( $term_ids ) ) {
+			$post_type = $this->get_post_type();
+			foreach ( $term_ids as $term_id ) {
+				$term = get_term( $term_id, $taxonomy );
+				$title = esc_html( sanitize_term_field( 'name', $term->name, $term->term_id, $term->taxonomy, 'edit' ) );
+
+				$filter_key = $term->taxonomy;
+				if ( 'category' === $term->taxonomy ) {
+					$filter_key = 'category_name';
+				}
+
+				$link = "<a href='edit.php?post_type={$post_type}&{$filter_key}={$term->slug}'>{$title}</a>";
+				if ( $post_type == 'attachment' ) {
+					$link = "<a href='upload.php?taxonomy={$filter_key}&term={$term->slug}'>{$title}</a>";
+				}
+
+				$values[] = $link;
+			}
+		}
+		if ( ! $values ) {
+			return false;
+		}
+
+		return implode( ', ', $values );
+	}
+
+	/**
+	 * @since 2.0
 	 * @param string $name
 	 * @return array Image Sizes
 	 */
@@ -515,7 +581,7 @@ class CPAC_Column {
 
 	/**
 	 * @see image_resize()
-	 * @since 2.0.0
+	 * @since 2.0
 	 * @return string Image URL
 	 */
 	public function image_resize( $file, $max_w, $max_h, $crop = false, $suffix = null, $dest_path = null, $jpeg_quality = 90 ) {
@@ -544,7 +610,53 @@ class CPAC_Column {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since: 2.2.6
+	 *
+	 */
+	function get_color_for_display( $color_hex ) {
+		if ( ! $color_hex ) {
+			return false;
+		}
+		$text_color = $this->get_text_color( $color_hex );
+		return "<div class='cpac-color'><span style='background-color:{$color_hex};color:{$text_color}'>{$color_hex}</span></div>";
+	}
+
+	/**
+	 * Determines text color absed on bakground coloring.
+	 *
+	 * @since 1.0
+	 */
+	function get_text_color( $bg_color ) {
+
+		$rgb = $this->hex2rgb( $bg_color );
+
+		return $rgb && ( ( $rgb[0]*0.299 + $rgb[1]*0.587 + $rgb[2]*0.114 ) < 186 ) ? '#ffffff' : '#333333';
+	}
+
+	/**
+	 * Convert hex to rgb
+	 *
+	 * @since 1.0
+	 */
+	function hex2rgb( $hex ) {
+		$hex = str_replace( "#", "", $hex );
+
+		if(strlen($hex) == 3) {
+			$r = hexdec(substr($hex,0,1).substr($hex,0,1));
+			$g = hexdec(substr($hex,1,1).substr($hex,1,1));
+			$b = hexdec(substr($hex,2,1).substr($hex,2,1));
+		} else {
+			$r = hexdec(substr($hex,0,2));
+			$g = hexdec(substr($hex,2,2));
+			$b = hexdec(substr($hex,4,2));
+		}
+		$rgb = array($r, $g, $b);
+
+		return $rgb;
+	}
+
+	/**
+	 * @since 1.0
 	 * @param mixed $meta Image files or Image ID's
 	 * @param array $args
 	 * @return array HTML img elements
@@ -557,7 +669,7 @@ class CPAC_Column {
 		}
 
 		// turn string to array
-		if ( is_string( $images ) ) {
+		if ( is_string( $images ) || is_numeric( $images ) ) {
 			if ( strpos( $images, ',' ) !== false ) {
 				$images = array_filter( explode( ',', $this->strip_trim( str_replace( ' ', '', $images ) ) ) );
 			}
@@ -637,12 +749,12 @@ class CPAC_Column {
 	/**
 	 * Implode for multi dimensional array
 	 *
-	 * @since 1.0.0
+	 * @since 1.0
 	 * @param string $glue
 	 * @param array $pieces
 	 * @return string Imploded array
 	 */
-	protected function recursive_implode( $glue, $pieces ) {
+	public function recursive_implode( $glue, $pieces ) {
 		foreach( $pieces as $r_pieces )	{
 			if ( is_array( $r_pieces ) ) {
 				$retVal[] = $this->recursive_implode( $glue, $r_pieces );
@@ -661,7 +773,7 @@ class CPAC_Column {
 	/**
 	 * Get timestamp
 	 *
-	 * @since  2.0.0
+	 * @since 2.0
 	 * @param string $date
 	 * @return string Formatted date
 	 */
@@ -726,7 +838,27 @@ class CPAC_Column {
 	}
 
 	/**
-	 * @since 2.0.0
+	 * Get before value
+	 *
+	 * @since 1.0
+	 */
+	public function get_before() {
+
+		return stripslashes( $this->options->before );
+	}
+
+	/**
+	 * Get after value
+	 *
+	 * @since 1.0
+	 */
+	public function get_after() {
+
+		return stripslashes( $this->options->after );
+	}
+
+	/**
+	 * @since 2.0
 	 * @param string $field_key
 	 * @return string Attribute Name
 	 */
@@ -743,7 +875,7 @@ class CPAC_Column {
 	}
 
 	/**
-	 * @since 2.0.0
+	 * @since 2.0
 	 */
 	function display_field_date_format() {
 
@@ -767,7 +899,7 @@ class CPAC_Column {
 	}
 
 	/**
-	 * @since 2.0.0
+	 * @since 2.0
 	 */
 	function display_field_excerpt_length() {
 
@@ -786,7 +918,7 @@ class CPAC_Column {
 	}
 
 	/**
-	 * @since 2.0.0
+	 * @since 2.0
 	 */
 	function display_field_preview_size() {
 
@@ -843,7 +975,7 @@ class CPAC_Column {
 	}
 
 	/**
-	 * @since 2.0.0
+	 * @since 2.0
 	 * @param array Column Objects
 	 * @return string HTML List
 	 */
@@ -857,13 +989,19 @@ class CPAC_Column {
 
 		// sort by alphabet
 		$_columns = array();
+
 		foreach ( $columns as $column ) {
-			$_columns[ $column->properties->type ] = 0 === strlen( strip_tags( $column->properties->label ) ) ? ucfirst( $column->properties->type ) : $column->properties->label;
+			if ( $column->properties->hidden ) {
+				continue;
+			}
+
+			$_columns[ $column->properties->type ] = ( 0 === strlen( strip_tags( $column->properties->label ) ) ) ? ucfirst( $column->properties->type ) : $column->properties->label;
 		}
+
 		asort( $_columns );
 
 		$list = "<optgroup label='{$label}'>";
-		foreach ( $_columns as $type => $label ){
+		foreach ( $_columns as $type => $label ) {
 			$selected = selected( $this->properties->type, $type, false );
 			$list .= "<option value='{$type}'{$selected}>{$label}</option>";
 		}
@@ -873,7 +1011,7 @@ class CPAC_Column {
 	}
 
 	/**
-	 * @since 2.0.0
+	 * @since 2.0
 	 */
 	public function display() {
 
@@ -883,7 +1021,6 @@ class CPAC_Column {
 		$column_list = '';
 
 		$groups = $this->storage_model->get_column_type_groups();
-
 		foreach ( $groups as $group => $label ) {
 			$column_list .= $this->get_column_list( $this->storage_model->column_types[ $group ], $label );
 		}
@@ -909,7 +1046,7 @@ class CPAC_Column {
 										/**
 										 * Fires in the meta-element for column options, which is displayed right after the column label
 										 *
-										 * @since 2.0.0
+										 * @since 2.0
 										 *
 										 * @param CPAC_Column $column_instance Column class instance
 										 */
@@ -974,7 +1111,7 @@ class CPAC_Column {
 						/**
 						 * Fires directly before the custom options for a column are displayed in the column form
 						 *
-						 * @since 2.0.0
+						 * @since 2.0
 						 * @param CPAC_Column $column_instance Column class instance
 						 */
 						do_action( 'cac/column/settings_before', $this );
@@ -993,7 +1130,7 @@ class CPAC_Column {
 						/**
 						 * Fires directly after the custom options for a column are displayed in the column form
 						 *
-						 * @since 2.0.0
+						 * @since 2.0
 						 * @param CPAC_Column $column_instance Column class instance
 						 */
 						do_action( 'cac/column/settings_after', $this );
@@ -1009,8 +1146,8 @@ class CPAC_Column {
 
 					</tbody>
 				</table>
-			</div><!--.column-form-->
-		</div><!--.cpac-column-->
+			</div>
+		</div>
 		<?php
 	}
 }

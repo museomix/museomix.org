@@ -1,29 +1,32 @@
 <?php
-
 /**
  * CPAC_Column_User_Post_Count
  *
- * @since 2.0.0
+ * @since 2.0
  */
 class CPAC_Column_User_Post_Count extends CPAC_Column {
 
-	function __construct( $storage_model ) {
+	/**
+	 * @see CPAC_Column::init()
+	 * @since 2.2.1
+	 */
+	public function init() {
 
-		// define properties
+		parent::init();
+
+		// Properties
 		$this->properties['type']	 		= 'column-user_postcount';
 		$this->properties['label']	 		= __( 'Post Count', 'cpac' );
 		$this->properties['is_cloneable']	= true;
 
-		// define additional options
+		// Options
 		$this->options['post_type'] = '';
-
-		parent::__construct( $storage_model );
 	}
 
 	/**
 	 * Get count
 	 *
-	 * @since 2.0.0
+	 * @since 2.0
 	 */
 	public function get_count( $user_id ) {
 
@@ -45,7 +48,7 @@ class CPAC_Column_User_Post_Count extends CPAC_Column {
 
 	/**
 	 * @see CPAC_Column::get_value()
-	 * @since 2.0.0
+	 * @since 2.0
 	 */
 	function get_value( $user_id ) {
 
@@ -71,7 +74,7 @@ class CPAC_Column_User_Post_Count extends CPAC_Column {
 	 * Display Settings
 	 *
 	 * @see CPAC_Column::display_settings()
-	 * @since 2.0.0
+	 * @since 2.0
 	 */
 	function display_settings() {
 

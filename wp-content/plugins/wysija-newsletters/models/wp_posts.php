@@ -138,8 +138,8 @@ class WYSIJA_model_wp_posts extends WYSIJA_model{
                     break;
                     case 'post_date':
                         // apply timezone to date value
-                        $helper_toolbar = WYSIJA::get('toolbox','helper');
-                        $value = $helper_toolbar->time_tzed($value);
+                        $helper_toolbox = WYSIJA::get('toolbox','helper');
+                        $value = $helper_toolbox->time_tzed($value);
 
                         if($value !== '') {
                             $conditions[] = array('col' => 'A.post_date', 'sign' => '>', 'val' => $value);
@@ -178,10 +178,12 @@ class WYSIJA_model_wp_posts extends WYSIJA_model{
             }
         }
 
-        // set limit
-        $query_offset = (isset($args['query_offset']) ? (int)$args['query_offset'] : 0);
-        $query_limit = ((isset($args['post_limit']) && (int)$args['post_limit'] > 0) ? (int)$args['post_limit'] : 10);
-        $query .= sprintf(' LIMIT %d,%d', $query_offset, $query_limit);
+        // set limit (only if we are not requesting posts based on their id)
+        if(array_key_exists('include', $args) && $args['include'] === NULL) {
+            $query_offset = (isset($args['query_offset']) ? (int)$args['query_offset'] : 0);
+            $query_limit = ((isset($args['post_limit']) && (int)$args['post_limit'] > 0) ? (int)$args['post_limit'] : 10);
+            $query .= sprintf(' LIMIT %d,%d', $query_offset, $query_limit);
+        }
 
         if($args['is_search_query'] === true) {
             return array(

@@ -1,10 +1,10 @@
-=== Codepress Admin Columns ===
+=== Admin Columns ===
 Contributors: codepress, tschutter, davidmosterd, engelen
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZDZRSYLQ4Z76J
 Tags: plugins, wordpress, admin, column, columns, custom columns, custom fields, image, dashboard, sortable, filters, posts, media, users, pages, posttypes, manage columns, wp-admin
 Requires at least: 3.5
-Tested up to: 3.9.1
-Stable tag: 2.2
+Tested up to: 4.0
+Stable tag: 2.2.8.1
 
 Customise columns on the administration screens for post(types), pages, media, comments, links and users with an easy to use drag-and-drop interface.
 
@@ -12,9 +12,12 @@ Customise columns on the administration screens for post(types), pages, media, c
 
 Manage and organize columns in the posts, users, comments and media lists in the WordPress admin panel. Transform the WordPress admin screens into beautiful, clear overviews.
 
+> #### Admin Columns Pro
 > The free version of Admin Columns does not support sorting, filtering and inline editing and has no priority support. [Admin Columns Pro](http://admincolumns.com/?utm_source=wordpressorg&utm_medium=readme&utm_content=blockquote&utm_campaign=cpac-pluginpage) offers these features, direct e-mail support and several add-ons.
 
+
 [vimeo http://vimeo.com/96885841]
+
 
 = Enhanced list tables =
 By default, WordPress provides list tables, giving you an overview of your content in the admin panel. These list tables are quite limited, however. For posts and custom post types, for example, not much more than the date and title of the post is displayed. Admin Columns allows you to take control over these list tables, managing the columns dislpayed in these overviews. Supporting custom fields, featured images, custom taxonomies, EXIF data for media and much, much more (Admin Columns features over 90 columns), you can create overviews that are perfectly suited for your content.
@@ -29,6 +32,8 @@ All of the new columns support sorting on all screens, and many of them support 
 
 = Third party plugin integration =
 Admin Columns works perfectly with just about all external plugins with custom columns. Examples include Yoast SEO (SEO columns), WooCommerce, Advanced Custom Fields, Types and Pods. Not only can you reorganize the custom columns added by these plugins, you can also add custom columns provided by Admin Columns in the overview!
+
+The Developer license of [Admin Columns Pro](http://admincolumns.com/?utm_source=wordpressorg&utm_medium=readme&utm_content=thirdpartyplugins&utm_campaign=cpac-pluginpage) includes [Advanced Custom Fields](http://admincolumns.com/advanced-custom-fields-integration/?utm_source=wordpressorg&utm_medium=readme&utm_content=thirdpartyplugins&utm_campaign=cpac-pluginpage) and [WooCommerce](http://admincolumns.com/woocommerce-integration/?utm_source=wordpressorg&utm_medium=readme&utm_content=thirdpartyplugins&utm_campaign=cpac-pluginpage) add-ons for easy integration and inline editing of data from these plugins.
 
 = Custom field column =
 Admin Columns allows you to display custom fields for posts (post meta) and users (user meta) for all custom fields you have. With many different custom field types supported, such as files, images, numbers and even post and user relations, you can create a beautiful overview of your custom content!
@@ -171,8 +176,8 @@ You can leave any requests or feedback on [admincolumns.com](http://admincolumns
 == Installation ==
 
 1. Upload codepress-admin-columns to the /wp-content/plugins/ directory
-2. Activate Codepress Admin Columns through the 'Plugins' menu in WordPress
-3. Configure the plugin by going to the Admin Column settings that appears under the Settings menu.
+2. Activate Admin Columns through the 'Plugins' menu in WordPress
+3. Configure the plugin by going to the Admin Columns settings that appears under the Settings menu.
 
 == Frequently Asked Questions ==
 
@@ -246,6 +251,74 @@ You can find a list of the available actions and filters (and examples on how to
 
 == Changelog ==
 
+= 2.2.8.1 =
+* [Fixed] Quick Edit will display columns correctly after saving
+
+= 2.2.8 =
+* [Fixed] support for WPML columns
+
+= 2.2.7 =
+* [Added] Added date format option for "Last modified" column
+* [Updated] Change references from Codepress Admin Columns to Admin Columns
+* [Updated] General code clean-up
+* [Improved] Documentation improvements
+
+= 2.2.6.4 =
+* [Updated] Portuguese (Brazil) language - thanks to André Mácola Machado
+
+= 2.2.6.3 =
+* [Updated] Enable 3rd party plugins to set storage_models outside the post listings screens
+* [Updated] Spanish language updated - thanks to Andrew Kurtis
+
+= 2.2.6.2 =
+* [Fixed] Fixed “Illegal offset” warning for unset option on edit screen
+
+= 2.2.6.1 =
+* [Fixed] Fixed dependency on PHP 5.3+ in actions column
+
+= 2.2.6 =
+* [Changed] Display "edit columns" button by default
+* [Improved] Improved memory usage by only loading columns for the current screen
+* [Changed] Removed floatHead library
+* [Updated] Only display ACF placeholder with ACF active.
+
+= 2.2.5.1 =
+* [Fixed] Unavailable included JS-file on editing pages
+
+= 2.2.5 =
+* [Fixed] Error with actions icons.
+* [Added] New Column! Used-by-menu column; will display in which menu a post/page/taxonomy is being used. With support for column sorting in posts.
+* [Fixed] Only ajax calls from cpac will trigger the loading of storage_models now.
+
+= 2.2.4 =
+* [Added] New filter `cpac/storage_model/columns_default` for filtering the columns that should be loaded if there are no stored columns
+* [Added] Option (column property `hidden`) to hide column types from the dropdown list of column types
+* [Added] Use tooltip library for enhanced column value representation
+* [Added] Box for direct feedback on Admin Columns settings screen
+* [Added] Added method for retrieving current storage model (for overview pages such as the posts and page overviews)
+* [Added] Added WooCommerce add-on to list of add-ons
+* [Updated] Hide ACF5 field group post type from list of post types columns settings
+* [Updated] Updated structure of scripts and styles and way of enqueuing them
+
+= 2.2.3 =
+* [Added] Added Path column for post(types). Uses the permalink without the home url.
+
+= 2.2.2 =
+* [Fixed] Custom Fields for Media Library did not work.
+* [Fixed] Column type dropdown displayed an empty item.
+
+= 2.2.1.1 =
+* [Fixed] Fixed issue with Posts 2 Posts (and other third party plugins) columns not being displayed because of  hooking into late actions on post pages
+
+= 2.2.1 =
+* [Added] Option to make permalink in permalink column clickable (linking to post)
+* [Added] Direct support box in Admin Columns settings screen sidebar
+* [Added] Added filter to suppress pro add-on notice (`cpac/suppress_proaddon_notice`)
+* [Updated] Minor adjustments for WooCommerce and other third party plugin support, setting up the post object in post columns
+* [Updated] Minor update in default column retrieval for improved 3rd party plugin support
+* [Fixed] Fixed problem with column groups incorrectly handling default 3rd party columns
+* [Updated] Updated translations from Transifex
+
 = 2.2 =
 * [Added] AJAX refreshing of columns in columns settings screen
 * [Added] Support for managing columns via code instead of UI
@@ -295,7 +368,7 @@ You can find a list of the available actions and filters (and examples on how to
 = 2.0.3 =
 * [Updated] Danish translation - thanks to iosoftgame
 * [Updated] Spanish translation - thanks to redywebs
-* [Added] Chinese translation - thanks to å€¡èŒ
+* [Added] Chinese translation - thanks to Ã¥â‚¬Â¡Ã¨ÂÅ’
 * [Fixed] Solved bug with before and after field
 * [Added] Fieldtype "Counter" to Custom Fields
 * [Added] Column type ID when you hover over the column type label
@@ -315,7 +388,7 @@ You can find a list of the available actions and filters (and examples on how to
 = 2.0.1 =
 * [Fixed] Bug which caused columns to not include properly
 
-= 2.0.0 =
+= 2.0 =
 * [Notice] Database needs an update, make sure to backup first
 * [Changed] Sortorder licence is now an Pro Add-on
 * [Changed] Some filters and hooks have been changed, see online documentation

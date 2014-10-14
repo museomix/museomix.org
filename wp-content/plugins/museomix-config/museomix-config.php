@@ -15,7 +15,7 @@ License:
 /* configuration générale 
    ======================  */  
 
-define(’WP_POST_REVISIONS’, 5);   
+define('WP_POST_REVISIONS', 5);   
 
 require_once(dirname(__FILE__).'/Utilitaires.php');
 require_once(dirname(__FILE__).'/TypesPages.php');
@@ -44,11 +44,13 @@ function ThemeVariable($theme){
 /* après initialisation de Wordpress 
    =================================  */   
 
-add_action('wp',MuseomixExtensions);
+add_action('wp','MuseomixExtensions');
 
 function MuseomixExtensions(){
 	global $wp;
-	if(
+	if (!isset($_GET['action']))
+		return;
+	if( 
 		'fluxtwitter'==$_GET['action']
 		||'fluxagenda'==$_GET['action']
 		||'fluxtwitterjson'==$_GET['action']
@@ -86,10 +88,4 @@ function MuseomixExtensions(){
 		}		
 		exit;
 	}
-	#VT(phpversion());
-
 }
-
-
-
-

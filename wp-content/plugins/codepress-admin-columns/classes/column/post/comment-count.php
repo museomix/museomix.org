@@ -1,28 +1,32 @@
 <?php
-
 /**
- * CPAC_Column_Post_Modified
+ * Column displaying the number of comments for an item, displaying either the total
+ * amount of comments, or the amount per status (e.g. "Approved", "Pending").
  *
- * @since 2.0.0
+ * @since 2.0
  */
 class CPAC_Column_Post_Comment_Count extends CPAC_Column {
 
-	function __construct( $storage_model ) {
+	/**
+	 * @see CPAC_Column::init()
+	 * @since 2.2.1
+	 */
+	public function init() {
 
-		// define properties
+		parent::init();
+
+		// Properties
 		$this->properties['type']	 		= 'column-comment_count';
 		$this->properties['label']	 		= __( 'Comment count', 'cpac' );
 		$this->properties['is_cloneable']	= true;
 
-		// define additional options
+		// Options
 		$this->options['comment_status'] = '';
-
-		parent::__construct( $storage_model );
 	}
 
 	/**
 	 * get_comment_stati
-	 * @since 2.0.0
+	 * @since 2.0
 	 */
 	function get_comment_stati() {
 
@@ -37,7 +41,7 @@ class CPAC_Column_Post_Comment_Count extends CPAC_Column {
 
 	/**
 	 * @see CPAC_Column::get_value()
-	 * @since 2.0.0
+	 * @since 2.0
 	 */
 	function get_value( $post_id ) {
 
@@ -76,7 +80,7 @@ class CPAC_Column_Post_Comment_Count extends CPAC_Column {
 
 	/**
 	 * @see CPAC_Column::apply_conditional()
-	 * @since 2.0.0
+	 * @since 2.0
 	 */
 	function apply_conditional() {
 
@@ -87,7 +91,7 @@ class CPAC_Column_Post_Comment_Count extends CPAC_Column {
 	 * Display Settings
 	 *
 	 * @see CPAC_Column::display_settings()
-	 * @since 2.0.0
+	 * @since 2.0
 	 */
 	function display_settings() {
 		?>

@@ -1,24 +1,27 @@
 <?php
-
 /**
  * CPAC_Column_User_Nickname
  *
- * @since 2.0.0
+ * @since 2.0
  */
 class CPAC_Column_User_Nickname extends CPAC_Column {
 
-	function __construct( $storage_model ) {
+	/**
+	 * @see CPAC_Column::init()
+	 * @since 2.2.1
+	 */
+	public function init() {
 
-		// define properties
+		parent::init();
+
+		// Properties
 		$this->properties['type']	 = 'column-nickname';
 		$this->properties['label']	 = __( 'Nickname', 'cpac' );
-
-		parent::__construct( $storage_model );
 	}
 
 	/**
 	 * @see CPAC_Column::get_value()
-	 * @since 2.0.0
+	 * @since 2.0
 	 */
 	function get_value( $user_id ) {
 

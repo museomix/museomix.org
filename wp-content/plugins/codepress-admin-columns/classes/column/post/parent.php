@@ -2,22 +2,27 @@
 /**
  * CPAC_Column_Post_Parent
  *
- * @since 2.0.0
+ * @since 2.0
  */
 class CPAC_Column_Post_Parent extends CPAC_Column {
 
-	function __construct( $storage_model ) {
+	/**
+	 * @see CPAC_Column::init()
+	 * @since 2.2.1
+	 */
+	public function init() {
 
+		parent::init();
+
+		// Properties
 		$this->properties['type']				= 'column-parent';
 		$this->properties['label']				= __( 'Parent', 'cpac' );
 		$this->properties['object_property']	= 'post_parent';
-
-		parent::__construct( $storage_model );
 	}
 
 	/**
 	 * @see CPAC_Column::get_value()
-	 * @since 2.0.0
+	 * @since 2.0
 	 */
 	function get_value( $post_id ) {
 
@@ -47,7 +52,7 @@ class CPAC_Column_Post_Parent extends CPAC_Column {
 
 	/**
 	 * @see CPAC_Column::apply_conditional()
-	 * @since 2.0.0
+	 * @since 2.0
 	 */
 	function apply_conditional() {
 

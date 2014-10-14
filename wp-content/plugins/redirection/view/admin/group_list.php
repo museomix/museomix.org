@@ -1,7 +1,6 @@
 <?php if ( !defined( 'ABSPATH' ) ) die( 'No direct access allowed' ); ?>
 <div class="wrap">
 	<?php screen_icon(); ?>
-	<?php $this->render_admin( 'annoy'  ); ?>
 
 	<h2><?php _e( 'Groups for module', 'redirection' ); ?>: <a href="edit.php?page=redirection.php&amp;sub=modules"><?php echo esc_html( $module->name  ) ?></a></h2>
 
@@ -33,7 +32,6 @@
 		<ul id="redirections_header" class="redirections_header">
 			<li>
 				<div class="tools" style="width: 6.5em">&nbsp;</div>
-				<div class="count"><?php echo __( 'Hits', 'redirection' ) ?></div>
 				<div class="item"><?php echo __( 'Name', 'redirection' )  ?></div>
 			</li>
 		</ul>

@@ -1,4 +1,4 @@
-<?
+<?php
 if (!isset($SectionsPage) || !is_array($SectionsPage))
 	$SectionsPage = array();
 if (!isset($ContenusSections) || !is_array($ContenusSections))
@@ -151,7 +151,7 @@ function ListeLive($atts){
 		$cat = $atts['category'];
 	} else $cat = "global";
 
-	if(!is_page()) return '';
+	//if(!is_page()) return '';
 	$lives = get_posts(array('category_name'=>$cat,'posts_per_page'=>3));
 
 	foreach($lives as $post): setup_postdata( $post );

@@ -1,27 +1,30 @@
 <?php
-
 /**
  * CPAC_Column_User_Description
  *
- * @since 2.0.0
+ * @since 2.0
  */
 class CPAC_Column_User_Description extends CPAC_Column {
 
-	function __construct( $storage_model ) {
+	/**
+	 * @see CPAC_Column::init()
+	 * @since 2.2.1
+	 */
+	public function init() {
 
-		// define properties
+		parent::init();
+
+		// Properties
 		$this->properties['type']	 = 'column-user_description';
 		$this->properties['label']	 = __( 'Description', 'cpac' );
 
-		// define additional options
+		// Options
 		$this->options['excerpt_length'] = 30;
-
-		parent::__construct( $storage_model );
 	}
 
 	/**
 	 * @see CPAC_Column::get_value()
-	 * @since 2.0.0
+	 * @since 2.0
 	 */
 	function get_value( $user_id ) {
 
@@ -39,7 +42,7 @@ class CPAC_Column_User_Description extends CPAC_Column {
 
 	/**
 	 * @see CPAC_Column::display_settings()
-	 * @since 2.0.0
+	 * @since 2.0
 	 */
 	function display_settings() {
 

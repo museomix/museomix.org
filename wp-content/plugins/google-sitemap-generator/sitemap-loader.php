@@ -15,7 +15,7 @@ class GoogleSitemapGeneratorLoader {
 	/**
 	 * @var string Version of the generator in SVN
 	 */
-	private static $svnVersion = '$Id: sitemap-loader.php 925789 2014-06-03 17:03:07Z arnee $';
+	private static $svnVersion = '$Id: sitemap-loader.php 937300 2014-06-23 18:04:11Z arnee $';
 
 
 	/**
@@ -23,9 +23,7 @@ class GoogleSitemapGeneratorLoader {
 	 *
 	 * @uses add_action Adds actions for admin menu, executing pings and handling robots.txt
 	 * @uses add_filter Adds filtes for admin menu icon and contexual help
-	 * @uses GoogleSitemapGeneratorLoader::SetupRewriteHooks() Registeres the rewrite hooks
 	 * @uses GoogleSitemapGeneratorLoader::CallShowPingResult() Shows the ping result on request
-	 * @uses GoogleSitemapGeneratorLoader::ActivateRewrite() Writes rewrite rules the first time
 	 */
 	public static function Enable() {
 
@@ -44,11 +42,8 @@ class GoogleSitemapGeneratorLoader {
 		//Listen to daily ping
 		add_action('sm_ping_daily', array(__CLASS__, 'CallSendPingDaily'), 10, 1);
 
-		//Existing page was published
-		add_action('publish_post', array(__CLASS__, 'SchedulePing'), 9999, 1);
-		add_action('publish_page', array(__CLASS__, 'SchedulePing'), 9999, 1);
-		add_action('delete_post', array(__CLASS__, 'SchedulePing'), 9999, 1);
-		add_action('post_updated', array(__CLASS__, 'SchedulePing'), 9999, 1);
+		//Post is somehow changed (also publish to publish (=edit) is fired)
+		add_action('transition_post_status', array(__CLASS__, 'SchedulePingOnStatusChange'), 9999, 3);
 
 		//Robots.txt request
 		add_action('do_robots', array(__CLASS__, 'CallDoRobots'), 100, 0);
@@ -76,7 +71,6 @@ class GoogleSitemapGeneratorLoader {
 	 * Sets up the query vars and template redirect hooks
 	 * @uses GoogleSitemapGeneratorLoader::RegisterQueryVars
 	 * @uses GoogleSitemapGeneratorLoader::DoTemplateRedirect
-	 * @uses GoogleSitemapGeneratorLoader::KillFrontpageQuery
 	 * @since 4.0
 	 */
 	public static function SetupQueryVars() {
@@ -85,7 +79,6 @@ class GoogleSitemapGeneratorLoader {
 
 		add_filter('template_redirect', array(__CLASS__, 'DoTemplateRedirect'), 1, 0);
 
-		//add_filter('parse_request', array(__CLASS__, 'KillFrontpageQuery'), 1, 0);
 	}
 
 	/**
@@ -204,29 +197,6 @@ class GoogleSitemapGeneratorLoader {
 		}
 	}
 
-	public static function KillFrontpageQuery() {
-		//add_filter('posts_request', array('GoogleSitemapGeneratorLoader', 'KillFrontpagePosts'), 1000, 2);
-	}
-
-	public static function KillFrontpagePosts($sql, &$query) {
-		// The main query is running on the front page
-		// And the currently running query is that main query
-		if(!empty($query->query_vars["xml_sitemap"])) {
-			// We only want to do this once: remove the filter
-			remove_filter('posts_request', array('GoogleSitemapGeneratorLoader', 'KillFrontpagePosts'), 1000, 2);
-			// Kill the FOUND_ROWS() query too
-			$query->query_vars['no_found_rows'] = true;
-			//Workaround for preventing to fetch sticky posts
-			$query->is_home = false;
-			//Prevent sending of 404 (it would happen because we didn't find any posts). Setting is_404 to true skips that check.
-			$query->is_404 = true;
-
-			return "SELECT ID FROM {$GLOBALS['wpdb']->posts} WHERE 1=2"; // Kill the query doesnt work anymore. Now try to select no matching posts :(
-		}
-		return $sql;
-	}
-
-
 	/**
 	 * Registers the plugin in the admin menu system
 	 *
@@ -269,17 +239,15 @@ class GoogleSitemapGeneratorLoader {
 	}
 
 	/**
-	 * Schedules pinging the search engines
-	 *
-	 * @static
-	 *
-	 * @param $postID
-	 *
-	 * @return void
+	 * @param $new_status string The new post status
+	 * @param $old_status string The old post status
+	 * @param $post WP_Post The post object
 	 */
-	public static function SchedulePing($postID) {
-		set_transient('sm_ping_post_id', $postID, 60);
-		wp_schedule_single_event(time(), 'sm_ping');
+	public static function SchedulePingOnStatusChange($new_status, $old_status, $post ) {
+		if($new_status == 'publish') {
+			set_transient('sm_ping_post_id', $post->ID, 120);
+			wp_schedule_single_event(time() + 5, 'sm_ping');
+		}
 	}
 
 	/**

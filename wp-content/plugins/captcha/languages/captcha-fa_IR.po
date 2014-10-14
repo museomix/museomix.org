@@ -2,10 +2,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: captcha\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-11 11:14+0300\n"
-"PO-Revision-Date: 2014-04-11 11:14+0300\n"
+"POT-Creation-Date: 2014-09-10 14:23+0300\n"
+"PO-Revision-Date: 2014-09-10 14:28+0300\n"
 "Last-Translator: bestwebsoft.com <plugins@bestwebsoft.com>\n"
-"Language-Team: bestwebsoft.com <plugin@bestwebsoft.com>\n"
+"Language-Team: Mostafa Asadi <mostafaasadi73@gmail.com>\n"
 "Language: fa_IR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -13,172 +13,171 @@ msgstr ""
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.5.7\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: captcha.php:72
-#: captcha.php:403
-#, fuzzy
+#: captcha.php:73
+#: captcha.php:402
 msgid "Captcha Settings"
 msgstr "تنظیمات معادله ی امنیتی"
 
-#: captcha.php:72
+#: captcha.php:73
 msgid "Captcha"
 msgstr "معادله ی امنیتی"
 
-#: captcha.php:160
+#: captcha.php:161
 msgid "requires"
-msgstr ""
+msgstr "الزامی"
 
-#: captcha.php:160
+#: captcha.php:161
 msgid "or higher, that is why it has been deactivated! Please upgrade WordPress and try again."
-msgstr ""
+msgstr "یا بیشتر ، این دلیل غیر فعال شدن این است ، لطفا وردپرس را بروزرسانی کنید و دوباره تلاش کنید . "
 
-#: captcha.php:160
+#: captcha.php:161
 msgid "Back to the WordPress"
-msgstr ""
+msgstr "بازگشت به وردپرس"
 
-#: captcha.php:160
-#, fuzzy
+#: captcha.php:161
 msgid "Plugins page"
 msgstr "افزونه های BWS"
 
-#: captcha.php:233
+#: captcha.php:234
 msgid "Login form"
 msgstr "فرم ورود"
 
-#: captcha.php:234
-#: captcha.php:448
-#, fuzzy
+#: captcha.php:235
+#: captcha.php:456
 msgid "Registration form"
 msgstr "فرم ثبت نام"
 
-#: captcha.php:234
+#: captcha.php:235
 msgid "Register form"
 msgstr "فرم ثبت نام"
 
-#: captcha.php:235
-#, fuzzy
+#: captcha.php:236
 msgid "Reset Password form"
 msgstr "فرم فراموشی رمز عبور"
 
-#: captcha.php:235
+#: captcha.php:236
 msgid "Lost password form"
 msgstr "فرم فراموشی رمز عبور"
 
-#: captcha.php:236
-#: captcha.php:449
+#: captcha.php:237
+#: captcha.php:457
 msgid "Comments form"
 msgstr "فرم دیدگاه ها"
 
-#: captcha.php:237
-msgid "Hide CAPTCHA for registered users"
+#: captcha.php:238
+#, fuzzy
+msgid "Hide CAPTCHA in Comments form for registered users"
 msgstr "عدم نمایش معادله ی امنیتی برای کاربران ثبت نام شده"
 
-#: captcha.php:242
+#: captcha.php:243
 msgid "Plus (&#43;)"
 msgstr "جمع (&#43;)"
 
-#: captcha.php:242
+#: captcha.php:243
 msgid "Plus"
 msgstr "جمع"
 
-#: captcha.php:243
+#: captcha.php:244
 msgid "Minus (&minus;)"
 msgstr "تفریق (&minus;)"
 
-#: captcha.php:243
+#: captcha.php:244
 msgid "Minus"
 msgstr "تفریق"
 
-#: captcha.php:244
-#, fuzzy
+#: captcha.php:245
 msgid "Multiplication (&times;)"
 msgstr "ضرب (&times;)"
 
-#: captcha.php:244
-#, fuzzy
+#: captcha.php:245
 msgid "Multiply"
 msgstr "ضرب (&times;)"
 
-#: captcha.php:249
+#: captcha.php:250
 msgid "Numbers"
 msgstr "ارقام"
 
-#: captcha.php:250
+#: captcha.php:251
 msgid "Words"
 msgstr "کلمات"
 
-#: captcha.php:281
-#, fuzzy
+#: captcha.php:282
 msgid "Please select one item in the block Arithmetic and Complexity for CAPTCHA"
 msgstr "لطفاً یکی از گزینه های موجود در بلوک های مربوط به عمل های ریاضی و میزان دشواری معادله ی امنیتی را انتخاب کنید"
 
-#: captcha.php:285
-#, fuzzy
+#: captcha.php:286
 msgid "Settings saved."
 msgstr "تنظیمات ذخیره شد"
 
-#: captcha.php:298
-#: captcha.php:336
+#: captcha.php:299
+#: captcha.php:337
 msgid "Wrong license key"
-msgstr ""
+msgstr "شماره لایسنس اشتباه"
 
-#: captcha.php:329
+#: captcha.php:330
 msgid "Something went wrong. Try again later. If the error will appear again, please, contact us <a href=http://support.bestwebsoft.com>BestWebSoft</a>. We are sorry for inconvenience."
-msgstr ""
+msgstr "مشکلی پیش آمده ، بعدا دوباره تلاش کنید . اگر این مشکل دوباره پیش آمد ،از طریق <a href=http://support.bestwebsoft.com>BestWebSoft</a> با ما در ارتباط باشید .به خاطر این دردسر از شما پوزش می طلبیم .  "
 
-#: captcha.php:338
+#: captcha.php:339
 msgid "This license key is bind to another site"
-msgstr ""
+msgstr "این شماره لایسنس مربوط به سایت دیگری است"
 
-#: captcha.php:340
-#: captcha.php:568
+#: captcha.php:341
+#: captcha.php:576
 msgid "Unfortunately, you have exceeded the number of available tries per day. Please, upload the plugin manually."
-msgstr ""
+msgstr "متاسفانه ، شما از تعداد مجاز تلاش های روزانه فراتر رفته اید . لطفا افزونه را دستی بارگزاری کنید"
 
-#: captcha.php:357
+#: captcha.php:358
 msgid "Failed to open the zip archive. Please, upload the plugin manually"
-msgstr ""
+msgstr "بازگشایی فایل فشرده با شکست مواجه شد . لطفا افزوه را دستی بارگزاری کنید "
 
-#: captcha.php:363
+#: captcha.php:364
 msgid "Your server does not support either ZipArchive or Phar. Please, upload the plugin manually"
-msgstr ""
+msgstr "سرور شما فایل های فشرده فرمت zip را پشتیبانی نمی کند . لطفا افزونه را دستی بارگزاری کنید ."
 
-#: captcha.php:367
-#: captcha.php:376
+#: captcha.php:368
+#: captcha.php:377
 msgid "Failed to download the zip archive. Please, upload the plugin manually"
-msgstr ""
+msgstr "بارگیری فایل فشرده با شکست مواجه شد . لطفا افزونه را دستی بارگزاری کنید "
 
-#: captcha.php:380
-msgid "Something went wrong. Try again later or upload the plugin manually. We are sorry for inconvienience."
-msgstr ""
+#: captcha.php:381
+#, fuzzy
+msgid "Something went wrong. Try again later or upload the plugin manually. We are sorry for inconvenience."
+msgstr "اشکالی پیش آمده است . بعدا دوباره تلاش کنید یا دستی بارگزاری کنید . از دردسر پیش آمده پوزش می طلبیم"
 
-#: captcha.php:395
+#: captcha.php:396
 msgid "Please, enter Your license key"
-msgstr ""
+msgstr "لطفا شماره لایسنس خود را وارد کنید"
 
-#: captcha.php:405
-#: captcha.php:1414
-#: captcha.php:1426
+#: captcha.php:404
+#: captcha.php:1422
+#: captcha.php:1434
 msgid "Settings"
 msgstr "تنظیمات"
 
+#: captcha.php:405
+#: captcha.php:1435
+msgid "FAQ"
+msgstr "پرسش های متداول"
+
 #: captcha.php:406
 msgid "Go PRO"
-msgstr ""
+msgstr "ارتقا"
 
 #: captcha.php:408
 msgid "Notice:"
-msgstr ""
+msgstr "توجه"
 
 #: captcha.php:408
 msgid "The plugin's settings have been changed. In order to save them please don't forget to click the 'Save Changes' button."
-msgstr ""
+msgstr "تنظیمات افزونه تغییر یافته است ، پس فراموش نکنید که بر دکمه ذخیره تغییرات کلیک کنید . "
 
 #: captcha.php:415
-#: captcha.php:445
-#, fuzzy
+#: captcha.php:444
+#: captcha.php:453
 msgid "Enable CAPTCHA for:"
 msgstr "معادله امنیتی را فعال کن در:"
 
@@ -191,8 +190,9 @@ msgstr "فرم تماس"
 #: captcha.php:427
 #: captcha.php:429
 #: captcha.php:432
+#: captcha.php:447
 msgid "powered by"
-msgstr ""
+msgstr "ساخته شده توسط"
 
 #: captcha.php:429
 msgid "Activate contact form"
@@ -203,315 +203,306 @@ msgid "Download contact form"
 msgstr "فرم تماس را دانلود کن"
 
 #: captcha.php:434
-#, fuzzy
 msgid "If you would like to customize this plugin for a custom form, please see"
 msgstr "اگر می خواهید این افزونه را به عنوان یک فرم اختصاصی سفارشی سازی کنید، لطفاً از طریق <a href=\"Mailto:plugin@bestwebsoft.com\">plugin@bestwebsoft.com</a> با ما تماس بگیرید یا اینکه فرم تماس موجود در سایت ما را پُر کنید"
 
-#: captcha.php:450
+#: captcha.php:447
+msgid "Subscriber"
+msgstr ""
+
+#: captcha.php:458
 msgid "\"Create a Group\" form"
 msgstr ""
 
-#: captcha.php:456
-#, fuzzy
+#: captcha.php:464
 msgid "Enable CAPTCHA:"
 msgstr "معادله امنیتی را فعال کن در:"
 
-#: captcha.php:464
-msgid "If you upgrade to Pro version all your settings will be saved."
-msgstr ""
-
-#: captcha.php:471
-msgid "Unlock premium options by upgrading to a PRO version."
-msgstr ""
-
 #: captcha.php:472
-#: captcha.php:1487
+msgid "If you upgrade to Pro version all your settings will be saved."
+msgstr "اگر افزونه را به نسخه کامل ارتقا دهید همه ی تنظیمات شما ذخیره خواهد شد ."
+
+#: captcha.php:479
+msgid "Unlock premium options by upgrading to a PRO version."
+msgstr "از امکانات ویژه را با ارتقا به نسخه کامل استفاده کنید . "
+
+#: captcha.php:480
+#: captcha.php:1500
 msgid "Learn More"
-msgstr ""
+msgstr "بیشتر بدانید"
 
-#: captcha.php:475
+#: captcha.php:483
 msgid "Go"
-msgstr ""
+msgstr " "
 
-#: captcha.php:482
-#, fuzzy
+#: captcha.php:490
 msgid "Title for CAPTCHA in the form"
 msgstr "برچسب معادله ی امنیتی در فرم"
 
-#: captcha.php:486
+#: captcha.php:494
 msgid "Required symbol"
-msgstr ""
+msgstr "نماد الزامی"
 
-#: captcha.php:492
+#: captcha.php:500
 msgid "Arithmetic actions for CAPTCHA"
 msgstr "عمل های ریاضی برای معادله ی امنیتی"
 
-#: captcha.php:506
+#: captcha.php:514
 msgid "CAPTCHA complexity level"
-msgstr ""
+msgstr "پیچیدگی کپچا"
 
-#: captcha.php:522
+#: captcha.php:530
 msgid "Save Changes"
 msgstr "ذخیره سازی تغییرات"
 
-#: captcha.php:528
+#: captcha.php:536
 msgid "If you enjoy our plugin, please give it 5 stars on WordPress"
-msgstr ""
+msgstr "اگر از پلاگین ما لذت بردید ، لطفا به آن در سایت وردپرس امتیاز 5 بدهید "
 
-#: captcha.php:529
-#, fuzzy
+#: captcha.php:537
 msgid "Rate the plugin"
 msgstr "افزونه های پیشنهادی"
 
-#: captcha.php:532
+#: captcha.php:540
 msgid "If there is something wrong about it, please contact us"
-msgstr ""
-
-#: captcha.php:543
-msgid "Congratulations! The PRO version of the plugin is successfully download and activated."
-msgstr ""
-
-#: captcha.php:545
-msgid "Please, go to"
-msgstr ""
-
-#: captcha.php:545
-msgid "the setting page"
-msgstr ""
-
-#: captcha.php:546
-msgid "You will be redirected automatically in 5 seconds."
-msgstr ""
+msgstr "اگر افزنه مشکلی دارد لطفا با ما در میان بگذارید "
 
 #: captcha.php:551
-msgid "You can download and activate"
-msgstr ""
+msgid "Congratulations! The PRO version of the plugin is successfully download and activated."
+msgstr "تبریک ! نسخه کامل افزونه با موفقیت دانلود و فعال شد . "
 
 #: captcha.php:553
+msgid "Please, go to"
+msgstr "لطفا بروید به"
+
+#: captcha.php:553
+msgid "the setting page"
+msgstr "صفحه تنظیمات"
+
+#: captcha.php:554
+msgid "You will be redirected automatically in 5 seconds."
+msgstr "شما بصورت خودکار تا 5 ثانیه دیگر منتقل خواهید شد "
+
+#: captcha.php:559
+msgid "You can download and activate"
+msgstr "شما می توانید دانلود کنید و فعال کنید"
+
+#: captcha.php:561
 msgid "version of this plugin by entering Your license key."
-msgstr ""
+msgstr "این افزونه را با وارد کردن شماره لایسنس ارتقا دهید . "
 
-#: captcha.php:555
+#: captcha.php:563
 msgid "You can find your license key on your personal page Client area, by clicking on the link"
-msgstr ""
-
-#: captcha.php:557
-msgid "(your username is the email you specify when purchasing the product)."
-msgstr ""
+msgstr "شما می توانید شماره لایسنس خود را در صفحه شخصی خود با کلیک بر لینک بیابید ."
 
 #: captcha.php:565
-#: captcha.php:575
+msgid "(your username is the email you specify when purchasing the product)."
+msgstr "(شناسه شما همان ایمیلی است که افزونه را با آن خریده اید)"
+
+#: captcha.php:573
+#: captcha.php:583
 msgid "Go!"
-msgstr ""
+msgstr "ارتقا !"
 
-#: captcha.php:642
+#: captcha.php:650
 msgid "<strong>ERROR</strong>: Please fill the form."
-msgstr ""
+msgstr "<strong>ERROR</strong>: لطفا فرم را پر کنید "
 
-#: captcha.php:656
-#, fuzzy
+#: captcha.php:664
 msgid "<strong>ERROR</strong>: Please enter a valid CAPTCHA value."
 msgstr "لطفاً معادله ی امنیتی را پُر کنید."
 
-#: captcha.php:767
-#: captcha.php:806
-#: captcha.php:829
-#: captcha.php:858
-msgid "Please fill the form."
-msgstr ""
-
-#: captcha.php:773
+#: captcha.php:775
+#: captcha.php:814
+#: captcha.php:837
 #: captcha.php:866
-#, fuzzy
+msgid "Please fill the form."
+msgstr "لطفا فرم را پر کنید"
+
+#: captcha.php:781
+#: captcha.php:874
 msgid "Error: You have entered an incorrect CAPTCHA value. Click the BACK button on your browser, and try again."
 msgstr "خطا: پاسخ وارد شده توسط شما در معادله ی امنیتی نادرست بود. لطفاً دکمه ی بازگشت مرورگر خود را بفشارید و مجدداً تلاش کنید."
 
-#: captcha.php:806
 #: captcha.php:814
-#: captcha.php:829
+#: captcha.php:822
 #: captcha.php:837
+#: captcha.php:845
 msgid "ERROR"
 msgstr "خطا"
 
-#: captcha.php:814
-#: captcha.php:837
-#, fuzzy
+#: captcha.php:822
+#: captcha.php:845
 msgid "Please enter a valid CAPTCHA value."
 msgstr "لطفاً معادله ی امنیتی را پُر کنید."
 
-#: captcha.php:885
-#: captcha.php:1184
+#: captcha.php:893
+#: captcha.php:1192
 msgid "zero"
 msgstr "هیچ"
 
-#: captcha.php:886
-#: captcha.php:1185
-#: captcha.php:1391
+#: captcha.php:894
+#: captcha.php:1193
+#: captcha.php:1399
 msgid "one"
 msgstr "یک"
 
-#: captcha.php:887
-#: captcha.php:1186
+#: captcha.php:895
+#: captcha.php:1194
 msgid "two"
 msgstr "دو"
 
-#: captcha.php:888
-#: captcha.php:1187
+#: captcha.php:896
+#: captcha.php:1195
 msgid "three"
 msgstr "سه"
 
-#: captcha.php:889
-#: captcha.php:1188
+#: captcha.php:897
+#: captcha.php:1196
 msgid "four"
 msgstr "چهار"
 
-#: captcha.php:890
-#: captcha.php:1189
+#: captcha.php:898
+#: captcha.php:1197
 msgid "five"
 msgstr "پنج"
 
-#: captcha.php:891
-#: captcha.php:1190
-#: captcha.php:1391
+#: captcha.php:899
+#: captcha.php:1198
+#: captcha.php:1399
 msgid "six"
 msgstr "شش"
 
-#: captcha.php:892
-#: captcha.php:1191
-#: captcha.php:1379
-#: captcha.php:1385
+#: captcha.php:900
+#: captcha.php:1199
+#: captcha.php:1387
+#: captcha.php:1393
 msgid "seven"
 msgstr "هفت"
 
-#: captcha.php:893
-#: captcha.php:1192
-#: captcha.php:1382
+#: captcha.php:901
+#: captcha.php:1200
+#: captcha.php:1390
 msgid "eight"
 msgstr "هشت"
 
-#: captcha.php:894
-#: captcha.php:1193
+#: captcha.php:902
+#: captcha.php:1201
 msgid "nine"
 msgstr "نُه"
 
-#: captcha.php:897
-#: captcha.php:1196
+#: captcha.php:905
+#: captcha.php:1204
 msgid "eleven"
 msgstr "یازده"
 
-#: captcha.php:898
-#: captcha.php:1197
+#: captcha.php:906
+#: captcha.php:1205
 msgid "twelve"
 msgstr "دوازده"
 
-#: captcha.php:899
-#: captcha.php:1198
+#: captcha.php:907
+#: captcha.php:1206
 msgid "thirteen"
 msgstr "سیزده"
 
-#: captcha.php:900
-#: captcha.php:1199
+#: captcha.php:908
+#: captcha.php:1207
 msgid "fourteen"
 msgstr "چهارده"
 
-#: captcha.php:901
-#: captcha.php:1200
+#: captcha.php:909
+#: captcha.php:1208
 msgid "fifteen"
 msgstr "پانزده"
 
-#: captcha.php:902
-#: captcha.php:1201
+#: captcha.php:910
+#: captcha.php:1209
 msgid "sixteen"
 msgstr "شانزده"
 
-#: captcha.php:903
-#: captcha.php:1202
+#: captcha.php:911
+#: captcha.php:1210
 msgid "seventeen"
 msgstr "هفده"
 
-#: captcha.php:904
-#: captcha.php:1203
+#: captcha.php:912
+#: captcha.php:1211
 msgid "eighteen"
 msgstr "هجده"
 
-#: captcha.php:905
-#: captcha.php:1204
+#: captcha.php:913
+#: captcha.php:1212
 msgid "nineteen"
 msgstr "نوزده"
 
-#: captcha.php:908
-#: captcha.php:1207
+#: captcha.php:916
+#: captcha.php:1215
 msgid "ten"
 msgstr "ده"
 
-#: captcha.php:909
-#: captcha.php:1208
+#: captcha.php:917
+#: captcha.php:1216
 msgid "twenty"
 msgstr "بیست"
 
-#: captcha.php:910
-#: captcha.php:1209
+#: captcha.php:918
+#: captcha.php:1217
 msgid "thirty"
 msgstr "سی"
 
-#: captcha.php:911
-#: captcha.php:1210
+#: captcha.php:919
+#: captcha.php:1218
 msgid "forty"
 msgstr "چهل"
 
-#: captcha.php:912
-#: captcha.php:1211
+#: captcha.php:920
+#: captcha.php:1219
 msgid "fifty"
 msgstr "پنجاه"
 
-#: captcha.php:913
-#: captcha.php:1212
+#: captcha.php:921
+#: captcha.php:1220
 msgid "sixty"
 msgstr "شصت"
 
-#: captcha.php:914
-#: captcha.php:1213
+#: captcha.php:922
+#: captcha.php:1221
 msgid "seventy"
 msgstr "هفتاد"
 
-#: captcha.php:915
-#: captcha.php:1214
+#: captcha.php:923
+#: captcha.php:1222
 msgid "eighty"
 msgstr "هشتاد"
 
-#: captcha.php:916
-#: captcha.php:1215
+#: captcha.php:924
+#: captcha.php:1223
 msgid "ninety"
 msgstr "نود"
 
-#: captcha.php:1003
-#: captcha.php:1302
+#: captcha.php:1011
+#: captcha.php:1310
 msgid "and"
 msgstr "و"
 
-#: captcha.php:1078
-#, fuzzy
+#: captcha.php:1086
 msgid "Encryption password is not set"
 msgstr "رمز عبوری برای رمزگشایی تعیین نشده است"
 
-#: captcha.php:1098
-#, fuzzy
+#: captcha.php:1106
 msgid "Decryption password is not set"
 msgstr "رمز عبوری برای رمزگشایی تعیین نشده است"
 
-#: captcha.php:1427
-msgid "FAQ"
-msgstr "پرسش های متداول"
-
-#: captcha.php:1428
+#: captcha.php:1436
 msgid "Support"
 msgstr "پشتیبانی"
 
-#: captcha.php:1489
+#: captcha.php:1503
 msgid "It's time to upgrade your <strong>Captcha plugin</strong> to <strong>PRO</strong> version"
-msgstr ""
+msgstr "وقت آن است که  <strong>افزونه کپچا</strong> را به  <strong>نسخه کامل</strong> بروزرسانی کنید"
 
-#: captcha.php:1490
+#: captcha.php:1504
 msgid "Extend standard plugin functionality with new great options"
 msgstr ""
 

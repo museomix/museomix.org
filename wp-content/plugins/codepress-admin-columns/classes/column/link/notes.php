@@ -2,25 +2,29 @@
 /**
  * CPAC_Column_Link_Notes
  *
- * @since 2.0.0
+ * @since 2.0
  */
 class CPAC_Column_Link_Notes extends CPAC_Column {
 
-	function __construct( $storage_model ) {
+	/**
+	 * @see CPAC_Column::init()
+	 * @since 2.2.1
+	 */
+	public function init() {
 
-		// define properties
+		parent::init();
+
+		// Properties
 		$this->properties['type']	 	= 'column-notes';
 		$this->properties['label']	 	= __( 'Notes', 'cpac' );
 
-		// define additional options
+		// Options
 		$this->options['excerpt_length'] = 30;
-
-		parent::__construct( $storage_model );
 	}
 
 	/**
 	 * @see CPAC_Column::get_value()
-	 * @since 2.0.0
+	 * @since 2.0
 	 */
 	function get_value( $id ) {
 
@@ -31,7 +35,7 @@ class CPAC_Column_Link_Notes extends CPAC_Column {
 
 	/**
 	 * @see CPAC_Column::display_settings()
-	 * @since 2.0.0
+	 * @since 2.0
 	 */
 	function display_settings() {
 

@@ -92,6 +92,7 @@ if (!is_front_page())
 		<?php foreach($SectionsPage as $id => $titre): ?>
 
 			<?php $titre = preg_replace('/^\\d+\\.\\s*/','',$titre);
+			
 			if ('prototype' == $post->post_type)
 			{
 				$tmpContent = ContenuSectionProto($id);
@@ -115,7 +116,7 @@ if (!is_front_page())
 			if ($menuItemTest>0){
 			?>
 				<li><a class="ln-nav-page" style="width: 190px;" href="#<?php echo $id ?>"><i class="icon-chevron-right"></i> <?php echo $titre; ?></a></li>
-			<?
+			<?php
 			}
 		endforeach; 
 		?>

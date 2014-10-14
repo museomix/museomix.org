@@ -5,14 +5,15 @@ class CPAC_Storage_Model_User extends CPAC_Storage_Model {
 	/**
 	 * Constructor
 	 *
-	 * @since 2.0.0
+	 * @since 2.0
 	 */
 	function __construct() {
 
-		$this->key 		= 'wp-users';
-		$this->label 	= __( 'Users' );
-		$this->type 	= 'user';
-		$this->page 	= 'users';
+		$this->key 		 = 'wp-users';
+		$this->label 	 = __( 'Users' );
+		$this->type 	 = 'user';
+		$this->meta_type = 'user';
+		$this->page 	 = 'users';
 		$this->menu_type = 'other';
 
 		// headings
@@ -28,13 +29,15 @@ class CPAC_Storage_Model_User extends CPAC_Storage_Model {
 	 * Get WP default supported admin columns per post type.
 	 *
 	 * @see CPAC_Type::get_default_columns()
-	 * @since 1.0.0
+	 * @since 1.0
 	 *
 	 * @return array
 	 */
 	public function get_default_columns() {
 
-		if ( ! function_exists('_get_list_table') ) return array();
+		if ( ! function_exists('_get_list_table') ) {
+			return array();
+		}
 
 		// You can use this filter to add third_party columns by hooking into this.
 		do_action( "cac/columns/default/storage_key={$this->key}" );
@@ -100,7 +103,7 @@ class CPAC_Storage_Model_User extends CPAC_Storage_Model {
      * Get Meta
      *
 	 * @see CPAC_Columns::get_meta_keys()
-	 * @since 2.0.0
+	 * @since 2.0
 	 *
 	 * @return array
      */

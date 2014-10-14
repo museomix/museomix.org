@@ -2,8 +2,8 @@
 Contributors: wysija, kgjerstad, benheu, JoN1oP, badshark, tung-wysija, bordoni
 Tags: newsletter, newsletters, wysija, newsletter signup, newsletter widget, subscribers, post notification, email subscription, email alerts, automatic newsletter, auto newsletter, autoresponder, follow up, email, marketing, emailing, subscription, mail poet, mailpoet
 Requires at least: 3.3
-Tested up to: 3.9
-Stable tag: 2.6.6
+Tested up to: 4.0
+Stable tag: 2.6.11
 Send newsletters, post notifications or autoresponders from WordPress easily, and beautifully.
 
 == Description ==
@@ -133,11 +133,55 @@ Our [support site](http://support.mailpoet.com/) has plenty of articles and a ti
 
 == Changelog ==
 
+= 2.6.11 - 2014-08-14 =
+* Improved protection against CSRF attacks thanks to Yoshinori Matsumoto.
+* Fixed bug on scheduled newsletters edited back and forth and becoming uneditable.
+* Fixed when duplicating an email through the stats page of a newsletter, then deleting the duplicate would also delete the original.
+* Old code Spring cleaning part 2, getting rid of the junk.
+
+= 2.6.10 - 2014-08-04 =
+* Improved protection of themes upload, unsubscribe links, file access and statistics.
+* Improved the "Send a test email" function.
+* Fixed never ending process while sending previews on certain servers.
+* Fixed a few regular expressions for a better rendering in Outlook.
+* Fixed memory issue when dropping the "WordPress Post" widget on sites with thousands of taxonomies.
+* Fixed wrong subscribers count in the subscribers' listing.
+* Old code Spring cleaning, removed unused rusty pieces.
+
+= 2.6.9 - 2014-07-14 =
+* Fixed email display issues caused by responsive CSS. We're truly sorry for this.
+* New columns on Subscribers page: "Never opened or clicked"
+* Removed "Unconfirmed" filter on Subscribers page when signup confirmation is off
+* Fixed a few minor bugs on the Statistics page for Premium users. Thanks for your feedbacks!
+* Fixed our hair with spray to look like cool kids in the eighties
+
+= 2.6.8 - 2014-07-04 =
+* Fixed security issue reported by our dear Dominic. Thank you sir!
+
+= 2.6.7 - 2014-07-01 =
+* Added 1 more add-on to our plugin's listing
+* Implemented a new Email Rendering Engine, with a lot of bugs fixed for Outlook users and Mobile Users
+* Fixed broken "Automatic Latest Content" settings on sites with lots of tags
+* Fixed fatal error when sending to more than 1 million total subscribers
+* Fixed subscribers page being inaccessible on some Multisites (very rare bug)
+* Fixed Outlook 2013 paragraph spacing issue on previous beta
+* Fixed security issue reported by [Sucuri](http://sucuri.net/)
+* Fixed the HTML button on TinyMCE which was hidden in editor
+* Fixed the links popup on TinyMCE for IE11 in editor
+* Fixed "automated latest content" (ALC) bugs with multiple Custom Post Types
+* Fixed the upload image functionality in our plugin
+* Fixed default item selected on filter lists at the Subscribers page for Firefox and Opera users
+* Fixed warning message appearing on the subscription form for Admin Users
+* Fixed a few typos in the plugin
+* Improved the CSV export to expand its compatibility with Excel on Windows
+* Improved the performance of the plugin when loading admin assets
+
 = 2.6.6 - 2014-04-30 =
 * Fixed the Upload Image functionality in our plugin
 * Fixed default item selected on filter lists at the Users Page for Firefox and Opera users
 * Fixed warning message appearing on the Subscription form for Admin Users
 * Fixed some typos in the plugin
+* Improved the performance of the plugin when Loading admin assets
 
 = 2.6.5 - 2014-04-18 =
 * Fixed TinyMCE issue with WordPress 3.9, our editor in Step 2 is working again
@@ -787,12 +831,12 @@ Our [support site](http://support.mailpoet.com/) has plenty of articles and a ti
 
 * fixed small IE8 and IE9 compatibility issues
 * fixed fatal error for new installation
-* fixed MailPoet admin white screen on wordpres due to get_current_screen function
+* fixed MailPoet admin white screen on wordpress due to get_current_screen function
 * fixed unsubscribe link disappearing because of qtranslate fix
 * fixed old separators just blocked the email wizard
 * fixed unsubscribe link disappearing because of default color
 * fixed settings panel redirection
-* fixed update error message corrected :"An error occured during the update" sounding like update failed even though it succeeded
+* fixed update error message corrected :"An error occurred during the update" sounding like update failed even though it succeeded
 * fixed rendering of aligned text
 * fixed daily report email information
 * fixed export: first line with comma, the rest with semi colon now is all semi colon
@@ -800,7 +844,7 @@ Our [support site](http://support.mailpoet.com/) has plenty of articles and a ti
 * fixed get_avatar during install completely irrelevant
 * fixed wordpress post in editor when an article had an image with height 0px
 * fixed when domain does not exist, trying to send email, we need to flag it as undelivered after 3 tries and remove it from the queue
-* fixed user tags [user:firstname | defaul:subscriber] left over when sent through queue and on some users
+* fixed user tags [user:firstname | default:subscriber] left over when sent through queue and on some users
 * fixed get_version when wp-admin folder doesn't exist...
 * fixed Bulk Unsubscribe from all list "why can't I add him"
 

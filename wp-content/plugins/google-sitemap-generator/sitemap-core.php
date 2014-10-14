@@ -1,7 +1,7 @@
 <?php
 /*
 
- $Id: sitemap-core.php 925850 2014-06-03 19:06:48Z arnee $
+ $Id: sitemap-core.php 935247 2014-06-19 17:13:03Z arnee $
 
 */
 
@@ -846,10 +846,6 @@ final class GoogleSitemapGenerator {
 	public static function GetBackLink() {
 		global $wp_version;
 		$url = admin_url("options-general.php?page=" . GoogleSitemapGeneratorLoader::GetBaseName());
-
-		//Some browser cache the page... great! So lets add some no caching params depending on the WP and plugin version
-		$url .= '&sm_wpv=' . $wp_version . '&sm_pv=' . GoogleSitemapGeneratorLoader::GetVersion();
-
 		return $url;
 	}
 
@@ -1208,6 +1204,11 @@ final class GoogleSitemapGenerator {
 		if($this->optionsLoaded) return;
 
 		$this->InitOptions();
+
+		//Delete the options cache. This is unfortunately required for some hosts,
+		//but it is not that bad since it will only clear the options and only if a
+		//sitemap is actually served or the sitemap admin page is requested.
+		wp_cache_delete('alloptions', 'options');
 
 		//First init default values, then overwrite it with stored values so we can add default
 		//values with an update which get stored by the next edit.
@@ -1589,14 +1590,14 @@ final class GoogleSitemapGenerator {
 		//filter level already, which we can't detect. Zipping then would lead to invalid content.
 		$pack = (isset($options['zip']) ? $options['zip'] : $this->GetOption('b_autozip'));
 		if(
-			empty($_SERVER['HTTP_ACCEPT_ENCODING']) //No encondig support
+			empty($_SERVER['HTTP_ACCEPT_ENCODING']) //No encoding support
 			|| strpos($_SERVER['HTTP_ACCEPT_ENCODING'],'gzip') === false //or no gzip
 			|| !$this->IsGzipEnabled() //No PHP gzip support
 			|| headers_sent() //Headers already sent
 			|| ob_get_contents() //there was already some output...
 			|| in_array('ob_gzhandler', ob_list_handlers()) //Some other plugin (or PHP) is already gzipping
-			|| in_array(strtolower(ini_get("zlib.output_compression")),array('yes', 'on', 'true', 1, true)) //Zlib compression in php.ini enabled
-			|| ob_get_level() > 1 //Another plugin is using an output filter already
+			|| $this->GetPhpIniBoolean(ini_get("zlib.output_compression")) //Zlib compression in php.ini enabled
+			|| ob_get_level() > (!$this->GetPhpIniBoolean(ini_get("output_buffering"))?0:1) //Another output buffer (beside of the default one) is already active
 			|| (isset($_SERVER['HTTP_X_VARNISH']) && is_numeric($_SERVER['HTTP_X_VARNISH'])) //Behind a Varnish proxy
 		) $pack = false;
 
@@ -1690,7 +1691,6 @@ final class GoogleSitemapGenerator {
 			$this->AddElement(new GoogleSitemapGeneratorXmlEntry('<' . '?xml-stylesheet type="text/xsl" href="' . $styleSheet . '"?' . '>'));
 		}
 
-		$this->AddElement(new GoogleSitemapGeneratorDebugEntry("generator=\"wordpress/" . get_bloginfo('version') . "\""));
 		$this->AddElement(new GoogleSitemapGeneratorDebugEntry("sitemap-generator-url=\"http://www.arnebrachhold.de\" sitemap-generator-version=\"" . $this->GetVersion() . "\""));
 		$this->AddElement(new GoogleSitemapGeneratorDebugEntry("generated-on=\"" . date(get_option("date_format") . " " . get_option("time_format")) . "\""));
 
@@ -2214,5 +2214,38 @@ final class GoogleSitemapGenerator {
 	 */
 	public function IsGreaterZero($value) {
 		return ($value > 0);
+	}
+
+	/**
+	 * Converts the various possible php.ini values for true and false to boolean
+	 *
+	 * @param $value string The value from ini_get
+	 *
+	 * @return bool The converted value
+	 */
+	public function GetPhpIniBoolean($value) {
+		if (is_string($value)) {
+			switch (strtolower($value)) {
+				case '+':
+				case '1':
+				case 'y':
+				case 'on':
+				case 'yes':
+				case 'true':
+				case 'enabled':
+					return true;
+
+				case '-':
+				case '0':
+				case 'n':
+				case 'no':
+				case 'off':
+				case 'false':
+				case 'disabled':
+					return false;
+			}
+		}
+
+		return (boolean) $value;
 	}
 }

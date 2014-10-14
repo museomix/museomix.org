@@ -240,18 +240,18 @@ width:100%;
 }
 
 .bloc-page {
-	max-width: 850px; 
+	/*max-width: 850px; */
 	min-width: 230px; 
-	float: left; 
+	display:inline-block;
 	/*margin-left: 0; */
 	background: #fff; 
-	padding-top: 10px; 
-	padding-bottom: 65px; 
+	/*padding-bottom: 65px; */
 	margin-bottom: 50px; 
-	min-height: 250px;
-	padding-right: 20px;
+	/*min-height: 250px;*/
 	/*margin-left: 25px;*/
 	margin-top: 15px;
+	width:100%;
+	padding:10px;
 }
 #big_header {
 	background-color:#FFEC00;
@@ -441,9 +441,9 @@ body.home .navbar {
 }
 
 .section-1 {
-	padding-top: 50px;
+	/*padding-top: 50px;*/
 	padding-bottom: 25px;
-	margin-bottom: -40px; 
+	/*margin-bottom: -40px;*/ 
 	border-bottom: 1px solid #ccc;
 	min-height: 250px;
 }
@@ -584,20 +584,21 @@ body.home .navbar {
 }
 
 .lst-bloc-lieux {
-	background: #eee;
-
-	max-width: none !important;
+	text-align:center;
+	margin-left:0;
 }
 
 .elm-bloc-lieu {
 	float: left;
 }
-.lst-bloc-lieux .elm-bloc-lieu {
-	width:50%;
-	float:left;
+.lst-bloc-lieux  li {
+	display: inline-block;
+    float: none;
+    list-style: none outside none;
+	
 }
 body#lieux .lst-bloc-lieux .elm-bloc-lieu,body#locations .lst-bloc-lieux .elm-bloc-lieu {
-	width:249px;
+	
 	margin:0 20px 10px 0;
 }
 
@@ -621,13 +622,15 @@ width: 50%;
 .ln-bloc-lieu {
 	display: inline-block;
 	height: 233px;
-	width: 233px;
+	width: 100%;
 	border: 1px solid #ccc;
 	margin: 0 10px 10px 0;
 	-webkit-border-radius: 7px;
 	-moz-border-radius: 7px;
 	border-radius: 7px;
-	background: #fff;
+	background-color: #fff;
+	background-size:100% 100%;
+	background-repeat:no-repeat;
 	padding: 0;
 	position: relative;
 }

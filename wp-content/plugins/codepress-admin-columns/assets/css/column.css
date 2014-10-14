@@ -70,3 +70,29 @@ div.cpac-color span {
 div.sizes span.not-available {
   color: #999;
 }
+/* =Actions column
+-------------------------------------------------------------- */
+.button.cpac-button-action {
+  position: relative;
+  text-indent: 9999px;
+  margin-right: 4px;
+  padding: 0 13px;
+}
+.button.cpac-button-action:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-indent: 0;
+}
+/* =qTip2
+-------------------------------------------------------------- */
+.cpac-tip {
+  display: inline-block;
+}
+.qtip.qtip-tipsy {
+  background: rgba(0, 0, 0, 0.75);
+  font-weight: normal;
+  min-width: 25px;
+}

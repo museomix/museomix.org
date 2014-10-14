@@ -3,8 +3,8 @@ Contributors: bestwebsoft
 Donate link: https://www.2checkout.com/checkout/purchase?sid=1430388&quantity=1&product_id=94
 Tags: add, antispam, anti-spam, anti-spam security, arithmetic actions, capcha, captcha, captha, catcha, cpatcha, captcha numbers, captcha plugin, captcha words, contact form with captcha, comment,  label, login, lost password, match captcha, math actions, multiply, registration, security, spam, spam protection, substract, text captcha, web form protection
 Requires at least: 3.0
-Tested up to: 3.9.1
-Stable tag: 4.0.1
+Tested up to: 4.0
+Stable tag: 4.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,7 +18,7 @@ There is also a premium version of the plugin, allowing compatibility with Buddy
 
 http://www.youtube.com/watch?v=jxrvHaCmQfg
 
-<a href="http://www.youtube.com/watch?v=svcdSfwlb2c" target="_blank">Video instruction on Installation</a>
+<a href="http://www.youtube.com/watch?v=jsvc8FxxEnk" target="_blank">Video instruction on Installation</a>
 
 <a href="http://wordpress.org/plugins/captcha/faq/" target="_blank">FAQ</a>
 
@@ -36,6 +36,8 @@ http://www.youtube.com/watch?v=jxrvHaCmQfg
 
 The author of the Captcha also recommends the following plugins:
 
+*  <a href="http://wordpress.org/plugins/limit-attempts/">Limit Attempts</a> - This plugin allows you to limit users' attempts to log in to your website, as well as create and edit black- and whitelists. This way, you will be able to manage access to your website and its content and protect it from spam and unwanted visitors.
+There is also a premium version of the plugin - <a href="http://bestwebsoft.com/plugin/limit-attempts-pro/?k=c6b924d096b75a288daf0e49a58f93c2">Limited Attempts Pro</a>, with more useful features available. With the pro version, you recieve a possibility to add ranges of IP addresses or IP masks to black- and whitelists. Also, it is compatible with Captcha Pro plugin, so all functionality of Limit Attempts Pro can be apllied to all forms when Captcha Pro is activated.
 * <a href="http://wordpress.org/plugins/updater/">Updater</a> - This plugin updates WordPress core and the plugins to the recent versions. You can also use the auto mode or manual mode for updating and set email notifications.
 There is also a premium version of the plugin <a href="http://bestwebsoft.com/plugin/updater-pro/?k=0864088de1701a5e104ffb77c6d7011c">Updater Pro</a> with more useful features available. It can make backup of all your files and database before updating. Also it can forbid some plugins or WordPress Core update.
 
@@ -54,7 +56,7 @@ There is also a premium version of the plugin <a href="http://bestwebsoft.com/pl
 * Dutch (nl_NL) (thanks to <a href="mailto:byrial@vip.cybercity.dk">Bart Duineveld</a>)
 * Estonian (et) (thanks to Ahto Tanner)
 * Greek (el) (thanks to Aris, www.paraxeno.net)
-* Farsi/Persian (fa_IR) (thanks to <a href="mailto:info[at]mpspace[dot]zio[dot]ir">Meysam Parvizi</a>, www.mpspace.zio.ir)
+* Farsi/Persian (fa_IR) (thanks to <a href="mailto:mostafaasadi73@gmail.com">Mostafa Asadi</a>, www.ma73.ir)
 * Finnish (fi) (thanks to Mikko Sederholm)
 * French (fr_FR) (thanks to Martel Benjamin, <a href="mailto:lcapronnier@yahoo.com">Capronnier luc</a>)
 * German (de_DE) (thanks to Thomas Hartung, <a href="mailto:lothar.schiborr@web.de">Lothar Schiborr</a>)
@@ -98,7 +100,7 @@ We can fix some things for free for the users who provide translation of our plu
 
 <a href="https://docs.google.com/document/d/1DN2yYCvDyK2LqmbWw6xmUNLbb0awOVDZ_dOgIXod-Jw/edit" target="_blank">View a Step-by-step Instruction on Captcha Installation</a>.
 
-http://www.youtube.com/watch?v=svcdSfwlb2c
+http://www.youtube.com/watch?v=jsvc8FxxEnk
 
 == Frequently Asked Questions ==
 
@@ -178,6 +180,16 @@ Please make sure that the problem hasn't been discussed yet on our forum (<a hre
 6. Contact form with Captcha.
 
 == Changelog ==
+
+= V4.0.4 - 10.09.2014 =
+* Update : The Farsi language file is updated.
+* Update : We updated all functionality for wordpress 4.0.
+
+= V4.0.3 - 07.08.2014 =
+* Budfix : Security Exploit was fixed.
+
+= V4.0.2 - 28.07.2014 =
+* Update : We updated all functionality for Limit Attempts plugin.
 
 = V4.0.1 - 12.05.2014 =
 * Bugfix : We fixed syntax error.
@@ -469,6 +481,15 @@ Please make sure that the problem hasn't been discussed yet on our forum (<a hre
 * Select functionality of mathematical actions and level of their difficulty are implemented.
 
 == Upgrade Notice ==
+
+= V4.0.4 =
+The Farsi language file is updated. We updated all functionality for wordpress 4.0.
+
+= V4.0.3 =
+Security Exploit was fixed.
+
+= V4.0.2 =
+We updated all functionality for Limit Attempts plugin.
 
 = V4.0.1 =
 We fixed syntax error.

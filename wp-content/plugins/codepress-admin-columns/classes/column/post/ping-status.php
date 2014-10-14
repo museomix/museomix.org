@@ -1,20 +1,23 @@
 <?php
-
 /**
  * CPAC_Column_Post_Ping_Status
  *
- * @since 2.0.0
+ * @since 2.0
  */
 class CPAC_Column_Post_Ping_Status extends CPAC_Column {
 
-	function __construct( $storage_model ) {
+	/**
+	 * @see CPAC_Column::init()
+	 * @since 2.2.1
+	 */
+	public function init() {
 
-		// define properties
+		parent::init();
+
+		// Properties
 		$this->properties['type']				= 'column-ping_status';
 		$this->properties['label']				= __( 'Ping status', 'cpac' );
 		$this->properties['object_property']	= 'ping_status';
-
-		parent::__construct( $storage_model );
 	}
 
 	/**
@@ -28,7 +31,7 @@ class CPAC_Column_Post_Ping_Status extends CPAC_Column {
 
 	/**
 	 * @see CPAC_Column::get_value()
-	 * @since 2.0.0
+	 * @since 2.0
 	 */
 	function get_value( $post_id ) {
 

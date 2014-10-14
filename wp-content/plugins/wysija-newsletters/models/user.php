@@ -44,10 +44,15 @@ class WYSIJA_model_user extends WYSIJA_model{
         return true;
     }
 
-    function getSubscriptionStatus($uid){
+    /**
+     * Get status number of a subscriber
+     * @param int $user_id
+     * @return int or null
+     */
+    function getSubscriptionStatus($user_id){
         $this->getFormat=OBJECT;
         $result=$this->getOne(array('status'),array('user_id'=>$user_id));
-        return $result->status;
+		return ($result->status !== NULL) ? (int)$result->status : $result->status;
     }
 
     /**
@@ -148,17 +153,22 @@ class WYSIJA_model_user extends WYSIJA_model{
         static $result_user;
         if(!empty($result_user)) return $result_user;
         $this->getFormat = OBJECT;
-        $result_user = $this->getOne(false,array('wpuser_id'=>WYSIJA::wp_get_userdata('ID')));
+
+        $wp_user_id = (int)WYSIJA::wp_get_userdata('ID');
+        if( !( $wp_user_id > 0 ) ){
+            return $result_user;
+        }
+        $result_user = $this->getOne(false,array('wpuser_id'=>$wp_user_id));
 
         if(!$result_user){
             $this->getFormat = OBJECT;
             $result_user = $this->getOne(false,array('email'=>WYSIJA::wp_get_userdata('user_email')));
-            $this->update(array('wpuser_id'=>WYSIJA::wp_get_userdata('ID')),array('email'=>WYSIJA::wp_get_userdata('user_email')));
+            $this->update(array('wpuser_id'=>$wp_user_id),array('email'=>WYSIJA::wp_get_userdata('user_email')));
         }
 
         //the subscriber doesn't seem to exist let's insert it in the DB
         if(!$result_user){
-            $data = get_userdata(WYSIJA::wp_get_userdata('ID'));
+            $data = get_userdata($wp_user_id);
             $firstname = $data->first_name;
             $lastname = $data->last_name;
             if(!$data->first_name && !$data->last_name) $firstname = $data->display_name;
@@ -170,7 +180,7 @@ class WYSIJA_model_user extends WYSIJA_model{
                 'lastname'=>$lastname));
 
             $this->getFormat = OBJECT;
-            $result_user = $this->getOne(false,array('wpuser_id'=>WYSIJA::wp_get_userdata('ID')));
+            $result_user = $this->getOne(false,array('wpuser_id'=>$wp_user_id));
         }
 
         return $result_user;
@@ -309,7 +319,11 @@ class WYSIJA_model_user extends WYSIJA_model{
         // Lists filters
         // Catch list filter from URL
         if ( empty($_REQUEST['wysija']['filter']['filter_list']) && !empty($_REQUEST['filter-list']) ) {
-            $filters['lists'] = $_REQUEST['filter-list'];
+            if ($_REQUEST['filter-list'] == 'orphaned') {
+                $filters['lists'] = 0; // force to 0. 0 means: no list!
+            } else {
+                $filters['lists'] = $_REQUEST['filter-list'];
+            }
         }
 
         if(!empty($_REQUEST['wysija']['filter']['filter_list'])){
@@ -320,6 +334,7 @@ class WYSIJA_model_user extends WYSIJA_model{
                 $filters['lists'] = $_REQUEST['wysija']['filter']['filter_list'];
             }
         }
+
 
         if(!empty($_REQUEST['link_filter'])){
             $filters['status'] = $_REQUEST['link_filter'];
@@ -723,32 +738,46 @@ class WYSIJA_model_user extends WYSIJA_model{
 	if ($result)
 	    return $result[0];
     }
-    public function structure_user_status_count_array($count_by_status){
-        $arr_max_create_at = array();
-        foreach($count_by_status as $status_data){
+    public function structure_user_status_count_array($count_by_status) {
+		$counts = array(
+			'unsubscribed' => 0,
+			'unconfirmed' => 0,
+			'subscribed' => 0,
+			'inactive' => 0
+		);
+        $model_config = WYSIJA::get('config','model');
+        $is_dbleoptin	  = (boolean)$model_config->getValue('confirm_dbleoptin');
 
-            switch($status_data['status']){
-                case '-1':
-                    $counts['unsubscribed'] = $status_data['users'];
-                    break;
-                case '0':
-                    $counts['unconfirmed'] = $status_data['users'];
-                    break;
-                case '1':
-                    $counts['subscribed'] = $status_data['users'];
-                    break;
-		case '-99':
-		    $counts['inactive'] = $status_data['users'];
-            }
-            $arr_max_create_at[] = $status_data['max_create_at'];
-        }
-        $counts['all'] = 0;
-        if(isset($counts['unsubscribed'])) $counts['all'] += $counts['unsubscribed'];
-        if(isset($counts['unconfirmed'])) $counts['all'] += $counts['unconfirmed'];
-        if(isset($counts['subscribed'])) $counts['all'] += $counts['subscribed'];
+		foreach ($count_by_status as $status_data) {
+			switch ($status_data['status']) {
+				case '-1':
+					$counts['unsubscribed'] += $status_data['users'];
+					break;
 
-        return $counts;
-    }
+				case '0':
+					if ($is_dbleoptin) {
+						$counts['unconfirmed']  += $status_data['users'];
+					} else {
+						$counts['subscribed']  += $status_data['users'];
+					}
+					break;
+
+				case '1':
+					$counts['subscribed']  += $status_data['users'];
+					break;
+
+				case '-99':
+					$counts['inactive']	 += $status_data['users'];
+					break;
+
+				default:
+					break;
+			}
+		}
+
+		$counts['all'] = array_sum(array_values($counts)) - $counts['inactive'];
+		return $counts;
+	}
 
     public function get_max_create($count_by_status){
         $arr_max_create_at = array();

@@ -48,7 +48,8 @@ function TypesPagesEditions(){
 			'capability_type' => 'page',
 		)
 	);	
-	if( ! $taxono){ return; }
+	if( !isset($taxono) || !$taxono)
+		return;
 }
 
 /* Post_types Museomix
@@ -92,7 +93,8 @@ function TypesPagesMuseomix(){
 			#'map_meta_cap' => true,
 		)
 	);	
-	if( ! $taxono){ return; }
+	if( !isset($taxono) || !$taxono)
+		return;
 }
 
 
@@ -135,7 +137,8 @@ function TypesPagesMuseum(){
 			),
 		)
 	);	
-	if( ! $taxono){ return; }
+	if( !isset($taxono) || !$taxono)
+		return;
 }
 
 
@@ -177,7 +180,8 @@ function TypesPagesPrototype(){
 			),
 		)
 	);	
-	if( ! $taxono){ return; }
+	if( !isset($taxono) || !$taxono)
+		return;
 }
 
 /* Post_types Configuration

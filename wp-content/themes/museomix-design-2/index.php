@@ -32,7 +32,7 @@
     		<?php if('prototype'==$post->post_type): ?>
 			<?php get_template_part('Prototype'); ?>
 			<?php else: ?>	
-			<?php get_template_part('Page'); ?>
+			<?php get_template_part('Page_template'); ?>
 			<?php endif; ?>
 		
 		<?php endwhile; ?>

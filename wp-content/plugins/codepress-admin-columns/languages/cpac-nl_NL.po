@@ -1,12 +1,12 @@
 #
 # Translators:
-# codepress <info@codepress.nl>, 2013
+# Tobias Schutter <info@codepress.nl>, 2013-2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Admin Columns\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-05-22 17:03+0100\n"
-"PO-Revision-Date: 2014-05-22 17:51+0100\n"
+"PO-Revision-Date: 2014-08-28 12:17+0100\n"
 "Last-Translator: Codepress <info@codepress.nl>\n"
 "Language-Team: Dutch (Netherlands) (http://www.transifex.com/projects/p/"
 "admin-columns/language/nl_NL/)\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: nl_NL\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.6.5\n"
+"X-Generator: Poedit 1.6.8\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -24,17 +24,17 @@ msgstr ""
 
 #: ../classes/addons.php:117
 msgid "Third party plugin integration"
-msgstr ""
+msgstr "Plugin integratie"
 
 #: ../classes/addons.php:142
 msgid "Advanced Custom Fields"
-msgstr ""
+msgstr "Advanced Custom Fields"
 
 #: ../classes/addons.php:143
 msgid ""
 "Display and edit Advanced Custom Fields fields in the posts overview in "
 "seconds!"
-msgstr ""
+msgstr "Toon en bewerk Advanced Custom Fields velden in het post overzicht!"
 
 #: ../classes/column.php:481
 msgid "Thumbnail"
@@ -160,7 +160,7 @@ msgstr "standaard"
 
 #: ../classes/column/acf-placeholder.php:16
 msgid "ACF Field"
-msgstr ""
+msgstr "ACF Veld"
 
 #: ../classes/column/acf-placeholder.php:32
 msgid "This feature is only available in Admin Columns Pro - Developer."
@@ -182,7 +182,7 @@ msgstr ""
 
 #: ../classes/column/acf-placeholder.php:40
 msgid "Find out more"
-msgstr ""
+msgstr "Meer weten"
 
 #: ../classes/column/comment/actions.php:14
 #: ../classes/column/link/actions.php:14
@@ -299,7 +299,7 @@ msgstr "Kleur"
 
 #: ../classes/column/custom-field.php:68 ../classes/settings.php:305
 msgid "Counter"
-msgstr ""
+msgstr "Teller"
 
 #: ../classes/column/custom-field.php:71 ../classes/column/link/image.php:12
 #: ../classes/settings.php:296
@@ -426,11 +426,11 @@ msgstr "Copyright EXIF"
 
 #: ../classes/column/media/exif-data.php:39
 msgid "Focal Length"
-msgstr ""
+msgstr "Brandpuntsafstand"
 
 #: ../classes/column/media/exif-data.php:40
 msgid "ISO"
-msgstr ""
+msgstr "ISO"
 
 #: ../classes/column/media/exif-data.php:41
 msgid "Shutter Speed"
@@ -470,7 +470,7 @@ msgstr "Bijwerken van dit item"
 
 #: ../classes/column/post/actions.php:62
 msgid "Restore this item from the Trash"
-msgstr ""
+msgstr "Herstel dit item uit de prullenbak"
 
 #: ../classes/column/post/actions.php:64
 msgid "Move this item to the Trash"
@@ -518,7 +518,7 @@ msgstr "Toon auteur als"
 
 #: ../classes/column/post/author-name.php:34
 msgid "Display Name"
-msgstr ""
+msgstr "Schermnaam"
 
 #: ../classes/column/post/author-name.php:35
 msgid "First Name"
@@ -886,7 +886,7 @@ msgstr ""
 
 #: ../classes/settings.php:422
 msgid "Addons are seperate plugins which need to be downloaded."
-msgstr ""
+msgstr "Add-ons zijn aparte plugins die moeten worden gedownload."
 
 #: ../classes/settings.php:422
 msgid "Download your Addons"
@@ -894,11 +894,11 @@ msgstr "Download je Addons"
 
 #: ../classes/settings.php:428
 msgid "This website does not use add-ons"
-msgstr ""
+msgstr "Deze website gebruikt geen add-ons"
 
 #: ../classes/settings.php:428
 msgid "See our website for Admin Columns Pro."
-msgstr ""
+msgstr "Bekijk onze website Admin Column Pro"
 
 #: ../classes/settings.php:435
 msgid "Important"
@@ -947,6 +947,8 @@ msgid ""
 "When you have found a bug please <a href=\"%s\">report them to us</a> so we "
 "can fix it in the next release."
 msgstr ""
+"Mocht je een bug vinden, <a href=\"%s\">rapporteer deze aan ons</a> zodat we "
+"die kunnen herstellen in een volgende versie."
 
 #: ../classes/settings.php:448
 msgid "Important!"
@@ -990,6 +992,8 @@ msgstr "Pas uw Admin Column instellingen aan."
 msgid ""
 "Show \"Edit Columns\" button on admin screens. Default is <code>off</code>."
 msgstr ""
+"Toon \"Bewerk Kolommen\" knop op de admin schermen. Standaard waarde is "
+"<code>uit</code>."
 
 #: ../classes/settings.php:553 ../classes/settings.php:682
 msgid "Save"
@@ -1023,7 +1027,7 @@ msgstr "Instellingen"
 
 #: ../classes/settings.php:621
 msgid "Add-ons"
-msgstr ""
+msgstr "Add-ons"
 
 #: ../classes/settings.php:647
 msgid "Posttypes"
@@ -1031,7 +1035,7 @@ msgstr ""
 
 #: ../classes/settings.php:648
 msgid "Others"
-msgstr ""
+msgstr "Overige"
 
 #: ../classes/settings.php:649
 msgid "Taxonomies"
@@ -1081,12 +1085,12 @@ msgstr "Voeg import/export toe"
 
 #: ../classes/settings.php:708
 msgid "Add Direct Editing"
-msgstr ""
+msgstr "Toevoegen Direct Bewerken"
 
 #: ../classes/settings.php:711
 #, php-format
 msgid "Check out <a href=\"%s\">Admin Columns Pro</a> for more details!"
-msgstr ""
+msgstr "Bekijk <a href=\"%s\">Admin Columns Pro</a> voor meer details!"
 
 #: ../classes/settings.php:742
 msgid "Support"
@@ -1113,27 +1117,27 @@ msgstr "Voeg Kolom toe"
 
 #: ../classes/settings.php:853
 msgid "Active"
-msgstr ""
+msgstr "Activeer"
 
 #: ../classes/settings.php:854
 msgid "Deactivate"
-msgstr ""
+msgstr "Deactiveer"
 
 #: ../classes/settings.php:861
 msgid "Installed"
-msgstr ""
+msgstr "Geinstalleerd"
 
 #: ../classes/settings.php:862
 msgid "Activate"
-msgstr ""
+msgstr "Activeer"
 
 #: ../classes/settings.php:876
 msgid "Download & Install"
-msgstr ""
+msgstr "Download & Installeer"
 
 #: ../classes/settings.php:881
 msgid "Get this add-on"
-msgstr ""
+msgstr "Ga naar deze add-on"
 
 #: ../classes/storage_model.php:207
 msgid "settings succesfully restored."
