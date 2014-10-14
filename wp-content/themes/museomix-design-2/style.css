@@ -1174,8 +1174,8 @@ height: auto;
 	}
 	.bloc-page {
 		 margin-right: 0;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 2%;
+    padding-right: 2%;
 	margin-left:0;
 	}
 	.bloc-page .contenu-page {
@@ -1204,7 +1204,7 @@ height: auto;
     float: left;;
   }
   .bloc-page {
-  	width: 100%;
+  	width: 96%;
   }
 }
 @media screen and (max-width: 320px) {
