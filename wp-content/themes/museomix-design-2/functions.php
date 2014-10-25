@@ -275,6 +275,7 @@ function pre_get_posts_hook($wp_query) {
 add_image_size('vignette_prototype',400,400);
 add_image_size('edition_thumbnail',200,200);
 add_image_size('edition_banner',790);
+add_image_size('location_thumbnail',2000);
 
 /* types de pages à trier selon le menu
    ==================================== */
@@ -600,9 +601,9 @@ array_push($liste,$elm);
 				$principal[] = $elm;
 			}	
 			$contenu .= '<div class="span5 rond-5" style="float: left; background: #fff; padding: 10px; border: 1px solid #ccc; margin-bottom: 20px;">';
-			ICL_LANGUAGE_CODE == 'en' ? $coordinator = 'Local coordinator' : $coordinator = 'Coordinateur local';
+			ICL_LANGUAGE_CODE == 'en' ? $coordinator = 'Local coordinators' : $coordinator = 'Coordinateurs locaux';
 			$contenu .= '<h4 style="color: #666; padding-bottom: 10px; ">'.$coordinator.'</h4>';
-			$contenu .= '<table class="table table-striped"><tr>'.$principal[0].'</tr></table>';
+			$contenu .= '<table class="table table-striped"><tr>'.implode('</tr><tr>',$principal).'</tr></table>';
 			$contenu .= '</div>'; 
 		}
 		if($coorgs=get_field('co-organisateurs')){

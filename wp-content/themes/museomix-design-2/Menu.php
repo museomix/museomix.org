@@ -50,6 +50,14 @@
 
 ?>
 <div id="big_header">
+	<div id="social">
+	<?php 
+		$socialMedia = DisplaySocialMedia();
+		if (trim($socialMedia)!='') { ?>
+			<small>Follow us ! <?php echo $socialMedia; ?></small>
+		<?php } 
+	?>
+		</div>
 <?php if (is_front_page()) : ?>
 	<div id="museomix_banner">
 		<a href="<?php 

@@ -1,5 +1,5 @@
 /*
-Theme Name: Museomix design 2
+Theme Name: Museomix OLD
 Theme URI: 
 Author: 
 Author URI: 
@@ -267,7 +267,7 @@ z-index: 1000;
 #museomix_circle {
 	position: absolute;
 	right: 220px;
-	top: 115px;
+	top: 60px;
 }
 
 
@@ -1216,8 +1216,8 @@ height: auto;
 #social{
 	z-index: 3000;
 	position: absolute;
-	top: 210px;
-	left: 10%;
+	top: 5px;
+	right: 15%;
 	font-weight: normal;
 	line-height: 1;
 	font-size: 17.5px;
@@ -1233,7 +1233,7 @@ height: auto;
 
 /* Home page animation (Arthur) */
 #anim-hp {
-	margin: 30px auto 0;
+	margin: 0 auto 0;
     max-width: 800px;
     text-align: center;
     width: 90%;
@@ -1243,7 +1243,7 @@ height: auto;
 }
 #anim-hp .hexa-cont {
 	text-align: center;
-	margin-top: 20px;
+	margin-top: 0;
 	margin-bottom: 20px;
 }
 
@@ -1290,4 +1290,14 @@ height: auto;
 }
 .admin-bar .navbar-fixed-top {
 	top:30px;
+}
+
+#nos-partenaires .partenaires img,#our-partners .partenaires img {
+	padding:3px 0;
+}
+#nos-partenaires .partenaires.first img, #our-partners  .partenaires.first img{
+	height:90px;
+}
+#nos-partenaires .partenaires.last img, #our-partners  .partenaires.last img{
+	height:75px;
 }

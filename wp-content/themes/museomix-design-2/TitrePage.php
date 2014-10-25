@@ -83,23 +83,23 @@
 
 			$cat = get_the_category($post->ID);
 			$lieu_id = substr(category_description($cat[0]->term_id),3,2);
-
+			echo 'lieu='.$lieu_id;
 			if(!empty($lieu_id)) {
 				$id = get_field('visuel_page',$lieu_id);
-				$img = wp_get_attachment_image_src($id,"large");
+				$img = wp_get_attachment_image_src($id,"location_thumbnail");
 			} else {
-				$img = wp_get_attachment_image_src(203,"large");
+				$img = wp_get_attachment_image_src(203,"location_thumbnail");
 			}
 			echo $img[0];
 
 		} else if(get_field('visuel_page')) {
 			$id = get_field('visuel_page');
-			$img = wp_get_attachment_image_src($id,"large");
+			$img = wp_get_attachment_image_src($id,"location_thumbnail");
 			echo $img[0];
 		} else {
 			$id = get_field('visuel_page',get_field('museomix',$id)->ID);
 			if(empty($id)) $id = 203;
-			$img = wp_get_attachment_image_src($id,"large");
+			$img = wp_get_attachment_image_src($id,"location_thumbnail");
 			echo $img[0];
 		}
 
@@ -107,7 +107,7 @@
 		
 ?>
 <?php if( ! is_front_page() ) : ?> 
-	<header class="jumbotron subhead " style="border-bottom: 1px solid #ccc; position: relative; min-height: 240px; background:#ffffff url('<?php VisuelPage(); ?>') no-repeat left top; ">
+	<header class="jumbotron subhead "  style="border-bottom: 1px solid #ccc; position: relative; min-height: 241px; background:#ffffff url('<?php VisuelPage(); ?>') no-repeat left top; ">
 	
 	
 	  <div class="container" style="padding: 70px 0 0 0;  border: 1px none #ccc; position: relative; z-index: 3;
@@ -134,15 +134,7 @@
 	  </div>
 
 	<div style="clear: both;"></div>
-	
 	</header>
 	<?php else: ?>
-	<div id="social">
-<?php 
-	$socialMedia = DisplaySocialMedia();
-	if (trim($socialMedia)!='') { ?>
-		<small>Follow us ! <?php echo $socialMedia; ?></small>
-	<?php } 
-?>
-	</div>
+	
 	<?php endif; ?>
