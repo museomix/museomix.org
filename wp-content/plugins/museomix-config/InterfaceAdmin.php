@@ -45,7 +45,7 @@ function ReordonnerMenu($menu_ord) {
 #       'edit-comments.php', // Commentaires  
     ); 
     remove_menu_page( 'edit-comments.php' );
-    remove_menu_page( 'tools.php' );
+    //remove_menu_page( 'tools.php' );
     remove_menu_page( 'themes.php' );
 
     if(RoleEst('coordinateur_local')){
