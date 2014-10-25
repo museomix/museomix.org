@@ -89,7 +89,7 @@ if(!$ContenuPage)
 	$ContenuPage = apply_filters('the_content',get_the_content());
 		
 ?>
-<div class="bloc-page span12 centered">
+<div class="bloc-page <?php echo ((is_front_page() || (get_field('pleine_largeur'))) ? 'span12' : 'span9'); ?> centered">
 
 	<div class="contenu-page">
 	
