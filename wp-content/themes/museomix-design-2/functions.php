@@ -659,12 +659,12 @@ function DescriptionMusee() {
 			if(is_object($valeur)){
 				$id = $valeur->ID;
 				$url = get_field('lien',$id);
-				$html .= '<div class="row museum">';
-				$html .= '<div class="row"><div class="span7"><h2 class="museumTitre"><a href="'.$url.'">'.get_the_title($id).'</a></h2></div></div>';
-				$html .= '<div class="row">';
+				$html .= '<div class=" museum">';
+				$html .= '<div class="row-fluid"><div class="span7"><h2 class="museumTitre"><a href="'.$url.'">'.get_the_title($id).'</a></h2></div></div>';
+				$html .= '<div class="row-fluid">';
 				$imag = wp_get_attachment_image_src(get_field('image_musee',$id),"thumbnail");
 				$html .= '<div class="span2"><a href="'.$url.'"><img src="'.$imag[0].'" width='.$imag[1].' height='.$imag[2].' class=""></a></div>';
-				$html .= '<div class="span5">
+				$html .= '<div class="span10">
 							<table class="table">
 							<tr><td><i class="icon-home"></i></td><td>'.get_field('court_descriptif_musee',$id).'</td></tr>
 							<tr><td><i class="icon-map-marker"></i></td><td>'.get_field('adresse',$id).' <br />'.get_field('ville',$id).' '.get_field('pays',$id).'</td></tr>
