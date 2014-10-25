@@ -2,9 +2,9 @@
 Contributors: bestwebsoft
 Donate link: https://www.2checkout.com/checkout/purchase?sid=1430388&quantity=1&product_id=94
 Tags: add, antispam, anti-spam, anti-spam security, arithmetic actions, capcha, captcha, captha, catcha, cpatcha, captcha numbers, captcha plugin, captcha words, contact form with captcha, comment,  label, login, lost password, match captcha, math actions, multiply, registration, security, spam, spam protection, substract, text captcha, web form protection
-Requires at least: 3.0
+Requires at least: 3.1
 Tested up to: 4.0
-Stable tag: 4.0.4
+Stable tag: 4.0.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -24,7 +24,7 @@ http://www.youtube.com/watch?v=jxrvHaCmQfg
 
 <a href="http://support.bestwebsoft.com" target="_blank">Support</a>
 
-<a href="http://bestwebsoft.com/plugin/captcha-pro/?k=2d2d85a3c277bf3489697c9a9ff2d352" target="_blank">Upgrade to Pro Version</a>
+<a href="http://bestwebsoft.com/products/captcha/?k=2d2d85a3c277bf3489697c9a9ff2d352" target="_blank">Upgrade to Pro Version</a>
 
 = Features =
 
@@ -37,9 +37,9 @@ http://www.youtube.com/watch?v=jxrvHaCmQfg
 The author of the Captcha also recommends the following plugins:
 
 *  <a href="http://wordpress.org/plugins/limit-attempts/">Limit Attempts</a> - This plugin allows you to limit users' attempts to log in to your website, as well as create and edit black- and whitelists. This way, you will be able to manage access to your website and its content and protect it from spam and unwanted visitors.
-There is also a premium version of the plugin - <a href="http://bestwebsoft.com/plugin/limit-attempts-pro/?k=c6b924d096b75a288daf0e49a58f93c2">Limited Attempts Pro</a>, with more useful features available. With the pro version, you recieve a possibility to add ranges of IP addresses or IP masks to black- and whitelists. Also, it is compatible with Captcha Pro plugin, so all functionality of Limit Attempts Pro can be apllied to all forms when Captcha Pro is activated.
+There is also a premium version of the plugin - <a href="http://bestwebsoft.com/products/limit-attempts/?k=c6b924d096b75a288daf0e49a58f93c2">Limited Attempts Pro</a>, with more useful features available. With the pro version, you recieve a possibility to add ranges of IP addresses or IP masks to black- and whitelists. Also, it is compatible with Captcha Pro plugin, so all functionality of Limit Attempts Pro can be apllied to all forms when Captcha Pro is activated.
 * <a href="http://wordpress.org/plugins/updater/">Updater</a> - This plugin updates WordPress core and the plugins to the recent versions. You can also use the auto mode or manual mode for updating and set email notifications.
-There is also a premium version of the plugin <a href="http://bestwebsoft.com/plugin/updater-pro/?k=0864088de1701a5e104ffb77c6d7011c">Updater Pro</a> with more useful features available. It can make backup of all your files and database before updating. Also it can forbid some plugins or WordPress Core update.
+There is also a premium version of the plugin <a href="http://bestwebsoft.com/products/updater/?k=0864088de1701a5e104ffb77c6d7011c">Updater Pro</a> with more useful features available. It can make backup of all your files and database before updating. Also it can forbid some plugins or WordPress Core update.
 
 = Translation =
 
@@ -78,7 +78,7 @@ There is also a premium version of the plugin <a href="http://bestwebsoft.com/pl
 * Spain (es_ES) (thanks to Iván García Cubero)
 * Swedish (sv_SE) (thanks to Christer Rönningborg, <a href="mailto:blittan@xbmc.org">Blittan</a>)
 * Tagalog (tl) (thanks to <a href="mailto:rjalali@languageconnect.net">Roozbeh Jalali</a>, www.languageconnect.net)
-* Turkish (tr_TR) (thanks to Can Atasever, www.candanblog.com)
+* Turkish (tr_TR) (thanks to Can Atasever, www.canatasever.com)
 * Ukrainian (uk)
 * Vietnamese (vi_VN) (thanks to NDT Solutions)
 
@@ -180,6 +180,10 @@ Please make sure that the problem hasn't been discussed yet on our forum (<a hre
 6. Contact form with Captcha.
 
 == Changelog ==
+
+= V4.0.5 - 15.10.2014 =
+* Update : The Brazilian Portuguese language file is updated.
+* NEW: We added filter 'cptch_forms_list' in the plugin settings page.
 
 = V4.0.4 - 10.09.2014 =
 * Update : The Farsi language file is updated.
@@ -481,6 +485,9 @@ Please make sure that the problem hasn't been discussed yet on our forum (<a hre
 * Select functionality of mathematical actions and level of their difficulty are implemented.
 
 == Upgrade Notice ==
+
+= V4.0.5 =
+The Brazilian Portuguese language file is updated. We added filter 'cptch_forms_list' in the plugin settings page.
 
 = V4.0.4 =
 The Farsi language file is updated. We updated all functionality for wordpress 4.0.
