@@ -79,6 +79,6 @@ showMapMessages('error','The files does not exist');
 <script type="text/javascript">
         showMapMessages('error' , "<?php echo $_REQUEST['errormsg']; ?>")
 </script>
-<?php
+<?
         }
 ?>
