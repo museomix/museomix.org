@@ -68,7 +68,9 @@ width:100%;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
 }
-
+body {
+	background: url(images/fond.png) repeat-x top left #eee;
+}
 .dgd {
   color: #333333;
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
@@ -255,6 +257,7 @@ width:100%;
 }
 #big_header {
 	background-color:#FFEC00;
+	position:relative;
 }
 #museomix_banner {
 	position: relative;
@@ -266,7 +269,7 @@ z-index: 1000;
 }
 #museomix_circle {
 	position: absolute;
-	right: 220px;
+	right: 0;
 	top: 60px;
 }
 
@@ -445,7 +448,7 @@ body.home .navbar {
 	padding-bottom: 25px;
 	/*margin-bottom: -40px;*/ 
 	border-bottom: 1px solid #ccc;
-	min-height: 250px;
+	/*min-height: 250px;*/
 }
 .section-1.first,.section-1:first-child{
 	padding-top: 0;
@@ -597,6 +600,20 @@ body.home .navbar {
     list-style: none outside none;
 	
 }
+#accueil .lst-bloc-lieux li {
+	width:25%;
+	margin: 0 2%;
+}
+#accueil .lst-bloc-lieux li>a {
+		height:150px;
+}
+#accueil .lst-bloc-lieux {
+	max-width:100%;
+}
+#accueil .elm-bloc-lieu:nth-child(3n) {
+	margin-right: 2% !important;
+}
+
 body#lieux .lst-bloc-lieux .elm-bloc-lieu,body#locations .lst-bloc-lieux .elm-bloc-lieu {
 	
 	margin:0 20px 10px 0;
@@ -1207,17 +1224,13 @@ height: auto;
   	width: 96%;
   }
 }
-@media screen and (max-width: 320px) {
-	#museomix_circle {
-		right: 10px;
-	}
-}
+
 
 #social{
 	z-index: 3000;
 	position: absolute;
 	top: 5px;
-	right: 15%;
+	right: 0;
 	font-weight: normal;
 	line-height: 1;
 	font-size: 17.5px;
@@ -1233,10 +1246,10 @@ height: auto;
 
 /* Home page animation (Arthur) */
 #anim-hp {
-	margin: 0 auto 0;
+	margin: 25px auto 0;
     max-width: 800px;
     text-align: center;
-    width: 90%;
+    width: 55%;
 }
 #anim-hp p {
 	/*display:none;*/
@@ -1248,17 +1261,18 @@ height: auto;
 }
 
 #anim-hp .hexa-text {
-	position: relative;
-	top: -230px;
-	-webkit-transition: opacity 0.5s ease-in-out;
-	-moz-transition: opacity 0.5s ease-in-out;
-	-o-transition: opacity 0.5s ease-in-out;
-	-ms-transition: opacity 0.5s ease-in-out;
-	transition: opacity 0.5s ease-in-out;
-	opacity: 0;
-	height: 220px;
-	vertical-align: middle;
-	background-color: rgba(255,255,255,0.9);
+position: relative;
+top: -145px;
+-webkit-transition: opacity 0.5s ease-in-out;
+-moz-transition: opacity 0.5s ease-in-out;
+-o-transition: opacity 0.5s ease-in-out;
+-ms-transition: opacity 0.5s ease-in-out;
+transition: opacity 0.5s ease-in-out;
+opacity: 0;
+height: 210px;
+vertical-align: middle;
+background-color: rgba(255,255,255,0.9);
+
 }
 
 #anim-hp .hexa-text:hover {
@@ -1267,18 +1281,18 @@ height: auto;
 
 #anim-hp .hexa-title {
 	position: relative;
-	top:40%; 
+	top:70%; 
 }
 
 #anim-hp h6 {
 	font-family: 'museomix' !important;
 	margin-top: 0px !important;
 	margin-bottom: 0px !important;
-	font-size: 24px !important;
+	font-size: 15px !important;
 }
 #anim-hp .hexas {
 	display: inline-block;
-    height: 220px;
+    height: 205px;
     vertical-align: top;
     width: 30%;
 }
@@ -1300,4 +1314,21 @@ height: auto;
 }
 #nos-partenaires .partenaires.last img, #our-partners  .partenaires.last img{
 	height:75px;
+}
+@media screen and (max-width: 640px) {
+	#museomix_circle {
+		display:none;
+	}
+	#anim-hp {
+		display:none;
+	}
+	#accueil iframe {
+		margin-top:0 !important;
+	}
+	#accueil .lst-bloc-lieux li {
+		width:29%;
+	}
+	#social {
+		display:none;
+	}
 }

@@ -49,7 +49,7 @@
 	
 
 ?>
-<div id="big_header">
+<div id="big_header" class="container">
 	<div id="social">
 	<?php 
 		$socialMedia = DisplaySocialMedia();
