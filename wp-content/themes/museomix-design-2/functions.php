@@ -581,7 +581,7 @@ function ContenuSection($id, $echo = true){
 array_push($liste,$elm);
 
 			}
-			$contenu = '<ul class="landscape"><li>'.implode('</li><li>',$liste).'</li></ul>';
+			$contenu = '<ul class="landscape"><li class="span6">'.implode('</li><li class="span6">',$liste).'</li></ul>';
 		}else{
 			//$contenu = '<span style="margin-left: 25px;color: #999;">pas de partenaires (champ: partenaires)</span>';		
 		}

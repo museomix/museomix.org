@@ -81,7 +81,7 @@
 
 				echo '"><img src="'.get_template_directory_uri().'/images/logo-museomix-2.png" alt="Museomix 2013" class="logoHeader"/>';
 
-				_e('7-8-9+ nov. 2014','museomix-design-2'); 
+				_e(' 7-8-9+ nov. 2014','museomix-design-2'); 
 				
 				echo '</a>';
 

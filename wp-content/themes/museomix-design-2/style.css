@@ -1315,6 +1315,10 @@ background-color: rgba(255,255,255,0.9);
 #nos-partenaires .partenaires.last img, #our-partners  .partenaires.last img{
 	height:75px;
 }
+.single-museomix #partenaires li {
+	border: 1px solid #ccc;
+	border-radius:5px;
+}
 @media screen and (max-width: 640px) {
 	#museomix_circle {
 		display:none;
