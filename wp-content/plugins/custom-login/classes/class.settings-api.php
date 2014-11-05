@@ -14,7 +14,7 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
 	/**
 	 * Version
 	 */
-	var $api_version = '1.0.17';
+	var $api_version = '1.0.18';
 
     /**
      * settings sections array
@@ -243,31 +243,32 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
             add_settings_section( $section['id'], $section['title'], '__return_false', $section['id'] );
         }
 
-        //register settings fields
-        foreach ( $this->settings_fields as $section => $field ) {
-            foreach ( $field as $option ) {
+		//register settings fields
+		foreach ( $this->settings_fields as $section => $field ) {
+			foreach ( $field as $option ) {
 
-                $type = isset( $option['type'] ) ? $option['type'] : 'text';
-
-                $args = array(
-                    'id'				=> $option['name'],
-                    'desc' 				=> isset( $option['desc'] ) ? $option['desc'] : '',
-                    'name' 				=> $option['label'],
-                    'section' 			=> $section,
-                    'size' 				=> isset( $option['size'] ) ? $option['size'] : null,
-                    'options' 			=> isset( $option['options'] ) ? $option['options'] : '',
-                    'std' 				=> isset( $option['default'] ) ? $option['default'] : '',
-                    'sanitize_callback' => isset( $option['sanitize_callback'] ) ? $option['sanitize_callback'] : '',
-                );
+				$type = isset( $option['type'] ) ? $option['type'] : 'text';
+				
+				$args = array(
+					'id'					=> $option['name'],
+					'desc' 					=> isset( $option['desc'] ) ? $option['desc'] : '',
+					'name' 					=> $option['label'],
+					'section' 				=> $section,
+					'size' 					=> isset( $option['size'] ) ? $option['size'] : null,
+					'options' 				=> isset( $option['options'] ) ? $option['options'] : '',
+					'std'					=> isset( $option['default'] ) ? $option['default'] : '',
+					'sanitize_callback'	=> isset( $option['sanitize_callback'] ) ? $option['sanitize_callback'] : '',
+					'class'					=> isset( $option['class'] ) ? $option['class'] : $this,
+				);
 				$args = wp_parse_args( $args, $option );
-                add_settings_field( $section . '[' . $option['name'] . ']', $option['label'], array( $this, 'callback_' . $type ), $section, $section, $args );
-            }
-        }
+				add_settings_field( $section . '[' . $option['name'] . ']', $option['label'], array( $args['class'], 'callback_' . $type ), $section, $section, $args );
+			}
+		}
 
-        // creates our settings in the options table
-        foreach ( $this->settings_sections as $section ) {
-            register_setting( $section['id'], $section['id'], array( $this, 'sanitize_options' ) );
-        }
+		// creates our settings in the options table
+		foreach ( $this->settings_sections as $section ) {
+			register_setting( $section['id'], $section['id'], array( $this, 'sanitize_options' ) );
+		}
     }
 
     /**
@@ -294,8 +295,8 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
     function callback_text_array( $args ) {
 		static $counter = 0;
 		
-        $value = $this->get_option( $args['id'], $args['section'], $args['std'] );
-        $size  = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
+		$value = $this->get_option( $args['id'], $args['section'], $args['std'] );
+		$size  = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
 				
 		$html  = '<ul style="margin-top:0">';
 		
@@ -346,9 +347,9 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
 		
 		$html .= 1 === $counter ? ob_get_clean() : '';
 				
-        $html .= sprintf( '<span class="description"> %s</span>', $args['desc'] );
-
-        echo $html;
+		$html .= sprintf( '<span class="description"> %s</span>', $args['desc'] );
+	
+		echo $html;
     }
 
     /**

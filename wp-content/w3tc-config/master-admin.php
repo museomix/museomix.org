@@ -10,7 +10,7 @@ return array(
 	'minify.configuration_sealed' => false,
 	'objectcache.configuration_sealed' => false,
 	'pgcache.configuration_sealed' => false,
-	'previewmode.enabled' => false,
+	'previewmode.enabled' => true,
 	'varnish.configuration_sealed' => false,
 	'fragmentcache.configuration_sealed' => false,
 	'newrelic.configuration_sealed' => false,
@@ -28,5 +28,5 @@ return array(
 	'notes.remove_w3tc' => false,
 	'notes.hide_extensions' => array(
 	),
-	'evaluation.reminder' => 1413588838,
+	'evaluation.reminder' => 1418837779,
 );

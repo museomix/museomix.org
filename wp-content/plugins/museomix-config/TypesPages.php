@@ -236,6 +236,7 @@ function TypesPagesSponsor(){
 				'menu_name' => __('Partners','museomix-config') 
 			),
 			'public' => true,
+			'show_ui' => true,
 			'hierarchical' => true,
 			'has_archive' => true,
 			'rewrite' => array('slug'=>'partenaires'),
