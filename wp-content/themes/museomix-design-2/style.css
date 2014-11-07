@@ -1352,3 +1352,10 @@ body#live.home .bouton-nav-accueil {
 #live #museomix_banner {
 	display:none;
 }
+#tagboard {
+	overflow-y:hidden;
+}
+#tagboard-embed {
+	position:relative;
+	top:-80px;
+}
