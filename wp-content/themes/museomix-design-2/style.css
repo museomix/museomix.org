@@ -1336,3 +1336,19 @@ background-color: rgba(255,255,255,0.9);
 		display:none;
 	}
 }
+
+
+
+#live #accueil .lst-bloc-lieux li  {
+	width:17%;
+}
+#live #accueil .lst-bloc-lieux li>a {
+	height:118px;
+}
+
+body#live.home .bouton-nav-accueil {
+	display:block !important;
+}
+#live #museomix_banner {
+	display:none;
+}
