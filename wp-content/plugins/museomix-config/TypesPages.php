@@ -55,7 +55,7 @@ function TypesPagesEditions(){
 /* Post_types Museomix
    =================== */
 function TypesPagesMuseomix(){
-	$supports = (RoleEst('administrator'))? array('title','editor','author') : array('title','editor');
+	$supports = (RoleEst('administrator'))? array('title','editor','author','revisions') : array('title','editor','revisions');
 	register_post_type(
 		'museomix',
 		array( 
@@ -168,6 +168,7 @@ function TypesPagesPrototype(){
 			'has_archive' => true,
 			'rewrite' => array('slug'=>'prototypes'),
 			'capability_type' => 'prototype',
+			'supports' => array('title', 'editor', 'author', 'thumbnail','revisions'),
 			'capabilities' => array(
 				'read_post' => 'read_prototype',
 				'edit_post' => 'edit_prototype',
