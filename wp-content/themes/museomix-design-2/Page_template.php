@@ -102,6 +102,7 @@ if(!$ContenuPage)
 			<!--div class="alert alert-info">formulaire en maintenance. Merci de rééssayer plus tard.</div-->
 
 			<?php if('museomix'==$post->post_type):  ?>
+				
 	
 				<?php
 				$SectionsPageId = 0;
@@ -124,6 +125,11 @@ if(!$ContenuPage)
 							<?php echo $ContenusSections[$id]['txt']; ?>
 		
 						</section>
+						<?php if ($id == 'prototypes') { ?>
+							<section class="section-1 sec1" style="min-height: 300px; position: relative;"> 
+								<?php the_content(); ?>
+							</section>
+						<?php } ?>
 					 
 					<?php
 					}

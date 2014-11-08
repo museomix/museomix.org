@@ -22,8 +22,9 @@ global $SectionsPage, $ContenusSections;
 
 			} else {
 				$menu_default_items = array(
-					'presentation'=> 'Présentation',
 					'prototypes'=> 'Prototypes',
+					'presentation'=> 'Présentation',
+					
 					'actualites'=> 'Actualités',
 					/*'participer'=> 'Participez',*/
 					'partenaires'=> 'Partenaires',
