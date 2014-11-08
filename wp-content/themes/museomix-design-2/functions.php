@@ -113,7 +113,8 @@ add_shortcode( 'liste-lieux', 'ListeLieux' );
 function ListeLieux($atts){
 	global $SectionsPage;
 	extract(shortcode_atts(array(
-		'edition' => ''
+		'edition' => '',
+		'show_local_website' => ''
 	),$atts));
 	$lieux = get_pages(array('post_type'=>'museomix'));
 	if(!count($lieux)){ return ''; }
@@ -124,7 +125,11 @@ function ListeLieux($atts){
 			if(!$imag=wp_get_attachment_image_src(get_field('vignette_lieu',$id),"thumbnail")) {
 				$imag= wp_get_attachment_image_src(get_field('visuel_page',$id),"large");
 			}
-			$r[] = '<a class="ln-bloc-lieu btn btn-large" style="background: #ffffff url('.$imag[0].') no-repeat center center;" href="'.get_permalink($id).'"><span class="titre-bloc-lieu" ><span class="tx-bloc-lieu">'.$titre.'</span></span></a>';
+			$lien = get_permalink($id);
+			$website = get_field('website', $id);
+			if (!empty($website) && isset($atts['show_local_website']) && !empty($atts['show_local_website']))
+				$lien = $website;
+			$r[] = '<a class="ln-bloc-lieu btn btn-large" style="background: #ffffff url('.$imag[0].') no-repeat center center;" href="'.$lien.'"><span class="titre-bloc-lieu" ><span class="tx-bloc-lieu">'.$titre.'</span></span></a>';
 		}
 	}
 	if(!$r) return '';
