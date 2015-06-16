@@ -97,7 +97,7 @@
 						</a>
 						<div class="extrait" style="color: #999; font-size: 15px; margin: 0; text-decoration: none !important"><?php echo get_the_excerpt(); ?>
 							<br />
-							<a class="small" href="<?php echo get_permalink(); ?>"><?php _e('En savoir plus','museomix-design-2'); ?></a>
+							<a class="small" href="<?php echo get_permalink(); ?>"><?php _e('En savoir plus','museomix'); ?></a>
 						</div>
 					
 					</li>

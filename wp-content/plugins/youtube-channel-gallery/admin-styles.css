@@ -1,0 +1,77 @@
+
+/*clearfix*/
+.ytchgtabs .clearfix:before, .ytchgtabs .clearfix:after { content: ""; display: table; }
+.ytchgtabs .clearfix:after { clear: both; }
+.ytchgtabs .clearfix { zoom: 1; }
+
+
+/*tabs ul*/
+.ytchgtabs ul{
+	margin: 0;
+	padding: 0;
+}
+
+/*tabs li*/
+.ytchgtabs li { 
+	display: inline-block; margin: 1px .2em 0 0; 
+	padding: 0;
+	list-style: none; white-space: nowrap; 
+	position: relative;
+	background: #F3F3F3;
+	border: 1px solid #DFDFDF;
+	border-bottom: none;
+	border-radius: 5px 5px 0 0;
+}
+.ytchgtabs li.active{
+	margin-bottom: -1px;
+	padding-bottom: 1px;
+	background: #FAFAFA;
+}
+
+
+/*tabs a*/
+.ytchgtabs-tabs a{
+	padding: 5px;
+	display: inline-block;
+	text-decoration: none;
+	outline: 0;
+}
+
+/*content*/
+.ytchgtabs div.ytchgtabs-content {
+	border: 1px solid #DFDFDF;
+	padding: 15px 12px;
+	background: #FAFAFA;
+}
+
+.ytchgtabs-content p:last-child{ margin-bottom: 0}
+
+/*
+tab1
+---------------
+*/
+.feed_playlist_id_label{display: none;}
+
+
+/*
+tab3
+---------------
+*/
+/*title and description*/
+.ytchgtabs div.ytchg-title-and-description{border: none; background: none;}
+
+
+.ytchgtabs fieldset.ytchg-fieldborder{border: 1px solid #DFDFDF;border-radius: 5px;}
+
+.ytchgtabs .ytchag_info {
+background: #ADD3E2;
+border-radius: 20px;
+font-size: 11px;
+width: 15px;
+height: 15px;
+line-height: 14px;
+display: inline-block;
+text-align: center;
+cursor: pointer;
+}
+.wideinfo{width: 88%;margin-right: 2px;}

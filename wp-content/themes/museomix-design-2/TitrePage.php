@@ -14,7 +14,7 @@
 		}
 		
 		elseif(is_singular('post')){
-			echo '<a class="ln-titre-page" href="'.get_permalink(get_option('page_for_posts')).'">Actualités</a>';
+			echo '<a class="ln-titre-page" href="'.get_permalink(get_option('page_for_posts')).'">'.__('News', 'museomix').'</a>';
 		}
 		
 		elseif(is_singular()){

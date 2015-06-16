@@ -1,0 +1,133 @@
+/*------------------------------------------------------------
+Plugin Name: Youtube Channel Gallery
+Plugin URI: http://www.poselab.com/
+Version: 1.8.7
+Description: Show a youtube video and a gallery of thumbnails for a youtube channel.
+------------------------------------------------------------*/	
+/*plugin wrapper*/
+.youtubechannelgallery, .youtubechannelgallery *,
+.ytcplayer-fixwidthwrapper, .ytcplayer-fixwidthwrapper *,
+.ytchagallery, .ytchagallery * {
+	-webkit-box-sizing: border-box!important;
+	 -moz-box-sizing: border-box!important; 
+	 box-sizing: border-box!important; 
+}
+
+/*clearfix*/
+.ytccf:before,.ytccf:after {content: " "!important; display: table!important;}
+.ytccf:after {clear: both!important;}
+.ytccf {*zoom: 1!important;}
+
+
+/*shortcode wrapper*/
+.ytcshort{margin: 10px 0}
+
+/*Player*/
+/*---------------------------------------------------*/
+
+/* 
+padding-top: player chrome height 
+padding-bottom: height of player;
+*/
+.ytcplayer-wrapper{
+	position: relative!important;padding: 0!important;padding-bottom: 56.25%!important; height: 0!important; width: 100%!important;
+	margin-bottom: 10px; background: 
+}
+.ytcplayer-wrapper.ytc-player4x3{
+	padding-bottom: 75%!important;
+}
+iframe.ytcplayer{
+	position: absolute!important; top: 0!important;left: 0!important; width: 100%!important; height: 100%!important; padding: 0!important; border: 0!important; 
+}
+
+/*Thumbnails, title and description*/
+/*---------------------------------------------------*/
+ul.ytchagallery{margin: 0!important; padding: 0!important;list-style: none!important; width: 100%!important; overflow: hidden!important;}
+ul.ytchagallery .ytc-row{width:-webkit-calc(100% + 10px)!important; width:calc(100% + 10px)!important;margin: 0!important;padding: 0!important} 
+ul.ytchagallery li{float:left!important;margin: 0!important;list-style: none!important;padding: 0!important;clear: none!important;}
+ul.ytchagallery li.ytccell-first{clear: left!important;}
+ul.ytchagallery li .ytcliinner {overflow: hidden!important;padding: 0 10px 10px 0!important}
+
+	/*Thumbnails*/
+	/*----------------------------*/
+	ul.ytchagallery a.ytcthumb{
+		display: block!important;border:1px solid #999; position: relative!important; line-height: 0!important;width: 100%!important;
+		padding: 0!important; margin: 0!important; height: 0!important; overflow: hidden!important; 
+		background-size: cover!important; background-position: center!important;
+	}
+
+	/*Play button*/
+	ul.ytchagallery a.ytcthumb .ytcplay{background: url(img/play.png) no-repeat!important; background-position: -9999px -9999px!important;position: absolute!important; width: 100%!important; height: 100%!important}
+	ul.ytchagallery a.ytcthumb:hover{opacity: 0.75;}
+	ul.ytchagallery a.ytcthumb:hover .ytcplay{background-position: center center!important;}
+
+	ul.ytchagallery p{display: none!important}/*for some themes*/
+
+	/*images*/
+	/*----------------------------*/
+
+	/*4x3*/
+	ul.ytc-thumb4x3 a.ytcthumb{
+		 padding-bottom: 75%!important;
+	}
+
+	/*16x9*/
+	ul.ytc-thumb16x9 a.ytcthumb{
+		padding-bottom: 55%!important;
+	}
+
+
+
+	/*Title and description*/
+	/*----------------------------*/
+		ul.ytchagallery .ytctitledesc-cont * {clear: none!important; }
+		ul.ytchagallery .ytctitle a{word-wrap: break-word; }
+
+		ul.ytchagallery .ytctitle{margin: 5px 0 10px 0}
+
+		/*left*/
+		ul.ytchagallery.ytc-td-left div.ytcthumb-cont{float: left!important; margin: 0 5px 5px 0!important;}
+
+		/*right*/
+		ul.ytchagallery.ytc-td-right div.ytcthumb-cont{float: right!important; margin: 0 0 5px 5px!important}
+		
+
+		/*top*/
+		ul.ytchagallery.ytc-td-top div.ytcthumb-cont{float: none!important;}
+
+		/*bottom*/
+		ul.ytchagallery.ytc-td-bottom div.ytcthumb-cont{float: none!important; }
+		ul.ytchagallery.ytc-td-bottom div.ytctitledesc-cont{margin-bottom: 5px}
+		ul.ytchagallery.ytc-td-bottom div.ytctitledesc-cont h5{margin-bottom: 5px}
+
+
+
+	/*columns*/
+	.ytc-row{clear: both!important;}
+
+	.ytc-columns1 li{ width: 100%!important;}
+
+	.ytc-columns2 li{ width: 50%!important;}
+
+	.ytc-columns3 li{ width: 33.33%!important;}
+
+	.ytc-columns4 li{ width: 25%!important;}
+
+	.ytc-columns5 li{ width: 20%!important;}
+
+	.ytc-columns6 li{ width: 16.66%!important;}
+
+	.ytc-columns7 li{ width: 14.28%!important;}
+
+	.ytc-columns8 li{ width: 12.5%!important;}
+
+	.ytc-columns9 li{ width: 11.11%!important;}
+
+	.ytc-columns10 li{ width: 10%!important;}
+
+
+/*link to YouTube*/
+/*---------------------------------------------------*/
+.ytcmore{display: block}
+
+

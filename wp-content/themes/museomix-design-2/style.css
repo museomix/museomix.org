@@ -93,7 +93,7 @@ body {
 
 }
 
-.bouton-nav {
+.bouton-nav, .bouton-nav li a {
 	-webkit-box-shadow: none !important;
 	-moz-box-shadow: none !important;
 	box-shadow: none !important;
@@ -101,6 +101,14 @@ body {
 	color: #333 !important;
 	font-size: 15px;
 	font-family : "museomix", Helvetica, Arial, sans serif;
+}
+.menu-main-container {
+	float:left;
+	width:55%;
+}
+#lang_sel_click {
+	width:10%;
+	float:left;
 }
 .navbar-inner {
 	filter:none !important;
@@ -1115,7 +1123,7 @@ td.hd {
 }
 .bs-docs-sidenav .active .icon-chevron-right,
 .bs-docs-sidenav .active a:hover .icon-chevron-right {
-  background-image: url(../img/glyphicons-halflings-white.png);
+ /* background-image: url(../img/glyphicons-halflings-white.png);*/
   opacity: 1;
 }
 .bs-docs-sidenav.affix {
@@ -1358,4 +1366,17 @@ body#live.home .bouton-nav-accueil {
 #tagboard-embed {
 	position:relative;
 	top:-80px;
+}
+
+#tagboard-embed iframe {
+	height:750px !important;
+}
+
+body.single-museomix #prototypes ul li {
+width: 20%;
+margin: 0 2%;
+}
+
+body.single-museomix #prototypes ul {
+max-width:100%;
 }

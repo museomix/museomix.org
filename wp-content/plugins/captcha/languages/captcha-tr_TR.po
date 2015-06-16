@@ -3,11 +3,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: captcha\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-11 11:17+0300\n"
-"PO-Revision-Date: 2014-04-11 11:17+0300\n"
+"POT-Creation-Date: 2014-12-23 13:49+0300\n"
+"PO-Revision-Date: 2014-12-23 13:49+0300\n"
 "Last-Translator: bestwebsoft.com <plugins@bestwebsoft.com>\n"
-"Language-Team: Thomas Hartung <thartung@adipositas-mm.de>\n"
-"Language: da\n"
+"Language-Team: Can Atasever <webmaster@canatasever.com>\n"
+"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -17,504 +17,497 @@ msgstr ""
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: captcha.php:72
-#: captcha.php:403
-#, fuzzy
+#: captcha.php:79
+#: captcha.php:410
 msgid "Captcha Settings"
 msgstr "Captcha Ayarları"
 
-#: captcha.php:72
+#: captcha.php:79
 msgid "Captcha"
 msgstr "Captcha"
 
-#: captcha.php:160
+#: captcha.php:166
 msgid "requires"
-msgstr ""
+msgstr "eklentisi"
 
-#: captcha.php:160
+#: captcha.php:166
 msgid "or higher, that is why it has been deactivated! Please upgrade WordPress and try again."
-msgstr ""
+msgstr "ya da daha üst versiyon gerektirir, eklenti bu yüzden etkisizleştirildi! Lütfen Wordpress&#39;i güncelleyin ve tekrar deneyin."
 
-#: captcha.php:160
+#: captcha.php:166
 msgid "Back to the WordPress"
-msgstr ""
+msgstr "Wordpress&#39;e geri dön"
 
-#: captcha.php:160
-#, fuzzy
+#: captcha.php:166
 msgid "Plugins page"
-msgstr "BWS Plugins"
+msgstr "Eklentiler sayfası"
 
-#: captcha.php:233
+#: captcha.php:239
 msgid "Login form"
 msgstr "Giriş Formu"
 
-#: captcha.php:234
-#: captcha.php:448
-#, fuzzy
+#: captcha.php:240
+#: captcha.php:461
 msgid "Registration form"
 msgstr "Kayıt Formu"
 
-#: captcha.php:234
+#: captcha.php:240
 msgid "Register form"
 msgstr "Kayıt Formu"
 
-#: captcha.php:235
-#, fuzzy
+#: captcha.php:241
 msgid "Reset Password form"
-msgstr "Kayıp Parola Formu"
+msgstr "Parola sıfırlama formu"
 
-#: captcha.php:235
+#: captcha.php:241
 msgid "Lost password form"
 msgstr "Kayıp Parola Formu"
 
-#: captcha.php:236
-#: captcha.php:449
+#: captcha.php:242
+#: captcha.php:462
 msgid "Comments form"
 msgstr "Yorum Formu"
 
-#: captcha.php:237
-msgid "Hide CAPTCHA for registered users"
-msgstr "Kayıtlı kullanıcılar için CAPTCHA'yı gizle"
+#: captcha.php:243
+msgid "Hide CAPTCHA in Comments form for registered users"
+msgstr "Kayıtlı kullanıcılar için CAPTCHA&#39;yı gizle"
 
-#: captcha.php:242
+#: captcha.php:248
 msgid "Plus (&#43;)"
 msgstr "Artı (&#43;)"
 
-#: captcha.php:242
+#: captcha.php:248
 msgid "Plus"
 msgstr "Artı"
 
-#: captcha.php:243
+#: captcha.php:249
 msgid "Minus (&minus;)"
 msgstr "Eksi (&minus;)"
 
-#: captcha.php:243
+#: captcha.php:249
 msgid "Minus"
 msgstr "Eksi"
 
-#: captcha.php:244
-#, fuzzy
+#: captcha.php:250
 msgid "Multiplication (&times;)"
-msgstr "Çarpı (&times;)"
+msgstr "Çarpma (&times;)"
 
-#: captcha.php:244
-#, fuzzy
+#: captcha.php:250
 msgid "Multiply"
-msgstr "Çarpı (&times;)"
+msgstr "Çarp (&times;)"
 
-#: captcha.php:249
+#: captcha.php:255
 msgid "Numbers"
 msgstr "Sayılar"
 
-#: captcha.php:250
+#: captcha.php:256
 msgid "Words"
 msgstr "Kelimeler"
 
-#: captcha.php:281
-#, fuzzy
+#: captcha.php:293
 msgid "Please select one item in the block Arithmetic and Complexity for CAPTCHA"
-msgstr "Lütfen, Aritmetik Hareketler ve CAPTCHA İçin Zorluk bloklarından bir nokta seçin."
+msgstr "Lütfen, Aritmetik Hareketler ve CAPTCHA İçin Zorluk bölümünden bir öge seçin."
 
-#: captcha.php:285
-#, fuzzy
+#: captcha.php:297
 msgid "Settings saved."
 msgstr "Ayarlar kaydedildi."
 
-#: captcha.php:298
-#: captcha.php:336
+#: captcha.php:310
+#: captcha.php:342
 msgid "Wrong license key"
-msgstr ""
+msgstr "Hatalı lisans anahtarı"
 
-#: captcha.php:329
+#: captcha.php:335
 msgid "Something went wrong. Try again later. If the error will appear again, please, contact us <a href=http://support.bestwebsoft.com>BestWebSoft</a>. We are sorry for inconvenience."
-msgstr ""
+msgstr "Bir şeyler ters gitti, daha sonra tekrar deneyin. Eğer hata mesajı tekrar görünürse, lütfen <a href=http://support.bestwebsoft.com>buraya</a> tıklayın ve bizimle iletişime geçin. Yaşadığınız rahatsızlık için üzgünüz."
 
-#: captcha.php:338
+#: captcha.php:344
 msgid "This license key is bind to another site"
-msgstr ""
+msgstr "Bu lisans anahtarı başka bir siteyle ilişkilendirilmiş."
 
-#: captcha.php:340
-#: captcha.php:568
+#: captcha.php:346
+#: captcha.php:581
 msgid "Unfortunately, you have exceeded the number of available tries per day. Please, upload the plugin manually."
-msgstr ""
-
-#: captcha.php:357
-msgid "Failed to open the zip archive. Please, upload the plugin manually"
-msgstr ""
+msgstr "Üzgünüz, günlük deneme limitini aştınız. Lütfen eklentiyi manuel olarak yükleyin."
 
 #: captcha.php:363
+msgid "Failed to open the zip archive. Please, upload the plugin manually"
+msgstr "ZIP arşivi açılamadı. Lütfen eklentiyi manuel olarak yükleyin."
+
+#: captcha.php:369
 msgid "Your server does not support either ZipArchive or Phar. Please, upload the plugin manually"
-msgstr ""
+msgstr "Sunucunuz ZipArchive ya da Phar desteklemiyor. Lütfen eklentiyi manuel olarak yükleyin."
 
-#: captcha.php:367
-#: captcha.php:376
+#: captcha.php:373
+#: captcha.php:382
 msgid "Failed to download the zip archive. Please, upload the plugin manually"
-msgstr ""
+msgstr "ZIP arşivi indirilemedi. Lütfen eklentiyi manuel olarak yükleyin."
 
-#: captcha.php:380
-msgid "Something went wrong. Try again later or upload the plugin manually. We are sorry for inconvienience."
-msgstr ""
+#: captcha.php:386
+msgid "Something went wrong. Try again later or upload the plugin manually. We are sorry for inconvenience."
+msgstr "Bir şeyler ters gitti. Daha sonra tekrar deneyin ya da eklentiyi manuel olarak yükleyin. Yaşadığınız rahatsızlık için üzgünüz."
 
-#: captcha.php:395
+#: captcha.php:404
 msgid "Please, enter Your license key"
-msgstr ""
+msgstr "Lütfen lisans anahtarınızı girin"
 
-#: captcha.php:405
-#: captcha.php:1414
-#: captcha.php:1426
+#: captcha.php:412
+#: captcha.php:1424
+#: captcha.php:1436
 msgid "Settings"
 msgstr "Ayarlar"
 
-#: captcha.php:406
-msgid "Go PRO"
-msgstr ""
-
-#: captcha.php:408
-msgid "Notice:"
-msgstr ""
-
-#: captcha.php:408
-msgid "The plugin's settings have been changed. In order to save them please don't forget to click the 'Save Changes' button."
-msgstr ""
-
-#: captcha.php:415
-#: captcha.php:445
-#, fuzzy
-msgid "Enable CAPTCHA for:"
-msgstr "CAPTCHA'yı şunlarda aktifleştir:"
-
-#: captcha.php:427
-#: captcha.php:429
-#: captcha.php:432
-msgid "Contact form"
-msgstr "İletişim Formu"
-
-#: captcha.php:427
-#: captcha.php:429
-#: captcha.php:432
-msgid "powered by"
-msgstr ""
-
-#: captcha.php:429
-msgid "Activate contact form"
-msgstr "İletişim formunu etkinleştir"
-
-#: captcha.php:432
-msgid "Download contact form"
-msgstr "İletişim formunu indir"
-
-#: captcha.php:434
-#, fuzzy
-msgid "If you would like to customize this plugin for a custom form, please see"
-msgstr "Eğer eklentiyi, özelleştirilmiş bir form için kişiselleştirmek isterseniz, <a href=\"Mailto:plugin@bestwebsoft.com\">plugin@bestwebsoft.com</a> aracılığıyla ya da sitemizdeki iletişim formu aracılığıyla bizimle iletişime geçebilirsiniz."
-
-#: captcha.php:450
-msgid "\"Create a Group\" form"
-msgstr ""
-
-#: captcha.php:456
-#, fuzzy
-msgid "Enable CAPTCHA:"
-msgstr "CAPTCHA'yı şunlarda aktifleştir:"
-
-#: captcha.php:464
-msgid "If you upgrade to Pro version all your settings will be saved."
-msgstr ""
-
-#: captcha.php:471
-msgid "Unlock premium options by upgrading to a PRO version."
-msgstr ""
-
-#: captcha.php:472
-#: captcha.php:1487
-msgid "Learn More"
-msgstr ""
-
-#: captcha.php:475
-msgid "Go"
-msgstr ""
-
-#: captcha.php:482
-#, fuzzy
-msgid "Title for CAPTCHA in the form"
-msgstr "Formdaki CAPTCHA Etiketi"
-
-#: captcha.php:486
-msgid "Required symbol"
-msgstr ""
-
-#: captcha.php:492
-msgid "Arithmetic actions for CAPTCHA"
-msgstr "CAPTCHA için Aritmetik Hareketler"
-
-#: captcha.php:506
-msgid "CAPTCHA complexity level"
-msgstr ""
-
-#: captcha.php:522
-msgid "Save Changes"
-msgstr "Değişiklikleri Kaydet"
-
-#: captcha.php:528
-msgid "If you enjoy our plugin, please give it 5 stars on WordPress"
-msgstr ""
-
-#: captcha.php:529
-#, fuzzy
-msgid "Rate the plugin"
-msgstr "Önerilen eklentiler"
-
-#: captcha.php:532
-msgid "If there is something wrong about it, please contact us"
-msgstr ""
-
-#: captcha.php:543
-msgid "Congratulations! The PRO version of the plugin is successfully download and activated."
-msgstr ""
-
-#: captcha.php:545
-msgid "Please, go to"
-msgstr ""
-
-#: captcha.php:545
-msgid "the setting page"
-msgstr ""
-
-#: captcha.php:546
-msgid "You will be redirected automatically in 5 seconds."
-msgstr ""
-
-#: captcha.php:551
-msgid "You can download and activate"
-msgstr ""
-
-#: captcha.php:553
-msgid "version of this plugin by entering Your license key."
-msgstr ""
-
-#: captcha.php:555
-msgid "You can find your license key on your personal page Client area, by clicking on the link"
-msgstr ""
-
-#: captcha.php:557
-msgid "(your username is the email you specify when purchasing the product)."
-msgstr ""
-
-#: captcha.php:565
-#: captcha.php:575
-msgid "Go!"
-msgstr ""
-
-#: captcha.php:642
-msgid "<strong>ERROR</strong>: Please fill the form."
-msgstr ""
-
-#: captcha.php:656
-#, fuzzy
-msgid "<strong>ERROR</strong>: Please enter a valid CAPTCHA value."
-msgstr "Lütfen CAPTCHA doğrulama sistemini tamamlayın."
-
-#: captcha.php:767
-#: captcha.php:806
-#: captcha.php:829
-#: captcha.php:858
-msgid "Please fill the form."
-msgstr ""
-
-#: captcha.php:773
-#: captcha.php:866
-#, fuzzy
-msgid "Error: You have entered an incorrect CAPTCHA value. Click the BACK button on your browser, and try again."
-msgstr "HATA: Yanlış CAPTCHA cevabı girdiniz. Tarayıcınızın GERİ butonuna basın ve tekrar deneyin."
-
-#: captcha.php:806
-#: captcha.php:814
-#: captcha.php:829
-#: captcha.php:837
-msgid "ERROR"
-msgstr "HATA"
-
-#: captcha.php:814
-#: captcha.php:837
-#, fuzzy
-msgid "Please enter a valid CAPTCHA value."
-msgstr "Lütfen CAPTCHA doğrulama sistemini tamamlayın."
-
-#: captcha.php:885
-#: captcha.php:1184
-msgid "zero"
-msgstr "sıfır"
-
-#: captcha.php:886
-#: captcha.php:1185
-#: captcha.php:1391
-msgid "one"
-msgstr "bir"
-
-#: captcha.php:887
-#: captcha.php:1186
-msgid "two"
-msgstr "iki"
-
-#: captcha.php:888
-#: captcha.php:1187
-msgid "three"
-msgstr "üç"
-
-#: captcha.php:889
-#: captcha.php:1188
-msgid "four"
-msgstr "dört"
-
-#: captcha.php:890
-#: captcha.php:1189
-msgid "five"
-msgstr "beş"
-
-#: captcha.php:891
-#: captcha.php:1190
-#: captcha.php:1391
-msgid "six"
-msgstr "altı"
-
-#: captcha.php:892
-#: captcha.php:1191
-#: captcha.php:1379
-#: captcha.php:1385
-msgid "seven"
-msgstr "yedi"
-
-#: captcha.php:893
-#: captcha.php:1192
-#: captcha.php:1382
-msgid "eight"
-msgstr "sekiz"
-
-#: captcha.php:894
-#: captcha.php:1193
-msgid "nine"
-msgstr "dokuz"
-
-#: captcha.php:897
-#: captcha.php:1196
-msgid "eleven"
-msgstr "onbir"
-
-#: captcha.php:898
-#: captcha.php:1197
-msgid "twelve"
-msgstr "oniki"
-
-#: captcha.php:899
-#: captcha.php:1198
-msgid "thirteen"
-msgstr "onüç"
-
-#: captcha.php:900
-#: captcha.php:1199
-msgid "fourteen"
-msgstr "ondört"
-
-#: captcha.php:901
-#: captcha.php:1200
-msgid "fifteen"
-msgstr "onbeş"
-
-#: captcha.php:902
-#: captcha.php:1201
-msgid "sixteen"
-msgstr "onaltı"
-
-#: captcha.php:903
-#: captcha.php:1202
-msgid "seventeen"
-msgstr "onyedi"
-
-#: captcha.php:904
-#: captcha.php:1203
-msgid "eighteen"
-msgstr "onsekiz"
-
-#: captcha.php:905
-#: captcha.php:1204
-msgid "nineteen"
-msgstr "ondokuz"
-
-#: captcha.php:908
-#: captcha.php:1207
-msgid "ten"
-msgstr "on"
-
-#: captcha.php:909
-#: captcha.php:1208
-msgid "twenty"
-msgstr "yirmi"
-
-#: captcha.php:910
-#: captcha.php:1209
-msgid "thirty"
-msgstr "otuz"
-
-#: captcha.php:911
-#: captcha.php:1210
-msgid "forty"
-msgstr "kırk"
-
-#: captcha.php:912
-#: captcha.php:1211
-msgid "fifty"
-msgstr "elli"
-
-#: captcha.php:913
-#: captcha.php:1212
-msgid "sixty"
-msgstr "altmış"
-
-#: captcha.php:914
-#: captcha.php:1213
-msgid "seventy"
-msgstr "yetmiş"
-
-#: captcha.php:915
-#: captcha.php:1214
-msgid "eighty"
-msgstr "seksen"
-
-#: captcha.php:916
-#: captcha.php:1215
-msgid "ninety"
-msgstr "doksan"
-
-#: captcha.php:1003
-#: captcha.php:1302
-msgid "and"
-msgstr "ve"
-
-#: captcha.php:1078
-#, fuzzy
-msgid "Encryption password is not set"
-msgstr "Şifre çözme (decode) için parola ayarlanmadı"
-
-#: captcha.php:1098
-#, fuzzy
-msgid "Decryption password is not set"
-msgstr "Şifre çözme (decode) için parola ayarlanmadı"
-
-#: captcha.php:1427
+#: captcha.php:413
+#: captcha.php:1437
 msgid "FAQ"
 msgstr "SSS"
 
-#: captcha.php:1428
+#: captcha.php:414
+msgid "Go PRO"
+msgstr "Yükseltin"
+
+#: captcha.php:416
+msgid "Notice:"
+msgstr "Uyarı:"
+
+#: captcha.php:416
+msgid "The plugin's settings have been changed. In order to save them please don't forget to click the 'Save Changes' button."
+msgstr "Eklentinin ayarları değişti, değişiklikleri kaydetmek için &#39;Değişiklikleri Kaydet&#39; butonuna basmayı unutmayın."
+
+#: captcha.php:423
+#: captcha.php:449
+#: captcha.php:458
+msgid "Enable CAPTCHA for:"
+msgstr "CAPTCHA&#39;yı şunlar için aktifleştir:"
+
+#: captcha.php:431
+#: captcha.php:433
+#: captcha.php:436
+msgid "Contact form"
+msgstr "İletişim Formu"
+
+#: captcha.php:431
+#: captcha.php:433
+#: captcha.php:436
+#: captcha.php:452
+msgid "powered by"
+msgstr "tarafından:"
+
+#: captcha.php:433
+msgid "Activate contact form"
+msgstr "İletişim formunu etkinleştir"
+
+#: captcha.php:436
+msgid "Download contact form"
+msgstr "İletişim formunu indir"
+
+#: captcha.php:439
+msgid "If you would like to add Captcha to a custom form, please see"
+msgstr "Eğer eklentiyi, özelleştirilmiş bir form için kişiselleştirmek isterseniz şuraya göz atın "
+
+#: captcha.php:452
+msgid "Subscriber"
+msgstr "Abone"
+
+#: captcha.php:463
+msgid "\"Create a Group\" form"
+msgstr "\"Grup Oluştur\" formu"
+
+#: captcha.php:469
+msgid "Enable CAPTCHA:"
+msgstr "CAPTCHA&#39;yı aktifleştir:"
+
+#: captcha.php:477
+msgid "If you upgrade to Pro version all your settings will be saved."
+msgstr "Eğer hesabınızı yükseltirseniz tüm değişiklikleriniz kaydedilecek."
+
+#: captcha.php:484
+msgid "Unlock premium options by upgrading to a PRO version."
+msgstr "Aboneliğinizi yükseltin ve premium özelliklere erişin."
+
+#: captcha.php:485
+#: captcha.php:1502
+msgid "Learn More"
+msgstr "Detaylı Bilgi"
+
+#: captcha.php:488
+msgid "Go"
+msgstr "Git"
+
+#: captcha.php:495
+msgid "Title for CAPTCHA in the form"
+msgstr "Formdaki CAPTCHA Başlığı"
+
+#: captcha.php:499
+msgid "Required symbol"
+msgstr "Gerekli sembol"
+
+#: captcha.php:505
+msgid "Arithmetic actions for CAPTCHA"
+msgstr "CAPTCHA için Aritmetik Hareketler"
+
+#: captcha.php:519
+msgid "CAPTCHA complexity level"
+msgstr "CAPTCHA Karışıklık Seviyesi"
+
+#: captcha.php:535
+msgid "Save Changes"
+msgstr "Değişiklikleri Kaydet"
+
+#: captcha.php:541
+msgid "If you enjoy our plugin, please give it 5 stars on WordPress"
+msgstr "Eklentimizi beğenirseniz lütfen Wordpress&#39;te 5 yıldız verin"
+
+#: captcha.php:542
+msgid "Rate the plugin"
+msgstr "Eklentiyi değerlendirin"
+
+#: captcha.php:545
+msgid "If there is something wrong about it, please contact us"
+msgstr "Eğer hatalı bir durum görürseniz lütfen bizimle iletişime geçin."
+
+#: captcha.php:556
+msgid "Congratulations! The PRO version of the plugin is successfully download and activated."
+msgstr "Tebrikler! Eklentinin PRO versiyonu başarıyla indirildi ve yüklendi."
+
+#: captcha.php:558
+msgid "Please, go to"
+msgstr "Lütfen şuraya gidin:"
+
+#: captcha.php:558
+msgid "the setting page"
+msgstr "ayarlar sayfası"
+
+#: captcha.php:559
+msgid "You will be redirected automatically in 5 seconds."
+msgstr "5 saniye içinde otomatik olarak yönlendirileceksiniz."
+
+#: captcha.php:564
+msgid "You can download and activate"
+msgstr "Eklentinin"
+
+#: captcha.php:566
+msgid "version of this plugin by entering Your license key."
+msgstr "versiyonunu lisans anahtarınızı girerek yükleyebilir ve aktifleştirebilirsiniz."
+
+#: captcha.php:568
+msgid "You can find your license key on your personal page Client area, by clicking on the link"
+msgstr "Lisans anahtarınızı kişisel müşteri sayfanızda bulabilirsiniz, tıklayın"
+
+#: captcha.php:570
+msgid "(your username is the email you specify when purchasing the product)."
+msgstr "(kullanıcı adınız, ürün için ödeme yaparken belirttiğiniz e-posta adresinizdir)"
+
+#: captcha.php:578
+#: captcha.php:588
+msgid "Go!"
+msgstr "Git!"
+
+#: captcha.php:654
+msgid "<strong>ERROR</strong>: Please fill the form."
+msgstr "<strong>HATA</strong>: Lütfen formu doldurun."
+
+#: captcha.php:668
+msgid "<strong>ERROR</strong>: Please enter a valid CAPTCHA value."
+msgstr "<strong>HATA</strong>: Lütfen geçerli bir CAPTCHA değeri girin."
+
+#: captcha.php:675
+msgid "<strong>ERROR</strong>: Please enter a CAPTCHA value."
+msgstr "<strong>HATA</strong>: Lütfen bir CAPTCHA değeri girin."
+
+#: captcha.php:786
+#: captcha.php:847
+#: captcha.php:870
+#: captcha.php:899
+msgid "Please fill the form."
+msgstr "Lütfen formu doldurun."
+
+#: captcha.php:792
+#: captcha.php:907
+msgid "Error: You have entered an incorrect CAPTCHA value. Click the BACK button on your browser, and try again."
+msgstr "HATA: Yanlış CAPTCHA değeri girdiniz. Tarayıcınızın GERİ butonuna basın ve tekrar deneyin."
+
+#: captcha.php:847
+#: captcha.php:855
+#: captcha.php:870
+#: captcha.php:878
+msgid "ERROR"
+msgstr "HATA"
+
+#: captcha.php:855
+#: captcha.php:878
+msgid "Please enter a valid CAPTCHA value."
+msgstr "Lütfen geçerli bir CAPTCHA değeri girin."
+
+#: captcha.php:931
+#: captcha.php:1233
+msgid "zero"
+msgstr "sıfır"
+
+#: captcha.php:932
+#: captcha.php:1234
+#: captcha.php:1399
+msgid "one"
+msgstr "bir"
+
+#: captcha.php:933
+#: captcha.php:1235
+msgid "two"
+msgstr "iki"
+
+#: captcha.php:934
+#: captcha.php:1236
+msgid "three"
+msgstr "üç"
+
+#: captcha.php:935
+#: captcha.php:1237
+msgid "four"
+msgstr "dört"
+
+#: captcha.php:936
+#: captcha.php:1238
+msgid "five"
+msgstr "beş"
+
+#: captcha.php:937
+#: captcha.php:1239
+#: captcha.php:1399
+msgid "six"
+msgstr "altı"
+
+#: captcha.php:938
+#: captcha.php:1240
+#: captcha.php:1387
+#: captcha.php:1393
+msgid "seven"
+msgstr "yedi"
+
+#: captcha.php:939
+#: captcha.php:1241
+#: captcha.php:1390
+msgid "eight"
+msgstr "sekiz"
+
+#: captcha.php:940
+#: captcha.php:1242
+msgid "nine"
+msgstr "dokuz"
+
+#: captcha.php:943
+#: captcha.php:1245
+msgid "eleven"
+msgstr "onbir"
+
+#: captcha.php:944
+#: captcha.php:1246
+msgid "twelve"
+msgstr "oniki"
+
+#: captcha.php:945
+#: captcha.php:1247
+msgid "thirteen"
+msgstr "onüç"
+
+#: captcha.php:946
+#: captcha.php:1248
+msgid "fourteen"
+msgstr "ondört"
+
+#: captcha.php:947
+#: captcha.php:1249
+msgid "fifteen"
+msgstr "onbeş"
+
+#: captcha.php:948
+#: captcha.php:1250
+msgid "sixteen"
+msgstr "onaltı"
+
+#: captcha.php:949
+#: captcha.php:1251
+msgid "seventeen"
+msgstr "onyedi"
+
+#: captcha.php:950
+#: captcha.php:1252
+msgid "eighteen"
+msgstr "onsekiz"
+
+#: captcha.php:951
+#: captcha.php:1253
+msgid "nineteen"
+msgstr "ondokuz"
+
+#: captcha.php:954
+#: captcha.php:1256
+msgid "ten"
+msgstr "on"
+
+#: captcha.php:955
+#: captcha.php:1257
+msgid "twenty"
+msgstr "yirmi"
+
+#: captcha.php:956
+#: captcha.php:1258
+msgid "thirty"
+msgstr "otuz"
+
+#: captcha.php:957
+#: captcha.php:1259
+msgid "forty"
+msgstr "kırk"
+
+#: captcha.php:958
+#: captcha.php:1260
+msgid "fifty"
+msgstr "elli"
+
+#: captcha.php:959
+#: captcha.php:1261
+msgid "sixty"
+msgstr "altmış"
+
+#: captcha.php:960
+#: captcha.php:1262
+msgid "seventy"
+msgstr "yetmiş"
+
+#: captcha.php:961
+#: captcha.php:1263
+msgid "eighty"
+msgstr "seksen"
+
+#: captcha.php:962
+#: captcha.php:1264
+msgid "ninety"
+msgstr "doksan"
+
+#: captcha.php:1049
+#: captcha.php:1351
+msgid "and"
+msgstr "ve"
+
+#: captcha.php:1122
+msgid "Encryption password is not set"
+msgstr "Şifreleme parolası ayarlanmadı"
+
+#: captcha.php:1142
+msgid "Decryption password is not set"
+msgstr "Şifre çözme parolası ayarlanmadı"
+
+#: captcha.php:1438
 msgid "Support"
 msgstr "Destek"
 
-#: captcha.php:1489
+#: captcha.php:1505
 msgid "It's time to upgrade your <strong>Captcha plugin</strong> to <strong>PRO</strong> version"
-msgstr ""
+msgstr "<strong>Captcha eklentisini</strong> <strong>PRO</strong> versiyonuna yükseltmenizin zamanı geldi!"
 
-#: captcha.php:1490
+#: captcha.php:1506
 msgid "Extend standard plugin functionality with new great options"
-msgstr ""
+msgstr "Eklentinin standart özelliklerini yeni ve harika özelliklerle zenginleştirin."
 
 #, fuzzy
 #~ msgid "to"

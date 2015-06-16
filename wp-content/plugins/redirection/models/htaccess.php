@@ -126,12 +126,12 @@ class Red_Htaccess {
 	}
 
 	function generate() {
-		// Head of redirection section - do not localize this
-		global $redirection;
+		$version = get_plugin_data( __FILE__ );
+		$version = $version['Version'];
 
 		$text[] = '# Created by Redirection';
 		$text[] = '# '.date ('r');
-		$text[] = '# Redirection '.$redirection->version().' - http://urbangiraffe.com/plugins/redirection/';
+		$text[] = '# Redirection '.$version.' - http://urbangiraffe.com/plugins/redirection/';
 		$text[] = '';
 
 		// Default blocked files - I can't think of a reason not to block these
@@ -173,7 +173,7 @@ class Red_Htaccess {
 			$existing = @file_get_contents( $filename );
 
 			// Remove any existing Redirection module
-			$text .= preg_replace( '@# Created by Redirection Module: '.$name.'(.*?)# End of Redirection@s', '', $existing );
+			$text .= preg_replace( '@# Created by Redirection(.*?)# End of Redirection@sm', '', $existing );
 		}
 
 		$file = @fopen( $filename, 'w' );

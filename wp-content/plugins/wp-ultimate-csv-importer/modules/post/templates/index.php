@@ -44,8 +44,14 @@ $impCE = new WPImporter_includes_helper();
 	<td>
 	<h3>CSV Import Options</h3>
 	<div id='sec-one' <?php if($_REQUEST['step']!= 'uploadfile') {?> style='display:none;' <?php } ?>>
-	<?php if(is_dir($impCE->getUploadDirectory('default'))){ ?>
-		<input type='hidden' id='is_uploadfound' name='is_uploadfound' value='found' />
+	<?php if(is_dir($impCE->getUploadDirectory('default'))) { 
+		if (!is_writable($impCE->getUploadDirectory('default'))) {
+			if (!chmod($impCE->getUploadDirectory('default'), 0777)) { ?>
+				<input type='hidden' id='is_uploadfound' name='is_uploadfound' value='notfound' /> <?php
+			}
+		} else { ?>
+			<input type='hidden' id='is_uploadfound' name='is_uploadfound' value='found' />
+		<?php }?>
 	<?php } else { ?>
 		<input type='hidden' id='is_uploadfound' name='is_uploadfound' value='notfound' />
 	<?php } ?>
@@ -71,8 +77,9 @@ $impCE = new WPImporter_includes_helper();
                                 <tr>
                                  <div id='showmappingtemplate' style='float:left;padding-left:10px;'> 
                                   <select disabled/>
-                               <option value ='select template' > select template </option>
+	                               <option value ='select template' > select template </option>
                                    </select>
+				 <img src="<?php echo WP_CONTENT_URL; ?>/plugins/<?php echo WP_CONST_ULTIMATE_CSV_IMP_SLUG; ?>/images/pro_icon.gif" title="PRO Feature" />
                                    </div>
                                 <!-- code ends here -->
                                 </div>
@@ -494,6 +501,7 @@ $impCE = new WPImporter_includes_helper();
 		<input id="startbutton" class="btn btn-primary" type="button" value="Import Now" style="color: #ffffff;background:#2E9AFE;" onclick="importRecordsbySettings('<?php echo site_url(); ?>');" >
 		<input id="terminatenow" class="btn btn-danger btn-sm" type="button" value="Terminate Now" style="display:none;" onclick="terminateProcess();" />
 		<input class="btn btn-warning" type="button" value="Reload" id="importagain" style="display:none" onclick="import_again();" />
+                <input id="continuebutton" class="btn btn-lg btn-success" type="button" value="Continue" style="display:none;color: #ffffff;" onclick="continueprocess();">
 		<!--<input id="continuebutton" class="button" type="button" value="Continue old search" style="color: #ffffff;background:#2E9AFE;">-->
 		<div id="ajaxloader" style="display:none"><img src="<?php echo WP_CONST_ULTIMATE_CSV_IMP_DIR; ?>images/ajax-loader.gif"> Processing...</div>
            

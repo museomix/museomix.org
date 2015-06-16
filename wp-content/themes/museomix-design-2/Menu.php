@@ -75,25 +75,25 @@
 
 				<a class="bouton-nav bouton-nav-accueil brand" href="<?php 
 
-				if(get_field("langage")=="en") {
-					echo get_permalink(580);
-				} else echo home_url();  
+				echo home_url();  
 
 				echo '"><img src="'.get_template_directory_uri().'/images/logo-museomix-2.png" alt="Museomix 2013" class="logoHeader"/>';
 
-				_e(' 7-8-9+ nov. 2014','museomix-design-2'); 
+				_e(' 6-15 nov. 2015','museomix'); 
 				
 				echo '</a>';
 
 			 #MenuGeneral(); ?>    
-
-		<div class="nav-collapse collapse">
-		<ul class="nav">
-		
-		<?php MenuPrincipal(ICL_LANGUAGE_CODE); ?>
-		<li><?php do_action('icl_language_selector'); ?></li>
-		</ul>
-		</div>
+			
+				<?php
+				 wp_nav_menu(
+					array(
+						'menu' => 'Menu_principal',
+						'menu_class' => 'bouton-nav nav'
+					)
+				);
+				?>
+				<?php do_action('icl_language_selector'); ?>
 		</div>
 		<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
 				<span class="icon-bar"></span>

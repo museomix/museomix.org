@@ -11,7 +11,7 @@ function my_custom_init() {
 }
 add_action('after_setup_theme', 'my_theme_setup');
 function my_theme_setup(){
-    load_theme_textdomain('my_theme', get_template_directory());
+    load_theme_textdomain('museomix', get_template_directory().'/lang');
 }
 /* initiation des menus personnalisés 
    ================================== */
@@ -44,8 +44,8 @@ function OrdonnerListes($query){
 add_action('acf/register_fields', 'my_register_fields');
 function my_register_fields()
 {
-	include_once('biblio/acf-field-date-time-picker/acf-date_time_picker.php');
-	include_once('biblio/acf-location/acf-location.php');
+	// include_once('biblio/acf-field-date-time-picker/acf-date_time_picker.php');
+	// include_once('biblio/acf-location/acf-location.php');
 }
 
 /* bloc 'get involved'
@@ -394,9 +394,9 @@ function DateBillet($temps){
 			$nbH = (int)floor((date_i18n('U')-$temps)/3600);
 			if ($nbH===-1)
 				$nbH = 0;
-			$date = ($nbH ===0 ? 'à l\'instant' : __('il y a','museomix-design-2').' '.$nbH.' h');
+			$date = ($nbH ===0 ? 'à l\'instant' : __('il y a','museomix').' '.$nbH.' h');
 		}else{
-			$date = __('le','museomix-design-2').' '.date_i18n('d M',$temps);
+			$date = __('le','museomix').' '.date_i18n('d M',$temps);
 		}
 		return $date;	
 	}
@@ -513,7 +513,7 @@ function ContenuSection($id, $echo = true){
 										<h3 class="titre-section">'.$post->post_title.'</h3></a>
 										<span class="date-actualites" style="color: #888; margin: 0; text-decoration: none !important; background: #eee">le '.date_i18n('d M',strtotime($post->post_modified)).'</span>
 										<br /><div class="">'.get_the_excerpt().'</div>
-										<a class="small" href="'.get_permalink().'">'.__('En savoir plus','museomix-design-2').'</a></div></li>';
+										<a class="small" href="'.get_permalink().'">'.__('En savoir plus','museomix').'</a></div></li>';
 							
 
 							$first = false;
@@ -526,7 +526,7 @@ function ContenuSection($id, $echo = true){
 						}
 					endwhile;
 					if ((int)$newsNumber>0)
-						$contenu .= '<li class="elm-bloc-actualites"><a href="'.get_category_link($catId).'">'.__('Tous les articles','museomix-design-2').'</a></li>';
+						$contenu .= '<li class="elm-bloc-actualites"><a href="'.get_category_link($catId).'">'.__('Tous les articles','museomix').'</a></li>';
 					$contenu .= '</ul></div>';
 					wp_reset_postdata();
 				}
@@ -692,8 +692,10 @@ function DescriptionMusee() {
 
 
 
-function ExtraitBillet($thePost){
-		
+function ExtraitBillet($thePost = null){
+		global $post;
+		if (empty($thePost))
+			$thePost = $post;
 		$max = 100;
 		$texte = strip_tags($thePost->post_content);
 		if(strlen($texte)>($max-10)){

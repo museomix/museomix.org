@@ -34,7 +34,8 @@
  * Notices must display the words
  * "Copyright Smackcoders. 2014. All rights reserved".
  ********************************************************************************/
-
+if(!defined('ABSPATH'))
+        die('Your requested url were wrong! Please contact your admin.');
 require_once(WP_CONST_ULTIMATE_CSV_IMP_DIRECTORY . 'lib/skinnymvc/core/base/SkinnyBaseActions.php');
 require_once(WP_CONST_ULTIMATE_CSV_IMP_DIRECTORY . 'lib/skinnymvc/core/SkinnyActions.php');
 $skinnyObj = new CallWPImporterObj();
@@ -220,7 +221,7 @@ if ($totRecords <= ($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['insPostCount'] +
 	unset($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['captureId']);
 }
 if ($limit == $totRecords) {
-	echo "<br><div style='margin-left:3px;'>Import successfully completed!.</div>";
+	echo "<br><div style='margin-left:10px; color:green;'>Import successfully completed!.</div>";
 }
 /*if ($curr_action == 'users') {
 	echo "<div style='margin-left:7px;'>";

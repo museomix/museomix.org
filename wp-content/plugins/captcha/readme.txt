@@ -3,8 +3,8 @@ Contributors: bestwebsoft
 Donate link: https://www.2checkout.com/checkout/purchase?sid=1430388&quantity=1&product_id=94
 Tags: add, antispam, anti-spam, anti-spam security, arithmetic actions, capcha, captcha, captha, catcha, cpatcha, captcha numbers, captcha plugin, captcha words, contact form with captcha, comment,  label, login, lost password, match captcha, math actions, multiply, registration, security, spam, spam protection, substract, text captcha, web form protection
 Requires at least: 3.1
-Tested up to: 4.0
-Stable tag: 4.0.5
+Tested up to: 4.1
+Stable tag: 4.0.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -48,10 +48,10 @@ There is also a premium version of the plugin <a href="http://bestwebsoft.com/pr
 * Brazilian Portuguese (pt_BR) (thanks to <a href="mailto:brenojac@gmail.com">Breno Jacinto</a>, www.iconis.org.br)
 * Bulgarian (bg_BG) (thanks to <a href="mailto:paharaman@gmail.com">Nick</a>)
 * Catalan (ca) (thanks to <a href="mailto:psiete@gmail.com">Psiete</a>)
-* Chinese (zh_CN) (thanks to Billy Jeans)
+* Chinese (zh_CN) (thanks to <a href="mailto:newbiesup@gmail.com">Newbiesup</a>, www.wpsites.org)
 * Taiwan (zh_TW) (thanks to <a href="mailto:hh3stuff@gmail.com">Henry H</a>)
 * Croatian (hr) (thanks to <a href="mailto:daniel@geogat.com">Daniel</a>)
-* Czech (cs_CZ) (thanks to Tomas Vesely, <a href="mailto:crysman@seznam.cz">Crysman</a>)
+* Czech (cs_CZ) (thanks to <a href="mailto:crysman@seznam.cz">Crysman</a>)
 * Danish (da_DK) (thanks to Byrial Ole Jensed)
 * Dutch (nl_NL) (thanks to <a href="mailto:byrial@vip.cybercity.dk">Bart Duineveld</a>)
 * Estonian (et) (thanks to Ahto Tanner)
@@ -65,11 +65,12 @@ There is also a premium version of the plugin <a href="http://bestwebsoft.com/pr
 * Hungarian (hu_HU) (thanks to Bőm Tamás)
 * Japanese (ja) (thanks to Foken)
 * Indonesian (id_ID) (thanks to <a href="mailto:nasroel@al-badar.net">Nasrulhaq Muiz</a>, www.al-badar.net)
-* Italian (it_IT) (thanks to Gianluca Di Carlo, <a href="mailto:marco@blackstudio.it">Marco</a>)
+* Italian (it_IT) (thanks to <a href="mailto:marco@blackstudio.it">Marco</a>)
 * Latvian (lv) (thanks to <a href="mailto:juris.o@gmail.com">Juris O</a>)
 * Lithuanian (lt_LT) (thanks to <a href="mailto:arnas.metal@gmail.com">Arnas</a>)
 * Norwegian (nb_NO) (thanks to Tore Hjartland)
 * Polish (pl_PL) (thanks to Krzysztof Opuchlik)
+* Portuguese (pt_PT) (thanks to <a href="mailto:jp.jp@sapo.pt">João Paulo Antunes</a>)
 * Romanian (ro_RO) (thanks to Ciprian)
 * Russian (ru_RU)
 * Serbian (sr_RS) (thanks to Radovan Georgijevic)
@@ -181,6 +182,20 @@ Please make sure that the problem hasn't been discussed yet on our forum (<a hre
 
 == Changelog ==
 
+= V4.0.8 - 23.12.2014 =
+* Update : The language files are updated.
+* Update : We updated all functionality for wordpress 4.1.
+
+= V4.0.7 - 27.11.2014 =
+* Bugfix : Security Vulnerability was fixed.
+* Bugfix : The bug with error message on multisite is fixed.
+
+= V4.0.6 - 17.11.2014 =
+* NEW : The Portuguese language file is added to the plugin.
+* Update : The French language file is updated.
+* Bugfix : The performance issue was fixed.
+* Update : We added padding style for captcha input.
+
 = V4.0.5 - 15.10.2014 =
 * Update : The Brazilian Portuguese language file is updated.
 * NEW: We added filter 'cptch_forms_list' in the plugin settings page.
@@ -190,7 +205,7 @@ Please make sure that the problem hasn't been discussed yet on our forum (<a hre
 * Update : We updated all functionality for wordpress 4.0.
 
 = V4.0.3 - 07.08.2014 =
-* Budfix : Security Exploit was fixed.
+* Bugfix : Security Exploit was fixed.
 
 = V4.0.2 - 28.07.2014 =
 * Update : We updated all functionality for Limit Attempts plugin.
@@ -210,7 +225,7 @@ Please make sure that the problem hasn't been discussed yet on our forum (<a hre
 * Bugfix : We fixed error related to custom plugins folder.
 
 = V3.9.7 - 10.03.2014 =
-* Budfix : Plugin optimization is done.
+* Bugfix : Plugin optimization is done.
 * Update : The French language file is updated.
 
 = V3.9.6 - 12.02.2014 =
@@ -485,6 +500,15 @@ Please make sure that the problem hasn't been discussed yet on our forum (<a hre
 * Select functionality of mathematical actions and level of their difficulty are implemented.
 
 == Upgrade Notice ==
+
+= V4.0.8 =
+The language files are updated. We updated all functionality for wordpress 4.1.
+
+= V4.0.7 =
+Security Vulnerability was fixed. The bug with error message on multisite is fixed.
+
+= V4.0.6 =
+The Portuguese language file is added to the plugin. The French language file is updated. The performance issue was fixed. We added padding style for captcha input.
 
 = V4.0.5 =
 The Brazilian Portuguese language file is updated. We added filter 'cptch_forms_list' in the plugin settings page.

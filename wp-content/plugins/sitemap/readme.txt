@@ -3,20 +3,21 @@ Contributors: webvitaly
 Donate link: http://web-profile.com.ua/donate/
 Tags: page, page-list, pagelist, sitemap, subpages, siblings
 Requires at least: 3.0
-Tested up to: 3.5.1
-Stable tag: 4.2
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Tested up to: 4.1
+Stable tag: 4.3
+License: GPLv3
+License URI: http://www.gnu.org/licenses/gpl.html
 
 [pagelist], [subpages], [siblings] and [pagelist_ext] shortcodes
 
 == Description ==
 
-**Code moved to [page-list plugin](http://wordpress.org/plugins/page-list/)** Please, delete Sitemap plugin and install [Pagelist plugin](http://wordpress.org/plugins/page-list/). Don't be afraid, the functionality of these plugins is the same.
+**Code moved to [Page-list plugin](http://wordpress.org/plugins/page-list/)** Please, delete Sitemap plugin and install [Page-list plugin](http://wordpress.org/plugins/page-list/ "List of pages") instead. Don't be afraid, the functionality of these plugins is the same.
 
-**[Page-list](http://web-profile.com.ua/wordpress/plugins/page-list/ "Plugin page")** |
-**[all Page-list params](http://wordpress.org/plugins/page-list/other_notes/)** |
-**[Donate](http://web-profile.com.ua/donate/ "Support the development")**
+> **[WordPress Pro plugins](http://codecanyon.net/popular_item/by_category?category=wordpress&ref=webvitaly)** |
+> **[Page-list](http://web-profile.com.ua/wordpress/plugins/page-list/ "Plugin page")** |
+> **[all Page-list params](http://wordpress.org/plugins/page-list/other_notes/)** |
+> **[Donate](http://web-profile.com.ua/donate/ "Support the development")**
 
 = shortcodes: =
 
@@ -34,7 +35,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 = Useful: =
 * ["Anti-spam" - block spam in comments](http://wordpress.org/plugins/anti-spam/ "no spam, no captcha")
 * ["Iframe" - embed iframe with shortcode](http://wordpress.org/plugins/iframe/ "embed iframe")
-* ["activetab" - responsive light and clean theme](http://wordpress.org/themes/activetab "responsive light and clean theme")
+* [WordPress Pro plugins](http://codecanyon.net/popular_item/by_category?category=wordpress&ref=webvitaly)
 
 == Other Notes ==
 
@@ -72,7 +73,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 * **parent** - if you want to show subpages of the specific page only you can use this shortcode: `[pagelist_ext parent="4"]` where `4` is the ID of the specific page and the depth will be only one level; by default parent="-1" and depth is unlimited;
 * **sort_order** - if you want to change the sort order of the list of pages (either ascending or descending) you can use this shortcode: `[pagelist_ext sort_order="desc"]`; by default: sort_order="asc"; you can use this values for `sort_order` parameter: asc, desc;
 * **sort_column** - if you want to specify the column by what to sort you can use this shortcode: `[pagelist_ext sort_column="menu_order"]`; by default order columns are `sort_column` and `post_title` (sort_column="menu_order, post_title"); you can use this values for `sort_column` parameter: post_title, menu_order, post_date (sort by creation time), post_modified (sort by last modified time), ID, post_author (sort by the page author's numeric ID), post_name (sort by page slug);
-* **hierarchical** - display sub-pages below their parent page `[pagelist_ext hierarchical="0"]`; by default: hierarchical="1";
+* **hierarchical** - display subpages below their parent page `[pagelist_ext hierarchical="0"]`; by default: hierarchical="1";
 * **exclude** - if you want to exclude some pages from the list you can use this shortcode: `[pagelist_ext exclude="6,7,8"]` where `exclude` parameter accepts comma-separated list of Page IDs;
 * **exclude_tree** - if you want to exclude the tree of pages from the list you can use this shortcode: `[pagelist_ext exclude_tree="7,10"]` where `exclude_tree` parameter accepts comma-separated list of Page IDs (all this pages and their subpages will be excluded);
 * **include** - if you want to include certain pages into the list of pages you can use this shortcode: `[pagelist_ext include="6,7,8"]` where `include` parameter accepts comma-separated list of Page IDs;
@@ -124,6 +125,9 @@ When you changed the plugin's code you should also change the plugin's version t
 2. [pagelist_ext] shortcode
 
 == Changelog ==
+
+= 4.3 - 2015.01.15 =
+* use wp_enqueue_scripts hook instead of wp_print_styles to enqueue scripts and styles (thanks to sireneweb)
 
 = 4.2 - 2013.02.16 =
 * fix in css styles (clearfix added to .page-list-ext)

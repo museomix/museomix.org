@@ -20,7 +20,7 @@
 
 	<?php elseif(is_singular('post')): ?>
 
-		<?php get_template_part('Actualites'); ?>
+		<?php get_template_part('Post'); ?>
 
 	<?php elseif(is_singular() || is_front_page() ): ?>
 

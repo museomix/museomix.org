@@ -7,8 +7,8 @@ jQuery( document ).ready(function() {
                   document.getElementById('log').innerHTML = '<p style="margin:15px;color:red;">NO LOGS YET NOW.</p>';
                 }
        
-pieStats();
-lineStats();
+//pieStats();
+//lineStats();
 
 
  }
@@ -374,26 +374,26 @@ function import_csv()
             if (array[j] == 'post_title') {
                 val1 = 'On';
             }
-            if (array[j] == 'post_content') {
+         /*   if (array[j] == 'post_content') {
                 val2 = 'On';
-            }
+            } */
             if (post_status_msg == 'Off') {
                 if (array[j] == 'post_status')
                     post_status_msg = 'On';
             }
         }
-        if (importer != 'custompost' && val1 == 'On' && val2 == 'On' && post_status_msg == 'On') {
+        if (importer != 'custompost' && val1 == 'On' && post_status_msg == 'On') {
 		return true;
         }
-	else if (importer == 'custompost' && val1 == 'On' && val2 == 'On' && post_status_msg == 'On' && post_type=='On') {
+	else if (importer == 'custompost' && val1 == 'On'  && post_status_msg == 'On' && post_type=='On') {
                 return true;
         }
         else {
             error_msg = '';
             if (val1 == 'Off')
-                error_msg += " post_title,";
-            if (val2 == 'Off')
-                error_msg += " post_content,";
+                error_msg += " post_title";
+          /*  if (val2 == 'Off')
+                error_msg += " post_content,"; */
 	    if(importer == 'custompost') {
 	            if (SelectedIndex == 'select')
         	        error_msg += " post_type,";
@@ -566,13 +566,13 @@ function importRecordsbySettings(siteurl)
                 return false;
         }
 	if(get_log == '<p style="margin:15px;color:red;">NO LOGS YET NOW.</p>'){
-		document.getElementById('log').innerHTML = '<p style="margin:15px;color:red;">Your Import Is In Progress...</p>';
+		document.getElementById('log').innerHTML = '<p style="margin-left:10px;color:red;">Your Import Is In Progress...</p>';
 		document.getElementById('startbutton').disabled = true;
 	}
 	document.getElementById('ajaxloader').style.display="";
         var tempCount = parseInt(tmpCnt);
         var totalCount = parseInt(tot_no_of_records);
-        if(tempCount>totalCount){
+        if(tempCount >= totalCount){
 		document.getElementById('ajaxloader').style.display="none";
 		document.getElementById('startbutton').style.display="none";
 		document.getElementById('importagain').style.display="";
@@ -605,7 +605,11 @@ function importRecordsbySettings(siteurl)
 					document.getElementById('tmpcount').value = parseInt(tmpCnt)+parseInt(importlimit);
 					setTimeout(function(){importRecordsbySettings()},0);
 				} else {
-					document.getElementById('log').innerHTML += "Import process has been terminated.</br>";
+					document.getElementById('log').innerHTML += "<p style='margin-left:10px;color:red;'>Import process has been terminated.</p>";
+                                        document.getElementById('ajaxloader').style.display="none";
+                                        document.getElementById('startbutton').style.display = "none";
+                                        document.getElementById('terminatenow').style.display = "none";
+                                        document.getElementById('continuebutton').style.display = "";
 					return false;
 				}
 	                }else{
@@ -628,6 +632,34 @@ function terminateProcess(){
 	document.getElementById('terminateaction').value = 'terminate';
 }
 
+function continueprocess() {
+    var tot_no_of_records = document.getElementById('checktotal').value;
+    var tmpCnt = document.getElementById('tmpcount').value;
+    var currentlimit = document.getElementById('currentlimit').value;
+            var importlimit = document.getElementById('importlimit').value;
+      //  var get_requested_count = importlimit;
+        var tot_no_of_records = document.getElementById('checktotal').value;
+
+    if (parseInt(tmpCnt) > parseInt(tot_no_of_records)) {
+        document.getElementById('terminatenow').style.display = "none";
+    } else {
+        document.getElementById('terminatenow').style.display = "";
+    }
+    document.getElementById('log').innerHTML += "<div style='margin-left:10px;color:green;'> Import process has been continued.</div></br>";
+    document.getElementById('ajaxloader').style.display = "";
+    document.getElementById('startbutton').style.display = "";
+    document.getElementById('continuebutton').style.display = "none";
+    //document.getElementById('dwnld_log_link').style.display = "none";
+    document.getElementById('terminateaction').value = 'continue';
+                              //          document.getElementById('currentlimit').value = currentlimit;
+     //currentlimit = parseInt(currentlimit)+parseInt(importlimit);
+       //                                 console.log('impLmt: '+importlimit+'totRecds: '+tot_no_of_records);
+         //                               document.getElementById('tmpcount').value = parseInt(tmpCnt)+parseInt(importlimit);
+
+    setTimeout(function () {
+        importRecordsbySettings()
+    }, 0);
+}
 
 // Enable/Disable WP-e-Commerce Custom Fields
 function enablewpcustomfield(val){
@@ -923,7 +955,7 @@ function selectModules(id) {
   }
 }
 
-function addwpexportfilter(id) {
+function addexportfilter(id) {
 	if(document.getElementById(id).checked == true) {
 		if(id == 'getdataforspecificperiod') {
 			document.getElementById('specificperiodexport').style.display = '';
@@ -968,9 +1000,9 @@ function showsettingsoption(id) {
         for(i=1;i<=9;i++) {
                 if(parseInt(id) == parseInt(i)) {
                         if(parseInt(i) == 8) {
-                                document.getElementById('sidebar').style.height = '1139px';
-                                document.getElementById('contentbar').style.height = '1139px';
-                                document.getElementById('settingsholder').style.height = '1140px';
+                                document.getElementById('sidebar').style.height = '1189px';
+                                document.getElementById('contentbar').style.height = '1189px';
+                                document.getElementById('settingsholder').style.height = '1190px';
                         } else if(parseInt(i) == 9) {
                                 document.getElementById('sidebar').style.height = '665px';
                                 document.getElementById('contentbar').style.height = '665px';
@@ -991,6 +1023,10 @@ function showsettingsoption(id) {
                                 document.getElementById('sidebar').style.height = '965px';
                                 document.getElementById('contentbar').style.height = '965px';
                                 document.getElementById('settingsholder').style.height = '966px';
+                        } else if(parseInt(i) == 6) {
+                                document.getElementById('sidebar').style.height = '565px';
+                                document.getElementById('contentbar').style.height = '565px';
+                                document.getElementById('settingsholder').style.height = '566px';
                         } else {
                                 document.getElementById('sidebar').style.height = 'auto';
                                 document.getElementById('contentbar').style.height = 'auto';
@@ -1015,7 +1051,7 @@ function showsettingsoption(id) {
 
 //seo setting enable and disable
 function seosetting(id) {
-       if(id == 'none') {
+       if(id == 'nonerseooption') {
                jQuery('#seosetting1').removeClass("disablesetting");
                jQuery('#seosetting1').addClass("enablesetting");
                document.getElementById("seosetting1text").innerHTML="Enabled";
@@ -1406,6 +1442,21 @@ function dropsetting(id) {
                 jQuery('#dropon').addClass("disablesetting");
                 jQuery('#dropon').removeClass("enablesetting");
         }
+}
+
+// Enable / Disable the debug mode 
+function debugmode_check (id) {
+	if(id == 'enabled') {
+                jQuery('#debugmode_enable').removeClass("disablesetting");
+                jQuery('#debugmode_enable').addClass("enablesetting");
+                jQuery('#debugmode_disable').removeClass("enablesetting");
+                jQuery('#debugmode_disable').addClass("disablesetting");
+	} else {
+                jQuery('#debugmode_disable').removeClass("disablesetting");
+                jQuery('#debugmode_disable').addClass("enablesetting");
+                jQuery('#debugmode_enable').removeClass("enablesetting");
+		jQuery('#debugmode_enable').addClass("disablesetting");
+	} 
 }
 
 //Ecommerce setting

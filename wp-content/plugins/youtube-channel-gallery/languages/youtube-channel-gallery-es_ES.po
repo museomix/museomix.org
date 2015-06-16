@@ -1,0 +1,390 @@
+# Spanish translation for duplicate-post
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# This file is distributed under the same license as the duplicate-post package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: youtube-channel-gallery\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-05-21 17:37+0100\n"
+"PO-Revision-Date: 2013-05-21 17:37+0100\n"
+"Last-Translator: Javier <javierpose@gmail.com>\n"
+"Language-Team: PoseLab <javierpose@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2010-06-23 21:48+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Language: Spanish\n"
+"X-Poedit-Country: SPAIN\n"
+"X-Poedit-KeywordsList: _e;__\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: youtube-channel-gallery.php:46
+msgid "Youtube Channel Gallery"
+msgstr "Galería de Canal de Youtube"
+
+#: youtube-channel-gallery.php:48
+msgid "Show a youtube video and a gallery of thumbnails for a youtube channel"
+msgstr "Muestra un vídeo y una galería de miniaturas de una canal de Youtube "
+
+#: youtube-channel-gallery.php:175
+msgid "Title:"
+msgstr "Título:"
+
+#: youtube-channel-gallery.php:181
+msgid "Feed"
+msgstr "Feed"
+
+#: youtube-channel-gallery.php:182
+msgid "Player"
+msgstr "Reproductor"
+
+#: youtube-channel-gallery.php:183
+msgid "Thumbnails"
+msgstr "Miniaturas"
+
+#: youtube-channel-gallery.php:184
+msgid "Link"
+msgstr "Enlace"
+
+#: youtube-channel-gallery.php:197
+msgid "Video feed type:"
+msgstr "Tipo de feed de vídeo:"
+
+#: youtube-channel-gallery.php:199
+msgid "Uploaded by a user"
+msgstr "Subidos por el usuario"
+
+#: youtube-channel-gallery.php:201
+msgid "Playlist"
+msgstr "Lista de reproducción"
+
+#: youtube-channel-gallery.php:206
+msgid "YouTube user id:"
+msgstr "Id de usuario de Youtube:"
+
+#: youtube-channel-gallery.php:207
+msgid "YouTube playlist id:"
+msgstr "Id de lista de reproducción de YouTube:"
+
+#: youtube-channel-gallery.php:212
+msgid "Playlist order:"
+msgstr "Orden de lista de reproducción:"
+
+#: youtube-channel-gallery.php:214
+msgid "Ascending Order"
+msgstr "Ascendente"
+
+#: youtube-channel-gallery.php:215
+msgid "Descending Order"
+msgstr "Descendente"
+
+#: youtube-channel-gallery.php:220
+msgid "Cache time (hours):"
+msgstr "Tiempo de cache (horas):"
+
+#: youtube-channel-gallery.php:222
+msgid "Hours that RSS data is saved in database, to not make a request every time the page is displayed. Assign this value according to how often you upgrade your playlist in YouTube."
+msgstr "Horas que los datos del RSS se guardan en la base de datos, para no hacer una solicitud cada vez que se muestra la página. Asigna este valor en función de la frecuencia con que actualizas la lista de reproducción en YouTube."
+
+#: youtube-channel-gallery.php:227
+msgid "Activate cache"
+msgstr "Activar caché"
+
+#: youtube-channel-gallery.php:228
+msgid "If you disable this field the cache will be deleted and will not be used. This is useful to refresh immediately the YouTube RSS used by the plugin. Reenable the cache when the gallery shows the changes you made in your youtube account."
+msgstr "Si se deshabilita este campo la caché se borrará y no será utilizada. Esto es útil para actualizar inmediatamente el RSS de YouTube usado por el plugin. Vuelve a habilitar la caché cuando la galería muestre los cambios que ha realizado en su cuenta de YouTube."
+
+#: youtube-channel-gallery.php:243
+msgid "Player:"
+msgstr "Reproductor:"
+
+#: youtube-channel-gallery.php:245
+msgid "Without player"
+msgstr "Sin reproductor"
+
+#: youtube-channel-gallery.php:246
+msgid "Show player above thumbnails"
+msgstr "Mostrar reproductor sobre miniaturas"
+
+#: youtube-channel-gallery.php:252
+#: youtube-channel-gallery.php:335
+msgid "Aspect ratio:"
+msgstr "Relación de aspecto:"
+
+#: youtube-channel-gallery.php:254
+#: youtube-channel-gallery.php:337
+msgid "Standard (4x3)"
+msgstr "Estándar (4x3)"
+
+#: youtube-channel-gallery.php:255
+#: youtube-channel-gallery.php:338
+msgid "Widescreen (16x9)"
+msgstr "Panorámico (16x9)"
+
+#: youtube-channel-gallery.php:260
+msgid "Theme:"
+msgstr "Tema:"
+
+#: youtube-channel-gallery.php:262
+msgid "Dark"
+msgstr "Oscuro"
+
+#: youtube-channel-gallery.php:263
+msgid "Light"
+msgstr "Claro"
+
+#: youtube-channel-gallery.php:268
+msgid "Progress bar color:"
+msgstr "Color de barra de progreso:"
+
+#: youtube-channel-gallery.php:270
+msgid "Red"
+msgstr "Rojo"
+
+#: youtube-channel-gallery.php:271
+msgid "White"
+msgstr "Blanco"
+
+#: youtube-channel-gallery.php:276
+msgid "Video quality:"
+msgstr "Calidad del vídeo:"
+
+#: youtube-channel-gallery.php:278
+msgid "default"
+msgstr "por defecto"
+
+#: youtube-channel-gallery.php:279
+msgid "highres"
+msgstr "alta resolución"
+
+#: youtube-channel-gallery.php:280
+msgid "hd1080"
+msgstr "hd1080"
+
+#: youtube-channel-gallery.php:281
+msgid "hd720"
+msgstr "hd720"
+
+#: youtube-channel-gallery.php:282
+msgid "large"
+msgstr "largo"
+
+#: youtube-channel-gallery.php:283
+msgid "medium"
+msgstr "mediano"
+
+#: youtube-channel-gallery.php:284
+msgid "small"
+msgstr "pequeño"
+
+#: youtube-channel-gallery.php:286
+msgid "Default value enables YouTube to select the most appropriate playback quality. If you select a quality level that is not available for the video, then the quality will be set to the next lowest level that is available."
+msgstr "El valor predeterminado permite a YouTube seleccionar la calidad de reproducción más adecuada. Si selecciona un nivel de calidad que no está disponible para el vídeo, la calidad se ajustará al siguiente nivel más bajo que este disponible."
+
+#: youtube-channel-gallery.php:290
+msgid "Autoplay"
+msgstr "Autoplay"
+
+#: youtube-channel-gallery.php:295
+msgid "Show YouTube logo"
+msgstr "Mostrar el logotipo de YouTube"
+
+#: youtube-channel-gallery.php:296
+msgid "Activate this field to show the YouTube logo in the control bar. Setting the color parameter to white will show the YouTube logo in the control bar."
+msgstr "Activa este campo para mostrar el logotipo de YouTube en la barra de control. Un ajuste del parámetro de color a blanco mostrará el logotipo de YouTube en la barra de control."
+
+#: youtube-channel-gallery.php:301
+msgid "Show related videos"
+msgstr "Mostrar los vídeos relacionados"
+
+#: youtube-channel-gallery.php:302
+msgid "Activate this field to show related videos when playback of the video ends."
+msgstr "Activa este campo para mostrar videos relacionados cuando termine la reproducción del vídeo."
+
+#: youtube-channel-gallery.php:307
+msgid "Show info"
+msgstr "Mostrar información"
+
+#: youtube-channel-gallery.php:308
+msgid "Activate this field to display information like the video title and uploader before the video starts playing."
+msgstr "Active este campo para mostrar información como el título del vídeo y nombre de usuario antes de que el vídeo comience a reproducirse."
+
+#: youtube-channel-gallery.php:322
+msgid "Number of videos to show:"
+msgstr "Número de vídeos a mostrar:"
+
+#: youtube-channel-gallery.php:324
+msgid "The plugin can display a maximum of 50 videos. This limitation will change in a future release."
+msgstr "El plugin puede mostrar un máximo de 50 vídeos. Esta limitación cambiará  en una futura versión."
+
+#: youtube-channel-gallery.php:328
+msgid "Thumbnail width:"
+msgstr "Ancho de miniaturas:"
+
+#: youtube-channel-gallery.php:330
+msgid "This field is used to assign the appropriate quality of thumbnail images in top and bottom alignments and to assign width to thumbnails in left and right alignments. If the quality of thumbnail images is not enough, insert a larger value. If you are unsure you can assign one of the following values​​: 120, 320, 480 or 640"
+msgstr "Este campo se utiliza para asignar la calidad de imagen más adecuada a las miniaturas en las alineaciones superior e inferior y para asignar ancho a las miniaturas en las alineaciones izquierda y derecha. Si la calidad de las imágenes de las miniaturas no es suficiente, introduzca un valor mayor. Si no está seguro de que valor usar puede asignar uno de los siguientes valores: 120, 320, 480 ó 640"
+
+#: youtube-channel-gallery.php:343
+msgid "Thumbnail columns:"
+msgstr "Columnas de las miniaturas:"
+
+#: youtube-channel-gallery.php:349
+msgid "Add \"nofollow\" attribute to links"
+msgstr "Añade el atributo \"nofollow\" a los enlaces"
+
+#: youtube-channel-gallery.php:350
+msgid "\"nofollow\" attribute provides a way for webmasters to tell search engines \"Don't follow this specific link.\""
+msgstr "El atributo \"nofollow\" ofrece a los webmasters un modo de indicar a los motores de búsqueda para no seguir un enlace."
+
+#: youtube-channel-gallery.php:356
+#: youtube-channel-gallery.php:421
+msgid "Open in a new window or tab"
+msgstr "Abrir en una ventana nueva o pestaña"
+
+#: youtube-channel-gallery.php:362
+msgid "Show title or description"
+msgstr "Mostrar título y descripción"
+
+#: youtube-channel-gallery.php:369
+msgid "Show title"
+msgstr "Mostrar Título"
+
+#: youtube-channel-gallery.php:374
+msgid "Show description"
+msgstr "Mostrar descripción"
+
+#: youtube-channel-gallery.php:378
+msgid "Thumbnail alignment:"
+msgstr "Alineación de miniaturas:"
+
+#: youtube-channel-gallery.php:380
+msgid "Left"
+msgstr "Izquierda"
+
+#: youtube-channel-gallery.php:381
+msgid "Right"
+msgstr "Derecha"
+
+#: youtube-channel-gallery.php:382
+msgid "Top"
+msgstr "Arriba"
+
+#: youtube-channel-gallery.php:383
+msgid "Bottom"
+msgstr "Abajo"
+
+#: youtube-channel-gallery.php:388
+msgid "Description words number:"
+msgstr "Número de palabras en la descripción:"
+
+#: youtube-channel-gallery.php:390
+msgid "Set the maximum number of words that will be displayed of the description. This field is useful when the descriptions of videos in the gallery have different sizes."
+msgstr "Establece el número máximo de palabras que se mostrarán en la descripción. Este campo es útil cuando la descripción de los vídeos de la galería tienen diferentes tamaños."
+
+#: youtube-channel-gallery.php:410
+msgid "Link text:"
+msgstr "Texto del enlace"
+
+#: youtube-channel-gallery.php:416
+msgid "Show link to channel"
+msgstr "Mostrar enlace al canal"
+
+#: youtube-channel-gallery.php:517
+msgid "Show more videos»"
+msgstr "Ver más vídeos»"
+
+#: youtube-channel-gallery.php:530
+msgid "There is no video to show."
+msgstr "No hay ningún vídeo para mostrar."
+
+#: youtube-channel-gallery.php:601
+#, php-format
+msgid "Message from server: %1$s. Check in YouTube if the id <a href=\"%2$s\" target=\"_blank\">%3$s</a> belongs to a %4$s. To locate the id of your %4$s check the <a href=\"http://wordpress.org/extend/plugins/youtube-channel-gallery/faq/\" target=\"_blank\">FAQ</a> of the plugin."
+msgstr "Mensaje del servidor: %1$s. Compruebe en YouTube si el id <a href=\"%2$s\" target=\"_blank\">%3$s</a> pertenece a un %4$s. Para localizar el id de la carpeta %4$s revise el <a href=\"http://wordpress.org/extend/plugins/youtube-channel-gallery/faq/\" target=\"_blank\"> FAQ </ a> del plugin."
+
+#~ msgid "Video width:"
+#~ msgstr "Ancho del vídeo:"
+#~ msgid "Show info (title, uploader)"
+#~ msgstr "Mostrar información (título, cargador)"
+#~ msgid "You must insert a valid YouTube user id."
+#~ msgstr "Debes introducir un id válido de usuario de YouTube."
+#~ msgid "You must insert a valid playlist id."
+#~ msgstr "Debes introducir un id válido de lista de reproducción de YouTube."
+#~ msgid "User's favorites"
+#~ msgstr "Favoritos del usuario"
+#~ msgid "Light:"
+#~ msgstr "Claro"
+#~ msgid "No post to duplicate has been supplied!"
+#~ msgstr "No se facilitó ninguna entrada a copiar"
+#~ msgid "Post creation failed, could not find original post:"
+#~ msgstr ""
+#~ "Creación realizada sin éxito, no ha sido posible encontrar la entrada "
+#~ "original:"
+#~ msgid "No page to duplicate has been supplied!"
+#~ msgstr "No se facilitó ninguna página a copiar"
+#~ msgid "Make a duplicate from this post"
+#~ msgstr "Crea una copia de esta entrada"
+#~ msgid "Duplicate"
+#~ msgstr "Duplicar"
+#~ msgid "Make a duplicate from this page"
+#~ msgstr "Crea una copia de esta página"
+#~ msgid "Copy to a new draft"
+#~ msgstr "Copia en un borrador nuevo"
+#~ msgid "Duplicate Post Options"
+#~ msgstr "Opciones"
+#~ msgid "Duplicate Post"
+#~ msgstr "Duplicate Post"
+#~ msgid "Copy post/page date also"
+#~ msgstr "Copiar también fecha del post o la página"
+#~ msgid ""
+#~ "Normally, the new draft has publication date set to current time: check "
+#~ "the box to copy the original post/page date"
+#~ msgstr ""
+#~ "Normalmente se establece la fecha de publicación del nuevo borrador a la "
+#~ "fecha actual: compruebe la casilla para copiar la fecha original del post "
+#~ "o la página"
+#~ msgid "Do not copy these fields"
+#~ msgstr "No copiar estos campos"
+#~ msgid ""
+#~ "Comma-separated list of meta fields that must not be copied when cloning "
+#~ "a post/page"
+#~ msgstr ""
+#~ "Lista separada por comas de meta campos que no pueden ser copiados cuando "
+#~ "se clona una entrada/pagina."
+#~ msgid "Title prefix"
+#~ msgstr "Prefijo del titulo"
+#~ msgid ""
+#~ "Prefix to be added before the original title when cloning a post/page, e."
+#~ "g. \"Copy of\" (blank for no prefix)"
+#~ msgstr ""
+#~ "Prefijo a ser agregado antes del titulo original cuando se clona una "
+#~ "entrada/pagina, ej. \"Copia de\" (en blanco  para no agregar prefijo)"
+#~ msgid "Minimum level to copy posts"
+#~ msgstr "Nivel mínimo para copiar posts"
+#~ msgid ""
+#~ "Warning: users will be able to copy all posts, even those of higher level "
+#~ "users"
+#~ msgstr ""
+#~ "Atención: los usuarios podrán copiar todos los posts, incluso aquellos de "
+#~ "usuarios de nivel más alto"
+#~ msgid "Save Changes"
+#~ msgstr "Guardar los cambios"
+#~ msgid "Donate"
+#~ msgstr "Hacer una donación"
+#~ msgid "Translate"
+#~ msgstr "Traducir"
+#~ msgid "http://www.lopo.it/duplicate-post-plugin/"
+#~ msgstr "Copy text   \t http://www.lopo.it/duplicate-post-plugin/"
+#~ msgid "Creates a copy of a post."
+#~ msgstr "Crear una copia de las entradas."
+#~ msgid "Enrico Battocchi"
+#~ msgstr "Enrico Battocchi"
+#~ msgid "http://www.lopo.it"
+#~ msgstr "http://www.lopo.it"
+

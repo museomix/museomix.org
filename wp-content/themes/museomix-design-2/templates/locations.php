@@ -12,7 +12,8 @@ $edition_to_display = get_field('edition');
 $locations = new WP_Query( array(
 	'post_type' => 'museomix', //The post type for locations
 	'meta_key' => 'edition',
-	'meta_value' => $edition_to_display->ID
+	'meta_value' => $edition_to_display->ID,
+	'posts_per_page' => -1
 ));
 ?>
 <div class="container">

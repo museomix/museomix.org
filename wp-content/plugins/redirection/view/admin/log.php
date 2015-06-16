@@ -4,7 +4,7 @@
 
 	<h2><?php _e ('Redirection Log', 'redirection'); ?></h2>
 
-	<?php $this->render_admin( 'submenu', array( 'options' => $options ) ); ?>
+	<?php $this->render( 'submenu', array( 'options' => $options ) ); ?>
 
 	<form action="tools.php">
 		<input type="hidden" name="page" value="redirection.php"/>
@@ -32,22 +32,15 @@
 	<div style="clear: both"></div>
 </div>
 
-<?php $this->render_admin ('add', array ('hidden' => true))?>
+<?php $this->render ('add', array ('hidden' => true))?>
 
 <script type="text/javascript">
 var redirection;
 
 (function($) {
 	$(document).ready( function() {
-		redirection = new Redirection( {
-			progress: '<img src="<?php echo $this->url () ?>/images/progress.gif" alt="loading" width="50" height="16"/>',
-			ajaxurl: '<?php echo admin_url( 'admin-ajax.php' ) ?>',
-			nonce: '<?php echo wp_create_nonce( 'redirection-items' ); ?>',
-			none_select: '<?php echo esc_js( __( 'No items have been selected', 'redirection' ) ); ?>',
-			are_you_sure: '<?php echo esc_js( __( 'Are you sure?', 'redirection') ); ?>',
-		});
-
-		redirection.logs();
+		new Redirection_Logs();
+		new Redirection_Add( 'select[name=red_action]', '#target', '#add', false );
 	});
 })(jQuery);
 </script>

@@ -90,7 +90,8 @@ if (!is_front_page())
 	if($SectionsPage) { ?>
 	<div class="span3 hidden-phone hidden-tablet sidebar-nav" style="float: left; min-height: 1px;" >
 		<ul class="nav nav-list bs-docs-sidenav" data-spy="affix" data-offset-top="<?php echo  (is_front_page() ? 472 : 200); ?>">
-		<?php foreach($SectionsPage as $id => $titre): ?>
+		<?php
+		foreach($SectionsPage as $id => $titre): ?>
 
 			<?php $titre = preg_replace('/^\\d+\\.\\s*/','',$titre);
 			

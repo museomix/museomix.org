@@ -45,7 +45,7 @@ class Agent_Match extends Red_Match {
 			<th width="100"><?php _e( 'User Agent', 'redirection' ); ?>:</th>
 			<td>
 				<input id="user_agent_<?php echo $this->id ?>" style="width: 65%" type="text" name="user_agent" value="<?php echo esc_attr( $this->user_agent ); ?>"/>
-				<select style="width: 30%" onchange="return update_user_agent( this,<?php echo $this->id ?> )">
+				<select style="width: 30%" class="change-user-agent">
 					<?php foreach ( $defined AS $key => $value ) : ?>
 						<option value="<?php echo $key ?>"<?php if ( $key == $this->user_agent ) echo ' selected="selected"' ?>><?php echo esc_html( $value ) ?></option>
 					<?php endforeach; ?>
@@ -64,11 +64,13 @@ class Agent_Match extends Red_Match {
 		<?php endif; ?>
 
 		<?php if ( $this->action->can_perform_action() ) : ?>
-		</table>
-		<p style="padding: 0.5em"><?php _e( 'The visitor will be redirected from the source URL if the user agent matches.  You can specify a <em>matched</em> target URL as the address to send visitors if they do match, and <em>not matched</em> if they don\'t match.  Leaving a URL blank means that the visitor is not redirected. <strong>All matches are performed as regular expressions</strong>.
+		<tr>
+			<th></th>
+			<td>
+				<p style="padding: 0.5em"><?php _e( 'The visitor will be redirected from the source URL if the user agent matches.  You can specify a <em>matched</em> target URL as the address to send visitors if they do match, and <em>not matched</em> if they don\'t match.  Leaving a URL blank means that the visitor is not redirected. <strong>All matches are performed as regular expressions</strong>.
 ', 'redirection' ); ?></p>
-		<table class="edit">
-
+			</td>
+		</tr>
 		<tr>
 			<th width="100" valign="top">
 				<?php if ( strlen( $this->url_from ) > 0 ) : ?>
@@ -100,9 +102,9 @@ class Agent_Match extends Red_Match {
 			$details['url_from'] = $details['target'];
 
 		return array(
-			'url_from'    => $details['url_from'],
-			'url_notfrom' => $details['url_notfrom'],
-			'user_agent'  => $details['user_agent']
+			'url_from'    => isset( $details['url_from'] ) ? $details['url_from'] : false,
+			'url_notfrom' => isset( $details['url_notfrom'] ) ? $details['url_notfrom'] : false,
+			'user_agent'  => isset( $details['user_agent'] ) ? $details['user_agent'] : false
 		);
 	}
 

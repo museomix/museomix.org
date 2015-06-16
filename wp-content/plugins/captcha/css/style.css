@@ -47,3 +47,10 @@
     position: absolute;
     top: 7px;
 }
+/*
+* frontend styles
+*/
+form input.cptch_input {
+    padding-left: 8px;
+    padding-right: 8px;
+}

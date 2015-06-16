@@ -46,17 +46,23 @@ $eshopObj->isplugin();
 	<td>
 	<h3>CSV Import Options</h3>
 	<div id='sec-one' <?php if($_REQUEST['step']!= 'uploadfile') {?> style='display:none;' <?php } ?>>
-	<?php if(is_dir($impCE->getUploadDirectory('default'))){ ?>
-		<input type='hidden' id='is_uploadfound' name='is_uploadfound' value='found' />
+	<?php if(is_dir($impCE->getUploadDirectory('default'))){ 
+                if (!is_writable($impCE->getUploadDirectory('default'))) {
+                        if (!chmod($impCE->getUploadDirectory('default'), 0777)) { ?>
+                                <input type='hidden' id='is_uploadfound' name='is_uploadfound' value='notfound' /> <?php
+                        }
+                } else { ?>
+                        <input type='hidden' id='is_uploadfound' name='is_uploadfound' value='found' />
+                <?php }?>
 	<?php } else { ?>
 		<input type='hidden' id='is_uploadfound' name='is_uploadfound' value='notfound' />
 	<?php } ?>
 	<div class="warning" id="warning" name="warning" style="display:none;margin: 4% 0 4% 22%;"></div>
+	<div align=center>
+	<div id="noPlugin" class="warnings" style="display:none"></div>
+	</div>
 	<form action='<?php echo admin_url().'admin.php?page='.WP_CONST_ULTIMATE_CSV_IMP_SLUG.'/index.php&__module='.$_REQUEST['__module'].'&step=mapping_settings'?>' id='browsefile' method='post' name='browsefile' enctype="multipart/form-data">
 	<div class="importfile" align='center'>
-           <div align=center>
-        <div id="noPlugin" class="warnings" style="display:none"></div>
-        </div>
         <?php
         if ($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['isplugin_avail'] == 'not_avail') {
         ?>
@@ -109,6 +115,7 @@ if ($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['isplugin_avail'] != 'not_avail' 
                                   <select disabled/>
                                <option value ='select template' > select template </option>
                                    </select>
+				<img src="<?php echo WP_CONTENT_URL; ?>/plugins/<?php echo WP_CONST_ULTIMATE_CSV_IMP_SLUG; ?>/images/pro_icon.gif" title="PRO Feature" />
                                    </div>
                                 <!-- code ends here -->
                                 </div>
@@ -532,6 +539,7 @@ if ($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['isplugin_avail'] != 'not_avail' 
 		<input id="startbutton" class="btn btn-primary" type="button" value="Import Now" style="color: #ffffff;background:#2E9AFE;" onclick="importRecordsbySettings('<?php echo site_url(); ?>');" >
 		<input id="terminatenow" class="btn btn-danger btn-sm" type="button" value="Terminate Now" style="display:none;" onclick="terminateProcess();" />
 		<input class="btn btn-warning" type="button" value="Reload" id="importagain" style="display:none" onclick="import_again();" />
+                <input id="continuebutton" class="btn btn-lg btn-success" type="button" value="Continue" style="display:none;color: #ffffff;" onclick="continueprocess();">
 		<!--<input id="continuebutton" class="button" type="button" value="Continue old search" style="color: #ffffff;background:#2E9AFE;">-->
 		<div id="ajaxloader" style="display:none"><img src="<?php echo WP_CONST_ULTIMATE_CSV_IMP_DIR; ?>images/ajax-loader.gif"> Processing...</div>
            

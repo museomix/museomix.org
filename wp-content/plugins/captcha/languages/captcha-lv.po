@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: captcha\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-11 11:15+0300\n"
-"PO-Revision-Date: 2014-04-11 11:15+0300\n"
+"POT-Creation-Date: 2014-12-23 13:48+0300\n"
+"PO-Revision-Date: 2014-12-23 13:48+0300\n"
 "Last-Translator: bestwebsoft.com <plugins@bestwebsoft.com>\n"
 "Language-Team: Juris O <juris.o@gmail.com>\n"
 "Language: lv\n"
@@ -13,498 +13,501 @@ msgstr ""
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.5.5\n"
+"X-Generator: Poedit 1.5.4\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2);\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: captcha.php:72
-#: captcha.php:403
+#: captcha.php:79
+#: captcha.php:410
 msgid "Captcha Settings"
 msgstr "Captcha iestatījumi"
 
-#: captcha.php:72
+#: captcha.php:79
 msgid "Captcha"
 msgstr "Captcha"
 
-#: captcha.php:160
+#: captcha.php:166
 msgid "requires"
-msgstr ""
+msgstr "nepieciešams"
 
-#: captcha.php:160
+#: captcha.php:166
 msgid "or higher, that is why it has been deactivated! Please upgrade WordPress and try again."
-msgstr ""
+msgstr "vai augstāka, tāpēc tas tika deaktivēts! Lūdzu atjaunojiet WordPress un mēģiniet vēlreiz."
 
-#: captcha.php:160
+#: captcha.php:166
 msgid "Back to the WordPress"
-msgstr ""
+msgstr "Atpakaļ uz WordPress"
 
-#: captcha.php:160
-#, fuzzy
+#: captcha.php:166
 msgid "Plugins page"
-msgstr "Pro spraudņi"
+msgstr "Spraudņu lapa"
 
-#: captcha.php:233
+#: captcha.php:239
 msgid "Login form"
 msgstr "Ieiešanas forma"
 
-#: captcha.php:234
-#: captcha.php:448
+#: captcha.php:240
+#: captcha.php:461
 msgid "Registration form"
 msgstr "Reģistrācijas forma"
 
-#: captcha.php:234
+#: captcha.php:240
 msgid "Register form"
 msgstr "Reģistrācijas forma"
 
-#: captcha.php:235
+#: captcha.php:241
 msgid "Reset Password form"
 msgstr "Paroles atjaunošanas forma"
 
-#: captcha.php:235
+#: captcha.php:241
 msgid "Lost password form"
 msgstr "Pazaudētas paroles forma"
 
-#: captcha.php:236
-#: captcha.php:449
+#: captcha.php:242
+#: captcha.php:462
 msgid "Comments form"
 msgstr "Komentāru forma"
 
-#: captcha.php:237
-msgid "Hide CAPTCHA for registered users"
-msgstr "Nerādīt CAPTCHA reģistrētiem lietotājiem"
+#: captcha.php:243
+msgid "Hide CAPTCHA in Comments form for registered users"
+msgstr "Slēpt CAPTCHA reģistrētu lietotāju komentāros"
 
-#: captcha.php:242
+#: captcha.php:248
 msgid "Plus (&#43;)"
 msgstr "Plus (&#43;)"
 
-#: captcha.php:242
+#: captcha.php:248
 msgid "Plus"
 msgstr "Plus"
 
-#: captcha.php:243
+#: captcha.php:249
 msgid "Minus (&minus;)"
 msgstr "Mīnus (&minus;)"
 
-#: captcha.php:243
+#: captcha.php:249
 msgid "Minus"
 msgstr "Mīnus"
 
-#: captcha.php:244
+#: captcha.php:250
 msgid "Multiplication (&times;)"
 msgstr "Reizināšana (&times;)"
 
-#: captcha.php:244
+#: captcha.php:250
 msgid "Multiply"
 msgstr "Reizināt"
 
-#: captcha.php:249
+#: captcha.php:255
 msgid "Numbers"
 msgstr "Cipari"
 
-#: captcha.php:250
+#: captcha.php:256
 msgid "Words"
 msgstr "Vārdi"
 
-#: captcha.php:281
+#: captcha.php:293
 msgid "Please select one item in the block Arithmetic and Complexity for CAPTCHA"
 msgstr "Lūdzu izvēlieties vienu punktu no Aritmētisko darbību un Sarežģītības bloka priekš CAPTCHA"
 
-#: captcha.php:285
-#, fuzzy
+#: captcha.php:297
 msgid "Settings saved."
 msgstr "Iestatījumi saglabāti."
 
-#: captcha.php:298
-#: captcha.php:336
+#: captcha.php:310
+#: captcha.php:342
 msgid "Wrong license key"
-msgstr ""
+msgstr "Nepareiza licences atslēga"
 
-#: captcha.php:329
+#: captcha.php:335
 msgid "Something went wrong. Try again later. If the error will appear again, please, contact us <a href=http://support.bestwebsoft.com>BestWebSoft</a>. We are sorry for inconvenience."
-msgstr ""
+msgstr "Notika kļūda. Mēģiniet atkal pēc brīža. Ja kļūdz atkārtosies, lūdzu sazinieties ar mums <a href=http://support.bestwebsoft.com>BestWebSoft</a>. Mēs atvainojamies par sagādātajām neērtībām."
 
-#: captcha.php:338
+#: captcha.php:344
 msgid "This license key is bind to another site"
-msgstr ""
+msgstr "Šī licences atslēga ir piesaistīta citai vietnei"
 
-#: captcha.php:340
-#: captcha.php:568
+#: captcha.php:346
+#: captcha.php:581
 msgid "Unfortunately, you have exceeded the number of available tries per day. Please, upload the plugin manually."
-msgstr ""
-
-#: captcha.php:357
-msgid "Failed to open the zip archive. Please, upload the plugin manually"
-msgstr ""
+msgstr "Diemžēl Jūs esiet pārsniedzis dienā pieļauto mēģinājumu skaitu. Lūdzu augšuplādējiet spraudni manuāli."
 
 #: captcha.php:363
+msgid "Failed to open the zip archive. Please, upload the plugin manually"
+msgstr "Neizdevās atvērt zip arhīvu. Lūdzu augšuplādējiet spraudni manuāli"
+
+#: captcha.php:369
 msgid "Your server does not support either ZipArchive or Phar. Please, upload the plugin manually"
-msgstr ""
+msgstr "Jūsu serveris neatbalsta ne Zip arhīvu ne Phar. Lūdzu augšuplādējiet spraudni manuāli"
 
-#: captcha.php:367
-#: captcha.php:376
+#: captcha.php:373
+#: captcha.php:382
 msgid "Failed to download the zip archive. Please, upload the plugin manually"
-msgstr ""
+msgstr "Neizdevās lejuplādēt zip arhīvu. Lūdzu augšuplādējiet spraudni manuāli"
 
-#: captcha.php:380
-msgid "Something went wrong. Try again later or upload the plugin manually. We are sorry for inconvienience."
-msgstr ""
+#: captcha.php:386
+msgid "Something went wrong. Try again later or upload the plugin manually. We are sorry for inconvenience."
+msgstr "Kaut kas nogāja greizi. Mēģiniet atkal nedaudz vēlāk vai augšuplādējiet spraudni manuāli. Mēs atvainojamies par sagādātajām neērtībām."
 
-#: captcha.php:395
+#: captcha.php:404
 msgid "Please, enter Your license key"
-msgstr ""
+msgstr "Lūdzu ievadiet Jūsu licences atslēgu"
 
-#: captcha.php:405
-#: captcha.php:1414
-#: captcha.php:1426
+#: captcha.php:412
+#: captcha.php:1424
+#: captcha.php:1436
 msgid "Settings"
 msgstr "Iestatījumi"
 
-#: captcha.php:406
-msgid "Go PRO"
-msgstr ""
-
-#: captcha.php:408
-msgid "Notice:"
-msgstr ""
-
-#: captcha.php:408
-msgid "The plugin's settings have been changed. In order to save them please don't forget to click the 'Save Changes' button."
-msgstr ""
-
-#: captcha.php:415
-#: captcha.php:445
-msgid "Enable CAPTCHA for:"
-msgstr "Attēlot CAPTCHA:"
-
-#: captcha.php:427
-#: captcha.php:429
-#: captcha.php:432
-msgid "Contact form"
-msgstr "Kontaktforma"
-
-#: captcha.php:427
-#: captcha.php:429
-#: captcha.php:432
-msgid "powered by"
-msgstr ""
-
-#: captcha.php:429
-msgid "Activate contact form"
-msgstr "Aktivēt kontaktformu"
-
-#: captcha.php:432
-msgid "Download contact form"
-msgstr "Lejuplādēt kontaktformu"
-
-#: captcha.php:434
-#, fuzzy
-msgid "If you would like to customize this plugin for a custom form, please see"
-msgstr "Ja vēlaties pielāgot spraudni pielāgotai formai, lūdzu kontaktējaties "
-
-#: captcha.php:450
-msgid "\"Create a Group\" form"
-msgstr ""
-
-#: captcha.php:456
-#, fuzzy
-msgid "Enable CAPTCHA:"
-msgstr "Attēlot CAPTCHA:"
-
-#: captcha.php:464
-msgid "If you upgrade to Pro version all your settings will be saved."
-msgstr ""
-
-#: captcha.php:471
-msgid "Unlock premium options by upgrading to a PRO version."
-msgstr ""
-
-#: captcha.php:472
-#: captcha.php:1487
-msgid "Learn More"
-msgstr ""
-
-#: captcha.php:475
-msgid "Go"
-msgstr ""
-
-#: captcha.php:482
-msgid "Title for CAPTCHA in the form"
-msgstr "CAPTCHA virsraksts formā"
-
-#: captcha.php:486
-msgid "Required symbol"
-msgstr ""
-
-#: captcha.php:492
-msgid "Arithmetic actions for CAPTCHA"
-msgstr "CAPTCHA aritmētiskās darbības"
-
-#: captcha.php:506
-msgid "CAPTCHA complexity level"
-msgstr "CAPTCHA sarežģītības līmenis"
-
-#: captcha.php:522
-msgid "Save Changes"
-msgstr "Saglabāt izmaiņas"
-
-#: captcha.php:528
-msgid "If you enjoy our plugin, please give it 5 stars on WordPress"
-msgstr ""
-
-#: captcha.php:529
-#, fuzzy
-msgid "Rate the plugin"
-msgstr "Bezmaksas spraudņi"
-
-#: captcha.php:532
-#, fuzzy
-msgid "If there is something wrong about it, please contact us"
-msgstr "Ja Jums ir kāds jautājums, lūdzu kontaktējaties caur"
-
-#: captcha.php:543
-msgid "Congratulations! The PRO version of the plugin is successfully download and activated."
-msgstr ""
-
-#: captcha.php:545
-msgid "Please, go to"
-msgstr ""
-
-#: captcha.php:545
-msgid "the setting page"
-msgstr ""
-
-#: captcha.php:546
-msgid "You will be redirected automatically in 5 seconds."
-msgstr ""
-
-#: captcha.php:551
-msgid "You can download and activate"
-msgstr ""
-
-#: captcha.php:553
-msgid "version of this plugin by entering Your license key."
-msgstr ""
-
-#: captcha.php:555
-msgid "You can find your license key on your personal page Client area, by clicking on the link"
-msgstr ""
-
-#: captcha.php:557
-msgid "(your username is the email you specify when purchasing the product)."
-msgstr ""
-
-#: captcha.php:565
-#: captcha.php:575
-msgid "Go!"
-msgstr ""
-
-#: captcha.php:642
-#, fuzzy
-msgid "<strong>ERROR</strong>: Please fill the form."
-msgstr "Lūdzu aizpildiet formu."
-
-#: captcha.php:656
-#, fuzzy
-msgid "<strong>ERROR</strong>: Please enter a valid CAPTCHA value."
-msgstr "Lūdzu aizpildiet CAPTCHA"
-
-#: captcha.php:767
-#: captcha.php:806
-#: captcha.php:829
-#: captcha.php:858
-msgid "Please fill the form."
-msgstr "Lūdzu aizpildiet formu."
-
-#: captcha.php:773
-#: captcha.php:866
-msgid "Error: You have entered an incorrect CAPTCHA value. Click the BACK button on your browser, and try again."
-msgstr "Kļūda: Jūs ievadījāt nepareizu CAPTCHA. Nospiediet Jūsu pārlūkā Atpakaļ un mēģiniet vēlreiz."
-
-#: captcha.php:806
-#: captcha.php:814
-#: captcha.php:829
-#: captcha.php:837
-msgid "ERROR"
-msgstr "KĻŪDA"
-
-#: captcha.php:814
-#: captcha.php:837
-msgid "Please enter a valid CAPTCHA value."
-msgstr "Lūdzu aizpildiet CAPTCHA"
-
-#: captcha.php:885
-#: captcha.php:1184
-msgid "zero"
-msgstr "nulle"
-
-#: captcha.php:886
-#: captcha.php:1185
-#: captcha.php:1391
-msgid "one"
-msgstr "viens"
-
-#: captcha.php:887
-#: captcha.php:1186
-msgid "two"
-msgstr "divi"
-
-#: captcha.php:888
-#: captcha.php:1187
-msgid "three"
-msgstr "trīs"
-
-#: captcha.php:889
-#: captcha.php:1188
-msgid "four"
-msgstr "četri"
-
-#: captcha.php:890
-#: captcha.php:1189
-msgid "five"
-msgstr "pieci"
-
-#: captcha.php:891
-#: captcha.php:1190
-#: captcha.php:1391
-msgid "six"
-msgstr "seši"
-
-#: captcha.php:892
-#: captcha.php:1191
-#: captcha.php:1379
-#: captcha.php:1385
-msgid "seven"
-msgstr "septiņi"
-
-#: captcha.php:893
-#: captcha.php:1192
-#: captcha.php:1382
-msgid "eight"
-msgstr "astoņi"
-
-#: captcha.php:894
-#: captcha.php:1193
-msgid "nine"
-msgstr "deviņi"
-
-#: captcha.php:897
-#: captcha.php:1196
-msgid "eleven"
-msgstr "vienpadsmit"
-
-#: captcha.php:898
-#: captcha.php:1197
-msgid "twelve"
-msgstr "divpadsmit"
-
-#: captcha.php:899
-#: captcha.php:1198
-msgid "thirteen"
-msgstr "trīspadsmit"
-
-#: captcha.php:900
-#: captcha.php:1199
-msgid "fourteen"
-msgstr "četrpadsmit"
-
-#: captcha.php:901
-#: captcha.php:1200
-msgid "fifteen"
-msgstr "piecpadsmit"
-
-#: captcha.php:902
-#: captcha.php:1201
-msgid "sixteen"
-msgstr "sešpadsmit"
-
-#: captcha.php:903
-#: captcha.php:1202
-msgid "seventeen"
-msgstr "septiņpadsmit"
-
-#: captcha.php:904
-#: captcha.php:1203
-msgid "eighteen"
-msgstr "astoņpadsmit"
-
-#: captcha.php:905
-#: captcha.php:1204
-msgid "nineteen"
-msgstr "deviņpadsmit"
-
-#: captcha.php:908
-#: captcha.php:1207
-msgid "ten"
-msgstr "desmit"
-
-#: captcha.php:909
-#: captcha.php:1208
-msgid "twenty"
-msgstr "divdesmit"
-
-#: captcha.php:910
-#: captcha.php:1209
-msgid "thirty"
-msgstr "trīsdesmit"
-
-#: captcha.php:911
-#: captcha.php:1210
-msgid "forty"
-msgstr "četrdesmit"
-
-#: captcha.php:912
-#: captcha.php:1211
-msgid "fifty"
-msgstr "piecdesmit"
-
-#: captcha.php:913
-#: captcha.php:1212
-msgid "sixty"
-msgstr "sešdesmit"
-
-#: captcha.php:914
-#: captcha.php:1213
-msgid "seventy"
-msgstr "septiņdesmit"
-
-#: captcha.php:915
-#: captcha.php:1214
-msgid "eighty"
-msgstr "astoņdesmit"
-
-#: captcha.php:916
-#: captcha.php:1215
-msgid "ninety"
-msgstr "deviņdesmit"
-
-#: captcha.php:1003
-#: captcha.php:1302
-msgid "and"
-msgstr "un"
-
-#: captcha.php:1078
-msgid "Encryption password is not set"
-msgstr "Šifrēšanas parole nav iestatīta"
-
-#: captcha.php:1098
-msgid "Decryption password is not set"
-msgstr "Dešifrēšanas parole nav iestatīta"
-
-#: captcha.php:1427
+#: captcha.php:413
+#: captcha.php:1437
 msgid "FAQ"
 msgstr "BUJ"
 
-#: captcha.php:1428
+#: captcha.php:414
+msgid "Go PRO"
+msgstr "Iegūt PRO"
+
+#: captcha.php:416
+msgid "Notice:"
+msgstr "Piezīme:"
+
+#: captcha.php:416
+msgid "The plugin's settings have been changed. In order to save them please don't forget to click the 'Save Changes' button."
+msgstr "Spraudņa iestatījumi tika nomainīti. La tos saglabātu, lūdzu neaizmirstiet nospiest pogu 'Saglabāt izmaiņas'."
+
+#: captcha.php:423
+#: captcha.php:449
+#: captcha.php:458
+msgid "Enable CAPTCHA for:"
+msgstr "Attēlot CAPTCHA:"
+
+#: captcha.php:431
+#: captcha.php:433
+#: captcha.php:436
+msgid "Contact form"
+msgstr "Kontaktforma"
+
+#: captcha.php:431
+#: captcha.php:433
+#: captcha.php:436
+#: captcha.php:452
+msgid "powered by"
+msgstr "izstrādājis"
+
+#: captcha.php:433
+msgid "Activate contact form"
+msgstr "Aktivēt kontaktformu"
+
+#: captcha.php:436
+msgid "Download contact form"
+msgstr "Lejuplādēt kontaktformu"
+
+#: captcha.php:439
+msgid "If you would like to add Captcha to a custom form, please see"
+msgstr "Ja vēlaties Captcha pievienot pielāgotai formai, lūdzu skatiet"
+
+#: captcha.php:452
+msgid "Subscriber"
+msgstr "Abonents"
+
+#: captcha.php:463
+msgid "\"Create a Group\" form"
+msgstr "Forma \"Izveidot grupu\""
+
+#: captcha.php:469
+msgid "Enable CAPTCHA:"
+msgstr "Ieslēgt CAPTCHA:"
+
+#: captcha.php:477
+msgid "If you upgrade to Pro version all your settings will be saved."
+msgstr "Ja Jūs atjaunosieties uz Pro versiju, visi Jūsu iestatījumi tiks saglabāti."
+
+#: captcha.php:484
+msgid "Unlock premium options by upgrading to a PRO version."
+msgstr "Atslēgt premium iespējas atjaunojoties uz PRO versiju."
+
+#: captcha.php:485
+#: captcha.php:1502
+msgid "Learn More"
+msgstr "Uzzināt vairāk"
+
+#: captcha.php:488
+msgid "Go"
+msgstr "Aiziet"
+
+#: captcha.php:495
+msgid "Title for CAPTCHA in the form"
+msgstr "CAPTCHA virsraksts formā"
+
+#: captcha.php:499
+msgid "Required symbol"
+msgstr "Nepieciešams simbols"
+
+#: captcha.php:505
+msgid "Arithmetic actions for CAPTCHA"
+msgstr "CAPTCHA aritmētiskās darbības"
+
+#: captcha.php:519
+msgid "CAPTCHA complexity level"
+msgstr "CAPTCHA sarežģītības līmenis"
+
+#: captcha.php:535
+msgid "Save Changes"
+msgstr "Saglabāt izmaiņas"
+
+#: captcha.php:541
+msgid "If you enjoy our plugin, please give it 5 stars on WordPress"
+msgstr "Ja Jums patīk mūsu spraudnis, lūdzu WordPress iedodiet tam 5 zvaigznes"
+
+#: captcha.php:542
+msgid "Rate the plugin"
+msgstr "Novērtējiet spraudni"
+
+#: captcha.php:545
+msgid "If there is something wrong about it, please contact us"
+msgstr "Ja šeit kaut kas nav kārtībā, lūdu sazinieties ar mums"
+
+#: captcha.php:556
+msgid "Congratulations! The PRO version of the plugin is successfully download and activated."
+msgstr "Apsveicam! Spraudņa PRO versija veiksmīgi lejuplādēta un aktivizēta."
+
+#: captcha.php:558
+msgid "Please, go to"
+msgstr "Lūdzu ejiet uz"
+
+#: captcha.php:558
+msgid "the setting page"
+msgstr "iestatījumu lapu"
+
+#: captcha.php:559
+msgid "You will be redirected automatically in 5 seconds."
+msgstr "Jūs automātiski tiksiet pāradresēts pēc 5 sekundēm."
+
+#: captcha.php:564
+msgid "You can download and activate"
+msgstr "Jūs variet lejuplādēt un aktivēt"
+
+#: captcha.php:566
+msgid "version of this plugin by entering Your license key."
+msgstr "šī spraudņa versijas, ievadot Jūsu licences atslēgu."
+
+#: captcha.php:568
+msgid "You can find your license key on your personal page Client area, by clicking on the link"
+msgstr "Jūs variet atrast Jūsu licences atslēgu klikšķinot uz saites Klientu sadaļas personīgajā lapā"
+
+#: captcha.php:570
+msgid "(your username is the email you specify when purchasing the product)."
+msgstr "(Jūsu lietotājvārds ir e-pasta adrese, ko norādījāt, kad iegādājieties produktu)."
+
+#: captcha.php:578
+#: captcha.php:588
+msgid "Go!"
+msgstr "Aiziet!"
+
+#: captcha.php:654
+msgid "<strong>ERROR</strong>: Please fill the form."
+msgstr "<strong>KĻŪDA</strong>: Lūdzu aizpildiet formu."
+
+#: captcha.php:668
+msgid "<strong>ERROR</strong>: Please enter a valid CAPTCHA value."
+msgstr "<strong>KĻŪDA</strong>: Lūdzu ievadiet derīgu CAPTCHA vērtību."
+
+#: captcha.php:675
+msgid "<strong>ERROR</strong>: Please enter a CAPTCHA value."
+msgstr "<strong>KĻŪDA</strong>: Lūdzu ievadiet CAPTCHA vērtību."
+
+#: captcha.php:786
+#: captcha.php:847
+#: captcha.php:870
+#: captcha.php:899
+msgid "Please fill the form."
+msgstr "Lūdzu aizpildiet formu."
+
+#: captcha.php:792
+#: captcha.php:907
+msgid "Error: You have entered an incorrect CAPTCHA value. Click the BACK button on your browser, and try again."
+msgstr "Kļūda: Jūs ievadījāt nepareizu CAPTCHA. Nospiediet Jūsu pārlūkā Atpakaļ un mēģiniet vēlreiz."
+
+#: captcha.php:847
+#: captcha.php:855
+#: captcha.php:870
+#: captcha.php:878
+msgid "ERROR"
+msgstr "KĻŪDA"
+
+#: captcha.php:855
+#: captcha.php:878
+msgid "Please enter a valid CAPTCHA value."
+msgstr "Lūdzu aizpildiet CAPTCHA"
+
+#: captcha.php:931
+#: captcha.php:1233
+msgid "zero"
+msgstr "nulle"
+
+#: captcha.php:932
+#: captcha.php:1234
+#: captcha.php:1399
+msgid "one"
+msgstr "viens"
+
+#: captcha.php:933
+#: captcha.php:1235
+msgid "two"
+msgstr "divi"
+
+#: captcha.php:934
+#: captcha.php:1236
+msgid "three"
+msgstr "trīs"
+
+#: captcha.php:935
+#: captcha.php:1237
+msgid "four"
+msgstr "četri"
+
+#: captcha.php:936
+#: captcha.php:1238
+msgid "five"
+msgstr "pieci"
+
+#: captcha.php:937
+#: captcha.php:1239
+#: captcha.php:1399
+msgid "six"
+msgstr "seši"
+
+#: captcha.php:938
+#: captcha.php:1240
+#: captcha.php:1387
+#: captcha.php:1393
+msgid "seven"
+msgstr "septiņi"
+
+#: captcha.php:939
+#: captcha.php:1241
+#: captcha.php:1390
+msgid "eight"
+msgstr "astoņi"
+
+#: captcha.php:940
+#: captcha.php:1242
+msgid "nine"
+msgstr "deviņi"
+
+#: captcha.php:943
+#: captcha.php:1245
+msgid "eleven"
+msgstr "vienpadsmit"
+
+#: captcha.php:944
+#: captcha.php:1246
+msgid "twelve"
+msgstr "divpadsmit"
+
+#: captcha.php:945
+#: captcha.php:1247
+msgid "thirteen"
+msgstr "trīspadsmit"
+
+#: captcha.php:946
+#: captcha.php:1248
+msgid "fourteen"
+msgstr "četrpadsmit"
+
+#: captcha.php:947
+#: captcha.php:1249
+msgid "fifteen"
+msgstr "piecpadsmit"
+
+#: captcha.php:948
+#: captcha.php:1250
+msgid "sixteen"
+msgstr "sešpadsmit"
+
+#: captcha.php:949
+#: captcha.php:1251
+msgid "seventeen"
+msgstr "septiņpadsmit"
+
+#: captcha.php:950
+#: captcha.php:1252
+msgid "eighteen"
+msgstr "astoņpadsmit"
+
+#: captcha.php:951
+#: captcha.php:1253
+msgid "nineteen"
+msgstr "deviņpadsmit"
+
+#: captcha.php:954
+#: captcha.php:1256
+msgid "ten"
+msgstr "desmit"
+
+#: captcha.php:955
+#: captcha.php:1257
+msgid "twenty"
+msgstr "divdesmit"
+
+#: captcha.php:956
+#: captcha.php:1258
+msgid "thirty"
+msgstr "trīsdesmit"
+
+#: captcha.php:957
+#: captcha.php:1259
+msgid "forty"
+msgstr "četrdesmit"
+
+#: captcha.php:958
+#: captcha.php:1260
+msgid "fifty"
+msgstr "piecdesmit"
+
+#: captcha.php:959
+#: captcha.php:1261
+msgid "sixty"
+msgstr "sešdesmit"
+
+#: captcha.php:960
+#: captcha.php:1262
+msgid "seventy"
+msgstr "septiņdesmit"
+
+#: captcha.php:961
+#: captcha.php:1263
+msgid "eighty"
+msgstr "astoņdesmit"
+
+#: captcha.php:962
+#: captcha.php:1264
+msgid "ninety"
+msgstr "deviņdesmit"
+
+#: captcha.php:1049
+#: captcha.php:1351
+msgid "and"
+msgstr "un"
+
+#: captcha.php:1122
+msgid "Encryption password is not set"
+msgstr "Šifrēšanas parole nav iestatīta"
+
+#: captcha.php:1142
+msgid "Decryption password is not set"
+msgstr "Dešifrēšanas parole nav iestatīta"
+
+#: captcha.php:1438
 msgid "Support"
 msgstr "Atbalsts"
 
-#: captcha.php:1489
+#: captcha.php:1505
 msgid "It's time to upgrade your <strong>Captcha plugin</strong> to <strong>PRO</strong> version"
-msgstr ""
+msgstr "Ir pienācis laiks atjaunot Jūsu <strong>Captcha spraudni</strong> uz <strong>PRO</strong> versiju"
 
-#: captcha.php:1490
+#: captcha.php:1506
 msgid "Extend standard plugin functionality with new great options"
-msgstr ""
+msgstr "Paplašiniet standarta spraudņa funkcionalitāti ar jaunām lieliskām iespējām"
 
 #, fuzzy
 #~ msgid "to"
