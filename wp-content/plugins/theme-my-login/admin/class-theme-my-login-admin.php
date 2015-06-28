@@ -52,6 +52,7 @@ class Theme_My_Login_Admin extends Theme_My_Login_Abstract {
 	protected function load() {
 		add_action( 'admin_init', array( &$this, 'admin_init' ) );
 		add_action( 'admin_menu', array( &$this, 'admin_menu' ), 8 );
+		add_action( 'admin_enqueue_scripts', array( &$this, 'admin_enqueue_scripts' ), 11 );
 
 		register_uninstall_hook( WP_PLUGIN_DIR . '/theme-my-login/theme-my-login.php', array( 'Theme_My_Login_Admin', 'uninstall' ) );
 	}
@@ -103,6 +104,19 @@ class Theme_My_Login_Admin extends Theme_My_Login_Abstract {
 
 		if ( version_compare( $this->get_option( 'version', 0 ), Theme_My_Login::version, '<' ) )
 			$this->install();
+	}
+
+	/**
+	 * Enqueues TML scripts
+	 *
+	 * @since 6.3.11
+	 * @access public
+	 */
+	public function admin_enqueue_scripts() {
+		wp_enqueue_script( 'theme-my-login-admin', plugins_url( 'theme-my-login/admin/js/theme-my-login-admin.js' ), array( 'jquery' ), Theme_My_Login::version, true );
+		wp_localize_script( 'theme-my-login-admin', 'tmlAdmin', array(
+			'interim_login_url' => site_url( 'wp-login.php?interim-login=1', 'login' )
+		) );
 	}
 
 	/**
@@ -335,7 +349,7 @@ class Theme_My_Login_Admin extends Theme_My_Login_Abstract {
 				}
 				restore_current_blog();
 				return;
-			}	
+			}
 		}
 		self::_uninstall();
 	}

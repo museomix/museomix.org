@@ -34,8 +34,14 @@
  * Notices must display the words
  * "Copyright Smackcoders. 2014. All rights reserved".
  ********************************************************************************/
-if(!defined('ABSPATH'))
-        die('Your requested url were wrong! Please contact your admin.');
+$impObj = new WPImporter_includes_helper();
+$nonceKey = $impObj->create_nonce_key();
+if(! wp_verify_nonce($nonceKey, 'smack_nonce'))
+die('You are not allowed to do this operation.Please contact your admin.');
+$impCheckobj = CallWPImporterObj::checkSecurity();
+if($impCheckobj != 'true')
+die($impCheckobj);
+
 global $wpdb;
 $all_arr = array();
 $all_arr = $_REQUEST['postdata'];

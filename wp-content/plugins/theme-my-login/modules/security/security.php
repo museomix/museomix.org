@@ -177,16 +177,16 @@ class Theme_My_Login_Security extends Theme_My_Login_Abstract {
 		$key = preg_replace( '/[^a-z0-9]/i', '', $key );
 
 		if ( empty( $key ) || ! is_string( $key ) )
-			return new WP_Error( 'invalid_key', __( 'Invalid key' ) );
+			return new WP_Error( 'invalid_key', __( 'Invalid key', 'theme-my-login' ) );
 
 		if ( empty( $login ) || ! is_string( $login ) )
-			return new WP_Error( 'invalid_key', __( 'Invalid key' ) );
+			return new WP_Error( 'invalid_key', __( 'Invalid key', 'theme-my-login' ) );
 
 		if ( ! $user = get_user_by( 'login', $login ) )
-			return new WP_Error( 'invalid_key', __( 'Invalid key' ) );
+			return new WP_Error( 'invalid_key', __( 'Invalid key', 'theme-my-login' ) );
 
 		if ( $key != self::get_user_unlock_key( $user->ID ) )
-			return new WP_Error( 'invalid_key', __( 'Invalid key' ) );
+			return new WP_Error( 'invalid_key', __( 'Invalid key', 'theme-my-login' ) );
 
 		return $user;
 	}
@@ -290,17 +290,17 @@ class Theme_My_Login_Security extends Theme_My_Login_Abstract {
 			<table class="form-table">
 			<tr>
 				<th scope="col"><?php _e( 'IP Address', 'theme-my-login' ); ?></th>
-				<th scope="col"><?php _e( 'Date' ); ?></th>
+				<th scope="col"><?php _e( 'Date', 'theme-my-login' ); ?></th>
 			</tr>
 			<?php foreach ( $failed_login_attempts as $attempt ) :
-				$t_time = date_i18n( __( 'Y/m/d g:i:s A' ), $attempt['time'] );
+				$t_time = date_i18n( __( 'Y/m/d g:i:s A', 'theme-my-login' ), $attempt['time'] );
 
 				$time_diff = time() - $attempt['time'];
 
 				if ( $time_diff > 0 && $time_diff < 24*60*60 )
-					$h_time = sprintf( __( '%s ago' ), human_time_diff( $attempt['time'] ) );
+					$h_time = sprintf( __( '%s ago', 'theme-my-login' ), human_time_diff( $attempt['time'] ) );
 				else
-					$h_time = date_i18n( __( 'Y/m/d' ), $attempt['time'] );
+					$h_time = date_i18n( __( 'Y/m/d', 'theme-my-login' ), $attempt['time'] );
 			?>
 			<tr>
 				<td><?php echo $attempt['ip']; ?></td>
@@ -584,7 +584,7 @@ class Theme_My_Login_Security extends Theme_My_Login_Abstract {
 				// The blogname option is escaped with esc_html on the way into the database in sanitize_option
 				// we want to reverse this for the plain text arena of emails.
 				$blogname = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
-			}			
+			}
 
 			$unlock_url = add_query_arg( array( 'action' => 'unlock', 'key' => self::get_user_unlock_key( $user->ID ), 'login' => rawurlencode( $user_login ) ), wp_login_url() );
 
@@ -596,7 +596,7 @@ class Theme_My_Login_Security extends Theme_My_Login_Abstract {
 				$message .= "\r\n";
 				$message .= __( 'The following attempts resulted in the lock:', 'theme-my-login' ) . "\r\n\r\n";
 				foreach ( self::get_failed_login_attempts( $user->ID ) as $attempt ) {
-					$time = date_i18n( __( 'Y/m/d g:i:s A' ), $attempt['time'] );
+					$time = date_i18n( __( 'Y/m/d g:i:s A', 'theme-my-login' ), $attempt['time'] );
 					$message .= $attempt['ip'] . "\t" . $time . "\r\n";
 				}
 			}
@@ -610,7 +610,7 @@ class Theme_My_Login_Security extends Theme_My_Login_Abstract {
 }
 
 Theme_My_Login_Security::get_object();
-	
+
 endif;
 
 if ( is_admin() )

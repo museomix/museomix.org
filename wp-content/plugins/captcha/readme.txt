@@ -1,10 +1,10 @@
-=== Captcha ===
+=== Captcha by BestWebSoft ===
 Contributors: bestwebsoft
-Donate link: https://www.2checkout.com/checkout/purchase?sid=1430388&quantity=1&product_id=94
+Donate link: http://bestwebsoft.com/donate/
 Tags: add, antispam, anti-spam, anti-spam security, arithmetic actions, capcha, captcha, captha, catcha, cpatcha, captcha numbers, captcha plugin, captcha words, contact form with captcha, comment,  label, login, lost password, match captcha, math actions, multiply, registration, security, spam, spam protection, substract, text captcha, web form protection
 Requires at least: 3.1
-Tested up to: 4.1
-Stable tag: 4.0.8
+Tested up to: 4.2.2
+Stable tag: 4.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -50,13 +50,13 @@ There is also a premium version of the plugin <a href="http://bestwebsoft.com/pr
 * Catalan (ca) (thanks to <a href="mailto:psiete@gmail.com">Psiete</a>)
 * Chinese (zh_CN) (thanks to <a href="mailto:newbiesup@gmail.com">Newbiesup</a>, www.wpsites.org)
 * Taiwan (zh_TW) (thanks to <a href="mailto:hh3stuff@gmail.com">Henry H</a>)
-* Croatian (hr) (thanks to <a href="mailto:daniel@geogat.com">Daniel</a>)
+* Croatian (hr) (thanks to <a href="mailto:daniel@croteh.com">Daniel</a>)
 * Czech (cs_CZ) (thanks to <a href="mailto:crysman@seznam.cz">Crysman</a>)
 * Danish (da_DK) (thanks to Byrial Ole Jensed)
 * Dutch (nl_NL) (thanks to <a href="mailto:byrial@vip.cybercity.dk">Bart Duineveld</a>)
 * Estonian (et) (thanks to Ahto Tanner)
 * Greek (el) (thanks to Aris, www.paraxeno.net)
-* Farsi/Persian (fa_IR) (thanks to <a href="mailto:mostafaasadi73@gmail.com">Mostafa Asadi</a>, www.ma73.ir)
+* Farsi/Persian (fa_IR) (thanks to <a href="mailto:mostafaasadi73@gmail.com">Mostafa Asadi</a>, www.ma73.ir, <a href="mailto:Morteza.Gholami@Yahoo.Com">Morteza Gholami</a>)
 * Finnish (fi) (thanks to Mikko Sederholm)
 * French (fr_FR) (thanks to Martel Benjamin, <a href="mailto:lcapronnier@yahoo.com">Capronnier luc</a>)
 * German (de_DE) (thanks to Thomas Hartung, <a href="mailto:lothar.schiborr@web.de">Lothar Schiborr</a>)
@@ -159,13 +159,17 @@ If the form is HTML you should insert the line with the PHP tags:
 5. Then you should add the lines to the function of the entered data checking  
 
 `if( function_exists( 'cptch_check_custom_form' ) && cptch_check_custom_form() !== true ) echo "Please complete the CAPTCHA."`
+
 or
+
 `<?php if( function_exists( 'cptch_check_custom_form' ) && cptch_check_custom_form() !== true ) echo "Please complete the CAPTCHA." ?>`
+
 You could add this line to the variable and display this variable in the required place instead of `echo "Please complete the CAPTCHA."`. If there is a variable (responsible for the errors output) in the check function, this phrase can be added to this variable. If the function returns 'true', it means that you have entered captcha properly. In all other cases the function will return 'false'.
 
 = I have some problems with the plugin's work. What Information should I provide to receive proper support? =
 
 Please make sure that the problem hasn't been discussed yet on our forum (<a href="http://support.bestwebsoft.com" target="_blank">http://support.bestwebsoft.com</a>). If no, please provide the following data along with your problem's description:
+
 1. the link to the page where the problem occurs
 2. the name of the plugin and its version. If you are using a pro version - your order number.
 3. the version of your WordPress installation
@@ -181,6 +185,20 @@ Please make sure that the problem hasn't been discussed yet on our forum (<a hre
 6. Contact form with Captcha.
 
 == Changelog ==
+
+= V4.1.2 - 02.06.2015 =
+* Bugfix : We fixed error of a visual display of the settings page.
+* Bugfix : We fixed the Required symbol that has not been displayed on login, registration and password recovery form.
+
+= V4.1.1 - 04.05.2015 =
+* Update : We updated all functionality for wordpress 4.2.1.
+
+= V4.1.0 - 20.03.2015 =
+* Update : The Croatian, French and Farsi languages file are updated.
+* Update: Error display with the comments form was changed.
+
+= V4.0.9 - 18.02.2015 =
+* NEW: We added the ability to change error messages.
 
 = V4.0.8 - 23.12.2014 =
 * Update : The language files are updated.
@@ -500,6 +518,18 @@ Please make sure that the problem hasn't been discussed yet on our forum (<a hre
 * Select functionality of mathematical actions and level of their difficulty are implemented.
 
 == Upgrade Notice ==
+
+= V4.1.2 =
+We fixed error of a visual display of the settings page. We fixed the Required symbol that has not been displayed on login, registration and password recovery form.
+
+= V4.1.1 =
+We updated all functionality for wordpress 4.2.1.
+
+= V4.1.0 =
+The Croatian, French and Farsi languages file are updated. Error display with the comments form was changed.
+
+= V4.0.9 =
+We added the ability to change error messages.
 
 = V4.0.8 =
 The language files are updated. We updated all functionality for wordpress 4.1.

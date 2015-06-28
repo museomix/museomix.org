@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: captcha\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-23 13:48+0300\n"
-"PO-Revision-Date: 2014-12-23 13:48+0300\n"
+"POT-Creation-Date: 2015-02-12 11:43+0300\n"
+"PO-Revision-Date: 2015-02-12 11:43+0300\n"
 "Last-Translator: bestwebsoft.com <plugins@bestwebsoft.com>\n"
 "Language-Team: Ciprian <cipibad@gmail.com>\n"
 "Language: ro_RO\n"
@@ -17,7 +17,7 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 
 #: captcha.php:79
-#: captcha.php:410
+#: captcha.php:430
 #, fuzzy
 msgid "Captcha Settings"
 msgstr "Optiuni CAPTCHA"
@@ -26,569 +26,513 @@ msgstr "Optiuni CAPTCHA"
 msgid "Captcha"
 msgstr "CAPTCHA"
 
-#: captcha.php:166
-msgid "requires"
-msgstr "are nevoie de"
-
-#: captcha.php:166
-msgid "or higher, that is why it has been deactivated! Please upgrade WordPress and try again."
-msgstr "sau mai mare, acesta este motivul pentru care a fost dezactivat! Va rugam sa faceti upgrade la WordPress si sa incercati din nou."
-
-#: captcha.php:166
-msgid "Back to the WordPress"
-msgstr "Inapoi la WordPress"
-
-#: captcha.php:166
-msgid "Plugins page"
-msgstr "Pagina plugin-ului"
-
-#: captcha.php:239
-msgid "Login form"
-msgstr "Formular autentificare"
-
-#: captcha.php:240
-#: captcha.php:461
+#: captcha.php:133
+#: captcha.php:301
 #, fuzzy
-msgid "Registration form"
-msgstr "Formular inregistrare"
-
-#: captcha.php:240
-msgid "Register form"
-msgstr "Formular inregistrare"
-
-#: captcha.php:241
-#, fuzzy
-msgid "Reset Password form"
-msgstr "Formular parola pierduta"
-
-#: captcha.php:241
-msgid "Lost password form"
-msgstr "Formular parola pierduta"
-
-#: captcha.php:242
-#: captcha.php:462
-msgid "Comments form"
-msgstr "Formular comentarii"
-
-#: captcha.php:243
-#, fuzzy
-msgid "Hide CAPTCHA in Comments form for registered users"
-msgstr "Ascunde CAPTCHA pentru utilizatorii inregistrati"
-
-#: captcha.php:248
-msgid "Plus (&#43;)"
-msgstr "Plus (&#43;)"
-
-#: captcha.php:248
-msgid "Plus"
-msgstr "Plus"
-
-#: captcha.php:249
-msgid "Minus (&minus;)"
-msgstr "Minus (&minus;)"
-
-#: captcha.php:249
-msgid "Minus"
-msgstr "Minus"
-
-#: captcha.php:250
-msgid "Multiplication (&times;)"
-msgstr "Inmultire (&times;)"
-
-#: captcha.php:250
-msgid "Multiply"
-msgstr "Inmultit (&times;)"
-
-#: captcha.php:255
-msgid "Numbers"
-msgstr "Numere"
-
-#: captcha.php:256
-msgid "Words"
-msgstr "Cuvinte"
-
-#: captcha.php:293
-#, fuzzy
-msgid "Please select one item in the block Arithmetic and Complexity for CAPTCHA"
-msgstr "Va rugam selectati un punct in blocul actiunilor aritmetice si dificultatea pentru CAPTCHA"
-
-#: captcha.php:297
-#, fuzzy
-msgid "Settings saved."
-msgstr "Optiuni salvate."
-
-#: captcha.php:310
-#: captcha.php:342
-msgid "Wrong license key"
-msgstr "Codul licentei este gresit"
-
-#: captcha.php:335
-msgid "Something went wrong. Try again later. If the error will appear again, please, contact us <a href=http://support.bestwebsoft.com>BestWebSoft</a>. We are sorry for inconvenience."
-msgstr "A aparut o eroare. Incercati din nou mai tarziu. Daca eroarea apare din nou, va rugam sa ne contactati <a href=http://support.bestwebsoft.com>BestWebSoft</a>. Ne pare rau pentru neplacerea provocata."
-
-#: captcha.php:344
-msgid "This license key is bind to another site"
-msgstr "Licenta este folosite de alt site."
-
-#: captcha.php:346
-#: captcha.php:581
-msgid "Unfortunately, you have exceeded the number of available tries per day. Please, upload the plugin manually."
-msgstr "Din pacate, numarul de incercari zilnice a fost depadit. Va rugam sa incarcati plugin-ul manual."
-
-#: captcha.php:363
-msgid "Failed to open the zip archive. Please, upload the plugin manually"
-msgstr "Eroare la deschiderea arhievi zip.  Va rugam sa incarcati plugin-ul manual."
-
-#: captcha.php:369
-msgid "Your server does not support either ZipArchive or Phar. Please, upload the plugin manually"
-msgstr "Serverul dumneavoastra nu suporta ZipArchive sau Phar. Va rugam sa incarcati plugin-ul manual."
-
-#: captcha.php:373
-#: captcha.php:382
-msgid "Failed to download the zip archive. Please, upload the plugin manually"
-msgstr "Eroare la descarcarea arhivei zip. Va rugam sa incarcati plugin-ul manual."
-
-#: captcha.php:386
-msgid "Something went wrong. Try again later or upload the plugin manually. We are sorry for inconvenience."
-msgstr "A aparut o eroare. Incercati din nou mai tarziu sau incarcati plugin-ul manual. Ne pare rau pentru neplacerea provocata"
-
-#: captcha.php:404
-msgid "Please, enter Your license key"
-msgstr "Va rugam introduceti codul licentei"
-
-#: captcha.php:412
-#: captcha.php:1424
-#: captcha.php:1436
-msgid "Settings"
-msgstr "Setari"
-
-#: captcha.php:413
-#: captcha.php:1437
-msgid "FAQ"
-msgstr "Intrebari frecvente (FAQ)"
-
-#: captcha.php:414
-msgid "Go PRO"
-msgstr "Schimba la varianta PRO"
-
-#: captcha.php:416
-msgid "Notice:"
-msgstr "Notificare:"
-
-#: captcha.php:416
-msgid "The plugin's settings have been changed. In order to save them please don't forget to click the 'Save Changes' button."
-msgstr "Setarile plugin-ului au fost schimbare. Pentru a fi salvate nu uitati sa apasati butonul 'Salveaza schimbarile'."
-
-#: captcha.php:423
-#: captcha.php:449
-#: captcha.php:458
-#, fuzzy
-msgid "Enable CAPTCHA for:"
-msgstr "Activeaza CAPTCHA la:"
-
-#: captcha.php:431
-#: captcha.php:433
-#: captcha.php:436
-msgid "Contact form"
-msgstr "Formular de contact"
-
-#: captcha.php:431
-#: captcha.php:433
-#: captcha.php:436
-#: captcha.php:452
-msgid "powered by"
-msgstr "propulsat de"
-
-#: captcha.php:433
-msgid "Activate contact form"
-msgstr "Activeaza formularul de contact"
-
-#: captcha.php:436
-msgid "Download contact form"
-msgstr "Descarca formularul de contact"
-
-#: captcha.php:439
-msgid "If you would like to add Captcha to a custom form, please see"
-msgstr "Daca doriti sa personalizati acest modul pentru un formular personalizat, va rugam sa ne contactati la"
-
-#: captcha.php:452
-msgid "Subscriber"
-msgstr "Abonat"
-
-#: captcha.php:463
-msgid "\"Create a Group\" form"
-msgstr "Formularul: \"Creeaza un Grup\" "
-
-#: captcha.php:469
-#, fuzzy
-msgid "Enable CAPTCHA:"
-msgstr "Activeaza CAPTCHA la:"
-
-#: captcha.php:477
-msgid "If you upgrade to Pro version all your settings will be saved."
-msgstr "Daca faceti upgrade la versiunew PRO, toate schimbarile raman salvate"
-
-#: captcha.php:484
-msgid "Unlock premium options by upgrading to a PRO version."
-msgstr "Deblocati optiunile premium facand upgrade la versiunea PRO"
-
-#: captcha.php:485
-#: captcha.php:1502
-msgid "Learn More"
-msgstr "Vezi ma mult"
-
-#: captcha.php:488
-msgid "Go"
-msgstr "Go"
-
-#: captcha.php:495
-#, fuzzy
-msgid "Title for CAPTCHA in the form"
-msgstr "Eticheta pentru CAPTCHA in formular"
-
-#: captcha.php:499
-msgid "Required symbol"
-msgstr "Symbol necesar"
-
-#: captcha.php:505
-msgid "Arithmetic actions for CAPTCHA"
-msgstr "Operatii aritmetice pentru CAPTCHA"
-
-#: captcha.php:519
-msgid "CAPTCHA complexity level"
-msgstr "Nivelul CAPTCHA de complexitate"
-
-#: captcha.php:535
-msgid "Save Changes"
-msgstr "Salveaza schimbarile"
-
-#: captcha.php:541
-msgid "If you enjoy our plugin, please give it 5 stars on WordPress"
-msgstr "Daca va place plugin-ul, va rugam notati-l cu 5 stele pe site-ul WordPress"
-
-#: captcha.php:542
-msgid "Rate the plugin"
-msgstr "Noteaza plugin-ul"
-
-#: captcha.php:545
-msgid "If there is something wrong about it, please contact us"
-msgstr "Daca ceva nu este in regula, va rugam sa ne contactati"
-
-#: captcha.php:556
-msgid "Congratulations! The PRO version of the plugin is successfully download and activated."
-msgstr "Felicitari! Versiunea PRO a plugin-ului a fost descarcata si activata cu success."
-
-#: captcha.php:558
-msgid "Please, go to"
-msgstr "Va rugam, mergeti la"
-
-#: captcha.php:558
-msgid "the setting page"
-msgstr "pagina cu setari"
-
-#: captcha.php:559
-msgid "You will be redirected automatically in 5 seconds."
-msgstr "O sa fiti redirectat automat in 5 secunde"
-
-#: captcha.php:564
-msgid "You can download and activate"
-msgstr "Puteti descarca si activa"
-
-#: captcha.php:566
-msgid "version of this plugin by entering Your license key."
-msgstr "versiuna a acestui plugin completand cheia licentei"
-
-#: captcha.php:568
-msgid "You can find your license key on your personal page Client area, by clicking on the link"
-msgstr "Puteti gasi cheia licentei pe pagina personala a clientului, urmand link-ul"
-
-#: captcha.php:570
-msgid "(your username is the email you specify when purchasing the product)."
-msgstr "(Numele de utilizator este adresa de email specificata la cumpararea produsului)."
-
-#: captcha.php:578
-#: captcha.php:588
-msgid "Go!"
-msgstr "Go!"
-
-#: captcha.php:654
-msgid "<strong>ERROR</strong>: Please fill the form."
-msgstr "<strong>EROARE</strong>: Va rugam completati formularul."
-
-#: captcha.php:668
-msgid "<strong>ERROR</strong>: Please enter a valid CAPTCHA value."
-msgstr "<strong>EROARE</strong>: Va rugam sa completati CAPTCHA valid."
-
-#: captcha.php:675
-#, fuzzy
-msgid "<strong>ERROR</strong>: Please enter a CAPTCHA value."
+msgid "Please enter a CAPTCHA value."
 msgstr "Va rugam sa completati CAPTCHA."
 
-#: captcha.php:786
-#: captcha.php:847
-#: captcha.php:870
-#: captcha.php:899
-msgid "Please fill the form."
-msgstr "Va rugam completati formularul."
-
-#: captcha.php:792
-#: captcha.php:907
-#, fuzzy
-msgid "Error: You have entered an incorrect CAPTCHA value. Click the BACK button on your browser, and try again."
-msgstr "Eroare: Ati introdus CAPTCHA gresit. Apasati butonul \"Inapoi\" al browserului si incercati din nou."
-
-#: captcha.php:847
-#: captcha.php:855
-#: captcha.php:870
-#: captcha.php:878
-msgid "ERROR"
-msgstr "EROARE"
-
-#: captcha.php:855
-#: captcha.php:878
+#: captcha.php:134
+#: captcha.php:304
 #, fuzzy
 msgid "Please enter a valid CAPTCHA value."
 msgstr "Va rugam sa completati CAPTCHA."
 
+#: captcha.php:168
+msgid "requires"
+msgstr "are nevoie de"
+
+#: captcha.php:168
+msgid "or higher, that is why it has been deactivated! Please upgrade WordPress and try again."
+msgstr "sau mai mare, acesta este motivul pentru care a fost dezactivat! Va rugam sa faceti upgrade la WordPress si sa incercati din nou."
+
+#: captcha.php:168
+msgid "Back to the WordPress"
+msgstr "Inapoi la WordPress"
+
+#: captcha.php:168
+msgid "Plugins page"
+msgstr "Pagina plugin-ului"
+
+#: captcha.php:241
+msgid "Login form"
+msgstr "Formular autentificare"
+
+#: captcha.php:242
+#: captcha.php:480
+#, fuzzy
+msgid "Registration form"
+msgstr "Formular inregistrare"
+
+#: captcha.php:242
+msgid "Register form"
+msgstr "Formular inregistrare"
+
+#: captcha.php:243
+#, fuzzy
+msgid "Reset Password form"
+msgstr "Formular parola pierduta"
+
+#: captcha.php:243
+msgid "Lost password form"
+msgstr "Formular parola pierduta"
+
+#: captcha.php:244
+#: captcha.php:481
+msgid "Comments form"
+msgstr "Formular comentarii"
+
+#: captcha.php:245
+#, fuzzy
+msgid "Hide CAPTCHA in Comments form for registered users"
+msgstr "Ascunde CAPTCHA pentru utilizatorii inregistrati"
+
+#: captcha.php:250
+msgid "Plus (&#43;)"
+msgstr "Plus (&#43;)"
+
+#: captcha.php:250
+msgid "Plus"
+msgstr "Plus"
+
+#: captcha.php:251
+msgid "Minus (&minus;)"
+msgstr "Minus (&minus;)"
+
+#: captcha.php:251
+msgid "Minus"
+msgstr "Minus"
+
+#: captcha.php:252
+msgid "Multiplication (&times;)"
+msgstr "Inmultire (&times;)"
+
+#: captcha.php:252
+msgid "Multiply"
+msgstr "Inmultit (&times;)"
+
+#: captcha.php:257
+msgid "Numbers"
+msgstr "Numere"
+
+#: captcha.php:258
+msgid "Words"
+msgstr "Cuvinte"
+
+#: captcha.php:298
+#, fuzzy
+msgid "Please select one item in the block Arithmetic and Complexity for CAPTCHA"
+msgstr "Va rugam selectati un punct in blocul actiunilor aritmetice si dificultatea pentru CAPTCHA"
+
+#: captcha.php:308
+#, fuzzy
+msgid "Settings saved."
+msgstr "Optiuni salvate."
+
+#: captcha.php:321
+#: captcha.php:353
+msgid "Wrong license key"
+msgstr "Codul licentei este gresit"
+
+#: captcha.php:346
+msgid "Something went wrong. Try again later. If the error will appear again, please, contact us <a href=http://support.bestwebsoft.com>BestWebSoft</a>. We are sorry for inconvenience."
+msgstr "A aparut o eroare. Incercati din nou mai tarziu. Daca eroarea apare din nou, va rugam sa ne contactati <a href=http://support.bestwebsoft.com>BestWebSoft</a>. Ne pare rau pentru neplacerea provocata."
+
+#: captcha.php:355
+msgid "This license key is bind to another site"
+msgstr "Licenta este folosite de alt site."
+
+#: captcha.php:357
+#: captcha.php:607
+msgid "Unfortunately, you have exceeded the number of available tries per day. Please, upload the plugin manually."
+msgstr "Din pacate, numarul de incercari zilnice a fost depadit. Va rugam sa incarcati plugin-ul manual."
+
+#: captcha.php:368
+#: captcha.php:390
+#: captcha.php:402
+msgid "Failed to download the zip archive. Please, upload the plugin manually"
+msgstr "Eroare la descarcarea arhivei zip. Va rugam sa incarcati plugin-ul manual."
+
+#: captcha.php:380
+msgid "Failed to open the zip archive. Please, upload the plugin manually"
+msgstr "Eroare la deschiderea arhievi zip.  Va rugam sa incarcati plugin-ul manual."
+
+#: captcha.php:386
+msgid "Your server does not support either ZipArchive or Phar. Please, upload the plugin manually"
+msgstr "Serverul dumneavoastra nu suporta ZipArchive sau Phar. Va rugam sa incarcati plugin-ul manual."
+
+#: captcha.php:393
+#, fuzzy
+msgid "UploadDir is not writable. Please, upload the plugin manually"
+msgstr "Eroare la deschiderea arhievi zip.  Va rugam sa incarcati plugin-ul manual."
+
+#: captcha.php:406
+msgid "Something went wrong. Try again later or upload the plugin manually. We are sorry for inconvenience."
+msgstr "A aparut o eroare. Incercati din nou mai tarziu sau incarcati plugin-ul manual. Ne pare rau pentru neplacerea provocata"
+
+#: captcha.php:424
+msgid "Please, enter Your license key"
+msgstr "Va rugam introduceti codul licentei"
+
+#: captcha.php:432
+#: captcha.php:1448
+#: captcha.php:1460
+msgid "Settings"
+msgstr "Setari"
+
+#: captcha.php:433
+#: captcha.php:1461
+msgid "FAQ"
+msgstr "Intrebari frecvente (FAQ)"
+
+#: captcha.php:434
+msgid "Go PRO"
+msgstr "Schimba la varianta PRO"
+
+#: captcha.php:436
+msgid "Notice:"
+msgstr "Notificare:"
+
+#: captcha.php:436
+msgid "The plugin's settings have been changed. In order to save them please don't forget to click the 'Save Changes' button."
+msgstr "Setarile plugin-ului au fost schimbare. Pentru a fi salvate nu uitati sa apasati butonul 'Salveaza schimbarile'."
+
+#: captcha.php:443
+#: captcha.php:468
+#: captcha.php:477
+#, fuzzy
+msgid "Enable CAPTCHA for:"
+msgstr "Activeaza CAPTCHA la:"
+
+#: captcha.php:450
+#: captcha.php:452
+#: captcha.php:455
+msgid "Contact form"
+msgstr "Formular de contact"
+
+#: captcha.php:450
+#: captcha.php:452
+#: captcha.php:455
+#: captcha.php:471
+msgid "powered by"
+msgstr "propulsat de"
+
+#: captcha.php:452
+msgid "Activate contact form"
+msgstr "Activeaza formularul de contact"
+
+#: captcha.php:455
+msgid "Download contact form"
+msgstr "Descarca formularul de contact"
+
+#: captcha.php:458
+msgid "If you would like to add Captcha to a custom form, please see"
+msgstr "Daca doriti sa personalizati acest modul pentru un formular personalizat, va rugam sa ne contactati la"
+
+#: captcha.php:471
+msgid "Subscriber"
+msgstr "Abonat"
+
+#: captcha.php:482
+msgid "\"Create a Group\" form"
+msgstr "Formularul: \"Creeaza un Grup\" "
+
+#: captcha.php:488
+#, fuzzy
+msgid "Enable CAPTCHA:"
+msgstr "Activeaza CAPTCHA la:"
+
+#: captcha.php:496
+msgid "If you upgrade to Pro version all your settings will be saved."
+msgstr "Daca faceti upgrade la versiunew PRO, toate schimbarile raman salvate"
+
+#: captcha.php:503
+msgid "Unlock premium options by upgrading to a PRO version."
+msgstr "Deblocati optiunile premium facand upgrade la versiunea PRO"
+
+#: captcha.php:504
+#: captcha.php:1523
+msgid "Learn More"
+msgstr "Vezi ma mult"
+
+#: captcha.php:507
+msgid "Go"
+msgstr "Go"
+
+#: captcha.php:514
+#, fuzzy
+msgid "Title for CAPTCHA in the form"
+msgstr "Eticheta pentru CAPTCHA in formular"
+
+#: captcha.php:518
+msgid "Required symbol"
+msgstr "Symbol necesar"
+
+#: captcha.php:524
+msgid "Error messages"
+msgstr ""
+
+#: captcha.php:526
+#, fuzzy
+msgid "If CAPTCHA field is empty"
+msgstr "CAPTCHA nu a fost correct"
+
+#: captcha.php:527
+#, fuzzy
+msgid "If CAPTCHA is incorrect"
+msgstr "CAPTCHA nu a fost correct"
+
+#: captcha.php:531
+msgid "Arithmetic actions for CAPTCHA"
+msgstr "Operatii aritmetice pentru CAPTCHA"
+
+#: captcha.php:545
+msgid "CAPTCHA complexity level"
+msgstr "Nivelul CAPTCHA de complexitate"
+
+#: captcha.php:561
+msgid "Save Changes"
+msgstr "Salveaza schimbarile"
+
+#: captcha.php:567
+msgid "If you enjoy our plugin, please give it 5 stars on WordPress"
+msgstr "Daca va place plugin-ul, va rugam notati-l cu 5 stele pe site-ul WordPress"
+
+#: captcha.php:568
+msgid "Rate the plugin"
+msgstr "Noteaza plugin-ul"
+
+#: captcha.php:571
+msgid "If there is something wrong about it, please contact us"
+msgstr "Daca ceva nu este in regula, va rugam sa ne contactati"
+
+#: captcha.php:582
+msgid "Congratulations! The PRO version of the plugin is successfully download and activated."
+msgstr "Felicitari! Versiunea PRO a plugin-ului a fost descarcata si activata cu success."
+
+#: captcha.php:584
+msgid "Please, go to"
+msgstr "Va rugam, mergeti la"
+
+#: captcha.php:584
+msgid "the setting page"
+msgstr "pagina cu setari"
+
+#: captcha.php:585
+msgid "You will be redirected automatically in 5 seconds."
+msgstr "O sa fiti redirectat automat in 5 secunde"
+
+#: captcha.php:590
+msgid "You can download and activate"
+msgstr "Puteti descarca si activa"
+
+#: captcha.php:592
+msgid "version of this plugin by entering Your license key."
+msgstr "versiuna a acestui plugin completand cheia licentei"
+
+#: captcha.php:594
+msgid "You can find your license key on your personal page Client area, by clicking on the link"
+msgstr "Puteti gasi cheia licentei pe pagina personala a clientului, urmand link-ul"
+
+#: captcha.php:596
+msgid "(your username is the email you specify when purchasing the product)."
+msgstr "(Numele de utilizator este adresa de email specificata la cumpararea produsului)."
+
+#: captcha.php:604
+#: captcha.php:614
+msgid "Go!"
+msgstr "Go!"
+
+#: captcha.php:677
+#: captcha.php:691
+#: captcha.php:698
+#: captcha.php:870
+#: captcha.php:878
+#: captcha.php:894
+#: captcha.php:902
+msgid "ERROR"
+msgstr "EROARE"
+
+#: captcha.php:815
 #: captcha.php:931
-#: captcha.php:1233
-msgid "zero"
-msgstr "zero"
+#, fuzzy
+msgid "ERROR:"
+msgstr "EROARE"
 
-#: captcha.php:932
-#: captcha.php:1234
-#: captcha.php:1399
-msgid "one"
-msgstr "unu"
-
-#: captcha.php:933
-#: captcha.php:1235
-msgid "two"
-msgstr "doi"
-
-#: captcha.php:934
-#: captcha.php:1236
-msgid "three"
-msgstr "trei"
-
-#: captcha.php:935
-#: captcha.php:1237
-msgid "four"
-msgstr "patru"
-
-#: captcha.php:936
-#: captcha.php:1238
-msgid "five"
-msgstr "cinci"
-
-#: captcha.php:937
-#: captcha.php:1239
-#: captcha.php:1399
-msgid "six"
-msgstr "sase"
-
-#: captcha.php:938
-#: captcha.php:1240
-#: captcha.php:1387
-#: captcha.php:1393
-msgid "seven"
-msgstr "sapte"
-
-#: captcha.php:939
-#: captcha.php:1241
-#: captcha.php:1390
-msgid "eight"
-msgstr "opt"
-
-#: captcha.php:940
-#: captcha.php:1242
-msgid "nine"
-msgstr "noua"
-
-#: captcha.php:943
-#: captcha.php:1245
-msgid "eleven"
-msgstr "unsprezece"
-
-#: captcha.php:944
-#: captcha.php:1246
-msgid "twelve"
-msgstr "doisprezece"
-
-#: captcha.php:945
-#: captcha.php:1247
-msgid "thirteen"
-msgstr "treisprezece"
-
-#: captcha.php:946
-#: captcha.php:1248
-msgid "fourteen"
-msgstr "paisprezece"
-
-#: captcha.php:947
-#: captcha.php:1249
-msgid "fifteen"
-msgstr "cincisprezece"
-
-#: captcha.php:948
-#: captcha.php:1250
-msgid "sixteen"
-msgstr "saisprezece"
-
-#: captcha.php:949
-#: captcha.php:1251
-msgid "seventeen"
-msgstr "saptesprezece"
-
-#: captcha.php:950
-#: captcha.php:1252
-msgid "eighteen"
-msgstr "optsprezece"
-
-#: captcha.php:951
-#: captcha.php:1253
-msgid "nineteen"
-msgstr "nouasprezece"
-
-#: captcha.php:954
-#: captcha.php:1256
-msgid "ten"
-msgstr "zece"
+#: captcha.php:815
+#: captcha.php:931
+#, fuzzy
+msgid "Click the BACK button on your browser, and try again."
+msgstr "Eroare: Ati introdus CAPTCHA gresit. Apasati butonul \"Inapoi\" al browserului si incercati din nou."
 
 #: captcha.php:955
 #: captcha.php:1257
-msgid "twenty"
-msgstr "douazeci"
+msgid "zero"
+msgstr "zero"
 
 #: captcha.php:956
 #: captcha.php:1258
-msgid "thirty"
-msgstr "treizeci"
+#: captcha.php:1423
+msgid "one"
+msgstr "unu"
 
 #: captcha.php:957
 #: captcha.php:1259
-msgid "forty"
-msgstr "patruzeci"
+msgid "two"
+msgstr "doi"
 
 #: captcha.php:958
 #: captcha.php:1260
-msgid "fifty"
-msgstr "cincizeci"
+msgid "three"
+msgstr "trei"
 
 #: captcha.php:959
 #: captcha.php:1261
-msgid "sixty"
-msgstr "saizeci"
+msgid "four"
+msgstr "patru"
 
 #: captcha.php:960
 #: captcha.php:1262
-msgid "seventy"
-msgstr "saptezeci"
+msgid "five"
+msgstr "cinci"
 
 #: captcha.php:961
 #: captcha.php:1263
-msgid "eighty"
-msgstr "optzeci"
+#: captcha.php:1423
+msgid "six"
+msgstr "sase"
 
 #: captcha.php:962
 #: captcha.php:1264
+#: captcha.php:1411
+#: captcha.php:1417
+msgid "seven"
+msgstr "sapte"
+
+#: captcha.php:963
+#: captcha.php:1265
+#: captcha.php:1414
+msgid "eight"
+msgstr "opt"
+
+#: captcha.php:964
+#: captcha.php:1266
+msgid "nine"
+msgstr "noua"
+
+#: captcha.php:967
+#: captcha.php:1269
+msgid "eleven"
+msgstr "unsprezece"
+
+#: captcha.php:968
+#: captcha.php:1270
+msgid "twelve"
+msgstr "doisprezece"
+
+#: captcha.php:969
+#: captcha.php:1271
+msgid "thirteen"
+msgstr "treisprezece"
+
+#: captcha.php:970
+#: captcha.php:1272
+msgid "fourteen"
+msgstr "paisprezece"
+
+#: captcha.php:971
+#: captcha.php:1273
+msgid "fifteen"
+msgstr "cincisprezece"
+
+#: captcha.php:972
+#: captcha.php:1274
+msgid "sixteen"
+msgstr "saisprezece"
+
+#: captcha.php:973
+#: captcha.php:1275
+msgid "seventeen"
+msgstr "saptesprezece"
+
+#: captcha.php:974
+#: captcha.php:1276
+msgid "eighteen"
+msgstr "optsprezece"
+
+#: captcha.php:975
+#: captcha.php:1277
+msgid "nineteen"
+msgstr "nouasprezece"
+
+#: captcha.php:978
+#: captcha.php:1280
+msgid "ten"
+msgstr "zece"
+
+#: captcha.php:979
+#: captcha.php:1281
+msgid "twenty"
+msgstr "douazeci"
+
+#: captcha.php:980
+#: captcha.php:1282
+msgid "thirty"
+msgstr "treizeci"
+
+#: captcha.php:981
+#: captcha.php:1283
+msgid "forty"
+msgstr "patruzeci"
+
+#: captcha.php:982
+#: captcha.php:1284
+msgid "fifty"
+msgstr "cincizeci"
+
+#: captcha.php:983
+#: captcha.php:1285
+msgid "sixty"
+msgstr "saizeci"
+
+#: captcha.php:984
+#: captcha.php:1286
+msgid "seventy"
+msgstr "saptezeci"
+
+#: captcha.php:985
+#: captcha.php:1287
+msgid "eighty"
+msgstr "optzeci"
+
+#: captcha.php:986
+#: captcha.php:1288
 msgid "ninety"
 msgstr "nouazeci"
 
-#: captcha.php:1049
-#: captcha.php:1351
+#: captcha.php:1073
+#: captcha.php:1375
 msgid "and"
 msgstr "si"
 
-#: captcha.php:1122
+#: captcha.php:1146
 msgid "Encryption password is not set"
 msgstr "Parola pentru codare nu e setata"
 
-#: captcha.php:1142
+#: captcha.php:1166
 #, fuzzy
 msgid "Decryption password is not set"
 msgstr "Parola pentru decodare nu e setata"
 
-#: captcha.php:1438
+#: captcha.php:1462
 msgid "Support"
 msgstr "Suport"
 
-#: captcha.php:1505
+#: captcha.php:1526
 msgid "It's time to upgrade your <strong>Captcha plugin</strong> to <strong>PRO</strong> version"
 msgstr "Este timpul sa faceti upgrade <strong>pluglin-ului Captcha</strong> la versiunea <strong>PRO</strong>"
 
-#: captcha.php:1506
+#: captcha.php:1527
 msgid "Extend standard plugin functionality with new great options"
 msgstr "Extinde functionalitatile standard cu noi optiuni"
 
-#, fuzzy
-#~ msgid "to"
-#~ msgstr "doi"
-
-#, fuzzy
-#~ msgid "Please enter a valid email address."
-#~ msgstr "Va rugam sa completati CAPTCHA."
-
-#~ msgid "Activated plugins"
-#~ msgstr "Modul activat"
-
-#~ msgid "Read more"
-#~ msgstr "Citeste mai mult"
-
-#~ msgid "Installed plugins"
-#~ msgstr "Modul instalat"
-
-#~ msgid "Recommended plugins"
-#~ msgstr "Module recomandate"
-
-#~ msgid "Download"
-#~ msgstr "Descarca"
-
-#~ msgid "Install %s"
-#~ msgstr "Instaleaza %s"
-
-#~ msgid "Install now from wordpress.org"
-#~ msgstr "Instaleaza acum de pe wordpress.org"
-
-#, fuzzy
-#~ msgid "Active Plugins"
-#~ msgstr "Modul activat"
-
-#, fuzzy
-#~ msgid "Inactive Plugins"
-#~ msgstr "Modul activat"
-
-#, fuzzy
-#~ msgid "Send to support"
-#~ msgstr "Suport"
-
-#, fuzzy
-#~ msgid "(powered by bestwebsoft.com)"
-#~ msgstr "(propulsat de bestwebsoft.com)"
-
-#, fuzzy
-#~ msgid ""
-#~ "If you have any questions, please contact us via plugin@bestwebsoft.com "
-#~ "or fill in the contact form on our website"
-#~ msgstr ""
-#~ "Daca aveti intrebari va rugam sa ne contactati la adresa "
-#~ "plugin@bestwebsoft.com sau sa completati formularul de contact de pe site-"
-#~ "ul nostru"
-
-#~ msgid "Increase"
-#~ msgstr "Creste"
-
-#~ msgid "Difficulty for CAPTCHA"
-#~ msgstr "Dificultate pentru CAPTCHA"
-
-#~ msgid "That CAPTCHA was incorrect."
-#~ msgstr "CAPTCHA nu a fost correct"
-
-#~ msgid "The password of encryption is not set"
-#~ msgstr "Parola pentru criptare nu e setata"
-
-#~ msgid "null"
-#~ msgstr "нуль"
-
-#~ msgid "Install Now"
-#~ msgstr "Установить сейчас"

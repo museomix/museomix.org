@@ -220,7 +220,7 @@ class Theme_My_Login_Themed_Profiles extends Theme_My_Login_Abstract {
 			check_admin_referer( 'update-user_' . $current_user->ID );
 
 			if ( ! current_user_can( 'edit_user', $current_user->ID ) )
-				wp_die( __( 'You do not have permission to edit this user.' ) );
+				wp_die( __( 'You do not have permission to edit this user.', 'theme-my-login' ) );
 
 			do_action( 'personal_options_update', $current_user->ID );
 
@@ -257,7 +257,7 @@ class Theme_My_Login_Themed_Profiles extends Theme_My_Login_Abstract {
 		require_once( ABSPATH . 'wp-admin/includes/misc.php' );
 
 		if ( isset( $_GET['updated'] ) && 'true' == $_GET['updated'] )
-			Theme_My_Login::get_object()->errors->add( 'profile_updated', __( 'Profile updated.' ), 'message' );
+			Theme_My_Login::get_object()->errors->add( 'profile_updated', __( 'Profile updated.', 'theme-my-login' ), 'message' );
 
 		$current_user = wp_get_current_user();
 		$profileuser  = get_user_to_edit( $current_user->ID );
@@ -310,7 +310,7 @@ class Theme_My_Login_Themed_Profiles extends Theme_My_Login_Abstract {
 
 			if ( $user_role && ! $this->get_option( array( $user_role, 'theme_profile' ) ) )
 				return $url;
-					
+
 			$parsed_url = parse_url( $url );
 
 			$url = Theme_My_Login::get_page_link( 'profile' );

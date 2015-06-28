@@ -105,6 +105,23 @@ function jetpack_og_tags() {
 		$tags['og:description'] = strlen( $tags['og:description'] ) > $description_length ? mb_substr( $tags['og:description'], 0, $description_length ) . '...' : $tags['og:description'];
 	}
 
+	// Try to add OG locale tag if the WP->FB data mapping exists
+	if ( defined( 'JETPACK__GLOTPRESS_LOCALES_PATH' ) && file_exists( JETPACK__GLOTPRESS_LOCALES_PATH ) ) {
+		require_once JETPACK__GLOTPRESS_LOCALES_PATH;
+		$_locale = get_locale();
+
+		// We have to account for WP.org vs WP.com locale divergence
+		if ( defined( 'IS_WPCOM' ) && IS_WPCOM ) {
+			$gp_locale = GP_Locales::by_field( 'slug', $_locale );
+		} else {
+			$gp_locale = GP_Locales::by_field( 'wp_locale', $_locale );
+		}
+	}
+
+	if ( isset( $gp_locale->facebook_locale ) && ! empty( $gp_locale->facebook_locale ) ) {
+		$tags['og:locale'] = $gp_locale->facebook_locale;
+	}
+
 	// Add any additional tags here, or modify what we've come up with
 	$tags = apply_filters( 'jetpack_open_graph_tags', $tags, compact( 'image_width', 'image_height' ) );
 
@@ -162,14 +179,8 @@ function jetpack_og_get_image( $width = 200, $height = 200, $max_images = 4 ) { 
 	} else if ( is_author() ) {
 		$author = get_queried_object();
 		if ( function_exists( 'get_avatar_url' ) ) {
-			$avatar = get_avatar_url( $author->user_email, $width );
-
-			if ( ! empty( $avatar ) ) {
-				if ( is_array( $avatar ) )
-					$image = $avatar[0];
-				else
-					$image = $avatar;
-			}
+			// Prefer the core function get_avatar_url() if available, WP 4.2+
+			$image = get_avatar_url( $author->user_email, array( 'size' => $width ) );
 		}
 		else {
 			$has_filter = has_filter( 'pre_option_show_avatars', '__return_true' );

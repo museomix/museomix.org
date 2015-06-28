@@ -17,6 +17,13 @@
 .cptch_block {
 	direction: ltr;
 }
+input.cptch_settings_input {
+    width: 252px;
+}
+.cptch_span {
+    color: #888888;
+    font-size: 10px;
+}
 /*
 * styles help tooltips
 */
@@ -24,12 +31,12 @@
     background-image: url("../images/tooltip_icons.png");
     background-repeat: no-repeat;
     cursor: pointer;
-    float: left;
-    height: 29px;
+    height: 28px;
     position: relative;
-    margin: -3px 5px 3px;
-    width: 29px;
-    clear: none !important;
+    margin: 3px 5px;
+    width: 28px;
+    display: inline-block;
+    vertical-align: middle;
 }
 .cptch_hidden_help_text {
     background: #F4F4F4;
@@ -38,14 +45,19 @@
     left: 40px;
     padding: 5px 10px;
     position: absolute;
-    width: 240px;
+    width: auto;
     line-height: 1.5;
+    display: none;
 }
 .cptch_hidden_help_text:before {
     content: url("../images/help.png");
     left: -10px;
     position: absolute;
     top: 7px;
+    direction: ltr;
+}
+.cptch_help_box:hover .cptch_hidden_help_text {
+    display: block;
 }
 /*
 * frontend styles

@@ -12,9 +12,9 @@ Theme My Login will always look in your theme's directory first, before using th
 	<?php do_action( 'signup_hidden_fields' ); ?>
 
 	<?php if ( ! is_subdomain_install() ) { ?>
-	<label for="blogname<?php $template->the_instance(); ?>"><?php _e( 'Site Name:' ); ?></label>
+	<label for="blogname<?php $template->the_instance(); ?>"><?php _e( 'Site Name:', 'theme-my-login' ); ?></label>
 	<?php } else { ?>
-	<label for="blogname<?php $template->the_instance(); ?>"><?php _e( 'Site Domain:' ); ?></label>
+	<label for="blogname<?php $template->the_instance(); ?>"><?php _e( 'Site Domain:', 'theme-my-login' ); ?></label>
 	<?php } ?>
 
 	<?php if ( $errmsg = $errors->get_error_message( 'blogname' ) ) { ?>
@@ -31,13 +31,13 @@ Theme My Login will always look in your theme's directory first, before using th
 
 	<?php if ( ! is_user_logged_in() ) {
 		if ( ! is_subdomain_install() )
-			$site = $current_site->domain . $current_site->path . __( 'sitename' );
+			$site = $current_site->domain . $current_site->path . __( 'sitename', 'theme-my-login' );
 		else
-			$site = __( 'domain' ) . '.' . $site_domain . $current_site->path;
-		echo '<p>(<strong>' . sprintf( __( 'Your address will be %s.' ), $site ) . '</strong>) ' . __( 'Must be at least 4 characters, letters and numbers only. It cannot be changed, so choose carefully!' ) . '</p>';
+			$site = __( 'domain', 'theme-my-login' ) . '.' . $site_domain . $current_site->path;
+		echo '<p>(<strong>' . sprintf( __( 'Your address will be %s.', 'theme-my-login' ), $site ) . '</strong>) ' . __( 'Must be at least 4 characters, letters and numbers only. It cannot be changed, so choose carefully!', 'theme-my-login' ) . '</p>';
 	} ?>
 
-	<label for="blog_title<?php $template->the_instance(); ?>"><?php _e( 'Site Title:' ); ?></label>
+	<label for="blog_title<?php $template->the_instance(); ?>"><?php _e( 'Site Title:', 'theme-my-login' ); ?></label>
 	<?php if ( $errmsg = $errors->get_error_message( 'blog_title' ) ) { ?>
 		<p class="error"><?php echo $errmsg; ?></p>
 	<?php } ?>
@@ -45,22 +45,22 @@ Theme My Login will always look in your theme's directory first, before using th
 
 	<div id="privacy">
 		<p class="privacy-intro">
-			<label for="blog_public_on<?php $template->the_instance(); ?>"><?php _e( 'Privacy:' ); ?></label>
-			<?php _e( 'Allow search engines to index this site.' ); ?>
+			<label for="blog_public_on<?php $template->the_instance(); ?>"><?php _e( 'Privacy:', 'theme-my-login' ); ?></label>
+			<?php _e( 'Allow search engines to index this site.', 'theme-my-login' ); ?>
 			<br style="clear:both" />
 			<label class="checkbox" for="blog_public_on<?php $template->the_instance(); ?>">
 				<input type="radio" id="blog_public_on<?php $template->the_instance(); ?>" name="blog_public" value="1" <?php if ( ! isset( $_POST['blog_public'] ) || $_POST['blog_public'] == '1' ) { ?>checked="checked"<?php } ?> />
-				<strong><?php _e( 'Yes' ); ?></strong>
+				<strong><?php _e( 'Yes', 'theme-my-login' ); ?></strong>
 			</label>
 			<label class="checkbox" for="blog_public_off<?php $template->the_instance(); ?>">
 				<input type="radio" id="blog_public_off<?php $template->the_instance(); ?>" name="blog_public" value="0" <?php if ( isset( $_POST['blog_public'] ) && $_POST['blog_public'] == '0' ) { ?>checked="checked"<?php } ?> />
-				<strong><?php _e( 'No' ); ?></strong>
+				<strong><?php _e( 'No', 'theme-my-login' ); ?></strong>
 			</label>
 		</p>
 	</div>
 
 	<?php do_action( 'signup_blogform', $errors ); ?>
 
-	<p class="submit"><input type="submit" name="submit" class="submit" value="<?php esc_attr_e( 'Signup' ); ?>" /></p>
+	<p class="submit"><input type="submit" name="submit" class="submit" value="<?php esc_attr_e( 'Signup', 'theme-my-login' ); ?>" /></p>
 </form>
 <?php $template->the_action_links( array( 'register' => false ) ); ?>

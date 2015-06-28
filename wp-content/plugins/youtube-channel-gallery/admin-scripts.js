@@ -177,4 +177,35 @@ jQuery(document).ready(function($) {
 		}
 	}
 
+    $('.ytchgtabs[id^="tabs-youtubechannelgallery_widget-"]:not([id*="__i__"])').each(function() {
+
+      var $this = $(this);
+
+      $this.on('keyup', '[id$="ytchag_search_playlists"]:not([id*="__i__"])', function(e) {
+
+        var campos = this.value.split('#'),
+            $select =  $this.find('[id$="ytchag_search_restrict"]:not([id*="__i__"])'),
+            restrict = '',
+            options = '';
+
+
+        $.each(campos, function(i, c) {
+
+          var tag = c.toLocaleLowerCase().replace(/ /g, '_');
+
+          if (c !== '') {
+            restrict += (restrict ? ',' : '') + 'restrict#' + tag;
+            options += '<option value="' + tag + '">' + c + '</option>';
+          }
+        });
+
+        $this.find('.restrict').html(restrict);
+        $select.find('option:gt(0)').remove();
+        $select.append(options);
+
+        return true;
+      });
+    });
+
+
 });

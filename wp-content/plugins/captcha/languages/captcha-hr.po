@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: captcha\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-23 13:47+0300\n"
-"PO-Revision-Date: 2014-12-23 13:47+0300\n"
+"POT-Creation-Date: 2015-03-20 12:21+0300\n"
+"PO-Revision-Date: 2015-03-20 12:22+0300\n"
 "Last-Translator: bestwebsoft.com <plugins@bestwebsoft.com>\n"
 "Language-Team: Daniel <daniel@geogat.com>\n"
 "Language: sr_RS\n"
@@ -13,588 +13,523 @@ msgstr ""
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.5.5\n"
+"X-Generator: Poedit 1.7.4\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: captcha.php:79
-#: captcha.php:410
+#: captcha.php:31
+#: captcha.php:255
 #, fuzzy
 msgid "Captcha Settings"
 msgstr "Captcha Opcije"
 
-#: captcha.php:79
+#: captcha.php:31
 msgid "Captcha"
 msgstr "Captcha"
 
-#: captcha.php:166
-msgid "requires"
-msgstr ""
+#: captcha.php:90
+msgid "Please enter a CAPTCHA value."
+msgstr "Unesite CAPTCHA vrijednost."
 
-#: captcha.php:166
-msgid "or higher, that is why it has been deactivated! Please upgrade WordPress and try again."
-msgstr ""
+#: captcha.php:91
+msgid "Please enter a valid CAPTCHA value."
+msgstr "Unesite valjanu CAPTCHA vrijednost."
 
-#: captcha.php:166
-msgid "Back to the WordPress"
-msgstr ""
-
-#: captcha.php:166
-#, fuzzy
-msgid "Plugins page"
-msgstr "BWS Dodaci"
-
-#: captcha.php:239
+#: captcha.php:178
 msgid "Login form"
 msgstr "Obrazac za prijavu"
 
-#: captcha.php:240
-#: captcha.php:461
+#: captcha.php:179
+#: captcha.php:305
 #, fuzzy
 msgid "Registration form"
 msgstr "Obrazac za registraciju"
 
-#: captcha.php:240
+#: captcha.php:179
 msgid "Register form"
 msgstr "Obrazac za registraciju"
 
-#: captcha.php:241
+#: captcha.php:180
 #, fuzzy
 msgid "Reset Password form"
 msgstr "Obrazac za izgubljenu lozinku"
 
-#: captcha.php:241
+#: captcha.php:180
 msgid "Lost password form"
 msgstr "Obrazac za izgubljenu lozinku"
 
-#: captcha.php:242
-#: captcha.php:462
+#: captcha.php:181
+#: captcha.php:306
 msgid "Comments form"
 msgstr "Obrazac za komentare"
 
-#: captcha.php:243
+#: captcha.php:182
 #, fuzzy
 msgid "Hide CAPTCHA in Comments form for registered users"
 msgstr "Sakrij CAPTCHA za registrirane korisnike"
 
-#: captcha.php:248
+#: captcha.php:187
 msgid "Plus (&#43;)"
 msgstr "Plus (&#43;)"
 
-#: captcha.php:248
+#: captcha.php:187
 msgid "Plus"
 msgstr "Plus (&#43;)"
 
-#: captcha.php:249
+#: captcha.php:188
 msgid "Minus (&minus;)"
 msgstr "Minus (&minus;)"
 
-#: captcha.php:249
+#: captcha.php:188
 msgid "Minus"
 msgstr "Minus"
 
-#: captcha.php:250
+#: captcha.php:189
 #, fuzzy
 msgid "Multiplication (&times;)"
 msgstr "Pomnoži (&times;)"
 
-#: captcha.php:250
+#: captcha.php:189
 #, fuzzy
 msgid "Multiply"
 msgstr "Pomnoži (&times;)"
 
-#: captcha.php:255
+#: captcha.php:194
 msgid "Numbers"
 msgstr "Brojevi"
 
-#: captcha.php:256
+#: captcha.php:195
 msgid "Words"
 msgstr "Riječi"
 
-#: captcha.php:293
+#: captcha.php:239
 msgid "Please select one item in the block Arithmetic and Complexity for CAPTCHA"
-msgstr "Izaberite jednu točku u blokovima Aritmetičkih akcija i Težine za CAPTCHA"
+msgstr "Molimo odaberite jednu stavku u bloku aritmetike i složenosti za CAPTCHA"
 
-#: captcha.php:297
+#: captcha.php:243
 #, fuzzy
 msgid "Settings saved."
 msgstr "Opcije spremljene"
 
-#: captcha.php:310
-#: captcha.php:342
-msgid "Wrong license key"
-msgstr ""
-
-#: captcha.php:335
-msgid "Something went wrong. Try again later. If the error will appear again, please, contact us <a href=http://support.bestwebsoft.com>BestWebSoft</a>. We are sorry for inconvenience."
-msgstr ""
-
-#: captcha.php:344
-msgid "This license key is bind to another site"
-msgstr ""
-
-#: captcha.php:346
-#: captcha.php:581
-msgid "Unfortunately, you have exceeded the number of available tries per day. Please, upload the plugin manually."
-msgstr ""
-
-#: captcha.php:363
-msgid "Failed to open the zip archive. Please, upload the plugin manually"
-msgstr ""
-
-#: captcha.php:369
-msgid "Your server does not support either ZipArchive or Phar. Please, upload the plugin manually"
-msgstr ""
-
-#: captcha.php:373
-#: captcha.php:382
-msgid "Failed to download the zip archive. Please, upload the plugin manually"
-msgstr ""
-
-#: captcha.php:386
-msgid "Something went wrong. Try again later or upload the plugin manually. We are sorry for inconvenience."
-msgstr ""
-
-#: captcha.php:404
-msgid "Please, enter Your license key"
-msgstr ""
-
-#: captcha.php:412
-#: captcha.php:1424
-#: captcha.php:1436
+#: captcha.php:257
+#: captcha.php:1241
+#: captcha.php:1254
 msgid "Settings"
 msgstr "Podešavanja"
 
-#: captcha.php:413
-#: captcha.php:1437
+#: captcha.php:258
+#: captcha.php:1255
 msgid "FAQ"
 msgstr "FAQ"
 
-#: captcha.php:414
+#: captcha.php:259
 msgid "Go PRO"
-msgstr ""
+msgstr "Go PRO"
 
-#: captcha.php:416
+#: captcha.php:261
 msgid "Notice:"
-msgstr ""
+msgstr "Obavijest:"
 
-#: captcha.php:416
+#: captcha.php:261
 msgid "The plugin's settings have been changed. In order to save them please don't forget to click the 'Save Changes' button."
-msgstr ""
+msgstr "Postavke dodatka su promijenjene. Kako bi se postavke spremile ne zaboravite kliknuti na \"Spremi promjene\" gumb."
 
-#: captcha.php:423
-#: captcha.php:449
-#: captcha.php:458
+#: captcha.php:268
+#: captcha.php:293
+#: captcha.php:302
 #, fuzzy
 msgid "Enable CAPTCHA for:"
 msgstr "Omogući CAPTCHA na:"
 
-#: captcha.php:431
-#: captcha.php:433
-#: captcha.php:436
+#: captcha.php:275
+#: captcha.php:277
+#: captcha.php:280
 msgid "Contact form"
 msgstr "Kontakt forma"
 
-#: captcha.php:431
-#: captcha.php:433
-#: captcha.php:436
-#: captcha.php:452
+#: captcha.php:275
+#: captcha.php:277
+#: captcha.php:280
+#: captcha.php:296
 msgid "powered by"
-msgstr ""
+msgstr "powered by"
 
-#: captcha.php:433
+#: captcha.php:277
 msgid "Activate contact form"
 msgstr "Aktiviraj kontakt formu"
 
-#: captcha.php:436
+#: captcha.php:280
 msgid "Download contact form"
 msgstr "Preuzmi kontakt formu"
 
-#: captcha.php:439
-#, fuzzy
+#: captcha.php:283
 msgid "If you would like to add Captcha to a custom form, please see"
-msgstr "Ukoliko želite ovaj dodatak da prilagodite svojim posebnim porebama, kontaktirajte nas putem maila <a href=\"Mailto:plugin@bestwebsoft.com\">plugin@bestwebsoft.com</a> ili popunite kontakt formu na našem sajtu"
+msgstr "Ako želite Captcha-u u prilagođenom obliku, molimo pogledajte"
 
-#: captcha.php:452
+#: captcha.php:296
 msgid "Subscriber"
-msgstr ""
+msgstr "Pretplatnik"
 
-#: captcha.php:463
+#: captcha.php:307
 msgid "\"Create a Group\" form"
-msgstr ""
+msgstr "\"Stvori grupu \" oblik"
 
-#: captcha.php:469
-#, fuzzy
+#: captcha.php:313
 msgid "Enable CAPTCHA:"
-msgstr "Omogući CAPTCHA na:"
+msgstr "Omogući CAPTCHA:"
 
-#: captcha.php:477
+#: captcha.php:321
 msgid "If you upgrade to Pro version all your settings will be saved."
-msgstr ""
+msgstr "Ako nadogradite na Pro verziju sve postavke će se spremiti."
 
-#: captcha.php:484
+#: captcha.php:328
 msgid "Unlock premium options by upgrading to a PRO version."
-msgstr ""
+msgstr "Otključaj premium opcije nadogradnjom na PRO verziju."
 
-#: captcha.php:485
-#: captcha.php:1502
+#: captcha.php:329
 msgid "Learn More"
-msgstr ""
+msgstr "Saznajte više"
 
-#: captcha.php:488
+#: captcha.php:332
 msgid "Go"
-msgstr ""
+msgstr "Idi"
 
-#: captcha.php:495
+#: captcha.php:339
 msgid "Title for CAPTCHA in the form"
 msgstr "Oznaka za CAPTCHA u obrascu"
 
-#: captcha.php:499
+#: captcha.php:343
 msgid "Required symbol"
-msgstr ""
+msgstr "Obavezni simboli"
 
-#: captcha.php:505
+#: captcha.php:349
+msgid "Error messages"
+msgstr "Poruke o pogreškama"
+
+#: captcha.php:351
+msgid "If CAPTCHA field is empty"
+msgstr "Ako je CAPTCHA polje prazno"
+
+#: captcha.php:352
+msgid "If CAPTCHA is incorrect"
+msgstr "Ako je CAPTCHA pogrešna"
+
+#: captcha.php:356
 msgid "Arithmetic actions for CAPTCHA"
 msgstr "Aritmetičke operacije za CAPTCHA"
 
-#: captcha.php:519
+#: captcha.php:370
 msgid "CAPTCHA complexity level"
 msgstr "CAPTCHA razina složenosti"
 
-#: captcha.php:535
+#: captcha.php:386
 msgid "Save Changes"
 msgstr "Spremi promjene"
 
-#: captcha.php:541
-msgid "If you enjoy our plugin, please give it 5 stars on WordPress"
-msgstr ""
-
-#: captcha.php:542
-#, fuzzy
-msgid "Rate the plugin"
-msgstr "Preporučeni dodaci"
-
-#: captcha.php:545
-#, fuzzy
-msgid "If there is something wrong about it, please contact us"
-msgstr "Ako imate bilo kakvih pitanja, molimo Vas da nas kontaktirate putem"
-
-#: captcha.php:556
-msgid "Congratulations! The PRO version of the plugin is successfully download and activated."
-msgstr ""
-
-#: captcha.php:558
-msgid "Please, go to"
-msgstr ""
-
-#: captcha.php:558
-msgid "the setting page"
-msgstr ""
-
-#: captcha.php:559
-msgid "You will be redirected automatically in 5 seconds."
-msgstr ""
-
-#: captcha.php:564
-msgid "You can download and activate"
-msgstr ""
-
-#: captcha.php:566
-msgid "version of this plugin by entering Your license key."
-msgstr ""
-
-#: captcha.php:568
-msgid "You can find your license key on your personal page Client area, by clicking on the link"
-msgstr ""
-
-#: captcha.php:570
-msgid "(your username is the email you specify when purchasing the product)."
-msgstr ""
-
-#: captcha.php:578
-#: captcha.php:588
-msgid "Go!"
-msgstr ""
-
-#: captcha.php:654
-#, fuzzy
-msgid "<strong>ERROR</strong>: Please fill the form."
-msgstr "Molimo ispunite formular."
-
-#: captcha.php:668
-#, fuzzy
-msgid "<strong>ERROR</strong>: Please enter a valid CAPTCHA value."
-msgstr "Molimo vas da popunite CAPTCHA"
-
-#: captcha.php:675
-#, fuzzy
-msgid "<strong>ERROR</strong>: Please enter a CAPTCHA value."
-msgstr "Molimo vas da popunite CAPTCHA"
-
-#: captcha.php:786
-#: captcha.php:847
-#: captcha.php:870
-#: captcha.php:899
-msgid "Please fill the form."
-msgstr "Molimo ispunite formular."
-
-#: captcha.php:792
-#: captcha.php:907
-msgid "Error: You have entered an incorrect CAPTCHA value. Click the BACK button on your browser, and try again."
-msgstr "Greška: Unijeli ste pogrešnu CAPTCHA frazu. Vratite se nazad i pokušajte ponovo"
-
-#: captcha.php:847
-#: captcha.php:855
-#: captcha.php:870
-#: captcha.php:878
+#: captcha.php:452
+#: captcha.php:466
+#: captcha.php:473
+#: captcha.php:645
+#: captcha.php:653
+#: captcha.php:669
+#: captcha.php:677
 msgid "ERROR"
 msgstr "GREŠKA"
 
-#: captcha.php:855
-#: captcha.php:878
-#, fuzzy
-msgid "Please enter a valid CAPTCHA value."
-msgstr "Molimo vas da popunite CAPTCHA"
+#: captcha.php:590
+#: captcha.php:706
+msgid "Error"
+msgstr ""
 
-#: captcha.php:931
-#: captcha.php:1233
+#: captcha.php:590
+#: captcha.php:706
+#, fuzzy
+msgid "Click the BACK button on your browser, and try again."
+msgstr "Greška: Unijeli ste pogrešnu CAPTCHA frazu. Vratite se nazad i pokušajte ponovo"
+
+#: captcha.php:730
+#: captcha.php:1032
 msgid "zero"
 msgstr "nula"
 
-#: captcha.php:932
-#: captcha.php:1234
-#: captcha.php:1399
+#: captcha.php:731
+#: captcha.php:1033
+#: captcha.php:1198
 msgid "one"
 msgstr "jedan"
 
-#: captcha.php:933
-#: captcha.php:1235
+#: captcha.php:732
+#: captcha.php:1034
 msgid "two"
 msgstr "dva"
 
-#: captcha.php:934
-#: captcha.php:1236
+#: captcha.php:733
+#: captcha.php:1035
 msgid "three"
 msgstr "tri"
 
-#: captcha.php:935
-#: captcha.php:1237
+#: captcha.php:734
+#: captcha.php:1036
 msgid "four"
 msgstr "četiri"
 
-#: captcha.php:936
-#: captcha.php:1238
+#: captcha.php:735
+#: captcha.php:1037
 msgid "five"
 msgstr "pet"
 
-#: captcha.php:937
-#: captcha.php:1239
-#: captcha.php:1399
+#: captcha.php:736
+#: captcha.php:1038
+#: captcha.php:1198
 msgid "six"
 msgstr "šest"
 
-#: captcha.php:938
-#: captcha.php:1240
-#: captcha.php:1387
-#: captcha.php:1393
+#: captcha.php:737
+#: captcha.php:1039
+#: captcha.php:1186
+#: captcha.php:1192
 msgid "seven"
 msgstr "sedam"
 
-#: captcha.php:939
-#: captcha.php:1241
-#: captcha.php:1390
+#: captcha.php:738
+#: captcha.php:1040
+#: captcha.php:1189
 msgid "eight"
 msgstr "osam"
 
-#: captcha.php:940
-#: captcha.php:1242
+#: captcha.php:739
+#: captcha.php:1041
 msgid "nine"
 msgstr "devet"
 
-#: captcha.php:943
-#: captcha.php:1245
+#: captcha.php:742
+#: captcha.php:1044
 msgid "eleven"
 msgstr "jedanaest"
 
-#: captcha.php:944
-#: captcha.php:1246
+#: captcha.php:743
+#: captcha.php:1045
 msgid "twelve"
 msgstr "dvanaest"
 
-#: captcha.php:945
-#: captcha.php:1247
+#: captcha.php:744
+#: captcha.php:1046
 msgid "thirteen"
 msgstr "trinaest"
 
-#: captcha.php:946
-#: captcha.php:1248
+#: captcha.php:745
+#: captcha.php:1047
 msgid "fourteen"
 msgstr "četrnaest"
 
-#: captcha.php:947
-#: captcha.php:1249
+#: captcha.php:746
+#: captcha.php:1048
 msgid "fifteen"
 msgstr "petnaest"
 
-#: captcha.php:948
-#: captcha.php:1250
+#: captcha.php:747
+#: captcha.php:1049
 msgid "sixteen"
 msgstr "šesnaest"
 
-#: captcha.php:949
-#: captcha.php:1251
+#: captcha.php:748
+#: captcha.php:1050
 msgid "seventeen"
 msgstr "sedamnaest"
 
-#: captcha.php:950
-#: captcha.php:1252
+#: captcha.php:749
+#: captcha.php:1051
 msgid "eighteen"
 msgstr "osamnaest"
 
-#: captcha.php:951
-#: captcha.php:1253
+#: captcha.php:750
+#: captcha.php:1052
 msgid "nineteen"
 msgstr "devetnaest"
 
-#: captcha.php:954
-#: captcha.php:1256
+#: captcha.php:753
+#: captcha.php:1055
 msgid "ten"
 msgstr "deset"
 
-#: captcha.php:955
-#: captcha.php:1257
+#: captcha.php:754
+#: captcha.php:1056
 msgid "twenty"
 msgstr "dvadeset"
 
-#: captcha.php:956
-#: captcha.php:1258
+#: captcha.php:755
+#: captcha.php:1057
 msgid "thirty"
 msgstr "trideset"
 
-#: captcha.php:957
-#: captcha.php:1259
+#: captcha.php:756
+#: captcha.php:1058
 msgid "forty"
 msgstr "četrdeset"
 
-#: captcha.php:958
-#: captcha.php:1260
+#: captcha.php:757
+#: captcha.php:1059
 msgid "fifty"
 msgstr "pedeset"
 
-#: captcha.php:959
-#: captcha.php:1261
+#: captcha.php:758
+#: captcha.php:1060
 msgid "sixty"
 msgstr "šeszdeset"
 
-#: captcha.php:960
-#: captcha.php:1262
+#: captcha.php:759
+#: captcha.php:1061
 msgid "seventy"
 msgstr "sedamdeset"
 
-#: captcha.php:961
-#: captcha.php:1263
+#: captcha.php:760
+#: captcha.php:1062
 msgid "eighty"
 msgstr "osamdeset"
 
-#: captcha.php:962
-#: captcha.php:1264
+#: captcha.php:761
+#: captcha.php:1063
 msgid "ninety"
 msgstr "devedeset"
 
-#: captcha.php:1049
-#: captcha.php:1351
+#: captcha.php:848
+#: captcha.php:1150
 msgid "and"
 msgstr "i"
 
-#: captcha.php:1122
+#: captcha.php:921
 msgid "Encryption password is not set"
 msgstr "Lozinka za dešifriranje nije još podešena"
 
-#: captcha.php:1142
+#: captcha.php:941
 msgid "Decryption password is not set"
 msgstr "Lozinka za dešifriranje nije još podešena"
 
-#: captcha.php:1438
+#: captcha.php:1256
 msgid "Support"
 msgstr "Podrška"
 
-#: captcha.php:1505
-msgid "It's time to upgrade your <strong>Captcha plugin</strong> to <strong>PRO</strong> version"
-msgstr ""
+#~ msgid "requires"
+#~ msgstr "obavezno"
 
-#: captcha.php:1506
-msgid "Extend standard plugin functionality with new great options"
-msgstr ""
-
-#, fuzzy
-#~ msgid "to"
-#~ msgstr "dva"
-
-#, fuzzy
-#~ msgid "Please enter a valid email address."
-#~ msgstr "Molimo vas da popunite CAPTCHA"
-
-#~ msgid "Activated plugins"
-#~ msgstr "Aktivni dodaci"
-
-#~ msgid "Read more"
-#~ msgstr "Čitaj više.."
-
-#~ msgid "Installed plugins"
-#~ msgstr "Instalirani dodaci"
-
-#~ msgid "Recommended plugins"
-#~ msgstr "Preporučeni dodaci"
-
-#~ msgid "Purchase"
-#~ msgstr "Kupiti"
-
-#~ msgid "Download"
-#~ msgstr "Preuzmi"
-
-#~ msgid "Install %s"
-#~ msgstr "Instaliraj %s"
-
-#~ msgid "Install now from wordpress.org"
-#~ msgstr "Instaliraj sa wordpress.org"
-
-#, fuzzy
-#~ msgid "Active Plugins"
-#~ msgstr "Aktivni dodaci"
-
-#, fuzzy
-#~ msgid "Inactive Plugins"
-#~ msgstr "Aktivni dodaci"
-
-#, fuzzy
-#~ msgid "Send to support"
-#~ msgstr "Podrška"
-
-#, fuzzy
-#~ msgid "(powered by bestwebsoft.com)"
-#~ msgstr "(razvijeno od strane bestwebsoft.com)"
-
-#, fuzzy
 #~ msgid ""
-#~ "If you have any questions, please contact us via plugin@bestwebsoft.com "
-#~ "or fill in the contact form on our website"
+#~ "or higher, that is why it has been deactivated! Please upgrade WordPress "
+#~ "and try again."
 #~ msgstr ""
-#~ "Ako imate bilo kakva pitanja, kontaktirajte nas putem mejla "
-#~ "plugin@bestwebsoft.com ili popunite kontakt formu na našem sajtu"
+#~ "ili veća, to je razlog zašto je isključen! Molimo nadogradite WordPress i "
+#~ "pokušajte ponovno."
 
-#~ msgid "Increase"
-#~ msgstr "Saberi"
+#~ msgid "Back to the WordPress"
+#~ msgstr "Natrag na WordPress"
 
-#~ msgid "Difficulty for CAPTCHA"
-#~ msgstr "Težina za CAPTCHA"
+#~ msgid "Plugins page"
+#~ msgstr "Stranica dodataka"
 
-#~ msgid "That CAPTCHA was incorrect."
-#~ msgstr "Ta CAPTCHA je pogrešna"
+#~ msgid "Wrong license key"
+#~ msgstr "Pogrešna licenca/ključ"
 
-#~ msgid "The password of encryption is not set"
-#~ msgstr "Lozinka za enkripciju nije podešena"
+#~ msgid ""
+#~ "Something went wrong. Try again later. If the error will appear again, "
+#~ "please, contact us <a href=http://support.bestwebsoft.com>BestWebSoft</"
+#~ "a>. We are sorry for inconvenience."
+#~ msgstr ""
+#~ "Nešto je krivo. Pokušajte ponovno kasnije. Ako se pogreška ponovo pojavi, "
+#~ "molimo, kontaktirajte nas <a href=http://support.bestwebsoft.com> "
+#~ "BestWebSoft </a>. Ispričavamo se zbog neugodnosti."
 
-#~ msgid "null"
-#~ msgstr "nula"
+#~ msgid "This license key is bind to another site"
+#~ msgstr "Ova licenca/ključ je vezana za drugu stranicu."
 
-#~ msgid "Install Now"
-#~ msgstr "Instaliraj sada"
+#~ msgid ""
+#~ "Unfortunately, you have exceeded the number of available tries per day. "
+#~ "Please, upload the plugin manually."
+#~ msgstr ""
+#~ "Nažalost, premašili ste broj dnevnih raspoloživih pokušaja. Molimo, "
+#~ "ažurirajte dodatak ručno."
+
+#~ msgid ""
+#~ "Failed to download the zip archive. Please, upload the plugin manually"
+#~ msgstr ""
+#~ "Preuzimanje zip arhive nije uspjelo. Molimo, ažurirajte dodatak ručno"
+
+#~ msgid "Failed to open the zip archive. Please, upload the plugin manually"
+#~ msgstr "Greška u otvaranju zip arhive. Molimo, ažurirajte dodatak ručno"
+
+#~ msgid ""
+#~ "Your server does not support either ZipArchive or Phar. Please, upload "
+#~ "the plugin manually"
+#~ msgstr ""
+#~ "Vaš poslužitelj ne podržava ZipArchive  Phar. Molimo, ažurirajte dodatak "
+#~ "ručno"
+
+#~ msgid "UploadDir is not writable. Please, upload the plugin manually"
+#~ msgstr "UploadDir se ne može prepisati. Molimo, ažurirajte dodatak ručno"
+
+#~ msgid ""
+#~ "Something went wrong. Try again later or upload the plugin manually. We "
+#~ "are sorry for inconvenience."
+#~ msgstr ""
+#~ "Došlo je do pogreške. Pokušajte ponovno kasnije ili ažurirajte dodatak "
+#~ "ručno. Ispričavamo se zbog neugodnosti."
+
+#~ msgid "Please, enter Your license key"
+#~ msgstr "Molimo unesite svoju licencu - ključ"
+
+#~ msgid "If you enjoy our plugin, please give it 5 stars on WordPress"
+#~ msgstr ""
+#~ "Ako uživate u našem dodatku, molim vas dajte mu 5 zvjezdica na WordPress-u"
+
+#~ msgid "Rate the plugin"
+#~ msgstr "Ocijenite dodatak"
+
+#~ msgid "If there is something wrong about it, please contact us"
+#~ msgstr "Ako imate bilo kakvih pitanja, molimo Vas da nas kontaktirate"
+
+#~ msgid ""
+#~ "Congratulations! The PRO version of the plugin is successfully download "
+#~ "and activated."
+#~ msgstr "Čestitamo! PRO verzija dodatka je uspješno preuzeta i aktivirana."
+
+#~ msgid "Please, go to"
+#~ msgstr "Molimo, idite na"
+
+#~ msgid "the setting page"
+#~ msgstr "Stranica postavki"
+
+#~ msgid "You will be redirected automatically in 5 seconds."
+#~ msgstr "Biti ćete automatski preusmjereni za 5 sekundi."
+
+#~ msgid "You can download and activate"
+#~ msgstr "Možete preuzeti i aktivirati"
+
+#~ msgid "version of this plugin by entering Your license key."
+#~ msgstr "verziju ovog dodatka unosom licence/ključa."
+
+#~ msgid ""
+#~ "You can find your license key on your personal page Client area, by "
+#~ "clicking on the link"
+#~ msgstr ""
+#~ "Pronađite svoj ključ na osobnoj stranici za klijente, klikom na link"
+
+#~ msgid ""
+#~ "(your username is the email you specify when purchasing the product)."
+#~ msgstr ""
+#~ "(vaše korisničko ime je e-mail koji ste naveli prilikom kupnje proizvoda) "
+#~ "možete pronaći svoje licence na osobnim stranicama za klijente, klikom na "
+#~ "link"
+
+#~ msgid "Go!"
+#~ msgstr "Idi!"
+
+#, fuzzy
+#~ msgid "ERROR:"
+#~ msgstr "GREŠKA"
+
+#~ msgid ""
+#~ "It's time to upgrade your <strong>Captcha plugin</strong> to <strong>PRO</"
+#~ "strong> version"
+#~ msgstr ""
+#~ "Vrijeme je za nadogradnju <strong> Captcha dodatka </ strong> <strong> "
+#~ "PRO </ strong> verzije"
+
+#~ msgid "Extend standard plugin functionality with new great options"
+#~ msgstr "Proširite funkcionalnost standardnog dodatka s novim mogućnostima"

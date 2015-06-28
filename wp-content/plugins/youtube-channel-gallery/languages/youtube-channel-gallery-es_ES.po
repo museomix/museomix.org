@@ -7,341 +7,558 @@ msgid ""
 msgstr ""
 "Project-Id-Version: youtube-channel-gallery\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-21 17:37+0100\n"
-"PO-Revision-Date: 2013-05-21 17:37+0100\n"
+"POT-Creation-Date: 2015-06-05 10:40+0100\n"
+"PO-Revision-Date: 2015-06-05 10:46+0100\n"
 "Last-Translator: Javier <javierpose@gmail.com>\n"
 "Language-Team: PoseLab <javierpose@gmail.com>\n"
+"Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2010-06-23 21:48+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Generator: Poedit 1.7.3\n"
 "X-Poedit-Basepath: ..\n"
-"X-Poedit-Language: Spanish\n"
-"X-Poedit-Country: SPAIN\n"
 "X-Poedit-KeywordsList: _e;__\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: youtube-channel-gallery.php:46
-msgid "Youtube Channel Gallery"
-msgstr "Galería de Canal de Youtube"
-
-#: youtube-channel-gallery.php:48
-msgid "Show a youtube video and a gallery of thumbnails for a youtube channel"
-msgstr "Muestra un vídeo y una galería de miniaturas de una canal de Youtube "
-
-#: youtube-channel-gallery.php:175
+#: templates/admin_tabs.php:3 templates/admin_tabs.php:321
 msgid "Title:"
 msgstr "Título:"
 
-#: youtube-channel-gallery.php:181
+#: templates/admin_tabs.php:9
 msgid "Feed"
 msgstr "Feed"
 
-#: youtube-channel-gallery.php:182
+#: templates/admin_tabs.php:10
 msgid "Player"
 msgstr "Reproductor"
 
-#: youtube-channel-gallery.php:183
+#: templates/admin_tabs.php:11
+msgid "Search"
+msgstr "Búsqueda"
+
+#: templates/admin_tabs.php:12
 msgid "Thumbnails"
 msgstr "Miniaturas"
 
-#: youtube-channel-gallery.php:184
+#: templates/admin_tabs.php:13
 msgid "Link"
 msgstr "Enlace"
 
-#: youtube-channel-gallery.php:197
+#: templates/admin_tabs.php:26
+msgid "YouTube API Key:"
+msgstr "YouTube API Key:"
+
+#: templates/admin_tabs.php:28
+msgid "Get your own YouTube API Key and put here."
+msgstr "Inserta tu YouTube API Key."
+
+#: templates/admin_tabs.php:32
 msgid "Video feed type:"
 msgstr "Tipo de feed de vídeo:"
 
-#: youtube-channel-gallery.php:199
+#: templates/admin_tabs.php:34
 msgid "Uploaded by a user"
 msgstr "Subidos por el usuario"
 
-#: youtube-channel-gallery.php:201
+#: templates/admin_tabs.php:36
 msgid "Playlist"
 msgstr "Lista de reproducción"
 
-#: youtube-channel-gallery.php:206
+#: templates/admin_tabs.php:41
 msgid "YouTube user id:"
 msgstr "Id de usuario de Youtube:"
 
-#: youtube-channel-gallery.php:207
+#: templates/admin_tabs.php:42
 msgid "YouTube playlist id:"
 msgstr "Id de lista de reproducción de YouTube:"
 
-#: youtube-channel-gallery.php:212
+#: templates/admin_tabs.php:48
 msgid "Playlist order:"
 msgstr "Orden de lista de reproducción:"
 
-#: youtube-channel-gallery.php:214
+#: templates/admin_tabs.php:50
 msgid "Ascending Order"
 msgstr "Ascendente"
 
-#: youtube-channel-gallery.php:215
+#: templates/admin_tabs.php:51
 msgid "Descending Order"
 msgstr "Descendente"
 
-#: youtube-channel-gallery.php:220
+#: templates/admin_tabs.php:56
 msgid "Cache time (hours):"
 msgstr "Tiempo de cache (horas):"
 
-#: youtube-channel-gallery.php:222
-msgid "Hours that RSS data is saved in database, to not make a request every time the page is displayed. Assign this value according to how often you upgrade your playlist in YouTube."
-msgstr "Horas que los datos del RSS se guardan en la base de datos, para no hacer una solicitud cada vez que se muestra la página. Asigna este valor en función de la frecuencia con que actualizas la lista de reproducción en YouTube."
+#: templates/admin_tabs.php:58
+msgid ""
+"Hours that RSS data is saved in database, to not make a request every time "
+"the page is displayed. Assign this value according to how often you upgrade "
+"your playlist in YouTube."
+msgstr ""
+"Horas que los datos del RSS se guardan en la base de datos, para no hacer una "
+"solicitud cada vez que se muestra la página. Asigna este valor en función de "
+"la frecuencia con que actualizas la lista de reproducción en YouTube."
 
-#: youtube-channel-gallery.php:227
+#: templates/admin_tabs.php:63
 msgid "Activate cache"
 msgstr "Activar caché"
 
-#: youtube-channel-gallery.php:228
-msgid "If you disable this field the cache will be deleted and will not be used. This is useful to refresh immediately the YouTube RSS used by the plugin. Reenable the cache when the gallery shows the changes you made in your youtube account."
-msgstr "Si se deshabilita este campo la caché se borrará y no será utilizada. Esto es útil para actualizar inmediatamente el RSS de YouTube usado por el plugin. Vuelve a habilitar la caché cuando la galería muestre los cambios que ha realizado en su cuenta de YouTube."
+#: templates/admin_tabs.php:64
+msgid ""
+"If you disable this field the cache will be deleted and will not be used. "
+"This is useful to refresh immediately the YouTube RSS used by the plugin. "
+"Reenable the cache when the gallery shows the changes you made in your "
+"youtube account."
+msgstr ""
+"Si se deshabilita este campo la caché se borrará y no será utilizada. Esto es "
+"útil para actualizar inmediatamente el RSS de YouTube usado por el plugin. "
+"Vuelve a habilitar la caché cuando la galería muestre los cambios que ha "
+"realizado en su cuenta de YouTube."
 
-#: youtube-channel-gallery.php:243
+#: templates/admin_tabs.php:79
 msgid "Player:"
 msgstr "Reproductor:"
 
-#: youtube-channel-gallery.php:245
+#: templates/admin_tabs.php:81
 msgid "Without player"
 msgstr "Sin reproductor"
 
-#: youtube-channel-gallery.php:246
-msgid "Show player above thumbnails"
+#: templates/admin_tabs.php:82
+msgid "show player above thumbnails"
 msgstr "Mostrar reproductor sobre miniaturas"
 
-#: youtube-channel-gallery.php:252
-#: youtube-channel-gallery.php:335
+#: templates/admin_tabs.php:83
+msgid "show player in Magnific Popup"
+msgstr "Mostrar reproductor en Magnific Popup"
+
+#: templates/admin_tabs.php:89
+msgid "Width:"
+msgstr "Ancho:"
+
+#: templates/admin_tabs.php:92
+msgid "%"
+msgstr ""
+
+#: templates/admin_tabs.php:93
+msgid "px"
+msgstr ""
+
+#: templates/admin_tabs.php:97 templates/admin_tabs.php:232
 msgid "Aspect ratio:"
 msgstr "Relación de aspecto:"
 
-#: youtube-channel-gallery.php:254
-#: youtube-channel-gallery.php:337
+#: templates/admin_tabs.php:99 templates/admin_tabs.php:234
 msgid "Standard (4x3)"
 msgstr "Estándar (4x3)"
 
-#: youtube-channel-gallery.php:255
-#: youtube-channel-gallery.php:338
+#: templates/admin_tabs.php:100 templates/admin_tabs.php:235
 msgid "Widescreen (16x9)"
 msgstr "Panorámico (16x9)"
 
-#: youtube-channel-gallery.php:260
+#: templates/admin_tabs.php:105
 msgid "Theme:"
 msgstr "Tema:"
 
-#: youtube-channel-gallery.php:262
+#: templates/admin_tabs.php:107
 msgid "Dark"
 msgstr "Oscuro"
 
-#: youtube-channel-gallery.php:263
+#: templates/admin_tabs.php:108
 msgid "Light"
 msgstr "Claro"
 
-#: youtube-channel-gallery.php:268
+#: templates/admin_tabs.php:113
 msgid "Progress bar color:"
 msgstr "Color de barra de progreso:"
 
-#: youtube-channel-gallery.php:270
+#: templates/admin_tabs.php:115
 msgid "Red"
 msgstr "Rojo"
 
-#: youtube-channel-gallery.php:271
+#: templates/admin_tabs.php:116
 msgid "White"
 msgstr "Blanco"
 
-#: youtube-channel-gallery.php:276
+#: templates/admin_tabs.php:121
 msgid "Video quality:"
 msgstr "Calidad del vídeo:"
 
-#: youtube-channel-gallery.php:278
+#: templates/admin_tabs.php:123
 msgid "default"
 msgstr "por defecto"
 
-#: youtube-channel-gallery.php:279
+#: templates/admin_tabs.php:124
 msgid "highres"
 msgstr "alta resolución"
 
-#: youtube-channel-gallery.php:280
+#: templates/admin_tabs.php:125
 msgid "hd1080"
 msgstr "hd1080"
 
-#: youtube-channel-gallery.php:281
+#: templates/admin_tabs.php:126
 msgid "hd720"
 msgstr "hd720"
 
-#: youtube-channel-gallery.php:282
+#: templates/admin_tabs.php:127
 msgid "large"
 msgstr "largo"
 
-#: youtube-channel-gallery.php:283
+#: templates/admin_tabs.php:128
 msgid "medium"
 msgstr "mediano"
 
-#: youtube-channel-gallery.php:284
+#: templates/admin_tabs.php:129
 msgid "small"
 msgstr "pequeño"
 
-#: youtube-channel-gallery.php:286
-msgid "Default value enables YouTube to select the most appropriate playback quality. If you select a quality level that is not available for the video, then the quality will be set to the next lowest level that is available."
-msgstr "El valor predeterminado permite a YouTube seleccionar la calidad de reproducción más adecuada. Si selecciona un nivel de calidad que no está disponible para el vídeo, la calidad se ajustará al siguiente nivel más bajo que este disponible."
+#: templates/admin_tabs.php:131
+msgid ""
+"Default value enables YouTube to select the most appropriate playback "
+"quality. If you select a quality level that is not available for the video, "
+"then the quality will be set to the next lowest level that is available."
+msgstr ""
+"El valor predeterminado permite a YouTube seleccionar la calidad de "
+"reproducción más adecuada. Si selecciona un nivel de calidad que no está "
+"disponible para el vídeo, la calidad se ajustará al siguiente nivel más bajo "
+"que este disponible."
 
-#: youtube-channel-gallery.php:290
+#: templates/admin_tabs.php:135
 msgid "Autoplay"
 msgstr "Autoplay"
 
-#: youtube-channel-gallery.php:295
+#: templates/admin_tabs.php:140
 msgid "Show YouTube logo"
 msgstr "Mostrar el logotipo de YouTube"
 
-#: youtube-channel-gallery.php:296
-msgid "Activate this field to show the YouTube logo in the control bar. Setting the color parameter to white will show the YouTube logo in the control bar."
-msgstr "Activa este campo para mostrar el logotipo de YouTube en la barra de control. Un ajuste del parámetro de color a blanco mostrará el logotipo de YouTube en la barra de control."
+#: templates/admin_tabs.php:141
+msgid ""
+"Activate this field to show the YouTube logo in the control bar. Setting the "
+"color parameter to white will show the YouTube logo in the control bar."
+msgstr ""
+"Activa este campo para mostrar el logotipo de YouTube en la barra de control. "
+"Un ajuste del parámetro de color a blanco mostrará el logotipo de YouTube en "
+"la barra de control."
 
-#: youtube-channel-gallery.php:301
+#: templates/admin_tabs.php:146
 msgid "Show related videos"
 msgstr "Mostrar los vídeos relacionados"
 
-#: youtube-channel-gallery.php:302
-msgid "Activate this field to show related videos when playback of the video ends."
-msgstr "Activa este campo para mostrar videos relacionados cuando termine la reproducción del vídeo."
+#: templates/admin_tabs.php:147
+msgid ""
+"Activate this field to show related videos when playback of the video ends."
+msgstr ""
+"Activa este campo para mostrar videos relacionados cuando termine la "
+"reproducción del vídeo."
 
-#: youtube-channel-gallery.php:307
+#: templates/admin_tabs.php:152
 msgid "Show info"
 msgstr "Mostrar información"
 
-#: youtube-channel-gallery.php:308
-msgid "Activate this field to display information like the video title and uploader before the video starts playing."
-msgstr "Active este campo para mostrar información como el título del vídeo y nombre de usuario antes de que el vídeo comience a reproducirse."
+#: templates/admin_tabs.php:153
+msgid ""
+"Activate this field to display information like the video title and uploader "
+"before the video starts playing."
+msgstr ""
+"Active este campo para mostrar información como el título del vídeo y nombre "
+"de usuario antes de que el vídeo comience a reproducirse."
 
-#: youtube-channel-gallery.php:322
+#: templates/admin_tabs.php:155 templates/admin_tabs.php:207
+#: templates/admin_tabs.php:317 templates/admin_tabs.php:328
+#: templates/admin_tabs.php:365
+msgid "Order:"
+msgstr "Orden:"
+
+#: templates/admin_tabs.php:172
+msgid "Search input text:"
+msgstr ""
+
+#: templates/admin_tabs.php:176
+msgid "Restrict search to (# separated):"
+msgstr ""
+
+#: templates/admin_tabs.php:180
+msgid "You must assing this tags to your videos to restrict the search:"
+msgstr ""
+
+#: templates/admin_tabs.php:189
+msgid "Restrict search by default: It will overwrite results of feed tab)"
+msgstr ""
+
+#: templates/admin_tabs.php:191 templates/search.php:10
+msgid "None"
+msgstr "Ninguno"
+
+#: templates/admin_tabs.php:199
+msgid "Show search box"
+msgstr ""
+
+#: templates/admin_tabs.php:203
+msgid "Show select with Playlists"
+msgstr ""
+
+#: templates/admin_tabs.php:219
 msgid "Number of videos to show:"
 msgstr "Número de vídeos a mostrar:"
 
-#: youtube-channel-gallery.php:324
-msgid "The plugin can display a maximum of 50 videos. This limitation will change in a future release."
-msgstr "El plugin puede mostrar un máximo de 50 vídeos. Esta limitación cambiará  en una futura versión."
+#: templates/admin_tabs.php:221
+msgid ""
+"The plugin can display a maximum of 50 videos. This limitation will change in "
+"a future release."
+msgstr ""
+"El plugin puede mostrar un máximo de 50 vídeos. Esta limitación cambiará  en "
+"una futura versión."
 
-#: youtube-channel-gallery.php:328
+#: templates/admin_tabs.php:225
 msgid "Thumbnail width:"
 msgstr "Ancho de miniaturas:"
 
-#: youtube-channel-gallery.php:330
-msgid "This field is used to assign the appropriate quality of thumbnail images in top and bottom alignments and to assign width to thumbnails in left and right alignments. If the quality of thumbnail images is not enough, insert a larger value. If you are unsure you can assign one of the following values​​: 120, 320, 480 or 640"
-msgstr "Este campo se utiliza para asignar la calidad de imagen más adecuada a las miniaturas en las alineaciones superior e inferior y para asignar ancho a las miniaturas en las alineaciones izquierda y derecha. Si la calidad de las imágenes de las miniaturas no es suficiente, introduzca un valor mayor. Si no está seguro de que valor usar puede asignar uno de los siguientes valores: 120, 320, 480 ó 640"
+#: templates/admin_tabs.php:227
+msgid ""
+"This field is used to assign the appropriate quality of thumbnail images in "
+"top and bottom alignments and to assign width to thumbnails in left and right "
+"alignments. If the quality of thumbnail images is not enough, insert a larger "
+"value. If you are unsure you can assign one of the following values​​: 120, "
+"320, 480 or 640"
+msgstr ""
+"Este campo se utiliza para asignar la calidad de imagen más adecuada a las "
+"miniaturas en las alineaciones superior e inferior y para asignar ancho a las "
+"miniaturas en las alineaciones izquierda y derecha. Si la calidad de las "
+"imágenes de las miniaturas no es suficiente, introduzca un valor mayor. Si no "
+"está seguro de que valor usar puede asignar uno de los siguientes valores: "
+"120, 320, 480 ó 640"
 
-#: youtube-channel-gallery.php:343
+#: templates/admin_tabs.php:240
 msgid "Thumbnail columns:"
 msgstr "Columnas de las miniaturas:"
 
-#: youtube-channel-gallery.php:349
-msgid "Add \"nofollow\" attribute to links"
-msgstr "Añade el atributo \"nofollow\" a los enlaces"
+#: templates/admin_tabs.php:242
+msgid "Phones:"
+msgstr "Móvil:"
 
-#: youtube-channel-gallery.php:350
-msgid "\"nofollow\" attribute provides a way for webmasters to tell search engines \"Don't follow this specific link.\""
-msgstr "El atributo \"nofollow\" ofrece a los webmasters un modo de indicar a los motores de búsqueda para no seguir un enlace."
+#: templates/admin_tabs.php:244
+msgid "Tablets:"
+msgstr "Tablet:"
 
-#: youtube-channel-gallery.php:356
-#: youtube-channel-gallery.php:421
-msgid "Open in a new window or tab"
-msgstr "Abrir en una ventana nueva o pestaña"
+#: templates/admin_tabs.php:247
+msgid "Medium Desktops:"
+msgstr "Escritorio medio:"
 
-#: youtube-channel-gallery.php:362
+#: templates/admin_tabs.php:249
+msgid "Large Desktops:"
+msgstr "Escritorio grandes:"
+
+#: templates/admin_tabs.php:258
 msgid "Show title or description"
 msgstr "Mostrar título y descripción"
 
-#: youtube-channel-gallery.php:369
+#: templates/admin_tabs.php:265
 msgid "Show title"
 msgstr "Mostrar Título"
 
-#: youtube-channel-gallery.php:374
+#: templates/admin_tabs.php:270
 msgid "Show description"
 msgstr "Mostrar descripción"
 
-#: youtube-channel-gallery.php:378
+#: templates/admin_tabs.php:274
+msgid "Title tag:"
+msgstr "Etiqueta de título:"
+
+#: templates/admin_tabs.php:276
+msgid "h1"
+msgstr ""
+
+#: templates/admin_tabs.php:277
+msgid "h2"
+msgstr ""
+
+#: templates/admin_tabs.php:278
+msgid "h3"
+msgstr ""
+
+#: templates/admin_tabs.php:279
+msgid "h4"
+msgstr "h4"
+
+#: templates/admin_tabs.php:280
+msgid "h5"
+msgstr ""
+
+#: templates/admin_tabs.php:281
+msgid "h6"
+msgstr ""
+
+#: templates/admin_tabs.php:286
 msgid "Thumbnail alignment:"
 msgstr "Alineación de miniaturas:"
 
-#: youtube-channel-gallery.php:380
+#: templates/admin_tabs.php:288
+msgid "none"
+msgstr "Ninguno"
+
+#: templates/admin_tabs.php:289
 msgid "Left"
 msgstr "Izquierda"
 
-#: youtube-channel-gallery.php:381
+#: templates/admin_tabs.php:290
 msgid "Right"
 msgstr "Derecha"
 
-#: youtube-channel-gallery.php:382
-msgid "Top"
-msgstr "Arriba"
-
-#: youtube-channel-gallery.php:383
-msgid "Bottom"
-msgstr "Abajo"
-
-#: youtube-channel-gallery.php:388
+#: templates/admin_tabs.php:295
 msgid "Description words number:"
 msgstr "Número de palabras en la descripción:"
 
-#: youtube-channel-gallery.php:390
-msgid "Set the maximum number of words that will be displayed of the description. This field is useful when the descriptions of videos in the gallery have different sizes."
-msgstr "Establece el número máximo de palabras que se mostrarán en la descripción. Este campo es útil cuando la descripción de los vídeos de la galería tienen diferentes tamaños."
+#: templates/admin_tabs.php:297
+msgid ""
+"Set the maximum number of words that will be displayed of the description. "
+"This field is useful when the descriptions of videos in the gallery have "
+"different sizes."
+msgstr ""
+"Establece el número máximo de palabras que se mostrarán en la descripción. "
+"Este campo es útil cuando la descripción de los vídeos de la galería tienen "
+"diferentes tamaños."
 
-#: youtube-channel-gallery.php:410
+#: templates/admin_tabs.php:303
+msgid "Add \"nofollow\" attribute to links"
+msgstr "Añade el atributo \"nofollow\" a los enlaces"
+
+#: templates/admin_tabs.php:304
+msgid ""
+"\"nofollow\" attribute provides a way for webmasters to tell search engines "
+"\"Don't follow this specific link.\""
+msgstr ""
+"El atributo \"nofollow\" ofrece a los webmasters un modo de indicar a los "
+"motores de búsqueda para no seguir un enlace."
+
+#: templates/admin_tabs.php:310 templates/admin_tabs.php:355
+msgid "Open in a new window or tab"
+msgstr "Abrir en una ventana nueva o pestaña"
+
+#: templates/admin_tabs.php:315
+msgid "Show pagination"
+msgstr "Mostrar paginación"
+
+#: templates/admin_tabs.php:319
+msgid "Thumbnail:"
+msgstr "Miniatura"
+
+#: templates/admin_tabs.php:323
+msgid "Description:"
+msgstr "Descripción:"
+
+#: templates/admin_tabs.php:344
 msgid "Link text:"
 msgstr "Texto del enlace"
 
-#: youtube-channel-gallery.php:416
+#: templates/admin_tabs.php:350
 msgid "Show link to channel"
 msgstr "Mostrar enlace al canal"
 
-#: youtube-channel-gallery.php:517
+#: templates/admin_tabs.php:360
+msgid "Show link to thank the developer"
+msgstr "Mostrar enlace para agradecer al desarrollador"
+
+#: templates/link.php:9
+msgid "By PoseLab"
+msgstr ""
+
+#: templates/link.php:18
+msgid "Show more videos"
+msgstr "Ver más vídeos»"
+
+#: templates/thumbs.php:55
+msgid "«Previous"
+msgstr "«Anterior"
+
+#: templates/thumbs.php:64
+msgid "Next»"
+msgstr "Siguiente»"
+
+#: youtube-channel-gallery.php:48
+msgid "Youtube Channel Gallery"
+msgstr "Galería de Canal de Youtube"
+
+#: youtube-channel-gallery.php:50
+msgid "Show a youtube video and a gallery of thumbnails for a youtube channel"
+msgstr "Muestra un vídeo y una galería de miniaturas de una canal de Youtube "
+
+#: youtube-channel-gallery.php:552
 msgid "Show more videos»"
 msgstr "Ver más vídeos»"
 
-#: youtube-channel-gallery.php:530
+#: youtube-channel-gallery.php:561
 msgid "There is no video to show."
 msgstr "No hay ningún vídeo para mostrar."
 
-#: youtube-channel-gallery.php:601
+#: youtube-channel-gallery.php:616
 #, php-format
-msgid "Message from server: %1$s. Check in YouTube if the id <a href=\"%2$s\" target=\"_blank\">%3$s</a> belongs to a %4$s. To locate the id of your %4$s check the <a href=\"http://wordpress.org/extend/plugins/youtube-channel-gallery/faq/\" target=\"_blank\">FAQ</a> of the plugin."
-msgstr "Mensaje del servidor: %1$s. Compruebe en YouTube si el id <a href=\"%2$s\" target=\"_blank\">%3$s</a> pertenece a un %4$s. Para localizar el id de la carpeta %4$s revise el <a href=\"http://wordpress.org/extend/plugins/youtube-channel-gallery/faq/\" target=\"_blank\"> FAQ </ a> del plugin."
+msgid ""
+"Message from server: %1$s. Check in YouTube if the id <a href=\"%2$s\" target="
+"\"_blank\">%3$s</a> belongs to a %4$s. To locate the id of your %4$s check "
+"the <a href=\"http://wordpress.org/extend/plugins/youtube-channel-gallery/faq/"
+"\" target=\"_blank\">FAQ</a> of the plugin."
+msgstr ""
+"Mensaje del servidor: %1$s. Compruebe en YouTube si el id <a href=\"%2$s\" "
+"target=\"_blank\">%3$s</a> pertenece a un %4$s. Para localizar el id de la "
+"carpeta %4$s revise el <a href=\"http://wordpress.org/extend/plugins/youtube-"
+"channel-gallery/faq/\" target=\"_blank\"> FAQ </ a> del plugin."
+
+#~ msgid "Top"
+#~ msgstr "Arriba"
+
+#~ msgid "Bottom"
+#~ msgstr "Abajo"
 
 #~ msgid "Video width:"
 #~ msgstr "Ancho del vídeo:"
+
 #~ msgid "Show info (title, uploader)"
 #~ msgstr "Mostrar información (título, cargador)"
+
 #~ msgid "You must insert a valid YouTube user id."
 #~ msgstr "Debes introducir un id válido de usuario de YouTube."
+
 #~ msgid "You must insert a valid playlist id."
 #~ msgstr "Debes introducir un id válido de lista de reproducción de YouTube."
+
 #~ msgid "User's favorites"
 #~ msgstr "Favoritos del usuario"
+
 #~ msgid "Light:"
 #~ msgstr "Claro"
+
 #~ msgid "No post to duplicate has been supplied!"
 #~ msgstr "No se facilitó ninguna entrada a copiar"
+
 #~ msgid "Post creation failed, could not find original post:"
 #~ msgstr ""
 #~ "Creación realizada sin éxito, no ha sido posible encontrar la entrada "
 #~ "original:"
+
 #~ msgid "No page to duplicate has been supplied!"
 #~ msgstr "No se facilitó ninguna página a copiar"
+
 #~ msgid "Make a duplicate from this post"
 #~ msgstr "Crea una copia de esta entrada"
+
 #~ msgid "Duplicate"
 #~ msgstr "Duplicar"
+
 #~ msgid "Make a duplicate from this page"
 #~ msgstr "Crea una copia de esta página"
+
 #~ msgid "Copy to a new draft"
 #~ msgstr "Copia en un borrador nuevo"
+
 #~ msgid "Duplicate Post Options"
 #~ msgstr "Opciones"
+
 #~ msgid "Duplicate Post"
 #~ msgstr "Duplicate Post"
+
 #~ msgid "Copy post/page date also"
 #~ msgstr "Copiar también fecha del post o la página"
+
 #~ msgid ""
 #~ "Normally, the new draft has publication date set to current time: check "
 #~ "the box to copy the original post/page date"
@@ -349,42 +566,54 @@ msgstr "Mensaje del servidor: %1$s. Compruebe en YouTube si el id <a href=\"%2$s
 #~ "Normalmente se establece la fecha de publicación del nuevo borrador a la "
 #~ "fecha actual: compruebe la casilla para copiar la fecha original del post "
 #~ "o la página"
+
 #~ msgid "Do not copy these fields"
 #~ msgstr "No copiar estos campos"
+
 #~ msgid ""
-#~ "Comma-separated list of meta fields that must not be copied when cloning "
-#~ "a post/page"
+#~ "Comma-separated list of meta fields that must not be copied when cloning a "
+#~ "post/page"
 #~ msgstr ""
 #~ "Lista separada por comas de meta campos que no pueden ser copiados cuando "
 #~ "se clona una entrada/pagina."
+
 #~ msgid "Title prefix"
 #~ msgstr "Prefijo del titulo"
+
 #~ msgid ""
 #~ "Prefix to be added before the original title when cloning a post/page, e."
 #~ "g. \"Copy of\" (blank for no prefix)"
 #~ msgstr ""
 #~ "Prefijo a ser agregado antes del titulo original cuando se clona una "
 #~ "entrada/pagina, ej. \"Copia de\" (en blanco  para no agregar prefijo)"
+
 #~ msgid "Minimum level to copy posts"
 #~ msgstr "Nivel mínimo para copiar posts"
+
 #~ msgid ""
 #~ "Warning: users will be able to copy all posts, even those of higher level "
 #~ "users"
 #~ msgstr ""
 #~ "Atención: los usuarios podrán copiar todos los posts, incluso aquellos de "
 #~ "usuarios de nivel más alto"
+
 #~ msgid "Save Changes"
 #~ msgstr "Guardar los cambios"
+
 #~ msgid "Donate"
 #~ msgstr "Hacer una donación"
+
 #~ msgid "Translate"
 #~ msgstr "Traducir"
+
 #~ msgid "http://www.lopo.it/duplicate-post-plugin/"
 #~ msgstr "Copy text   \t http://www.lopo.it/duplicate-post-plugin/"
+
 #~ msgid "Creates a copy of a post."
 #~ msgstr "Crear una copia de las entradas."
+
 #~ msgid "Enrico Battocchi"
 #~ msgstr "Enrico Battocchi"
+
 #~ msgid "http://www.lopo.it"
 #~ msgstr "http://www.lopo.it"
-

@@ -74,7 +74,7 @@ class Theme_My_Login_Ajax extends Theme_My_Login_Abstract {
 		if ( Theme_My_Login::is_tml_page() && isset( $_GET['ajax'] ) ) {
 			define( 'DOING_AJAX', true );
 
-			$instance =& $theme_my_login->get_instance();
+			$instance = $theme_my_login->get_instance();
 
 			$instance->set_option( 'default_action', ! empty( $theme_my_login->request_action ) ? $theme_my_login->request_action : 'login' );
 			$instance->set_option( 'gravatar_size', 75    );

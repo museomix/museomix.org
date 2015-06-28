@@ -6,7 +6,7 @@
  * we need for twitter cards.
  *
  * @see /wp-content/blog-plugins/open-graph.php
- * @see https://dev.twitter.com/docs/cards
+ * @see https://dev.twitter.com/cards/overview
  */
 class Jetpack_Twitter_Cards {
 
@@ -28,7 +28,9 @@ class Jetpack_Twitter_Cards {
 		$site_tag = self::site_tag();
 		$site_tag = apply_filters( 'jetpack_sharing_twitter_via', $site_tag, ( is_singular() ? $post->ID : null ) );
 		$site_tag = apply_filters( 'jetpack_twitter_cards_site_tag', $site_tag, $og_tags );
-		$og_tags['twitter:site'] = self::sanitize_twitter_user( $site_tag );
+		if ( ! empty( $site_tag ) ) {
+			$og_tags['twitter:site'] = self::sanitize_twitter_user( $site_tag );
+		}
 
 		if ( ! is_singular() || ! empty( $og_tags['twitter:card'] ) ) {
 			return $og_tags;
@@ -164,7 +166,7 @@ class Jetpack_Twitter_Cards {
 	static function twitter_cards_gallery( $extract, $og_tags ) {
 		foreach( $extract['images'] as $key => $value ) {
 			if ( $key > 3 ) {
-				break; // Can only send a max of 4 picts (https://dev.twitter.com/docs/cards/types/gallery-card)
+				break; // only the first 4 appear in card template (https://dev.twitter.com/cards/types/gallery)
 			}
 			$og_tags[ 'twitter:image' . $key ] = add_query_arg( 'w', 640, $value['url'] );
 		}
@@ -196,7 +198,11 @@ class Jetpack_Twitter_Cards {
 	static function site_tag() {
 		$site_tag = get_option( 'jetpack-twitter-cards-site-tag' );
 		if ( empty( $site_tag ) ) {
-			$site_tag = ( defined( 'IS_WPCOM' ) && IS_WPCOM ) ? 'wordpressdotcom' : 'jetpack';
+			if ( defined( 'IS_WPCOM' ) && IS_WPCOM ) {
+				return 'wordpressdotcom';
+			} else {
+				return;
+			}
 		}
 		return $site_tag;
 	}

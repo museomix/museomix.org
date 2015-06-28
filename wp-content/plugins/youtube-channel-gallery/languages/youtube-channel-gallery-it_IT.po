@@ -1,0 +1,508 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Youtube Channel Gallery\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: Mon Jun 08 2015 11:11:59 GMT+0200 (ora legale Europa "
+"occidentale)\n"
+"PO-Revision-Date: Mon Jun 08 2015 11:34:08 GMT+0200 (ora legale Europa "
+"occidentale)\n"
+"Last-Translator: admin <admin@127.0.0.1>\n"
+"Language-Team: \n"
+"Language: Italian\n"
+"Plural-Forms: nplurals=2; plural=n != 1\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: ..\n"
+"X-Poedit-KeywordsList: _:1;gettext:1;dgettext:2;ngettext:1,2;dngettext:2,3;"
+"__:1;_e:1;_c:1;_n:1,2;_n_noop:1,2;_nc:1,2;__ngettext:1,2;__ngettext_noop:1,2;"
+"_x:1,2c;_ex:1,2c;_nx:1,2,4c;_nx_noop:1,2,3c;_n_js:1,2;_nx_js:1,2,3c;"
+"esc_attr__:1;esc_html__:1;esc_attr_e:1;esc_html_e:1;esc_attr_x:1,2c;"
+"esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
+"X-Loco-Target-Locale: it_IT\n"
+"X-Generator: Loco - https://localise.biz/"
+
+#. Base ID
+#: ../youtube-channel-gallery.php:48
+msgid "Youtube Channel Gallery"
+msgstr "Youtube Channel Gallery"
+
+#: ../youtube-channel-gallery.php:50
+msgid "Show a youtube video and a gallery of thumbnails for a youtube channel"
+msgstr "Visualizza un video YouTube e una galleria di anteprime di un canale YouTube"
+
+#: ../youtube-channel-gallery.php:552
+msgid "Show more videos»"
+msgstr ""
+"Visualizza altri video\n"
+"»"
+
+#: ../youtube-channel-gallery.php:561
+msgid "There is no video to show."
+msgstr "Non ci sono video da mostrare."
+
+#: ../youtube-channel-gallery.php:616
+#, php-format
+msgid ""
+"Message from server: %1$s. Check in YouTube if the id <a href=\"%2$s\" "
+"target=\"_blank\">%3$s</a> belongs to a %4$s. To locate the id of your %4$s "
+"check the <a href=\"http://wordpress.org/extend/plugins/youtube-channel-"
+"gallery/faq/\" target=\"_blank\">FAQ</a> of the plugin."
+msgstr ""
+"Messaggio dal server: %1$s. Controlla su YouTube se l'id <a href=\"%2$s\" "
+"target=\"_blank\">%3$s</a> corrisponde a %4$s. Per trovare l'id del tuo %4$s "
+"controlla le <a href=\"http://wordpress.org/extend/plugins/youtube-channel-"
+"gallery/faq/\" target=\"_blank\">FAQ</a> del plugin."
+
+#: ../templates/admin_tabs.php:3 ../templates/admin_tabs.php:321
+msgid "Title:"
+msgstr "Titolo:"
+
+#: ../templates/admin_tabs.php:9
+msgid "Feed"
+msgstr "Feed"
+
+#: ../templates/admin_tabs.php:10
+msgid "Player"
+msgstr "Riproduttore"
+
+#: ../templates/admin_tabs.php:11
+msgid "Search"
+msgstr "Cerca"
+
+#: ../templates/admin_tabs.php:12
+msgid "Thumbnails"
+msgstr "Anteprime"
+
+#: ../templates/admin_tabs.php:13
+msgid "Link"
+msgstr "Collegamento"
+
+#: ../templates/admin_tabs.php:26
+msgid "YouTube API Key:"
+msgstr "YouTube API Key:"
+
+#: ../templates/admin_tabs.php:28
+msgid "Get your own YouTube API Key and put here."
+msgstr "Ottieni la tua chiave API e inseriscila qui."
+
+#: ../templates/admin_tabs.php:32
+msgid "Video feed type:"
+msgstr "Tipo feed video:"
+
+#: ../templates/admin_tabs.php:34
+msgid "Uploaded by a user"
+msgstr "Caricata da un utente"
+
+#: ../templates/admin_tabs.php:36
+msgid "Playlist"
+msgstr "Playlist"
+
+#: ../templates/admin_tabs.php:41
+msgid "YouTube user id:"
+msgstr "ID utente YouTube:"
+
+#: ../templates/admin_tabs.php:42
+msgid "YouTube playlist id:"
+msgstr "ID playlist YouTube:"
+
+#: ../templates/admin_tabs.php:48
+msgid "Playlist order:"
+msgstr "Ordine playlist:"
+
+#: ../templates/admin_tabs.php:50
+msgid "Ascending Order"
+msgstr "Ordine Crescente"
+
+#: ../templates/admin_tabs.php:51
+msgid "Descending Order"
+msgstr "Ordine Decrescente"
+
+#: ../templates/admin_tabs.php:56
+msgid "Cache time (hours):"
+msgstr "Durata cache (ore):"
+
+#: ../templates/admin_tabs.php:58
+msgid ""
+"Hours that RSS data is saved in database, to not make a request every time "
+"the page is displayed. Assign this value according to how often you upgrade "
+"your playlist in YouTube."
+msgstr ""
+"Durata (in ore) in cui il flusso RSS rimane database, per non fare una "
+"richiesta ad ogni visualizzazione di pagina. Imposta un valore in base a "
+"quanto spesso aggiorni la tua playlist YouTube."
+
+#: ../templates/admin_tabs.php:63
+msgid "Activate cache"
+msgstr "Attiva cache"
+
+#: ../templates/admin_tabs.php:64
+msgid ""
+"If you disable this field the cache will be deleted and will not be used. "
+"This is useful to refresh immediately the YouTube RSS used by the plugin. "
+"Reenable the cache when the gallery shows the changes you made in your "
+"youtube account."
+msgstr ""
+"Se disattivi questo campo la cache sarà svuotata e non verrà utilizzata. "
+"Utile per aggiornare immediatamente il flusso RSS di YouTube usato dal "
+"plugin. Riabilita la cache quando la galleria mostra le modifiche fatte al "
+"tuo account YouTube."
+
+#: ../templates/admin_tabs.php:79
+msgid "Player:"
+msgstr "Riproduttore:"
+
+#: ../templates/admin_tabs.php:81
+msgid "Without player"
+msgstr "Senza riproduttore:"
+
+#: ../templates/admin_tabs.php:82
+msgid "show player above thumbnails"
+msgstr "mostra riproduttore sopra le anteprime"
+
+#: ../templates/admin_tabs.php:83
+msgid "show player in Magnific Popup"
+msgstr "mostra riproduttore nel \"Magnific Popup\""
+
+#: ../templates/admin_tabs.php:89
+msgid "Width:"
+msgstr "Larghezza:"
+
+#: ../templates/admin_tabs.php:92
+msgid "%"
+msgstr "%"
+
+#: ../templates/admin_tabs.php:93
+msgid "px"
+msgstr "px"
+
+#: ../templates/admin_tabs.php:97 ../templates/admin_tabs.php:232
+msgid "Aspect ratio:"
+msgstr "Rapporto d'aspetto:"
+
+#: ../templates/admin_tabs.php:99 ../templates/admin_tabs.php:234
+msgid "Standard (4x3)"
+msgstr "Standard (4:3)"
+
+#: ../templates/admin_tabs.php:100 ../templates/admin_tabs.php:235
+msgid "Widescreen (16x9)"
+msgstr "Widescreen (16:9)"
+
+#: ../templates/admin_tabs.php:105
+msgid "Theme:"
+msgstr "Tema:"
+
+#: ../templates/admin_tabs.php:107
+msgid "Dark"
+msgstr "Scuro"
+
+#: ../templates/admin_tabs.php:108
+msgid "Light"
+msgstr "Chiaro"
+
+#: ../templates/admin_tabs.php:113
+msgid "Progress bar color:"
+msgstr "Colore barra di progresso"
+
+#: ../templates/admin_tabs.php:115
+msgid "Red"
+msgstr "Rosso"
+
+#: ../templates/admin_tabs.php:116
+msgid "White"
+msgstr "Bianco"
+
+#: ../templates/admin_tabs.php:121
+msgid "Video quality:"
+msgstr "Qualità video:"
+
+#: ../templates/admin_tabs.php:123
+msgid "default"
+msgstr "default"
+
+#: ../templates/admin_tabs.php:124
+msgid "highres"
+msgstr "altarisoluzione"
+
+#: ../templates/admin_tabs.php:125
+msgid "hd1080"
+msgstr "hd1080"
+
+#: ../templates/admin_tabs.php:126
+msgid "hd720"
+msgstr "hd720"
+
+#: ../templates/admin_tabs.php:127
+msgid "large"
+msgstr "largo"
+
+#: ../templates/admin_tabs.php:128
+msgid "medium"
+msgstr "medio"
+
+#: ../templates/admin_tabs.php:129
+msgid "small"
+msgstr "piccolo"
+
+#: ../templates/admin_tabs.php:131
+msgid ""
+"Default value enables YouTube to select the most appropriate playback "
+"quality. If you select a quality level that is not available for the video, "
+"then the quality will be set to the next lowest level that is available."
+msgstr ""
+"YouTube sceglie automaticamente la qualità video più appropriata. Se "
+"selezioni un livello di qualità che non è dsponibile per il video, la "
+"qualità sarà impostata a quella appena più bassa disponibile."
+
+#: ../templates/admin_tabs.php:135
+msgid "Autoplay"
+msgstr "Avvio automatico"
+
+#: ../templates/admin_tabs.php:140
+msgid "Show YouTube logo"
+msgstr "Mostra logo YouTube"
+
+#: ../templates/admin_tabs.php:141
+msgid ""
+"Activate this field to show the YouTube logo in the control bar. Setting the "
+"color parameter to white will show the YouTube logo in the control bar."
+msgstr ""
+"Attiva questo campo per mostrare il logo YouTube nella barra di controllo. "
+"Impostando il colore su bianco verrà visualizzato il logo YouTube nella "
+"barra di controllo."
+
+#: ../templates/admin_tabs.php:146
+msgid "Show related videos"
+msgstr "Mosra video correlati"
+
+#: ../templates/admin_tabs.php:147
+msgid "Activate this field to show related videos when playback of the video ends."
+msgstr ""
+"Attiva questo campo permostrare i video correlati quando il video riprodotto "
+"finisce."
+
+#: ../templates/admin_tabs.php:152
+msgid "Show info"
+msgstr "Mostra info"
+
+#: ../templates/admin_tabs.php:153
+msgid ""
+"Activate this field to display information like the video title and uploader "
+"before the video starts playing."
+msgstr ""
+"Attiva questo campo per mostrare informazioni come il titolo del video e "
+"l'autore prima che inizi la riproduzione."
+
+#: ../templates/admin_tabs.php:155 ../templates/admin_tabs.php:207 ..
+#: /templates/admin_tabs.php:317 ../templates/admin_tabs.php:328 ..
+#: /templates/admin_tabs.php:365
+msgid "Order:"
+msgstr "Ordine:"
+
+#: ../templates/admin_tabs.php:172
+msgid "Search input text:"
+msgstr "Testo campo di ricerca:"
+
+#: ../templates/admin_tabs.php:176
+msgid "Restrict search to (# separated):"
+msgstr "Restringi la ricerca a (# separati):"
+
+#: ../templates/admin_tabs.php:180
+msgid "You must assing this tags to your videos to restrict the search:"
+msgstr "Devi assegnare questi tag al tuo video per restringere la ricerca:"
+
+#: ../templates/admin_tabs.php:189
+msgid "Restrict search by default: It will overwrite results of feed tab)"
+msgstr "Restringi la ricerca di default: sovrascriverà i risultati della scheda feed)"
+
+#: ../templates/admin_tabs.php:191 ../templates/search.php:10
+msgid "None"
+msgstr "Nessuno"
+
+#: ../templates/admin_tabs.php:199
+msgid "Show search box"
+msgstr "Mostra box di ricerca"
+
+#: ../templates/admin_tabs.php:203
+msgid "Show select with Playlists"
+msgstr "Mostra selezione con Playlist"
+
+#: ../templates/admin_tabs.php:219
+msgid "Number of videos to show:"
+msgstr "Numero di video da visualizzare:"
+
+#: ../templates/admin_tabs.php:221
+msgid ""
+"The plugin can display a maximum of 50 videos. This limitation will change "
+"in a future release."
+msgstr ""
+"Il plugin può mostrare un massimo di 50 video. Questa limitazione cambierà "
+"in un rilascio futuro."
+
+#: ../templates/admin_tabs.php:225
+msgid "Thumbnail width:"
+msgstr "Larghezza anteprime:"
+
+#: ../templates/admin_tabs.php:227
+msgid ""
+"This field is used to assign the appropriate quality of thumbnail images in "
+"top and bottom alignments and to assign width to thumbnails in left and "
+"right alignments. If the quality of thumbnail images is not enough, insert a "
+"larger value. If you are unsure you can assign one of the following values​​:"
+" 120, 320, 480 or 640"
+msgstr ""
+"Questo campo è usato per assegnare una qualità appropriata alle immagini di "
+"anteprima con allineamento in alto e in basso e per assegnare una larghezza "
+"alle anteprime con allineamento a sinistra e destra. Se la qualità delle "
+"anteprime non è sufficiente, inserisci un valore più grande. Se non sei "
+"sicuro puoi utilizzare uno di questi valori: 120, 320, 480 o 640"
+
+#: ../templates/admin_tabs.php:240
+msgid "Thumbnail columns:"
+msgstr "Colonne anteprime:"
+
+#: ../templates/admin_tabs.php:242
+msgid "Phones:"
+msgstr "Cellulari:"
+
+#: ../templates/admin_tabs.php:244
+msgid "Tablets:"
+msgstr "Tablet:"
+
+#: ../templates/admin_tabs.php:247
+msgid "Medium Desktops:"
+msgstr "Desktop medi:"
+
+#: ../templates/admin_tabs.php:249
+msgid "Large Desktops:"
+msgstr "Desktop larghi:"
+
+#: ../templates/admin_tabs.php:258
+msgid "Show title or description"
+msgstr "Mostra titolo o descrizione"
+
+#: ../templates/admin_tabs.php:265
+msgid "Show title"
+msgstr "Mostra titolo:"
+
+#: ../templates/admin_tabs.php:270
+msgid "Show description"
+msgstr "Mostra descrizione:"
+
+#: ../templates/admin_tabs.php:274
+msgid "Title tag:"
+msgstr "Tag titolo:"
+
+#: ../templates/admin_tabs.php:276
+msgid "h1"
+msgstr "h1"
+
+#: ../templates/admin_tabs.php:277
+msgid "h2"
+msgstr "h2"
+
+#: ../templates/admin_tabs.php:278
+msgid "h3"
+msgstr "h3"
+
+#: ../templates/admin_tabs.php:279
+msgid "h4"
+msgstr "h4"
+
+#: ../templates/admin_tabs.php:280
+msgid "h5"
+msgstr "h5"
+
+#: ../templates/admin_tabs.php:281
+msgid "h6"
+msgstr "6"
+
+#: ../templates/admin_tabs.php:286
+msgid "Thumbnail alignment:"
+msgstr "Allineamento anteprime:"
+
+#: ../templates/admin_tabs.php:288
+msgid "none"
+msgstr "nessuno"
+
+#: ../templates/admin_tabs.php:289
+msgid "Left"
+msgstr "Sinistra"
+
+#: ../templates/admin_tabs.php:290
+msgid "Right"
+msgstr "Destra"
+
+#: ../templates/admin_tabs.php:295
+msgid "Description words number:"
+msgstr "Numero parole della descrizione:"
+
+#: ../templates/admin_tabs.php:297
+msgid ""
+"Set the maximum number of words that will be displayed of the description. "
+"This field is useful when the descriptions of videos in the gallery have "
+"different sizes."
+msgstr ""
+"Imposta il massimo numero di parole che saranno visualizzate nella "
+"descrizione. Questo campo è utile quando le descrizioni dei video nella "
+"galleria hanno lunghezze differenti."
+
+#: ../templates/admin_tabs.php:303
+msgid "Add \"nofollow\" attribute to links"
+msgstr "Aggiungi l'attributo \"nofollow\" ai link"
+
+#: ../templates/admin_tabs.php:304
+msgid ""
+"\"nofollow\" attribute provides a way for webmasters to tell search engines "
+"\"Don't follow this specific link.\""
+msgstr ""
+"L'attributo \"nofollow\" consente di avvisare i motori di ricerca di \"Non "
+"seguire questo specifico link.\""
+
+#: ../templates/admin_tabs.php:310 ../templates/admin_tabs.php:355
+msgid "Open in a new window or tab"
+msgstr "Apri in una nuova finestra o scheda"
+
+#: ../templates/admin_tabs.php:315
+msgid "Show pagination"
+msgstr "Mostra paginazione"
+
+#: ../templates/admin_tabs.php:319
+msgid "Thumbnail:"
+msgstr "Anteprima:"
+
+#: ../templates/admin_tabs.php:323
+msgid "Description:"
+msgstr "Descrizione:"
+
+#: ../templates/admin_tabs.php:344
+msgid "Link text:"
+msgstr "Testo collegamento:"
+
+#: ../templates/admin_tabs.php:350
+msgid "Show link to channel"
+msgstr "Mostra collegamento nel canale"
+
+#: ../templates/admin_tabs.php:360
+msgid "Show link to thank the developer"
+msgstr "Mostra link per ringraziare lo sviluppatore"
+
+#: ../templates/link.php:9
+msgid "By PoseLab"
+msgstr "By PoseLab"
+
+#: ../templates/link.php:18
+msgid "Show more videos"
+msgstr "Mostra più video"
+
+#: ../templates/thumbs.php:55
+msgid "«Previous"
+msgstr "«Precedente"
+
+#: ../templates/thumbs.php:64
+msgid "Next»"
+msgstr ""
+"Successivo\n"
+"»"

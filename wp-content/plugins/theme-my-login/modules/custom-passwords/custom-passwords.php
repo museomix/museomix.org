@@ -63,9 +63,9 @@ class Theme_My_Login_Custom_Passwords extends Theme_My_Login_Abstract {
 	 * @access public
 	 */
 	public function password_fields() {
-		$template =& Theme_My_Login::get_object()->get_active_instance();
+		$template = Theme_My_Login::get_object()->get_active_instance();
 		?>
-		<p><label for="pass1<?php $template->the_instance(); ?>"><?php _e( 'Password' ); ?></label>
+		<p><label for="pass1<?php $template->the_instance(); ?>"><?php _e( 'Password', 'theme-my-login' ); ?></label>
 		<input autocomplete="off" name="pass1" id="pass1<?php $template->the_instance(); ?>" class="input" size="20" value="" type="password" /></p>
 		<p><label for="pass2<?php $template->the_instance(); ?>"><?php _e( 'Confirm Password', 'theme-my-login' ); ?></label>
 		<input autocomplete="off" name="pass2" id="pass2<?php $template->the_instance(); ?>" class="input" size="20" value="" type="password" /></p>
@@ -84,7 +84,7 @@ class Theme_My_Login_Custom_Passwords extends Theme_My_Login_Abstract {
 	public function ms_password_fields() {
 		$theme_my_login = Theme_My_Login::get_object();
 
-		$template =& $theme_my_login->get_active_instance();
+		$template = $theme_my_login->get_active_instance();
 
 		$errors = array();
 		foreach ( $theme_my_login->errors->get_error_codes() as $code ) {
@@ -138,15 +138,15 @@ class Theme_My_Login_Custom_Passwords extends Theme_My_Login_Abstract {
 
 		// Make sure passwords aren't empty
 		if ( empty( $_POST['pass1'] ) || empty( $_POST['pass2'] ) ) {
-			$errors->add( 'empty_password', __( '<strong>ERROR</strong>: Please enter your password twice.' ) );
+			$errors->add( 'empty_password', __( '<strong>ERROR</strong>: Please enter your password twice.', 'theme-my-login' ) );
 
 		// Make sure there's no "\" in the password
 		} elseif ( false !== strpos( stripslashes( $_POST['pass1'] ), "\\" ) ) {
-			$errors->add( 'password_backslash', __( '<strong>ERROR</strong>: Passwords may not contain the character "\\".' ) );
+			$errors->add( 'password_backslash', __( '<strong>ERROR</strong>: Passwords may not contain the character "\\".', 'theme-my-login' ) );
 
 		// Make sure passwords match
 		} elseif ( $_POST['pass1'] != $_POST['pass2'] ) {
-			$errors->add( 'password_mismatch', __( '<strong>ERROR</strong>: Please enter the same password in the two password fields.' ) );
+			$errors->add( 'password_mismatch', __( '<strong>ERROR</strong>: Please enter the same password in the two password fields.', 'theme-my-login' ) );
 
 		// Make sure password is long enough
 		} elseif ( strlen( $_POST['pass1'] ) < 6 ) {

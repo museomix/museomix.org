@@ -3,8 +3,8 @@ Contributors: codepress, tschutter, davidmosterd, engelen
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZDZRSYLQ4Z76J
 Tags: plugins, wordpress, admin, column, columns, custom columns, custom fields, image, dashboard, sortable, filters, posts, media, users, pages, posttypes, manage columns, wp-admin
 Requires at least: 3.5
-Tested up to: 4.1
-Stable tag: 2.3.2
+Tested up to: 4.2.1
+Stable tag: 2.4.3
 
 Customise columns on the administration screens for post(types), pages, media, comments, links and users with an easy to use drag-and-drop interface.
 
@@ -195,43 +195,6 @@ You can select a custom size for your custom field option from the Column option
 
 If you want your already uploaded images to display the newly added size you will need to regenerate the thumbnail for them. You can use this plugin to generate the newly added sized thumbnails: http://wordpress.org/extend/plugins/regenerate-thumbnails/.
 
-= How can I display a custom value in the Custom Fields Column? =
-
-With this filter 'cac/column/meta/value' you can control what the value will be for any Custom Field Column.
-
-Filter explained:
-
-* **$value** is the original value which would otherwise be displayed
-* **$id** will return the ID of the object.
-* **$column** will return the Admin Columns Column object.
-*
-* **$column->options->field** is the name of your custom field
-* **$column->storage_model->key** will return either the posttype or if it is any other type it will return wp-comments, wp-links, wp-users, wp-media.
-
-For example if you have a custom posttype 'demo' with a custom_field that is called 'city' and the result would be an integer '33'. You can change that integer '33' to Amsterdam.
-
-`
-<?php
-function my_custom_field_value( $value, $id, $column ) {
-
-	$post_type  	= 'demo';
-	$custom_field 	= 'city';
-
-	// make sure we have the correct posttype and custom field
-	if ( $post_type == $column->storage_model->key && $custom_field == $column->options->field ) {
-
-		if ( '33' == $value )
-			$value = 'Amsterdam';
-
-		elseif ( '34' == $value )
-			$value = 'New York';
-	}
-	return $value;
-}
-add_filter( 'cac/column/meta/value', 'my_custom_field_value', 10, 3 );
-?>
-`
-
 = What filters and hooks can I use? =
 
 You can find a list of the available actions and filters (and examples on how to use them!) in the [Admin Columns documentation](http://admincolumns.com/documentation/?utm_source=wordpressorg&utm_medium=readme&utm_content=faq&utm_campaign=cpac-pluginpage).
@@ -248,6 +211,46 @@ You can find a list of the available actions and filters (and examples on how to
 8. Posts Screen with custom fields.
 
 == Changelog ==
+
+= 2.4.3 =
+* [Fixed] Comment bubble icon is fixed
+
+= 2.4.2 =
+* [Added] Added new comment columns: type, author and user.
+* [Added] Width indicator text is darker
+* [Fixed] Remove ' symbol from column label, because it causing issues when sorting
+* [Fixed] Review notice will only show on admin columns page and with an improved hide button
+
+= 2.4.1 =
+* [Added] Added the development filter 'cac/menu_types' to add custom menu types
+* [Added] Added public method set_menu_type() to the storage model
+* [Added] Added review notice
+* [Updated] Po file will exclude Actions columns which contain only native WordPress translatable strings
+* [Updated] Updated all languages from Transifex
+* [Updated] Pro addon notice text has been updated
+
+= 2.4 =
+* [Added] Added content column for post(types).
+* [Added] Added the column shortcodes, which will display any used shortcodes in your post's content
+* [Added] Column width has a text field to enter the width
+* [Added] Added a message for when a custom field is empty
+* [Added] Column width can be set to pixels or percentages
+* [Added] Added a width indicator to the column settings header
+* [Added] Added a singular label to all storage_models
+
+= 2.3.4 =
+* [Added] A column can have it's own JS/CSS files by using the CPAC_Column::scripts() method
+* [Added] Column Name can be found by hovering over the "Type" label in your column settings
+* [Fixed] Fixed a quick edit issue for comments
+* [Fixed] is_field() method of the custom field column works as intended
+
+= 2.3.3 =
+* [Added] Added user column: Visual Editor
+* [Added] Added post column: Estimated Reading Time
+* [Added] Added method CPAC_Column::get_sorting_value()
+* [Added] Added user column display name
+* [Fixed] fixed wordcount issue with PHP 5.3 or lower
+* [Fixed] Fixed media actions column
 
 = 2.3.2 =
 * [Updated] All translations from Transifex - ttps://www.transifex.com/projects/p/admin-columns

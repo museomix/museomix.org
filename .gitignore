@@ -216,3 +216,8 @@ pip-log.txt
 wp-content/uploads/*
 wp-content/cache/*
 wp-config.php
+bkp.php
+msx.sh
+.htpasswd
+overview/*
+museomix-webdoc/*

@@ -805,29 +805,29 @@ class Theme_My_Login_Custom_Email extends Theme_My_Login_Abstract {
 		}
 
 		if ( apply_filters( 'send_new_user_admin_notification', true ) ) {
-			$message  = sprintf( __( 'New user registration on your site %s:' ), $blogname   ) . "\r\n\r\n";
-			$message .= sprintf( __( 'Username: %s'                           ), $user_login ) . "\r\n\r\n";
-			$message .= sprintf( __( 'E-mail: %s'                             ), $user_email ) . "\r\n";
+			$message  = sprintf( __( 'New user registration on your site %s:', 'theme-my-login' ), $blogname   ) . "\r\n\r\n";
+			$message .= sprintf( __( 'Username: %s'                          , 'theme-my-login' ), $user_login ) . "\r\n\r\n";
+			$message .= sprintf( __( 'E-mail: %s'                            , 'theme-my-login' ), $user_email ) . "\r\n";
 
-			$title    = sprintf( __( '[%s] New User Registration'             ), $blogname   );
+			$title    = sprintf( __( '[%s] New User Registration'            , 'theme-my-login' ), $blogname   );
 
 			$title    = apply_filters( 'new_user_admin_notification_title',   $title,   $user_id );
 			$message  = apply_filters( 'new_user_admin_notification_message', $message, $user_id );
 
 			$to       = apply_filters( 'new_user_admin_notification_mail_to', get_option( 'admin_email' ) );
 
-			@wp_mail( $to, $title, $message );		
+			@wp_mail( $to, $title, $message );
 		}
 
 		if ( empty( $plaintext_pass ) )
 			return;
 
 		if ( apply_filters( 'send_new_user_notification', true ) ) {
-			$message  = sprintf( __( 'Username: %s' ), $user_login     ) . "\r\n";
-			$message .= sprintf( __( 'Password: %s' ), $plaintext_pass ) . "\r\n";
+			$message  = sprintf( __( 'Username: %s', 'theme-my-login' ), $user_login     ) . "\r\n";
+			$message .= sprintf( __( 'Password: %s', 'theme-my-login' ), $plaintext_pass ) . "\r\n";
 			$message .= wp_login_url() . "\r\n";
 
-			$title = sprintf( __( '[%s] Your username and password' ), $blogname );
+			$title = sprintf( __( '[%s] Your username and password', 'theme-my-login' ), $blogname );
 
 			$title   = apply_filters( 'new_user_notification_title',   $title,   $user_id                  );
 			$message = apply_filters( 'new_user_notification_message', $message, $plaintext_pass, $user_id );
@@ -859,8 +859,8 @@ class Theme_My_Login_Custom_Email extends Theme_My_Login_Abstract {
 				$blogname = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
 			}
 
-			$title   = sprintf( __( '[%s] Password Lost/Changed'             ), $blogname         );
-			$message = sprintf( __( 'Password Lost and Changed for user: %s' ), $user->user_login ) . "\r\n";
+			$title   = sprintf( __( '[%s] Password Lost/Changed'            , 'theme-my-login' ), $blogname         );
+			$message = sprintf( __( 'Password Lost and Changed for user: %s', 'theme-my-login' ), $user->user_login ) . "\r\n";
 
 			$title   = apply_filters( 'password_change_notification_title',   $title,   $user->ID );
 			$message = apply_filters( 'password_change_notification_message', $message, $user->ID );

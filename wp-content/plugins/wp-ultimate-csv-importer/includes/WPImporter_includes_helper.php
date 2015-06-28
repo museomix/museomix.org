@@ -299,6 +299,20 @@ class WPImporter_includes_helper {
 		return $csv->data; 
 	}
 
+        function csv_file_readdata($file, $obj)
+        {
+                $file = $obj->getUploadDirectory().'/'.$file;
+                require_once(WP_CONST_ULTIMATE_CSV_IMP_DIRECTORY.'includes/Importer.php');
+                $csv = new ImporterLib();
+                $csv->delim($file);
+                foreach($csv->data as $hkey => $hval) {
+                        foreach($hval as $hk => $hv) {
+                                $this->headers[] = $hk;
+                        }
+                        break;
+                }
+                return $csv->data;
+        }
 
 	/**
 	 * Manage duplicates
@@ -483,8 +497,9 @@ class WPImporter_includes_helper {
 							$fimg_path = $full_path;
 
 							$fimg_name = @basename($f_img);
-							$fimg_name = preg_replace("/[^a-zA-Z0-9._\s]/", "", $fimg_name);
-							$fimg_name = preg_replace('/\s/', '-', $fimg_name);
+							$featured_image = $fimg_name;
+							$fimg_name =  preg_replace('/\.[^.]*$/', '', $fimg_name);
+							$fimg_name = strtolower(str_replace(' ','-',$fimg_name));
 							$fimg_name = urlencode($fimg_name);
 
 							$parseURL = parse_url($f_img);
@@ -492,8 +507,8 @@ class WPImporter_includes_helper {
 							if(!isset($path_parts['extension']))
 								$fimg_name = $fimg_name . '.jpg';
 
-							$f_img_slug = preg_replace("/[^a-zA-Z0-9._\s]/", "", $new_post['post_title']);
-							$f_img_slug = preg_replace('/\s/', '-', $f_img_slug);
+							$f_img_slug =  preg_replace('/\.[^.]*$/', '',$f_img_slug);
+							$f_img_slug = strtolower(str_replace('','-',$f_img_slug));
 
 							$post_slug_value = strtolower($f_img_slug);
 							$fimg_name = wp_unique_filename($fimg_path, $fimg_name, $path_parts['extension']);
@@ -515,7 +530,7 @@ class WPImporter_includes_helper {
 											);
 									$resize = $img->multi_resize($sizes_array);
 								}
-								$file ['guid'] = $baseurl."/".$fimg_name;
+								$file ['guid'] = $baseurl."/".$featured_image;
 								$file ['post_title'] = $fimg_name;
 								$file ['post_content'] = '';
 								$file ['post_status'] = 'attachment';
@@ -633,6 +648,34 @@ class WPImporter_includes_helper {
 						$post_format = 'post-format-gallery';
 						break;
 					default :
+						if($data_array['post_format']=='post-format-aside'){
+					  		$post_format='post-format-aside';
+					  		break;   
+						 }	
+					 	if($data_array['post_format']=='post-format-image'){
+					  		$post_format='post-format-image'; 
+					  		break;
+					 	}
+					 	if($data_array['post_format']=='post-format-video'){
+					 		$post_format='post-format-video'; 
+					 		break;
+					 	}
+					 	if($data_array['post_format']=='post-format-audio'){
+					 		$post_format='post-format-audio'; 
+					 		break;
+					 	}
+					 	if($data_array['post_format']=='post-format-quote'){
+					 		$post_format='post-format-quote'; 
+					 		break;
+					 	}
+					 	if($data_array['post_format']=='post-format-link'){
+					 		$post_format='post-format-link'; 
+					 		break;
+					 	}
+					 	if($data_array['post_format']=='post-format-gallery'){
+					 		$post_format='post-format-gallery'; 
+					 		break;
+					 	}
 						$post_format = 0;
 
 				}
@@ -694,7 +737,7 @@ class WPImporter_includes_helper {
 				}
 			}
 			if ($data_array) {
-				if($this->MultiImages == 'true') {
+				if($this->MultiImages == 'true') { // Inline image import feature by fredrick marks
 					$inlineImagesObj = new WPImporter_inlineImages();
 					$post_id = $inlineImagesObj->importwithInlineImages($data_array['ID'], $currentLimit, $data_array, $this, $importinlineimageoption, $extractedimagelocation, $sample_inlineimage_url);
 				} else {
@@ -798,7 +841,7 @@ class WPImporter_includes_helper {
 					$attachment = array(
 							'guid' => $file ['guid'],
 							'post_mime_type' => 'image/jpeg',
-							'post_title' => preg_replace('/\.[^.]+$/', '', @basename($file ['guid'])),
+							'post_title' => preg_replace('/\.[^.]*$/', '', @basename($file ['guid'])),
 							'post_content' => '',
 							'post_status' => 'inherit'
 							);
@@ -1089,6 +1132,10 @@ class WPImporter_includes_helper {
 			</span>';
 		return $smackhelpnotes;
 	}
+	function create_nonce_key(){
+		return wp_create_nonce('smack_nonce');
+	}
+        
 }
 
 class CallWPImporterObj extends WPImporter_includes_helper
@@ -1100,6 +1147,23 @@ class CallWPImporterObj extends WPImporter_includes_helper
 			self::$_instance = new WPImporter_includes_helper();
 		return self::$_instance;
 	}
+	public static function checkSecurity(){
+                $msg = 'You are not allowed to do this operation! Please contact your admin';
+                if(!function_exists('session_status')){
+                        if(session_id() == '')
+                                return $msg;
+			else
+				return 'true';
+                }
+                else if(session_status() != PHP_SESSION_ACTIVE)
+                        return $msg;
+                else if(!defined('ABSPATH'))
+                        return $msg;
+                else if (php_sapi_name() == "cli") 
+                        return $msg;
+                else
+                        return 'true';
+        }
 }
 
 class WPImpCSVParserLib {

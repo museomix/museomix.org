@@ -5,8 +5,15 @@
  * Proprietary and confidential
  * You can contact Smackcoders at email address info@smackcoders.com.
  *******************************************************************************************/
-if(!defined('ABSPATH'))
-        die('Your requested url were wrong! Please contact your admin.');
+//require_once(WP_CONST_ULTIMATE_CSV_IMP_DIR.'includes/WPImporter_includes_helper.php');
+$impObj = new WPImporter_includes_helper();
+$nonceKey = $impObj->create_nonce_key();
+if(! wp_verify_nonce($nonceKey, 'smack_nonce'))
+die('You are not allowed to do this operation.Please contact your admin.');
+$impCheckobj = CallWPImporterObj::checkSecurity();
+if($impCheckobj != 'true')
+die($impCheckobj);
+
 $post = $page = $custompost = $categories = $users = $customtaxonomy = $comments = $eshop = $wpcommerce = $woocommerce = $settings = $support = $dashboard = $export = $mappingtemplate = $filemanager = $schedulemapping = $marketpress = $customerreviews = '';
 $impCEM = CallWPImporterObj::getInstance();
 $get_settings = array();

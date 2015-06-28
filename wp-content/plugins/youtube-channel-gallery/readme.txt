@@ -1,16 +1,18 @@
 === Youtube Channel Gallery ===
 Contributors: javitxu123
 Donate link: http://poselab.com/
-Tags: widget, gallery, youtube, channel, user, sidebar, video, youtube playlist, html5, iframe, Youtube channel, youtube videos
+Tags: widget, gallery, youtube, channel, user, sidebar, video, youtube playlist, html5, iframe, Youtube channel, youtube videos, API 3
 Requires at least: 2.8
-Tested up to: 3.5.1
-Stable tag: 1.8.7
+Tested up to: 3.8.8
+Stable tag: 2.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Show a YouTube video and a gallery of thumbnails for a YouTube channel.
 
 == Description ==
+
+`WARNING: The name of some Shortcode options has change`
 
 Show a YouTube video and a gallery of thumbnails for a YouTube user channel. 
 
@@ -25,6 +27,7 @@ You can see a demo of the plugin in the following URLs:
 * [Demo with title and description and thumbnail on the left](http://poselab.com/en/youtube-channel-gallery-demo-with-title-description-and-thumbnail-on-the-left/) | [ES](http://poselab.com/youtube-channel-gallery-demo-con-titulo-y-descripcion-y-miniatura-a-la-izquierda)
 * [Demo with title and thumbnail at bottom](http://poselab.com/en/youtube-channel-gallery-demo-with-title-and-thumbnail-at-the-bottom/) | [ES](http://poselab.com/youtube-channel-gallery-demo-con-titulo-y-miniatura-abajo)
 * [Demo with playlist](http://poselab.com/en/youtube-channel-gallery-demo-with-playlist/) | [ES](http://poselab.com/youtube-channel-gallery-demo-con-lista-de-reproduccion/)
+* [Demo with changed order](http://poselab.com/en/youtube-channel-gallery-demo-with-changed-order/) | [ES](http://poselab.com/youtube-channel-gallery-demo-con-orden-cambiado/)
 
 
 = Features: =
@@ -42,6 +45,7 @@ Description of the different fields of the plugin:
 
 **Feed tab:**
 
+* **Key:** You must insert your own API key. The API key inserted is an example anf if you do not change the API key for yours you may receive an error message of exceeded quota. This is necessary in version 3 of the YouTube API, [Obtaining authorization credentials](https://developers.google.com/youtube/registering_an_application). Shortcode attribute: key; value: API key. (Required).
 * **Video feed type:** option to select the feed type to use to show videos. Yo can select uploaded by the user or playlist. Shortcode attribute: feed; value: user (default) or playlist. (Optional).
 * **YouTube user id/YouTube playlist id:** the user id of the user's Youtube videos you want to show or the id of the playlist. Shortcode attribute: user; value: String. (Required).
 * **Playlist order:** this option appears if you selected playlist as Video feed type. You can show videos in a playlist by ascending or descending order. Shortcode attribute: feedorder; value: asc (default) or desc. (Optional).
@@ -50,7 +54,9 @@ Description of the different fields of the plugin:
 
 **Player tab:**
 
-* **Player:** Select whether you want to display the gallery with or without player. Shortcode attribute: player; values: 0 or 1 (default). (Optional).
+* **Player:** Select whether you want to display the gallery with, without player or in Magnific Popup. Shortcode attribute: player; values: 0, 1 (default) or 2. (Optional).
+* **Width:** Width of player. Shortcode attribute:** width_value; values: Number. 100 (default). (Optional).
+* **Width dimensions:** dimensionn of player width. Shortcode attribute:** width_type; values: % (default) or px. (Optional).
 * **Aspect ratio:** indicates the proportions of the player, standard (4:3) or widescreen (16:9) format. Shortcode attribute:** ratio; values: 4x3 (default) or 16x9. (Optional).
 * **Theme:** display player controls (like a 'play' button or volume control) within a dark or light control bar. Shortcode attribute: theme; values: dark (default) or light. (Optional).
 * **Progress bar color:** specifies the color that will be used in the player's video progress bar to highlight the amount of the video that the viewer has already seen. Shortcode attribute: color; values: red (default) or white. (Optional).
@@ -59,35 +65,41 @@ Description of the different fields of the plugin:
 * **Show YouTube logo:** Activate this field to show the YouTube logo in the control bar. Setting the color parameter to white will show the YouTube logo in the control bar. Shortcode attribute: modestbranding; values: 0 (default) or 1. (Optional).
 * **Show related videos:** this parameter indicates whether the player should show related videos when playback of the initial video ends. Shortcode attribute: rel; values: 0 (default) or 1. (Optional).
 * **Show info (title, uploader):** display information like the video title and rating before the video starts playing. Shortcode attribute: showinfo; values: 0 (default) or 1. (Optional).
+* **Order:** order of player. Shortcode attribute: player_order; values: Number. 1 (default). (Optional).
 
 **Thumbnails tab:**
 
 * **Number of videos to show:** it must be a number indicating the number of thumbnails to be displayed. Shortcode attribute: maxitems; value: Number. (Optional).
-* **Thumbnail width:** indicates the width of the thumbnails. The height is automatically generated based on the aspect ratio selected. Shortcode attribute: thumbwidth; value: Number. (Optional).
-* **Aspect ratio:** indicates the proportions of the thumbnails, standard (4:3) or widescreen (16:9) format. Shortcode attribute: thumbratio; values: 4x3 (default) or 16x9. (Optional).
-* **Thumbnail columns:** it allows to control the number of columns in which the thumbnails are distributed. Shortcode attribute: thumbcolumns; value: Number. (Optional).
+* **Thumbnail width:** indicates the width of the thumbnails. The height is automatically generated based on the aspect ratio selected. Shortcode attribute: thumb_width; value: Number. (Optional).
+* **Aspect ratio:** indicates the proportions of the thumbnails, standard (4:3) or widescreen (16:9) format. Shortcode attribute: thumb_ratio; values: 4x3 (default) or 16x9. (Optional).
+* **Thumbnail columns:** it allows to control the number of columns in which the thumbnails are distributed. It uses [Bootstrap Grid system](http://getbootstrap.com/css/#grid) to allow responsive behavior. Shortcode attribute: thumb_columns_phones (Phones), thumb_columns_tablets (Tablets), thumb_columns_md (Medium Desktops), thumb_columns_ld (Large Desktops); value: Number. Max value 12. (Optional).
 * **Add "nofollow" attribute to links:** "nofollow" attribute provides a way for webmasters to tell search engines "Don't follow this specific link". Shortcode attribute: nofollow; values: 0 (default) or 1. (Optional).
 * **Open in a new window or tab:** this option only appears if you select to use the gallery without player. Thumbnails links will open in a new window or tab. Shortcode attribute: thumb_window; values: 0 (default) or 1. (Optional).
 * **Show title:** it displays the title of the thumbnail with a link to play the video in the player. Shortcode attribute: title; values: 0 (default) or 1. (Optional).
 * **Show description:** it shows the description of the thumbnail with the number of specified words. Shortcode attribute: description; values: 0 (default) or 1. (Optional).
-* **Thumbnail alignment:** it defines the alignment of the thumbnail respect to its description and title. Shortcode attribute: thumbnail_alignment; values: left (default), right, top or bottom. (Optional).
-* **Description words number:** the maximum number of words displayed in the description. Shortcode attribute: descriptionwordsnumber; value: Number. (Optional).
+* **Title tag:** select an appropriate tag for the title. Shortcode attribute: title_tag; values: h1, h2, h3, h4, h5 (default), h6. (Optional).
+* **Thumbnail alignment:** it defines the alignment of the thumbnail respect to its description and title. Shortcode attribute: thumbnail_alignment; values: none (default), left, right. (Optional).
+* **Description words number:** the maximum number of words displayed in the description. Shortcode attribute: description_words_number; value: Number. (Optional).
 
 **Link tab:**
 
 * **Link text:** field to customize the text of the link to the gallery on YouTube. Shortcode attribute: link_tx; value: String. (Optional).
 * **Show link to channel:** option to display a link to the YouTube user channel. Shortcode attribute: link; values: 0 (default) or 1. (Optional).
 * **Open in a new window or tab:** option to open the link to YouTube in a new window or tab . Shortcode attribute: link_window; values: 0 (default) or 1. (Optional).
+* **Show link to thank the developer:** option to add a small link to home page of the developer . Shortcode attribute: promotion; values: 0 or 1 (default). (Optional).
 
 
 = Shortcode syntax: =
 In the following example are many attributes that can be used with the shortcode and explained above:
 
-`[Youtube_Channel_Gallery feed="user" user="MaxonC4D" feedorder="desc" videowidth="500" ratio="16x9" theme="light" color="white" quality="small" autoplay="1" rel="1" showinfo="1" maxitems="9" thumbwidth="90" thumbratio="16x9" thumbcolumns="3" title="1" description="1" thumbnail_alignment="left" descriptionwordsnumber="10" link_window="0"]`
+`[Youtube_Channel_Gallery user="Autodesk" videowidth="580" ratio="16x9" theme="light" color="white" autoplay="0" rel="0" showinfo="0" maxitems="16" thumb_width="125" thumb_ratio="16x9" thumb_columns_ld="4" promotion="0" pagination_show="0"]`
 
 
 = Languages: =
+* Brazilian portuguese (pt_BR) - [lojainterativa.com](http://www.lojainterativa.com).
+* Italian (it_IT) - [Marco Milesi](https://profiles.wordpress.org/milmor).
 * Spanish (es_ES) - [PoseLab](http://poselab.com/)
+
 
 If you have created your own language pack, or have an update of an existing one, you can [send me](mailto:javierpose@gmail.com) your gettext PO and MO so that I can bundle it into the Youtube Channel Gallery.
 
@@ -141,6 +153,27 @@ See [HTTPS Support for YouTube Embeds](http://apiblog.youtube.com/2011/02/https-
 
 
 == Changelog ==
+
+= 2.0.3 =
+* Added brazilian portuguese translation by [lojainterativa.com](http://www.lojainterativa.com).
+* Added italian translation by [Marco Milesi](https://profiles.wordpress.org/milmor).
+
+= 2.0.2 =
+* Delete debug element.
+
+= 2.0.1 =
+* Change short_open_tag in thumbs.php for compability with php < 5.4.
+
+= 2.0.0 =
+* Update in order to make it compatible with YouTube API 3.
+* Option to set player width.
+* Options to set the order of elements of each tab.
+* Options to improve responsive behavior based on Bootstrap grid system.
+* Options to select title tag.
+* Optimization of alignment behavior.
+* Options to set the order of elements of thumbnails tab.
+* Option to promotion.
+* Rewritted code.
 
 = 1.8.7 =
 * Fixed problem with SSL.

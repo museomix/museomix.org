@@ -44,7 +44,7 @@ function ReordonnerMenu($menu_ord) {
 #		'link-manager.php', // Liens
 #       'edit-comments.php', // Commentaires  
     ); 
-    // remove_menu_page( 'edit-comments.php' );
+    remove_menu_page( 'edit-comments.php' );
     //remove_menu_page( 'tools.php' );
     // remove_menu_page( 'themes.php' );
 

@@ -238,10 +238,10 @@ class Theme_My_Login_Security_Admin extends Theme_My_Login_Abstract {
 			$user = isset( $_GET['user'] ) ? $_GET['user'] : '';
 
 			if ( ! $user || ! current_user_can( 'edit_user', $user ) )
-				wp_die( __( 'You can&#8217;t edit that user.' ) );
+				wp_die( __( 'You can&#8217;t edit that user.', 'theme-my-login' ) );
 
 			if ( ! $user = get_userdata( $user ) )
-				wp_die( __( 'You can&#8217;t edit that user.' ) );
+				wp_die( __( 'You can&#8217;t edit that user.', 'theme-my-login' ) );
 
 			if ( 'lock' == $_GET['action'] ) {
 				check_admin_referer( 'lock-user_' . $user->ID );

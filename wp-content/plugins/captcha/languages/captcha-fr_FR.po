@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: captcha\n"
+"Project-Id-Version: captcha 4.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-23 13:45+0300\n"
-"PO-Revision-Date: 2014-12-23 13:47+0300\n"
+"POT-Creation-Date: 2015-06-01 11:25+0300\n"
+"PO-Revision-Date: 2015-06-01 11:25+0300\n"
 "Last-Translator: bestwebsoft.com <plugins@bestwebsoft.com>\n"
 "Language-Team: Luc Capronnier <lcapronnier@yahoo.com>\n"
 "Language: fr_FR\n"
@@ -13,501 +13,626 @@ msgstr ""
 "X-Poedit-KeywordsList: __;_e;_n\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.5.7\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: captcha.php:79
-#: captcha.php:410
+#: captcha.php:31
+#: captcha.php:255
 msgid "Captcha Settings"
 msgstr "Options du Captcha"
 
-#: captcha.php:79
+#: captcha.php:31
 msgid "Captcha"
 msgstr "Captcha"
 
-#: captcha.php:166
-msgid "requires"
-msgstr "requis"
-
-#: captcha.php:166
-msgid "or higher, that is why it has been deactivated! Please upgrade WordPress and try again."
-msgstr "ou supérieure, c'est pourquoi il a été désactivé! Merci de faire la mise à jour de WordPress puis de ré-essayer."
-
-#: captcha.php:166
-msgid "Back to the WordPress"
-msgstr "Retour à WordPress"
-
-#: captcha.php:166
-msgid "Plugins page"
-msgstr "Page des extensions"
-
-#: captcha.php:239
-msgid "Login form"
-msgstr "Formulaire de connexion"
-
-#: captcha.php:240
-#: captcha.php:461
-msgid "Registration form"
-msgstr "Formulaire d'enregistrement"
-
-#: captcha.php:240
-msgid "Register form"
-msgstr "Formulaire d'enregistrement"
-
-#: captcha.php:241
-msgid "Reset Password form"
-msgstr "Formulaire de mot de passe perdu"
-
-#: captcha.php:241
-msgid "Lost password form"
-msgstr "Formulaire de mot de passe perdu"
-
-#: captcha.php:242
-#: captcha.php:462
-msgid "Comments form"
-msgstr "Formulaire des commentaires"
-
-#: captcha.php:243
-msgid "Hide CAPTCHA in Comments form for registered users"
-msgstr "Cacher le CAPTCHA dans les commentaires pour les utilisateurs enregistrés"
-
-#: captcha.php:248
-msgid "Plus (&#43;)"
-msgstr "Plus (&#43;)"
-
-#: captcha.php:248
-msgid "Plus"
-msgstr "Plus"
-
-#: captcha.php:249
-msgid "Minus (&minus;)"
-msgstr "Moins (&minus;)"
-
-#: captcha.php:249
-msgid "Minus"
-msgstr "Moins"
-
-#: captcha.php:250
-msgid "Multiplication (&times;)"
-msgstr "Multiplication (&times;)"
-
-#: captcha.php:250
-msgid "Multiply"
-msgstr "Multiplie (&times;)"
-
-#: captcha.php:255
-msgid "Numbers"
-msgstr "Nombres"
-
-#: captcha.php:256
-msgid "Words"
-msgstr "Mots"
-
-#: captcha.php:293
-msgid "Please select one item in the block Arithmetic and Complexity for CAPTCHA"
-msgstr "Merci de choisir au moins un élément dans la catégorie mathématique et un dans la catégorie compléxité pour le CAPTCHA"
-
-#: captcha.php:297
-msgid "Settings saved."
-msgstr "Options enregistrées."
-
-#: captcha.php:310
-#: captcha.php:342
-msgid "Wrong license key"
-msgstr "Clé de licence incorrecte"
-
-#: captcha.php:335
-msgid "Something went wrong. Try again later. If the error will appear again, please, contact us <a href=http://support.bestwebsoft.com>BestWebSoft</a>. We are sorry for inconvenience."
-msgstr "Il est survenu une erreur. Essayer de nouveau. Si l'erreur se produit de nouveau, merci de contacter <a href=http://support.bestwebsoft.com>BestWebSoft</a>. Nous sommes désolés pour le désagrément."
-
-#: captcha.php:344
-msgid "This license key is bind to another site"
-msgstr "La clé de licence correspond à un autre site."
-
-#: captcha.php:346
-#: captcha.php:581
-msgid "Unfortunately, you have exceeded the number of available tries per day. Please, upload the plugin manually."
-msgstr "Désoler mais vous avez dépassé le nombre d'essai de la journée. Merci de télécharger l'extension manuellement."
-
-#: captcha.php:363
-msgid "Failed to open the zip archive. Please, upload the plugin manually"
-msgstr "Erreur d'ouverture de l'archive zip. Merci de télécharger l'extension manuellement."
-
-#: captcha.php:369
-msgid "Your server does not support either ZipArchive or Phar. Please, upload the plugin manually"
-msgstr "Votre server n'a pas le support du format des archives ZIP ou Phar. Merci de télécharger l'extension manuellement."
-
-#: captcha.php:373
-#: captcha.php:382
-msgid "Failed to download the zip archive. Please, upload the plugin manually"
-msgstr "Erreur de téléchargement de l'archive ZIP. Merci de télécharger l'extension manuellement."
-
-#: captcha.php:386
-msgid "Something went wrong. Try again later or upload the plugin manually. We are sorry for inconvenience."
-msgstr "Il est survenu une erreur. Essayer de nouveau ou bien télécharger l'extension manuellement.Nous sommes désolés pour le désagrément."
-
-#: captcha.php:404
-msgid "Please, enter Your license key"
-msgstr "Merci de saisir votre clé de liecence"
-
-#: captcha.php:412
-#: captcha.php:1424
-#: captcha.php:1436
-msgid "Settings"
-msgstr "Réglages"
-
-#: captcha.php:413
-#: captcha.php:1437
-msgid "FAQ"
-msgstr "FAQ"
-
-#: captcha.php:414
-msgid "Go PRO"
-msgstr "Choisir la version PRO"
-
-#: captcha.php:416
-msgid "Notice:"
-msgstr "Avertissement :"
-
-#: captcha.php:416
-msgid "The plugin's settings have been changed. In order to save them please don't forget to click the 'Save Changes' button."
-msgstr "Les paramètres de cette extensions ont été changés. Afin de pouvoir les enregistrer, merci de cliquer sur le bouton 'Enregistrer les modifications'.\""
-
-#: captcha.php:423
-#: captcha.php:449
-#: captcha.php:458
-msgid "Enable CAPTCHA for:"
-msgstr "Activer le CAPTCHA pour :"
-
-#: captcha.php:431
-#: captcha.php:433
-#: captcha.php:436
-msgid "Contact form"
-msgstr "Formulaire de contact"
-
-#: captcha.php:431
-#: captcha.php:433
-#: captcha.php:436
-#: captcha.php:452
-msgid "powered by"
-msgstr "propulsé par"
-
-#: captcha.php:433
-msgid "Activate contact form"
-msgstr "Activer le formulaire de contact"
-
-#: captcha.php:436
-msgid "Download contact form"
-msgstr "Télécharger le formulaire de contact"
-
-#: captcha.php:439
-msgid "If you would like to add Captcha to a custom form, please see"
-msgstr "Si vous voulez ajouter le Captcha à un formulaire, merci de consulter la"
-
-#: captcha.php:452
-msgid "Subscriber"
-msgstr "Abonner"
-
-#: captcha.php:463
-msgid "\"Create a Group\" form"
-msgstr "Formulaire pour \"Créer un groupe\""
-
-#: captcha.php:469
-msgid "Enable CAPTCHA:"
-msgstr "Activer le CAPTCHA pour :"
-
-#: captcha.php:477
-msgid "If you upgrade to Pro version all your settings will be saved."
-msgstr "Si vous passez à la version Pro, tous ces paramètres seront enregistrés."
-
-#: captcha.php:484
-msgid "Unlock premium options by upgrading to a PRO version."
-msgstr "Déploquer les options premium en migrant vers la version PRO."
-
-#: captcha.php:485
-#: captcha.php:1502
-msgid "Learn More"
-msgstr "En savoir plus"
-
-#: captcha.php:488
-msgid "Go"
-msgstr "Passez"
-
-#: captcha.php:495
-msgid "Title for CAPTCHA in the form"
-msgstr "Le titre du CAPTCHA dans les formulaires"
-
-#: captcha.php:499
-msgid "Required symbol"
-msgstr "Symbol obligatoire"
-
-#: captcha.php:505
-msgid "Arithmetic actions for CAPTCHA"
-msgstr "Opérations arithmétiques  pour le CAPTCHA"
-
-#: captcha.php:519
-msgid "CAPTCHA complexity level"
-msgstr "Niveau de compléxité du CAPTCHA"
-
-#: captcha.php:535
-msgid "Save Changes"
-msgstr "Savegarder les modifications"
-
-#: captcha.php:541
-msgid "If you enjoy our plugin, please give it 5 stars on WordPress"
-msgstr "Si notre extension vous satisfait, merci de la notée avec 5 étoiles dans Wordpress"
-
-#: captcha.php:542
-msgid "Rate the plugin"
-msgstr "Voter pour l'extension"
-
-#: captcha.php:545
-msgid "If there is something wrong about it, please contact us"
-msgstr "Si vous avez une question, n'hésitez pas à nous contacter par "
-
-#: captcha.php:556
-msgid "Congratulations! The PRO version of the plugin is successfully download and activated."
-msgstr "Félicitations! La version PRO de cette extension a été téléchargée et activée avec succès."
-
-#: captcha.php:558
-msgid "Please, go to"
-msgstr "Merci d'allez à"
-
-#: captcha.php:558
-msgid "the setting page"
-msgstr "Options supplémentaires"
-
-#: captcha.php:559
-msgid "You will be redirected automatically in 5 seconds."
-msgstr "Vous allez être redirigé automatiquement dans 5 secondes"
-
-#: captcha.php:564
-msgid "You can download and activate"
-msgstr "Vous pouvez télécharger et activer la version "
-
-#: captcha.php:566
-msgid "version of this plugin by entering Your license key."
-msgstr " de cette extension en donnant votre clé de licence."
-
-#: captcha.php:568
-msgid "You can find your license key on your personal page Client area, by clicking on the link"
-msgstr "Vous pouvez trouver votre clé de licence sur votre page personnelle dans la zone cliente en cliquant sur le lien"
-
-#: captcha.php:570
-msgid "(your username is the email you specify when purchasing the product)."
-msgstr "(votre nom d'utilisateur est l'adresse e-mail que vous avez donné lors de l'achat de l'extension)."
-
-#: captcha.php:578
-#: captcha.php:588
-msgid "Go!"
-msgstr "Allez!"
-
-#: captcha.php:654
-msgid "<strong>ERROR</strong>: Please fill the form."
-msgstr "<strong>ERREUR</strong> : Merci de remplir le formulaire."
-
-#: captcha.php:668
-msgid "<strong>ERROR</strong>: Please enter a valid CAPTCHA value."
-msgstr "<strong>ERREUR</strong> : Merci de compléter le CAPTCHA."
-
-#: captcha.php:675
-msgid "<strong>ERROR</strong>: Please enter a CAPTCHA value."
-msgstr "<strong>ERREUR</strong> : Merci de compléter le CAPTCHA."
-
-#: captcha.php:786
-#: captcha.php:847
-#: captcha.php:870
-#: captcha.php:899
-msgid "Please fill the form."
-msgstr "Merci de remplir le formulaire."
-
-#: captcha.php:792
-#: captcha.php:907
-msgid "Error: You have entered an incorrect CAPTCHA value. Click the BACK button on your browser, and try again."
-msgstr "Erreur: Vous avez saisi un mauvais CAPTCHA. Appuyez sur le bouton retour de votre navigateur et essayez de nouveau."
-
-#: captcha.php:847
-#: captcha.php:855
-#: captcha.php:870
-#: captcha.php:878
-msgid "ERROR"
-msgstr "ERREUR"
-
-#: captcha.php:855
-#: captcha.php:878
+#: captcha.php:90
+msgid "Please enter a CAPTCHA value."
+msgstr "Merci de compléter le CAPTCHA."
+
+#: captcha.php:91
 msgid "Please enter a valid CAPTCHA value."
 msgstr "Merci de compléter le CAPTCHA."
 
-#: captcha.php:931
-#: captcha.php:1233
+#: captcha.php:178
+msgid "Login form"
+msgstr "Formulaire de connexion"
+
+#: captcha.php:179
+#: captcha.php:305
+msgid "Registration form"
+msgstr "Formulaire d'enregistrement"
+
+#: captcha.php:179
+msgid "Register form"
+msgstr "Formulaire d'enregistrement"
+
+#: captcha.php:180
+msgid "Reset Password form"
+msgstr "Formulaire de mot de passe perdu"
+
+#: captcha.php:180
+msgid "Lost password form"
+msgstr "Formulaire de mot de passe perdu"
+
+#: captcha.php:181
+#: captcha.php:306
+msgid "Comments form"
+msgstr "Formulaire des commentaires"
+
+#: captcha.php:182
+msgid "Hide CAPTCHA in Comments form for registered users"
+msgstr "Cacher le CAPTCHA dans les commentaires pour les utilisateurs enregistrés"
+
+#: captcha.php:187
+msgid "Plus (&#43;)"
+msgstr "Plus (&#43;)"
+
+#: captcha.php:187
+msgid "Plus"
+msgstr "Plus"
+
+#: captcha.php:188
+msgid "Minus (&minus;)"
+msgstr "Moins (&minus;)"
+
+#: captcha.php:188
+msgid "Minus"
+msgstr "Moins"
+
+#: captcha.php:189
+msgid "Multiplication (&times;)"
+msgstr "Multiplication (&times;)"
+
+#: captcha.php:189
+msgid "Multiply"
+msgstr "Multiplie (&times;)"
+
+#: captcha.php:194
+msgid "Numbers"
+msgstr "Nombres"
+
+#: captcha.php:195
+msgid "Words"
+msgstr "Mots"
+
+#: captcha.php:239
+msgid "Please select one item in the block Arithmetic and Complexity for CAPTCHA"
+msgstr "Merci de choisir au moins un élément dans la catégorie mathématique et un dans la catégorie compléxité pour le CAPTCHA"
+
+#: captcha.php:243
+msgid "Settings saved."
+msgstr "Options enregistrées."
+
+#: captcha.php:257
+#: captcha.php:1241
+#: captcha.php:1254
+msgid "Settings"
+msgstr "Réglages"
+
+#: captcha.php:258
+#: captcha.php:1255
+msgid "FAQ"
+msgstr "FAQ"
+
+#: captcha.php:259
+msgid "Go PRO"
+msgstr "Choisir la version PRO"
+
+#: captcha.php:261
+msgid "Notice:"
+msgstr "Avertissement :"
+
+#: captcha.php:261
+msgid "The plugin's settings have been changed. In order to save them please don't forget to click the 'Save Changes' button."
+msgstr "Les paramètres de cette extensions ont été changés. Afin de pouvoir les enregistrer, merci de cliquer sur le bouton 'Enregistrer les modifications'.\""
+
+#: captcha.php:268
+#: captcha.php:293
+#: captcha.php:302
+msgid "Enable CAPTCHA for:"
+msgstr "Activer le CAPTCHA pour :"
+
+#: captcha.php:275
+#: captcha.php:277
+#: captcha.php:280
+msgid "Contact form"
+msgstr "Formulaire de contact"
+
+#: captcha.php:275
+#: captcha.php:277
+#: captcha.php:280
+#: captcha.php:296
+msgid "powered by"
+msgstr "propulsé par"
+
+#: captcha.php:277
+msgid "Activate contact form"
+msgstr "Activer le formulaire de contact"
+
+#: captcha.php:280
+msgid "Download contact form"
+msgstr "Télécharger le formulaire de contact"
+
+#: captcha.php:283
+msgid "If you would like to add Captcha to a custom form, please see"
+msgstr "Si vous voulez ajouter le Captcha à un formulaire, merci de consulter la"
+
+#: captcha.php:296
+msgid "Subscriber"
+msgstr "Abonner"
+
+#: captcha.php:307
+msgid "\"Create a Group\" form"
+msgstr "Formulaire pour \"Créer un groupe\""
+
+#: captcha.php:313
+msgid "Enable CAPTCHA:"
+msgstr "Activer le CAPTCHA pour :"
+
+#: captcha.php:321
+msgid "If you upgrade to Pro version all your settings will be saved."
+msgstr "Si vous passez à la version Pro, tous ces paramètres seront enregistrés."
+
+#: captcha.php:328
+msgid "Unlock premium options by upgrading to a PRO version."
+msgstr "Déploquer les options premium en migrant vers la version PRO."
+
+#: captcha.php:329
+msgid "Learn More"
+msgstr "En savoir plus"
+
+#: captcha.php:332
+msgid "Go"
+msgstr "Passez"
+
+#: captcha.php:339
+msgid "Title for CAPTCHA in the form"
+msgstr "Le titre du CAPTCHA dans les formulaires"
+
+#: captcha.php:343
+msgid "Required symbol"
+msgstr "Symbol obligatoire"
+
+#: captcha.php:349
+msgid "Error messages"
+msgstr "Messages d'erreur"
+
+#: captcha.php:351
+msgid "If CAPTCHA field is empty"
+msgstr "Si le champ CAPTCHA est vide"
+
+#: captcha.php:352
+msgid "If CAPTCHA is incorrect"
+msgstr "Si le CAPTCHA est incorrect"
+
+#: captcha.php:356
+msgid "Arithmetic actions for CAPTCHA"
+msgstr "Opérations arithmétiques  pour le CAPTCHA"
+
+#: captcha.php:370
+msgid "CAPTCHA complexity level"
+msgstr "Niveau de compléxité du CAPTCHA"
+
+#: captcha.php:386
+msgid "Save Changes"
+msgstr "Savegarder les modifications"
+
+#: captcha.php:452
+#: captcha.php:466
+#: captcha.php:473
+#: captcha.php:645
+#: captcha.php:653
+#: captcha.php:669
+#: captcha.php:677
+msgid "ERROR"
+msgstr "ERREUR"
+
+#: captcha.php:590
+#: captcha.php:706
+msgid "Error"
+msgstr "Erreur"
+
+#: captcha.php:590
+#: captcha.php:706
+msgid "Click the BACK button on your browser, and try again."
+msgstr "Appuyez sur le bouton retour de votre navigateur et essayez de nouveau."
+
+#: captcha.php:730
+#: captcha.php:1032
 msgid "zero"
 msgstr "null"
 
-#: captcha.php:932
-#: captcha.php:1234
-#: captcha.php:1399
+#: captcha.php:731
+#: captcha.php:1033
+#: captcha.php:1198
 msgid "one"
 msgstr "un"
 
-#: captcha.php:933
-#: captcha.php:1235
+#: captcha.php:732
+#: captcha.php:1034
 msgid "two"
 msgstr "deux"
 
-#: captcha.php:934
-#: captcha.php:1236
+#: captcha.php:733
+#: captcha.php:1035
 msgid "three"
 msgstr "trois"
 
-#: captcha.php:935
-#: captcha.php:1237
+#: captcha.php:734
+#: captcha.php:1036
 msgid "four"
 msgstr "quatre"
 
-#: captcha.php:936
-#: captcha.php:1238
+#: captcha.php:735
+#: captcha.php:1037
 msgid "five"
 msgstr "cinq"
 
-#: captcha.php:937
-#: captcha.php:1239
-#: captcha.php:1399
+#: captcha.php:736
+#: captcha.php:1038
+#: captcha.php:1198
 msgid "six"
 msgstr "six"
 
-#: captcha.php:938
-#: captcha.php:1240
-#: captcha.php:1387
-#: captcha.php:1393
+#: captcha.php:737
+#: captcha.php:1039
+#: captcha.php:1186
+#: captcha.php:1192
 msgid "seven"
 msgstr "sept"
 
-#: captcha.php:939
-#: captcha.php:1241
-#: captcha.php:1390
+#: captcha.php:738
+#: captcha.php:1040
+#: captcha.php:1189
 msgid "eight"
 msgstr "huit"
 
-#: captcha.php:940
-#: captcha.php:1242
+#: captcha.php:739
+#: captcha.php:1041
 msgid "nine"
 msgstr "neuf"
 
-#: captcha.php:943
-#: captcha.php:1245
+#: captcha.php:742
+#: captcha.php:1044
 msgid "eleven"
 msgstr "onze"
 
-#: captcha.php:944
-#: captcha.php:1246
+#: captcha.php:743
+#: captcha.php:1045
 msgid "twelve"
 msgstr "douze"
 
-#: captcha.php:945
-#: captcha.php:1247
+#: captcha.php:744
+#: captcha.php:1046
 msgid "thirteen"
 msgstr "treize"
 
-#: captcha.php:946
-#: captcha.php:1248
+#: captcha.php:745
+#: captcha.php:1047
 msgid "fourteen"
 msgstr "quatorze"
 
-#: captcha.php:947
-#: captcha.php:1249
+#: captcha.php:746
+#: captcha.php:1048
 msgid "fifteen"
 msgstr "quinze"
 
-#: captcha.php:948
-#: captcha.php:1250
+#: captcha.php:747
+#: captcha.php:1049
 msgid "sixteen"
 msgstr "seize"
 
-#: captcha.php:949
-#: captcha.php:1251
+#: captcha.php:748
+#: captcha.php:1050
 msgid "seventeen"
 msgstr "dix-sept"
 
-#: captcha.php:950
-#: captcha.php:1252
+#: captcha.php:749
+#: captcha.php:1051
 msgid "eighteen"
 msgstr "dix-huit"
 
-#: captcha.php:951
-#: captcha.php:1253
+#: captcha.php:750
+#: captcha.php:1052
 msgid "nineteen"
 msgstr "dix-neuf"
 
-#: captcha.php:954
-#: captcha.php:1256
+#: captcha.php:753
+#: captcha.php:1055
 msgid "ten"
 msgstr "dix"
 
-#: captcha.php:955
-#: captcha.php:1257
+#: captcha.php:754
+#: captcha.php:1056
 msgid "twenty"
 msgstr "vingt"
 
-#: captcha.php:956
-#: captcha.php:1258
+#: captcha.php:755
+#: captcha.php:1057
 msgid "thirty"
 msgstr "trente"
 
-#: captcha.php:957
-#: captcha.php:1259
+#: captcha.php:756
+#: captcha.php:1058
 msgid "forty"
 msgstr "quarante"
 
-#: captcha.php:958
-#: captcha.php:1260
+#: captcha.php:757
+#: captcha.php:1059
 msgid "fifty"
 msgstr "cinquante"
 
-#: captcha.php:959
-#: captcha.php:1261
+#: captcha.php:758
+#: captcha.php:1060
 msgid "sixty"
 msgstr "soixante"
 
-#: captcha.php:960
-#: captcha.php:1262
+#: captcha.php:759
+#: captcha.php:1061
 msgid "seventy"
 msgstr "soixante-dix"
 
-#: captcha.php:961
-#: captcha.php:1263
+#: captcha.php:760
+#: captcha.php:1062
 msgid "eighty"
 msgstr "quatre-vingt"
 
-#: captcha.php:962
-#: captcha.php:1264
+#: captcha.php:761
+#: captcha.php:1063
 msgid "ninety"
 msgstr "quatre-vingt-dix"
 
-#: captcha.php:1049
-#: captcha.php:1351
+#: captcha.php:848
+#: captcha.php:1150
 msgid "and"
 msgstr "et"
 
-#: captcha.php:1122
+#: captcha.php:921
 msgid "Encryption password is not set"
 msgstr "Le mot de passe de cryptage n'est pas défini"
 
-#: captcha.php:1142
+#: captcha.php:941
 msgid "Decryption password is not set"
 msgstr "Le mot de passe de décryptage n'est pas défini"
 
-#: captcha.php:1438
+#: captcha.php:1256
 msgid "Support"
 msgstr "Support"
 
-#: captcha.php:1505
-msgid "It's time to upgrade your <strong>Captcha plugin</strong> to <strong>PRO</strong> version"
-msgstr "Il est peut-être nécessaiire de faire évoluer votre extension <strong>Captcha</strong> vers la version <strong>PRO</strong>"
+#~ msgid "requires"
+#~ msgstr "requis"
 
-#: captcha.php:1506
-msgid "Extend standard plugin functionality with new great options"
-msgstr "Etend les fonctionalités classiques de l'extension avec des nouvelles options"
+#~ msgid ""
+#~ "or higher, that is why it has been deactivated! Please upgrade WordPress "
+#~ "and try again."
+#~ msgstr ""
+#~ "ou supérieure, c'est pourquoi il a été désactivé! Merci de faire la mise "
+#~ "à jour de WordPress puis de ré-essayer."
+
+#~ msgid "Back to the WordPress"
+#~ msgstr "Retour à WordPress"
+
+#~ msgid "Plugins page"
+#~ msgstr "Page des extensions"
+
+#~ msgid "It’s time to upgrade your"
+#~ msgstr "C'est le moment de mettre à jour votre "
+
+#~ msgid "to"
+#~ msgstr "à"
+
+#~ msgid "version!"
+#~ msgstr "version"
+
+#~ msgid "Extend standard plugin functionality with new great options."
+#~ msgstr ""
+#~ "Etend les fonctionalités classiques de l'extension avec des nouvelles "
+#~ "options."
+
+#~ msgid "If you enjoy our plugin, please give it 5 stars on WordPress"
+#~ msgstr ""
+#~ "Si notre extension vous satisfait, merci de la notée avec 5 étoiles dans "
+#~ "Wordpress"
+
+#~ msgid "Rate the plugin"
+#~ msgstr "Voter pour l'extension"
+
+#~ msgid "If there is something wrong about it, please contact us"
+#~ msgstr "Si vous avez une question, n'hésitez pas à nous contacter"
+
+#~ msgid "Wrong license key"
+#~ msgstr "Clé de licence incorrecte"
+
+#~ msgid ""
+#~ "Something went wrong. Please try again later. If the error appears again, "
+#~ "please contact us"
+#~ msgstr ""
+#~ "Il est survenu une erreur. Essayer de nouveau. Si l'erreur se produit de "
+#~ "nouveau, merci de contacter <a href=http://support.bestwebsoft."
+#~ "com>BestWebSoft</a>. Nous sommes désolés pour le désagrément."
+
+#~ msgid "We are sorry for inconvenience."
+#~ msgstr "Nous sommes désolés pour le désagrément."
+
+#~ msgid "This license key is bind to another site"
+#~ msgstr "La clé de licence correspond à un autre site."
+
+#~ msgid ""
+#~ "Unfortunately, you have exceeded the number of available tries per day. "
+#~ "Please, upload the plugin manually."
+#~ msgstr ""
+#~ "Désoler mais vous avez dépassé le nombre d'essai de la journée. Merci de "
+#~ "télécharger l'extension manuellement."
+
+#~ msgid ""
+#~ "Unfortunately, Your license has expired. To continue getting top-priority "
+#~ "support and plugin updates you should extend it in your"
+#~ msgstr ""
+#~ "Désoler, votre licence est terminée. Pour continuer à disposer du support "
+#~ "rapide et des mises à jour de l'extension vous devez la renouveller dans "
+#~ "votre"
+
+#~ msgid ""
+#~ "Unfortunately, the PRO licence was already installed to this domain. The "
+#~ "PRO Trial license can be installed only once."
+#~ msgstr ""
+#~ "Une licence a déjà été installée sur ce domaine. La licence d'évaluation "
+#~ "ne peut-être installée qu'une seule fois."
+
+#~ msgid ""
+#~ "Failed to download the zip archive. Please, upload the plugin manually"
+#~ msgstr ""
+#~ "Erreur de téléchargement de l'archive ZIP. Merci de télécharger "
+#~ "l'extension manuellement."
+
+#~ msgid "Failed to open the zip archive. Please, upload the plugin manually"
+#~ msgstr ""
+#~ "Erreur d'ouverture de l'archive zip. Merci de télécharger l'extension "
+#~ "manuellement."
+
+#~ msgid ""
+#~ "Your server does not support either ZipArchive or Phar. Please, upload "
+#~ "the plugin manually"
+#~ msgstr ""
+#~ "Votre server n'a pas le support du format des archives ZIP ou Phar. Merci "
+#~ "de télécharger l'extension manuellement."
+
+#~ msgid "UploadDir is not writable. Please, upload the plugin manually"
+#~ msgstr ""
+#~ "Erreur d'ouverture de l'archive zip. Merci de télécharger l'extension "
+#~ "manuellement."
+
+#~ msgid ""
+#~ "Something went wrong. Try again later or upload the plugin manually. We "
+#~ "are sorry for inconvenience."
+#~ msgstr ""
+#~ "Il est survenu une erreur. Essayer de nouveau ou bien télécharger "
+#~ "l'extension manuellement.Nous sommes désolés pour le désagrément."
+
+#~ msgid "Please, enter Your license key"
+#~ msgstr "Merci de saisir votre clé de licence"
+
+#~ msgid ""
+#~ "Congratulations! The PRO version of the plugin is successfully download "
+#~ "and activated."
+#~ msgstr ""
+#~ "Félicitations! La version PRO de cette extension a été téléchargée et "
+#~ "activée avec succès."
+
+#~ msgid "Please, go to"
+#~ msgstr "Merci d'allez à"
+
+#~ msgid "the setting page"
+#~ msgstr "Options supplémentaires"
+
+#~ msgid "You will be redirected automatically in 5 seconds."
+#~ msgstr "Vous allez être redirigé automatiquement dans 5 secondes"
+
+#~ msgid "You can download and activate"
+#~ msgstr "Vous pouvez télécharger et activer la version "
+
+#~ msgid "version of this plugin by entering Your license key."
+#~ msgstr " de cette extension en donnant votre clé de licence."
+
+#~ msgid ""
+#~ "You can find your license key on your personal page Client area, by "
+#~ "clicking on the link"
+#~ msgstr ""
+#~ "Vous pouvez trouver votre clé de licence sur votre page personnelle dans "
+#~ "la zone cliente en cliquant sur le lien"
+
+#~ msgid ""
+#~ "(your username is the email you specify when purchasing the product)."
+#~ msgstr ""
+#~ "(votre nom d'utilisateur est l'adresse e-mail que vous avez donné lors de "
+#~ "l'achat de l'extension)."
+
+#~ msgid "Activate"
+#~ msgstr "Activer"
+
+#~ msgid ""
+#~ "This license key is valid, but Your license has expired. If you want to "
+#~ "update our plugin in future, you should extend the license."
+#~ msgstr ""
+#~ "La clé de licence est valide mais votre durée de validité est passée. "
+#~ "Pour continuer à disposer du support rapide et des mises à jour de "
+#~ "l'extension vous devez la renouveller."
+
+#~ msgid "Unfortunately, you have exceeded the number of available tries."
+#~ msgstr ""
+#~ "Désoler mais vous avez dépassé le nombre d'essai de la journée. Merci de "
+#~ "télécharger l'extension manuellement."
+
+#~ msgid "The license key is valid. Your license will expire on"
+#~ msgstr "La clé de licence est valide. Votre licence se termine le "
+
+#~ msgid "The license key is valid."
+#~ msgstr "La clé de licence est valide."
+
+#~ msgid "Please, enter your license key"
+#~ msgstr "Merci de saisir votre clé de liecence"
+
+#~ msgid ""
+#~ "If needed you can check if the license key is correct or reenter it in "
+#~ "the field below. You can find your license key on your personal page - "
+#~ "Client area - on our website"
+#~ msgstr ""
+#~ "Si nécessaire vous pouvez vérifier que la clé de licence est correcte ou "
+#~ "la saisir de nouveau dans le champ ci-dessous. Vous pouvez trouver votre "
+#~ "clé de licence sur votre page personnelle (zone client) sur notre site "
+#~ "web."
+
+#~ msgid ""
+#~ "(your username is the email you specify when purchasing the product). If "
+#~ "necessary, please submit \"Lost your password?\" request."
+#~ msgstr ""
+#~ "(votre nom d'utilisateur est l'adresse e-mail que vous avez donné lors de "
+#~ "l'achat de l'extension). Si nécessaire, utilisez la fonction de demande "
+#~ "de mot de passe perdu."
+
+#~ msgid "Check license key"
+#~ msgstr "Vérifier la clé de licence"
+
+#~ msgid ""
+#~ "WARNING: We have noticed illegal use of our plugin by you. We strongly "
+#~ "recommend you to solve the problem within 24 hours, otherwise the plugin "
+#~ "will be deactivated. Please go to your personal"
+#~ msgstr ""
+#~ "AVERTISSEMENT : Nous avons détecté une utilisation abusive de notre "
+#~ "extension. Nous vous recommandons de résoudre ce problème dans les 24 "
+#~ "heures, sinon l'extension sera rendue inactive. Merci de vous rendre dans "
+#~ "votre espace personel"
+
+#~ msgid ""
+#~ "(your username is the email you specify when purchasing the product), "
+#~ "where you can make the necessary changes."
+#~ msgstr ""
+#~ "(votre nom d'utilisateur est l'adresse e-mail que vous avez donné lors de "
+#~ "l'achat de l'extension), où vous pourrez faire les modifications "
+#~ "nécessaires."
+
+#~ msgid ""
+#~ "Your license has expired. To continue getting top-priority support and "
+#~ "plugin updates you should extend it."
+#~ msgstr ""
+#~ "Votre licence est terminée. Pour continuer à disposer du support rapide "
+#~ "et des mises à jour de l'extension vous devez la renouveller."
+
+#~ msgid "Learn more"
+#~ msgstr "En savoir plus"
+
+#~ msgid "You license for"
+#~ msgstr "Votre licence pour"
+
+#~ msgid "expires on"
+#~ msgstr "se termine le"
+
+#~ msgid "and you won't be granted TOP-PRIORITY SUPPORT or UPDATES."
+#~ msgstr "et vous ne diposerez plus du support rapide et des mises à jour."
+
+#~ msgid "Close"
+#~ msgstr "Fermer"
 
 #~ msgid "Not set"
 #~ msgstr "Non défini"
@@ -632,14 +757,8 @@ msgstr "Etend les fonctionalités classiques de l'extension avec des nouvelles o
 #~ msgid "Installed plugins"
 #~ msgstr "Extensions installées"
 
-#~ msgid "Learn more"
-#~ msgstr "En savoir plus"
-
 #~ msgid "Activate this plugin"
 #~ msgstr "Activer cette extension"
-
-#~ msgid "Activate"
-#~ msgstr "Activer"
 
 #~ msgid "DONATE"
 #~ msgstr "Faire un don"
@@ -698,6 +817,28 @@ msgstr "Etend les fonctionalités classiques de l'extension avec des nouvelles o
 #~ msgid "Send to custom email &#187;"
 #~ msgstr "Envoyer à un e-mail spécifique &#187;"
 
+#~ msgid "Go!"
+#~ msgstr "Allez!"
+
+#~ msgid "<strong>ERROR</strong>: Please fill the form."
+#~ msgstr "<strong>ERREUR</strong> : Merci de remplir le formulaire."
+
+#~ msgid "<strong>ERROR</strong>: Please enter a valid CAPTCHA value."
+#~ msgstr "<strong>ERREUR</strong> : Merci de compléter le CAPTCHA."
+
+#~ msgid "Please fill the form."
+#~ msgstr "Merci de remplir le formulaire."
+
+#~ msgid ""
+#~ "It's time to upgrade your <strong>Captcha plugin</strong> to <strong>PRO</"
+#~ "strong> version"
+#~ msgstr ""
+#~ "Il est peut-être nécessaiire de faire évoluer votre extension "
+#~ "<strong>Captcha</strong> vers la version <strong>PRO</strong>"
+
+#~ msgid "<strong>ERROR</strong>: Please enter a CAPTCHA value."
+#~ msgstr "<strong>ERREUR</strong> : Merci de compléter le CAPTCHA."
+
 #~ msgid ""
 #~ "This functionality is available in the Pro version of the plugin. For "
 #~ "more details, please follow the link"
@@ -753,15 +894,6 @@ msgstr "Etend les fonctionalités classiques de l'extension avec des nouvelles o
 #~ msgid "Switch to old interface"
 #~ msgstr "Basculer vers l'ancienne interface"
 
-#~ msgid "It's time to upgrade your"
-#~ msgstr "C'est le moment de mettre à jour votre "
-
-#~ msgid "to"
-#~ msgstr "à"
-
-#~ msgid "version"
-#~ msgstr "version"
-
 #~ msgid "(powered by bestwebsoft.com)"
 #~ msgstr "(fourni par bestwebsoft.com)"
 
@@ -778,9 +910,6 @@ msgstr "Etend les fonctionalités classiques de l'extension avec des nouvelles o
 
 #~ msgid "Difficulty for CAPTCHA"
 #~ msgstr "La difficulté pour le CAPTCHA"
-
-#~ msgid "That CAPTCHA was incorrect."
-#~ msgstr "Le CAPTCHA est incorrect."
 
 #~ msgid "The password of encryption is not set"
 #~ msgstr "Le mot de passe de cryptage n'est pas défini"

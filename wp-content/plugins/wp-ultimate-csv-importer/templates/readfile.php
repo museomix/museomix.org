@@ -34,14 +34,35 @@
  * Notices must display the words
  * "Copyright Smackcoders. 2014. All rights reserved".
  ********************************************************************************/
+$parse_uri = explode( 'wp-content', $_SERVER['SCRIPT_FILENAME'] );
 
-require_once('../includes/WPImporter_includes_helper.php');
-require_once('../../../../wp-load.php');
+require_once($parse_uri[0]."wp-load.php");
+$impCheckobj = CallWPImporterObj::checkSecurity();
+if($impCheckobj != 'true')
+die($impCheckobj);
+$noncevar = isset($_REQUEST['wpnonce']) ? $_REQUEST['wpnonce'] : '';
+if(! wp_verify_nonce($noncevar, 'smack_nonce'))
+die('You are not allowed to do this operation.Please contact your admin.');
+
+$requested_module = "";
+if(isset($requested_module))
+$requested_module = $_REQUEST['checkmodule'];
+$post_url = admin_url() . 'admin.php?page=' . WP_CONST_ULTIMATE_CSV_IMP_SLUG . '/index.php&__module=' . $requested_module . '&step=mapping_settings';
+ if($_SERVER['HTTP_REFERER'] != urldecode($_SERVER['HTTP_REFERER'])){
+                if($post_url != urldecode($_SERVER['HTTP_REFERER']))
+                die('Your requested url were wrong! Please contact your admin.');
+        }
+        else {
+                if($post_url != $_SERVER['HTTP_REFERER'] )
+                die('Your requested url were wrong! Please contact your admin.');
+        }
+
 $impObj = CallWPImporterObj::getInstance(); 
-$filename=$_POST['file_name'];
+$filename = $_POST['file_name'];
 $delimeter = '';
-$result = $impObj->csv_file_data($filename);
+$result = $impObj->csv_file_readdata($filename, $impObj);
+#$result = $impObj->csv_file_data($filename);
 foreach($result[$_REQUEST['record_no']] as $key => $value) {
-	$data[] = $value;
+	$data[] = html_entity_decode($value);
 }
 print_r(json_encode($data));

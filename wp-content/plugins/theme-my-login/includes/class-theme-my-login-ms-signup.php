@@ -112,15 +112,15 @@ class Theme_My_Login_MS_Signup extends Theme_My_Login_Abstract {
 		$i18n_signup['user'] = _x( 'user', 'Multisite active signup type' );
 
 		if ( is_super_admin() )
-			echo '<p class="message">' . sprintf( __( 'Greetings Site Administrator! You are currently allowing &#8220;%s&#8221; registrations. To change or disable registration go to your <a href="%s">Options page</a>.' ), $i18n_signup[$active_signup], esc_url( network_admin_url( 'ms-options.php' ) ) ) . '</p>';
+			echo '<p class="message">' . sprintf( __( 'Greetings Site Administrator! You are currently allowing &#8220;%s&#8221; registrations. To change or disable registration go to your <a href="%s">Options page</a>.', 'theme-my-login' ), $i18n_signup[$active_signup], esc_url( network_admin_url( 'ms-options.php' ) ) ) . '</p>';
 
 		$newblogname = isset( $_GET['new'] ) ? strtolower( preg_replace( '/^-|-$|[^-a-zA-Z0-9]/', '', $_GET['new'] ) ) : null;
 
 		$current_user = wp_get_current_user();
 		if ( $active_signup == "none" ) {
-			_e( 'Registration has been disabled.' );
+			_e( 'Registration has been disabled.', 'theme-my-login' );
 		} elseif ( $active_signup == 'blog' && ! is_user_logged_in() ) {
-			printf( __( 'You must first <a href="%s">log in</a>, and then you can create a new site.' ), wp_login_url( Theme_My_Login_Common::get_current_url() ) );
+			printf( __( 'You must first <a href="%s">log in</a>, and then you can create a new site.', 'theme-my-login' ), wp_login_url( Theme_My_Login_Common::get_current_url() ) );
 		} else {
 			$stage = isset( $_POST['stage'] ) ?  $_POST['stage'] : 'default';
 			switch ( $stage ) {
@@ -144,14 +144,14 @@ class Theme_My_Login_MS_Signup extends Theme_My_Login_Abstract {
 						wpmu_signup_user( $user_name, $user_email, apply_filters( 'add_signup_meta', array() ) );
 
 						?>
-						<h2><?php printf( __( '%s is your new username' ), $user_name) ?></h2>
-						<p><?php _e( 'But, before you can start using your new username, <strong>you must activate it</strong>.' ) ?></p>
-						<p><?php printf(__( 'Check your inbox at <strong>%1$s</strong> and click the link given.' ),  $user_email) ?></p>
-						<p><?php _e( 'If you do not activate your username within two days, you will have to sign up again.' ); ?></p>
+						<h2><?php printf( __( '%s is your new username', 'theme-my-login' ), $user_name) ?></h2>
+						<p><?php _e( 'But, before you can start using your new username, <strong>you must activate it</strong>.', 'theme-my-login' ) ?></p>
+						<p><?php printf(__( 'Check your inbox at <strong>%1$s</strong> and click the link given.', 'theme-my-login' ),  $user_email) ?></p>
+						<p><?php _e( 'If you do not activate your username within two days, you will have to sign up again.', 'theme-my-login' ); ?></p>
 						<?php
 						do_action( 'signup_finished' );
 					} else {
-						_e( 'User registration has been disabled.' );
+						_e( 'User registration has been disabled.', 'theme-my-login' );
 					}
 				break;
 				case 'validate-blog-signup':
@@ -183,24 +183,24 @@ class Theme_My_Login_MS_Signup extends Theme_My_Login_Abstract {
 
 						wpmu_signup_blog( $domain, $path, $blog_title, $user_name, $user_email, $meta );
 						?>
-						<h2><?php printf( __( 'Congratulations! Your new site, %s, is almost ready.' ), "<a href='http://{$domain}{$path}'>{$blog_title}</a>" ) ?></h2>
+						<h2><?php printf( __( 'Congratulations! Your new site, %s, is almost ready.', 'theme-my-login' ), "<a href='http://{$domain}{$path}'>{$blog_title}</a>" ) ?></h2>
 
-						<p><?php _e( 'But, before you can start using your site, <strong>you must activate it</strong>.' ) ?></p>
-						<p><?php printf( __( 'Check your inbox at <strong>%s</strong> and click the link given.' ),  $user_email) ?></p>
-						<p><?php _e( 'If you do not activate your site within two days, you will have to sign up again.' ); ?></p>
-						<h2><?php _e( 'Still waiting for your email?' ); ?></h2>
+						<p><?php _e( 'But, before you can start using your site, <strong>you must activate it</strong>.', 'theme-my-login' ) ?></p>
+						<p><?php printf( __( 'Check your inbox at <strong>%s</strong> and click the link given.', 'theme-my-login' ),  $user_email) ?></p>
+						<p><?php _e( 'If you do not activate your site within two days, you will have to sign up again.', 'theme-my-login' ); ?></p>
+						<h2><?php _e( 'Still waiting for your email?', 'theme-my-login' ); ?></h2>
 						<p>
-							<?php _e( 'If you haven&#8217;t received your email yet, there are a number of things you can do:' ) ?>
+							<?php _e( 'If you haven&#8217;t received your email yet, there are a number of things you can do:', 'theme-my-login' ) ?>
 							<ul id="noemail-tips">
-								<li><p><strong><?php _e( 'Wait a little longer. Sometimes delivery of email can be delayed by processes outside of our control.' ) ?></strong></p></li>
-								<li><p><?php _e( 'Check the junk or spam folder of your email client. Sometime emails wind up there by mistake.' ) ?></p></li>
-								<li><?php printf( __( 'Have you entered your email correctly?  You have entered %s, if it&#8217;s incorrect, you will not receive your email.' ), $user_email ) ?></li>
+								<li><p><strong><?php _e( 'Wait a little longer. Sometimes delivery of email can be delayed by processes outside of our control.', 'theme-my-login' ) ?></strong></p></li>
+								<li><p><?php _e( 'Check the junk or spam folder of your email client. Sometime emails wind up there by mistake.', 'theme-my-login' ) ?></p></li>
+								<li><?php printf( __( 'Have you entered your email correctly?  You have entered %s, if it&#8217;s incorrect, you will not receive your email.', 'theme-my-login' ), $user_email ) ?></li>
 							</ul>
 						</p>
 						<?php
 						do_action( 'signup_finished' );
 					} else {
-						_e( 'Site registration has been disabled.' );
+						_e( 'Site registration has been disabled.', 'theme-my-login' );
 					}
 					break;
 				case 'gimmeanotherblog':
@@ -224,9 +224,9 @@ class Theme_My_Login_MS_Signup extends Theme_My_Login_Abstract {
 
 					wpmu_create_blog( $domain, $path, $blog_title, $current_user->ID, $meta, $wpdb->siteid );
 					?>
-					<h2><?php printf( __( 'The site %s is yours.' ), "<a href='http://{$domain}{$path}'>{$blog_title}</a>" ) ?></h2>
+					<h2><?php printf( __( 'The site %s is yours.', 'theme-my-login' ), "<a href='http://{$domain}{$path}'>{$blog_title}</a>" ) ?></h2>
 					<p>
-						<?php printf( __( '<a href="http://%1$s">http://%2$s</a> is your new site.  <a href="%3$s">Log in</a> as &#8220;%4$s&#8221; using your existing password.' ), $domain.$path, $domain.$path, "http://" . $domain.$path . "wp-login.php", $current_user->user_login ) ?>
+						<?php printf( __( '<a href="http://%1$s">http://%2$s</a> is your new site.  <a href="%3$s">Log in</a> as &#8220;%4$s&#8221; using your existing password.', 'theme-my-login' ), $domain.$path, $domain.$path, "http://" . $domain.$path . "wp-login.php", $current_user->user_login ) ?>
 					</p>
 					<?php
 					do_action( 'signup_finished' );
@@ -242,17 +242,17 @@ class Theme_My_Login_MS_Signup extends Theme_My_Login_Abstract {
 					elseif ( is_user_logged_in() == false && ( $active_signup == 'all' || $active_signup == 'user' ) )
 						$this->signup_user( $newblogname, $user_email );
 					elseif ( is_user_logged_in() == false && ( $active_signup == 'blog' ) )
-						_e( 'Sorry, new registrations are not allowed at this time.' );
+						_e( 'Sorry, new registrations are not allowed at this time.', 'theme-my-login' );
 					else
-						_e( 'You are logged in already. No need to register again!' );
+						_e( 'You are logged in already. No need to register again!', 'theme-my-login' );
 
 					if ( $newblogname ) {
 						$newblog = get_blogaddress_by_name( $newblogname );
 
 						if ( $active_signup == 'blog' || $active_signup == 'all' )
-							printf( __( '<p><em>The site you were looking for, <strong>%s</strong> does not exist, but you can create it now!</em></p>' ), $newblog );
+							printf( __( '<p><em>The site you were looking for, <strong>%s</strong> does not exist, but you can create it now!</em></p>', 'theme-my-login' ), $newblog );
 						else
-							printf( __( '<p><em>The site you were looking for, <strong>%s</strong>, does not exist.</em></p>' ), $newblog );
+							printf( __( '<p><em>The site you were looking for, <strong>%s</strong>, does not exist.</em></p>', 'theme-my-login' ), $newblog );
 					}
 					break;
 			}
@@ -285,7 +285,7 @@ class Theme_My_Login_MS_Signup extends Theme_My_Login_Abstract {
 
 		$theme_my_login = Theme_My_Login::get_object();
 
-		$template =& $theme_my_login->get_active_instance();
+		$template = $theme_my_login->get_active_instance();
 
 		// allow definition of default variables
 		$filtered_results = apply_filters( 'signup_user_init', array( 'user_name' => $user_name, 'user_email' => $user_email, 'errors' => $theme_my_login->errors ) );
@@ -315,7 +315,7 @@ class Theme_My_Login_MS_Signup extends Theme_My_Login_Abstract {
 
 		$theme_my_login = Theme_My_Login::get_object();
 
-		$template =& $theme_my_login->get_active_instance();
+		$template = $theme_my_login->get_active_instance();
 
 		// allow definition of default variables
 		$filtered_results = apply_filters( 'signup_blog_init', array( 'user_name' => $user_name, 'user_email' => $user_email, 'blogname' => $blogname, 'blog_title' => $blog_title, 'errors' => $theme_my_login->errors ) );
@@ -348,7 +348,7 @@ class Theme_My_Login_MS_Signup extends Theme_My_Login_Abstract {
 
 		$theme_my_login = Theme_My_Login::get_object();
 
-		$template =& $theme_my_login->get_active_instance();
+		$template = $theme_my_login->get_active_instance();
 
 		// allow definition of default variables
 		$filtered_results = apply_filters( 'signup_another_blog_init', array( 'blogname' => $blogname, 'blog_title' => $blog_title, 'errors' => $theme_my_login->errors ) );
@@ -394,14 +394,14 @@ class Theme_My_Login_MS_Signup extends Theme_My_Login_Abstract {
 
 		if ( empty( $_GET['key'] ) && empty( $_POST['key'] ) ) { ?>
 
-			<h2><?php _e( 'Activation Key Required' ) ?></h2>
+			<h2><?php _e( 'Activation Key Required', 'theme-my-login' ) ?></h2>
 			<form name="activateform" id="activateform" method="post" action="<?php $template->the_action_url( 'activate' ); ?>">
 				<p>
-					<label for="key<?php $template->the_instance(); ?>"><?php _e( 'Activation Key:' ) ?></label>
+					<label for="key<?php $template->the_instance(); ?>"><?php _e( 'Activation Key:', 'theme-my-login' ) ?></label>
 					<br /><input type="text" name="key<?php $template->the_instance(); ?>" id="key" value="" size="50" />
 				</p>
 				<p class="submit">
-					<input id="submit<?php $template->the_instance(); ?>" type="submit" name="Submit" class="submit" value="<?php esc_attr_e( 'Activate' ) ?>" />
+					<input id="submit<?php $template->the_instance(); ?>" type="submit" name="Submit" class="submit" value="<?php esc_attr_e( 'Activate', 'theme-my-login' ) ?>" />
 				</p>
 			</form>
 
@@ -413,18 +413,18 @@ class Theme_My_Login_MS_Signup extends Theme_My_Login_Abstract {
 				if ( 'already_active' == $result->get_error_code() || 'blog_taken' == $result->get_error_code() ) {
 					$signup = $result->get_error_data();
 					?>
-					<h2><?php _e( 'Your account is now active!' ); ?></h2>
+					<h2><?php _e( 'Your account is now active!', 'theme-my-login' ); ?></h2>
 					<?php
 					echo '<p class="lead-in">';
 					if ( $signup->domain . $signup->path == '' ) {
-						printf( __( 'Your account has been activated. You may now <a href="%1$s">login</a> to the site using your chosen username of &#8220;%2$s&#8221;.  Please check your email inbox at %3$s for your password and login instructions. If you do not receive an email, please check your junk or spam folder. If you still do not receive an email within an hour, you can <a href="%4$s">reset your password</a>.' ), network_site_url( 'wp-login.php', 'login' ), $signup->user_login, $signup->user_email, network_site_url( 'wp-login.php?action=lostpassword', 'login' ) );
+						printf( __( 'Your account has been activated. You may now <a href="%1$s">login</a> to the site using your chosen username of &#8220;%2$s&#8221;.  Please check your email inbox at %3$s for your password and login instructions. If you do not receive an email, please check your junk or spam folder. If you still do not receive an email within an hour, you can <a href="%4$s">reset your password</a>.', 'theme-my-login' ), network_site_url( 'wp-login.php', 'login' ), $signup->user_login, $signup->user_email, network_site_url( 'wp-login.php?action=lostpassword', 'login' ) );
 					} else {
-						printf( __( 'Your site at <a href="%1$s">%2$s</a> is active. You may now log in to your site using your chosen username of &#8220;%3$s&#8221;.  Please check your email inbox at %4$s for your password and login instructions.  If you do not receive an email, please check your junk or spam folder.  If you still do not receive an email within an hour, you can <a href="%5$s">reset your password</a>.' ), 'http://' . $signup->domain, $signup->domain, $signup->user_login, $signup->user_email, network_site_url( 'wp-login.php?action=lostpassword' ) );
+						printf( __( 'Your site at <a href="%1$s">%2$s</a> is active. You may now log in to your site using your chosen username of &#8220;%3$s&#8221;.  Please check your email inbox at %4$s for your password and login instructions.  If you do not receive an email, please check your junk or spam folder.  If you still do not receive an email within an hour, you can <a href="%5$s">reset your password</a>.', 'theme-my-login' ), 'http://' . $signup->domain, $signup->domain, $signup->user_login, $signup->user_email, network_site_url( 'wp-login.php?action=lostpassword' ) );
 					}
 					echo '</p>';
 				} else {
 					?>
-					<h2><?php _e( 'An error occurred during the activation' ); ?></h2>
+					<h2><?php _e( 'An error occurred during the activation', 'theme-my-login' ); ?></h2>
 					<?php
 					echo '<p>' . $result->get_error_message() . '</p>';
 				}
@@ -433,17 +433,17 @@ class Theme_My_Login_MS_Signup extends Theme_My_Login_Abstract {
 				$url = get_blogaddress_by_id( (int) $blog_id );
 				$user = new WP_User( (int) $user_id );
 				?>
-				<h2><?php _e( 'Your account is now active!' ); ?></h2>
+				<h2><?php _e( 'Your account is now active!', 'theme-my-login' ); ?></h2>
 
 				<div id="signup-welcome">
-					<p><span class="h3"><?php _e( 'Username:' ); ?></span> <?php echo $user->user_login ?></p>
-					<p><span class="h3"><?php _e( 'Password:' ); ?></span> <?php echo $password; ?></p>
+					<p><span class="h3"><?php _e( 'Username:', 'theme-my-login' ); ?></span> <?php echo $user->user_login ?></p>
+					<p><span class="h3"><?php _e( 'Password:', 'theme-my-login' ); ?></span> <?php echo $password; ?></p>
 				</div>
 
 				<?php if ( $url != network_home_url( '', 'http' ) ) : switch_to_blog( (int) $blog_id ); ?>
-					<p class="view"><?php printf( __( 'Your account is now activated. <a href="%1$s">View your site</a> or <a href="%2$s">Login</a>' ), $url, wp_login_url() ); ?></p>
+					<p class="view"><?php printf( __( 'Your account is now activated. <a href="%1$s">View your site</a> or <a href="%2$s">Login</a>', 'theme-my-login' ), $url, wp_login_url() ); ?></p>
 				<?php restore_current_blog(); else: ?>
-					<p class="view"><?php printf( __( 'Your account is now activated. <a href="%1$s">Login</a> or go back to the <a href="%2$s">homepage</a>.' ), network_site_url( 'wp-login.php', 'login' ), network_home_url() ); ?></p>
+					<p class="view"><?php printf( __( 'Your account is now activated. <a href="%1$s">Login</a> or go back to the <a href="%2$s">homepage</a>.', 'theme-my-login' ), network_site_url( 'wp-login.php', 'login' ), network_home_url() ); ?></p>
 				<?php endif;
 			}
 		}
@@ -473,7 +473,7 @@ class Theme_My_Login_MS_Signup extends Theme_My_Login_Abstract {
 	 */
 	public function tml_title( $title, $action ) {
 		if ( 'activate' == $action )
-			$title = __( 'Activate' );
+			$title = __( 'Activate', 'theme-my-login' );
 		return $title;
 	}
 

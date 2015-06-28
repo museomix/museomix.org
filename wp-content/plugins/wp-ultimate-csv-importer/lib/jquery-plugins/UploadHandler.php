@@ -9,9 +9,11 @@
  * Licensed under the MIT license:
  * http://www.opensource.org/licenses/MIT
  */
-
-require_once("../../../../../wp-load.php");
-require_once("../../includes/WPImporter_includes_helper.php");
+$parse_uri = explode( 'wp-content', $_SERVER['SCRIPT_FILENAME'] );
+require_once($parse_uri[0]."wp-load.php");
+$impCheckobj = CallWPImporterObj::checkSecurity();
+if($impCheckobj != 'true')
+die($impCheckobj);
 
 class UploadHandler
 {
@@ -1080,8 +1082,18 @@ class UploadHandler
                                           $index = null, $content_range = null)
     {
 	$post_url = admin_url() . 'admin.php?page=' . WP_CONST_ULTIMATE_CSV_IMP_SLUG . '/index.php&__module=' . $_POST['current_module'] . '&step=uploadfile';
-	if($post_url != $_SERVER['HTTP_REFERER']) 
-		die('Your requested url were wrong! Please contact your admin.');
+	$impCheckobj = CallWPImporterObj::checkSecurity();
+		if($impCheckobj != 'true')
+		die($impCheckobj);
+        if($_SERVER['HTTP_REFERER'] != urldecode($_SERVER['HTTP_REFERER'])){
+                if($post_url != urldecode($_SERVER['HTTP_REFERER']))
+                die('Your requested url were wrong! Please contact your admin.');
+        }
+        else {
+                if($post_url != $_SERVER['HTTP_REFERER'] )
+                die('Your requested url were wrong! Please contact your admin.');
+        }
+
         $file = new stdClass();
         $file->name = $this->get_file_name($name, $type, $index, $content_range);
         $file->size = $this->fix_integer_overflow(intval($size));

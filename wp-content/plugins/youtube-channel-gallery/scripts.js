@@ -1,14 +1,14 @@
 /*------------------------------------------------------------
 Plugin Name: Youtube Channel Gallery
 Plugin URI: http://www.poselab.com/
-Version: 1.8.7
+Version: 2.0.0
 Description: Show a youtube video and a gallery of thumbnails for a youtube channel.
 ------------------------------------------------------------*/	
 jQuery(document).ready(function($) {
 	
 	//thumbnails
 	var ytcplayer = {};
-	$('.ytclink').click(function(){
+    $('.youtubechannelgallery').on('click', '.ytclink', function(e) {
 		var iframeid = $(this).attr('data-playerid');
 		var youtubeid = $(this).attr('href').split("watch?v=")[1];
 		var quality = $(this).attr('data-quality');
@@ -16,6 +16,19 @@ jQuery(document).ready(function($) {
 		ytcplayVideo (iframeid, youtubeid, quality);
 
 		return false;
+	});
+
+	$('.popup-youtube').magnificPopup({
+		disableOn: 700,
+		type: 'iframe',
+		mainClass: 'mfp-fade',
+		removalDelay: 160,
+		preloader: false,
+
+		fixedContentPos: false,
+        gallery: {
+          enabled:true
+        }
 	});
 
 	function ytcplayVideo (iframeid, youtubeid, quality) {
@@ -54,7 +67,7 @@ jQuery(document).ready(function($) {
 	//http://css-tricks.com/equal-height-blocks-in-rows/
 	var currentTallest = 0,
 	currentRowStart = 0,
-	rowDivs = new Array(),
+	rowDivs = [],
 	$el,
 	topPosition = 0;
 
@@ -86,4 +99,98 @@ jQuery(document).ready(function($) {
  
 	});
 
+    $('.widget.youtubechannelgallery').on('click', '.ytc-paginationlink', function(e) {
+
+      var token = $(this).data('token'),
+          playlist = $(this).data('playlist'),
+          cid = $(this).data('cid'),
+          wid = $(this).data('wid');
+
+	  $.ajax({
+	    url: ytcAjax.ajaxurl,
+	    type: 'POST',
+	    data: {
+	      action: 'ytc_next',
+	      token: token,
+	      cid: cid,
+	      playlist: playlist
+        },
+        success: function(data) {
+
+          var widget = $('#youtubechannelgallery_widget-' + wid);
+
+          widget.find('.ytc-thumbnails').empty();
+
+          widget.find('.ytc-thumbnails').prepend(data);
+
+          $('.popup-youtube').magnificPopup({
+              disableOn: 700,
+              type: 'iframe',
+              mainClass: 'mfp-fade',
+              removalDelay: 160,
+              preloader: false,
+
+              fixedContentPos: false,
+				gallery: {
+				  enabled:true
+				}
+          });
+        }
+      });
+
+	  return true;
+    });
+
+    $('.widget.youtubechannelgallery').on('keyup blur', '.search', function(e) {
+
+      var $this = $(this);
+
+      if (e.type === 'blur' || e.type === 'focusout' || (e.type === 'keyup' && e.which === 13)) {
+
+        var $widget = $('.widget.youtubechannelgallery'),
+            wid = $this.data('wid'),
+            cid = $this.data('cid'),
+            tag = $widget.find('.select-tag').val();
+
+        $.ajax({
+          url: ytcAjax.ajaxurl,
+          type: 'POST',
+          data: {
+            action: 'ytc_search',
+	        cid: cid,
+            q: this.value,
+            tag: tag
+          },
+          success: function(data) {
+
+            if (data === '') {
+              $this.val('');
+              return;
+            }
+
+            var widget = $('#youtubechannelgallery_widget-' + wid);
+
+            widget.find('ytc-thumbnails').remove();
+            widget.find('.ytc-paginationlink').remove();
+
+            widget.prepend(data);
+
+            $('.popup-youtube').magnificPopup({
+                disableOn: 700,
+                type: 'iframe',
+                mainClass: 'mfp-fade',
+                removalDelay: 160,
+                preloader: false,
+
+                fixedContentPos: false,
+		        gallery: {
+		          enabled:true
+		        }
+            });
+          }
+        });
+
+      }
+      return true;
+    });
 });

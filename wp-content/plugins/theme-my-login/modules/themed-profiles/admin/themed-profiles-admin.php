@@ -70,7 +70,7 @@ class Theme_My_Login_Themed_Profiles_Admin extends Theme_My_Login_Abstract {
 	public function activate() {
 		if ( ! $page_id = Theme_My_Login::get_page_id( 'profile' ) ) {
 			$page_id = wp_insert_post( array(
-				'post_title'     => __( 'Your Profile' ),
+				'post_title'     => __( 'Your Profile', 'theme-my-login' ),
 				'post_status'    => 'publish',
 				'post_type'      => 'page',
 				'post_content'   => '[theme-my-login]',
@@ -160,7 +160,7 @@ class Theme_My_Login_Themed_Profiles_Admin extends Theme_My_Login_Abstract {
 			?>
             <input name="<?php echo $this->options_key; ?>[<?php echo $role; ?>][theme_profile]" type="checkbox" id="<?php echo $this->options_key; ?>_<?php echo $role; ?>_theme_profile" value="1"<?php checked( $this->get_option( array( $role, 'theme_profile' ) ) ); ?> />
             <label for="<?php echo $this->options_key; ?>_<?php echo $role; ?>_theme_profile"><?php echo $role_name; ?></label><br />
-    		<?php 
+    		<?php
     	}
 	}
 

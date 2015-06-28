@@ -239,7 +239,7 @@ class Theme_My_Login_User_Moderation_Admin extends Theme_My_Login_Abstract {
 						check_admin_referer( 'approve-user' );
 
 						if ( ! self::approve_user( $user ) )
-							wp_die( __( 'You can&#8217;t edit that user.' ) );
+							wp_die( __( 'You can&#8217;t edit that user.', 'theme-my-login' ) );
 
 						$redirect_to = add_query_arg( 'update', 'approve', $redirect_to );
 						break;
@@ -249,7 +249,7 @@ class Theme_My_Login_User_Moderation_Admin extends Theme_My_Login_Abstract {
 						do_action( 'tml_user_activation_resend', $user );
 
 						if ( ! Theme_My_Login_User_Moderation::new_user_activation_notification( $user ) )
-							wp_die( __( 'The e-mail could not be sent.' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function...' ) );
+							wp_die( __( 'The e-mail could not be sent.', 'theme-my-login' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function...', 'theme-my-login' ) );
 
 						$redirect_to = add_query_arg( 'update', 'sendactivation', $redirect_to );
 						break;
@@ -313,7 +313,7 @@ class Theme_My_Login_User_Moderation_Admin extends Theme_My_Login_Abstract {
 						$actions['approve-user'] = sprintf( '<a href="%1$s">%2$s</a>',
 							add_query_arg( 'wp_http_referer',
 								urlencode( esc_url( stripslashes( $_SERVER['REQUEST_URI'] ) ) ),
-								wp_nonce_url( "users.php?action=approve&amp;user=$user_object->ID", 'approve-user' ) 
+								wp_nonce_url( "users.php?action=approve&amp;user=$user_object->ID", 'approve-user' )
 							),
 							__( 'Approve', 'theme-my-login' )
 						);
@@ -375,7 +375,7 @@ class Theme_My_Login_User_Moderation_Admin extends Theme_My_Login_Abstract {
 		$message  = sprintf( __( 'You have been approved access to %s', 'theme-my-login' ), $blogname         ) . "\r\n\r\n";
 		$message .= sprintf( __( 'Username: %s',                        'theme-my-login' ), $user->user_login ) . "\r\n";
 		$message .= sprintf( __( 'Password: %s',                        'theme-my-login' ), $user_pass        ) . "\r\n\r\n";
-		$message .= site_url( 'wp-login.php', 'login' ) . "\r\n";	
+		$message .= site_url( 'wp-login.php', 'login' ) . "\r\n";
 
 		$title    = sprintf( __( '[%s] Registration Approved', 'theme-my-login' ), $blogname );
 
@@ -383,7 +383,7 @@ class Theme_My_Login_User_Moderation_Admin extends Theme_My_Login_Abstract {
 		$message  = apply_filters( 'user_approval_notification_message', $message, $user_pass, $user->ID );
 
 		if ( $message && ! wp_mail( $user->user_email, $title, $message ) )
-			  die( '<p>' . __( 'The e-mail could not be sent.' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function...' ) . '</p>' );
+			  die( '<p>' . __( 'The e-mail could not be sent.', 'theme-my-login' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function...', 'theme-my-login' ) . '</p>' );
 
 		return true;
 	}
@@ -422,7 +422,7 @@ class Theme_My_Login_User_Moderation_Admin extends Theme_My_Login_Abstract {
 		$message = apply_filters( 'user_denial_notification_message', $message, $user_id );
 
 		if ( $message && ! wp_mail( $user->user_email, $title, $message ) )
-			  die( '<p>' . __( 'The e-mail could not be sent.' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function...' ) . '</p>' );
+			  die( '<p>' . __( 'The e-mail could not be sent.', 'theme-my-login' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function...', 'theme-my-login' ) . '</p>' );
 	}
 }
 

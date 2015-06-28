@@ -21,7 +21,7 @@ class Theme_My_Login extends Theme_My_Login_Abstract {
 	 * @since 6.3.2
 	 * @const string
 	 */
-	const version = '6.3.8';
+	const version = '6.3.12';
 
 	/**
 	 * Holds options key
@@ -114,11 +114,11 @@ class Theme_My_Login extends Theme_My_Login_Abstract {
 	 */
 	public static function default_pages() {
 		return apply_filters( 'tml_default_pages', array(
-			'login'        => __( 'Log In'         ),
-			'logout'       => __( 'Log Out'        ),
-			'register'     => __( 'Register'       ),
-			'lostpassword' => __( 'Lost Password'  ),
-			'resetpass'    => __( 'Reset Password' )
+			'login'        => __( 'Log In'        , 'theme-my-login' ),
+			'logout'       => __( 'Log Out'       , 'theme-my-login' ),
+			'register'     => __( 'Register'      , 'theme-my-login' ),
+			'lostpassword' => __( 'Lost Password' , 'theme-my-login' ),
+			'resetpass'    => __( 'Reset Password', 'theme-my-login' )
 		) );
 	}
 
@@ -298,26 +298,56 @@ class Theme_My_Login extends Theme_My_Login_Abstract {
 						}
 					}
 
-					if ( isset( $_REQUEST['error'] ) && 'invalidkey' == $_REQUEST['error'] )
-						$this->errors->add( 'invalidkey', __( 'Sorry, that key does not appear to be valid.' ) );
+					if ( isset( $_REQUEST['error'] ) ) {
+						if ( 'invalidkey' == $_REQUEST['error'] )
+							$this->errors->add( 'invalidkey', __( 'Sorry, that key does not appear to be valid.', 'theme-my-login' ) );
+						elseif ( 'expiredkey' == $_REQUEST['error'] )
+							$this->errors->add( 'expiredkey', __( 'Sorry, that key has expired. Please try again.', 'theme-my-login' ) );
+					}
 
 					do_action( 'lost_password' );
 					break;
 				case 'resetpass' :
 				case 'rp' :
-					$user = self::check_password_reset_key( $_REQUEST['key'], $_REQUEST['login'] );
+					// Dirty hack for now
+					global $rp_login, $rp_key;
 
-					if ( is_wp_error( $user ) ) {
-						$redirect_to = site_url( 'wp-login.php?action=lostpassword&error=invalidkey' );
-						wp_redirect( $redirect_to );
+					list( $rp_path ) = explode( '?', wp_unslash( $_SERVER['REQUEST_URI'] ) );
+					$rp_cookie = 'wp-resetpass-' . COOKIEHASH;
+					if ( isset( $_GET['key'] ) ) {
+						$value = sprintf( '%s:%s', wp_unslash( $_GET['login'] ), wp_unslash( $_GET['key'] ) );
+						setcookie( $rp_cookie, $value, 0, $rp_path, COOKIE_DOMAIN, is_ssl(), true );
+						wp_safe_redirect( remove_query_arg( array( 'key', 'login' ) ) );
 						exit;
 					}
 
-					if ( isset( $_POST['pass1'] ) && $_POST['pass1'] != $_POST['pass2'] ) {
-						$this->errors->add( 'password_reset_mismatch', __( 'The passwords do not match.' ) );
-					} elseif ( isset( $_POST['pass1'] ) && ! empty( $_POST['pass1'] ) ) {
-						self::reset_password( $user, $_POST['pass1'] );
+					if ( isset( $_COOKIE[ $rp_cookie ] ) && 0 < strpos( $_COOKIE[ $rp_cookie ], ':' ) ) {
+						list( $rp_login, $rp_key ) = explode( ':', wp_unslash( $_COOKIE[ $rp_cookie ] ), 2 );
+						$user = check_password_reset_key( $rp_key, $rp_login );
+						if ( isset( $_POST['pass1'] ) && ! hash_equals( $rp_key, $_POST['rp_key'] ) ) {
+							$user = false;
+						}
+					} else {
+						$user = false;
+					}
 
+					if ( ! $user || is_wp_error( $user ) ) {
+						setcookie( $rp_cookie, ' ', time() - YEAR_IN_SECONDS, $rp_path, COOKIE_DOMAIN, is_ssl(), true );
+						if ( $user && $user->get_error_code() === 'expired_key' )
+							wp_redirect( site_url( 'wp-login.php?action=lostpassword&error=expiredkey' ) );
+						else
+							wp_redirect( site_url( 'wp-login.php?action=lostpassword&error=invalidkey' ) );
+						exit;
+					}
+
+					if ( isset( $_POST['pass1'] ) && $_POST['pass1'] != $_POST['pass2'] )
+						$this->errors->add( 'password_reset_mismatch', __( 'The passwords do not match.', 'theme-my-login' ) );
+
+					do_action( 'validate_password_reset', $this->errors, $user );
+
+					if ( ( ! $this->errors->get_error_code() ) && isset( $_POST['pass1'] ) && ! empty( $_POST['pass1'] ) ) {
+						self::reset_password( $user, $_POST['pass1'] );
+						setcookie( $rp_cookie, ' ', time() - YEAR_IN_SECONDS, $rp_path, COOKIE_DOMAIN, is_ssl(), true );
 						$redirect_to = site_url( 'wp-login.php?resetpass=complete' );
 						wp_safe_redirect( $redirect_to );
 						exit;
@@ -409,19 +439,19 @@ class Theme_My_Login extends Theme_My_Login_Abstract {
 
 					// Some parts of this script use the main login form to display a message
 					if		( isset( $_GET['loggedout'] ) && true == $_GET['loggedout'] )
-						$this->errors->add( 'loggedout', __( 'You are now logged out.' ), 'message' );
+						$this->errors->add( 'loggedout', __( 'You are now logged out.', 'theme-my-login' ), 'message' );
 					elseif	( isset( $_GET['registration'] ) && 'disabled' == $_GET['registration'] )
-						$this->errors->add( 'registerdisabled', __( 'User registration is currently not allowed.' ) );
+						$this->errors->add( 'registerdisabled', __( 'User registration is currently not allowed.', 'theme-my-login' ) );
 					elseif	( isset( $_GET['checkemail'] ) && 'confirm' == $_GET['checkemail'] )
-						$this->errors->add( 'confirm', __( 'Check your e-mail for the confirmation link.' ), 'message' );
+						$this->errors->add( 'confirm', __( 'Check your e-mail for the confirmation link.', 'theme-my-login' ), 'message' );
 					elseif ( isset( $_GET['resetpass'] ) && 'complete' == $_GET['resetpass'] )
-						$this->errors->add( 'password_reset', __( 'Your password has been reset.' ), 'message' );
+						$this->errors->add( 'password_reset', __( 'Your password has been reset.', 'theme-my-login' ), 'message' );
 					elseif	( isset( $_GET['checkemail'] ) && 'registered' == $_GET['checkemail'] )
-						$this->errors->add( 'registered', __( 'Registration complete. Please check your e-mail.' ), 'message' );
+						$this->errors->add( 'registered', __( 'Registration complete. Please check your e-mail.', 'theme-my-login' ), 'message' );
 					elseif	( $interim_login )
-						$this->errors->add( 'expired', __( 'Your session has expired. Please log-in again.' ), 'message' );
+						$this->errors->add( 'expired', __( 'Your session has expired. Please log-in again.', 'theme-my-login' ), 'message' );
 					elseif ( strpos( $redirect_to, 'about.php?updated' ) )
-						$this->errors->add('updated', __( '<strong>You have successfully updated WordPress!</strong> Please log back in to experience the awesomeness.' ), 'message' );
+						$this->errors->add('updated', __( '<strong>You have successfully updated WordPress!</strong> Please log back in to experience the awesomeness.', 'theme-my-login' ), 'message' );
 					elseif	( $reauth )
 						$this->errors->add( 'reauth', __( 'Please log in to continue.', 'theme-my-login' ), 'message' );
 
@@ -573,16 +603,38 @@ if(typeof wpOnload=='function')wpOnload()
 	public function site_url( $url, $path, $orig_scheme ) {
 		global $pagenow;
 
-		if ( 'wp-login.php' != $pagenow && false !== strpos( $url, 'wp-login.php' ) && ! isset( $_REQUEST['interim-login'] ) ) {
-			parse_str( parse_url( $url, PHP_URL_QUERY ), $query );
+		// Bail if currently viewing wp-login.php
+		if ( 'wp-login.php' == $pagenow )
+			return $url;
 
-			$action = isset( $query['action'] ) ? $query['action'] : 'login';
+		// Bail if the URL isn't a login URL
+		if ( false === strpos( $url, 'wp-login.php' ) )
+			return $url;
 
-			$url = self::get_page_link( $action, $query );
+		// Parse the query string from the URL
+		parse_str( parse_url( $url, PHP_URL_QUERY ), $query );
 
-			if ( 'https' == strtolower( $orig_scheme ) )
-				$url = preg_replace( '|^http://|', 'https://', $url );
-		}
+		/**
+		 * Bail if the URL is an interim-login URL
+		 *
+		 * This only works using the javascript workaround as implemented in
+		 * admin/theme-my-login-admin.php and admin/js/theme-my-login-admin.js.
+		 *
+		 * @see http://core.trac.wordpress.org/ticket/31821
+		 */
+		if ( isset( $query['interim-login'] ) )
+			return $url;
+
+		// Determine the action
+		$action = isset( $query['action'] ) ? $query['action'] : 'login';
+
+		// Get the action's page link
+		$url = self::get_page_link( $action, $query );
+
+		// Change the connection scheme to HTTPS, if needed
+		if ( 'https' == strtolower( $orig_scheme ) )
+			$url = preg_replace( '|^http://|', 'https://', $url );
+
 		return $url;
 	}
 
@@ -929,7 +981,7 @@ if(typeof wpOnload=='function')wpOnload()
 	 * @param object $object Instance object
 	 */
 	public function set_instance( $object ) {
-		$this->loaded_instances[] =& $object;
+		$this->loaded_instances[] = $object;
 	}
 
 	/**
@@ -999,16 +1051,16 @@ if(typeof wpOnload=='function')wpOnload()
 	 * @return bool|WP_Error True: when finish. WP_Error on error
 	 */
 	public static function retrieve_password() {
-		global $wpdb, $current_site;
+		global $wpdb, $wp_hasher;
 
 		$errors = new WP_Error();
 
 		if ( empty( $_POST['user_login'] ) ) {
-			$errors->add( 'empty_username', __( '<strong>ERROR</strong>: Enter a username or e-mail address.' ) );
+			$errors->add( 'empty_username', __( '<strong>ERROR</strong>: Enter a username or e-mail address.', 'theme-my-login' ) );
 		} else if ( strpos( $_POST['user_login'], '@' ) ) {
 			$user_data = get_user_by( 'email', trim( $_POST['user_login'] ) );
 			if ( empty( $user_data ) )
-				$errors->add( 'invalid_email', __( '<strong>ERROR</strong>: There is no user registered with that email address.' ) );
+				$errors->add( 'invalid_email', __( '<strong>ERROR</strong>: There is no user registered with that email address.', 'theme-my-login' ) );
 		} else {
 			$login = trim( $_POST['user_login'] );
 			$user_data = get_user_by( 'login', $login );
@@ -1020,7 +1072,7 @@ if(typeof wpOnload=='function')wpOnload()
 			return $errors;
 
 		if ( ! $user_data ) {
-			$errors->add( 'invalidcombo', __( '<strong>ERROR</strong>: Invalid username or e-mail.' ) );
+			$errors->add( 'invalidcombo', __( '<strong>ERROR</strong>: Invalid username or e-mail.', 'theme-my-login' ) );
 			return $errors;
 		}
 
@@ -1034,73 +1086,47 @@ if(typeof wpOnload=='function')wpOnload()
 		$allow = apply_filters( 'allow_password_reset', true, $user_data->ID );
 
 		if ( ! $allow )
-			return new WP_Error( 'no_password_reset', __( 'Password reset is not allowed for this user' ) );
+			return new WP_Error( 'no_password_reset', __( 'Password reset is not allowed for this user', 'theme-my-login' ) );
 		else if ( is_wp_error( $allow ) )
 			return $allow;
 
-		$key = $wpdb->get_var( $wpdb->prepare( "SELECT user_activation_key FROM $wpdb->users WHERE user_login = %s", $user_login ) );
-		if ( empty( $key ) ) {
-			// Generate something random for a key...
-			$key = wp_generate_password( 20, false );
-			do_action( 'retrieve_password_key', $user_login, $key );
-			// Now insert the new md5 key into the db
-			$wpdb->update( $wpdb->users, array( 'user_activation_key' => $key ), array( 'user_login' => $user_login ) );
+		// Generate something random for a password reset key.
+		$key = wp_generate_password( 20, false );
+
+		do_action( 'retrieve_password_key', $user_login, $key );
+
+		// Now insert the key, hashed, into the DB.
+		if ( empty( $wp_hasher ) ) {
+			require_once ABSPATH . WPINC . '/class-phpass.php';
+			$wp_hasher = new PasswordHash( 8, true );
 		}
-		$message = __( 'Someone requested that the password be reset for the following account:' ) . "\r\n\r\n";
+		$hashed = $wp_hasher->HashPassword( $key );
+		$wpdb->update( $wpdb->users, array( 'user_activation_key' => $hashed ), array( 'user_login' => $user_login ) );
+
+		$message = __( 'Someone requested that the password be reset for the following account:', 'theme-my-login' ) . "\r\n\r\n";
 		$message .= network_home_url( '/' ) . "\r\n\r\n";
-		$message .= sprintf( __( 'Username: %s' ), $user_login ) . "\r\n\r\n";
-		$message .= __( 'If this was a mistake, just ignore this email and nothing will happen.' ) . "\r\n\r\n";
-		$message .= __( 'To reset your password, visit the following address:' ) . "\r\n\r\n";
+		$message .= sprintf( __( 'Username: %s', 'theme-my-login' ), $user_login ) . "\r\n\r\n";
+		$message .= __( 'If this was a mistake, just ignore this email and nothing will happen.', 'theme-my-login' ) . "\r\n\r\n";
+		$message .= __( 'To reset your password, visit the following address:', 'theme-my-login' ) . "\r\n\r\n";
 		$message .= '<' . network_site_url( "wp-login.php?action=rp&key=$key&login=" . rawurlencode( $user_login ), 'login' ) . ">\r\n";
 
 		if ( is_multisite() ) {
-			$blogname = $current_site->site_name;
+			$blogname = $GLOBALS['current_site']->site_name;
 		} else {
 			// The blogname option is escaped with esc_html on the way into the database in sanitize_option
 			// we want to reverse this for the plain text arena of emails.
 			$blogname = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
 		}
 
-		$title = sprintf( __( '[%s] Password Reset' ), $blogname );
+		$title = sprintf( __( '[%s] Password Reset', 'theme-my-login' ), $blogname );
 
 		$title = apply_filters( 'retrieve_password_title', $title, $user_data->ID );
 		$message = apply_filters( 'retrieve_password_message', $message, $key, $user_data->ID );
 
 		if ( $message && ! wp_mail( $user_email, $title, $message ) )
-			wp_die( __( 'The e-mail could not be sent.' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function...' ) );
+			wp_die( __( 'The e-mail could not be sent.', 'theme-my-login' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function...', 'theme-my-login' ) );
 
 		return true;
-	}
-
-	/**
-	 * Retrieves a user row based on password reset key and login
-	 *
-	 * @since 6.1.1
-	 * @access public
-	 * @uses $wpdb WordPress Database object
-	 *
-	 * @param string $key Hash to validate sending user's password
-	 * @param string $login The user login
-	 *
-	 * @return object|WP_Error
-	 */
-	public static function check_password_reset_key( $key, $login ) {
-		global $wpdb;
-
-		$key = preg_replace( '/[^a-z0-9]/i', '', $key );
-
-		if ( empty( $key ) || ! is_string( $key ) )
-			return new WP_Error( 'invalid_key', __( 'Invalid key' ) );
-
-		if ( empty( $login ) || ! is_string( $login ) )
-			return new WP_Error( 'invalid_key', __( 'Invalid key' ) );
-
-		$user = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $wpdb->users WHERE user_activation_key = %s AND user_login = %s", $key, $login ) );
-
-		if ( empty( $user ) )
-			return new WP_Error( 'invalid_key', __( 'Invalid key' ) );
-
-		return $user;
 	}
 
 	/**
@@ -1110,12 +1136,14 @@ if(typeof wpOnload=='function')wpOnload()
 	 * @access public
 	 * @uses $wpdb WordPress Database object
 	 *
-	 * @param string $key Hash to validate sending user's password
+	 * @param WP_User $user The user
+	 * @param string $new_pass New password for the user
 	 */
 	public static function reset_password( $user, $new_pass ) {
 		do_action( 'password_reset', $user, $new_pass );
 
 		wp_set_password( $new_pass, $user->ID );
+		update_user_option( $user->ID, 'default_password_nag', false, true );
 
 		do_action_ref_array( 'tml_user_password_changed', array( &$user ) );
 	}
@@ -1138,22 +1166,22 @@ if(typeof wpOnload=='function')wpOnload()
 
 		// Check the username
 		if ( $sanitized_user_login == '' ) {
-			$errors->add( 'empty_username', __( '<strong>ERROR</strong>: Please enter a username.' ) );
+			$errors->add( 'empty_username', __( '<strong>ERROR</strong>: Please enter a username.', 'theme-my-login' ) );
 		} elseif ( ! validate_username( $user_login ) ) {
-			$errors->add( 'invalid_username', __( '<strong>ERROR</strong>: This username is invalid because it uses illegal characters. Please enter a valid username.' ) );
+			$errors->add( 'invalid_username', __( '<strong>ERROR</strong>: This username is invalid because it uses illegal characters. Please enter a valid username.', 'theme-my-login' ) );
 			$sanitized_user_login = '';
 		} elseif ( username_exists( $sanitized_user_login ) ) {
-			$errors->add( 'username_exists', __( '<strong>ERROR</strong>: This username is already registered, please choose another one.' ) );
+			$errors->add( 'username_exists', __( '<strong>ERROR</strong>: This username is already registered, please choose another one.', 'theme-my-login' ) );
 		}
 
 		// Check the e-mail address
 		if ( '' == $user_email ) {
-			$errors->add( 'empty_email', __( '<strong>ERROR</strong>: Please type your e-mail address.' ) );
+			$errors->add( 'empty_email', __( '<strong>ERROR</strong>: Please type your e-mail address.', 'theme-my-login' ) );
 		} elseif ( ! is_email( $user_email ) ) {
-			$errors->add( 'invalid_email', __( '<strong>ERROR</strong>: The email address isn&#8217;t correct.' ) );
+			$errors->add( 'invalid_email', __( '<strong>ERROR</strong>: The email address isn&#8217;t correct.', 'theme-my-login' ) );
 			$user_email = '';
 		} elseif ( email_exists( $user_email ) ) {
-			$errors->add( 'email_exists', __( '<strong>ERROR</strong>: This email is already registered, please choose another one.' ) );
+			$errors->add( 'email_exists', __( '<strong>ERROR</strong>: This email is already registered, please choose another one.', 'theme-my-login' ) );
 		}
 
 		do_action( 'register_post', $sanitized_user_login, $user_email, $errors );
@@ -1166,7 +1194,7 @@ if(typeof wpOnload=='function')wpOnload()
 		$user_pass = apply_filters( 'tml_user_registration_pass', wp_generate_password( 12, false ) );
 		$user_id = wp_create_user( $sanitized_user_login, $user_pass, $user_email );
 		if ( ! $user_id ) {
-			$errors->add( 'registerfail', sprintf( __( '<strong>ERROR</strong>: Couldn&#8217;t register you... please contact the <a href="mailto:%s">webmaster</a> !' ), get_option( 'admin_email' ) ) );
+			$errors->add( 'registerfail', sprintf( __( '<strong>ERROR</strong>: Couldn&#8217;t register you... please contact the <a href="mailto:%s">webmaster</a> !', 'theme-my-login' ), get_option( 'admin_email' ) ) );
 			return $errors;
 		}
 

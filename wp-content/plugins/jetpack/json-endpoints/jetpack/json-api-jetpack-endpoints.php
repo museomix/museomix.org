@@ -453,6 +453,7 @@ new Jetpack_JSON_API_Updates_Status( array(
 		'translations' => '(int) The total number of translation updates.',
 		'total'        => '(int) The total number of updates.',
 		'wp_version'   => '(safehtml) The wp_version string.',
+		'wp_update_version' => '(safehtml) The wp_version to update string.',
 		'jp_version'   => '(safehtml) The site Jetpack version.',
 	),
 	'example_request_data' => array(
@@ -562,3 +563,18 @@ new Jetpack_JSON_API_Core_Endpoint( array(
 	'example_request' => 'https://public-api.wordpress.com/rest/v1/sites/example.wordpress.org/core'
 ) );
 
+require_once( $json_jetpack_endpoints_dir . 'class.jetpack-json-api-sync-endpoint.php' );
+
+new Jetpack_JSON_API_Sync_Endpoint( array(
+	'description'     => 'Force sync of all options and constants',
+	'method'          => 'POST',
+	'path'            => '/sites/%s/sync',
+	'stat'            => 'sync',
+	'path_labels' => array(
+		'$site' => '(int|string) The site ID, The site domain'
+	),
+	'response_format' => array(
+		'scheduled' => '(bool) Whether or not the synchronisation was scheduled'
+	),
+	'example_request' => 'https://public-api.wordpress.com/rest/v1.1/sites/example.wordpress.org/sync'
+) );
