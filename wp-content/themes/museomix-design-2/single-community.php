@@ -11,14 +11,22 @@ $locations = get_posts(array(
 			'value' => '"' . get_the_ID() . '"', // matches exaclty "123", not just 123. This prevents a match for "1234"
 			'compare' => 'LIKE'
 		)
-	)
+	),
+	'suppress_filters' => 0
 ));
 $social_networks = get_field('social_networks');
+$website = get_field('website');
 
 ?>
 <div class="container">
 	<div class="row-fluid">
 		<div class="span3 hidden-phone hidden-tablet sidebar-nav bloc-page">
+			<?php
+			if ($website) : ?>
+			<p>
+				<a target="_blank" href="<?php echo $website; ?>"><strong><?php _e('Website', 'museomix'); ?></strong></a>
+			</p>
+			<?php endif; ?>
 			<?php
 			if (!empty($social_networks)) : ?>
 				<h4><?php _e('Find them on:', 'museomix'); ?></h4>
@@ -30,11 +38,15 @@ $social_networks = get_field('social_networks');
 				</ul>
 			<?php endif; ?>
 			<?php
-			if (!empty($locations)) : ?>
-				<br />
+			if (!empty($locations)) :
+				$tmp_locations = array();
+				?>
 				<h4><?php _e('Locations:', 'museomix'); ?></h4>
 				<ul>
 					<?php foreach($locations as $location) {
+						if (in_array($location->ID, $tmp_locations))
+							continue;
+						$tmp_locations[] = $location->ID;
 						$edition = get_field('edition', $location->ID);
 						$museums = get_field('museum', $location->ID);
 						$museum = $museums[0];

@@ -281,7 +281,7 @@ function communities_post_type(){
 			'public' => true,
 			'hierarchical' => true,
 			'show_ui' => true,
-			'menu_position' => 20,
+			'menu_position' => 8,
 			'supports' => array('title'),
 			'has_archive' => false,
 			'rewrite' => array('slug'=> _x('community', 'URL slug', 'museomix-config')),
