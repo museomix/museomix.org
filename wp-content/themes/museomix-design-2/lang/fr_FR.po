@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Museomix\n"
-"POT-Creation-Date: 2015-06-16 23:44+0100\n"
-"PO-Revision-Date: 2015-06-16 23:44+0100\n"
+"POT-Creation-Date: 2015-06-28 21:58+0100\n"
+"PO-Revision-Date: 2015-06-28 22:20+0100\n"
 "Last-Translator: Samy Rabih <contact@lahaut.info>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -16,7 +16,7 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: Actualites.php:100 functions.php:516
+#: Actualites.php:100 functions.php:519
 msgid "En savoir plus"
 msgstr ""
 
@@ -44,35 +44,43 @@ msgstr ""
 msgid "Comments are closed."
 msgstr ""
 
-#: functions.php:397
+#: functions.php:400
 msgid "il y a"
 msgstr ""
 
-#: functions.php:399
+#: functions.php:402
 msgid "le"
 msgstr ""
 
-#: functions.php:454
+#: functions.php:457
 #, php-format
 msgid "<cite class=\"fn\">%s</cite>"
 msgstr ""
 
-#: functions.php:454
+#: functions.php:457
 #, php-format
 msgid "[%1$s]"
 msgstr ""
 
-#: functions.php:454
+#: functions.php:457
 msgid "(Edit)"
 msgstr ""
 
-#: functions.php:458
+#: functions.php:461
 msgid "Your comment is awaiting moderation."
 msgstr ""
 
-#: functions.php:529
+#: functions.php:532
 msgid "Tous les articles"
 msgstr ""
+
+#: single-community.php:24
+msgid "Find them on:"
+msgstr "Retrouvez-les sur :"
+
+#: single-community.php:34
+msgid "Locations:"
+msgstr "Musées remixés :"
 
 #~ msgid "7-8-9+ nov. 2014"
 #~ msgstr "7-8-9+ nov. 2014"

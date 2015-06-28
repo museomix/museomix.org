@@ -97,7 +97,9 @@
 			$img = wp_get_attachment_image_src($id,"location_thumbnail");
 			echo $img[0];
 		} else {
-			$id = get_field('visuel_page',get_field('museomix',$id)->ID);
+			$id = false;
+			if (is_object(get_field('museomix')))
+				$id = get_field('visuel_page',get_field('museomix')->ID);
 			if(empty($id)) $id = 203;
 			$img = wp_get_attachment_image_src($id,"location_thumbnail");
 			echo $img[0];
