@@ -1,12 +1,3 @@
-<?php
-    wp_enqueue_style('wpml-sticky-links-css', WPML_STICKY_LINKS_PATH . '/res/css/management.css', array(), WPML_STICKY_LINKS_VERSION);
-?>
-
-<script type="text/javascript">
-var wpml_sticky_links_ajxloaderimg_src = '<?php echo WPML_STICKY_LINKS_URL ?>/res/img/ajax-loader.gif';
-var wpml_sticky_links_ajxloaderimg = '<img src="'+wpml_sticky_links_ajxloaderimg_src+'" alt="loading" width="16" height="16" />';
-</script>
-
 <div class="wrap">
 
     <div id="icon-wpml" class="icon32"><br /></div>
@@ -30,7 +21,7 @@ var wpml_sticky_links_ajxloaderimg = '<img src="'+wpml_sticky_links_ajxloaderimg
         <?php endif; ?>
     </ul>
     <p>
-        <input class="button" name="save" value="<?php echo __('Apply','wpml-sticky-links') ?>" type="submit" />
+        <a class="button" name="save" id="save" href="#"><?php echo __('Apply','wpml-sticky-links') ?></a>
         <span class="icl_ajx_response" id="icl_ajx_response2"></span>
     </p>    
     </form>

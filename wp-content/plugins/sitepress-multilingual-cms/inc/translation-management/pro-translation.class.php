@@ -117,9 +117,9 @@ class ICL_Pro_Translation{
                 
                 $iclq = new ICanLocalizeQuery($sitepress_settings['site_id'], $sitepress_settings['access_key']);
                 if($post->post_type=='page'){
-                    $post_url       = get_option('home') . '?page_id=' . ($post_id);
+                    $post_url       = get_home_url() . '?page_id=' . ($post_id);
                 }else{
-                    $post_url       = get_option('home') . '?p=' . ($post_id);
+                    $post_url       = get_home_url() . '?p=' . ($post_id);
                 }
 
                 $__ld = $sitepress->get_language_details($target_lang);
@@ -770,9 +770,9 @@ class ICL_Pro_Translation{
                 }
                 
                 //tag exists? (in the current language)
-                $etag = get_term_by('name', htmlspecialchars($v), 'post_tag');
+                $etag = get_term_by('name', $v, 'post_tag');
                 if(!$etag){
-                    $etag = get_term_by('name', htmlspecialchars($v) . ' @'.$lang_code, 'post_tag');
+                    $etag = get_term_by('name', $v . ' @'.$lang_code, 'post_tag');
                 }                
                 if(!$etag){                                          
                     $tmp = wp_insert_term($v, 'post_tag');
@@ -841,9 +841,9 @@ class ICL_Pro_Translation{
                 }
                 
                 //cat exists?
-                $ecat = get_term_by('name', htmlspecialchars($v), 'category');
+                $ecat = get_term_by('name', $v, 'category');
                 if(!$ecat){
-                    $ecat = get_term_by('name', htmlspecialchars($v) . ' @'.$lang_code, 'category');
+                    $ecat = get_term_by('name', $v . ' @'.$lang_code, 'category');
                 }     
                            
                 if(!$ecat){                    
@@ -878,9 +878,10 @@ class ICL_Pro_Translation{
                                 $wpdb->update($wpdb->term_taxonomy, array('parent'=>$tmp['term_id']), array(
                                     'taxonomy'=>'category', 'term_id' => $_tr_child
                                 ));
+	                            $sitepress->update_terms_relationship_cache( array($category_parent_id, $tmp['term_id'], $_tr_child), 'category' );
                             }
-                        }                            
-                        delete_option('category_children');
+                        }
+//                        delete_option('category_children');
                     }
                 }else{
                     $term_taxonomy_id = $ecat->term_taxonomy_id;
@@ -944,9 +945,9 @@ class ICL_Pro_Translation{
                         }
                             
                         //tax exists? (in the current language)
-                        $etag = get_term_by('name', htmlspecialchars($v), $taxonomy);
+                        $etag = get_term_by('name', $v, $taxonomy);
                         if(!$etag){
-                            $etag = get_term_by('name', htmlspecialchars($v) . ' @'.$lang_code, $taxonomy);
+                            $etag = get_term_by('name', $v . ' @'.$lang_code, $taxonomy);
                         }         
                         
                         if(!$etag){      
@@ -984,9 +985,10 @@ class ICL_Pro_Translation{
                                         $wpdb->update($wpdb->term_taxonomy, array('parent'=>$tmp['term_id']), array(
                                             'taxonomy'=>$taxonomy, 'term_id' => $_tr_child
                                         ));
+	                                    $sitepress->update_terms_relationship_cache( array($tmp['term_id'], $_tr_child), $taxonomy );
                                     }
                                 }
-                                delete_option($taxonomy . '_children');
+//                                delete_option($taxonomy . '_children');
                             }
                         }else{
                             $term_taxonomy_id = $etag->term_taxonomy_id;
@@ -1190,8 +1192,14 @@ class ICL_Pro_Translation{
             $_wp_page_template = get_post_meta($translation['original_id'], '_wp_page_template', true);
             update_post_meta($new_post_id, '_wp_page_template', $_wp_page_template);
         }
-        
-        if(!$new_post_id){
+
+		// sync post format
+		if ( $sitepress_settings[ 'sync_post_format' ] ) {
+			$_wp_post_format = get_post_format( $translation[ 'original_id' ] );
+			set_post_format( $new_post_id, $_wp_post_format );
+		}
+
+		if(!$new_post_id){
             return false;
         }
         
@@ -1557,7 +1565,7 @@ class ICL_Pro_Translation{
         }    
         $new_body = $body;
 
-        $base_url_parts = parse_url(get_option('home'));
+        $base_url_parts = parse_url(get_home_url());
         
         $links = $this->_content_get_link_paths($body);
         
@@ -1841,8 +1849,8 @@ class ICL_Pro_Translation{
             }
         }
         foreach($custom_fields as $cf){
-            $custom_fields_value = get_post_meta($post_id, $cf, true);
-            if ($custom_fields_value != "" && is_scalar($custom_fields_value)) {
+            $custom_fields_value = get_post_meta($post_id, $cf);
+            if ($custom_fields_value && is_scalar($custom_fields_value)) {
                 if(in_array($lang_code, self::$__asian_languages)){
                     $words += strlen(strip_tags($custom_fields_value)) / 6;
                 } else {
@@ -1850,12 +1858,24 @@ class ICL_Pro_Translation{
                         '/[\s\/]+/', strip_tags($custom_fields_value), 0, 
                         PREG_SPLIT_NO_EMPTY));
                 }
-            }
+            } else {
+				foreach($custom_fields_value as $custom_fields_value_item) {
+					if ($custom_fields_value_item && is_scalar($custom_fields_value_item)) {
+						 if(in_array($lang_code, self::$__asian_languages)){
+							 $words += strlen(strip_tags($custom_fields_value_item)) / 6;
+						 } else {
+							 $words += count(preg_split(
+								 '/[\s\/]+/', strip_tags($custom_fields_value_item), 0,
+								 PREG_SPLIT_NO_EMPTY));
+						 }
+					 }
+				}
+			}
         }        
         return (int)$words;
     }    
     
-    public function get_translator_name($translator_id){
+    public static function get_translator_name($translator_id){
         global $sitepress_settings;
         static $translators;
         if(is_null($translators)){
@@ -2145,5 +2165,4 @@ class ICL_Pro_Translation{
         }
     }
         
-}  
-?>
+}

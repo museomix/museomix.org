@@ -4,7 +4,7 @@
     }
         
     $languages = $this->get_ls_languages();
-
+    
     foreach($languages as $code => $language){
         if($code == $this->get_current_language()){
             $current_language = $language;
@@ -23,7 +23,7 @@
             <li>
                 <a href="javascript:;" class="lang_sel_sel icl-<?php echo $current_language['language_code'] ?>">
                     <?php if( $this->settings['icl_lso_flags'] ):?>                
-                    <img class="iclflag" src="<?php echo $current_language['country_flag_url']; ?>" alt="<?php echo $current_language['language_code'] ?>"  title="<?php 
+                    <img class="iclflag" src="<?php echo $current_language['country_flag_url'] ?>" alt="<?php echo $current_language['language_code'] ?>"  title="<?php 
                         echo $this->settings['icl_lso_display_lang'] ? esc_attr($current_language['translated_name']) : esc_attr($current_language['native_name']) ; ?>" />
                     <?php endif; ?>
                     <?php 
@@ -40,7 +40,7 @@
                     <li class="icl-<?php echo $language['language_code'] ?>">
                         <a rel="alternate" href="<?php echo apply_filters('WPML_filter_link', $language['url'], $language)?>">
                             <?php if( $this->settings['icl_lso_flags'] ):?>                
-                            <img class="iclflag" src="<?php echo $language['country_flag_url']; ?>" alt="<?php echo $language['language_code'] ?>" title="<?php 
+                            <img class="iclflag" src="<?php echo $language['country_flag_url'] ?>" alt="<?php echo $language['language_code'] ?>" title="<?php 
                                 echo $this->settings['icl_lso_display_lang'] ? esc_attr($language['translated_name']) : esc_attr($language['native_name']) ; ?>" />&nbsp;                    
                             <?php endif; ?>                        
                             

@@ -23,8 +23,10 @@
     
     <div class="icl_tm_wrap">
     
-    <?php 
-        switch(@$_GET['sm']){
+    <?php              
+        
+        $tm_submenu = isset($_GET['sm']) ? $_GET['sm'] : 'main';    
+        switch($tm_submenu){
             case 'translators':
                 include dirname(__FILE__) . '/sub/translators.php';
                 break;
@@ -41,6 +43,8 @@
                 include dirname(__FILE__) . '/sub/dashboard.php';
                 
         }
+        
+        do_action('icl_tm_menu_' . $tm_submenu);
     ?>
     
     </div>

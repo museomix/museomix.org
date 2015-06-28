@@ -14,6 +14,7 @@ function creer_posts_types(){
 	TypesPagesPrototype();
 	TypesPagesConfiguration();
 	TypesPagesSponsor();
+	communities_post_type();
 }
 add_action( 'init', 'creer_posts_types' );
 
@@ -253,6 +254,41 @@ function TypesPagesSponsor(){
 				'publish_posts' => 'publish_partenaires',
 				'read_private_posts' => 'read_private_partenaires',
 			),
+		)
+	);
+}
+
+/* Communities post type */
+function communities_post_type(){
+	register_post_type(
+		'community',
+		array( 
+			'labels' => array(
+				'name' => __('Communities','museomix-config'),
+				'singular_name' => __('Community','museomix-config'),
+				'add_new' => __('Add','museomix-config'),
+				'add_new_item' => __('Add an community','museomix-config'),
+				'edit_item' => __('Edit community','museomix-config'),
+				'new_item' => __('New community','museomix-config'),
+				'all_items' => __('All communities','museomix-config'),
+				'view_item' => __('Show community','museomix-config'),
+				'search_items' => __('Search','museomix-config'),
+				'not_found' => __('No element','museomix-config'),
+				'not_found_in_trash' => __('No element in trash','museomix-config'), 
+				'parent_item_colon' => '',
+				'menu_name' => __('Communities','museomix-config') 
+			),
+			'public' => true,
+			'hierarchical' => true,
+			'show_ui' => true,
+			'menu_position' => 20,
+			'supports' => array('title'),
+			'has_archive' => false,
+			'rewrite' => array('slug'=> _x('community', 'URL slug', 'museomix-config')),
+			'supports' => array('title','editor'),
+			'capability_type' => 'page',
+			'public' => true,
+
 		)
 	);
 }

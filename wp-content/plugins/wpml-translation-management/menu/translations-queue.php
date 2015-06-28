@@ -12,14 +12,17 @@
     $current_translator = $iclTranslationManagement->get_current_translator();
     $icl_translation_filter['translator_id'] = $current_translator->translator_id;
     $icl_translation_filter['include_unassigned'] = true;
-    
-    if(isset($_GET['updated'])){
-        $user_message = __('Translation updated: ', 'wpml-translation-management') . TranslationManagement::tm_post_link(intval($_GET['updated']));                
-        $iclTranslationManagement->messages[] = array('type'=>'updated', 'text' => $user_message);        
-    }elseif(isset($_GET['added'])){
-        $user_message = __('Translation added: ', 'wpml-translation-management') . TranslationManagement::tm_post_link(intval($_GET['added']));        
-        $iclTranslationManagement->messages[] = array('type'=>'updated', 'text' => $user_message);        
-    }
+
+		if ( isset( $_GET[ 'updated' ] ) ) {
+			$user_message                          = __( 'Translation updated: ', 'wpml-translation-management' ) . TranslationManagement::tm_post_link( intval( $_GET[ 'updated' ] ) );
+			$iclTranslationManagement->messages[ ] = array( 'type' => 'updated', 'text' => $user_message );
+		} elseif ( isset( $_GET[ 'added' ] ) ) {
+			$user_message                          = __( 'Translation added: ', 'wpml-translation-management' ) . TranslationManagement::tm_post_link( intval( $_GET[ 'added' ] ) );
+			$iclTranslationManagement->messages[ ] = array( 'type' => 'updated', 'text' => $user_message );
+		} elseif ( isset( $_GET[ 'job-cancelled' ] ) ) {
+			$user_message                          = __( 'Translation has been removed by admin', 'wpml-translation-management' );
+			$iclTranslationManagement->messages[ ] = array( 'type' => 'error', 'text' => $user_message );
+		}
     
     if(!empty($current_translator->language_pairs)){
         $_langs_to = array();
@@ -207,11 +210,7 @@
         <tbody>
             <?php if(empty($translation_jobs)):?>
             <tr>
-                <?php if(sizeof($actions)>0): ?>
-                    <td colspan="7" align="center"><?php _e('No translation jobs found', 'wpml-translation-management')?></td>
-                <?php else: ?>
-                    <td colspan="6" align="center"><?php _e('No translation jobs found', 'wpml-translation-management')?></td>
-                <?php endif; ?>
+                <td colspan="7" align="center"><?php _e('No translation jobs found', 'wpml-translation-management')?></td>
             </tr>
             <?php else: foreach($translation_jobs as $job):?>
             <tr>
@@ -225,8 +224,10 @@
                 <td><?php echo apply_filters('the_title', $job->post_title ); ?></td>
                 <td><?php echo $job->lang_text ?></td>
                 <td nowrap="nowrap">
-                    <a class="button-secondary" href="admin.php?page=<?php echo WPML_TM_FOLDER ?>/menu/translations-queue.php&job_id=<?php echo $job->job_id ?>"><?php _e('edit', 'wpml-translation-management'); ?></a>
-                    <?php if ($job->original_doc_id) {echo TranslationManagement::tm_post_link($job->original_doc_id, __('View original', 'wpml-translation-management'), true);} ?>
+                    <?php if ($job->original_doc_id) { ?>
+						<a class="button-secondary" href="<?php echo apply_filters('icl_job_edit_url',admin_url('admin.php?page=' . WPML_TM_FOLDER . '/menu/translations-queue.php&job_id=' . $job->job_id),$job->job_id); ?>"><?php _e('edit', 'wpml-translation-management'); ?></a>
+					<?php
+					echo TranslationManagement::tm_post_link($job->original_doc_id, __('View original', 'wpml-translation-management'), true);} ?>
                 </td>
                 <td><?php if($job->translator_id && $job->status == ICL_TM_WAITING_FOR_TRANSLATOR): ?><div class="icl_tj_your_job" title="<?php echo esc_html(__('This job is assigned specifically to you.','wpml-translation-management')) ?>">!</div><?php endif; ?></td>
                 <td><?php 

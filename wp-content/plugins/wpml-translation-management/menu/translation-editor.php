@@ -1,14 +1,21 @@
 <?php
+global $wpdb, $post, $sitepress, $iclTranslationManagement, $current_user, $wp_version;
+
 $job = $iclTranslationManagement->get_translation_job((int)$_GET['job_id'], false, true, 1); // don't include not-translatable and auto-assign
+
 if(empty($job)){
     $job_checked = true;
     include WPML_TM_PATH . '/menu/translations-queue.php';
     return;
 }
-$rtl_original = in_array($job->source_language_code, array('ar','he','fa'));
-$rtl_translation = in_array($job->language_code, array('ar','he','fa'));
+$rtl_original = $sitepress->is_rtl($job->source_language_code);
+$rtl_translation = $sitepress->is_rtl($job->language_code);
 $rtl_original_attribute = $rtl_original ? ' dir="rtl"' : ' dir="ltr"';
 $rtl_translation_attribute = $rtl_translation ? ' dir="rtl"' : ' dir="ltr"';
+
+require_once(ABSPATH . 'wp-admin/includes/image.php');
+require_once(ABSPATH . 'wp-admin/includes/file.php');
+require_once(ABSPATH . 'wp-admin/includes/media.php');
 
 ?>
 <div class="wrap icl-translation-editor">
@@ -18,6 +25,7 @@ $rtl_translation_attribute = $rtl_translation ? ' dir="rtl"' : ' dir="ltr"';
     <?php do_action('icl_tm_messages'); ?>
     <?php 
     $opost = get_post($job->original_doc_id);
+    
     if(!empty($opost) && ($opost->post_status == 'draft' || $opost->post_status == 'private') && $opost->post_author != $current_user->data->ID){
         $elink1 = '<i>';
         $elink2 = '</i>';
@@ -43,6 +51,7 @@ $rtl_translation_attribute = $rtl_translation ? ' dir="rtl"' : ' dir="ltr"';
     <div id="dashboard-widgets-wrap">
         <?php $icl_tm_all_finished = true; ?>
         <?php foreach($job->elements as $element): ?>    
+        
         <?php 
             if(empty($element->field_data)) continue;
             $_iter = !isset($_iter) ? 1 : $_iter + 1; 
@@ -59,9 +68,10 @@ $rtl_translation_attribute = $rtl_translation ? ' dir="rtl"' : ' dir="ltr"';
                         </div>
                         <?php 
                             // allow custom field names to be filtered
-                            if(0 === strpos($element->field_type, 'field-')){
-                                $element_field_type  = apply_filters('icl_editor_cf_name', $element->field_type);
-                                $element_field_style = apply_filters('icl_editor_cf_style', '', $element->field_type);
+                            if(0 === strpos($element->field_type, 'field-')){                                
+                                $element_field_type  = apply_filters('icl_editor_cf_name', $element->field_type);                                
+                                $element_field_style = 1;
+                                $element_field_style = apply_filters('icl_editor_cf_style', $element_field_style, $element->field_type);                                
                             }else{
                                 $element_field_type = $element->field_type;
                                 $element_field_style = false;
@@ -79,14 +89,15 @@ $rtl_translation_attribute = $rtl_translation ? ' dir="rtl"' : ' dir="ltr"';
                                 }
                             ?>
                             <?php /* TRANSLATED CONTENT */ ?>
-                            <?php  
+                            <?php 
                                 $icl_tm_original_content = TranslationManagement::decode_field_data($element->field_data, $element->field_format);
                                 $icl_tm_translated_content = TranslationManagement::decode_field_data($element->field_data_translated, $element->field_format);
                                 if($element->field_type=='tags' || $element->field_type=='categories'){
                                     $taxonomy = $element->field_type == 'tags' ? 'post_tag' : 'category';
                                     $icl_tm_translated_taxs[$element->field_type] = 
                                         TranslationManagement::determine_translated_taxonomies($icl_tm_original_content, $taxonomy, $job->language_code);
-                                }                                
+                                }   
+                                                             
                                 $translatable_taxonomies = $sitepress->get_translatable_taxonomies(false, $job->original_post_type);
                                 if(in_array($element->field_type, $translatable_taxonomies)){
                                     $taxonomy = $element->field_type;
@@ -97,42 +108,44 @@ $rtl_translation_attribute = $rtl_translation ? ' dir="rtl"' : ' dir="ltr"';
                             <p>
                                 <?php _e('Translated content', 'wpml-translation-management'); echo ' - ' . $job->to_language; ?>
                                 <?php if(empty($icl_tm_translated_content)):?>
-                                <span>| &nbsp;<a class="icl_tm_copy_link" id="icl_tm_copy_link_<?php echo $element->field_type 
+                                <span>| &nbsp;<a class="icl_tm_copy_link" id="icl_tm_copy_link_<?php echo sanitize_title($element->field_type)
                                     ?>" href="#"><?php printf(__('Copy from %s', 'wpml-translation-management'), $job->from_language)?></a></span>
                                 <?php endif; ?>
                             </p>
-                            
+
                             <?php // CASE 1 - body *********************** ?>
                             <?php if($element->field_type=='body'): ?>
                             <div id="poststuff">
-                            <?php 
-                                global $post;
-                                if(is_null($post)) $post = clone $opost;
+                            <?php
+                                if(is_null($post) && !is_null($opost)) $post = clone $opost;
                                 if(version_compare($wp_version, '3.3', '>=')){
                                     $settings = array(
                                         'media_buttons'     => false,
                                         'textarea_name'     => 'fields['.$element->field_type.'][data]',
-                                        'textarea_rows'     => 20
+                                        'textarea_rows'     => 20,
+                                        'editor_css'        => $rtl_translation ? ' <style type="text/css">.wp-editor-container textarea.wp-editor-area{direction:rtl;}</style>' : ''
                                     );
-                                    wp_editor($icl_tm_translated_content, 'fields['.$element->field_type.'][data]', $settings);                               
+									wp_editor($icl_tm_translated_content, $element->field_type, $settings);
                                 }else{
-                                    the_editor($icl_tm_translated_content, 'fields['.$element->field_type.'][data]', false, false); 
+									the_editor($icl_tm_translated_content, 'fields['.$element->field_type.'][data]', false, false);
                                 }
                             ?>
                             </div>    
-                                           
+                                                                          
                             <?php // CASE 2 - csv_base64 *********************** ?>         
                             <?php elseif($element->field_format == 'csv_base64'): ?>
                             <?php foreach($icl_tm_original_content as $k=>$c): ?>
                             <?php 
-                                if(empty($icl_tm_translated_content[$k]) && !empty($icl_tm_translated_taxs[$element->field_type][$k])){
+                                // if have we added/removed/replaced attached taxonomies check for existing translations!
+                                $__is_translated = isset($icl_tm_translated_taxs[$element->field_type]) && !empty($icl_tm_translated_taxs[$element->field_type][$k]);
+                                if((empty($icl_tm_translated_content[$k]) && $__is_translated) || ($__is_translated && ($icl_tm_translated_content[$k] != $icl_tm_translated_taxs[$element->field_type][$k]))){                                
                                     $icl_tm_translated_content[$k] = $icl_tm_translated_taxs[$element->field_type][$k];    
                                     $icl_tm_f_translated = true;
                                 }else{
                                     $icl_tm_f_translated = false;
                                 }
                             ?>
-                            <label><input class="icl_multiple" type="text" name="fields[<?php echo htmlspecialchars($element->field_type) 
+                            <label><input id="<?php echo sanitize_title($element->field_type)?>" class="icl_multiple" type="text" name="fields[<?php echo esc_attr($element->field_type)
                                 ?>][data][<?php echo $k ?>]" value="<?php if(isset($icl_tm_translated_content[$k])) 
                                     echo esc_attr($icl_tm_translated_content[$k]); ?>"<?php echo $rtl_translation_attribute; ?> /></label>
                             <?php if($icl_tm_f_translated): ?>
@@ -142,7 +155,7 @@ $rtl_translation_attribute = $rtl_translation ? ' dir="rtl"' : ' dir="ltr"';
                             
                             <?php // CASE 3 - multiple lines *********************** ?>         
                             <?php elseif(0 === strpos($element->field_type, 'field-') && $element_field_style == 1): ?>
-                                <textarea style="width:100%;" name="fields[<?php echo htmlspecialchars($element->field_type) ?>][data]"<?php 
+                                <textarea id="<?php echo sanitize_title($element->field_type) ?>" style="width:100%;" name="fields[<?php echo esc_attr($element->field_type) ?>][data]"<?php
                                     echo $rtl_translation_attribute; ?>><?php echo esc_html($icl_tm_translated_content); ?></textarea>
 
                             <?php // CASE 4 - wysiwyg *********************** ?>         
@@ -153,22 +166,22 @@ $rtl_translation_attribute = $rtl_translation ? ' dir="rtl"' : ' dir="ltr"';
                                             'textarea_name'     => 'fields['.$element->field_type.'][data]',
                                             'textarea_rows'     => 4
                                         );
-                                        wp_editor($icl_tm_translated_content, 'fields['.$element->field_type.'][data]', $settings);
+										wp_editor($icl_tm_translated_content, $element->field_type, $settings);
                                     }else{                                        
                                         ?>
-                                        <textarea style="width:100%;" name="fields[<?php echo htmlspecialchars($element->field_type) ?>][data]"<?php 
+                                        <textarea style="width:100%;" name="fields[<?php echo esc_attr($element->field_type) ?>][data]"<?php
                                     echo $rtl_translation_attribute; ?>><?php echo esc_html($icl_tm_translated_content); ?></textarea>
                                         <?php 
                                     }
                             ?>
                             <?php // CASE 5 - one-liner *********************** ?>         
                             <?php else: ?>
-                            <label><input type="text" name="fields[<?php echo htmlspecialchars($element->field_type) ?>][data]" value="<?php 
+                            <label><input id="<?php echo sanitize_title($element->field_type) ?>" type="text" name="fields[<?php echo esc_attr($element->field_type) ?>][data]" value="<?php
                                 echo esc_attr($icl_tm_translated_content); ?>"<?php echo $rtl_translation_attribute; ?> /></label>
                             <?php endif; ?> 
                             
                             <p><label><input class="icl_tm_finished<?php if($element->field_format == 'csv_base64'): ?> icl_tmf_multiple<?php endif;
-                                ?>" type="checkbox" name="fields[<?php echo htmlspecialchars($element->field_type) ?>][finished]" value="1" <?php 
+                                ?>" type="checkbox" name="fields[<?php echo esc_attr($element->field_type) ?>][finished]" value="1" <?php
                                 if($element->field_finished): ?>checked="checked"<?php endif;?> />&nbsp;<?php 
                                 _e('This translation is finished.', 'wpml-translation-management')?></label>                                
                                 <span class="icl_tm_error" style="display: none;"><?php _e('This field cannot be empty', 'wpml-translation-management') ?></span>
@@ -196,7 +209,7 @@ $rtl_translation_attribute = $rtl_translation ? ' dir="rtl"' : ' dir="ltr"';
                                             "SELECT t.name, x.description FROM {$wpdb->terms} t 
                                                 JOIN {$wpdb->term_taxonomy} x ON  x.term_id = t.term_id
                                             WHERE description<>'' && x.taxonomy=%s 
-                                                AND t.name IN ('".join("','", $wpdb->escape($icl_tm_original_content))."')",
+                                                AND t.name IN ('".join("','", esc_sql($icl_tm_original_content))."')",
                                             $term_taxonomy
                                         ));
                                         $term_descriptions = array();
@@ -228,7 +241,7 @@ $rtl_translation_attribute = $rtl_translation ? ' dir="rtl"' : ' dir="ltr"';
                                     ?>" width="100%" height="<?php echo $icl_wysiwyg_height ?>" frameborder="0"></iframe>
                                 
                                 <br clear="all"/></div>
-                                <div class="html"><textarea id="icl_tm_original_<?php echo $element->field_type ?>" readonly="readonly"><?php 
+                                <div class="html"><textarea id="icl_tm_original_<?php echo $element->field_type ?>" readonly="readonly"><?php
                                     echo $icl_tm_original_content_html ?></textarea></div>
                                 <?php elseif($element->field_format == 'csv_base64'): ?>
                                 <?php foreach($icl_tm_original_content as $c): ?>
@@ -239,13 +252,13 @@ $rtl_translation_attribute = $rtl_translation ? ' dir="rtl"' : ' dir="ltr"';
                                 </div>
                                 <?php endforeach;?>
                                 <?php else: ?>
-                                <div class="icl_single"<?php if ($rtl_original) echo ' dir="rtl" style="text-align:right;"'; else echo ' dir="ltr" style="text-align:left;"'; ?>><span id="icl_tm_original_<?php echo str_replace(' ', '__20__', $element->field_type) ?>"><?php echo esc_html($icl_tm_original_content) ?></span><br clear="all"/></div>
+                                <div class="icl_single"<?php if ($rtl_original) echo ' dir="rtl" style="text-align:right;"'; else echo ' dir="ltr" style="text-align:left;"'; ?>><span style="white-space:pre-wrap;" id="icl_tm_original_<?php echo sanitize_title($element->field_type) ?>"><?php echo esc_html($icl_tm_original_content) ?></span><br clear="all"/></div>
                                 <?php endif; ?>
                             </div>
                             <?php /* ORIGINAL CONTENT */ ?>
                             
-                            <input type="hidden" name="fields[<?php echo htmlspecialchars($element->field_type) ?>][format]" value="<?php echo $element->field_format ?>" />
-                            <input type="hidden" name="fields[<?php echo htmlspecialchars($element->field_type) ?>][tid]" value="<?php echo $element->tid ?>" />
+                            <input type="hidden" name="fields[<?php echo esc_attr($element->field_type) ?>][format]" value="<?php echo $element->field_format ?>" />
+                            <input type="hidden" name="fields[<?php echo esc_attr($element->field_type) ?>][tid]" value="<?php echo $element->tid ?>" />
                             
                             <?php if(!$element->field_finished && !empty($job->prev_version)): ?>                            
                                 <?php 
@@ -255,7 +268,9 @@ $rtl_translation_attribute = $rtl_translation ? ' dir="rtl"' : ' dir="ltr"';
                                             $prev_value = TranslationManagement::decode_field_data($pel->field_data, $pel->field_format);
                                         }    
                                     }
-                                    $diff = wp_text_diff( $prev_value, TranslationManagement::decode_field_data($element->field_data, $element->field_format) );  
+                                    if($element->field_format != 'csv_base64'){
+                                        $diff = wp_text_diff( $prev_value, TranslationManagement::decode_field_data($element->field_data, $element->field_format) );  
+                                    }
                                     if(!empty($diff)){
                                         ?>
                                         <p><a href="#" onclick="jQuery(this).parent().next().slideToggle();return false;"><?php 

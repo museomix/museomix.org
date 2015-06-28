@@ -12,7 +12,10 @@ jQuery(document).ready(function(){
     jQuery('#icl_st_delete_selected').click(icl_st_delete_selected);
     //jQuery('#icl_st_send_need_translation').click(icl_st_send_need_translation);
     //jQuery('#icl_st_do_send_strings').submit(icl_st_do_send_strings);
-    
+
+		jQuery('.icl_auto_reg_type').click(icl_st_auto_register_notes);
+		icl_st_auto_register_notes();
+
     jQuery('#icl_st_po_translations').click(function(){
         if(jQuery(this).attr('checked')){
             jQuery('#icl_st_po_language').removeAttr('disabled').fadeIn();
@@ -44,6 +47,7 @@ jQuery(document).ready(function(){
     jQuery('#icl_st_option_write_form').submit(icl_st_admin_options_form_submit);
     jQuery('#icl_st_option_write_form').submit(iclSaveForm);
     
+            
     jQuery('.icl_stow_toggler').click(icl_st_admin_strings_toggle_strings);
     
     jQuery('#icl_st_ow_export').click(icl_st_ow_export_selected);
@@ -60,7 +64,7 @@ jQuery(document).ready(function(){
     jQuery('#icl_tl_rescan').click(iclThemeLocalizationRescan);
     jQuery('#icl_tl_rescan_p').submit(iclThemeLocalizationRescanP);
     
-    jQuery('.wpml_st_pop_download').live('click', icl_st_pop_download);
+    jQuery(document).delegate('.wpml_st_pop_download', 'click', icl_st_pop_download);
     
     jQuery('#icl_st_more_options').submit(iclSaveForm);
     jQuery('#icl_st_more_options').submit(
@@ -82,7 +86,8 @@ jQuery(document).ready(function(){
                     
         }
     );
-        
+                  
+    icl_auto_download_mo.init();
         
 });
 
@@ -145,7 +150,7 @@ function icl_st_filter_status(){
 }
 
 function icl_st_filter_context(){
-    var qs = jQuery(this).val() != '' ? '&context=' + jQuery(this).val() : '';
+    var qs = jQuery(this).val() != '' ? '&context=' + encodeURIComponent(jQuery(this).val()) : '';
     location.href=location.href.replace(/#(.*)$/,'').replace(/&paged=([0-9]+)/,'').replace(/&updated=true/,'').replace(/&context=(.*)/g,'') + qs;
 }
 
@@ -307,7 +312,7 @@ function icl_validate_po_upload(){
 }
 
 var icl_show_in_source_scroll_once = false;
-jQuery('#icl_show_source_wrap').live('mouseover', function(){
+jQuery(document).delegate('#icl_show_source_wrap', 'mouseover', function(){
     if(icl_show_in_source_scroll_once){
         icl_show_in_source(0, icl_show_in_source_scroll_once);
         icl_show_in_source_scroll_once = false;
@@ -513,4 +518,83 @@ function icl_st_cancel_local_translation(ahref){
         }
     });
     return false;
+}
+
+function icl_st_auto_register_notes() {
+	var selected_value = jQuery('.icl_auto_reg_type:checked');
+	if(selected_value.length && selected_value.val()!='disable') {
+		jQuery('#auto_register_notes').fadeIn();
+	} else {
+		jQuery('#auto_register_notes').fadeOut();
+	}
+}
+
+
+var icl_auto_download_mo = {
+    
+    init: function(){
+        
+        icl_auto_download_mo.list_form_setup();
+        
+        jQuery(document).delegate('#icl_auto_download_mo', 'submit', icl_auto_download_mo.save_preferences);
+        jQuery(document).delegate('#icl_adm_update_check', 'click', icl_auto_download_mo.updates_check);
+        
+    },
+    
+    save_preferences: function(){
+        var thisf = jQuery(this);
+        var data = thisf.serialize();        
+        thisf.find('input:last').after(icl_ajxloaderimg);
+        jQuery.ajax({
+            type: "POST",
+            url: ajaxurl,
+            data: data,
+            dataType: 'json',
+            success: function(msg){
+                if(msg.enabled){
+                    jQuery('#icl_adm_update_check').fadeIn();
+                }else{
+                    jQuery('#icl_adm_update_check').fadeOut();
+                }                         
+                thisf.find('input:last').next().hide();                
+                try{
+                    jQuery('#icl_adm_options').pointer('close');    
+                }catch(err){;}
+                
+                location.href = location.href.replace(/#(.+)$/, '');
+                
+            }
+        });    
+        return false;
+    },
+        
+    list_form_setup: function(){
+        
+        jQuery(document).delegate('#icl_admo_list_table thead :checkbox', 'change', function(){
+            if(jQuery(this).is(':checked')){
+                jQuery('#icl_admo_list_table :checkbox').attr('checked', 'checked');
+            }else{
+                jQuery('#icl_admo_list_table :checkbox').removeAttr('checked');
+            }
+            
+        })
+        
+    },
+    
+    updates_check: function(){
+        jQuery('#icl_adm_updates').fadeIn().html(icl_ajxloaderimg);
+        jQuery.ajax({
+            type: "POST",
+            url: ajaxurl,
+            data: {action: 'icl_adm_updates_check'},
+            dataType: 'json',
+            success: function(msg){
+                jQuery('#icl_adm_updates').html(msg.html);        
+            }
+        });    
+        return false;
+        
+    }
+    
+    
 }

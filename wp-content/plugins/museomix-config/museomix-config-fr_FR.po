@@ -1,18 +1,18 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Museomix config\n"
-"POT-Creation-Date: 2014-01-31 22:30+0100\n"
-"PO-Revision-Date: 2014-01-31 22:30+0100\n"
+"POT-Creation-Date: 2015-06-28 21:37+0100\n"
+"PO-Revision-Date: 2015-06-28 22:01+0100\n"
 "Last-Translator: Samy Rabih <contact@lahaut.info>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.3\n"
+"X-Generator: Poedit 1.8.1\n"
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Poedit-KeywordsList: _e;__\n"
+"X-Poedit-KeywordsList: _e;__;_x\n"
 "X-Poedit-SearchPath-0: .\n"
 
 #: InterfaceAdmin.php:59
@@ -23,9 +23,9 @@ msgstr "Thème"
 msgid "Edition"
 msgstr "Edition"
 
-#: TypesPages.php:30 TypesPages.php:65 TypesPages.php:109 TypesPages.php:152
-#: TypesPages.php:193 TypesPages.php:223 TypesPages.php:266 TypesPages.php:275
-#: TypesPages.php:276
+#: TypesPages.php:30 TypesPages.php:66 TypesPages.php:111 TypesPages.php:155
+#: TypesPages.php:198 TypesPages.php:228 TypesPages.php:269 TypesPages.php:307
+#: TypesPages.php:316 TypesPages.php:317
 msgid "Add"
 msgstr "Ajouter"
 
@@ -49,18 +49,18 @@ msgstr "Toutes les éditions"
 msgid "Show edition"
 msgstr "Afficher l'édition"
 
-#: TypesPages.php:36 TypesPages.php:71 TypesPages.php:115 TypesPages.php:158
-#: TypesPages.php:199 TypesPages.php:229 TypesPages.php:281
+#: TypesPages.php:36 TypesPages.php:72 TypesPages.php:117 TypesPages.php:161
+#: TypesPages.php:204 TypesPages.php:234 TypesPages.php:275 TypesPages.php:322
 msgid "Search"
 msgstr "Rechercher"
 
-#: TypesPages.php:37 TypesPages.php:72 TypesPages.php:116 TypesPages.php:159
-#: TypesPages.php:200 TypesPages.php:230 TypesPages.php:282
+#: TypesPages.php:37 TypesPages.php:73 TypesPages.php:118 TypesPages.php:162
+#: TypesPages.php:205 TypesPages.php:235 TypesPages.php:276 TypesPages.php:323
 msgid "No element"
 msgstr "Aucun élément"
 
-#: TypesPages.php:38 TypesPages.php:73 TypesPages.php:117 TypesPages.php:160
-#: TypesPages.php:201 TypesPages.php:231 TypesPages.php:283
+#: TypesPages.php:38 TypesPages.php:74 TypesPages.php:119 TypesPages.php:163
+#: TypesPages.php:206 TypesPages.php:236 TypesPages.php:277 TypesPages.php:324
 msgid "No element in trash"
 msgstr "Aucun élément dans la corbeille"
 
@@ -68,147 +68,179 @@ msgstr "Aucun élément dans la corbeille"
 msgid "Editions"
 msgstr "Editions"
 
-#: TypesPages.php:63 TypesPages.php:75
+#: TypesPages.php:64 TypesPages.php:76
 msgid "Locations"
 msgstr "Lieux"
 
-#: TypesPages.php:64
+#: TypesPages.php:65
 msgid "Location"
 msgstr "Lieu"
 
-#: TypesPages.php:66
+#: TypesPages.php:67
 msgid "Add a location"
 msgstr "Ajouter un lieu"
 
-#: TypesPages.php:67
+#: TypesPages.php:68
 msgid "Edit the location"
 msgstr "Modifier le lieu"
 
-#: TypesPages.php:68 TypesPages.php:112 TypesPages.php:155 TypesPages.php:196
-#: TypesPages.php:226 TypesPages.php:278
+#: TypesPages.php:69 TypesPages.php:114 TypesPages.php:158 TypesPages.php:201
+#: TypesPages.php:231 TypesPages.php:319
 msgid "New"
 msgstr "Nouveau lieu"
 
-#: TypesPages.php:69
+#: TypesPages.php:70
 msgid "All the locations"
 msgstr "Tous les lieux"
 
-#: TypesPages.php:70
+#: TypesPages.php:71
 msgid "View the location"
 msgstr "Voir le lieu"
 
-#: TypesPages.php:107 TypesPages.php:108
+#: TypesPages.php:109 TypesPages.php:110
 msgid "Museum"
 msgstr "Musée"
 
-#: TypesPages.php:110
+#: TypesPages.php:112
 msgid "Add a museum"
 msgstr "Ajouter un musée"
 
-#: TypesPages.php:111
+#: TypesPages.php:113
 msgid "Edit the museum"
 msgstr "Modifier le musée"
 
-#: TypesPages.php:113
+#: TypesPages.php:115
 msgid "All museums"
 msgstr "Tous les musées"
 
-#: TypesPages.php:114
+#: TypesPages.php:116
 msgid "Show museum"
 msgstr "Afficher le musée"
 
-#: TypesPages.php:119
+#: TypesPages.php:121
 msgid "Museums"
 msgstr "Musées"
 
-#: TypesPages.php:150 TypesPages.php:151
+#: TypesPages.php:153 TypesPages.php:154
 msgid "Prototype"
 msgstr "Prototype"
 
-#: TypesPages.php:153
+#: TypesPages.php:156
 msgid "Add a prototype"
 msgstr "Ajouter un prototype"
 
-#: TypesPages.php:154
+#: TypesPages.php:157
 msgid "Edit the prototype"
 msgstr "Modifier le prototype"
 
-#: TypesPages.php:156
+#: TypesPages.php:159
 msgid "All prototypes"
 msgstr "Tous les prototypes"
 
-#: TypesPages.php:157
+#: TypesPages.php:160
 msgid "Show prototype"
 msgstr "Afficher le prototype"
 
-#: TypesPages.php:162
+#: TypesPages.php:165
 msgid "Prototypes"
 msgstr "Prototypes"
 
-#: TypesPages.php:191 TypesPages.php:192
+#: TypesPages.php:196 TypesPages.php:197
 msgid "Component"
 msgstr "Composant"
 
-#: TypesPages.php:194
+#: TypesPages.php:199
 msgid "Add a component"
 msgstr "Ajouter un composant"
 
-#: TypesPages.php:195
+#: TypesPages.php:200
 msgid "Edit component"
 msgstr "Modifier le composant"
 
-#: TypesPages.php:197
+#: TypesPages.php:202
 msgid "All components"
 msgstr "Tous les composants"
 
-#: TypesPages.php:198
+#: TypesPages.php:203
 msgid "Show component"
 msgstr "Afficher le composant"
 
-#: TypesPages.php:203
+#: TypesPages.php:208
 msgid "Components"
 msgstr "Composants"
 
-#: TypesPages.php:221 TypesPages.php:222
+#: TypesPages.php:226 TypesPages.php:227
 msgid "Partner"
 msgstr "Partenaire"
 
-#: TypesPages.php:224
+#: TypesPages.php:229
 msgid "Add a partner"
 msgstr "Ajouter un partenaire"
 
-#: TypesPages.php:225
+#: TypesPages.php:230
 msgid "Edit partner"
 msgstr "Modifier le partenaire"
 
-#: TypesPages.php:227
+#: TypesPages.php:232
 msgid "All partners"
 msgstr "Tous les partenaires"
 
-#: TypesPages.php:228
+#: TypesPages.php:233
 msgid "Show partner"
 msgstr "Afficher le partenaire"
 
-#: TypesPages.php:233
+#: TypesPages.php:238
 msgid "Partners"
 msgstr "Partenaires"
 
-#: TypesPages.php:264 TypesPages.php:273 TypesPages.php:274 TypesPages.php:284
+#: TypesPages.php:267 TypesPages.php:279
+msgid "Communities"
+msgstr "Communautés"
+
+#: TypesPages.php:268
+msgid "Community"
+msgstr "Communauté"
+
+#: TypesPages.php:270
+msgid "Add an community"
+msgstr "Ajouter une communauté"
+
+#: TypesPages.php:271
+msgid "Edit community"
+msgstr "Modifier la communauté"
+
+#: TypesPages.php:272
+msgid "New community"
+msgstr "Nouvelle communauté"
+
+#: TypesPages.php:273
+msgid "All communities"
+msgstr "Toutes les communautés"
+
+#: TypesPages.php:274
+msgid "Show community"
+msgstr "Afficher la communauté"
+
+#: TypesPages.php:287
+msgid "community"
+msgstr "communaute"
+
+#: TypesPages.php:305 TypesPages.php:314 TypesPages.php:315 TypesPages.php:325
 msgid "News"
 msgstr "Actualités"
 
-#: TypesPages.php:265 TypesPages.php:279
+#: TypesPages.php:306 TypesPages.php:320
 msgid "All news"
 msgstr "Toutes les actualités"
 
-#: TypesPages.php:267
+#: TypesPages.php:308
 msgid "keywords"
 msgstr "mots-clés"
 
-#: TypesPages.php:277
+#: TypesPages.php:318
 msgid "Edit"
 msgstr "Modifier"
 
-#: TypesPages.php:280
+#: TypesPages.php:321
 msgid "Show"
 msgstr "Afficher"

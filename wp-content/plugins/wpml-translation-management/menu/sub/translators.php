@@ -42,10 +42,20 @@ if ($selected_translator->ID) {
             . "\r\n" . '<option value="0">' . __('Choose', 'wpml-translation-management') . '</option>' . "\r\n";
     $to = '<label>' . __('To language:', 'wpml-translation-management') . '&nbsp;<select name="to_lang" id="edit-to">' . "\r\n"
             . '<option value="0">' . __('Choose', 'wpml-translation-management') . '</option>' . "\r\n";
+    
+    if(defined('WPML_ST_VERSION') && isset($sitepress_settings['st']['strings_language']) && !isset($languages[$sitepress_settings['st']['strings_language']])){
+        $ld = $sitepress->get_language_details($sitepress_settings['st']['strings_language']);
+        $from .= '<option value="' . $sitepress_settings['st']['strings_language'] . '">' . 
+            $ld['display_name'] . ' ' .
+            __('(only for strings)', 'wpml-translation-management') . '</option>' . "\r\n";    
+    }
+    
+    
     foreach ($languages as $language) {
-//              $selected_from = ($language->code == $default->language->code) ? ' selected="selected"' : '';
-//              $selected_from = ($language->code == $default->language->code) ? ' selected="selected"' : '';
-      $from .= '<option value="' . $language['code'] . '"' . @strval($selected_from) . '>' . $language['display_name']
+      // select language from request
+      $selected_from =  (isset($_GET['icl_lng']) && $_GET['icl_lng'] == $language['code']) ? ' selected="selected"' : '';
+      
+      $from .= '<option '.$selected_from.'  value="' . $language['code'] . '"' . @strval($selected_from) . '>' . $language['display_name']
                . '</option>' . "\r\n";
       $to .= '<option value="' . $language['code'] . '"' . @strval($selected_to) . '>' . $language['display_name']
              . '</option>' . "\r\n";
@@ -137,7 +147,13 @@ $other_service_translators = TranslationManagement::icanlocalize_translators_lis
                     </div>
                 </td>
                 <td>
-                    <?php $langs = $sitepress->get_active_languages(); ?>
+                    <?php 
+                        $langs = $sitepress->get_active_languages(); 
+                        if(defined('WPML_ST_VERSION') && isset($sitepress_settings['st']['strings_language']) && !isset($languages[$sitepress_settings['st']['strings_language']])){
+                            $langs[$sitepress_settings['st']['strings_language']] = $sitepress->get_language_details($sitepress_settings['st']['strings_language']);
+                            $langs[$sitepress_settings['st']['strings_language']]['display_name'] .= ' ' . __('(only for strings)', 'wpml-translation-management');
+                        }                        
+                    ?>
                     <ul>
                     <?php foreach($language_pairs as $from=>$lp): ?>
                         <?php 
@@ -236,9 +252,9 @@ function icl_local_add_translator_button($buttons = array()) {
  */
 function icl_local_edit_translator_form($action = 'add', $selected_translator = 0) {
     
-    global $sitepress, $iclTranslationManagement;
-    $blog_users_nt = $iclTranslationManagement->get_blog_not_translators();
-    $blog_users_t = $iclTranslationManagement->get_blog_translators();
+    global $sitepress, $iclTranslationManagement, $sitepress_settings;
+    $blog_users_nt = TranslationManagement::get_blog_not_translators();
+    $blog_users_t = TranslationManagement::get_blog_translators();
 
     $output = '';
     $return['name'] = __('Local', 'wpml-translation-management');
@@ -289,7 +305,14 @@ function icl_local_edit_translator_form($action = 'add', $selected_translator = 
       $output .= '>
           <ul>';
       
-      foreach ($sitepress->get_active_languages() as $from_lang):
+      $languages = $sitepress->get_active_languages();
+      
+      if(defined('WPML_ST_VERSION') && isset($sitepress_settings['st']['strings_language']) && !isset($languages[$sitepress_settings['st']['strings_language']])){
+          $languages[$sitepress_settings['st']['strings_language']] = $sitepress->get_language_details($sitepress_settings['st']['strings_language']);
+          $languages[$sitepress_settings['st']['strings_language']]['display_name'] .= ' ' . __('(only for strings)', 'wpml-translation-management');
+      }
+      
+      foreach ($languages as $from_lang):
         $output .= '<li>
               <label><input class="icl_tm_from_lang" type="checkbox"';
         if ($selected_translator && 0 < @count($selected_translator->language_pairs[$from_lang['code']])):
@@ -325,7 +348,7 @@ function icl_local_edit_translator_form($action = 'add', $selected_translator = 
       $output .= '
       <input class="button-primary" type="submit" value="';
       $output .= $selected_translator ? esc_attr(__('Update', 'wpml-translation-management')) : esc_attr(__('Add as translator', 'wpml-translation-management'));
-      $output .= '" /><input type="submit" value="' . __('Cancel', 'wpml-translation-management') . '" name="cancel" class="button-secondary" onclick="history.go(-1); return false;" />';
+      $output .= '" />&nbsp;<input type="submit" value="' . __('Cancel', 'wpml-translation-management') . '" name="cancel" class="button-secondary" onclick="history.go(-1); return false;" />';
     }
     
     $return['content'] = $output;

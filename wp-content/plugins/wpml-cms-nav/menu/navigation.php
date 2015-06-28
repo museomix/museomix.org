@@ -128,7 +128,7 @@ var wpml_cms_nav_ajx_cache_cleared = '<?php echo wpml_cms_nav_js_escape(__('The 
     
     <p><?php echo __('To customize the appearance of the navigation elements, you will need to override the styling provided in the plugin\'s CSS file.', 'wpml-cms-nav')?></p>
     
-    <p><?php printf(__('Visit %s for full CSS customization information.', 'wpml-cms-nav'), '<a href="http://wpml.org">wpml.org</a>')?></p>
+    <p><?php printf(__('Visit %s for full CSS customization information.', 'wpml-cms-nav'), '<a href="https://wpml.org">wpml.org</a>')?></p>
     
     <?php do_action('icl_menu_footer'); ?>
     

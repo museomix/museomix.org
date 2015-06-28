@@ -8,6 +8,17 @@
     <div id="icl_pt_controls" <?php if(!empty($sitepress_settings['hide_professional_translation_controls'])):?>style="display:none;"<?php endif; ?>>
     <?php 
         if(!empty($languages_translated)){ 
+            
+            if(!empty($sitepress_settings['default_translators'][$language_pair['from']])){
+                foreach($sitepress_settings['default_translators'][$language_pair['from']] as $_tolang => $tr){
+                    $status = $iclTranslationManagement->get_element_translation($post->ID, $_tolang , 'post_' . $post->post_type);
+                    if(isset($status->translator_id)) $tr['id']  = $status->translator_id;                    
+                    if($iclTranslationManagement->translator_exists($tr['id'], $language_pair['from'], $_tolang, $tr['type'])){            
+                        $icl_selected_translators[$_tolang] = $tr['type'] == 'local' ? $tr['id'] : $tr['id'] . '-' . $tr['type'];        
+                    }        
+                }
+            }
+            
             echo '<ul>';
             foreach($languages_translated as $lang){
                 if(isset($pro_translations[$lang]) 
@@ -32,7 +43,19 @@
                     echo '&nbsp;<small>('.__('up to date', 'wpml-translation-management').')</small>';
                 }
                                 
-                echo '</label></li>';
+                echo '</label>';
+                global $source_language;
+                $iclTranslationManagement->translators_dropdown(array(
+                        'from'          => $source_language,
+                        'to'            => $lang,
+                        'name'          => 'translator['.$lang.']',
+                        'selected'      =>  isset($icl_selected_translators[$lang]) ? $icl_selected_translators[$lang] : 0,
+                        'services'      => array('icanlocalize'),
+                        'show_service'  => false,
+                        'disabled'      => $disabled
+                )); 
+
+                echo '</li>';
             }    
             echo '</ul>';
         }
@@ -77,7 +100,7 @@
     <br clear="all" />
     <?php else:?>
     <?php 
-        $estimated_cost = sprintf("%.2f", (ICL_Pro_Translation::estimate_word_count($post, $selected_language) + ICL_Pro_Translation::estimate_custom_field_word_count($post->ID, $selected_language)) * 0.07);
+        $estimated_cost = sprintf("%.2f", (ICL_Pro_Translation::estimate_word_count($post, $selected_language) + ICL_Pro_Translation::estimate_custom_field_word_count($post->ID, $selected_language)) * 0.09);
     ?>
     <div style="text-align: right;margin:0 5px 5px 0;white-space:nowrap;">
     <?php printf( __('Estimated cost: %s USD', 'wpml-translation-management'), $estimated_cost);?><br />

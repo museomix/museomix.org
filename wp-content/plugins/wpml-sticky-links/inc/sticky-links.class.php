@@ -4,88 +4,105 @@
 class WPML_Sticky_Links{
     var $settings;
     var $broken_links;
-    var $absolute_links_object;
-    
-    
-    function __construct($ext = false){          
-        $this->settings = get_option('alp_settings');
-        add_action('init', array($this,'init'));           
-    }
-    
-    function __destruct(){
-        return;
-    }
-    
-    function init(){
+	/**
+	 * @var AbsoluteLinks
+	 */
+	var $absolute_links_object;
 
-        $this->plugin_localization();
-        
-        // Check if WPML is active. If not display warning message and not load Sticky links
-        if(!defined('ICL_SITEPRESS_VERSION') || ICL_PLUGIN_INACTIVE){
-            if ( !function_exists('is_multisite') || !is_multisite() ) {
-                add_action('admin_notices', array($this, '_no_wpml_warning'));
-            }
-            return false;            
-        }elseif(version_compare(ICL_SITEPRESS_VERSION, '2.0.5', '<')){
-            add_action('admin_notices', array($this, '_old_wpml_warning'));
-            return false;            
-        }
-        
-        require_once ICL_PLUGIN_PATH . '/inc/absolute-links/absolute-links.class.php';        
-        $this->absolute_links_object = new AbsoluteLinks;
-        
-        global $sitepress_settings;
-        
-        if(isset($_POST['save_alp']) && $_POST['save_alp']){            
-            // $this->settings = $_POST;
-            // $this->save_settings();
-            // TBD!
-        }
-        
-        $this->ajax_responses();
-        
-        add_action('save_post', array($this,'save_default_urls'), 10, 2);
-        add_action('admin_head',array($this,'js_scripts'));  
+	function __construct( $ext = false ) {
+		add_action( 'plugins_loaded', array( $this, 'plugins_loaded' ), 0 );
+		//init WPML_Sticky_Links after init AbsoluteLinks
+		add_action( 'init', array( $this, 'init' ) , 1001 );
+	}
 
-        add_filter('the_content', array($this,'show_permalinks'));
-        
-        if($this->settings['sticky_links_widgets'] || $this->settings['sticky_links_strings']){                               
-            add_filter('widget_text', array($this,'show_permalinks'), 99); // low priority - allow translation to be set        
-        }                
-        if($this->settings['sticky_links_widgets']){            
-            add_filter('pre_update_option_widget_text', array($this,'pre_update_option_widget_text'), 5, 2);
-        }
+	function __destruct() {
+		return;
+	}
 
-        if(empty($this->settings) && !empty($sitepress_settings['modules']['absolute-links'])){
-            $this->settings = $sitepress_settings['modules']['absolute-links'];
-            $this->save_settings();
-        }
-        
-        add_action('admin_menu', array($this, 'menu'));
-        add_filter('plugin_action_links', array($this, 'plugin_action_links'), 10, 2); 
-        
-        if(is_admin() && !defined('DOING_AJAX')){
-            wp_enqueue_script('wpml-sticky-links-js', WPML_STICKY_LINKS_URL . '/res/js/scripts.js', array(), WPML_STICKY_LINKS_VERSION);    
-        }        
-        
-        add_action('wp_ajax_wpml_sticky_links_save_options', array($this, '_save_options'));
-        
-        // add message to WPML dashboard widget
-        add_action('icl_dashboard_widget_content', array($this, 'icl_dashboard_widget_content'));
-        
-    }
+	function plugins_loaded() {
+		$this->settings = get_option( 'alp_settings' );
+		// Check if WPML is active. If not display warning message and not load Sticky links
+
+		if ( defined( 'ICL_PLUGIN_PATH' ) ) {
+			require_once ICL_PLUGIN_PATH . '/inc/absolute-links/absolute-links.class.php';
+			$this->absolute_links_object = new AbsoluteLinks;
+		}
+		$this->plugin_localization();
+	}
+
+	function init() {
+		if ( !defined( 'ICL_PLUGIN_PATH' ) ) {
+			return;
+		}
+
+		global $sitepress_settings;
+
+		if ( !defined( 'ICL_SITEPRESS_VERSION' ) || ICL_PLUGIN_INACTIVE ) {
+			if ( !function_exists( 'is_multisite' ) || !is_multisite() ) {
+				add_action( 'admin_notices', array( $this, '_no_wpml_warning' ) );
+			}
+		} elseif ( version_compare( ICL_SITEPRESS_VERSION, '2.0.5', '<' ) ) {
+			add_action( 'admin_notices', array( $this, '_old_wpml_warning' ) );
+		}
+
+		$this->ajax_responses();
+
+		add_action( 'save_post', array( $this, 'save_default_urls' ), 10, 2 );
+		add_action( 'admin_head', array( $this, 'js_scripts' ) );
+
+		add_filter( 'the_content', array( $this, 'show_permalinks' ) );
+
+		if ( $this->settings[ 'sticky_links_widgets' ] || $this->settings[ 'sticky_links_strings' ] ) {
+			add_filter( 'widget_text', array( $this, 'show_permalinks' ), 99 ); // low priority - allow translation to be set
+		}
+		if ( $this->settings[ 'sticky_links_widgets' ] ) {
+			add_filter( 'pre_update_option_widget_text', array( $this, 'pre_update_option_widget_text' ), 5, 2 );
+		}
+
+		if ( empty( $this->settings ) && !empty( $sitepress_settings[ 'modules' ][ 'absolute-links' ] ) ) {
+			$this->settings = $sitepress_settings[ 'modules' ][ 'absolute-links' ];
+			$this->save_settings();
+		}
+
+		add_action( 'admin_menu', array( $this, 'menu' ) );
+		add_filter( 'plugin_action_links', array( $this, 'plugin_action_links' ), 10, 2 );
+
+		if ( is_admin() && !defined( 'DOING_AJAX' ) ) {
+			add_action( 'admin_print_scripts', array( $this, 'admin_print_scripts' ) );
+			add_action( 'admin_print_styles', array( $this, 'admin_print_styles' ) );
+		}
+
+		add_action( 'wp_ajax_wpml_sticky_links_save_options', array( $this, '_save_options' ) );
+
+		// add message to WPML dashboard widget
+		add_action( 'icl_dashboard_widget_content', array( $this, 'icl_dashboard_widget_content' ) );
+
+	}
+
+	function admin_print_styles() {
+		wp_enqueue_style('wpml-sticky-links-css', WPML_STICKY_LINKS_URL . '/res/css/management.css', array(), WPML_STICKY_LINKS_VERSION);
+	}
+
+	function admin_print_scripts() {
+		wp_enqueue_script('wpml-sticky-links-js', WPML_STICKY_LINKS_URL . '/res/js/scripts.js', array('jquery'), WPML_STICKY_LINKS_VERSION);
+
+		$wpml_sticky_links_ajax_loader_img_src = WPML_STICKY_LINKS_URL . 'res/img/ajax-loader.gif';
+		$wpml_sticky_links_ajax_loader_img = '<img src="' . $wpml_sticky_links_ajax_loader_img_src . '" alt="loading" width="16" height="16" />';
+
+		wp_localize_script('wpml-sticky-links-js', 'data', array( 'wpml_sticky_links_ajax_loader_img' => $wpml_sticky_links_ajax_loader_img ));
+	}
     
     function _no_wpml_warning(){
         ?>
         <div class="message error"><p><?php printf(__('WPML Sticky Links is enabled but not effective. It requires <a href="%s">WPML</a> in order to work.', 'wpml-sticky-links'), 
-            'http://wpml.org/'); ?></p></div>
+            'https://wpml.org/'); ?></p></div>
         <?php
     }
 
     function _old_wpml_warning(){
         ?>
         <div class="message error"><p><?php printf(__('WPML Sticky Links is enabled but not effective. It is not compatible with  <a href="%s">WPML</a> versions prior 2.0.5.', 'wpml-sticky-links'), 
-            'http://wpml.org/'); ?></p></div>
+            'https://wpml.org/'); ?></p></div>
         <?php
     }
     
@@ -100,9 +117,19 @@ class WPML_Sticky_Links{
     }    
     
     function _save_options(){
-        if(wp_verify_nonce($_POST['_wpnonce'], 'icl_sticky_save')){
-            $this->settings['sticky_links_widgets'] = intval($_POST['icl_sticky_links_widgets']);
-            $this->settings['sticky_links_strings'] = intval($_POST['icl_sticky_links_strings']);
+        if(isset($_POST['_wpnonce']) && wp_verify_nonce($_POST['_wpnonce'], 'icl_sticky_save')){
+            if (!empty($_POST['icl_sticky_links_widgets'])) {
+                $this->settings['sticky_links_widgets'] = intval($_POST['icl_sticky_links_widgets']);
+            } else {
+                $this->settings['sticky_links_widgets'] = 0;
+            }
+            
+            if (!empty($_POST['icl_sticky_links_strings'])) {
+                $this->settings['sticky_links_strings'] = intval($_POST['icl_sticky_links_strings']);
+            } else {
+                $this->settings['sticky_links_strings'] = 0;
+            }
+            
             $this->save_settings();        
         }
     }
@@ -153,8 +180,8 @@ class WPML_Sticky_Links{
                 }                
                 break;
             case 'rescan_reset':
-                $wpdb->query("DELETE FROM {$wpdb->postmeta} WHERE meta_key='_alp_processed'");
-                echo mysql_affected_rows();
+                $affected_rows = $wpdb->query("DELETE FROM {$wpdb->postmeta} WHERE meta_key='_alp_processed'");
+                echo $affected_rows; 
                 break;
             case 'use_suggestion':
                 $broken_links = get_post_meta($_POST['post_id'],'_alp_broken_links', true);
@@ -328,10 +355,14 @@ class WPML_Sticky_Links{
     }
     
     function menu(){
-        $top_page = apply_filters('icl_menu_main_page', basename(ICL_PLUGIN_PATH).'/menu/languages.php');
+	    if(!defined('ICL_PLUGIN_PATH')) return;
+		global $sitepress;
+		if(!isset($sitepress) || (method_exists($sitepress,'get_setting') && !$sitepress->get_setting( 'setup_complete' ))) return;
+
+		$top_page = apply_filters('icl_menu_main_page', basename(ICL_PLUGIN_PATH).'/menu/languages.php');
         add_submenu_page($top_page, 
             __('Sticky Links','wpml-sticky-links'), __('Sticky Links','wpml-sticky-links'),
-            'manage_options', 'wpml-sticky-links', array($this,'menu_content'));
+            'wpml_manage_sticky_links', 'wpml-sticky-links', array($this,'menu_content'));
     }
     
     function menu_content(){
@@ -367,57 +398,80 @@ class WPML_Sticky_Links{
     }
             
     function pre_update_option_widget_text($new_value, $old_value){
-        global $wpdb;
-        if(is_array($new_value)){ 
-            foreach($new_value as $k=>$w){
-                if(isset($w['text'])){
-                    $new_value[$k]['text'] = $this->absolute_links_object->_process_generic_text($w['text']);
-                }
-            }
-            if($new_value !== $old_value){
-                $wpdb->update($wpdb->options, array('option_value'=>$new_value), array('option_name'=>'widget_text'));
-            }            
-        }
+        global $sitepress;
+
+		if(isset($sitepress)) {
+			global $wpdb;
+			$current_language = $sitepress->get_current_language();
+			$default_language = $sitepress->get_default_language();
+			$sitepress->switch_lang($default_language);
+			$alp_broken_links = array();
+
+			if(is_array($new_value)){
+				foreach($new_value as $k=>$w){
+					if(isset($w['text'])){
+							$new_value[$k]['text'] = $this->absolute_links_object->_process_generic_text($w['text'], $alp_broken_links);
+					}
+				}
+				if($new_value !== $old_value){
+					$wpdb->update($wpdb->options, array('option_value'=>$new_value), array('option_name'=>'widget_text'));
+				}
+			}
+
+			$sitepress->switch_lang($current_language);
+		}
+
         return $new_value;
     }
 
-    function save_default_urls($post_id, $post){    
-        if($post->post_status == 'auto-draft' || isset($_POST['autosave'])) 
-            return;
-        if(!in_array( $post->post_type, get_post_types( array('show_ui' => true ) ) )) 
-            return;
-        if(!post_type_supports($post->post_type, 'editor'))
-            return;
-        if(in_array($post->post_type, array('revision', 'attachment', 'nav_menu_item')))
-            return;
-        
-        $this->absolute_links_object->process_post($post_id);
-               
-    }    
+    function save_default_urls($post_id, $post){
+		if ( $post->post_status == 'auto-draft' || isset( $_POST[ 'autosave' ] ) ) {
+			return;
+		}
+		if ( !in_array( $post->post_type, get_post_types( array( 'show_ui' => true ) ) ) ) {
+			return;
+		}
+		if ( !post_type_supports( $post->post_type, 'editor' ) ) {
+			return;
+		}
+		if ( in_array( $post->post_type, array( 'revision', 'attachment', 'nav_menu_item' ) ) ) {
+			return;
+		}
+
+		$this->absolute_links_object->process_post($post_id);
+    }
     
     function show_permalinks($cont){
         if(!isset($GLOBALS['__disable_absolute_links_permalink_filter']) || !$GLOBALS['__disable_absolute_links_permalink_filter']){
             $home = rtrim(get_option('home'),'/');        
             $parts = parse_url($home);        
             $abshome = $parts['scheme'] .'://' . $parts['host'];
-            $path = @ltrim($parts['path'],'/');    
+            $path = isset($parts['path']) ? ltrim($parts['path'],'/') : '';
             $tx_qvs = join('|',$this->absolute_links_object->taxonomies_query_vars);
             $reg_ex = '@<a([^>]+)?href="(('.$abshome.')?/'.$path.'/?\?(p|page_id|cat_ID|'.$tx_qvs.')=([0-9a-z-]+))(#?[^"]*)"([^>]+)?>@i';
-            $cont = preg_replace_callback(
-                $reg_ex,
-                array($this,'show_permalinks_cb'),$cont);                    
-        }
+			$cont = preg_replace_callback( $reg_ex, array( $this, 'show_permalinks_cb' ), $cont );
+		}
         return $cont;
     }
        
     function show_permalinks_cb($matches){
-        if($matches[4]=='cat_ID'){
+		$tax = false;
+		if ( isset( $this->absolute_links_object->taxonomies_query_vars ) && is_array( $this->absolute_links_object->taxonomies_query_vars ) ) {
+			$tax = array_search( $matches[ 4 ], $this->absolute_links_object->taxonomies_query_vars  );
+		}
+
+		if($matches[4]=='cat_ID'){
             $url = get_category_link($matches[5]);
-        }elseif($tax = array_search($matches[4],$this->absolute_links_object->taxonomies_query_vars)){
+        }elseif( $tax ){
             $url = get_term_link($matches[5], $tax);
         }else{
             $url = get_permalink($matches[5]);
-        }  
+        }
+
+		if(is_wp_error($url) || empty($url)) {
+			return $matches[0];
+		}
+
         $fragment = $matches[6];
         if ($fragment != '') {
             $fragment = str_replace('&#038;', '&', $fragment);
@@ -433,13 +487,17 @@ class WPML_Sticky_Links{
         if (isset($matches[7])) {
             $trail = $matches[7];
         }
+
         return '<a'.$matches[1]. 'href="'. $url . $fragment . '"' . $trail . '>';
     }
     
     function get_broken_links(){
         global $wpdb;
-        $this->broken_links = $wpdb->get_results("SELECT p2.ID, p2.post_title, p1.meta_value AS links
-            FROM {$wpdb->postmeta} p1 JOIN {$wpdb->posts} p2 ON p1.post_id=p2.ID WHERE p1.meta_key='_alp_broken_links'");
+		$broken_links_prepared = $wpdb->prepare( "
+		SELECT p2.ID, p2.post_title, p1.meta_value AS links
+            FROM {$wpdb->postmeta} p1 JOIN {$wpdb->posts} p2 ON p1.post_id=p2.ID WHERE p1.meta_key=%s AND p1.meta_value<>'array'
+            ", array( '_alp_broken_links' ) );
+		$this->broken_links = $wpdb->get_results( $broken_links_prepared );
     }
     
     function icl_dashboard_widget_content(){
@@ -472,3 +530,17 @@ class WPML_Sticky_Links{
         load_plugin_textdomain( 'wpml-sticky-links', false, WPML_STICKY_LINKS_FOLDER . '/locale');
     }
 }  
+
+global $WPML_Sticky_Links;
+
+if(!isset($WPML_Sticky_Links)) {
+	$WPML_Sticky_Links = new WPML_Sticky_Links();
+}
+
+if(!function_exists('icl_js_escape')) {
+	function icl_js_escape($str){
+	    $str = esc_js($str);
+	    $str = htmlspecialchars_decode($str);
+	    return $str;
+	}  	
+}

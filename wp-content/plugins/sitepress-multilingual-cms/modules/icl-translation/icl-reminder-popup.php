@@ -70,7 +70,7 @@
                     $this->save_settings($iclsettings);
                 }else{
                     printf(__('<p>In order to enable ICanLocalize translation, your site needs to be on a public server (not localhost). Please <a%s>contact us</a> for support. </p><p>Show <a%s>debug information</a>.</p>', 'sitepress'), 
-                        ' target="_blank" href="http://wpml.org/?page_id=5255"', 
+                        ' target="_blank" href="https://wpml.org/?page_id=5255"',
                         ' a href="admin.php?page='.ICL_PLUGIN_FOLDER.'/menu/troubleshooting.php&icl_action=icl-connection-test&data='.base64_encode(serialize($user)).'#icl-connection-test"');
                     exit;                
                 }
@@ -113,7 +113,7 @@
         if(empty($website_details)){
             echo '<p class="error">';
             printf(__('There was a problem connecting to ICanLocalize. Please close this window and try again. If the problem persists please <a%s>contact us</a>.', 'sitepress'), 
-                ' target="_blank" href="http://wpml.org/?page_id=5255"');
+                ' target="_blank" href="https://wpml.org/?page_id=5255"');
             echo '</p>';
             exit;
         }
@@ -186,6 +186,14 @@
     <a id="icl_reminder_dismiss" href="#" onclick="<?php echo $on_click?>"><?php _e('Dismiss', 'sitepress')?></a>
     <br />
     <br />
-<?php endif; ?> 
-<iframe src="<?php echo $target;?>" style="width:100%; height:92%" onload="<?php if($auto_resize):?>jQuery('#TB_window').css('width','90%').css('margin-left', '-45%');<?php endif; ?><?php if($unload_cb):?>jQuery('#TB_window').unbind('unload').bind('tb_unload', <?php echo esc_js($unload_cb) ?>);<?php endif; ?>">
+<?php endif; ?>
+
+<iframe src="<?php echo $target;?>" style="width:100%; height:92%" onload="
+    <?php if($auto_resize):?>
+        jQuery('#TB_window').css('width','90%').css('margin-left', '-45%');
+    <?php endif; ?>
+    <?php if($unload_cb):?>
+        jQuery('#TB_window').unbind('unload').bind('tb_unload', function(){<?php echo esc_js($unload_cb)?>();});
+    <?php endif; ?>
+">
 

@@ -1,4 +1,10 @@
-<?php 
+<?php
+/**
+ * SitePress Template functions
+ *
+ * @package wpml-core
+ */
+
 
 /**
  * Add settings link to plugin page.
@@ -20,13 +26,14 @@ function _icl_deprecated_icl_debug_mode(){
     echo '<div class="updated"><p><strong>ICL_DEBUG_MODE</strong> no longer supported. Please use <strong>WP_DEBUG</strong> instead.</p></div>';
 } 
 
+if(!function_exists('icl_js_escape')) {
+	function icl_js_escape( $str ) {
+		$str = esc_js( $str );
+		$str = htmlspecialchars_decode( $str );
 
-
-function icl_js_escape($str){ 
-    $str = esc_js($str);
-    $str = htmlspecialchars_decode($str);
-    return $str;
-}  
+		return $str;
+	}
+}
 
 function icl_nobreak($str){
     return preg_replace("# #", '&nbsp;', $str);
@@ -114,7 +121,7 @@ function _icl_trash_restore_prompt(){
             $ret = '<p>';
             $ret .= sprintf(__('This translation is currently in the trash. You need to either <a href="%s">delete it permanently</a> or <a href="%s">restore</a> it in order to continue.'), 
                 get_delete_post_link($post->ID, '', true) , 
-                wp_nonce_url( admin_url( sprintf( $post_type_object->_edit_link . '&amp;action=untrash', $post->ID ) ), 'untrash-' . $post->post_type . '_' . $post->ID)
+                wp_nonce_url( admin_url( sprintf( $post_type_object->_edit_link . '&amp;action=untrash', $post->ID ) ), 'untrash-post_' . $post->ID)
                 );
             $ret .= '</p>';
             wp_die($ret);
@@ -138,10 +145,13 @@ function icl_pop_info($message, $icon='info', $args = array()){
     );
     extract($defaults);
     extract($args, EXTR_OVERWRITE);
-    
+
+	/** @var $but_style array */
+	/** @var $icon_size string */
+
     ?>
     <div class="icl_pop_info_wrap">
-    <img class="icl_pop_info_but <?php echo join(' ', $but_style)?>" src="<?php echo $icon ?>" width="<?php echo $icon_size ?>" height="<?php echo $icon_size ?>" alt="info" />
+		<img class="icl_pop_info_but <?php echo join(' ', $but_style)?>" src="<?php echo $icon ?>" width="<?php echo $icon_size ?>" height="<?php echo $icon_size ?>" alt="info" />
     <div class="icl_cyan_box icl_pop_info">
     <img class="icl_pop_info_but_close" align="right" src="<?php echo ICL_PLUGIN_URL ?>/res/img/ico-close.png" width="12" height="12" alt="x" />
     <?php echo $message; ?>
@@ -156,5 +166,25 @@ function icl_is_post_edit(){
         global $pagenow;
         $is = ($pagenow == 'post-new.php' || ($pagenow == 'post.php' && isset($_GET['action']) && $_GET['action']=='edit'));    
     }
-    return $is;    
+    return $is;
+}
+
+/**
+ * Build or update duplicated posts from a master post.
+ *
+ * @param  string                $master_post_id The ID of the post to duplicate from. Master post doesn't need to be in the default language.
+ *
+ * @uses SitePress
+ * @uses TranslationManagement
+ */
+function icl_makes_duplicates( $master_post_id )
+{
+	global $sitepress, $iclTranslationManagement;
+	if ( !isset( $iclTranslationManagement ) ) {
+		$iclTranslationManagement = new TranslationManagement;
+	}
+	$post_type = get_post_type( $master_post_id );
+	if ( $sitepress->is_translated_post_type( $post_type ) ) {
+		$iclTranslationManagement->make_duplicates_all( $master_post_id );
+	}
 }

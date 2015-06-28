@@ -23,7 +23,7 @@ function wpml_cms_nav_db_setup(){
             `data` TEXT NOT NULL ,
             `timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
             ) ENGINE=MyISAM {$charset_collate}"; 
-       mysql_query($sql);
+       $wpdb->query($sql);
     }    
 }
 
@@ -62,4 +62,3 @@ function wpml_cms_nav_default_settings(){
     }
     
 }
-?>

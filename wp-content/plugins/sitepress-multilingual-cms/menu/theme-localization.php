@@ -51,7 +51,7 @@ $locales = $sitepress->get_locale_file_names();
         <input class="button" name="save" value="<?php echo __('Save','sitepress') ?>" type="submit" />        
         <span style="display:none" class="icl_form_errors icl_form_errors_1"><?php _e('Please enter a value for the textdomain.', 'sitepress'); ?></span>
     </p>
-    <img src="<?php echo ICL_PLUGIN_URL ?>/res/img/question-green.png" width="29" height="29" alt="need help" align="left" /><p style="margin-top:14px;">&nbsp;<a href="http://wpml.org/?page_id=2717"><?php _e('Theme localization instructions', 'sitepress')?> &raquo;</a></p>
+    <img src="<?php echo ICL_PLUGIN_URL ?>/res/img/question-green.png" width="29" height="29" alt="need help" align="left" /><p style="margin-top:14px;">&nbsp;<a href="https://wpml.org/?page_id=2717"><?php _e('Theme localization instructions', 'sitepress')?> &raquo;</a></p>
     </form>
     
     <?php if(defined('WPML_ST_VERSION') && version_compare(WPML_ST_VERSION, '1.4.0', '>') && isset($sitepress_settings['theme_localization_type']) && $sitepress_settings['theme_localization_type'] == 1) include WPML_ST_PATH . '/menu/auto-download-mo-config.php'; ?>
@@ -74,7 +74,7 @@ $locales = $sitepress->get_locale_file_names();
     <?php if($sitepress_settings['theme_localization_type']==2):?>
     <th scope="col"><?php printf(__('MO file in %s', 'sitepress'), '/wp-content/themes/' . get_option('template')) ?></th>        
     <?php endif; ?>
-    <?php if(!empty($sitepress_settings['st']['auto_download_mo'])):?>
+    <?php if(class_exists('$WPML_ST_MO_Downloader') && !empty($sitepress_settings['st']['auto_download_mo'])):?>
     <?php 
         $wptranslations = $WPML_ST_MO_Downloader->get_option('translations');
     ?>
@@ -112,7 +112,7 @@ $locales = $sitepress->get_locale_file_names();
         <?php endif; ?>        
     </td>              
     <?php endif; ?> 
-    <?php if(!empty($sitepress_settings['st']['auto_download_mo'])):?>
+    <?php if(class_exists('$WPML_ST_MO_Downloader') && !empty($sitepress_settings['st']['auto_download_mo'])):?>
     <td scope="col"><?php 
             
         $wpl_disabled = true;
@@ -170,7 +170,7 @@ $locales = $sitepress->get_locale_file_names();
     </form>
         
     <?php if(!empty($sitepress_settings['st']['auto_download_mo'])):?>            
-        <?php if(!is_null($WPML_ST_MO_Downloader->get_option('last_time_xml_check'))): ?>
+        <?php if(class_exists('$WPML_ST_MO_Downloader') && !is_null($WPML_ST_MO_Downloader->get_option('last_time_xml_check'))): ?>
             <?php if($WPML_ST_MO_Downloader->get_option('last_time_xml_check_trigger') == 'wp-update'): ?>
                 <?php printf(__('WPML last checked for WordPress translations %s when WordPress version updated. <a%s>Check now.</a>', 'sitepress'), 
                     date("F j, Y @H:i", $WPML_ST_MO_Downloader->get_option('last_time_xml_check')), ' id="icl_adm_update_check" href="#"'); ?>

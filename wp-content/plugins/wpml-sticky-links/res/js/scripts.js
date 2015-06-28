@@ -1,17 +1,32 @@
-jQuery(document).ready(function(){
-        jQuery('#icl_save_sl_options').submit(wpml_sticky_links_save_options);
-})
+/*globals ajaxurl, wpml_sticky_links_ajxloaderimg, data */
 
-function wpml_sticky_links_save_options() {
-    var thisf = jQuery(this);
-    thisf.find(':submit').attr('disabled','disabled').after(wpml_sticky_links_ajxloaderimg);
-    jQuery.ajax({
-        type: "POST",
-        url: ajaxurl,
-        data: "action=wpml_sticky_links_save_options&"+thisf.serialize(),
-        success: function(msg){
-            thisf.find(':submit').removeAttr('disabled').next().fadeOut();
-        }
-    });
-    return false;
-}
+var wpml_sticky_links_ajax_loader_img = data.wpml_sticky_links_ajxloaderimg;
+
+jQuery(document).ready(function ($) {
+	var sticky_links = sticky_links || {};
+
+	sticky_links.save_options = function (event) {
+
+		if (typeof(event.preventDefault) !== 'undefined' ) {
+			event.preventDefault();
+		} else {
+			event.returnValue = false;
+		}
+
+		var submit_button = $(this).attr('disabled', 'disabled').after(wpml_sticky_links_ajax_loader_img);
+		var form = $(this).closest('form');
+		$.ajax({
+			type: "POST",
+			url: ajaxurl,
+			data: "action=wpml_sticky_links_save_options&" + form.serialize(),
+			success: function () {
+				submit_button.removeAttr('disabled').next().fadeOut();
+			}
+		});
+		return false;
+
+	};
+
+	jQuery('#icl_save_sl_options').find('#save').on('click', sticky_links.save_options);
+
+});
