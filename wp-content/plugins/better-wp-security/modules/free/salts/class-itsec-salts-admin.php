@@ -211,11 +211,23 @@ class ITSEC_Salts_Admin {
 	 */
 	public function itsec_add_dashboard_status( $statuses ) {
 
-		if ( true === $this->settings ) {
+		global $itsec_globals;
+
+		$last_update = get_site_option( 'itsec_salts' );
+
+		if ( false === $last_update ) {
 
 			$status_array = 'low';
 			$status       = array(
 				'text' => __( 'Your WordPress Salts have not been changed. You should change them now.', 'it-l10n-better-wp-security' ),
+				'link' => '#itsec_enable_salts', 'advanced' => true,
+			);
+
+		} elseif ( absint( $last_update ) < ( $itsec_globals['current_time_gmt'] - ( 30 * 24 * 60 * 60 ) ) ) {
+
+			$status_array = 'low';
+			$status       = array(
+				'text' => __( 'Your WordPress Salts have not been changed 30 days. You should change them now.', 'it-l10n-better-wp-security' ),
 				'link' => '#itsec_enable_salts', 'advanced' => true,
 			);
 
@@ -229,7 +241,7 @@ class ITSEC_Salts_Admin {
 
 		}
 
-		array_push( $statuses[ $status_array ], $status );
+		array_push( $statuses[$status_array], $status );
 
 		return $statuses;
 
@@ -325,7 +337,8 @@ class ITSEC_Salts_Admin {
 					</tr>
 				</table>
 				<p class="submit">
-					<input type="submit" class="button-primary" value="<?php _e( 'Change WordPress Salts', 'it-l10n-better-wp-security' ); ?>"/>
+					<input type="submit" class="button-primary"
+					       value="<?php _e( 'Change WordPress Salts', 'it-l10n-better-wp-security' ); ?>"/>
 				</p>
 			</form>
 
@@ -352,7 +365,7 @@ class ITSEC_Salts_Admin {
 	 */
 	public function process_salts() {
 
-		global $itsec_files;
+		global $itsec_files, $itsec_globals;
 
 		//suppress error messages due to timing
 		error_reporting( 0 );
@@ -413,6 +426,8 @@ class ITSEC_Salts_Admin {
 		}
 
 		if ( $this->settings === true ) {
+
+			update_site_option( 'itsec_salts', $itsec_globals['current_time_gmt'] );
 
 			wp_clear_auth_cookie();
 			$redirect_to = ! empty( $_REQUEST['redirect_to'] ) ? $_REQUEST['redirect_to'] : ITSEC_Lib::get_home_root() . 'wp-login.php?loggedout=true';

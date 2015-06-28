@@ -1,17 +1,34 @@
 <?php
-
 /**
- * Handles the abstraction of sync integration
+ * Handles the abstraction of sync integration.
  *
- * @package iThemes-Security
- * @since   4.1
+ * Registers modules with sync verbs and loads appropriate verb classes where applicable.
+ *
+ * @package iThemes_Security
+ *
+ * @since   4.0.0
  */
 final class ITSEC_Sync {
 
-	private
-		$sync_modules;
+	/**
+	 * The module's that have registered with sync
+	 *
+	 * @since  4.1.0
+	 * @access private
+	 * @var array
+	 */
+	private $sync_modules;
 
-	function __construct() {
+	/**
+	 * Loads sync modules
+	 *
+	 * Executes primary file actions at plugins_loaded.
+	 *
+	 * @since  4.1.0
+	 *
+	 * @return ITSEC_Sync
+	 */
+	public function __construct() {
 
 		$this->sync_modules = array(); //array to hold information on modules using this feature
 
@@ -21,9 +38,11 @@ final class ITSEC_Sync {
 	}
 
 	/**
-	 * Returns all moodules registered with Sync
+	 * Returns all modules registered with Sync.
 	 *
-	 * @since 4.1
+	 * Returns an array of all modules containing sync verbs.
+	 *
+	 * @since 4.1.0
 	 *
 	 * @return array sync module registrations
 	 */
@@ -34,9 +53,11 @@ final class ITSEC_Sync {
 	}
 
 	/**
-	 * Register verbs for iThemes Sync
+	 * Register verbs for iThemes Sync.
 	 *
-	 * @Since 4.1
+	 * Registers all verbs for a given module.
+	 *
+	 * @since 4.1.0
 	 *
 	 * @param object $api iThemes Sync Object
 	 *
@@ -63,9 +84,11 @@ final class ITSEC_Sync {
 	}
 
 	/**
-	 * Register modules that will use the sync service
+	 * Register modules that will use the sync service.
 	 *
-	 * @since 4.1
+	 * Executes a filter that allows modules to register themselves for iThemes Sync integration.
+	 *
+	 * @since 4.1.0
 	 *
 	 * @return void
 	 */

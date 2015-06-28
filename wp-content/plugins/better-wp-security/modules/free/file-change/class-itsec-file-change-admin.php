@@ -41,7 +41,7 @@ class ITSEC_File_Change_Admin {
 	/**
 	 * Setup the module's administrative functionality
 	 *
-	 * Loads the file change detection module's priviledged functionality including
+	 * Loads the file change detection module's privileged functionality including
 	 * settings fields.
 	 *
 	 * @since 4.0.0
@@ -435,7 +435,7 @@ class ITSEC_File_Change_Admin {
 	/**
 	 * Prepare and save options in network settings
 	 *
-	 * Saves the options in a multi-site network where data sanitization and processing is not
+	 * Saves the options in a multi-site network where data sensitization and processing is not
 	 * called automatically on form submission.
 	 *
 	 * @since 4.0.0

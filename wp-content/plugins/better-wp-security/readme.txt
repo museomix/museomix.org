@@ -1,10 +1,10 @@
 === iThemes Security (formerly Better WP Security) ===
-Contributors: ithemes, ChrisWiegman, gerroald, mattdanner, chrisjean
+Contributors: ithemes, chrisjean, gerroald, mattdanner
 Donate link: https://ithemes.com/security
 Tags: security, malware, secure, multi-site, network, mu, login, lockdown, htaccess, hack, header, cleanup, ban, restrict, access, protect, protection, disable, images, image, hotlink, admin, username, database, prefix, wp-content, rename, directory, directories, secure, SSL, iThemes, BackupBuddy, Exchange, iThemes Exchange
 Requires at least: 4.0
-Tested up to: 4.1
-Stable tag: 4.6.2
+Tested up to: 4.2
+Stable tag: 4.6.13
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -195,6 +195,30 @@ Free support may be available with the help of the community in the <a href="htt
 5. Easy-to-navigate Security dashboard
 
 == Changelog ==
+
+= 4.6.13 =
+* Security fix for XSS vulnerability. Thanks to Ole Aass (@oleaass) for finding and disclosing this vulnerability to the iThemes Security team.
+
+= 4.6.12 =
+* Enhancement: Translation files can now be stored in WP_LANG_DIR/plugins/better-wp-security/ so that translation files will not be overwritten on when the plugin updates.
+* Bug Fix: The file permissions check will no longer list a warning if the plugins directory has permissions of 755.
+* Bug Fix: Fixed incorrect text describing the "Backups to Retain" database backup setting.
+
+= 4.6.10 =
+* Bug Fix: Fixed regression that prevented adding wildcard IP's in the form of 'XXX.XXX.XXX.*' to Ban Hosts.
+* Bug Fix: When a file scan is run from iThemes Sync, a warning will no longer be added to the site's error log. 
+
+= 4.6.8 =
+* Enhancement: Minor refactoring for performance and scalability.
+* Enhancement: Add ITSEC_BACKUP_CRON constant to replace plugin's backup scheduler with wp_cron.
+* Enhancement: Add dashboard reminder to salts to prompt for periodic salt changes.
+* Enhancement: Limit the number of lockouts that can be displayed at any given time in the dashboard.
+* Fix: Make sure header error messages are suppressed when performing a lockout.
+* Fix: Fix error message from missing login information when displaying lockouts.
+
+= 4.6.6 =
+* Fix: Quick banning IPs will now work correctly if existing htaccess rules are in place
+* Fix: minor bug fixes and typo corrections.
 
 = 4.6.2 =
 * New Feature: Change WordPress Salts
@@ -1362,6 +1386,12 @@ This release is a complete rewrite from the ground up. Special thanks to Cory Mi
 * First alpha release including simple feature set.
 
 == Upgrade Notice ==
+
+= 4.6.8 =
+Version 4.6.8 contains minor bugfixes and enhancements and is recommended for all users.
+
+= 4.6.6 =
+Version 4.6.6 contains minor bugfixes and is recommended for all users.
 
 = 4.6.2 =
 Version 4.6.2 contains new features and enhancements and is recommended for all users.

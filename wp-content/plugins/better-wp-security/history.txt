@@ -1,4 +1,3 @@
-
 4.0.0 - 2014-03-25 - Chris Wiegman
 	Initial Release
 4.0.1 - 2014-03-25 - Packaging Bot (modules/free)
@@ -355,3 +354,26 @@
 4.6.2 - 2015-01-21 - Packaging Bot (core)
 	New Feature: Change WordPress Salts
 	Enhancement: Refactored ITSEC_Lib and ITSEC_Files for better usability and new functions to make changing salts possible
+4.6.3 - 2015-01-27 - Packaging Bot (core)
+	Bug Fix: Generating wp-config.php file updates no longer produces warnings.
+4.6.4 - 2015-01-27 - Packaging Bot (core)
+	Bug Fix: Fixed .htaccess file modifications failing.
+4.6.5 - 2015-02-05 - Packaging Bot (core)
+	Fix: Quick banning IPs will now work correctly if existing htaccess rules are in place
+	Fix: minor bug fixes and typo corrections.
+4.6.7 - 2015-02-20 - Packaging Bot (modules/free)
+	Updated modules/free to version 1.6.1
+4.6.8 - 2015-02-20 - Packaging Bot (core)
+	Enhancement: Limit the number of lockouts that can be displayed at any given time in the dashboard.
+	Fix: Make sure header error messages are suppressed when performing a lockout.
+	Fix: Fix error message from missing login information when displaying lockouts.
+4.6.9 - 2015-02-26 - Packaging Bot (modules/free)
+	Bug Fix: When a file scan is run from iThemes Sync, a warning will no longer be added to the site's error log.
+4.6.10 - 2015-02-26 - Packaging Bot (core)
+	Bug Fix: Fixed regression that prevented adding wildcard IP's in the form of 'XXX.XXX.XXX.*' to Ban Hosts.
+4.6.11 - 2015-03-20 - Packaging Bot (core)
+	Enhancement: Translation files can now be stored in WP_LANG_DIR/plugins/ithemes-security-pro for
+		iThemes Security Pro and WP_LANG_DIR/plugins/better-wp-security for iThemes Security free version.
+	Bug Fix: The file permissions check will no longer list a warning if the plugins directory has permissions of 755.
+4.6.12 - 2015-03-20 - Packaging Bot (modules/free)
+	Bug Fix: Fixed incorrect text describing the "Backups to Retain" database backup setting.

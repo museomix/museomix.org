@@ -267,13 +267,16 @@ function TableurGoogle($atts){
 add_filter('pre_get_posts', 'pre_get_posts_hook' );
 function pre_get_posts_hook($wp_query) {
 	global $OrdreMenuTypesPages;
-	$type = $wp_query->query['post_type'];
-    if (is_archive()&&in_array($type,$OrdreMenuTypesPages))
-    {
-        $wp_query->set( 'orderby', 'menu_order' );
-        $wp_query->set( 'order', 'ASC' );
-        return $wp_query;
-    }
+	if (isset($wp_query->query['post_type'])) {
+		$type = $wp_query->query['post_type'];
+		if (is_archive()&&in_array($type,$OrdreMenuTypesPages))
+		{
+			$wp_query->set( 'orderby', 'menu_order' );
+			$wp_query->set( 'order', 'ASC' );
+			return $wp_query;
+		}
+	}
+	return $wp_query;
 }
 
 /* Nouvelle taille d'image */

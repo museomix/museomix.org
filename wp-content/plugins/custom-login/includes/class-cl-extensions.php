@@ -21,8 +21,8 @@ class CL_Extensions {
 		$this->checkout_url = CUSTOM_LOGIN_API_URL . 'checkout/';
 		
 		add_action( CUSTOM_LOGIN_OPTION . '_settings_sidebars',	array( $this, 'settings_sidebar' ), 20 );
-		add_action( 'admin_menu',										array( $this, 'admin_menu' ), 10 );
-		add_action( 'admin_init',										array( $this, 'remote_install_client' ), 10 );
+		add_action( 'admin_menu',								array( $this, 'admin_menu' ), 10 );
+		add_action( 'admin_init',								array( $this, 'remote_install_client' ), 10 );
 		
 		$this->get_extensions();
 	}
@@ -217,7 +217,7 @@ class CL_Extensions {
 			$html .= '<div class="col span_1_of_3 eddri-addon">';			
 				$html .= '<div class="eddri-addon-container">';
 					$html .= '<div class="eddri-img-wrap">';					
-						$html .= '<a href="' . add_query_arg( array( 'utm_source' => 'wordpressorg', 'utm_medium' => 'custom-login', 'utm_campaign' => 'eddri' ), $extension['url'] ) . '" target="_blank"><img class="eddri-thumbnail" src="' . $extension['image'] . '"></a>';						
+						$html .= '<a href="' . esc_url( add_query_arg( array( 'utm_source' => 'wordpressorg', 'utm_medium' => 'custom-login', 'utm_campaign' => 'eddri' ), $extension['url'] ) ) . '" target="_blank"><img class="eddri-thumbnail" src="' . $extension['image'] . '"></a>';						
 						$html .= '<p>' . $extension['description'] . '</p>';						
 					$html .= '</div>';
 					
@@ -230,9 +230,9 @@ class CL_Extensions {
 						$html .= '<ul>';						
 						foreach( $extension['links'] as $link ) {
 							$html .= '<li>';
-							$html .= $link['description'] . ' (' . $link['price'] . '): <a href="' . add_query_arg( array( 'edd_action' => 'straight_to_gateway', 'download_id' => $link['download_id'], 'edd_options[price_id]' => $link['price_id'] ), $this->checkout_url ) . '">PayPal</a>';
+							$html .= $link['description'] . ' (' . $link['price'] . '): <a href="' . esc_url( add_query_arg( array( 'edd_action' => 'straight_to_gateway', 'download_id' => $link['download_id'], 'edd_options[price_id]' => $link['price_id'] ), $this->checkout_url ) ) . '">PayPal</a>';
 							$html .= ' | ';
-							$html .= '<a href="' . add_query_arg( array( 'edd_action' => 'add_to_cart', 'download_id' => $link['download_id'], 'edd_options[price_id]' => $link['price_id'] ), $this->checkout_url ) . '">Credit Card</a>';
+							$html .= '<a href="' . esc_url( add_query_arg( array( 'edd_action' => 'add_to_cart', 'download_id' => $link['download_id'], 'edd_options[price_id]' => $link['price_id'] ), $this->checkout_url ) ) . '">Credit Card</a>';
 							$html .= '</li>';
 						}						
 						$html .= '</ul>';

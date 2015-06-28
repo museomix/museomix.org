@@ -2863,12 +2863,10 @@ class WYSIJA_view_back_campaigns extends WYSIJA_view_back {
 
 											default :
 												foreach ($section['paragraphs'] as $line) {
-													?>
-													<p><?php echo $line ?></p>
-								<?php
-							}
-					}
-					?>
+													echo '<p>'.$line.'</p>';
+												}
+										}
+										?>
 									</div>
 								</div>
 					<?php
@@ -2888,14 +2886,36 @@ class WYSIJA_view_back_campaigns extends WYSIJA_view_back {
 				$helper_readme = WYSIJA::get('readme', 'helper');
 				$helper_readme->scan();
 				$helper_licence = WYSIJA::get('licence', 'helper');
+                                $model_config = WYSIJA::get('config', 'model');
 				$data = array();
-				$data['abouttext'] = __('You updated! It\'s like having the next gadget, but better.', WYSIJA);
+				//
+
+                                $installed_time = (int)$model_config->getValue('installed_time');
+                                $usage =  time() - $installed_time;
+
+                                $helper_toolbox = WYSIJA::get('toolbox', 'helper');
+                                $usage_string = $helper_toolbox->duration_string($usage, true, 1);
+
+                                $onemonth = 3600*24*31;
+                                $twomonths = 3600*24*62;
+                                $year = 3600*24*365;
+                                if( $usage > $twomonths){
+                                    $data['abouttext'] = sprintf(__('You have been a MailPoet user for %s.', WYSIJA), '<strong>'.trim($usage_string).'</strong>');
+                                     if( $usage > $twomonths){
+                                         $data['abouttext'] .= '<br/>'.__( 'Wow! Thanks for being part of our community for so long.' , WYSIJA ) ;
+                                     }
+
+                                }else{
+                                    $data['abouttext'] = __('You updated! It\'s like having the next gadget, but better.', WYSIJA);
+                                }
+
+
 				// this is a flag to have a pretty clean update page where teh only call to action is our survey
-				$show_survey = true;
+				$show_survey = false;
 
 				$is_multisite = is_multisite();
 				$is_network_admin = WYSIJA::current_user_can('manage_network');
-				$model_config = WYSIJA::get('config', 'model');
+
 
 				if ($is_multisite) {
 					if ($is_network_admin) {
@@ -2907,10 +2927,32 @@ class WYSIJA_view_back_campaigns extends WYSIJA_view_back {
 
                                 $data = $this->_inject_alert( $data );
 
-				// inject a poll in the what's new page
-				if($show_survey === false){
-                                    $data = $this->_inject_poll( $data );
+                                $sharing_data = $model_config->getValue('analytics');
+                                if( empty( $sharing_data ) ){
+                                    $data['sections'][] = array(
+                                            'title' => __('One quick question...',WYSIJA),
+
+                                            'content' => '<div class="feature-section"><iframe frameborder="0" width="100%" height="370" scrolling="auto" allowtransparency="true" src="//mailpoet.polldaddy.com/s/what-s-new-poll-june-2015?iframe=1"><a href="//mailpoet.polldaddy.com/s/what-s-new-poll-june-2015">View Survey</a></iframe></div>'.
+											 '<div class="mpoet-update-subscribe" ><h4>'.__( 'Subscribe to our newsletters', WYSIJA ).'</h4><div class="mpoet-update-subscribe-left"> <p>'.__('We send a monthly newsletter with the following:',WYSIJA).'</p>' .
+                                                                                                    '<ul>' .
+                                                                                                            '<li>'.__('Important plugin updates',WYSIJA).'</li>' .
+                                                                                                            '<li>'.__('Coupons',WYSIJA).'</li>' .
+                                                                                                            '<li>'.__('Tips for you, or your customers',WYSIJA).'</li>' .
+                                                                                                            '<li>'.__('What we’re working on',WYSIJA).'</li>' .
+                                                                                                            '<li>'.__('News from us, the team',WYSIJA).'</li>' .
+                                                                                                    '</ul>
+                                                                                                     <p>View an <a target="_blank" href="http://www.mailpoet.com/?wysija-page=1&controller=email&action=view&email_id=1181&wysijap=subscriptions-3">an example blog post email</a> and <a target="_blank" href="http://www.mailpoet.com/?wysija-page=1&controller=email&action=view&email_id=64&wysijap=subscriptions-2">an example newsletter</a>.</p>
+                                                                                                        </div>' .
+                                                                                            '<div class="mpoet-update-subscribe-right">' .
+
+                                                                                            '<iframe width="380" scrolling="no" frameborder="0" src="http://www.mailpoet.com/?wysija-page=1&controller=subscribers&action=wysija_outter&wysija_form=5&external_site=1&wysijap=subscriptions-3" class="iframe-wysija" vspace="0" tabindex="0" style="position: static; top: 0pt; margin: 0px; border-style: none; height: 180px; left: 0pt; visibility: visible; background-color: #f1f1f1!important;" marginwidth="0" marginheight="0" hspace="0" allowtransparency="true" title="Subscription Wysija"></iframe>
+                                                                                                </div>
+                                                                                                <div style="clear:both;"></div>',
+                                            'format' => 'title-content',
+                                    );
                                 }
+
+
 
 				$msg = $model_config->getValue('ignore_msgs');
 				if ( !isset($msg['ctaupdate']) && $show_survey === false ) {
@@ -3036,8 +3078,7 @@ class WYSIJA_view_back_campaigns extends WYSIJA_view_back {
 											echo '</div>';
 
 
-                                                                                        echo '<div class="mpoet-update-subscribe" ><h4>3. '.__( 'Subscribe to our newsletters', WYSIJA ).'</h4>'.
-                                                                                                '<div class="mpoet-update-subscribe-left"><p>'.__('We send a monthly newsletter with the following:',WYSIJA).'</p>' .
+                                                                                        echo '<div class="mpoet-update-subscribe" ><div class="mpoet-update-subscribe-left"><h4>'.__( 'Subscribe to our newsletters', WYSIJA ).'</h4> <p>'.__('We send a monthly newsletter with the following:',WYSIJA).'</p>' .
                                                                                                     '<ul>' .
                                                                                                             '<li>'.__('Important plugin updates',WYSIJA).'</li>' .
                                                                                                             '<li>'.__('Coupons',WYSIJA).'</li>' .
@@ -3045,17 +3086,18 @@ class WYSIJA_view_back_campaigns extends WYSIJA_view_back {
                                                                                                             '<li>'.__('What we’re working on',WYSIJA).'</li>' .
                                                                                                             '<li>'.__('News from us, the team',WYSIJA).'</li>' .
                                                                                                     '</ul>
-                                                                                                     <p>View <a target="_blank" href="http://www.mailpoet.com/?wysija-page=1&controller=email&action=view&email_id=64&wysijap=subscriptions-2">an example</a> of a newsletter we sent previously.</p>
+                                                                                                     <p>View an <a target="_blank" href="http://www.mailpoet.com/?wysija-page=1&controller=email&action=view&email_id=1181&wysijap=subscriptions-3">an example blog post email</a> and <a target="_blank" href="http://www.mailpoet.com/?wysija-page=1&controller=email&action=view&email_id=64&wysijap=subscriptions-2">an example newsletter</a>.</p>
                                                                                                         </div>' .
                                                                                             '<div class="mpoet-update-subscribe-right">' .
 
-                                                                                            '<iframe width="380px" scrolling="no" frameborder="0" src="http://www.mailpoet.com/?wysija-page=1&controller=subscribers&action=wysija_outter&wysija_form=5&external_site=1&wysijap=subscriptions-3" class="iframe-wysija" vspace="0" tabindex="0" style="position: static; top: 0pt; margin: 0px; border-style: none; height: 125px; left: 0pt; visibility: visible; background-color: #f1f1f1!important;" marginwidth="0" marginheight="0" hspace="0" allowtransparency="true" title="Subscription Wysija"></iframe>
+                                                                                            '<iframe width="380" scrolling="no" frameborder="0" src="http://www.mailpoet.com/?wysija-page=1&controller=subscribers&action=wysija_outter&wysija_form=5&external_site=1&wysijap=subscriptions-3" class="iframe-wysija" vspace="0" tabindex="0" style="position: static; top: 0pt; margin: 0px; border-style: none; height: 180px; left: 0pt; visibility: visible; background-color: #f1f1f1!important;" marginwidth="0" marginheight="0" hspace="0" allowtransparency="true" title="Subscription Wysija"></iframe>
                                                                                                 </div>
                                                                                                 <div style="clear:both;"></div>
 
                                                                                                 </div>';
 
 											break;
+
 										default :
 											foreach ($section['paragraphs'] as $line) {
 												?>

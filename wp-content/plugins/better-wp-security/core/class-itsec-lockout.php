@@ -202,7 +202,7 @@ class ITSEC_Lockout {
 		$lock_host     = null;
 		$lock_user     = null;
 		$lock_username = null;
-		$options       = $this->lockout_modules[ $module ];
+		$options       = $this->lockout_modules[$module];
 
 		$host = ITSEC_Lib::get_ip();
 
@@ -337,7 +337,7 @@ class ITSEC_Lockout {
 		@header( 'HTTP/1.0 403 Forbidden' );
 		@header( 'Cache-Control: no-cache, must-revalidate, max-age=0' );
 		@header( 'Expires: Thu, 22 Jun 1978 00:28:00 GMT' );
-		header( 'Pragma: no-cache' );
+		@header( 'Pragma: no-cache' );
 
 		if ( $network === true ) { //lockout triggered by iThemes Network
 
@@ -423,10 +423,11 @@ class ITSEC_Lockout {
 	 *
 	 * @param string $type    'all', 'host', or 'user'
 	 * @param bool   $current true for all lockouts, false for current lockouts
+	 * @param int    $limit   the maximum number of locks to return
 	 *
 	 * @return array all lockouts in the system
 	 */
-	public function get_lockouts( $type = 'all', $current = false ) {
+	public function get_lockouts( $type = 'all', $current = false, $limit = 0 ) {
 
 		global $wpdb, $itsec_globals;
 
@@ -469,7 +470,17 @@ class ITSEC_Lockout {
 
 		}
 
-		return $wpdb->get_results( "SELECT * FROM `" . $wpdb->base_prefix . "itsec_lockouts`" . $where . $type_statement . $active . ";", ARRAY_A );
+		if ( absint( $limit ) > 0 ) {
+
+			$limit = " LIMIT " . absint( $limit );
+
+		} else {
+
+			$limit = '';
+
+		}
+
+		return $wpdb->get_results( "SELECT * FROM `" . $wpdb->base_prefix . "itsec_lockouts`" . $where . $type_statement . $active . $limit . ";", ARRAY_A );
 
 	}
 
@@ -771,12 +782,12 @@ class ITSEC_Lockout {
 					$wpdb->insert(
 						$wpdb->base_prefix . 'itsec_lockouts',
 						array(
-							'lockout_type'      => $type,
-							'lockout_start'     => date( 'Y-m-d H:i:s', $itsec_globals['current_time'] ),
-							'lockout_start_gmt' => date( 'Y-m-d H:i:s', $itsec_globals['current_time_gmt'] ),
-							'lockout_expire'    => $expiration,
+							'lockout_type'       => $type,
+							'lockout_start'      => date( 'Y-m-d H:i:s', $itsec_globals['current_time'] ),
+							'lockout_start_gmt'  => date( 'Y-m-d H:i:s', $itsec_globals['current_time_gmt'] ),
+							'lockout_expire'     => $expiration,
 							'lockout_expire_gmt' => $expiration_gmt,
-							'lockout_host'      => sanitize_text_field( $host ),
+							'lockout_host'       => sanitize_text_field( $host ),
 						)
 					);
 
@@ -888,9 +899,9 @@ class ITSEC_Lockout {
 			<?php wp_nonce_field( 'itsec_release_lockout', 'wp_nonce' ); ?>
 			<input type="hidden" name="itsec_release_lockout" value="true"/>
 			<?php //get locked out hosts and users from database
-			$host_locks     = $this->get_lockouts( 'host', true );
-			$user_locks     = $this->get_lockouts( 'user', true );
-			$username_locks = $this->get_lockouts( 'username', true );
+			$host_locks     = $this->get_lockouts( 'host', true, 50 );
+			$user_locks     = $this->get_lockouts( 'user', true, 50 );
+			$username_locks = $this->get_lockouts( 'username', true, 50 );
 			?>
 			<table class="form-table">
 				<tr valign="top">
@@ -935,7 +946,7 @@ class ITSEC_Lockout {
 									                                     id="lo_<?php echo $user['lockout_id']; ?>"
 									                                     value="<?php echo $user['lockout_id']; ?>"/>
 										<label
-											for="lo_<?php echo $user['lockout_id']; ?>"><strong><?php echo $userdata->user_login; ?></strong>
+											for="lo_<?php echo $user['lockout_id']; ?>"><strong><?php echo isset( $userdata->lockout ) ? $userdata->user_login : '';  ?></strong>
 											- <?php _e( 'Expires in', 'it-l10n-better-wp-security' ); ?>
 											<em> <?php echo human_time_diff( $itsec_globals['current_time_gmt'], strtotime( $user['lockout_expire_gmt'] ) ); ?></em></label>
 									</li>
@@ -1035,7 +1046,7 @@ class ITSEC_Lockout {
 			),
 			'everything' => array(
 				'itsec-get-lockouts',
-			    'itsec-get-temp-whitelist',
+				'itsec-get-temp-whitelist',
 			),
 			'path'       => dirname( __FILE__ ),
 		);

@@ -3,7 +3,7 @@ Contributors: austyfrosty, frostymedia
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7431290
 Tags: admin, branding, customization, custom login, login, logo, error, login error, custom login pro
 Requires at least: 4.0
-Tested up to: 4.1
+Tested up to: 4.2
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -17,12 +17,12 @@ Custom Login 2.0 was 140% faster than version 1.0, and version 3.0 is now even b
 For more information visit the official [Custom Login](https://frosty.media/plugins/custom-login/) page.
 
 > <strong>Support</strong><br>
-> [Austin](https://austin.passy.co) and the [Frosty Media](https://frosty.media/) team will always try our best to support the Custom Login plugin on the WordPress.org forum, but please note that we can not guarantee a response in a timely manner. If you have an issue we would appriciate you using GitHub or purchasing priority support on our site.
+> [Austin](http://austin.passy.co) and the [Frosty Media](https://frosty.media/) team will always try our best to support the Custom Login plugin on the WordPress.org forum, but please note that we can not guarantee a response in a timely manner. If you have an issue we would appriciate you using GitHub or purchasing priority support on our site.
 >
-> Any extensions purchased on [Frosty Media](https://frosty.media/) (not hosted on WordPress.org) will not be supported on the WordPress.org forum. You can always browse our *small* but growing [documentation](https://frosty.media/docs) for further assistance. You need a valid license key to make support submissions *on our site*. We thank you in advance. 
+> Any extensions purchased on [Frosty Media](https://frosty.media/) (not hosted on WordPress.org) will not be supported on the WordPress.org forum. You can always browse our *small* but growing [documentation](https://frosty.media/docs) for further assistance. You need a valid license key to make support submissions *on our site*. We thank you in advance.
 
 > <strong>Bug Reports</strong><br>
-> Bug reports for Custom Login are [welcomed on GitHub](https://github.com/thefrosty/custom-login). 
+> Bug reports for Custom Login are [welcomed on GitHub](https://github.com/thefrosty/custom-login).
 
 = Video =
 
@@ -30,14 +30,15 @@ http://www.youtube.com/watch?v=hZkc-t36xYQ
 
 = Extensions =
 
-There are currently 4 premium extensions available, with more coming (suggestions welcome - and *will be offered for free to said user*).
+There are currently 5 premium extensions available, with more coming (suggestions welcome - and *will be offered for free to said user*).
 
 **Extensions available now**
 
-* <a href="https://frosty.media/plugins/custom-login-stealth-login/?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=readme.txt" title="Custom Login Stealth Login">Stealth Login</a> - obscure your login URL.
-* <a href="https://frosty.media/plugins/custom-login-page-template/?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=readme.txt" title="Custom Login Page Template">Page Template</a> - add a login form to any WordPress page.
-* <a href="https://frosty.media/plugins/custom-login-redirects/?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=readme.txt" title="Custom Login Redirects">Login Redirects</a> - Manage login redirects.
-* <a href="https://frosty.media/plugins/custom-login-no-password-login/?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=readme.txt" title="Custom Login No Password logins">No Password</a> - allow users to login without a password. 
+* [Stealth Login](https://frosty.media/plugins/custom-login-stealth-login/?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=readme.txt "Custom Login Stealth Login") - obscure your login URL.
+* [Page Template](https://frosty.media/plugins/custom-login-page-template/?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=readme.txt "Custom Login Page Template") - add a login form to any WordPress page.
+* [Login Redirects](https://frosty.media/plugins/custom-login-redirects/?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=readme.txt "Custom Login Redirects") - Manage login redirects.
+* [No Password](https://frosty.media/plugins/custom-login-no-password-login/?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=readme.txt "Custom Login No Password logins") - allow users to login without a password.
+* [Style Pack #1](https://frosty.media/plugins/custom-login-style-pack-1?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=readme.txt "Custom Login Style Pack #1") - four pre-designed login styles.
 
 **Extensions in development/extension ideas**
 
@@ -46,23 +47,24 @@ There are currently 4 premium extensions available, with more coming (suggestion
 * "Super User" only access for client sites.
 * **Added in core as of version 3.0** Remove default WordPress login CSS.
 * Submit button styles!
-* Custom Login pre made settings templates.
+* **Added as of version 3.2** Custom Login pre made settings templates *AKA* [Style Packs](https://frosty.media/plugin/tag/style-pack/).
 
 = More info =
 
 Activate the plugin and customize your WordPress login screen. It's as easy as modifying a few settings, there is no need to understand CSS at all. Custom Login even has a HTML, CSS &amp; jQuery textarea for more advanced customizations.
 
 1. Works great for client site installs.
-2. Read more about [Custom Login](http://wp.me/pzgsJ-HY) 2.0
+2. Read more about [Custom Login 3.1](https://frosty.media/2015/custom-login-v3-1-released/)
+2. Read more about [Custom Login 2.0](http://wp.me/pzgsJ-HY)
 
 **For those looking to showoff your login screen, check out the [Flickr group](http://flickr.com/groups/custom-login/)! Share you designs with the community!**
 
 = links =
 
 * Premium Plugins: [https://frosty.media/plugins](https://frosty.media/plugins/ "Premium WordPress Plugins by Frosty")
-* Austins Blog: [https:/austin.passy.co/](https://austin.passy.co/ "Austin Passy's blog")
+* Austins Blog: [https:/austin.passy.co/](http://austin.passy.co/ "Austin Passy's blog")
 * Austin on Twitter: @[TheFrosty](https:/twitter.com/TheFrosty "Austin TheFrosty' Passy on Twitter")
-* Frosty Media on Twitter: @[FrostyMediaWP](https:/twitter.com/FrostyMediaWP "Extendd on Twitter")
+* Frosty Media on Twitter: @[Frosty_Media](https:/twitter.com/Frosty_Media "Frosty Media on Twitter")
 * **Development welcomed on [GitHub](https://github.com/thefrosty/custom-login)**
 
 = Hooks and Filters =
@@ -112,6 +114,38 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 4. Custom Login Extensions Installer (an active license key is required).
 
 == Changelog ==
+
+= Version 3.2.2 (05/04/15) =
+
+* May the fourth be with you.
+* Cleaned up dashboard JS errors.
+
+= Version 3.2.2 (04/29/15) =
+
+* Update version number.
+* Fix upgrade notice showing when not needed.
+* Add class 'notice' and 'is-dismissible' to notice.
+* Cleanup admin dashboard empty ob_get_clean() notice.
+
+= Version 3.2.1 (04/20/15) =
+
+* Fix: XSS security flaw.
+* Fix: Settings page not showing. (Fixes Issue: [#6](https://github.com/thefrosty/custom-login/pull/6) /ht @[DrewAPicture](https://github.com/DrewAPicture).
+
+= Version 3.2 (02/09/15) =
+
+* Message: Celebrate 500,000 downloads. Visit the settings page or [this post](https://frosty.media/?p=26056) to get any extension for free! *Restrictions may apply.
+* Notice: Introduce Custom Login [Style Pack #1](https://frosty.media/plugins/custom-login-style-pack-1)
+* Fix: Possible headers_sent() error in some installations [forum](https://wordpress.org/support/topic/update-php-errors-dashboard-errors?replies=2).
+* Fix: Setting update script might uncheck (turn off) the activate switch.
+* Fix: CSS `#login form` box shadow not accepting opacity settings.
+* Update: Default 'activate' setting to 'on'.
+* Update: "Save Changes" submit button to "Save {Tab Title}".
+* Update: Allow Custom (CSS/HTML/JS) textareas to expand up to 30 lines.
+* Update: admin.css
+* Update: admin.js
+* Add: animate.css Licened under MIT.
+* Add: Global 'active' toggle switch.
 
 = Version 3.1 (01/20/15) =
 
@@ -172,7 +206,7 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 = Version 3.0.2 (01/12/15) =
 
 * Fix: Logo background size width &amp; height settings not transfering over in upgrade process.
-* Fix: Checking "Remove lost password text" removes the text instead of the other way around. [forum](https://wordpress.org/support/topic/lost-your-password-1) 
+* Fix: Checking "Remove lost password text" removes the text instead of the other way around. [forum](https://wordpress.org/support/topic/lost-your-password-1)
 
 = Version 3.0.1 (01/11/15) =
 
@@ -192,6 +226,9 @@ _REQUIRES WordPress 3.9 or later_
 * New: Removed version [2.x changelog](http://plugins.svn.wordpress.org/custom-login/tags/2.4/readme.txt).
 
 == Upgrade Notice ==
+
+= 3.2 =
+Celebrate 500,000 downloads w/ a FREE extension! Update to version 3.2 for more info.
 
 = 3.0.6 =
 Fixes unable to login to admin site.

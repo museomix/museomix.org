@@ -9,7 +9,6 @@
  * @package iThemes_Security
  */
 class Ithemes_Sync_Verb_ITSEC_Perform_File_Scan extends Ithemes_Sync_Verb {
-
 	/**
 	 * The name of the verb that can be called via Sync.
 	 *
@@ -18,7 +17,7 @@ class Ithemes_Sync_Verb_ITSEC_Perform_File_Scan extends Ithemes_Sync_Verb {
 	 * @var string
 	 */
 	public static $name = 'itsec-perform-file-scan';
-
+	
 	/**
 	 * A description of the verb for use in Sync.
 	 *
@@ -27,7 +26,7 @@ class Ithemes_Sync_Verb_ITSEC_Perform_File_Scan extends Ithemes_Sync_Verb {
 	 * @var string
 	 */
 	public static $description = 'Perform a one-time file scan';
-
+	
 	/**
 	 * Array of default arguments to process
 	 *
@@ -36,7 +35,7 @@ class Ithemes_Sync_Verb_ITSEC_Perform_File_Scan extends Ithemes_Sync_Verb {
 	 * @var array
 	 */
 	public $default_arguments = array();
-
+	
 	/**
 	 * Functionaly to execute when calling the verb
 	 *
@@ -46,16 +45,13 @@ class Ithemes_Sync_Verb_ITSEC_Perform_File_Scan extends Ithemes_Sync_Verb {
 	 *
 	 * @return array response indicating result of the file scan
 	 */
-	public function run() {
-
+	public function run( $arguments ) {
 		//We need the ITSEC_File_Change object to access the execution method.
 		$module = new ITSEC_File_Change();
 		$module->run();
-
+		
 		$response = $module->execute_file_check( false, true );
-
+		
 		return $response;
-
 	}
-
 }

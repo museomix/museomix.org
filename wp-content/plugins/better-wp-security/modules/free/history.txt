@@ -3,10 +3,10 @@
 1.0.1 - 2014-03-25 - Chris Wiegman
 	Better Check for empty IP strings when creating rewrite rules. Should improve upgrade process.
 1.0.2 - 2014-03-27 - Chris Wiegman
-    Away mode settings now accept PM time
-    Removed the pingback URL from the header if xmlrpc disabled.
-    Added file locking to admin user operations to [hopefully] avoid duplicated users.
-    Fixed minor typos
+	Away mode settings now accept PM time
+	Removed the pingback URL from the header if xmlrpc disabled.
+	Added file locking to admin user operations to [hopefully] avoid duplicated users.
+	Fixed minor typos
 1.0.3 - 2014-04-01 - Chris Wiegman
 	Fixed history.txt (for iThemes customers)
 	Removed extra quotes that could appear in user agents
@@ -76,9 +76,9 @@
 1.0.12 - 2014-04-14 - Chris Wiegman
 	Fix sorting by count in 404 Logs
 	Minor code cleanup
-    Make sure all wp_enqueue_script dependencies are in proper format
-    Reduce priority of hide backend init for better compatibility with other plugins
-    SSL now logs users out when activating to prevent cookie conflicts
+	Make sure all wp_enqueue_script dependencies are in proper format
+	Reduce priority of hide backend init for better compatibility with other plugins
+	SSL now logs users out when activating to prevent cookie conflicts
 1.0.13 - 2014-04-17 - Chris Wiegman
 	Make sure backup directory is present before trying to use it
 	Make sure backup file method is respected on all backup operations
@@ -109,45 +109,45 @@
 	Fixed hide backend in cases where a lockout has expired
 	Miscelaneous typos and other fixes.
 1.2.0 - 2014-05-07 - Chris Wiegman
-    Don't allow empty file types in file change exclusions
-    Add Sync integration for Away Mode
-    Minor typo and other fixes
+	Don't allow empty file types in file change exclusions
+	Add Sync integration for Away Mode
+	Minor typo and other fixes
 1.2.1 - 2014-05-19 - Chris Wiegman
-    Consolidate white lists into one option
-    Fix IP mask calculations
-    Fix NGINX IP range blocking
-    Update modules to use new logging
-    Minor refactoring
-    Add metabox for iThemes Sync
-    Update jQuery version in tweaks
-    Shortened file change array names to save space
+	Consolidate white lists into one option
+	Fix IP mask calculations
+	Fix NGINX IP range blocking
+	Update modules to use new logging
+	Minor refactoring
+	Add metabox for iThemes Sync
+	Update jQuery version in tweaks
+	Shortened file change array names to save space
 1.2.2 - 2014-05-28 - Chris Wiegman
-    Make sure backup disables itself when other backup solutions are present
-    Fix tweet link
-    Minor fixes and cleanup
+	Make sure backup disables itself when other backup solutions are present
+	Fix tweet link
+	Minor fixes and cleanup
 1.2.3 - 2014-06-11 - Chris Wiegman
-    Minor formatting and typo fixes
-    Make sure front-end classes are available only when needed
-    Fixed default types in file change settings
-    Added file type exclusion to 404 settings
-    Allow for Jetpack SSO to function with suspicious queries turned on
-    Use WordPress' PclZip for backup zip
+	Minor formatting and typo fixes
+	Make sure front-end classes are available only when needed
+	Fixed default types in file change settings
+	Added file type exclusion to 404 settings
+	Allow for Jetpack SSO to function with suspicious queries turned on
+	Use WordPress' PclZip for backup zip
 1.2.4 - 2014-06-12 - Chris Wiegman
-    Don't filter hide backend hash until after schema redirect
-    don't send file change email on first scan
-    Fixed verbage when changing login URL
-    Modified ban users rewrites for apache. Should work with proxy and if setenvif isn't enabled.
+	Don't filter hide backend hash until after schema redirect
+	don't send file change email on first scan
+	Fixed verbage when changing login URL
+	Modified ban users rewrites for apache. Should work with proxy and if setenvif isn't enabled.
 1.2.5 - 2014-06-12 - Chris Wiegman
-    Fixed error on line 55 of class-itsec-four-oh-four.php that could occur under certain circumstances
+	Fixed error on line 55 of class-itsec-four-oh-four.php that could occur under certain circumstances
 1.2.6 - 2014-06-12 - Chris Wiegman
-    Fixed 404 error on https with hide backend.
+	Fixed 404 error on https with hide backend.
 1.2.7 - 2014-06-12 - Chris Wiegman
-    Fixed error for missing function in hide backend
+	Fixed error for missing function in hide backend
 1.2.8 - 2014-07-02 - Chris Wiegman
-    Fixed a bug preventing file-change scanning from running when manually executed from the "Logs" page
-    Fixed a bug where an error could be generated if the saved files from the file change feature weren't properly saved
-    Fixed comment approval email links to make sure they work when a user is not logged in and hide backend is in effect
-    Fixed responsive issues in iThemes notifications that prevented notifications from being easily read on small screens.
+	Fixed a bug preventing file-change scanning from running when manually executed from the "Logs" page
+	Fixed a bug where an error could be generated if the saved files from the file change feature weren't properly saved
+	Fixed comment approval email links to make sure they work when a user is not logged in and hide backend is in effect
+	Fixed responsive issues in iThemes notifications that prevented notifications from being easily read on small screens.
 1.3.0 - 2014-07-28 - Chris Wiegman
 	Added on-demand malware scanning for the homepage
 	Fixed Error in 404 scanning if path field was empty
@@ -165,7 +165,7 @@
 	Fixed an inadvertant disabling of file change scans intrudced in 4.3
 1.3.2 - 2014-07-29 - Chris Wiegman
 	Updated descriptions an instructions in malware scheduling to make the feature easier to use
-    Numerous typo corrections throughout dashboard
+	Numerous typo corrections throughout dashboard
 1.3.3 - 2014-07-30 - Chris Wiegman
 	Clean up notifications for file change detection and malware scanning
 1.3.4 - 2014-08-11 - Chris Wiegman
@@ -203,15 +203,15 @@
 	Fixed: Fixed a bug that prevented the api key from saving after resetting the key.
 	Fixed: Removed errors that could occur due to the use of custom capabilities and roles.
 1.4.6 - 2014-09-17 - Chris Wiegman
-    Only code cleanup
+	Only code cleanup
 1.4.7 - 2014-10-09 - Chris Wiegman
 	Enhancement: File change summary emails are more concise and will avoid extra information
-    Fixed: Hide backend will now work with Jetpack's JSON API authorization.
-    Fixed: Option to change user ID 1 will correctly disappear when not present
-    Fixed: Removed empty user agent from default blacklist to avoid issues with external services
-    Fixed: File change folder check will no longer scan directories outside of ABSPATH for any reason
-    Fixed: Adding define( 'ITSEC_FILE_CHANGE_CRON', true ); to wp-config.php will cause the file change scanner to only run once daily via wp-cron.
-    Fixed: Compatibility issue where strong password enforcement could cause an error if passwords are changed outside of the core of WordPress
+	Fixed: Hide backend will now work with Jetpack's JSON API authorization.
+	Fixed: Option to change user ID 1 will correctly disappear when not present
+	Fixed: Removed empty user agent from default blacklist to avoid issues with external services
+	Fixed: File change folder check will no longer scan directories outside of ABSPATH for any reason
+	Fixed: Adding define( 'ITSEC_FILE_CHANGE_CRON', true ); to wp-config.php will cause the file change scanner to only run once daily via wp-cron.
+	Fixed: Compatibility issue where strong password enforcement could cause an error if passwords are changed outside of the core of WordPress
 	Fixed: Lost password url should now be correct on multisite.
 1.4.8 - 2014-10-13 - Chris Wiegman
 	New Pro Feature: Dashboard widget. Get important information and handle user blocking right from the WordPress Dashboard.
@@ -239,4 +239,11 @@
 	Fix: Fixed typo on file change warning emails.
 1.6.0 - 2015-01-21 - Chris Wiegman
 	New Feature: Change WordPress Salts
-
+1.6.1 - 2015-02-17 - Chris Wiegman
+	Enhancement: Minor refactoring for performance and scalability.
+	Enhancement: Add ITSEC_BACKUP_CRON constant to replace plugin's backup scheduler with wp_cron.
+	Enhancement: Add dashboard reminder to salts to prompt for periodic salt changes.
+1.6.2 - 2015-02-26 - Chris Jean
+	Bug Fix: When a file scan is run from iThemes Sync, a warning will no longer be added to the site's error log.
+1.6.3 - 2014-03-20 - Chris Jean
+	Bug Fix: Fixed incorrect text describing the "Backups to Retain" database backup setting.

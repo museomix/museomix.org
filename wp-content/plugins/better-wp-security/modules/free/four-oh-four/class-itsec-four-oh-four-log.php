@@ -87,7 +87,7 @@ final class ITSEC_Four_Oh_Four_Log extends ITSEC_WP_List_Table {
 
 		foreach ( $items as $item => $details ) {
 			$data = maybe_unserialize( $details['log_data'] );
-			echo '<li class="404_detail"><strong>' . __( 'Time', 'it-l10n-better-wp-security' ) . '</strong>: ' . $details['log_date'] . '<br /><strong>' . __( 'Host', 'it-l10n-better-wp-security' ) . '</strong>: ' . $details['log_host'] . '<br /><strong>' . __( 'Referrer', 'it-l10n-better-wp-security' ) . '</strong>: ' . $details['log_referrer'] . '<br /><strong>' . __( 'Query', 'it-l10n-better-wp-security' ) . '</strong>: ' . $data['query_string'] . '</li>';
+			echo '<li class="404_detail"><strong>' . __( 'Time', 'it-l10n-better-wp-security' ) . '</strong>: ' . $details['log_date'] . '<br /><strong>' . __( 'Host', 'it-l10n-better-wp-security' ) . '</strong>: ' . $details['log_host'] . '<br /><strong>' . __( 'Referrer', 'it-l10n-better-wp-security' ) . '</strong>: ' . esc_html( $details['log_referrer'] ) . '<br /><strong>' . __( 'Query', 'it-l10n-better-wp-security' ) . '</strong>: ' . esc_html( $data['query_string'] ) . '</li>';
 		}
 
 		echo '</ol>';

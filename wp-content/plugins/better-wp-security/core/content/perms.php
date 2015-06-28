@@ -106,7 +106,7 @@ $this_test = array(
 	'value'      => substr( sprintf( '%o', fileperms( dirname( plugin_dir_path( $itsec_globals['plugin_file'] ) ) ) ), - 4 ),
 );
 
-if ( ! dirname( plugin_dir_path( $itsec_globals['plugin_file'] ) ) || 755 != substr( sprintf( '%o', dirname( plugin_dir_path( $itsec_globals['plugin_file'] ) ) ), - 4 ) ) {
+if ( ! dirname( plugin_dir_path( $itsec_globals['plugin_file'] ) ) || 755 != substr( sprintf( '%o', fileperms( dirname( plugin_dir_path( $itsec_globals['plugin_file'] ) ) ) ), - 4 ) ) {
 
 	$this_test['status'] = 'WARNING';
 

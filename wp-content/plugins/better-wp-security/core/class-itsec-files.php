@@ -45,7 +45,7 @@ final class ITSEC_Files {
 	 * @access private
 	 * @var bool
 	 */
-	private	$rewrites_changed;
+	private $rewrites_changed;
 
 	/**
 	 * Whether or not wp-config.php rules have been modified externally
@@ -54,7 +54,7 @@ final class ITSEC_Files {
 	 * @access private
 	 * @var bool
 	 */
-	private	$config_changed;
+	private $config_changed;
 
 	/**
 	 * Whether or not the file writer is actually allowed to physically modify files.
@@ -63,7 +63,7 @@ final class ITSEC_Files {
 	 * @access private
 	 * @var bool
 	 */
-	private	$write_files;
+	private $write_files;
 
 	/**
 	 * Create and manage wp_config.php or .htaccess/nginx rewrites.
@@ -71,8 +71,6 @@ final class ITSEC_Files {
 	 * Executes primary file actions at plugins_loaded.
 	 *
 	 * @since  4.0.0
-	 *
-	 * @access private
 	 *
 	 * @return ITSEC_Files
 	 */
@@ -393,7 +391,7 @@ final class ITSEC_Files {
 
 				if ( true == $state ) { //as long as we're not in the section keep writing
 
-					unset( $lines[ $line_number ] );
+					unset( $lines[$line_number] );
 
 				}
 
@@ -665,7 +663,7 @@ final class ITSEC_Files {
 
 			} else {
 
-				$htaccess_contents = '# BEGIN iThemes Security' . PHP_EOL . $host_rule . '# BEGIN iThemes Security' . PHP_EOL . $htaccess_contents;
+				$htaccess_contents = '# BEGIN iThemes Security' . PHP_EOL . $host_rule . '# END iThemes Security' . PHP_EOL . $htaccess_contents;
 
 			}
 
@@ -815,7 +813,7 @@ final class ITSEC_Files {
 		global $itsec_globals;
 
 		if ( ! is_array( $this->file_modules ) ) {
-			return;
+			return false;
 		}
 
 		foreach ( $this->file_modules as $module ) {
@@ -886,7 +884,7 @@ final class ITSEC_Files {
 		global $itsec_globals;
 
 		if ( ! is_array( $this->file_modules ) ) {
-			return;
+			return false;
 		}
 
 		foreach ( $this->file_modules as $module ) {
@@ -989,8 +987,8 @@ final class ITSEC_Files {
 
 							if ( $rule['name'] == $rewrite_rule['name'] ) {
 
-								$found                       = true;
-								$this->rewrite_rules[ $key ] = $rule;
+								$found                     = true;
+								$this->rewrite_rules[$key] = $rule;
 
 							}
 
@@ -1046,8 +1044,8 @@ final class ITSEC_Files {
 
 							if ( $rule['name'] == $wpconfig_rule['name'] ) {
 
-								$found                        = true;
-								$this->wpconfig_rules[ $key ] = $rule;
+								$found                      = true;
+								$this->wpconfig_rules[$key] = $rule;
 
 							}
 
@@ -1131,7 +1129,7 @@ final class ITSEC_Files {
 
 				if ( true == $state ) { //as long as we're not in the section keep writing
 
-					unset( $lines[ $line_number ] );
+					unset( $lines[$line_number] );
 
 				}
 
@@ -1148,7 +1146,7 @@ final class ITSEC_Files {
 			}
 
 			//Actually write the new content to wp-config.
-			if ( $false !== htaccess_contents ) {
+			if ( false !== $htaccess_contents ) {
 
 				//Make sure we can write to the file
 				$perms = substr( sprintf( '%o', @fileperms( $htaccess_file ) ), - 4 );
@@ -1229,8 +1227,8 @@ final class ITSEC_Files {
 								}
 
 								//Replacing a rule that does exist. Note this will only work on one rule at a time
-								$rule_to_replace[ $rule['search_text'] ] = $rule['rule'];
-								$found                                   = true;
+								$rule_to_replace[$rule['search_text']] = $rule['rule'];
+								$found                                 = true;
 
 							}
 
@@ -1278,10 +1276,14 @@ final class ITSEC_Files {
 
 					foreach ( $config_array as $line_number => $line ) {
 
-						foreach ( $rule_to_replace as $search_text => $rule ) {
+						if ( is_array( $rule_to_replace ) ) {
 
-							if ( false !== strpos( $line, $search_text ) ) {
-								$config_array[ $line_number ] = $rule;
+							foreach ( $rule_to_replace as $search_text => $rule ) {
+
+								if ( false !== strpos( $line, $search_text ) ) {
+									$config_array[$line_number] = $rule;
+								}
+
 							}
 
 						}
@@ -1292,14 +1294,14 @@ final class ITSEC_Files {
 
 								if ( false !== strpos( $line, $rule['search_text'] ) ) {
 
-									unset( $config_array[ $line_number ] );
+									unset( $config_array[$line_number] );
 
 									//delete the following line(s) if they is blank
 									$count = 1;
 
-									while ( isset( $config_array[ $line_number + $count ] ) && 1 > strlen( trim( $config_array[ $line_number + $count ] ) ) ) {
+									while ( isset( $config_array[$line_number + $count] ) && 1 > strlen( trim( $config_array[$line_number + $count] ) ) ) {
 
-										unset( $config_array[ $line_number + 1 ] );
+										unset( $config_array[$line_number + 1] );
 
 									}
 
