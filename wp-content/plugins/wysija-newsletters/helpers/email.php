@@ -2,10 +2,9 @@
 defined('WYSIJA') or die('Restricted access');
 class WYSIJA_help_email extends WYSIJA_object{
 
-    function WYSIJA_help_email(){
-
+    function __construct(){
+        parent::__construct();
     }
-
 
     /**
      * used to strip the unsubscribe links and the view in browser links from an email html
@@ -87,7 +86,7 @@ class WYSIJA_help_email extends WYSIJA_object{
         }
 
         $mailer=WYSIJA::get('mailer','helper');
-        $mailer->WYSIJA_help_mailer('',$values,$testMultisite);
+        $mailer->__construct('',$values,$testMultisite);
 
         $current_user=WYSIJA::wp_get_userdata();
         $mailer->testemail=true;

@@ -5,8 +5,8 @@ class WYSIJA_control_back_subscribers extends WYSIJA_control_front{
     var $model='user';
     var $view='';
 
-    function WYSIJA_control_back_subscribers(){
-        parent::WYSIJA_control_front();
+    function __construct(){
+        parent::__construct();
         $data=array();
         foreach($_REQUEST['data'] as $vals){
             $data[$vals['name']]=$vals['value'];

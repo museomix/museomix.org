@@ -65,7 +65,7 @@ class ITSEC_Lockout {
 
 		add_meta_box(
 			'itsec_lockouts',
-			__( 'Active Lockouts', 'it-l10n-better-wp-security' ),
+			__( 'Active Lockouts', 'better-wp-security' ),
 			array( $this, 'lockout_metabox' ),
 			'toplevel_page_itsec',
 			'bottom',
@@ -82,7 +82,7 @@ class ITSEC_Lockout {
 
 			add_meta_box(
 				'itsec_self_protect',
-				__( "Don't Lock Yourself Out", 'it-l10n-better-wp-security' ),
+				__( "Don't Lock Yourself Out", 'better-wp-security' ),
 				array( $this, 'self_protect_metabox' ),
 				$page,
 				'top',
@@ -112,7 +112,7 @@ class ITSEC_Lockout {
 			wp_enqueue_script( 'itsec_temp_whitelist', $itsec_globals['plugin_url'] . 'core/js/admin-whitelist.js', array( 'jquery' ), $itsec_globals['plugin_build'] );
 			wp_localize_script( 'itsec_temp_whitelist', 'itsec_temp_whitelist', array(
 				'nonce'   => wp_create_nonce( 'itsec_temp_whitelist_nonce' ),
-				'success' => __( 'Temporarily Whitelist my IP', 'it-l10n-better-wp-security' ),
+				'success' => __( 'Temporarily Whitelist my IP', 'better-wp-security' ),
 			) );
 
 		}
@@ -312,7 +312,7 @@ class ITSEC_Lockout {
 
 			global $itsec_logger;
 
-			$itsec_logger->log_event( __( 'lockout', 'it-l10n-better-wp-security' ), 10, array( __( 'A whitelisted host has triggered a lockout condition but was not locked out.', 'it-l10n-better-wp-security' ) ), sanitize_text_field( $host ) );
+			$itsec_logger->log_event( __( 'lockout', 'better-wp-security' ), 10, array( __( 'A whitelisted host has triggered a lockout condition but was not locked out.', 'better-wp-security' ) ), sanitize_text_field( $host ) );
 
 		}
 
@@ -347,7 +347,7 @@ class ITSEC_Lockout {
 
 			} else {
 
-				die( __( "Your IP address has been flagged as a threat by the iThemes Security network.", 'it-l10n-better-wp-security' ) );
+				die( __( "Your IP address has been flagged as a threat by the iThemes Security network.", 'better-wp-security' ) );
 
 			}
 
@@ -359,7 +359,7 @@ class ITSEC_Lockout {
 
 			} else {
 
-				die( __( 'You have been locked out due to too many invalid login attempts.', 'it-l10n-better-wp-security' ) );
+				die( __( 'You have been locked out due to too many invalid login attempts.', 'better-wp-security' ) );
 
 			}
 
@@ -371,7 +371,7 @@ class ITSEC_Lockout {
 
 			} else {
 
-				die( __( 'error', 'it-l10n-better-wp-security' ) );
+				die( __( 'error', 'better-wp-security' ) );
 
 			}
 
@@ -394,22 +394,22 @@ class ITSEC_Lockout {
 
 		$description = sprintf(
 			'<h4>%s</h4><p>%s <a href="#global_options">%s</a>.<br /> %s</p><ul><li><strong>%s:</strong> %s</li><li><strong>%s:</strong> %s</li><li><strong>%s:</strong> %s</li><li><strong>%s:</strong> %s</li><li><strong>%s:</strong> %s</li><li><strong>%s:</strong> %s</li></ul>',
-			__( 'About Lockouts', 'it-l10n-better-wp-security' ),
-			__( 'Your lockout settings can be configured in', 'it-l10n-better-wp-security' ),
-			__( 'Global Settings', 'it-l10n-better-wp-security' ),
-			__( 'Your current settings are configured as follows:', 'it-l10n-better-wp-security' ),
-			__( 'Permanently ban', 'it-l10n-better-wp-security' ),
-			( $settings['blacklist'] === true ? __( 'yes', 'it-l10n-better-wp-security' ) : __( 'no', 'it-l10n-better-wp-security' ) ),
-			__( 'Number of lockouts before permanent ban', 'it-l10n-better-wp-security' ),
+			__( 'About Lockouts', 'better-wp-security' ),
+			__( 'Your lockout settings can be configured in', 'better-wp-security' ),
+			__( 'Global Settings', 'better-wp-security' ),
+			__( 'Your current settings are configured as follows:', 'better-wp-security' ),
+			__( 'Permanently ban', 'better-wp-security' ),
+			( $settings['blacklist'] === true ? __( 'yes', 'better-wp-security' ) : __( 'no', 'better-wp-security' ) ),
+			__( 'Number of lockouts before permanent ban', 'better-wp-security' ),
 			$settings['blacklist_count'],
-			__( 'How long lockouts will be remembered for ban', 'it-l10n-better-wp-security' ),
+			__( 'How long lockouts will be remembered for ban', 'better-wp-security' ),
 			$settings['blacklist_period'],
-			__( 'Host lockout message', 'it-l10n-better-wp-security' ),
+			__( 'Host lockout message', 'better-wp-security' ),
 			$settings['lockout_message'],
-			__( 'User lockout message', 'it-l10n-better-wp-security' ),
+			__( 'User lockout message', 'better-wp-security' ),
 			$settings['user_lockout_message'],
-			__( 'Is this computer white-listed', 'it-l10n-better-wp-security' ),
-			( $this->is_ip_whitelisted( ITSEC_Lib::get_ip() ) === true ? __( 'yes', 'it-l10n-better-wp-security' ) : __( 'no', 'it-l10n-better-wp-security' ) )
+			__( 'Is this computer white-listed', 'better-wp-security' ),
+			( $this->is_ip_whitelisted( ITSEC_Lib::get_ip() ) === true ? __( 'yes', 'better-wp-security' ) : __( 'no', 'better-wp-security' ) )
 		);
 
 		return $description;
@@ -650,9 +650,9 @@ class ITSEC_Lockout {
 			add_site_option( 'itsec_temp_whitelist_ip', $response );
 
 			$response['exp']      = human_time_diff( $itsec_globals['current_time'], $response['exp'] );
-			$response['message1'] = __( 'Your IP Address', 'it-l10n-better-wp-security' );
-			$response['message2'] = __( 'is whitelisted for', 'it-l10n-better-wp-security' );
-			$response['message3'] = __( 'Remove IP from Whitelist', 'it-l10n-better-wp-security' );
+			$response['message1'] = __( 'Your IP Address', 'better-wp-security' );
+			$response['message2'] = __( 'is whitelisted for', 'better-wp-security' );
+			$response['message3'] = __( 'Remove IP from Whitelist', 'better-wp-security' );
 
 			die( json_encode( $response ) );
 
@@ -746,7 +746,7 @@ class ITSEC_Lockout {
 					$host_expiration = false;
 
 					if ( ! class_exists( 'ITSEC_Ban_Users' ) ) {
-						require( trailingslashit( $itsec_globals['plugin_dir'] ) . 'modules/free/ban-users/class-itsec-ban-users.php' );
+						require( trailingslashit( $itsec_globals['plugin_dir'] ) . 'core/modules/ban-users/class-itsec-ban-users.php' );
 					}
 
 					ITSEC_Ban_Users::insert_ip( sanitize_text_field( $host ) ); //Send it to the Ban Users module for banning
@@ -791,7 +791,7 @@ class ITSEC_Lockout {
 						)
 					);
 
-					$itsec_logger->log_event( __( 'lockout', 'it-l10n-better-wp-security' ), 10, array(
+					$itsec_logger->log_event( __( 'lockout', 'better-wp-security' ), 10, array(
 						'expires' => $expiration, 'expires_gmt' => $expiration_gmt, 'type' => $type
 					), sanitize_text_field( $host ) );
 
@@ -820,7 +820,7 @@ class ITSEC_Lockout {
 						), '', '', intval( $user ) );
 					} else {
 						$itsec_logger->log_event( 'lockout', 10, array(
-							__( 'White Listed', 'it-l10n-better-wp-security' ), 'type' => $type
+							__( 'White Listed', 'better-wp-security' ), 'type' => $type
 						), '', '', intval( $user ) );
 					}
 
@@ -849,7 +849,7 @@ class ITSEC_Lockout {
 						), '', '', $username );
 					} else {
 						$itsec_logger->log_event( 'lockout', 10, array(
-							__( 'White Listed', 'it-l10n-better-wp-security' ), 'type' => $type
+							__( 'White Listed', 'better-wp-security' ), 'type' => $type
 						), '', '', $username );
 					}
 
@@ -906,7 +906,7 @@ class ITSEC_Lockout {
 			<table class="form-table">
 				<tr valign="top">
 					<th scope="row" class="settinglabel">
-						<?php _e( 'Locked out hosts', 'it-l10n-better-wp-security' ); ?>
+						<?php _e( 'Locked out hosts', 'better-wp-security' ); ?>
 					</th>
 					<td class="settingfield">
 						<?php if ( sizeof( $host_locks ) > 0 ) { ?>
@@ -918,7 +918,7 @@ class ITSEC_Lockout {
 									                                     value="<?php echo $host['lockout_id']; ?>"/>
 										<label
 											for="lo_<?php echo $host['lockout_id']; ?>"><strong><?php echo filter_var( $host['lockout_host'], FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 );; ?></strong>
-											- <?php _e( 'Expires in', 'it-l10n-better-wp-security' ); ?>
+											- <?php _e( 'Expires in', 'better-wp-security' ); ?>
 											<em> <?php echo human_time_diff( $itsec_globals['current_time_gmt'], strtotime( $host['lockout_expire_gmt'] ) ); ?></em></label>
 									</li>
 								<?php } ?>
@@ -926,7 +926,7 @@ class ITSEC_Lockout {
 						<?php } else { //no host is locked out ?>
 							<ul>
 								<li style="list-style: none;">
-									<p><?php _e( 'Currently no hosts are locked out of this website.', 'it-l10n-better-wp-security' ); ?></p>
+									<p><?php _e( 'Currently no hosts are locked out of this website.', 'better-wp-security' ); ?></p>
 								</li>
 							</ul>
 						<?php } ?>
@@ -934,7 +934,7 @@ class ITSEC_Lockout {
 				</tr>
 				<tr valign="top">
 					<th scope="row" class="settinglabel">
-						<?php _e( 'Locked out users', 'it-l10n-better-wp-security' ); ?>
+						<?php _e( 'Locked out users', 'better-wp-security' ); ?>
 					</th>
 					<td class="settingfield">
 						<?php if ( sizeof( $user_locks ) > 0 ) { ?>
@@ -947,7 +947,7 @@ class ITSEC_Lockout {
 									                                     value="<?php echo $user['lockout_id']; ?>"/>
 										<label
 											for="lo_<?php echo $user['lockout_id']; ?>"><strong><?php echo isset( $userdata->lockout ) ? $userdata->user_login : '';  ?></strong>
-											- <?php _e( 'Expires in', 'it-l10n-better-wp-security' ); ?>
+											- <?php _e( 'Expires in', 'better-wp-security' ); ?>
 											<em> <?php echo human_time_diff( $itsec_globals['current_time_gmt'], strtotime( $user['lockout_expire_gmt'] ) ); ?></em></label>
 									</li>
 								<?php } ?>
@@ -955,7 +955,7 @@ class ITSEC_Lockout {
 						<?php } else { //no user is locked out ?>
 							<ul>
 								<li style="list-style: none;">
-									<p><?php _e( 'Currently no users are locked out of this website.', 'it-l10n-better-wp-security' ); ?></p>
+									<p><?php _e( 'Currently no users are locked out of this website.', 'better-wp-security' ); ?></p>
 								</li>
 							</ul>
 						<?php } ?>
@@ -963,7 +963,7 @@ class ITSEC_Lockout {
 				</tr>
 				<tr valign="top">
 					<th scope="row" class="settinglabel">
-						<?php _e( 'Locked out usernames (not real users)', 'it-l10n-better-wp-security' ); ?>
+						<?php _e( 'Locked out usernames (not real users)', 'better-wp-security' ); ?>
 					</th>
 					<td class="settingfield">
 						<?php if ( sizeof( $username_locks ) > 0 ) { ?>
@@ -975,7 +975,7 @@ class ITSEC_Lockout {
 									                                     value="<?php echo $user['lockout_id']; ?>"/>
 										<label
 											for="lo_<?php echo $user['lockout_id']; ?>"><strong><?php echo sanitize_text_field( $user['lockout_username'] ); ?></strong>
-											- <?php _e( 'Expires in', 'it-l10n-better-wp-security' ); ?>
+											- <?php _e( 'Expires in', 'better-wp-security' ); ?>
 											<em> <?php echo human_time_diff( $itsec_globals['current_time_gmt'], strtotime( $user['lockout_expire_gmt'] ) ); ?></em></label>
 									</li>
 								<?php } ?>
@@ -983,7 +983,7 @@ class ITSEC_Lockout {
 						<?php } else { //no user is locked out ?>
 							<ul>
 								<li style="list-style: none;">
-									<p><?php _e( 'Currently no usernames are locked out of this website.', 'it-l10n-better-wp-security' ); ?></p>
+									<p><?php _e( 'Currently no usernames are locked out of this website.', 'better-wp-security' ); ?></p>
 								</li>
 							</ul>
 						<?php } ?>
@@ -991,7 +991,7 @@ class ITSEC_Lockout {
 				</tr>
 			</table>
 			<p class="submit"><input type="submit" class="button-primary"
-			                         value="<?php _e( 'Release Lockout', 'it-l10n-better-wp-security' ); ?>"/></p>
+			                         value="<?php _e( 'Release Lockout', 'better-wp-security' ); ?>"/></p>
 		</form>
 	<?php
 	}
@@ -1021,7 +1021,7 @@ class ITSEC_Lockout {
 
 		$logger_modules['lockout'] = array(
 			'type'     => 'lockout',
-			'function' => __( 'Host or User Lockout', 'it-l10n-better-wp-security' ),
+			'function' => __( 'Host or User Lockout', 'better-wp-security' ),
 		);
 
 		return $logger_modules;
@@ -1106,11 +1106,11 @@ class ITSEC_Lockout {
 		} elseif ( isset( $_POST['itsec_release_lockout'] ) && $_POST['itsec_release_lockout'] == 'true' ) {
 
 			if ( ! wp_verify_nonce( $_POST['wp_nonce'], 'itsec_release_lockout' ) ) {
-				die( __( 'Security error!', 'it-l10n-better-wp-security' ) );
+				die( __( 'Security error!', 'better-wp-security' ) );
 			}
 
 			$type    = 'updated';
-			$message = __( 'The selected lockouts have been cleared.', 'it-l10n-better-wp-security' );
+			$message = __( 'The selected lockouts have been cleared.', 'better-wp-security' );
 
 			foreach ( $_POST as $key => $value ) {
 
@@ -1161,22 +1161,22 @@ class ITSEC_Lockout {
 
 		global $itsec_globals;
 
-		echo '<p>' . __( 'Security is a delicate item. It does not care who you are, if it sees that you are trying to do something strange it will lock you out. This can be troublesome on sites with existing errors, particularly missing assets such as images and others.', 'it-l10n-better-wp-security' ) . '</p>';
-		echo '<p>' . __( 'Use the button below to temporarily white list your IP from lockouts for 24 hours. It will still notify you of the situation but it will not lock you out of your site allowing you a chance to fix the issue.', 'it-l10n-better-wp-security' ) . '</p>';
-		echo '<p>' . __( 'Please note that if your IP address changes at any time during the period (such as you switch locations) you could still inadvertently lock yourself out.', 'it-l10n-better-wp-security' ) . '</p>';
+		echo '<p>' . __( 'Security is a delicate item. It does not care who you are, if it sees that you are trying to do something strange it will lock you out. This can be troublesome on sites with existing errors, particularly missing assets such as images and others.', 'better-wp-security' ) . '</p>';
+		echo '<p>' . __( 'Use the button below to temporarily white list your IP from lockouts for 24 hours. It will still notify you of the situation but it will not lock you out of your site allowing you a chance to fix the issue.', 'better-wp-security' ) . '</p>';
+		echo '<p>' . __( 'Please note that if your IP address changes at any time during the period (such as you switch locations) you could still inadvertently lock yourself out.', 'better-wp-security' ) . '</p>';
 
 		$temp = get_site_option( 'itsec_temp_whitelist_ip' );
 
 		if ( $temp !== false ) {
 
 			echo '<p class="itsec_temp_whitelist submit">';
-			echo __( 'Your IP Address', 'it-l10n-better-wp-security' ) . ', <strong>' . $temp['ip'] . '</strong>, ' . __( 'is whitelisted for', 'it-l10n-better-wp-security' ) . ' <strong>' . human_time_diff( $itsec_globals['current_time'], $temp['exp'] ) . '</strong>.<br />';
-			echo '<a href="#" class="itsec_temp_whitelist_release_ajax button-primary">' . __( 'Remove IP from Whitelist', 'it-l10n-better-wp-security' ) . '</a>';
+			echo __( 'Your IP Address', 'better-wp-security' ) . ', <strong>' . $temp['ip'] . '</strong>, ' . __( 'is whitelisted for', 'better-wp-security' ) . ' <strong>' . human_time_diff( $itsec_globals['current_time'], $temp['exp'] ) . '</strong>.<br />';
+			echo '<a href="#" class="itsec_temp_whitelist_release_ajax button-primary">' . __( 'Remove IP from Whitelist', 'better-wp-security' ) . '</a>';
 			echo '</p>';
 
 		} else {
 
-			echo '<p class="itsec_temp_whitelist submit"><a href="#" class="itsec_temp_whitelist_ajax button-primary">' . __( 'Temporarily Whitelist my IP', 'it-l10n-better-wp-security' ) . '</a></p>';
+			echo '<p class="itsec_temp_whitelist submit"><a href="#" class="itsec_temp_whitelist_ajax button-primary">' . __( 'Temporarily Whitelist my IP', 'better-wp-security' ) . '</a></p>';
 
 		}
 
@@ -1202,24 +1202,24 @@ class ITSEC_Lockout {
 
 		if ( ! isset( $itsec_globals['settings']['digest_email'] ) || $itsec_globals['settings']['digest_email'] === false ) {
 
-			$plural_text = __( 'has', 'it-l10n-better-wp-security' );
+			$plural_text = __( 'has', 'better-wp-security' );
 
 			//Tell which host was locked out
 			if ( $host !== false ) {
 
-				$host_text = sprintf( '%s, <a href="http://ip-adress.com/ip_tracer/%s"><strong>%s</strong></a>, ', __( 'host', 'it-l10n-better-wp-security' ), sanitize_text_field( $host ), sanitize_text_field( $host ) );
+				$host_text = sprintf( '%s, <a href="http://ip-adress.com/ip_tracer/%s"><strong>%s</strong></a>, ', __( 'host', 'better-wp-security' ), sanitize_text_field( $host ), sanitize_text_field( $host ) );
 
-				$host_expiration_text = __( 'The host has been locked out ', 'it-l10n-better-wp-security' );
+				$host_expiration_text = __( 'The host has been locked out ', 'better-wp-security' );
 
 				if ( $host_expiration === false ) {
 
-					$host_expiration_text .= '<strong>' . __( 'permanently', 'it-l10n-better-wp-security' ) . '</strong>';
-					$release_text = sprintf( '%s <a href="%s">%s</a>.', __( 'To release the host lockout you can remove the host from the', 'it-l10n-better-wp-security' ), wp_login_url( get_admin_url( '', 'admin.php?page=toplevel_page_itsec_settings' ) ), __( 'host list', 'it-l10n-better-wp-security' ) );
+					$host_expiration_text .= '<strong>' . __( 'permanently', 'better-wp-security' ) . '</strong>';
+					$release_text = sprintf( '%s <a href="%s">%s</a>.', __( 'To release the host lockout you can remove the host from the', 'better-wp-security' ), wp_login_url( get_admin_url( '', 'admin.php?page=toplevel_page_itsec_settings' ) ), __( 'host list', 'better-wp-security' ) );
 
 				} else {
 
-					$host_expiration_text .= sprintf( '<strong>%s %s</strong>', __( 'until', 'it-l10n-better-wp-security' ), sanitize_text_field( $host_expiration ) );
-					$release_text = sprintf( '%s <a href="%s">%s</a>.', __( 'To release the lockout please visit', 'it-l10n-better-wp-security' ), wp_login_url( get_admin_url( '', 'admin.php?page=itsec' ) ), __( 'the admin area', 'it-l10n-better-wp-security' ) );
+					$host_expiration_text .= sprintf( '<strong>%s %s</strong>', __( 'until', 'better-wp-security' ), sanitize_text_field( $host_expiration ) );
+					$release_text = sprintf( '%s <a href="%s">%s</a>.', __( 'To release the lockout please visit', 'better-wp-security' ), wp_login_url( get_admin_url( '', 'admin.php?page=itsec' ) ), __( 'the admin area', 'better-wp-security' ) );
 
 				}
 
@@ -1244,25 +1244,25 @@ class ITSEC_Lockout {
 
 				if ( $host_text === '' ) {
 
-					$user_expiration_text = sprintf( '%s <strong>%s %s</strong>.', __( 'The user has been locked out', 'it-l10n-better-wp-security' ), __( 'until', 'it-l10n-better-wp-security' ), sanitize_text_field( $user_expiration ) );
+					$user_expiration_text = sprintf( '%s <strong>%s %s</strong>.', __( 'The user has been locked out', 'better-wp-security' ), __( 'until', 'better-wp-security' ), sanitize_text_field( $user_expiration ) );
 
-					$user_text = sprintf( '%s, <strong>%s</strong>, ', __( 'user', 'it-l10n-better-wp-security' ), $login );
+					$user_text = sprintf( '%s, <strong>%s</strong>, ', __( 'user', 'better-wp-security' ), $login );
 
-					$release_text = sprintf( '%s <a href="%s">%s</a>.', __( 'To release the lockout please visit', 'it-l10n-better-wp-security' ), wp_login_url( get_admin_url( '', 'admin.php?page=itsec' ) ), __( 'the lockouts page', 'it-l10n-better-wp-security' ) );
+					$release_text = sprintf( '%s <a href="%s">%s</a>.', __( 'To release the lockout please visit', 'better-wp-security' ), wp_login_url( get_admin_url( '', 'admin.php?page=itsec' ) ), __( 'the lockouts page', 'better-wp-security' ) );
 
 				} else {
 
-					$user_expiration_text = sprintf( '%s <strong>%s %s</strong>.', __( 'and the user has been locked out', 'it-l10n-better-wp-security' ), __( 'until', 'it-l10n-better-wp-security' ), sanitize_text_field( $user_expiration ) );
-					$plural_text          = __( 'have', 'it-l10n-better-wp-security' );
-					$user_text            = sprintf( '%s, <strong>%s</strong>, ', __( 'and a user', 'it-l10n-better-wp-security' ), $login );
+					$user_expiration_text = sprintf( '%s <strong>%s %s</strong>.', __( 'and the user has been locked out', 'better-wp-security' ), __( 'until', 'better-wp-security' ), sanitize_text_field( $user_expiration ) );
+					$plural_text          = __( 'have', 'better-wp-security' );
+					$user_text            = sprintf( '%s, <strong>%s</strong>, ', __( 'and a user', 'better-wp-security' ), $login );
 
 					if ( $host_expiration === false ) {
 
-						$release_text .= sprintf( '%s <a href="%s">%s</a>.', __( 'To release the user lockout please visit', 'it-l10n-better-wp-security' ), wp_login_url( get_admin_url( '', 'admin.php?page=itsec' ) ), __( 'the lockouts page', 'it-l10n-better-wp-security' ) );
+						$release_text .= sprintf( '%s <a href="%s">%s</a>.', __( 'To release the user lockout please visit', 'better-wp-security' ), wp_login_url( get_admin_url( '', 'admin.php?page=itsec' ) ), __( 'the lockouts page', 'better-wp-security' ) );
 
 					} else {
 
-						$release_text = sprintf( '%s <a href="%s">%s</a>.', __( 'To release the lockouts please visit', 'it-l10n-better-wp-security' ), wp_login_url( get_admin_url( '', 'admin.php?page=itsec' ) ), __( 'the lockouts page', 'it-l10n-better-wp-security' ) );
+						$release_text = sprintf( '%s <a href="%s">%s</a>.', __( 'To release the lockouts please visit', 'better-wp-security' ), wp_login_url( get_admin_url( '', 'admin.php?page=itsec' ) ), __( 'the lockouts page', 'better-wp-security' ) );
 
 					}
 
@@ -1279,27 +1279,27 @@ class ITSEC_Lockout {
 			//Put the copy all together
 			$body = sprintf(
 				'<p>%s,</p><p>%s %s %s %s %s <a href="%s">%s</a> %s <strong>%s</strong>.</p><p>%s %s</p><p>%s</p><p><em>*%s %s. %s <a href="%s">%s</a>.</em></p>',
-				__( 'Dear Site Admin', 'it-l10n-better-wp-security' ),
-				__( 'A', 'it-l10n-better-wp-security' ),
+				__( 'Dear Site Admin', 'better-wp-security' ),
+				__( 'A', 'better-wp-security' ),
 				$host_text,
 				$user_text,
 				$plural_text,
-				__( ' been locked out of the WordPress site at', 'it-l10n-better-wp-security' ),
+				__( ' been locked out of the WordPress site at', 'better-wp-security' ),
 				get_option( 'siteurl' ),
 				get_option( 'siteurl' ),
-				__( 'due to', 'it-l10n-better-wp-security' ),
+				__( 'due to', 'better-wp-security' ),
 				sanitize_text_field( $reason ),
 				$host_expiration_text,
 				$user_expiration_text,
 				$release_text,
 				__( 'This email was generated automatically by' ),
 				$itsec_globals['plugin_name'],
-				__( 'To change your email preferences please visit', 'it-l10n-better-wp-security' ),
+				__( 'To change your email preferences please visit', 'better-wp-security' ),
 				wp_login_url( get_admin_url( '', 'admin.php?page=toplevel_page_itsec_settings' ) ),
-				__( 'the plugin settings', 'it-l10n-better-wp-security' ) );
+				__( 'the plugin settings', 'better-wp-security' ) );
 
 			//Setup the remainder of the email
-			$subject = '[' . get_option( 'siteurl' ) . '] ' . __( 'Site Lockout Notification', 'it-l10n-better-wp-security' );
+			$subject = '[' . get_option( 'siteurl' ) . '] ' . __( 'Site Lockout Notification', 'better-wp-security' );
 			$subject = apply_filters( 'itsec_lockout_email_subject', $subject );
 			$headers = 'From: ' . get_bloginfo( 'name' ) . ' <' . get_option( 'admin_email' ) . '>' . "\r\n";
 

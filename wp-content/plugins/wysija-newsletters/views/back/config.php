@@ -1101,6 +1101,11 @@ class WYSIJA_view_back_config extends WYSIJA_view_back {
 
 			</tbody>
 		</table>
+		<script>
+		  wysija_translations = {};
+		  wysija_translations.api = "<?php _e('API Key', WYSIJA); ?>";
+		  wysija_translations.password = "<?php _e('Password', WYSIJA); ?>";
+		</script>
 		<?php
 	}
 

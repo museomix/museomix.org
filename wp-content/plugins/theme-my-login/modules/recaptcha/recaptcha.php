@@ -20,22 +20,6 @@ if ( ! class_exists( 'Theme_My_Login_Recaptcha' ) ) :
  */
 class Theme_My_Login_Recaptcha extends Theme_My_Login_Abstract {
 	/**
-	 * Holds reCAPTCHA API URI
-	 *
-	 * @since 6.3
-	 * @const string
-	 */
-	const RECAPTCHA_API_URI = 'www.google.com/recaptcha/api';
-
-	/**
-	 * Holds reCAPTCHA API URL
-	 *
-	 * @since 6.3.7
-	 * @var string
-	 */
-	private $recaptcha_api_url;
-
-	/**
 	 * Holds options key
 	 *
 	 * @since 6.3
@@ -67,7 +51,7 @@ class Theme_My_Login_Recaptcha extends Theme_My_Login_Abstract {
 		return array(
 			'public_key'  => '',
 			'private_key' => '',
-			'theme'       => 'red'
+			'theme'       => 'light'
 		);
 	}
 
@@ -80,8 +64,6 @@ class Theme_My_Login_Recaptcha extends Theme_My_Login_Abstract {
 	protected function load() {
 		if ( ! ( $this->get_option( 'public_key' ) || $this->get_option( 'private_key' ) ) )
 			return;
-
-		$this->recaptcha_api_url = ( is_ssl() ? 'https://' : 'http://' ) . self::RECAPTCHA_API_URI;
 
 		add_action( 'wp_enqueue_scripts', array( &$this, 'wp_enqueue_scripts' ) );
 
@@ -101,12 +83,7 @@ class Theme_My_Login_Recaptcha extends Theme_My_Login_Abstract {
 	 * @since 6.3
 	 */
 	function wp_enqueue_scripts() {
-		wp_enqueue_script( 'recaptcha', $this->recaptcha_api_url . '/js/recaptcha_ajax.js' );
-		wp_enqueue_script( 'theme-my-login-recaptcha', plugins_url( 'theme-my-login/modules/recaptcha/js/recaptcha.js' ), array( 'recaptcha', 'jquery' ) );
-		wp_localize_script( 'theme-my-login-recaptcha', 'tmlRecaptcha', array(
-			'publickey' => $this->get_option( 'public_key' ),
-			'theme'     => $this->get_option( 'theme' )
-		) );
+		wp_enqueue_script( 'recaptcha', 'https://www.google.com/recaptcha/api.js' );
 	}
 
 	/**
@@ -118,24 +95,25 @@ class Theme_My_Login_Recaptcha extends Theme_My_Login_Abstract {
 	 * @return WP_Error WP_Error object
 	 */
 	public function registration_errors( $errors ) {
-		$response = $this->recaptcha_validate( $_SERVER['REMOTE_ADDR'], $_POST['recaptcha_challenge_field'], $_POST['recaptcha_response_field'] );
-		if ( is_wp_error( $response ) ) {
+		$response = isset( $_POST['g-recaptcha-response'] ) ? $_POST['g-recaptcha-response'] : '';
+		$result   = $this->recaptcha_validate( $response );
 
-			$error_code = $response->get_error_message();
+		if ( is_wp_error( $result ) ) {
+
+			$error_code = $result->get_error_message();
 
 			switch ( $error_code ) {
-				case 'invalid-site-private-key' :
-					$errors->add( 'recaptcha', __( '<strong>ERROR</strong>: Invalid reCAPTCHA private key.', 'theme-my-login' ), 'invalid-site-private-key' );
+				case 'missing-input-secret' :
+				case 'invalid-input-secret' :
+					$errors->add( 'recaptcha', __( '<strong>ERROR</strong>: Invalid reCAPTCHA secret key.', 'theme-my-login' ), $error_code );
 					break;
-				case 'invalid-request-cookie' :
-					$errors->add( 'recaptcha', __( '<strong>ERROR</strong>: Invalid reCAPTCHA challenge parameter.', 'theme-my-login' ), 'invalid-request-cookie' );
-					break;
-				case 'incorrect-captcha-sol' :
-					$errors->add( 'recaptcha', __( '<strong>ERROR</strong>: Incorrect captcha code.', 'theme-my-login' ), 'incorrect-captcha-sol' );
+				case 'missing-input-response' :
+				case 'invalid-input-response' :
+					$errors->add( 'recaptcha', __( '<strong>ERROR</strong>: Please check the box to prove that you are not a robot.', 'theme-my-login' ), $error_code );
 					break;
 				case 'recaptcha-not-reachable' :
 				default :
-					$errors->add( 'recaptcha', __( '<strong>ERROR</strong>: Unable to reach the reCAPTCHA server.', 'theme-my-login' ), 'recaptcha-not-reachable' );
+					$errors->add( 'recaptcha', __( '<strong>ERROR</strong>: Unable to reach the reCAPTCHA server.', 'theme-my-login' ), $error_code );
 					break;
 			}
 		}
@@ -163,19 +141,10 @@ class Theme_My_Login_Recaptcha extends Theme_My_Login_Abstract {
 	 */
 	public function recaptcha_display( $errors = null ) {
 		if ( is_multisite() ) {
-			if ( $error = $errors->get_error_message( 'recaptcha' ) ) { ?>
-			<p class="error"><?php echo $error; ?></p>
-			<?php }
+			if ( $error = $errors->get_error_message( 'recaptcha' ) )
+				echo '<p class="error">' . $error . '</p>';
 		}
-		?>
-		<div id="recaptcha">
-			<noscript>
-				<iframe src="<?php echo self::RECAPTCHA_API_URI; ?>/noscript?k=<?php echo $this->get_option( 'public_key' ); ?>" height="300" width="500" frameborder="0"></iframe><br>
-				<textarea name="recaptcha_challenge_field" rows="3" cols="40"></textarea>
-				<input type="hidden" name="recaptcha_response_field" value="manual_challenge">
-			</noscript>
-		</div>
-		<?php
+		echo '<div class="g-recaptcha" data-sitekey="' . esc_attr( $this->get_option( 'public_key' ) ) . '" data-theme="' . esc_attr( $this->get_option( 'theme' ) ) . '"></div>';
 	}
 
 	/**
@@ -184,27 +153,31 @@ class Theme_My_Login_Recaptcha extends Theme_My_Login_Abstract {
 	 * @since 6.3
 	 * @access public
 	 */
-	public function recaptcha_validate( $remote_ip, $challenge, $response ) {
-		$response = wp_remote_post( $this->recaptcha_api_url . '/verify', array(
+	public function recaptcha_validate( $response, $remote_ip = '' ) {
+
+		if ( empty( $remote_ip ) )
+			$remote_ip = $_SERVER['REMOTE_ADDR'];
+
+		$response = wp_remote_post( 'https://www.google.com/recaptcha/api/siteverify', array(
 			'body' => array(
-				'privatekey' => $this->get_option( 'private_key' ),
-				'remoteip'   => $remote_ip,
-				'challenge'  => $challenge,
-				'response'   => $response
+				'secret'   => $this->get_option( 'private_key' ),
+				'response' => $response,
+				'remoteip' => $remote_ip
 			)
 		) );
 
 		$response_code    = wp_remote_retrieve_response_code( $response );
 		$response_message = wp_remote_retrieve_response_message( $response );
+		$response_body    = wp_remote_retrieve_body( $response );
 
 		if ( 200 == $response_code ) {
-			// Parse the response
-			list( $is_valid, $error_code ) = array_map( 'trim', explode( "\n", wp_remote_retrieve_body( $response ) ) );
 
-			if ( 'true' == $is_valid )
+			$result = json_decode( $response_body, true );
+
+			if ( $result['success'] )
 				return true;
 
-			return new WP_Error( 'recaptcha', $error_code );
+			return new WP_Error( 'recaptcha', reset( $result['error-codes'] ) );
 		}
 
 		return new WP_Error( 'recaptcha', 'recaptcha-not-reachable' );

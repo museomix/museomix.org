@@ -2,8 +2,10 @@
 /******************************
  * Plugin Name: WP Ultimate CSV Importer
  * Description: A plugin that helps to import the data's from a CSV file.
- * Version: 3.8
+ * Version: 3.8.3
  * Author: smackcoders.com
+ * Text Domain: wp-ultimate-csv-importer
+ * Domain Path: /languages
  * Plugin URI: http://www.smackcoders.com/wp-ultimate-csv-importer-pro.html
  * Author URI: http://www.smackcoders.com/wp-ultimate-csv-importer-pro.html
  */
@@ -43,6 +45,8 @@
  * Notices must display the words
  * "Copyright Smackcoders. 2014. All rights reserved".
  ********************************************************************************/
+if ( ! defined( 'ABSPATH' ) ) 
+        exit; // Exit if accessed directly
 
 $get_debug_mode = get_option('wpcsvfreesettings');
 if(isset($get_debug_mode['debug_mode']) && $get_debug_mode['debug_mode'] != 'enable_debug') {
@@ -75,7 +79,7 @@ define('WP_CONST_ULTIMATE_CSV_IMP_URL', 'http://www.smackcoders.com/wp-ultimate-
 define('WP_CONST_ULTIMATE_CSV_IMP_NAME', 'WP Ultimate CSV Importer');
 define('WP_CONST_ULTIMATE_CSV_IMP_SLUG', 'wp-ultimate-csv-importer');
 define('WP_CONST_ULTIMATE_CSV_IMP_SETTINGS', 'WP Ultimate CSV Importer');
-define('WP_CONST_ULTIMATE_CSV_IMP_VERSION', '3.8');
+define('WP_CONST_ULTIMATE_CSV_IMP_VERSION', '3.8.2');
 define('WP_CONST_ULTIMATE_CSV_IMP_DIR', WP_PLUGIN_URL . '/' . WP_CONST_ULTIMATE_CSV_IMP_SLUG . '/');
 define('WP_CONST_ULTIMATE_CSV_IMP_DIRECTORY', plugin_dir_path(__FILE__));
 define('WP_CSVIMP_PLUGIN_BASE', WP_CONST_ULTIMATE_CSV_IMP_DIRECTORY);
@@ -132,6 +136,18 @@ add_action("admin_menu" , "action_csv_imp_admin_menu");
 
 function action_csv_imp_admin_init() {
 	if (isset($_REQUEST['page']) && ($_REQUEST['page'] == 'wp-ultimate-csv-importer/index.php' || $_REQUEST['page'] == 'page')) {
+		
+		// Code for use the global wordpress functons in javascript
+
+	/*	wp_register_script('ultimate-importer-free', plugins_url('js/ultimate-importer-free.js', __FILE__));
+		wp_enqueue_script('ultimate-importer-free',plugins_url('js/ultimate-importer-free.js', __FILE__),array('ultimate-importer-free'));
+		$pa = array(
+				'plugin_url' => plugins_url(),
+				'ajax_url'   => admin_url( 'admin-ajax.php'),
+				'abspath' => ABSPATH,
+			   );
+		wp_localize_script( 'ultimate-importer-free', 'csvimporterfree', $pa);*/
+
 		wp_enqueue_script('jquery-ui-datepicker');
 		wp_enqueue_style('jquery-style', plugins_url('css/jquery-ui.css', __FILE__));
 		wp_register_script('ultimate-importer-js', plugins_url('js/ultimate-importer-free.js', __FILE__));
@@ -183,6 +199,18 @@ function firstchart() {
 }
 
 add_action('wp_ajax_firstchart', 'firstchart');
+
+function shownextrecords() {
+	require_once("templates/readfile.php");
+	die();
+}
+add_action('wp_ajax_shownextrecords','shownextrecords');
+
+function uploadfilehandle() {
+	require_once("lib/jquery-plugins/uploader.php");
+	die();
+}
+add_action('wp_ajax_uploadfilehandle','uploadfilehandle');
 
 function secondchart() {
 	require_once("modules/dashboard/actions/chartone.php");
@@ -260,10 +288,28 @@ add_action('wp_ajax_importByRequest', 'importByRequest');
  */
 function trans_alert_str(){
 if(isset($_POST['alertmsg']))
-echo __($_POST['alertmsg'],WP_CONST_ULTIMATE_CSV_IMP_SLUG);
+echo __($_POST['alertmsg'],'wp-ultimate-csv-importer');
 die();
 
 }
 add_action('wp_ajax_trans_alert_str' , 'trans_alert_str');
 
+/**
+ *
+ */
+function export_submit(){
+	require_once("modules/export/templates/export.php");
+	die;
+}
+add_action('wp_ajax_export_file','export_submit');	
+
+/**
+ *
+ */
+function addcorecustomfd(){
+	require_once("templates/Addcustomfields.php");
+	die;
+}
+
+add_action('wp_ajax_addcorecustomfd','addcorecustomfd');
 

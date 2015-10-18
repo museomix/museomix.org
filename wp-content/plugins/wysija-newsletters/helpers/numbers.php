@@ -2,10 +2,9 @@
 defined('WYSIJA') or die('Restricted access');
 class WYSIJA_help_numbers extends WYSIJA_object{
 
-    function WYSIJA_help_numbers(){
-
+    function __construct(){
+        parent::__construct();
     }
-
 
     function format_number($int) {
         // strip any commas

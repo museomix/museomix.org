@@ -106,6 +106,11 @@ http://support.advancedcustomfields.com/
 
 == Changelog ==
 
+= 4.4.3 = 
+* WYSIWYG field: Added compatibility for WP 4.3 filters
+* Core: Minor fixes and improvements
+* Language: Updated Polish translation - thanks to Maciej
+
 = 4.4.2 =
 * Image field: Fixed UI bug when image has been removed via media library
 * Core: Minor fixes and improvements

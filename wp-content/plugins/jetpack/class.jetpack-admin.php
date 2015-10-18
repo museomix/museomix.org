@@ -30,10 +30,19 @@ class Jetpack_Admin {
 		jetpack_require_lib( 'admin-pages/class.jetpack-settings-page' );
 		$this->settings_page = new Jetpack_Settings_Page;
 
+		jetpack_require_lib( 'admin-pages/class.jetpack-my-jetpack-page' );
+		$this->my_jetpack_page = new Jetpack_My_Jetpack_Page;
+
+		if ( isset( $_POST['jetpack-set-master-user'] ) ) {
+			add_action( 'init', array( $this->my_jetpack_page, 'jetpack_my_jetpack_change_user' ) );
+		}
+
 		// Add hooks for admin menus
 		add_action( 'admin_menu',                    array( $this->landing_page, 'add_actions' ), 998 );
 		add_action( 'jetpack_admin_menu',            array( $this, 'admin_menu_debugger' ) );
 		add_action( 'jetpack_admin_menu',            array( $this->settings_page, 'add_actions' ) );
+		add_action( 'jetpack_admin_menu',            array( $this->my_jetpack_page, 'add_actions' ) );
+
 
 		// Add redirect to current page for activation/deactivation of modules
 		add_action( 'jetpack_pre_activate_module',   array( $this, 'fix_redirect' ), 10, 2 );
@@ -65,6 +74,14 @@ class Jetpack_Admin {
 		$jetpack_active = Jetpack::is_active() || Jetpack::is_development_mode();
 		foreach ( $available_modules as $module ) {
 			if ( $module_array = $this->jetpack->get_module( $module ) ) {
+				/**
+				 * Filters each module's short description.
+				 *
+				 * @since 3.0.0
+				 *
+				 * @param string $module_array['description'] Module description.
+				 * @param string $module Module slug.
+				 */
 				$short_desc = apply_filters( 'jetpack_short_module_description', $module_array['description'], $module );
 				// Fix: correct multibyte strings truncate with checking for mbstring extension
 				$short_desc_trunc = ( function_exists( 'mb_strlen' ) )
@@ -84,16 +101,34 @@ class Jetpack_Admin {
 				$module_array['configure_url']     = Jetpack::module_configuration_url( $module );
 
 				ob_start();
+				/**
+				 * Allow the display of a "Learn More" button.
+				 * The dynamic part of the action, $module, is the module slug.
+				 *
+				 * @since 3.0.0
+				 */
 				do_action( 'jetpack_learn_more_button_' . $module );
 				$module_array['learn_more_button'] = ob_get_clean();
 
 				ob_start();
 				if ( Jetpack::is_active() && has_action( 'jetpack_module_more_info_connected_' . $module ) ) {
+					/**
+					 * Allow the display of information text when Jetpack is connected to WordPress.com.
+					 * The dynamic part of the action, $module, is the module slug.
+					 *
+					 * @since 3.0.0
+					 */
 					do_action( 'jetpack_module_more_info_connected_' . $module );
 				} else {
+					/**
+					 * Allow the display of information text when Jetpack is connected to WordPress.com.
+					 * The dynamic part of the action, $module, is the module slug.
+					 *
+					 * @since 3.0.0
+					 */
 					do_action( 'jetpack_module_more_info_' . $module );
 				}
-				
+
 				/**
 				* Filter the long description of a module.
 	 			*
@@ -118,13 +153,25 @@ class Jetpack_Admin {
 				 * add_filter( 'jetpack_search_terms_$module', 'jetpack_$module_search_terms' );
 				 *
 				 * @since 3.5.0
-				 * @param string The search terms (comma separated)
+				 *
+				 * @param string The search terms (comma separated).
 				 */
 				echo apply_filters( 'jetpack_search_terms_' . $module, '' );
 				$module_array['search_terms'] = ob_get_clean();
 
 				$module_array['configurable'] = false;
-				if ( current_user_can( 'manage_options' ) && apply_filters( 'jetpack_module_configurable_' . $module, false ) ) {
+				if (
+					current_user_can( 'manage_options' ) &&
+					/**
+					 * Allow the display of a configuration link in the Jetpack Settings screen.
+					 *
+					 * @since 3.0.0
+					 *
+					 * @param string $module Module name.
+					 * @param bool false Should the Configure module link be displayed? Default to false.
+					 */
+					apply_filters( 'jetpack_module_configurable_' . $module, false )
+				) {
 					$module_array['configurable'] = sprintf( '<a href="%1$s">%2$s</a>', esc_url( Jetpack::module_configuration_url( $module ) ), __( 'Configure', 'jetpack' ) );
 				}
 
@@ -146,14 +193,14 @@ class Jetpack_Admin {
 			return false;
 
 		/**
-		 * We never want to show VaultPress as activate-able through Jetpack.
+		 * We never want to show VaultPress as activatable through Jetpack.
 		 */
 		if ( 'vaultpress' === $module['module'] ) {
 			return false;
 		}
 
 		if ( Jetpack::is_development_mode() ) {
-			return ! ( $module['requires_connection'] && ! Jetpack::is_active() );
+			return ! ( $module['requires_connection'] );
 		} else {
 			return Jetpack::is_active();
 		}

@@ -6,8 +6,7 @@ defined('WYSIJA') or die('Restricted access');
 */
 class WJ_Utils {
 
-	private function __construct() {
-	}
+	private function __construct(){}
 
 	public static function to_int( $value ) {
 		$boolean = (bool) $value;

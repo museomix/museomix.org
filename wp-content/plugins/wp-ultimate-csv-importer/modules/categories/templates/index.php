@@ -34,5 +34,6 @@
  * Notices must display the words
  * "Copyright Smackcoders. 2014. All rights reserved".
  ********************************************************************************/
-
+if ( ! defined( 'ABSPATH' ) )
+        exit; // Exit if accessed directly
 echo "<div align='center' style='width:100%;'> <p class='warnings' style='width:50%;text-align:center;color:red;'>". __('This feature is only available in PRO!.')."</p></div>";

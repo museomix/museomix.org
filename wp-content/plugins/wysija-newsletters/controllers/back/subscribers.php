@@ -17,8 +17,9 @@ class WYSIJA_control_back_subscribers extends WYSIJA_control_back{
      */
     var $_filter_by_inactive_users = true;
 
-    function WYSIJA_control_back_subscribers() {
-		WYSIJA_control_back::WYSIJA_control_back();
+    function __construct() {
+        global $wpdb;
+		WYSIJA_control_back::__construct();
 		if ($this->_filter_by_inactive_users) {
                         // load the inactive subscribers on the listing and when a any bulk action is executed
                         if (    empty($_REQUEST['action'])
@@ -33,6 +34,7 @@ class WYSIJA_control_back_subscribers extends WYSIJA_control_back{
 				$this->modelObj->prepare_inactive_users_table();
 			}
 		}
+        $this->wpdb = $wpdb;
 	}
 
     /*
@@ -351,12 +353,12 @@ class WYSIJA_control_back_subscribers extends WYSIJA_control_back{
     }
 
     function main(){
-         $this->messages['insert'][true]=__('Subscriber has been saved.',WYSIJA);
+        $this->messages['insert'][true]=__('Subscriber has been saved.',WYSIJA);
         $this->messages['insert'][false]=__('Subscriber has not been saved.',WYSIJA);
         $this->messages['update'][true]=__('Subscriber has been modified. [link]Edit again[/link].',WYSIJA);
         $this->messages['update'][false]=__('Subscriber has not been modified.',WYSIJA);
-	$this->_cleanup_form();
-        parent::WYSIJA_control_back();
+    	$this->_cleanup_form();
+        parent::__construct();
 
         //we change the default model of the controller based on the action
         if(isset($_REQUEST['action'])){
@@ -371,7 +373,7 @@ class WYSIJA_control_back_subscribers extends WYSIJA_control_back{
             }
         }
 
-        $this->WYSIJA_control();
+        WYSIJA_control::__construct();
         if(!isset($_REQUEST['action']) || !$_REQUEST['action']) {
             $this->defaultDisplay();
             $this->checkTotalSubscribers();
@@ -588,7 +590,7 @@ class WYSIJA_control_back_subscribers extends WYSIJA_control_back{
         $data=$model_list->getOne(array('name','namekey','welcome_mail_id','unsub_mail_id'),array('list_id'=>(int)$_REQUEST['id']));
 
         $query='INSERT INTO `[wysija]list` (`created_at`,`name`,`namekey`,`description`,`welcome_mail_id`,`unsub_mail_id`,`is_enabled`,`ordering`)
-            SELECT '.time().',concat("' . mysql_real_escape_string( __( 'Copy of ', WYSIJA ) ) . '",`name`) ,"copy_'.$data['namekey'].time().'" ,`description`,0,0 ,1,`ordering` FROM [wysija]list
+            SELECT '.time().',concat("' . $this->wpdb->_real_escape( __( 'Copy of ', WYSIJA ) ) . '",`name`) ,"copy_'.$data['namekey'].time().'" ,`description`,0,0 ,1,`ordering` FROM [wysija]list
             WHERE list_id='.(int)$_REQUEST['id'];
 
         $list_id = $model_list->query($query);

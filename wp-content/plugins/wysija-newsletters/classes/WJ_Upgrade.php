@@ -73,7 +73,11 @@ class WJ_Upgrade extends WYSIJA_object {
 		}
 	}
 
-	public function update_plugin_complete_actions( $update_actions, $mixed = null, $plugin = null ){
+  //$titlelink=str_replace(array('[link]','[\link]'), array('<a href="">','</a>'),'');
+
+
+
+  public function update_plugin_complete_actions( $update_actions, $mixed = null, $plugin = null ){
 		$actions = array(
 			'refresh_page' => '<a href="#" onclick="window.parent.location.reload(true);return false;" title="' . esc_attr__( 'Refresh the page you current are!', WYSIJA ) . '" target="_parent">' . __( 'Return to MailPoet', WYSIJA ) . '</a>'
 		);

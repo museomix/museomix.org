@@ -15,7 +15,7 @@ class WYSIJA_control extends WYSIJA_object{
 	var $joins=array();
 	var $title="";
 
-	function WYSIJA_control(){
+	function __construct(){
 		//setup some required objects for the request
 		if(!defined('DOING_AJAX')){
 			if($this->view) $this->viewObj = WYSIJA::get($this->view,"view",false,$this->extension);

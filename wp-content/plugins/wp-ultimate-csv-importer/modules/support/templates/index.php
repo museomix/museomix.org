@@ -34,7 +34,8 @@
  * Notices must display the words
  * "Copyright Smackcoders. 2014. All rights reserved".
  ********************************************************************************/
-
+if ( ! defined( 'ABSPATH' ) )
+        exit; // Exit if accessed directly
 $impCE = new WPImporter_includes_helper();
 ?>
 
@@ -43,7 +44,7 @@ $impCE = new WPImporter_includes_helper();
 
   <div class= "contactus" id="contactus" style="height:480px">
                         <div class="title">
-                                <h3><?php echo __('Video Walk Through',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?></h3>
+                                <h3><?php echo __('Video Walk Through','wp-ultimate-csv-importer'); ?></h3>
                         </div>
                            <div id="data" >
                                 <div id="video">
@@ -51,14 +52,14 @@ $impCE = new WPImporter_includes_helper();
                                 </div>
                             
                                 <div id="relatedpages" style='position:relative;left:630px;bottom:345px;'>
-                                        <h2 id="doctitle"><?php echo __('Smackcoders Support',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?> </h2 >
-                                        <p style="line-height:20px;padding-top:20px"><?php echo __('Click',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?> <a href="https://www.smackcoders.com/blog/category/web-development-news/?utm_source=WpPlugin&utm_medium=Free&utm_campaign=SupportTraffic" target="_blank"> <?php __('here',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?></a> <?php echo __('for Development News',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?> </p>
-                                        <p style="line-height:20px"><?php echo __('View',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?> <a href="http://www.wpultimatecsvimporter.com/?utm_source=WpPlugin&utm_medium=Free&utm_campaign=SupportTraffic" target="_blank"><?php echo __('Recent News',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?></a> </p>
-                                        <p style="line-height:20px"><?php echo __('Refer',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?> <a href="http://www.wpultimatecsvimporter.com/documentation?utm_source=WpPlugin&utm_medium=Free&utm_campaign=SupportTraffic" target="_blank"><?php echo __('Detailed Document',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?></a> </p>
-                                        <p style="line-height:20px"><?php echo __('For',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?><a href="https://www.smackcoders.com/blog/csv-importer-a-simple-and-easy-csv-importer-tutorial.html?utm_source=WpPlugin&utm_medium=Free&utm_campaign=SupportTraffic" target="_blank"> <?php echo __('Tutorials',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?> </a> </p>
-                                        <p style="line-height:20px"><?php echo __('For',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?> <a href="http://www.youtube.com/user/smackcoders/channels" target="_blank"> <?php echo __('Youtube Channel',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?> </a> </p>
-                                        <p style="line-height:20px"><?php echo __('To',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?> <a href="http://www.wpultimatecsvimporter.com/contact-us" target="_blank"><?php echo __('Get Support',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?></a></p>
-                                        <p style="line-height:20px"><?php echo __('To Know the detail of',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?> <a href="https://www.smackcoders.com/store/products-46/wordpress.html?utm_source=WpPlugin&utm_medium=Free&utm_campaign=SupportTraffic" target="_blank"> <?php echo __('Other Plugins',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?> </a> </p>
+                                        <h2 id="doctitle"><?php echo __('Smackcoders Support','wp-ultimate-csv-importer'); ?> </h2 >
+                                        <p style="line-height:20px;padding-top:20px"><?php echo __('Click','wp-ultimate-csv-importer');echo ' '; echo __('here','wp-ultimate-csv-importer'); ?> <a href="https://www.smackcoders.com/blog/category/web-development-news/?utm_source=WpPlugin&utm_medium=Free&utm_campaign=SupportTraffic" target="_blank"> <?php echo __('for Development News','wp-ultimate-csv-importer'); ?> </a></p>
+                                        <p style="line-height:20px"><?php echo __('View','wp-ultimate-csv-importer'); ?> <a href="http://www.wpultimatecsvimporter.com/?utm_source=WpPlugin&utm_medium=Free&utm_campaign=SupportTraffic" target="_blank"><?php echo __('Recent News','wp-ultimate-csv-importer'); ?></a> </p>
+                                        <p style="line-height:20px"><?php echo __('Refer','wp-ultimate-csv-importer'); ?> <a href="http://www.wpultimatecsvimporter.com/documentation?utm_source=WpPlugin&utm_medium=Free&utm_campaign=SupportTraffic" target="_blank"><?php echo __('Detailed Document','wp-ultimate-csv-importer'); ?></a> </p>
+                                        <p style="line-height:20px"><?php echo __('For','wp-ultimate-csv-importer'); ?><a href="https://www.smackcoders.com/blog/csv-importer-a-simple-and-easy-csv-importer-tutorial.html?utm_source=WpPlugin&utm_medium=Free&utm_campaign=SupportTraffic" target="_blank"> <?php echo __('Tutorials','wp-ultimate-csv-importer'); ?> </a> </p>
+                                        <p style="line-height:20px"><?php echo __('For','wp-ultimate-csv-importer'); ?> <a href="http://www.youtube.com/user/smackcoders/channels" target="_blank"> <?php echo __('Youtube Channel','wp-ultimate-csv-importer'); ?> </a> </p>
+                                        <p style="line-height:20px"><?php echo __('To','wp-ultimate-csv-importer'); ?> <a href="http://www.wpultimatecsvimporter.com/contact-us" target="_blank"><?php echo __('Get Support','wp-ultimate-csv-importer'); ?></a></p>
+                                        <p style="line-height:20px"><?php echo __('To Know the detail of','wp-ultimate-csv-importer'); ?> <a href="https://www.smackcoders.com/store/products-46/wordpress.html?utm_source=WpPlugin&utm_medium=Free&utm_campaign=SupportTraffic" target="_blank"> <?php echo __('Other Plugins','wp-ultimate-csv-importer'); ?> </a> </p>
                                         
                                </div>
                       </div>

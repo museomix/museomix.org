@@ -34,6 +34,8 @@
  * Notices must display the words
  * "Copyright Smackcoders. 2014. All rights reserved".
  ********************************************************************************/
+if ( ! defined( 'ABSPATH' ) )
+        exit; // Exit if accessed directly
  ?>
  
 <div align='center' style='width:100%;'><?php echo $skinnyData['common_notice']; ?><img src='<?php echo WP_CONST_ULTIMATE_CSV_IMP_DIR ?>images/schedule.png' width=100%></div>

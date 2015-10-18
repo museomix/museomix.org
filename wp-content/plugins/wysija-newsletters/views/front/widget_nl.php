@@ -2,7 +2,7 @@
 defined( 'WYSIJA' ) or die( 'Restricted access' );
 class WYSIJA_view_front_widget_nl extends WYSIJA_view_front {
 
-	function WYSIJA_view_front_widget_nl(){
+	function __construct(){
 		$this->model=WYSIJA::get('user','model');
 	}
 

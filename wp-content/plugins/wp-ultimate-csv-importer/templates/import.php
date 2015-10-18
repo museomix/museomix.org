@@ -34,6 +34,8 @@
  * Notices must display the words
  * "Copyright Smackcoders. 2014. All rights reserved".
  ********************************************************************************/
+if ( ! defined( 'ABSPATH' ) )
+        exit; // Exit if accessed directly
 $noncevar = isset($_POST['postdata']['wpnonce']) ? $_POST['postdata']['wpnonce'] : '';
 if(!wp_verify_nonce($noncevar, 'smack_nonce'))
 die('You are not allowed to do this operation.Please contact your admin.');
@@ -105,6 +107,7 @@ if ($count < $totRecords) {
 $resultArr = array();
 $res2 = array();
 $res1 = array();
+$mapping_value = '';
 $filename = $_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['uploadedFile'];
 $delim = $_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['select_delimeter'];
 $resultArr = $skinnyObj->csv_file_data($filename);
@@ -118,6 +121,7 @@ $csv_rec_count = $_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['h2'];
 
 //mapped and unmapped count
 for($i=0;$i<$csv_rec_count;$i++) {
+	if(array_key_exists($_POST['postdata']['uploadedFile'],$_SESSION))
         $mapping_value = $_SESSION[$_POST['postdata']['uploadedFile']]['SMACK_MAPPING_SETTINGS_VALUES']['mapping'.$i];
         if($mapping_value == '-- Select --' ) {
                 $res1[] = $mapping_value;
@@ -154,14 +158,24 @@ for ($i = $limit; $i < $count; $i++) {
 		$sample_inlineimage_url = $_POST['postdata']['inlineimagehandling'];
 	}
 	$importObj->processDataInWP($to_be_import_rec,$_SESSION['SMACK_MAPPING_SETTINGS_VALUES'], $_SESSION['SMACK_MAPPING_SETTINGS_VALUES'], $i, $extracted_image_location, $importinlineimageoption, $sample_inlineimage_url);
+	$logarr = array('post_id','assigned_author','category','tags','postdate','image','poststatus');
 	if ($curr_action == 'post' || $curr_action == 'page' || $curr_action == 'custompost' || $curr_action == 'eshop') {
 		foreach($importObj->detailedLog as $logKey => $logVal) {
+		     if(array_key_exists($logarr[0],$logVal)) {
+			foreach($logarr as $logarrkey){
+				if(!array_key_exists($logarrkey,$logVal)){
+					$logVal[$logarrkey] = '';
+				}
+			}
 			echo "<p style='margin-left:10px;'> " . $logVal['post_id'] . " , " . $logVal['assigned_author'] . " , " . $logVal['category'] . " , " . $logVal['tags'] . " , " . $logVal['postdate'] . " , " . $logVal['image'] . " , " . $logVal['poststatus'];
 			if($curr_action == 'eshop') {
 				echo " , " . $logVal['SKU'] . ", " . $logVal['verify_here'] . "</p>";
 			} else {
 				echo " , " . $logVal['verify_here'] . "</p>";
-			}
+			}  } 
+		        else {
+                                   echo "<p style='margin-left:10px;'>" . $logVal['verify_here'] . "</p>";
+                        }
 		}
 	}
 	else if ($curr_action == 'comments' || $curr_action == 'users') {
@@ -209,18 +223,15 @@ if ($importObj->insPostCount != 0 || $importObj->dupPostCount != 0 || $importObj
 		$_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['captureId'] = $importObj->capturedId;
 	}
 }
-if ($totRecords <= ($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['insPostCount'] + $_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['dupPostCount'] + $_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['updatedPostCount'])) {
+//if ($totRecords <= ($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['insPostCount'] + $_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['dupPostCount'] + $_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['updatedPostCount'])) {
+$inserted_post_count = $_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['insPostCount'];
+if ($inserted_post_count != 0) {
 	if (!isset($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['captureId'])) {
 		$_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['captureId'] = 0;
 	}
-	$inserted_post_count = $_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['insPostCount'];
-	if ($inserted_post_count != 0) {
 		$importObj->addStatusLog($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['insPostCount'], $importedAs);
-	}
-	if ($inserted_post_count != 0) {
 		$importObj->addPieChartEntry($importedAs, $inserted_post_count);
 		$inserted_post_count = 0;
-	}
 	$_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['insPostCount'] = 0;
 	$_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['dupPostCount'] = 0;
 	$_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['updatedPostCount'] = 0;
@@ -231,7 +242,9 @@ if ($totRecords <= ($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['insPostCount'] +
 	unset($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['captureId']);
 }
 if ($limit == $totRecords) {
-	echo "<br><div style='margin-left:10px; color:green;'>Import successfully completed!.</div>";
+	echo "<br><div style='margin-left:10px; color:green;'>";
+	 echo __('Import successfully completed!.','wp-ultimate-csv-importer');
+	echo "</div>";
 }
 /*if ($curr_action == 'users') {
 	echo "<div style='margin-left:7px;'>";

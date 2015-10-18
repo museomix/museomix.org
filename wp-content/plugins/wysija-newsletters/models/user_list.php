@@ -11,12 +11,9 @@ class WYSIJA_model_user_list extends WYSIJA_model{
         'unsub_date' => array("type"=>"integer")
     );
 
-
-
-    function WYSIJA_model_user_list(){
-        $this->WYSIJA_model();
+    function __construct(){
+        parent::__construct();
     }
-
 
     function hook_subscriber_to_list( $details ) {
 

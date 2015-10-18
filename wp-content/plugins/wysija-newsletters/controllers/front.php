@@ -4,9 +4,9 @@ defined('WYSIJA') or die('Restricted access');
 
 class WYSIJA_control_front extends WYSIJA_control{
 
-    function WYSIJA_control_front($extension="wysija-newsletters"){
+    function __construct($extension="wysija-newsletters"){
         $this->extension=$extension;
-        parent::WYSIJA_control();
+        parent::__construct();
         $_REQUEST   = stripslashes_deep($_REQUEST);
         $_POST   = stripslashes_deep($_POST);
 

@@ -2,19 +2,21 @@
 # This file is distributed under the same license as the Twenty Thirteen package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2015-03-30 09:45:07+0000\n"
+"PO-Revision-Date: 2015-08-20 16:51:01+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: GlotPress/1.0-alpha-1000\n"
+"X-Generator: GlotPress/1.0-alpha-1100\n"
 "Project-Id-Version: Twenty Thirteen\n"
 
 #. Theme URI of the plugin/theme
 msgid "https://wordpress.org/themes/twentythirteen/"
 msgstr "https://wordpress.org/themes/twentythirteen/"
 
+#. #-#-#-#-#  twentythirteen.pot (Twenty Thirteen 1.6)  #-#-#-#-#
 #. Author URI of the plugin/theme
+#: footer.php:19
 msgid "https://wordpress.org/"
 msgstr "https://wordpress.org/"
 
@@ -24,7 +26,7 @@ msgstr "https://wordpress.org/"
 #: content-quote.php:16 content-status.php:16 content-video.php:26
 #: content.php:44 functions.php:478
 msgid "Continue reading %s <span class=\"meta-nav\">&rarr;</span>"
-msgstr "Continuer la lecture de %s <span class=\"meta-nav\">&rarr;</span>"
+msgstr "Continuer la lecture<span class=\"screen-reader-text\"> de %s</span>&nbsp;<span class=\"meta-nav\">&rarr;</span>"
 
 #: 404.php:16
 msgid "Not Found"
@@ -162,10 +164,6 @@ msgstr "Désolé, mais rien ne correspond à votre critère de recherche. Veuill
 #: content-none.php:27
 msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
 msgstr "Il semblerait que nous ne soyons pas en mesure de trouver votre contenu. Essayez en lançant une recherche."
-
-#: footer.php:19
-msgid "http://wordpress.org/"
-msgstr "http://wordpress.org/"
 
 #: footer.php:19
 msgid "Semantic Personal Publishing Platform"

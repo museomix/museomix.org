@@ -90,7 +90,7 @@ final class ITSEC_Logger {
 
 			add_meta_box(
 				'itsec_log_header',
-				__( 'Security Log Information', 'it-l10n-better-wp-security' ),
+				__( 'Security Log Information', 'better-wp-security' ),
 				array( $this, 'metabox_logs_header' ),
 				'security_page_toplevel_page_itsec_logs',
 				'top',
@@ -99,7 +99,7 @@ final class ITSEC_Logger {
 
 			add_meta_box(
 				'itsec_log_all',
-				__( 'Security Log Data', 'it-l10n-better-wp-security' ),
+				__( 'Security Log Data', 'better-wp-security' ),
 				array( $this, 'metabox_all_logs' ),
 				'security_page_toplevel_page_itsec_logs',
 				'normal',
@@ -110,7 +110,7 @@ final class ITSEC_Logger {
 
 			add_meta_box(
 				'itsec_log_header',
-				__( 'Security Log Information', 'it-l10n-better-wp-security' ),
+				__( 'Security Log Information', 'better-wp-security' ),
 				array( $this, 'metabox_logs_header_no_logs' ),
 				'security_page_toplevel_page_itsec_logs',
 				'top',
@@ -167,18 +167,18 @@ final class ITSEC_Logger {
 			<table class="form-table">
 				<tr valign="top">
 					<th scope="row" class="settinglabel">
-						<?php _e( 'Log Summary', 'it-l10n-better-wp-security' ); ?>
+						<?php _e( 'Log Summary', 'better-wp-security' ); ?>
 					</th>
 					<td class="settingfield">
 
-						<p><?php _e( 'Your database contains', 'it-l10n-better-wp-security' ); ?>
-							<strong><?php echo $log_count; ?></strong> <?php _e( 'log entries.', 'it-l10n-better-wp-security' ); ?>
+						<p><?php _e( 'Your database contains', 'better-wp-security' ); ?>
+							<strong><?php echo $log_count; ?></strong> <?php _e( 'log entries.', 'better-wp-security' ); ?>
 						</p>
 
-						<p><?php _e( 'Use the button below to purge the log table in your database. Please note this will purge all log entries in the database including 404s.', 'it-l10n-better-wp-security' ); ?></p>
+						<p><?php _e( 'Use the button below to purge the log table in your database. Please note this will purge all log entries in the database including 404s.', 'better-wp-security' ); ?></p>
 
 						<p class="submit"><input type="submit" class="button-primary"
-						                         value="<?php _e( 'Clear Logs', 'it-l10n-better-wp-security' ); ?>"/></p>
+						                         value="<?php _e( 'Clear Logs', 'better-wp-security' ); ?>"/></p>
 					</td>
 				</tr>
 			</table>
@@ -300,47 +300,45 @@ final class ITSEC_Logger {
 	 * @return void
 	 */
 	public function log_event( $module, $priority = 5, $data = array(), $host = '', $username = '', $user = '', $url = '', $referrer = '' ) {
-
 		global $wpdb, $itsec_globals;
 
 		if ( isset( $this->logger_modules[ $module ] ) ) {
-
 			$options = $this->logger_modules[ $module ];
 
-			$file_data = $this->sanitize_array( $data, true );
-
-			$sanitized_data = $this->sanitize_array( $data ); //array of sanitized data
-
 			if ( ! isset( $itsec_globals['settings']['log_type'] ) || $itsec_globals['settings']['log_type'] === 0 || $itsec_globals['settings']['log_type'] == 2 ) {
-
-				$wpdb->hide_errors(); //Don't show error if table isn't present. Instead we'll just try to reconstruct the tables.
-
-				$wpdb->insert(
-					$wpdb->base_prefix . 'itsec_log',
-					array(
-						'log_type'     => $options['type'],
-						'log_priority' => intval( $priority ),
-						'log_function' => $options['function'],
-						'log_date'     => date( 'Y-m-d H:i:s', $itsec_globals['current_time'] ),
-						'log_date_gmt' => date( 'Y-m-d H:i:s', $itsec_globals['current_time_gmt'] ),
-						'log_host'     => sanitize_text_field( $host ),
-						'log_username' => sanitize_text_field( $username ),
-						'log_user'     => intval( $user ),
-						'log_url'      => esc_sql( $url ),
-						'log_referrer' => esc_sql( $referrer ),
-						'log_data'     => serialize( $sanitized_data ),
-					)
+				$values = array(
+					'log_type'     => $options['type'],
+					'log_priority' => intval( $priority ),
+					'log_function' => $options['function'],
+					'log_date'     => date( 'Y-m-d H:i:s', $itsec_globals['current_time'] ),
+					'log_date_gmt' => date( 'Y-m-d H:i:s', $itsec_globals['current_time_gmt'] ),
+					'log_host'     => sanitize_text_field( $host ),
+					'log_username' => sanitize_text_field( $username ),
+					'log_user'     => intval( $user ),
+					'log_url'      => $url,
+					'log_referrer' => $referrer,
+					'log_data'     => serialize( $data ),
 				);
-
-				$error = $wpdb->last_error;
-
-				if ( strlen( trim( $error ) ) > 0 ) {
+				
+				$columns = '`' . implode( '`, `', array_keys( $values ) ) . '`';
+				$placeholders = '%s, %d, %s, %s, %s, %s, %s, %s, %s, %s, %s';
+				
+				$query_format = "INSERT INTO `{$wpdb->base_prefix}itsec_log` ($columns) VALUES ($placeholders)";
+				
+				$wpdb->hide_errors(); //Don't show error if table isn't present. Instead we'll just try to reconstruct the tables.
+				$result = $wpdb->query( $wpdb->prepare( $query_format, $values ) );
+				$wpdb->show_errors();
+				
+				if ( ! $result ) {
 					ITSEC_Lib::create_database_tables();
+					
+					// Attempt the query again. Since errors will now be shown, a remaining issue will be display an error.
+					$result = $wpdb->query( $wpdb->prepare( $query_format, $values ) );
 				}
-
 			}
 
 			if ( isset( $itsec_globals['settings']['log_type'] ) && ( $itsec_globals['settings']['log_type'] === 1 || $itsec_globals['settings']['log_type'] == 2 ) ) {
+				$file_data = $this->sanitize_array( $data, true );
 
 				$message =
 					$options['type'] . ',' .
@@ -353,7 +351,7 @@ final class ITSEC_Logger {
 					( intval( $user ) === 0 ? '' : intval( $user ) ) . ',' .
 					esc_sql( $url ) . ',' .
 					esc_sql( $referrer ) . ',' .
-					$file_data;
+					maybe_serialize( $file_data );
 
 				error_log( $message . PHP_EOL, 3, $this->log_file );
 
@@ -376,9 +374,9 @@ final class ITSEC_Logger {
 
 		printf(
 			'<p>%s %s. %s</p>',
-			__( 'Below are various logs of information collected by', 'it-l10n-better-wp-security' ),
+			__( 'Below are various logs of information collected by', 'better-wp-security' ),
 			$itsec_globals['plugin_name'],
-			__( 'This information can help you get a picture of what is happening with your site and the level of success you have achieved in your security efforts.', 'it-l10n-better-wp-security' )
+			__( 'This information can help you get a picture of what is happening with your site and the level of success you have achieved in your security efforts.', 'better-wp-security' )
 		);
 
 	}
@@ -396,7 +394,7 @@ final class ITSEC_Logger {
 
 		printf(
 			'<p>%s</p>',
-			__( 'To view logs within the plugin you must enable database logging in the plugin settings. File logging is not available for access within the plugin itself.', 'it-l10n-better-wp-security' )
+			__( 'To view logs within the plugin you must enable database logging in the plugin settings. File logging is not available for access within the plugin itself.', 'better-wp-security' )
 		);
 
 	}
@@ -413,11 +411,11 @@ final class ITSEC_Logger {
 		$log_filter = isset( $_GET['itsec_log_filter'] ) ? sanitize_text_field( $_GET['itsec_log_filter'] ) : 'all-log-data';
 		$callback   = null;
 
-		echo '<p>' . __( 'To adjust logging options visit the global settings page.', 'it-l10n-better-wp-security' ) . '</p>';
+		echo '<p>' . __( 'To adjust logging options visit the global settings page.', 'better-wp-security' ) . '</p>';
 
-		echo '<label for="itsec_log_filter"><strong>' . __( 'Select Filter: ', 'it-l10n-better-wp-security' ) . '</strong></label>';
+		echo '<label for="itsec_log_filter"><strong>' . __( 'Select Filter: ', 'better-wp-security' ) . '</strong></label>';
 		echo '<select id="itsec_log_filter" name="itsec_log_filter">';
-		echo '<option value="all-log-data" ' . selected( $log_filter, 'all-log-data' ) . '>' . __( 'All Log Data', 'it-l10n-better-wp-security' ) . '</option>';
+		echo '<option value="all-log-data" ' . selected( $log_filter, 'all-log-data' ) . '>' . __( 'All Log Data', 'better-wp-security' ) . '</option>';
 
 		if ( sizeof( $this->logger_displays ) > 0 ) {
 

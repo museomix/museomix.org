@@ -377,3 +377,56 @@
 	Bug Fix: The file permissions check will no longer list a warning if the plugins directory has permissions of 755.
 4.6.12 - 2015-03-20 - Packaging Bot (modules/free)
 	Bug Fix: Fixed incorrect text describing the "Backups to Retain" database backup setting.
+4.6.13 - 2015-04-13 - Packaging Bot (modules/free)
+	Bug Fix: Security fix for XSS vulnerability. Thanks to Ole Aass (@oleaass) for finding and disclosing this vulnerability to the iThemes Security team.
+4.7.0 - 2015-06-17 - Chris Jean
+	Enhancement: Updated to use new file modification API.
+	Enhancement: Added HackRepair.com blacklist for Nginx.
+	Enhancement: Improved Nginx support for System Tweak features.
+	Enhancement: Updates to wp-config.php, .htaccess, and nginx.conf files now support more systems.
+	Enhancement: Combined the "Force SSL for Dashboard" and "Force SSL for Login" settings to a unified "Force SSL for Dashboard" setting. This is due to how the FORCE_SSL_LOGIN define was deprecated in WP 4.0.0.
+	Enhancement: Added comments to wp-config.php, .htaccess, and nginx.conf updates that indicate which settings affect the specific entries.
+	Enhancement: Added translation support for previously static strings, including strings used for comments in wp-config.php, .htaccess, and nginx.conf files.
+	Enhancement: Improved generation of valid referers for use by the Reduce Comment Spam feature.
+	Enhancement: Broadened the server support in the import settings code.
+	Enhancement: Added new library classes for managing files, directories, and config files.
+	Enhancement: Improved error messages for when file writes fail.
+	Enhancement: Improved error messages for when export file creation fails.
+	Enhancement: Improved error messages for situations when the .htaccess, nginx.conf, or wp-config.php files may need to be manually updated.
+	Bug Fix: Added support for Apache 2.4 without the access_compat module.
+	Bug Fix: Fixed condition where forcing SSL on front-end pages could cause infinite redirection loops with specific setups of nginx to Apache reverse proxy servers.
+	Bug Fix: Fixed scenarios where the site would be forced to load via https but scripts, stylesheets, and images would load via http.
+	Bug Fix: Fixed invalid nginx.conf rule generation for the Reduce Comment Spam feature.
+	Bug Fix: Corrected invalid parsing of some IP formats in Ban Hosts list.
+	Bug Fix: Improved error handling when reading or updating config files.
+	Bug Fix: Fixed various warnings that would display when changing settings.
+	Bug Fix: Fixed a situation where creation of a zipped export file would fail, but an email would still be sent as if the zip was created successfully.
+4.8.0 - 2015-07-06 - Chris Jean
+	Feature Removal: Removed the malware scanning features as VirusTotal no longer supports scanning from WordPress sites. A replacement is in the works.
+	Bug Fix: The close button on the "Thank you for activating iThemes Security" message now appears in the correct location.
+	Bug Fix: Removed the site's URL being displayed in the "Replace jQuery With a Safe Version" setting details.
+	Bug Fix: Updated .htaccess rules to be compatible with Apache 2.4 without the auth compat module.
+	Bug Fix: Enabling and disabling the "Remove File Writing Permissions" setting now updates the file permissions properly.
+	Bug Fix: Web servers that cannot be recognized now default to Apache.
+	Enhancement: Updated the hackrepair lists.
+4.9.0 - 2015-08-03 - Chris Jean
+	Feature Removal: Removed the "Remove WordPress Generator Meta Tag" feature as it is not recommended due to limited security benefit and creating compatibility issues.
+	Enhancement: Added the ability to undo the Content Directory change.
+	Bug Fix: No longer tries to load a non-existent JavaScript file for the salts module.
+	Bug Fix: Fixed an issue with one-time database backups on multi-site installs.
+	Bug Fix: Fixed issues related to locating .htaccess or nginx.conf files on sites with WordPress installed in a separate directory.
+	Bug Fix: Fixed issues with PHP blocking in uploads directory not working with certain non-standard setups.
+	Bug Fix: Minor change to fix a warning that can appear after changing the Content Directory.
+	Bug Fix: Fixed a PHP fatal error that could occur on some servers when adding a ban to the site's .htaccess or nginx.conf file.
+5.0.0 - 2015-09-14 - Chris Jean
+	Compatibility Fix: Changed translation domain from it-l10n-better-wp-security to better-wp-security. This change was necessary in order to be included in the translate.wordpress.org project.
+	New Feature: Added malware scanning provided by Sucuri SiteCheck.
+5.0.1 - 2015-09-15 - Chris Jean
+	Compatibility Fix: Added support for ITSEC_TEST_MALWARE_SCAN_DISABLE_SSLVERIFY. Setting it to true can bypass "SSL peer certificate or SSH remote key was not OK" errors on servers with bad SSL configurations.
+5.1.0 - 2015-10-15 - Chris Jean
+	New Feature: Added "Multiple Authentication Attempts per XML-RPC Request" setting to the WordPress Tweaks section. When this setting is set to "Block", iThemes Security will block brute force login attacks against XML-RPC as described by Sucuri in this blog post: https://blog.sucuri.net/2015/10/brute-force-amplification-attacks-against-wordpress-xmlrpc.html
+	Enhancement: Updated text describing the XML-RPC setting in the WordPress Tweaks section to better explain what the setting is for and which setting is recommended.
+	Enhancement: Improved IP detection when proxy detection is active by processing the header set by CloudFlare.
+	Enhancement: Added a filter named itsec_filter_remote_addr_headers which can be used to change which headers are searched for the client IP. This allows for tailoring the IP detection for specific reverse proxies and load balancers.
+	Bug Fix: Updated the Banned Users settings to no longer add a newline to the Ban Hosts input each time the settings page is saved.
+	Compatibility Fix: Updated code triggered by the ITSEC_TEST_MALWARE_SCAN_DISABLE_SSLVERIFY define. This avoids plugin compatibility issues that prevent disabling the SSL peer verification.

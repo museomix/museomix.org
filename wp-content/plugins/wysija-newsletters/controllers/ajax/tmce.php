@@ -2,8 +2,8 @@
 defined('WYSIJA') or die('Restricted access');
 class WYSIJA_control_back_tmce extends WYSIJA_control{
 
-    function WYSIJA_control_back_tmce(){
-        parent::WYSIJA_control();
+    function __construct(){
+        parent::__construct();
         $this->viewObj=WYSIJA::get('tmce','view');
     }
 

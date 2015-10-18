@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) )
+        exit; // Exit if accessed directly
+
 class ImporterLib {
 	var $rzfejj_23 = true;
 	var $lfxszn_24 = array();

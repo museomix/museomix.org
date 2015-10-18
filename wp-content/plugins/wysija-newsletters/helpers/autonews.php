@@ -1,7 +1,9 @@
 <?php
 defined('WYSIJA') or die('Restricted access');
 class WYSIJA_help_autonews  extends WYSIJA_object {
-    function WYSIJA_help_autonews() {
+
+    function __construct(){
+        parent::__construct();
     }
 
     function events($key=false,$get=true,$value_set=array()){

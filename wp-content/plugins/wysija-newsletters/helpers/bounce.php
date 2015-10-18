@@ -21,7 +21,7 @@ class WYSIJA_help_bounce extends WYSIJA_help {
     var $messages = array();
     var $record_ms_bounce = false; // only used in multisite scenario
 
-    function WYSIJA_help_bounce() {
+    function __construct() {
         $this->config = WYSIJA::get('config', 'model');
         $this->mailer = WYSIJA::get('mailer', 'helper');
         $this->rulesClass = WYSIJA::get('rules', 'helper');

@@ -5,8 +5,8 @@ defined('WYSIJA') or die('Restricted access');
  */
 class WYSIJA_help_front extends WYSIJA_help{
 
-    function WYSIJA_help_front(){
-        parent::WYSIJA_help();
+    function __construct(){
+        parent::__construct();
 
         // wysija form shortcode
         add_shortcode('wysija_form', array($this,'scan_form_shortcode'));
@@ -268,7 +268,14 @@ class WYSIJA_help_front extends WYSIJA_help{
     function scan_subscribers_count_shortcode($attributes) {
         $user = WYSIJA::get('user','model');
         $list_ids = !empty($attributes['list_id']) ? explode(',', $attributes['list_id']) : array();
-        $confirmed_subscribers = !empty($attributes['confirmed_subscribers']) ? (bool)$attributes['confirmed_subscribers'] : true;
+
+        // if double optin is on we count only the confirmed subscribers, otherwise we count both confirmed and unconfirmed
+        $confirmed_subscribers = false;
+        $model_config = WYSIJA::get('config', 'model');
+        if ($model_config->getValue('confirm_dbleoptin')){
+            $confirmed_subscribers = true;
+        }
+        
         return $user->countSubscribers($list_ids, $confirmed_subscribers);
     }
 

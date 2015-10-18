@@ -1,4 +1,6 @@
 <?php
+if ( ! defined( 'ABSPATH' ) )
+        exit; // Exit if accessed directly
 class WPImporter_inlineImages {
 
 	/**
@@ -12,10 +14,15 @@ class WPImporter_inlineImages {
 #		print_r($res_array); die('am from importwithInlineImages function');
 		$updatearray = array();
 		$res_array = $this->capture_all_shortcodes($data_array['post_content'],$postID);
-		$updatearray['post_content'] = $res_array['post_content'];
-		$updatearray['ID'] = $postID;
+		if(isset($res_array['post_content'])){
+                $updatearray['post_content'] = $res_array['post_content'];
+                $updatearray['ID'] = $postID;
+                }
+                else
+                $updatearray['ID'] = $postID;
 		$post_id = wp_update_post($updatearray);
 		$impObj->insPostCount++;
+		$res_array['inlineimage_shortcode'] = isset($res_array['inlineimage_shortcode']) ? $res_array['inlineimage_shortcode'] : '';
 		$impObj->detailedLog[$currentLimit]['post_id'] = "<b>Created Post_ID - </b>" . $post_id . " - success , <b>Inline_images_shortcodes - </b>".$res_array['inlineimage_shortcode']."";
 		return $post_id;
 	}
@@ -208,6 +215,7 @@ public function capture_all_shortcodes( $post_content,$postID){
 			$eventKey = $_POST['postdata']['uploadedFile'];
                         $inlineimageDirpath = $inlineimageDir . '/' . $eventKey;
                         $imagelist = scanDirectories($inlineimageDirpath);
+			$currentLoc = '';
                         if(!$imagelist) {
                                 //echo 'Images not available!'; die;
 				$noimage = WP_CONST_ULTIMATE_CSV_IMP_DIR . "images/noimage.png";
@@ -224,8 +232,10 @@ public function capture_all_shortcodes( $post_content,$postID){
                         }
 
                         $exploded_currentLoc = explode("$eventKey", $currentLoc);
-                        if(!empty($exploded_currentLoc))
+                        if(!empty($exploded_currentLoc) && isset($exploded_currentLoc[1]))
                                 $inlimg_curr_loc = $exploded_currentLoc[1];
+			else
+				$inlimg_curr_loc = '';
 
                         $inlineimageURL = $inlineimageURL . '/' . $eventKey . $inlimg_curr_loc;
 
@@ -284,6 +294,9 @@ public function capture_all_shortcodes( $post_content,$postID){
 				}*/
                                // if($shortcode_mode == 'Inline') {
                                         $oldWord = $shortcode;
+					$image_attribute[1] = isset($image_attribute[1])?$image_attribute[1] : '';
+					$image_attribute[2] = isset($image_attribute[2])?$image_attribute[2] : '';
+					$image_attribute[3] = isset($image_attribute[3])?$image_attribute[3] : '';
                                         $newWord = '<img src="' . $inline_file['guid'] . '" '.$image_attribute[1].' '.$image_attribute[2].' '.$image_attribute[3].' />';
                                         $post_content = str_replace($oldWord , $newWord , $post_content);
 					$result['post_content'] = $post_content;

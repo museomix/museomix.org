@@ -34,8 +34,9 @@
  * Notices must display the words
  * "Copyright Smackcoders. 2014. All rights reserved".
  ********************************************************************************/
-$parse_uri = explode( 'wp-content', $_SERVER['SCRIPT_FILENAME'] );
-require_once($parse_uri[0]."wp-load.php");
+if(!defined('ABSPATH')) {
+	exit;
+}
 $impCheckobj = CallWPImporterObj::checkSecurity();
 if($impCheckobj != 'true')
 die($impCheckobj);

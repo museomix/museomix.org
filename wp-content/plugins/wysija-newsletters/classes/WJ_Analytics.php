@@ -162,9 +162,7 @@ class WJ_Analytics {
         )
     );
 
-    function __construct() {
-
-    }
+    function __construct() {}
 
     /**
      * Send data to Mixpanel by enqueuing the analytics JS file.

@@ -2,7 +2,7 @@
 defined('WYSIJA') or die('Restricted access');
 class WYSIJA_help_install extends WYSIJA_object{
 
-    function WYSIJA_help_install(){
+    function __construct(){
         if(file_exists(ABSPATH . 'wp-admin'.DS.'includes'.DS.'upgrade.php'))    require_once(ABSPATH . 'wp-admin'.DS.'includes'.DS.'upgrade.php');
     }
 

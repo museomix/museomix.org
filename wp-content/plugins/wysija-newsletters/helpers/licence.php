@@ -5,8 +5,8 @@ defined('WYSIJA') or die('Restricted access');
  */
 class WYSIJA_help_licence extends WYSIJA_help{
 
-    function WYSIJA_help_licence(){
-        parent::WYSIJA_help();
+    function __construct(){
+        parent::__construct();
     }
 
     /**

@@ -13,7 +13,7 @@ class WYSIJA_view_back extends WYSIJA_view{
     var $listingHeader = '';
     var $hiddenFields = '';
 
-    function WYSIJA_view_back(){
+    function __construct(){
         /* the default actions to be linked in a listing */
         if(!$this->column_actions)  $this->column_actions=array('view'=>__('View',WYSIJA),'edit'=>__('Edit',WYSIJA),'delete'=>__('Delete',WYSIJA));
 

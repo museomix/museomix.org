@@ -6,8 +6,8 @@ class WYSIJA_control_front_confirm extends WYSIJA_control_front{
     var $model='user';
     var $view='confirm';
 
-    function WYSIJA_control_front_confirm(){
-        parent::WYSIJA_control_front();
+    function __construct(){
+        parent::__construct();
     }
 
     function _testKeyuser(){

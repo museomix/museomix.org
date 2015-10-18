@@ -1,11 +1,11 @@
 === Import CSV with Ultimate CSV Importer ===
 Contributors: smackcoders
 Donate link: http://www.smackcoders.com/donate.html
-Tags: wp all import, batch, csv, excel, import, spreadsheet, autoblog, Autoblogger, csvimporter, data, dataimport, importer, wpcsvimporter, wpimporter, acf, auto blog, csv import, csv to post, data import, Easy CSV Importer, eci, import plugin, admin, user, users, Advanced CSV Import, Advanced CSV Importer, affiliate, amazon, author, automatic, blog, bulk, bulk edit, bulk editor, categories, comments, content, csv file, csv format, csv importer, custom post, e-commerce, free, images, language, manage, media, meta, multisite, News, page, photos, pictures, plugin, Post, seo, shop, shortcode, tags, Taxonomy, text, title, video, eshop, woocommerce, wordpress, xml, youtube, export
-Requires at least: 4.1
-Tested up to: 4.2.2
-Stable tag: 3.8
-Version: 3.8
+Tags: admin, administration, author, automatic, blog, categories, category, cms, contact, content, custom, custom post, dashboard, database, e-commerce, ecommerce, edit, event, events, feed, Formatting, free, gallery, image, images, import, integration, language, link, links, list, marketing, media, menu, meta, mobile, multisite, navigation, News, page, pages, performance, photo, photos, picture, pictures, plugin, plugins, Post, posts, profile, registration, rss, seo, Share, sharing, shop, shortcode, shortcodes, statistics, stats, store, tag, tags, Taxonomy, template, text, thumbnail, thumbnails, title, upload, url, user, users, video, woocommerce, wordpress, wpmu, xml, youtube,
+Requires at least: 4.2
+Tested up to: 4.2.4
+Stable tag: 3.8.3
+Version: 3.8.3
 Author: smackcoders
 Author URI: http://profiles.wordpress.org/smackcoders/
 
@@ -54,16 +54,13 @@ Much improved User interface with most flexible jquery plugin features and boots
 
 = Helpful Links =
 
-[Read More Here>>](http://www.wpultimatecsvimporter.com?utm_source=WpOrg&utm_medium=Readme&utm_campaign=ListingTraffic) 
-
+[Get More Details Here>>](https://www.smackcoders.com/wp-ultimate-csv-importer-pro.html?utm_source=WpOrg&utm_medium=Readme&utm_campaign=ListingTraffic) 
 
 [Test Drive Our Live Demo](http://demo.smackcoders.com/demowpthree/wp-admin/admin.php?page=wp-ultimate-csv-importer-pro/index.php&__module=dashboard?utm_source=WpOrg&utm_medium=Readme&utm_campaign=ListingTraffic)
 
+[Get Started Sample CSV Files](https://www.smackcoders.com/blog/wordpress-ultimate-csv-importer-csv-sample-files-and-updates.html?utm_source=WpOrg&utm_medium=Readme&utm_campaign=ListingTraffic)
 
-Get Started [Sample CSV Files](https://www.smackcoders.com/blog/wordpress-ultimate-csv-importer-csv-sample-files-and-updates.html?utm_source=WpOrg&utm_medium=Readme&utm_campaign=ListingTraffic)
-
-
-Documentation and Tutorial for [CSV Importer ](http://www.wpultimatecsvimporter.com/documentation?utm_source=WpOrg&utm_medium=Readme&utm_campaign=ListingTraffic)
+[Documentation and Tutorial for CSV Importer ](https://www.smackcoders.com/documentation/ultimate-csv-importer-pro?utm_source=WpOrg&utm_medium=Readme&utm_campaign=ListingTraffic)
 
 
 = Video Walkthrough =
@@ -130,7 +127,7 @@ Your WordPress theme should support featured image. If not, please add the follo
 * Dashboard, CSV Manager and Custom Mapping Templates
 * DB Optimizer, System status etc.
 
-Compare Free Vs Pro [Features](https://www.wpultimatecsvimporter.com/wp-ultimate-csv-importer-plugin?utm_source=WpOrg&utm_medium=Readme&utm_campaign=ListingTraffic)>>
+Compare Free Vs Pro[Features](https://www.wpultimatecsvimporter.com/wp-ultimate-csv-importer-plugin?utm_source=WpOrg&utm_medium=Readme&utm_campaign=ListingTraffic)>>
 Learn More from [User Manual](https://www.wpultimatecsvimporter.com/documentation?utm_source=WpOrg&utm_medium=Readme&utm_campaign=ListingTraffic)>>
 
 
@@ -209,6 +206,26 @@ This will solve your issue or get support from hosting if you dint have sufficie
 [Click Here for More Details](http://www.wpultimatecsvimporter.com/documentation?utm_source=WpOrg&utm_medium=Readme&utm_campaign=ListingTraffic)
 
 == Changelog ==
+
+= 3.8.3 =
+* Fixed : Text domain is added for language translation system.
+* Fixed : Bugs fixed for detecting duplicate post content and title option.
+
+= 3.8.2 =
+* Fixed : Wordpress 4.3.1 compatibility added.
+* Fixed : Dashboard entry issue fix.
+* Fixed : Featured image filename with empty space import issue fix.
+* Fixed : Duplicate featured images on import fixed.
+* Fixed : Core custom Field mapping group added
+
+= 3.8.1 =
+* Fixed : WordPress 4.2.3 and 4.2.4 compatibility checked.
+* Fixed : Fixed the unwanted warnings in all files.
+* Fixed : XSS vulnerability.
+* Fixed : Removed the ../../../../../../wp-load.php and used the wordpress ajax call. 
+* Fixed : Removed the wp-content that are directly used in some files.
+* Added : Checked the ABSPATH in each file.
+* Added : Comments are exported by specific date and author option.
 
 = 3.8 =
 * Multilanguage support (fr_FR,es_ES,nl_NL)
@@ -467,6 +484,15 @@ This will solve your issue or get support from hosting if you dint have sufficie
 
 
 == Upgrade Notice ==
+
+= 3.8.3 =
+* Upgrade now for improvements in multi language translation.
+
+= 3.8.2 = 
+* Upgrade now for more improvements.
+
+= 3.8.1 =
+* Upgrade now for ABSPATH used in all files and also fixed all the warnings,bugs.
 
 = 3.8 =
 * Upgrade now for Multi language support and bug fixes

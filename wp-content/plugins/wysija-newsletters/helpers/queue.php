@@ -22,7 +22,7 @@ class WYSIJA_help_queue extends WYSIJA_object{
         /**
          *
          */
-	function WYSIJA_help_queue(){
+	function __construct(){
             $this->config = WYSIJA::get('config','model');
             $this->subClass = WYSIJA::get('user','model');//acymailing_get('class.sub');
             $this->listsubClass = WYSIJA::get('user_list','model');//acymailing_get('class.listsub');

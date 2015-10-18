@@ -30,7 +30,7 @@ class WYSIJA_model extends WYSIJA_object{
 	var $time_start = 0;
 	var $query_duration = 0;
 
-	function WYSIJA_model($extensions=''){
+	function __construct($extensions=''){
 		if(defined('WYSIJA_DBG') && WYSIJA_DBG>0) $this->dbg=true;
 		global $wpdb;
 		$this->wpprefix=$wpdb->prefix;
@@ -284,6 +284,7 @@ class WYSIJA_model extends WYSIJA_object{
 						$i=1;
 						$likeCond='';
 						foreach($values as $qfield => $qval){
+						  	$qval = html_entity_decode($qval, ENT_QUOTES);
 							$likeCond.=$qfield." LIKE '%".esc_sql(addcslashes($qval, '%_' ))."%'";
 							if($i<$total){
 								$likeCond.=' OR ';
@@ -294,9 +295,10 @@ class WYSIJA_model extends WYSIJA_object{
 					}
 					continue;
 				}
+
 				foreach($values as $condK => $condVal){
 
-					//secure from injections
+				  //secure from injections
 					$this->_secureFieldVal($condK, $condVal);
 
 					switch($type){

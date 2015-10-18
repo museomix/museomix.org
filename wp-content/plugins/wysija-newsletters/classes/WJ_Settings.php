@@ -9,8 +9,7 @@ class WJ_Settings {
   static private $db_prefix;
   static private $name = 'wysija';
 
-  private function __construct() {
-  }
+  private function __construct(){}
 
   // db_prefix();
   // # => wp_wysija_

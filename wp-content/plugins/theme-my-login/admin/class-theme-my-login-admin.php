@@ -80,15 +80,6 @@ class Theme_My_Login_Admin extends Theme_My_Login_Abstract {
 			'theme_my_login',
 			array( 'Theme_My_Login_Admin', 'settings_page' )
 		);
-
-		// General section
-		add_settings_section( 'general',    __( 'General', 'theme-my-login'    ), '__return_false', $this->options_key );
-		add_settings_section( 'modules',    __( 'Modules', 'theme-my-login'    ), '__return_false', $this->options_key );
-
-		// General fields
-		add_settings_field( 'enable_css',  __( 'Stylesheet',   'theme-my-login' ), array( &$this, 'settings_field_enable_css'  ), $this->options_key, 'general' );
-		add_settings_field( 'email_login', __( 'E-mail Login', 'theme-my-login' ), array( &$this, 'settings_field_email_login' ), $this->options_key, 'general' );
-		add_settings_field( 'modules',     __( 'Modules',      'theme-my-login' ), array( &$this, 'settings_field_modules'     ), $this->options_key, 'modules' );
 	}
 
 	/**
@@ -100,10 +91,22 @@ class Theme_My_Login_Admin extends Theme_My_Login_Abstract {
 	 * @access public
 	 */
 	public function admin_init() {
+
+		// Register setting
 		register_setting( 'theme_my_login', 'theme_my_login',  array( &$this, 'save_settings' ) );
 
-		if ( version_compare( $this->get_option( 'version', 0 ), Theme_My_Login::version, '<' ) )
+		// Install/Upgrade
+		if ( version_compare( $this->get_option( 'version', 0 ), Theme_My_Login::VERSION, '<' ) )
 			$this->install();
+
+		// Add sections
+		add_settings_section( 'general',    __( 'General', 'theme-my-login'    ), '__return_false', $this->options_key );
+		add_settings_section( 'modules',    __( 'Modules', 'theme-my-login'    ), '__return_false', $this->options_key );
+
+		// Add fields
+		add_settings_field( 'enable_css', __( 'Stylesheet', 'theme-my-login' ), array( &$this, 'settings_field_enable_css' ), $this->options_key, 'general' );
+		add_settings_field( 'login_type', __( 'Login Type', 'theme-my-login' ), array( &$this, 'settings_field_login_type' ), $this->options_key, 'general' );
+		add_settings_field( 'modules',    __( 'Modules',    'theme-my-login' ), array( &$this, 'settings_field_modules'    ), $this->options_key, 'modules' );
 	}
 
 	/**
@@ -113,7 +116,7 @@ class Theme_My_Login_Admin extends Theme_My_Login_Abstract {
 	 * @access public
 	 */
 	public function admin_enqueue_scripts() {
-		wp_enqueue_script( 'theme-my-login-admin', plugins_url( 'theme-my-login/admin/js/theme-my-login-admin.js' ), array( 'jquery' ), Theme_My_Login::version, true );
+		wp_enqueue_script( 'theme-my-login-admin', plugins_url( 'theme-my-login/admin/js/theme-my-login-admin.js' ), array( 'jquery' ), Theme_My_Login::VERSION, true );
 		wp_localize_script( 'theme-my-login-admin', 'tmlAdmin', array(
 			'interim_login_url' => site_url( 'wp-login.php?interim-login=1', 'login' )
 		) );
@@ -162,16 +165,29 @@ class Theme_My_Login_Admin extends Theme_My_Login_Abstract {
 	}
 
 	/**
-	 * Renders E-mail Login settings field
+	 * Renders Login Type settings field
 	 *
 	 * @since 6.3
 	 * @access public
 	 */
-	public function settings_field_email_login() {
+	public function settings_field_login_type() {
 		?>
-		<input name="theme_my_login[email_login]" type="checkbox" id="theme_my_login_email_login" value="1"<?php checked( 1, $this->get_option( 'email_login' ) ); ?> />
-		<label for="theme_my_login_email_login"><?php _e( 'Enable e-mail address login', 'theme-my-login' ); ?></label>
-		<p class="description"><?php _e( 'Allows users to login using their e-mail address in place of their username.', 'theme-my-login' ); ?></p>
+
+		<ul>
+
+			<li><input name="theme_my_login[login_type]" type="radio" id="theme_my_login_login_type_default" value="default"<?php checked( 'default', $this->get_option( 'login_type' ) ); ?> />
+			<label for="theme_my_login_login_type_default"><?php _e( 'Username only', 'theme-my-login' ); ?></label></li>
+
+			<li><input name="theme_my_login[login_type]" type="radio" id="theme_my_login_login_type_email" value="email"<?php checked( 'email', $this->get_option( 'login_type' ) ); ?> />
+			<label for="theme_my_login_login_type_email"><?php _e( 'E-mail only', 'theme-my-login' ); ?></label></li>
+
+			<li><input name="theme_my_login[login_type]" type="radio" id="theme_my_login_login_type_both" value="both"<?php checked( 'both', $this->get_option( 'login_type' ) ); ?> />
+			<label for="theme_my_login_login_type_both"><?php _e( 'Username or E-mail', 'theme-my-login' ); ?></label></li>
+
+		</ul>
+
+		<p class="description"><?php _e( 'Allow users to login using their username and/or e-mail address.', 'theme-my-login' ); ?></p>
+
     	<?php
 	}
 
@@ -206,7 +222,7 @@ class Theme_My_Login_Admin extends Theme_My_Login_Abstract {
 	 */
 	public function save_settings( $settings ) {
 		$settings['enable_css']     = ! empty( $settings['enable_css']   );
-		$settings['email_login']    = ! empty( $settings['email_login']  );
+		$settings['login_type']     = in_array( $settings['login_type'], array( 'default', 'email', 'both' ) ) ? $settings['login_type'] : 'default';
 		$settings['active_modules'] = isset( $settings['active_modules'] ) ? (array) $settings['active_modules'] : array();
 
 		// If we have modules to activate
@@ -240,11 +256,11 @@ class Theme_My_Login_Admin extends Theme_My_Login_Abstract {
 		global $wpdb;
 
 		// Current version
-		$version = $this->get_option( 'version', Theme_My_Login::version );
+		$version = $this->get_option( 'version', Theme_My_Login::VERSION );
 
 		// Check if legacy page exists
 		if ( $page_id = $this->get_option( 'page_id' ) ) {
-			$page = get_page( $page_id );
+			$page = get_post( $page_id );
 		} else {
 			$page = get_page_by_title( 'Login' );
 		}
@@ -295,13 +311,21 @@ class Theme_My_Login_Admin extends Theme_My_Login_Abstract {
 			}
 		}
 
-		// 6.4 upgrade
+		// 6.3.7 upgrade
 		if ( version_compare( $version, '6.3.7', '<' ) ) {
 			// Convert TML pages to regular pages
 			$wpdb->update( $wpdb->posts, array( 'post_type' => 'page' ), array( 'post_type' => 'tml_page' ) );
 
 			// Get rid of stale rewrite rules
 			flush_rewrite_rules( false );
+		}
+
+		// 6.4 upgrade
+		if ( version_compare( $version, '6.4', '<' ) ) {
+			// Convert e-mail login option
+			if ( $this->get_option( 'email_login' ) )
+				$this->set_option( 'login_type', 'both' );
+			$this->delete_option( 'email_login' );
 		}
 
 		// Setup default pages
@@ -327,7 +351,7 @@ class Theme_My_Login_Admin extends Theme_My_Login_Abstract {
 			do_action( 'tml_activate_' . $module );
 		}
 
-		$this->set_option( 'version', Theme_My_Login::version );
+		$this->set_option( 'version', Theme_My_Login::VERSION );
 		$this->save_options();
 	}
 

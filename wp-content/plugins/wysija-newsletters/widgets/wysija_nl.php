@@ -9,7 +9,7 @@ class WYSIJA_NL_Widget extends WP_Widget {
 	var $iFrame = false;
 
 
-	function WYSIJA_NL_Widget( $core_only = false ) {
+	function __construct( $core_only = false ) {
 		static $script_registered;
 
 		if ( WYSIJA_SIDE == 'front' ){
@@ -47,7 +47,7 @@ class WYSIJA_NL_Widget extends WP_Widget {
 		add_action( 'init', array( $this, 'add_translated_default' ) );
 
 		$this->classid = strtolower( str_replace( __CLASS__ . '_', '', get_class( $this ) ) );
-		$this->WP_Widget( $namekey, $title, $params,$sizeWindow );
+		parent::__construct($namekey, $title, $params,$sizeWindow );
 
 	}
 

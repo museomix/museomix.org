@@ -7,8 +7,8 @@ defined('WYSIJA') or die('Restricted access');
  */
 class WYSIJA_help_back extends WYSIJA_help{
 
-    function WYSIJA_help_back(){
-        parent::WYSIJA_help();
+    function __construct(){
+        parent::__construct();
         //check that the application has been installed properly
         $config=WYSIJA::get('config','model');
 

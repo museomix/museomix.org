@@ -72,7 +72,8 @@ jQuery.ajax({
           cache: false,
          success: function(data) {
          var val = JSON.parse(data);
-         var line =  [val[0],val[1],val[2],val[3],val[4],val[5]]; 
+	// Removed the val[2] for comments (smackcoders)
+         var line =  [val[0],val[1],val[3],val[4],val[5]]; 
          jQuery('#lineStats').highcharts({
             title: {
                 text: '',

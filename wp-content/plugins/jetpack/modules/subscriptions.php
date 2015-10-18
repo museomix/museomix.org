@@ -2,7 +2,7 @@
 /**
  * Module Name: Subscriptions
  * Module Description: Allow users to subscribe to your posts and comments and receive notifications via email.
- * Jumpstart Description: give visitors two easy subscription options — while commenting, or via a separate email subscription widget you can display.
+ * Jumpstart Description: Give visitors two easy subscription options — while commenting, or via a separate email subscription widget you can display.
  * Sort Order: 9
  * Recommendation Order: 8
  * First Introduced: 1.2
@@ -43,7 +43,7 @@ function jetpack_subscriptions_configuration_load() {
 }
 
 class Jetpack_Subscriptions {
-	var $jetpack = false;
+	public $jetpack = false;
 
 	public static $hash;
 
@@ -61,7 +61,7 @@ class Jetpack_Subscriptions {
 		return $instance;
 	}
 
-	function Jetpack_Subscriptions() {
+	function __construct() {
 		$this->jetpack = Jetpack::init();
 
 		// Don't use COOKIEHASH as it could be shared across installs && is non-unique in multisite.
@@ -87,6 +87,22 @@ class Jetpack_Subscriptions {
 
 		// Catch comment posts and check for subscriptions.
 		add_action( 'comment_post', array( $this, 'comment_subscribe_submit' ), 50, 2 );
+
+		// Adds post meta checkbox in the post submit metabox
+		if (
+			/**
+			 * Filter whether or not to show the per-post subscription option.
+			 *
+			 * @since 3.7.0
+			 *
+			 * @param bool true = show checkbox option on all new posts | false = hide the option.
+			 */
+			apply_filters( 'jetpack_allow_per_post_subscriptions', false ) )
+		{
+			add_action( 'post_submitbox_misc_actions', array( $this, 'subscription_post_page_metabox' ) );
+		}
+
+		add_action( 'transition_post_status', array( $this, 'maybe_send_subscription_email' ), 10, 3 );
 	}
 
 	function post_is_public( $the_post ) {
@@ -112,6 +128,90 @@ class Jetpack_Subscriptions {
 				'jetpack.subscriptions.subscribe' => array( $this, 'subscribe' ),
 			)
 		);
+	}
+
+	/*
+	 * Disable Subscribe on Single Post
+	 * Register post meta
+	 */
+	function subscription_post_page_metabox() {
+		if ( has_filter( 'jetpack_subscriptions_exclude_these_categories' ) || has_filter( 'jetpack_subscriptions_include_only_these_categories' ) ) {
+			return;
+		}
+
+		global $post;
+		$disable_subscribe_value = get_post_meta( $post->ID, '_jetpack_dont_email_post_to_subs', true );
+		// Nonce it
+		wp_nonce_field( 'disable_subscribe', 'disable_subscribe_nonce' );
+		// only show checkbox if post hasn't been published and is a 'post' post type.
+		if ( get_post_status( $post->ID ) !== 'publish' && get_post_type( $post->ID ) == 'post' ) : ?>
+			<div class="misc-pub-section">
+				<label for="_jetpack_dont_email_post_to_subs"><?php _e( 'Jetpack Subscriptions:', 'jetpack' ); ?></label><br>
+				<input type="checkbox" name="_jetpack_dont_email_post_to_subs" id="jetpack-per-post-subscribe" value="1" <?php checked( $disable_subscribe_value, 1, true ); ?> />
+				<?php _e( 'Don&#8217;t send this to subscribers', 'jetpack' ); ?>
+			</div>
+		<?php endif;
+	}
+
+	/**
+	 * Checks whether or not the post should be emailed to subscribers
+	 *
+	 * It checks for the following things in order:
+	 * - Usage of filter jetpack_subscriptions_exclude_these_categories
+	 * - Usage of filter jetpack_subscriptions_include_only_these_categories
+	 * - Existence of the per-post checkbox option
+	 *
+	 * Only one of these can be used at any given time.
+	 *
+	 * @param $new_status string - the "new" post status of the transition when saved
+	 * @param $old_status string - the "old" post status of the transition when saved
+	 * @param $post obj - The post object
+	 */
+	function maybe_send_subscription_email( $new_status, $old_status, $post ) {
+		// Only do things on publish
+		if ( 'publish' !== $new_status ) {
+			return;
+		}
+		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+			return;
+		}
+
+		/**
+		 * Array of categories that will never trigger subscription emails.
+		 * Will not send subscription emails from any post from within these categories.
+		 *
+		 * @since 3.7.0
+		 *
+		 * @param array $args Array of category slugs or ID's.
+		 */
+		$excluded_categories = apply_filters( 'jetpack_subscriptions_exclude_these_categories', array() );
+
+		// Never email posts from these categories
+		if ( ! empty( $excluded_categories ) && in_category( $excluded_categories, $post->ID ) ) {
+			update_post_meta( $post->ID, '_jetpack_dont_email_post_to_subs', 1 );
+		}
+
+		/**
+		 * ONLY send subscription emails for these categories
+		 * Will ONLY send subscription emails to these categories.
+		 *
+		 * @since 3.7.0
+		 *
+		 * @param array $args Array of category slugs or ID's.
+		 */
+		$only_these_categories = apply_filters( 'jetpack_subscriptions_exclude_all_categories_except', array() );
+
+		// Only emails posts from these categories
+		if ( ! empty( $only_these_categories ) && ! in_category( $only_these_categories, $post->ID ) ) {
+			update_post_meta( $post->ID, '_jetpack_dont_email_post_to_subs', 1 );
+		}
+
+		// Email the post, depending on the checkbox option
+		if ( ! empty( $_POST['disable_subscribe_nonce'] ) && wp_verify_nonce( $_POST['disable_subscribe_nonce'], 'disable_subscribe' ) ) {
+			if ( isset( $_POST['_jetpack_dont_email_post_to_subs'] ) ) {
+				update_post_meta( $post->ID, '_jetpack_dont_email_post_to_subs', $_POST['_jetpack_dont_email_post_to_subs'] );
+			}
+		}
 	}
 
 	/**
@@ -426,21 +526,32 @@ class Jetpack_Subscriptions {
 			}
 		}
 
-		if ( $error ) {
-			switch ( $error ) {
-				case 'invalid_email':
-					$redirect = add_query_arg( 'subscribe', 'invalid_email' );
-					break;
-				case 'active': case 'pending':
-					$redirect = add_query_arg( 'subscribe', 'already' );
-					break;
-				default:
-					$redirect = add_query_arg( 'subscribe', 'error' );
-					break;
-			}
-		} else {
-			$redirect = add_query_arg( 'subscribe', 'success' );
+		switch ( $error ) {
+			case false:
+				$result = 'success';
+				break;
+			case 'invalid_email':
+				$result = $error;
+				break;
+			case 'active':
+			case 'pending':
+				$result = 'already';
+				break;
+			default:
+				$result = 'error';
+				break;
 		}
+
+		$redirect = add_query_arg( 'subscribe', $result );
+
+		/**
+		 * Fires on each subscription form submission.
+		 *
+		 * @since 3.7.0
+		 *
+		 * @param string $result Result of form submission: success, invalid_email, already, error.
+		 */
+		do_action( 'jetpack_subscriptions_form_submission', $result );
 
 		wp_safe_redirect( "$redirect#$redirect_fragment" );
 		exit;
@@ -560,16 +671,22 @@ Jetpack_Subscriptions::init();
  */
 
 class Jetpack_Subscriptions_Widget extends WP_Widget {
-	function Jetpack_Subscriptions_Widget() {
+	function __construct() {
 		$widget_ops  = array( 'classname' => 'jetpack_subscription_widget', 'description' => __( 'Add an email signup form to allow people to subscribe to your blog.', 'jetpack' ) );
 		$control_ops = array( 'width' => 300 );
 
-		$this->WP_Widget( 'blog_subscription', __( 'Blog Subscriptions (Jetpack)', 'jetpack' ), $widget_ops, $control_ops );
+		parent::__construct(
+			'blog_subscription',
+			/** This filter is documented in modules/widgets/facebook-likebox.php */
+			apply_filters( 'jetpack_widget_name', __( 'Blog Subscriptions', 'jetpack' ) ),
+			$widget_ops,
+			$control_ops
+		);
 	}
 
 	function widget( $args, $instance ) {
 		if ( ( ! defined( 'IS_WPCOM' ) || ! IS_WPCOM )
-		    && false === apply_filters( 'jetpack_auto_fill_logged_in_user', false )
+			&& false === apply_filters( 'jetpack_auto_fill_logged_in_user', false )
 		) {
 			$subscribe_email = '';
 		} else {
@@ -635,20 +752,19 @@ class Jetpack_Subscriptions_Widget extends WP_Widget {
 		} else { ?>
 			<form action="#" method="post" accept-charset="utf-8" id="subscribe-blog-<?php echo $widget_id; ?>">
 				<?php
-				if ( ! isset ( $_GET['subscribe'] ) ) {
+				if ( ! isset ( $_GET['subscribe'] ) || 'success' != $_GET['subscribe'] ) {
 					?><div id="subscribe-text"><?php echo wpautop( str_replace( '[total-subscribers]', number_format_i18n( $subscribers_total['value'] ), $subscribe_text ) ); ?></div><?php
 				}
 
 				if ( $show_subscribers_total && 0 < $subscribers_total['value'] ) {
 					echo wpautop( sprintf( _n( 'Join %s other subscriber', 'Join %s other subscribers', $subscribers_total['value'], 'jetpack' ), number_format_i18n( $subscribers_total['value'] ) ) );
 				}
-
-				if ( ! isset ( $_GET['subscribe'] ) ) { ?>
+				if ( ! isset ( $_GET['subscribe'] ) || 'success' != $_GET['subscribe'] ) { ?>
 					<p id="subscribe-email">
 						<label id="jetpack-subscribe-label" for="<?php echo esc_attr( $subscribe_field_id ); ?>">
 							<?php echo !empty( $subscribe_placeholder ) ? esc_html( $subscribe_placeholder ) : esc_html__( 'Email Address:', 'jetpack' ); ?>
 						</label>
-						<input type="email" name="email" required="required" class="required" value="<?php echo esc_attr( $subscribe_email ); ?>" id="<?php echo esc_attr( $subscribe_field_id ); ?>" placeholder="<?php echo esc_attr( $subscribe_placeholder ); ?>" />
+						<input type="email" name="email" required="required" class="required" value="<?php echo esc_attr( $subscribe_email ); ?>" id="<?php echo esc_attr( $subscribe_field_id ) . '-' . esc_attr( $widget_id ); ?>" placeholder="<?php echo esc_attr( $subscribe_placeholder ); ?>" />
 					</p>
 
 					<p id="subscribe-submit">
@@ -667,25 +783,41 @@ class Jetpack_Subscriptions_Widget extends WP_Widget {
 			</form>
 
 			<script>
-				( function( d ) {
-					if ( ( 'placeholder' in d.createElement( 'input' ) ) ) {
-						var label = d.getElementById( 'jetpack-subscribe-label' );
-	 					label.style.clip 	 = 'rect(1px, 1px, 1px, 1px)';
-	 					label.style.position = 'absolute';
-	 					label.style.height   = '1px';
-	 					label.style.width    = '1px';
-	 					label.style.overflow = 'hidden';
-					}
-				} ) ( document );
+			/*
+			Custom functionality for safari and IE
+			 */
+			(function( d ) {
+				// Creates placeholders for IE
+				if ( ( 'placeholder' in d.createElement( 'input' ) ) ) {
+					var label = d.getElementById( 'jetpack-subscribe-label' );
+						label.style.clip 	 = 'rect(1px, 1px, 1px, 1px)';
+						label.style.position = 'absolute';
+						label.style.height   = '1px';
+						label.style.width    = '1px';
+						label.style.overflow = 'hidden';
+				}
 
-				// Special check for required email input because Safari doesn't support HTML5 "required"
-				jQuery( '#subscribe-blog-<?php echo $widget_id; ?>' ).submit( function( event ) {
-					var requiredInput = jQuery( this ).find( '.required' );
-					if ( requiredInput.val() == '' ) {
-						event.preventDefault();
-						requiredInput.focus();
-					}
-				});
+				// Make sure the email value is filled in before allowing submit
+				var form = d.getElementById('subscribe-blog-<?php echo $widget_id; ?>'),
+					input = d.getElementById('<?php echo esc_attr( $subscribe_field_id ) . '-' . esc_attr( $widget_id ); ?>'),
+					handler = function( event ) {
+						if ( '' === input.value ) {
+							input.focus();
+
+							if ( event.preventDefault ){
+								event.preventDefault();
+							}
+
+							return false;
+						}
+					};
+
+				if ( window.addEventListener ) {
+					form.addEventListener( 'submit', handler, false );
+				} else {
+					form.attachEvent( 'onsubmit', handler );
+				}
+			})( document );
 			</script>
 		<?php } ?>
 		<?php

@@ -3,7 +3,7 @@
 defined( 'WYSIJA' ) or die( 'Restricted access' );
 class WYSIJA_view_front_confirm extends WYSIJA_view_front {
 
-	function WYSIJA_view_front_confirm(){
+	function __construct(){
 		$this->model = WYSIJA::get( 'user','model' );
 
 		add_action( 'wp_head', array( $this, 'add_noindex' ) );

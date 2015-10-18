@@ -1,9 +1,9 @@
 === MailPoet Newsletters ===
-Contributors: wysija, kgjerstad, benheu, JoN1oP, badshark, rafaehlers, rafaelfunchal, _dorsvenabili, vvaz, keiferski
+Contributors: wysija, kgjerstad, benheu, JoN1oP, badshark, rafaehlers, vvaz, keiferski, mrcasual
 Tags: newsletter, newsletters, email newsletter, email subscription, newsletter signup, post notification, autoresponder, newsletter alert, auto newsletter, automatic post notification, email newsletters, email signup, auto post notifications, newsletter widget, newsletter builder, subscribe widget, signup widget, email subscription, newsletter plugin, widget, subscription, emailing, mailpoet, wysija, mandrill, sendgrid
 Requires at least: 3.3
-Tested up to: 4.2
-Stable tag: 2.6.16
+Tested up to: 4.3.1
+Stable tag: 2.6.19
 Send newsletters post notifications or autoresponders from WordPress easily, and beautifully. Start to capture subscribers with our widget now.
 
 == Description ==
@@ -129,6 +129,21 @@ Our [support site](http://support.mailpoet.com/) has plenty of articles and a ti
 7. Importing subscribers with a CSV.
 
 == Changelog ==
+
+= 2.6.19 - 2015-10-13 =
+* Fixed a URL validation issue when WP's home & site URLs are different. Kudos to Divaldo for pointing it out
+
+= 2.6.18 - 2015-09-21 =
+* Fixed URL validation issue
+* Improved newsletter/subscriber search
+* Fixed minor issues
+
+= 2.6.17 - 2015-09-04 =
+* Enhanced redirection check in email URLs.
+* Fixed old-style PHP constructors.
+* Fixed newsletter preview bug.
+* Fixed import issues on old PHP versions.
+* Fixed minor issues.
 
 = 2.6.16 - 2015-06-23 =
 * Added HHVM support

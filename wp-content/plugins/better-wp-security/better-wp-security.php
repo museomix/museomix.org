@@ -1,24 +1,28 @@
 <?php
+
 /*
-Plugin Name: iThemes Security
-Plugin URI: https://ithemes.com/security
-Description: Protect your WordPress site by hiding vital areas of your site, protecting access to important files, preventing brute-force login attempts, detecting attack attempts and more.
-Version: 4.6.13
-Text Domain: it-l10n-better-wp-security
-Domain Path: /languages
-Author: iThemes.com
-Author URI: https://ithemes.com
-Network: True
-License: GPLv2
-Copyright 2015  iThemes  (email : info@ithemes.com)
-*/
+ * Plugin Name: iThemes Security
+ * Plugin URI: https://ithemes.com/security
+ * Description: Protect your WordPress site by hiding vital areas of your site, protecting access to important files, preventing brute-force login attempts, detecting attack attempts and more.
+ * Author: iThemes
+ * Author URI: https://ithemes.com
+ * Version: 5.1.0
+ * Text Domain: better-wp-security
+ * Network: True
+ * License: GPLv2
+ */
+
+
+$itsec_dir = dirname( __FILE__ );
+
+$locale = apply_filters( 'plugin_locale', get_locale(), 'better-wp-security' );
+load_textdomain( 'better-wp-security', WP_LANG_DIR . "/plugins/better-wp-security/better-wp-security-$locale.mo" );
+load_plugin_textdomain( 'better-wp-security' );
 
 if ( is_admin() ) {
-
-	require( dirname( __FILE__ ) . '/lib/icon-fonts/load.php' ); //Loads iThemes fonts
-	require( dirname( __FILE__ ) . '/lib/one-version/index.php' ); //Only have one version of the plugin
-
+	require( "$itsec_dir/lib/icon-fonts/load.php" );
+	require( "$itsec_dir/lib/one-version/index.php" );
 }
 
-require_once( dirname( __FILE__ ) .  '/core/class-itsec-core.php' );
-new ITSEC_Core( __FILE__, __( 'iThemes Security', 'it-l10n-better-wp-security' ) );
+require( "$itsec_dir/core/class-itsec-core.php" );
+new ITSEC_Core( __FILE__, __( 'iThemes Security', 'better-wp-security' ) );

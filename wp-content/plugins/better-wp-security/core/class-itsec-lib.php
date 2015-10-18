@@ -230,64 +230,32 @@ final class ITSEC_Lib {
 	 *
 	 * @since 4.0.0
 	 *
-	 * @param string $address  address to filter
-	 * @param bool   $apache   [true] does this require an apache style wildcard
-	 * @param bool   $wildcard false if a wildcard shouldn't be included at all
+	 * @param string $url          URL to filter
 	 *
-	 * @return string domain name
+	 * @return string domain name or '*' on error or domain mapped multisite
 	 * */
-	public static function get_domain( $address, $apache = true, $wildcard = true ) {
-
-		preg_match( "/^(http:\/\/)?([^\/]+)/i", $address, $matches );
-
-		$host = $matches[2];
-
-		preg_match( "/[^\.\/]+\.[^\.\/]+$/", $host, $matches );
-
-		if ( true === $wildcard ) {
-
-			if ( true === $apache ) {
-
-				$wc = '(.*)';
-
-			} else {
-
-				$wc = '*.';
-
-			}
-
-		} else {
-
-			$wc = '';
-
-		}
-
-		if ( ! is_array( $matches ) ) {
-			return false;
-		}
-
-		// multisite domain mapping compatibility. when hide login is enabled,
-		// rewrite rules redirect valid POST requests from MAPPED_DOMAIN/wp-login.php?SECRET_KEY
-		// because they aren't coming from the "top-level" domain. blog_id 1, the parent site,
-		// is a completely different, unrelated domain in this configuration.
+	public static function get_domain( $url ) {
 		if ( is_multisite() && function_exists( 'domain_mapping_warning' ) ) {
-
-			if ( $apache == true ) {
-				return $wc;
-			} else {
-				return '*';
-			}
-
-		} elseif ( isset( $matches[0] ) ) {
-
-			return $wc . $matches[0];
-
-		} else {
-
-			return false;
-
+			return '*';
 		}
-
+		
+		
+		$host = parse_url( $url, PHP_URL_HOST );
+		
+		if ( false === $host ) {
+			return '*';
+		}
+		if ( 'www.' == substr( $host, 0, 4 ) ) {
+			return substr( $host, 4 );
+		}
+		
+		$host_parts = explode( '.', $host );
+		
+		if ( count( $host_parts ) > 2 ) {
+			$host_parts = array_slice( $host_parts, -2, 2 );
+		}
+		
+		return implode( '.', $host_parts );
 	}
 
 	/**
@@ -393,51 +361,39 @@ final class ITSEC_Lib {
 	 * @return  String The IP address of the user
 	 */
 	public static function get_ip() {
-
 		global $itsec_globals;
 
 		if ( isset( $itsec_globals['settings']['proxy_override'] ) && true === $itsec_globals['settings']['proxy_override'] ) {
 			return esc_sql( $_SERVER['REMOTE_ADDR'] );
 		}
 
-		//Just get the headers if we can or else use the SERVER global
-		if ( function_exists( 'apache_request_headers' ) ) {
+		$headers = array(
+			'HTTP_CF_CONNECTING_IP', // CloudFlare
+			'HTTP_X_FORWARDED_FOR',  // Squid and most other forward and reverse proxies
+			'REMOTE_ADDR',           // Default source of remote IP
+		);
 
-			$headers = apache_request_headers();
+		$headers = apply_filters( 'itsec_filter_remote_addr_headers', $headers );
 
-		} else {
+		$headers = (array) $headers;
 
-			$headers = $_SERVER;
-
+		if ( ! in_array( 'REMOTE_ADDR', $headers ) ) {
+			$headers[] = 'REMOTE_ADDR';
 		}
 
-		//Get the forwarded IP if it exists
-		if ( array_key_exists( 'X-Forwarded-For', $headers ) &&
-		     (
-			     filter_var( $headers['X-Forwarded-For'], FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 ) ||
-			     filter_var( $headers['X-Forwarded-For'], FILTER_VALIDATE_IP, FILTER_FLAG_IPV6 ) )
-		) {
+		foreach ( $headers as $header ) {
+			if ( empty( $_SERVER[$header] ) ) {
+				continue;
+			}
 
-			$the_ip = $headers['X-Forwarded-For'];
+			$ip = filter_var( $_SERVER[$header], FILTER_VALIDATE_IP );
 
-		} elseif (
-			array_key_exists( 'HTTP_X_FORWARDED_FOR', $headers ) &&
-			(
-				filter_var( $headers['HTTP_X_FORWARDED_FOR'], FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 ) ||
-				filter_var( $headers['HTTP_X_FORWARDED_FOR'], FILTER_VALIDATE_IP, FILTER_FLAG_IPV6 )
-			)
-		) {
-
-			$the_ip = $headers['HTTP_X_FORWARDED_FOR'];
-
-		} else {
-
-			$the_ip = $_SERVER['REMOTE_ADDR'];
-
+			if ( ! empty( $ip ) ) {
+				break;
+			}
 		}
 
-		return esc_sql( $the_ip );
-
+		return esc_sql( (string) $ip );
 	}
 
 	/**
@@ -523,10 +479,12 @@ final class ITSEC_Lib {
 	 */
 	public static function get_server() {
 
+		// @codeCoverageIgnoreStart
 		//Allows to override server authentication for testing or other reasons.
 		if ( defined( 'ITSEC_SERVER_OVERRIDE' ) ) {
 			return ITSEC_SERVER_OVERRIDE;
 		}
+		// @codeCoverageIgnoreEnd
 
 		$server_raw = strtolower( filter_var( $_SERVER['SERVER_SOFTWARE'], FILTER_SANITIZE_STRING ) );
 
@@ -562,7 +520,7 @@ final class ITSEC_Lib {
 	 */
 	public static function get_ssl() {
 
-		$url = str_replace( 'http://', 'https://', get_bloginfo( 'url' ) );
+		$url = str_ireplace( 'http://', 'https://', get_bloginfo( 'url' ) );
 
 		if ( function_exists( 'wp_http_supports' ) && wp_http_supports( array( 'ssl' ), $url ) ) {
 

@@ -14,7 +14,8 @@ class WYSIJA_help_shortcodes extends WYSIJA_object {
     // Replacement values for shortcodes found.
     private $replace;
 
-    function WYSIJA_help_shortcodes() {
+    function __construct(){
+        parent::__construct();
     }
 
     /**

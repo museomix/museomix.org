@@ -21,10 +21,10 @@ class WYSIJA_model_user extends WYSIJA_model{
     );
     var $searchable = array('email','firstname', 'lastname');
 
-    function WYSIJA_model_user(){
+    function __construct(){
         $this->columns['status']['label']=__('Status',WYSIJA);
         $this->columns['created_at']['label']=__('Created on',WYSIJA);
-        $this->WYSIJA_model();
+        parent::__construct();
     }
 
     function refresh_columns(){

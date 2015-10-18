@@ -16,8 +16,7 @@ class WJ_StatsSessionManager {
 
 	protected $pre_defined_dates;
 
-	public function __construct() {
-	}
+	public function __construct(){}
 
 	public function set_pre_defined_dates(Array $pre_defined_dates) {
 		$this->pre_defined_dates = $pre_defined_dates;

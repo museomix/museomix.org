@@ -34,7 +34,8 @@
  * Notices must display the words
  * "Copyright Smackcoders. 2014. All rights reserved".
  ********************************************************************************/
-
+if ( ! defined( 'ABSPATH' ) )
+        exit; // Exit if accessed directly
 $impCE = new WPImporter_includes_helper();
 $nonce_Key = $impCE->create_nonce_key();
 ?>
@@ -43,7 +44,7 @@ $nonce_Key = $impCE->create_nonce_key();
 	<table class="table-importer">
 	<tr>
 	<td>
-	<h3><?php echo __('CSV Import Options',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?></h3>
+	<h3><?php echo __('CSV Import Options','wp-ultimate-csv-importer'); ?></h3>
 	<div id='sec-one' <?php if($_REQUEST['step']!= 'uploadfile') {?> style='display:none;' <?php } ?>>
 	<?php if(is_dir($impCE->getUploadDirectory('default'))){ 
                 if (!is_writable($impCE->getUploadDirectory('default'))) {
@@ -78,16 +79,16 @@ $nonce_Key = $impCE->create_nonce_key();
                                 <tr>
                                    <div id='showmappingtemplate' style='float:left;padding-left:10px;'>  
                                   <select disabled>
-                               <option value ='select template' > <?php echo __('select template',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?> </option>
+                               <option value ='select template' > <?php echo __('select template','wp-ultimate-csv-importer'); ?> </option>
                                    </select>
 				<img src="<?php echo WP_CONTENT_URL; ?>/plugins/<?php echo WP_CONST_ULTIMATE_CSV_IMP_SLUG; ?>/images/pro_icon.gif" title="PRO Feature" />
                                    </div>
 
                                 </div>
                                 <div style="float:right;">
-                                <input type='button' name='clearform' id='clearform' value='<?php echo __("Clear",WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?>' onclick="Reload();"
+                                <input type='button' name='clearform' id='clearform' value='<?php echo __("Clear",'wp-ultimate-csv-importer'); ?>' onclick="Reload();"
                                 class='btn btn-warning' style="margin-right:15px" />
-                                <input type='submit' name='importfile' title = '<?php echo __('Next',WP_CONST_ULTIMATE_CSV_IMP_SLUG);?>' id='importfile' value='<?php echo $impCE->reduceStringLength(__("Next",WP_CONST_ULTIMATE_CSV_IMP_SLUG),'Next'); echo (" >>");?>' disabled
+                                <input type='submit' name='importfile' title = '<?php echo __('Next','wp-ultimate-csv-importer');?>' id='importfile' value='<?php echo $impCE->reduceStringLength(__("Next",'wp-ultimate-csv-importer'),'Next'); echo (" >>");?>' disabled
                                 class='btn btn-primary'style="margin-right:15px"/>
                                 </div>
                                 </tr>
@@ -111,47 +112,85 @@ $nonce_Key = $impCE->create_nonce_key();
 		jQuery('#progress .progress-bar').css('visibility','hidden');
 	}
 	else{
-	jQuery(function () {
-		'use strict';
-		var uploadPath = document.getElementById('uploaddir').value;
-		var url = (document.getElementById('pluginurl').value+'/plugins/<?php echo WP_CONST_ULTIMATE_CSV_IMP_SLUG;?>/lib/jquery-plugins/uploader.php')+'?uploadPath='+uploadPath+'&curr_action=<?php echo $_REQUEST['__module']; ?>';
-		jQuery('#fileupload').fileupload({
-		url: url,
-		dataType: 'json',
-		done: function (e, data) {
-		jQuery.each(data.result.files, function (index, file) {
-		document.getElementById('uploadFileName').value=file.name;
-                var filewithmodule = file.uploadedname.split(".csv");
-                file.uploadedname = filewithmodule[0]+"-<?php echo $_REQUEST['__module']; ?>"+".csv";
-                document.getElementById('upload_csv_realname').value = file.uploadedname; 
-                var get_version1 = file.name.split("-<?php echo $_REQUEST['__module']; ?>"); 
-                var get_version2 = get_version1[1].split(".csv");
-                var get_version3 = get_version2[0].split("-");
-                document.getElementById('current_file_version').value = get_version3[1];
-                jQuery('#uploadedfilename').val(file.uploadedname);
-		jQuery( "#filenamedisplay").empty();
-		if(file.size>1024 && file.size<(1024*1024))
-		{
-			var fileSize =(file.size/1024).toFixed(2)+' kb';
-		}
-		else if(file.size>(1024*1024))
-		{
-			var fileSize =(file.size/(1024*1024)).toFixed(2)+' mb';
-		}
-		else
-		{
-			var fileSize= (file.size)+' byte';
-		}
-		jQuery('<p/>').text((file.name)+' - '+fileSize).appendTo('#filenamedisplay');
-		jQuery('#importfile').attr('disabled', false);
-		});
-		},progressall: function (e, data) {
-		var progress = parseInt(data.loaded / data.total * 100, 10);
-		jQuery('#progress .progress-bar').css('width', progress + '%' );
-		}
-		}).prop('disabled', !jQuery.support.fileInput)
-		.parent().addClass(jQuery.support.fileInput ? undefined : 'disabled');
-		});
+                jQuery(function () {
+                'use strict';
+                var url = (document.getElementById('pluginurl').value+'/plugins/<?php echo WP_CONST_ULTIMATE_CSV_IMP_SLUG;?>/modules/default/templates/index.php');
+                var filesdata;
+                var uploadPath = document.getElementById('uploaddir').value;
+                function prepareUpload(event){
+                        filesdata = event.target.files;
+                        var curraction = '<?php echo $_REQUEST['__module']; ?>';
+                        var frmdata = new FormData();
+                        var uploadfile_data = jQuery('#fileupload').prop('files')[0];
+                        frmdata.append('files', uploadfile_data);
+                        frmdata.append('action','uploadfilehandle');
+                        frmdata.append('curr_action', curraction);
+                        frmdata.append('uploadPath', uploadPath);
+                        jQuery.ajax({
+                                url : ajaxurl,
+                                type : 'post',
+                                data : frmdata,
+                                cache: false,
+                                contentType : false,
+                                processData: false,
+                                success : function(data) {
+                                        var fileobj =JSON.parse(data);
+                                        jQuery.each(fileobj,function(objkey,objval){
+                                                        jQuery.each(objval,function(o_key,file){
+                                                                document.getElementById('uploadFileName').value=file.name;
+                                                                var filewithmodule = file.uploadedname.split(".");
+                                                                var check_file = filewithmodule[filewithmodule.length - 1];
+                                                                if(check_file != "csv" && check_file != "txt") {
+                                                                        alert('Un Supported File Format');
+                                                                        return false;
+                                                                }
+                                                                if(check_file == "csv"){
+                                                                        var filenamecsv = file.uploadedname.split(".csv");
+                                                                        file.uploadedname = filenamecsv[0] + "-<?php echo $_REQUEST['__module']; ?>" + ".csv";
+                                                                }
+                                                                if(check_file == "txt"){
+                                                                        var filenametxt = file.uploadedname.split(".txt");
+                                                                        file.uploadedname = filenametxt[0] + "-<?php echo $_REQUEST['__module']; ?>" + ".txt";
+                                                                }
+                                                                document.getElementById('upload_csv_realname').value = file.uploadedname; 
+                                                                var get_version1 = file.name.split("-<?php echo $_REQUEST['__module']; ?>");
+                                                                var get_version2 = get_version1[1].split(".csv");
+                                                                var get_version3 = get_version2[0].split("-");
+                                                                document.getElementById('current_file_version').value = get_version3[1];
+                                                                jQuery('#uploadedfilename').val(file.uploadedname);
+                                                                jQuery( "#filenamedisplay" ).empty();
+                                                                if(file.size>1024 && file.size<(1024*1024))
+                                                                {
+                                                                        var fileSize =(file.size/1024).toFixed(2)+' kb';
+                                                                }
+                                                                else if(file.size>(1024*1024))
+                                                                {
+                                                                        var fileSize =(file.size/(1024*1024)).toFixed(2)+' mb';
+                                                                }
+                                                                else
+                                                                {
+                                                                        var fileSize= (file.size)+' byte';
+                                                                }
+                                                                jQuery('<p/>').text((file.name)+' - '+fileSize).appendTo('#filenamedisplay');
+                                                                jQuery('#importfile').attr('disabled', false);
+                                                                jQuery('#fileupload').prop('disabled', !jQuery.support.fileInput)
+                                                                .parent().addClass(jQuery.support.fileInput ? undefined : 'disabled');
+                                                        });
+                                        });
+
+                                }
+                        });
+                }        
+        jQuery('#fileupload').on('change', prepareUpload);
+        jQuery('#fileupload').fileupload({
+		url : url,
+                progressall: function (e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                jQuery('#progress .progress-bar').css('width', progress + '%' );
+                }
+        });
+});
+
 	}
 	</script>
 	<input type = 'hidden' name = 'importid' id = 'importid' >
@@ -177,11 +216,11 @@ $nonce_Key = $impCE->create_nonce_key();
         $custom_key = array();
 	$wpcsvsettings=get_option('wpcsvfreesettings');
 	?>
-	<h3>Map CSV to WP fields/attributes</h3>
+	<h3><?php echo __('Map CSV to WP fields/attributes','wp-ultimate-csv-importer'); ?></h3>
          <?php if(isset($_REQUEST['step']) && $_REQUEST['step'] == 'mapping_settings' ) { ?>
 	<div id='sec-two' <?php if($_REQUEST['step']!= 'mapping_settings'){ ?> style='display:none;' <?php } ?> >
 	<div class='mappingsection'>
-	<h2><div class="secondformheader">Import Data Configuration</div></h2>
+	<h2><div class="secondformheader"><?php echo __('Import Data Configuration','wp-ultimate-csv-importer'); ?></div></h2>
         <?php  
         if(isset($_FILES['inlineimages'])) {
                 if(isset($_POST['uploadfilename']) && $_POST['uploadfilename'] != ''){
@@ -193,7 +232,7 @@ $nonce_Key = $impCE->create_nonce_key();
                 $basename_zipfile = $get_basename_zipfile[0];
                 $location_to_extract = $uploadDir['basedir'] . '/smack_inline_images/' . $filehashkey;
                 $extracted_image_location = $uploadDir['baseurl'] . '/smack_inline_images/' . $filehashkey;
-		if(class_exists(ZipArchive)){
+		if(class_exists('ZipArchive')){
                 $zip = new ZipArchive;
 		if(!empty($uploaded_compressedFile)){
 			if ($zip->open($uploaded_compressedFile) === TRUE) {
@@ -210,10 +249,10 @@ $nonce_Key = $impCE->create_nonce_key();
 	<?php if(isset($_REQUEST['__module']) && $_REQUEST['__module']=='custompost'){ ?>
 		<div class='importstatus' style='display:true;'>
 			<input type="hidden" id="customposts" name="customposts" value="">
-			<div style = 'float:left'> <label id="importalign"> <?php echo __('Select Post Type',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?> </label> <span class="mandatory"> * </span> </div>
+			<div style = 'float:left'> <label id="importalign"> <?php echo __('Select Post Type','wp-ultimate-csv-importer'); ?> </label> <span class="mandatory"> * </span> </div>
 			<div style = 'float:left;margin-right:10px'> 
 			<select name='custompostlist' id='custompostlist'>
-			<option value='select'><?php echo __('---Select---',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?></option>
+			<option value='select'>---Select---</option>
 			<?php
 			$cust_post_list_count=0;
 			foreach (get_post_types() as $key => $value) {
@@ -285,10 +324,10 @@ $nonce_Key = $impCE->create_nonce_key();
 			<img src="<?php echo WP_CONST_ULTIMATE_CSV_IMP_DIR; ?>images/help.png" />
 			<span class="tooltipCustompost">
 			<img class="callout" src="<?php echo WP_CONST_ULTIMATE_CSV_IMP_DIR; ?>images/callout.gif" />
-			<strong><?php echo __('Select your custompost type',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?></strong>
+			<strong><?php echo __('Select your custompost type','wp-ultimate-csv-importer'); ?></strong>
 			<img src="<?php echo WP_CONST_ULTIMATE_CSV_IMP_DIR; ?>images/help.png" style="margin-top: 6px;float:right;" />
 			</span>
-			</a><label id='cust_post_empty' style='display:none'><?php echo __('CUSTOMPOST LIST IS EMPTY',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?></label>
+			</a><label id='cust_post_empty' style='display:none'><?php echo __('CUSTOMPOST LIST IS EMPTY','wp-ultimate-csv-importer'); ?></label>
 			</div>
 			</div>
 			<?php } ?>
@@ -347,10 +386,10 @@ $nonce_Key = $impCE->create_nonce_key();
 			<input type='hidden' id='mappingArr' name='mappingArr' value='' />
 			<input type='hidden' id='inline_image_location' name='inline_image_location' value='<?php if(isset($extracted_image_location)){ echo $extracted_image_location;}?>' />
 			<input type='button' id='prev_record' name='prev_record' class="btn btn-primary" value='<<' onclick='gotoelement(this.id);' />
-			 <label style="padding-right:10px;" id='preview_of_row'><?php echo __('Showing preview of row #  1',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?></label>
+			 <label style="padding-right:10px;" id='preview_of_row'><?php echo __('Showing preview of row #  1','wp-ultimate-csv-importer'); ?></label>
                         <input type='button' id='next_record' name='next_record' class="btn btn-primary" value='>>' onclick='gotoelement(this.id);' />
-			<label id="importalign" style="margin-right:8px;"> <?php echo __('Go To Row #',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?></label><input type='text' id='goto_element' name='goto_element' />
-			<input type='button' id='apply_element' name='apply_element' class="btn btn-success" value='<?php echo __("Show",WP_CONST_ULTIMATE_CSV_IMP_SLUG);?>' onclick='gotoelement(this.id);' style="margin-right:10px;margin-left:5px"/>
+			<label id="importalign" style="margin-right:8px;"> <?php echo __('Go To Row #','wp-ultimate-csv-importer'); ?></label><input type='text' id='goto_element' name='goto_element' />
+			<input type='button' id='apply_element' name='apply_element' class="btn btn-success" value='<?php echo __("Show",'wp-ultimate-csv-importer'); ?>' onclick='gotoelement(this.id);' style="margin-right:10px;margin-left:5px"/>
 			</div>
 			</td>
 			</tr> 
@@ -366,7 +405,7 @@ $nonce_Key = $impCE->create_nonce_key();
                                 unset($impCE->defCols['wp_page_template']);
                         }
                         ?>
-                        <tr><td class="left_align columnheader"> <b><?php echo __('CSV HEADER',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?></b> </td><td class="columnheader"> <b><?php echo  __('WP FIELDS',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?></b> </td><td class="columnheader"> <b><?php echo __('CSV ROW',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?></b> </td><td></td></tr>
+                        <tr><td class="left_align columnheader"> <b><?php echo __('CSV HEADER','wp-ultimate-csv-importer'); ?></b> </td><td class="columnheader"> <b><?php echo  __('WP FIELDS','wp-ultimate-csv-importer'); ?></b> </td><td class="columnheader"> <b><?php echo __('CSV ROW','wp-ultimate-csv-importer'); ?></b> </td><td></td></tr>
                         <?php
 			$mappingFields_arr = array();
 			foreach ($impCE->headers as $key => $value) 
@@ -374,7 +413,7 @@ $nonce_Key = $impCE->create_nonce_key();
 				<tr>
 					<td class="left_align csvheader"> <label> <?php print($value);?> </label> </td>
 					<td class="left_align"> <select name="mapping<?php print($count); ?>" id="mapping<?php print($count); ?>" class="uiButton" onchange="addcustomfield(this.value,<?php echo $count; ?>);">
-					<option id = "select"> <?php echo __('-- Select --',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?> </option>
+					<option id = "select">-- Select --</option>
 					<?php
 					foreach ($impCE->defCols as $key1 => $value1) 
 					{
@@ -410,7 +449,7 @@ $nonce_Key = $impCE->create_nonce_key();
 						}
 					}
 					?>
-					<option value="add_custom<?php print($count); ?>"><?php echo __('Add Custom Field',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?></option>
+					<!--<option value="add_custom<?php //print($count); ?>"><?php //echo __('Add Custom Field',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?></option>-->
 					</select>
                                         <script type="text/javascript">
                                         jQuery("select#mapping<?php print($count); ?>").find('option').each(function() {
@@ -431,18 +470,18 @@ $nonce_Key = $impCE->create_nonce_key();
 					<span id='elementVal_<?php echo $key; ?>' > <?php  echo $getrecords[0][$value]; ?> </span>
 					</td>
 					<td width = "180px;">
-					<input class="customfieldtext" type="text" id="textbox<?php print($count); ?>" name="textbox<?php print($count); ?>" TITLE="<?php echo __('Replace the default value',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?>" style="display: none;float:left;width:160px;" value="<?php echo $value ?>"/>
+					<input class="customfieldtext" type="text" id="textbox<?php print($count); ?>" name="textbox<?php print($count); ?>" TITLE="<?php echo __('Replace the default value','wp-ultimate-csv-importer'); ?>" style="display: none;float:left;width:160px;" value="<?php echo $value ?>"/>
 					<span style="display: none;float:left" id="customspan<?php echo $count ?>">
 					<a href="#" class="tooltip">
-					<img src="../wp-content/plugins/<?php echo WP_CONST_ULTIMATE_CSV_IMP_SLUG;?>/images/help.png" />
+					<img src="<?php echo WP_PLUGIN_URL . '/' .WP_CONST_ULTIMATE_CSV_IMP_SLUG.'/images/help.png'; ?>" />
 					<span class="tooltipPostStatus">
-					<img class="callout" src="../wp-content/plugins/<?php echo WP_CONST_ULTIMATE_CSV_IMP_SLUG;?>/images/callout.gif" />
-					<strong><?php echo __('Give a name for your new custom field',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?></strong>
-					<img src="../wp-content/plugins/<?php echo WP_CONST_ULTIMATE_CSV_IMP_SLUG;?>/images/help.png" style="margin-top: 6px;float:right;" />
+					<img class="callout" src="<?php echo WP_PLUGIN_URL . '/'. WP_CONST_ULTIMATE_CSV_IMP_SLUG.'/images/callout.gif'; ?>" />
+					<strong><?php echo __('Give a name for your new custom field','wp-ultimate-csv-importer'); ?></strong>
+					<img src="<?php echo WP_PLUGIN_URL . '/' . WP_CONST_ULTIMATE_CSV_IMP_SLUG.'/images/help.png' ; ?>" style="margin-top: 6px;float:right;" />
 					</span>
 					</a> 
 					</span>
-					<span style="display: none; color: red; margin-left: 5px;" id="customspan<?php echo $count ?>"><?php echo __('Replace the custom value',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?></span>
+					<span style="display: none; color: red; margin-left: 5px;" id="customspan<?php echo $count ?>"><?php echo __('Replace the custom value','wp-ultimate-csv-importer'); ?></span>
 					</td>
 					</tr>
 					<?php
@@ -454,24 +493,29 @@ $nonce_Key = $impCE->create_nonce_key();
 			$mFieldsArr = substr($mFieldsArr, 0, -1);
 			?>
 		</table>
+                <?php $basic_count = $count - 1; ?>
+                <input type="hidden" id="basic_count" name="basic_count" value="<?php echo $basic_count; ?>" />
+                <input type="hidden" id="corecustomcount" name="corecustomcount" value=0 />
+                <?php echo $impCE->customfieldui($count);?>
+
 		<input type="hidden" id="mapping_fields_array" name="mapping_fields_array" value="<?php if(isset($mFieldsArr)) {  print_r($mFieldsArr); } ?>"/>
 		<div>
 	                <div class="goto_import_options" align=center>
                 <div class="mappingactions"  style="margin-top:26px;">
-                <input type='button' id='clear_mapping' title = '<?php echo __('Clear Mapping',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?>' class='clear_mapping btn btn-warning' name='clear_mapping' value='<?php echo __('Clear',WP_CONST_ULTIMATE_CSV_IMP_SLUG);echo ' '; echo $impCE->reduceStringLength(__(' Mapping',WP_CONST_ULTIMATE_CSV_IMP_SLUG),'Mapping'); ?>' onclick='clearMapping();' style = 'float:left'/>
+                <input type='button' id='clear_mapping' title = '<?php echo __('Clear Mapping','wp-ultimate-csv-importer'); ?>' class='clear_mapping btn btn-warning' name='clear_mapping' value='<?php echo __('Clear','wp-ultimate-csv-importer');echo ' '; echo $impCE->reduceStringLength(__(' Mapping','wp-ultimate-csv-importer'),'Mapping'); ?>' onclick='clearMapping();' style = 'float:left'/>
                 <span style = ''>
                 <a href="#" class="tooltip tooltip_smack"  style = ''>
                 <img src="<?php echo WP_CONST_ULTIMATE_CSV_IMP_DIR; ?>images/help.png" />
                 <span class="tooltipClearMapping">
                 <img class="callout" src="<?php echo WP_CONST_ULTIMATE_CSV_IMP_DIR; ?>images/callout.gif" />
-                <strong><?php echo __('Refresh to re-map fields',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?></strong>
+                <strong><?php echo __('Refresh to re-map fields','wp-ultimate-csv-importer'); ?></strong>
                 <img src="<?php echo WP_CONST_ULTIMATE_CSV_IMP_DIR; ?>images/help.png" style="margin-top: 6px;float:right;" />
                 </span>
                 </a>
                 </span>
                 </div>
                 <div class="mappingactions" >
-                <input type='submit' id='goto_importer_setting' title = '<?php echo __('Next',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?>' class='goto_importer_setting btn btn-info' name='goto_importer_setting' value='<?php echo $impCE->reduceStringLength(__('Next',WP_CONST_ULTIMATE_CSV_IMP_SLUG),'Next'); ?> >>' />
+                <input type='submit' id='goto_importer_setting' title = '<?php echo __('Next','wp-ultimate-csv-importer'); ?>' class='goto_importer_setting btn btn-info' name='goto_importer_setting' value='<?php echo $impCE->reduceStringLength(__('Next','wp-ultimate-csv-importer'),'Next'); ?> >>' />
                 </div>
                 </div> 
 		</div>
@@ -483,7 +527,7 @@ $nonce_Key = $impCE->create_nonce_key();
 		</tr>
 		<tr>
 		<td>
-		<h3><?php echo __('Settings and Performance',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?></h3>
+		<h3><?php echo __('Settings and Performance','wp-ultimate-csv-importer'); ?></h3>
              <?php if(isset($_REQUEST['step']) && $_REQUEST['step']  == 'importoptions') { ?>
 		<div id='sec-three' <?php if($_REQUEST['step']!= 'importoptions'){ ?> style='display:none;' <?php } ?> >
 		<?php //$prevoptionindex='';?>
@@ -513,8 +557,8 @@ $nonce_Key = $impCE->create_nonce_key();
 		<div class="postbox" id="options" style=" margin-bottom:0px;">
 		<!--        <h4 class="hndle">Search settings</h4>-->
 		<div class="inside">
-                <label id="importalign"><input type ='radio' id='importNow' name='importMode' value='' onclick='choose_import_mode(this.id);' checked/> <?php echo __("Import right away",WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?> </label> 
-                                        <label id="importalign"><input type ='radio' id='scheduleNow' name='importMode' value='' onclick='choose_import_mode(this.id);' disabled/> <?php echo __("Schedule now",WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?> </label>
+                <label id="importalign"><input type ='radio' id='importNow' name='importMode' value='' onclick='choose_import_mode(this.id);' checked/> <?php echo __("Import right away",'wp-ultimate-csv-importer'); ?> </label> 
+                                        <label id="importalign"><input type ='radio' id='scheduleNow' name='importMode' value='' onclick='choose_import_mode(this.id);' disabled/> <?php echo __("Schedule now",'wp-ultimate-csv-importer'); ?> </label>
                   <div id='schedule' style='display:none'>
                                  <input type ='hidden' id='select_templatename' name='#select_templatename' value = '<?php if(isset($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['templateid'])) { echo $_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['templateid'] ; } ?>'>
                                 <?php //echo WPImporter_includes_schedulehelper::generatescheduleHTML(); ?>
@@ -543,16 +587,16 @@ $nonce_Key = $impCE->create_nonce_key();
 		</select><br>
 		<input name="filterhtml" id="filterhtml" type="checkbox" value="1"> Filter out HTML-Tags while comparing <br>
 		<input name="filterhtmlentities" id="filterhtmlentities" type="checkbox" value="1"> Decode HTML-Entities before comparing <br>-->
-		<label id="importalign"><input name='duplicatecontent' id='duplicatecontent' type="checkbox" value=""> <?php echo __('Detect duplicate post content',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?></label> <br>
+		<label id="importalign"><input name='duplicatecontent' id='duplicatecontent' type="checkbox" value=""> <?php echo __('Detect duplicate post content','wp-ultimate-csv-importer'); ?></label> <br>
 		<input type='hidden' name='wpnoncekey' id='wpnoncekey' value='<?php echo $nonce_Key; ?>' />
-		<label id="importalign"><input name='duplicatetitle' id='duplicatetitle' type="checkbox" value="" > <?php echo  __('Detect duplicate post title',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?></label> <br>
-		 <label id="importalign"><?php __('No. of posts/rows per server request',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?></label> <span class="mandatory" style="margin-left:-13px;margin-right:10px">*</span> <input name="importlimit" id="importlimit" type="text" value="1" placeholder="10" onblur="check_allnumeric(this.value);"></label> <?php echo $impCE->helpnotes(); ?><br>
-			<span class='msg' id='server_request_warning' style="display:none;color:red;margin-left:-10px;"><?php echo __('You can set upto',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?> <?php echo $_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['totRecords']; ?> per request.</span>
+		<label id="importalign"><input name='duplicatetitle' id='duplicatetitle' type="checkbox" value="" > <?php echo  __('Detect duplicate post title','wp-ultimate-csv-importer'); ?></label> <br>
+		 <label id="importalign"><?php echo __('No. of posts/rows per server request','wp-ultimate-csv-importer'); ?></label> <span class="mandatory" style="margin-left:-13px;margin-right:10px">*</span> <input name="importlimit" id="importlimit" type="text" value="1" placeholder="10" onblur="check_allnumeric(this.value);"></label> <?php echo $impCE->helpnotes(); ?><br>
+			<span class='msg' id='server_request_warning' style="display:none;color:red;margin-left:-10px;"><?php echo __('You can set upto','wp-ultimate-csv-importer'); ?> <?php echo $_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['totRecords']; ?><?php echo __('per request.','wp-ultimate-csv-importer'); ?></span>
                 <input type="hidden" id="currentlimit" name="currentlimit" value="0"/>
 		<input type="hidden" id="tmpcount" name="tmpcount" value="0" />
 		<input type="hidden" id="terminateaction" name="terminateaction" value="continue" />
                 <label id="innertitle">Inline image options</label><br />
-                <label id='importalign'> <input type ='checkbox' id='multiimage' name='multiimage' value = '' > <?php echo __('Insert Inline Images',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?> </label><br>
+                <label id='importalign'> <input type ='checkbox' id='multiimage' name='multiimage' value = '' > <?php echo __('Insert Inline Images','wp-ultimate-csv-importer'); ?> </label><br>
              <!--   <div id='inlineimageoption' style="display:none;" >
                 <label id="importalign"><input type="radio" name="inlineimage_location" id="imagewithextension" value="imagewithextension" onclick="inline_image_option(this.value);" /> Image name with extension </label>
                 <label id="importalign"><input type="radio" name="inlineimage_location" id="inlineimage_location" value="inlineimage_location" onclick="inline_image_option(this.value);" /> <input type="text" name="imagelocation" id="imagelocation" placeholder="Inline Image Location" value="" onblur="customimagelocation(this.value);" style="margin-top:5px;margin-left:10px"/></label>
@@ -563,12 +607,12 @@ $nonce_Key = $impCE->create_nonce_key();
 		Ignore these words while comparing <input name="filterwords" id="filterwords" type="text" value="">
 		</li>-->
 		</ul>
-		<input id="startbutton" class="btn btn-primary" type="button" value="<?php echo __('Import Now',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?>" style="color: #ffffff;background:#2E9AFE;" onclick="importRecordsbySettings();" >
-		<input id="terminatenow" class="btn btn-danger btn-sm" type="button" value="<?php echo __('Terminate Now',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?>" style="display:none;" onclick="terminateProcess();" />
-		<input class="btn btn-warning" type="button" value="<?php echo __('Reload',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?>" id="importagain" style="display:none" onclick="import_again();" />
-                <input id="continuebutton" class="btn btn-lg btn-success" type="button" value="<?php echo __('Continue',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?>" style="display:none;color: #ffffff;" onclick="continueprocess();">
+		<input id="startbutton" class="btn btn-primary" type="button" value="<?php echo __('Import Now','wp-ultimate-csv-importer'); ?>" style="color: #ffffff;background:#2E9AFE;" onclick="importRecordsbySettings();" >
+		<input id="terminatenow" class="btn btn-danger btn-sm" type="button" value="<?php echo __('Terminate Now','wp-ultimate-csv-importer'); ?>" style="display:none;" onclick="terminateProcess();" />
+		<input class="btn btn-warning" type="button" value="<?php echo __('Reload','wp-ultimate-csv-importer'); ?>" id="importagain" style="display:none" onclick="import_again();" />
+                <input id="continuebutton" class="btn btn-lg btn-success" type="button" value="<?php echo __('Continue','wp-ultimate-csv-importer'); ?>" style="display:none;color: #ffffff;" onclick="continueprocess();">
 		<!--<input id="continuebutton" class="button" type="button" value="Continue old search" style="color: #ffffff;background:#2E9AFE;">-->
-		<div id="ajaxloader" style="display:none"><img src="<?php echo WP_CONST_ULTIMATE_CSV_IMP_DIR; ?>images/ajax-loader.gif"> <?php echo __('Processing...',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?></div>
+		<div id="ajaxloader" style="display:none"><img src="<?php echo WP_CONST_ULTIMATE_CSV_IMP_DIR; ?>images/ajax-loader.gif"> <?php echo __('Processing...','wp-ultimate-csv-importer'); ?></div>
 		<div class="clear"></div>
 		</form>
                 </div>
@@ -589,7 +633,7 @@ $nonce_Key = $impCE->create_nonce_key();
                                                <table class="table-importer">
                                                <tr>
                                                <td>
-                                               <h3><?php echo __("Summary",WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?></h3>
+                                               <h3><?php echo __("Summary",'wp-ultimate-csv-importer'); ?></h3>
                                                 <div id='reportLog' class='postbox'  style='display:none;'>
                                                 <input type='hidden' name = 'csv_version' id = 'csv_version' value = "<?php if(isset($_POST['uploaded_csv_name'])) { echo $_POST['uploaded_csv_name']; } ?>">
                                                 <div id="logtabs" class="logcontainer">

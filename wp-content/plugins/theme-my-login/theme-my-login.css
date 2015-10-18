@@ -1,74 +1,200 @@
-.login {
-	padding: 5px;
+.tml {
+	max-width: 320px;
 }
-.login p.error {
-	padding: 5px;
+
+.tml * {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.tml .error,
+.tml .message {
+	color: #333;
+	padding: 0.5em;
+}
+
+.tml .error {
 	border: 1px solid #c00;
 	background-color: #ffebe8;
-	color: #333;
 }
-.login p.message {
-	padding: 5px;
+
+.tml .message {
 	border: 1px solid #e6db55;
 	background-color: #ffffe0;
-	color: #333;
 }
-.login form label {
+
+.tml p {
+	margin: 0 0 1.5em 0;
+	padding: 0;
+}
+
+.tml label {
 	display: block;
+	text-align: left;
 }
-.login form p.forgetmenot label {
+
+.tml .tml-rememberme-wrap label {
 	display: inline;
 }
-.login input {
-	margin: 5px 0;
+
+.tml input,
+.tml textarea,
+.tml select {
+	margin: 0.5em 0;
+	width: 100%;
 }
-.profile .screen-reader-text,
-.profile .screen-reader-text span {
-	height: 1px;
-	left: -1000em;
-	overflow: hidden;
-	position: absolute;
-	width: 1px;
+
+.tml input[type="checkbox"],
+.tml input[type="radio"],
+.tml .tml-rememberme-wrap input {
+	vertical-align: middle;
+	width: auto;
 }
+
+.tml .tml-action-links {
+	display: inline-block;
+	list-style: none;
+	margin: 0.5em auto;
+	padding: 0;
+	text-align: center;
+}
+
+.tml .tml-action-links li {
+	border: none;
+	border-right: 1px solid rgba(0, 0, 0, 0.1);
+	float: left;
+	line-height: 1;
+	list-style: none;
+	margin: 0 0.5em 0 0;
+	padding: 0 0.5em 0 0;
+}
+
+.tml .tml-action-links li:last-child {
+	border-right: none;
+	margin-right: 0;
+	padding-right: 0;
+}
+
+.tml .tml-action-links a {
+	border: none;
+	display: block;
+	padding: 0;
+	text-decoration: none;
+}
+
+.tml .tml-rememberme-submit-wrap:before,
+.tml .tml-rememberme-submit-wrap:after,
+.tml .tml-action-links:before,
+.tml .tml-action-links:after {
+	content: "";
+	display: table;
+}
+
+.tml .tml-rememberme-submit-wrap:after,
+.tml .tml-action-links:after {
+	clear: both;
+}
+
+.tml .tml-user-avatar {
+	text-align: left;
+}
+
 .mu_register .hint {
 	font-size: 12px;
 	margin-bottom: 10px;
 	display: block;
 }
+
 .mu_register label.checkbox {
 	display: inline;
 }
+
 #pass-strength-result {
-    border-style: solid;
-    border-width: 1px;
-    margin: 12px 5px 5px 1px;
-    padding: 3px 5px;
-    text-align: center;
-    width: 200px;
+	background-color: #eee;
+	border: 1px solid #ddd;
+	color: #23282d;
+	font-weight: 600;
+	margin: 0;
+	padding: 3px 5px;
+	text-align: center;
+	width: 100%;
+	opacity: 0;
 }
-#pass-strength-result.strong,
+
 #pass-strength-result.short {
-    font-weight: bold;
-}
-#pass-strength-result {
-    background-color: #eee;
-    border-color: #ddd !important;
+	background-color: #f1adad;
+	border-color: #e35b5b;
+	opacity: 1;
 }
 
 #pass-strength-result.bad {
-    background-color: #ffb78c;
-    border-color: #ff853c !important;
+	background-color: #fbc5a9;
+	border-color: #f78b53;
+	opacity: 1;
 }
 
 #pass-strength-result.good {
-    background-color: #ffec8b;
-    border-color: #fc0 !important;
+	background-color: #ffe399;
+	border-color: #ffc733;
+	opacity: 1;
 }
-#pass-strength-result.short {
-    background-color: #ffa0a0;
-    border-color: #f04040 !important;
-}
+
 #pass-strength-result.strong {
-    background-color: #c3ff88;
-    border-color: #8dff1c !important;
+	background-color: #c1e1b9;
+	border-color: #83c373;
+	opacity: 1;
+}
+
+.pw-weak {
+	display:none;
+}
+
+.indicator-hint {
+	padding-top: 8px;
+}
+
+#pass1,
+#pass1-text {
+	width: 100%;
+}
+
+#pass1-text,
+.show-password #pass1 {
+	display: none;
+}
+
+.show-password #pass1-text
+{
+	display: inline-block;
+}
+
+@media screen and (min-width: 768px) {
+	.tml .tml-submit-wrap input {
+		width: auto;
+	}
+
+	.tml-login .tml-rememberme-submit-wrap {
+		display: table;
+		margin-bottom: 1.5em;
+		width: 100%;
+	}
+
+	.tml-login .tml-rememberme-wrap {
+		display: table-cell;
+	}
+
+	.tml-login .tml-rememberme-wrap input {
+		margin: 0;
+	}
+
+	.tml-login .tml-submit-wrap {
+		display: table-cell;
+		text-align: right;
+	}
+
+	.tml-login .tml-submit-wrap input {
+		margin: 0;
+		width: auto;
+	}
 }

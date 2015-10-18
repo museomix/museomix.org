@@ -34,6 +34,8 @@
  * Notices must display the words
  * "Copyright Smackcoders. 2014. All rights reserved".
  ********************************************************************************/
+if ( ! defined( 'ABSPATH' ) )
+        exit; // Exit if accessed directly
 
 class WoocommerceActions extends SkinnyActions {
 

@@ -12,10 +12,11 @@ class WYSIJA_control_back_campaigns extends WYSIJA_control_back {
 	var $filters = array();
 	var $base_url = 'admin.php';
 
-	function WYSIJA_control_back_campaigns() {
-
+	function __construct(){
+	  global $wpdb;
+	  parent::__construct();
+	  $this->wpdb = $wpdb;
 	}
-
 
 	private function _wysija_subaction() {
 		if (isset($_REQUEST['subaction'])) {
@@ -64,7 +65,7 @@ class WYSIJA_control_back_campaigns extends WYSIJA_control_back {
 			$condition = '>=';
 			if ($model_config->getValue('confirm_dbleoptin'))
 				$condition = '>';
-			$qry1 = "SELECT count(distinct A.user_id) as nbsub,A.list_id FROM `[wysija]user_list` as A LEFT JOIN `[wysija]user` as B on A.user_id=B.user_id WHERE B.status $condition 0 and A.sub_date>0 and A.unsub_date=0 GROUP BY list_id";
+			$qry1 = "SELECT count(distinct A.user_id) as nbsub,A.list_id FROM `[wysija]user_list` as A LEFT JOIN `[wysija]user` as B on A.user_id=B.user_id WHERE B.status $condition 0 and A.unsub_date=0 GROUP BY list_id";
 
 			$total = $model_list->getResults($qry1);
 
@@ -203,7 +204,7 @@ class WYSIJA_control_back_campaigns extends WYSIJA_control_back {
 
 	// when curl or any php remote function not available mailpoet.com returns lcheck to that function
 	function licok() {
-		parent::WYSIJA_control_back();
+		parent::__construct();
 		$dt = get_option('wysijey');
 
 		if (isset($_REQUEST['xtz']) && $dt === $_REQUEST['xtz']) {
@@ -546,13 +547,13 @@ class WYSIJA_control_back_campaigns extends WYSIJA_control_back {
                 $this->requireSecurity();
 		$model = WYSIJA::get( 'campaign', 'model' );
 		$query = 'INSERT INTO `[wysija]campaign` (`name`,`description`)
-			SELECT concat("' . mysql_real_escape_string( __( 'Copy of ', WYSIJA ) ) . '",`name`),`description` FROM [wysija]campaign
+			SELECT concat("' . $this->wpdb->_real_escape( __( 'Copy of ', WYSIJA ) ) . '",`name`),`description` FROM [wysija]campaign
 			WHERE campaign_id=' . (int) $_REQUEST['id'];
 		$campaignid = $model->query( $query );
 
 		/* 2 - copy the email entry */
 		$query = 'INSERT INTO `[wysija]email` (`campaign_id`,`subject`,`body`,`type`,`params`,`wj_data`,`wj_styles`,`from_email`,`from_name`,`replyto_email`,`replyto_name`,`attachments`,`status`,`created_at`,`modified_at`)
-			SELECT ' . $campaignid . ', concat("' . mysql_real_escape_string( __( 'Copy of ', WYSIJA ) ) . '",`subject`),`body`,`type`,`params`,`wj_data`,`wj_styles`,`from_email`,`from_name`,`replyto_email`,`replyto_name`,`attachments`,0,' . time() . ',' . time() . ' FROM [wysija]email
+			SELECT ' . $campaignid . ', concat("' . $this->wpdb->_real_escape( __( 'Copy of ', WYSIJA ) ) . '",`subject`),`body`,`type`,`params`,`wj_data`,`wj_styles`,`from_email`,`from_name`,`replyto_email`,`replyto_name`,`attachments`,0,' . time() . ',' . time() . ' FROM [wysija]email
 			WHERE email_id=' . (int) $_REQUEST['email_id'];
 		$emailid = $model->query( $query );
 

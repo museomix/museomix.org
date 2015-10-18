@@ -2,9 +2,9 @@
 defined('WYSIJA') or die('Restricted access');
 class WYSIJA_control_back_campaigns extends WYSIJA_control{
 
-	function WYSIJA_control_back_campaigns(){
+	function __construct(){
 		if(!WYSIJA::current_user_can('wysija_newsletters'))  die('Action is forbidden.');
-		parent::WYSIJA_control();
+		parent::__construct();;
 	}
 
 	function save_poll(){

@@ -92,6 +92,11 @@ class Theme_My_Login_Security extends Theme_My_Login_Abstract {
 		global $wp_query, $pagenow;
 
 		if ( 'wp-login.php' == $pagenow && $this->get_option( 'private_login' ) ) {
+
+			parse_str( $_SERVER['QUERY_STRING'], $q );
+			if ( ! empty( $q['interim-login'] ) || ! empty( $_REQUEST['interim-login'] ) )
+				return;
+
 			$pagenow = 'index.php';
 			$wp_query->set_404();
 			status_header( 404 );

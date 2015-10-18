@@ -1,14 +1,15 @@
 <?php
 
 class WPCOM_JSON_API_List_Posts_v1_1_Endpoint extends WPCOM_JSON_API_Post_v1_1_Endpoint {
-	var $date_range = array();
-	var $modified_range = array();
-	var $page_handle = array();
-	var $performed_query = null;
+	public $date_range = array();
+	public $modified_range = array();
+	public $page_handle = array();
+	public $performed_query = null;
 
-	var $response_format = array(
+	public $response_format = array(
 		'found'    => '(int) The total number of posts found that match the request (ignoring limits, offsets, and pagination).',
 		'posts'    => '(array:post) An array of post objects.',
+		'meta'     => '(object) Meta data',
 	);
 
 	// /sites/%s/posts/ -> $blog_id
@@ -285,21 +286,33 @@ class WPCOM_JSON_API_List_Posts_v1_1_Endpoint extends WPCOM_JSON_API_Post_v1_1_E
 				}
 
 				if ( $posts ) {
+					/** This action is documented in json-endpoints/class.wpcom-json-api-site-settings-endpoint.php */
 					do_action( 'wpcom_json_api_objects', 'posts', count( $posts ) );
 				}
 
 				$return[$key] = $posts;
 				break;
-			}
-		}
 
-		if ( $is_eligible_for_page_handle && $return['posts'] ) {
-			$last_post = end( $return['posts'] );
-			reset( $return['posts'] );
+			case 'meta' :
+				if ( ! is_array( $args['type'] ) ) {
+					$return[$key] = (object) array(
+						'links' => (object) array(
+							'counts' => (string) $this->get_site_link( $blog_id, 'post-counts/' . $args['type'] ),
+						)
+					);
+				}
 
-			if ( ( $return['found'] > count( $return['posts'] ) ) && $last_post ) {
-				$return['meta'] = array();
-				$return['meta']['next_page'] = $this->build_page_handle( $last_post, $query );
+				if ( $is_eligible_for_page_handle && $return['posts'] ) {
+					$last_post = end( $return['posts'] );
+					reset( $return['posts'] );
+					if ( ( $return['found'] > count( $return['posts'] ) ) && $last_post ) {
+						if ( ! isset( $return[$key] ) ) {
+							$return[$key] = (object) array();
+						}
+						$return[$key]->next_page = $this->build_page_handle( $last_post, $query );
+					}
+				}
+				break;
 			}
 		}
 

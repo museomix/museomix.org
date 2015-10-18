@@ -4,8 +4,8 @@ class WYSIJA_help_cron extends WYSIJA_object{
 
     var $report=false;
 
-    function WYSIJA_help_cron(){
-
+    function __construct(){
+        parent::__construct();
     }
 
     /**

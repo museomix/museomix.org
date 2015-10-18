@@ -40,7 +40,9 @@ class WYSIJA_help_wj_engine extends WYSIJA_object {
 	);
 
 	/* Constructor */
-	function WYSIJA_help_wj_engine() { }
+	function __construct(){
+	  parent::__construct();
+	}
 
 	/* i18n methods */
 	function getTranslations() {

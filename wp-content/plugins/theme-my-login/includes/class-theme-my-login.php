@@ -21,7 +21,7 @@ class Theme_My_Login extends Theme_My_Login_Abstract {
 	 * @since 6.3.2
 	 * @const string
 	 */
-	const version = '6.3.12';
+	const VERSION = '6.4.1';
 
 	/**
 	 * Holds options key
@@ -99,7 +99,7 @@ class Theme_My_Login extends Theme_My_Login_Abstract {
 	public static function default_options() {
 		return apply_filters( 'tml_default_options', array(
 			'enable_css'     => true,
-			'email_login'    => true,
+			'login_type'     => 'default',
 			'active_modules' => array()
 		) );
 	}
@@ -136,6 +136,7 @@ class Theme_My_Login extends Theme_My_Login_Abstract {
 		add_action( 'init',                    array( &$this, 'init'                    ) );
 		add_action( 'widgets_init',            array( &$this, 'widgets_init'            ) );
 		add_action( 'wp',                      array( &$this, 'wp'                      ) );
+		add_action( 'pre_get_posts',           array( &$this, 'pre_get_posts'           ) );
 		add_action( 'template_redirect',       array( &$this, 'template_redirect'       ) );
 		add_action( 'wp_enqueue_scripts',      array( &$this, 'wp_enqueue_scripts'      ) );
 		add_action( 'wp_head',                 array( &$this, 'wp_head'                 ) );
@@ -151,7 +152,7 @@ class Theme_My_Login extends Theme_My_Login_Abstract {
 		add_filter( 'wp_list_pages_excludes', array( &$this, 'wp_list_pages_excludes' )        );
 		add_filter( 'page_link',              array( &$this, 'page_link'              ), 10, 2 );
 
-		add_action( 'tml_new_user_registered',   'wp_new_user_notification', 10, 2 );
+		add_action( 'tml_new_user_registered',   'wp_new_user_notification', 10, 3 );
 		add_action( 'tml_user_password_changed', 'wp_password_change_notification' );
 
 		add_shortcode( 'theme-my-login', array( &$this, 'shortcode' ) );
@@ -183,11 +184,13 @@ class Theme_My_Login extends Theme_My_Login_Abstract {
 	 * @access public
 	 */
 	public function init() {
+		global $pagenow;
+
 		self::load_textdomain();
 
 		$this->errors = new WP_Error();
 
-		if ( ! is_admin() && $this->get_option( 'enable_css' ) )
+		if ( ! is_admin() && 'wp-login.php' != $pagenow && $this->get_option( 'enable_css' ) )
 			wp_enqueue_style( 'theme-my-login', self::get_stylesheet(), false, $this->get_option( 'version' ) );
 	}
 
@@ -237,6 +240,46 @@ class Theme_My_Login extends Theme_My_Login_Abstract {
 	}
 
 	/**
+	 * Exclude TML pages from search
+	 *
+	 * @since 6.1.13
+	 * @access public
+	 */
+	public function pre_get_posts( &$query ) {
+
+		// Bail if not a search
+		if ( ! $query->is_search )
+			return;
+
+		// Get the requested post type
+		$post_type = $query->get( 'post_type' );
+
+		// Bail if not querying pages
+		if ( ! empty( $post_type ) && ! in_array( 'page', (array) $post_type ) )
+			return;
+
+		// Get TML pages
+		$pages = get_posts( array(
+			'post_type'      => 'page',
+			'post_status'    => 'any',
+			'meta_key'       => '_tml_action',
+			'posts_per_page' => -1
+		) );
+
+		// Get the page IDs
+		$pages = wp_list_pluck( $pages, 'ID' );
+
+		// Get any currently exclude posts
+		$excludes = (array) $query->get( 'post__not_in' );
+
+		// Merge the excludes
+		$excludes = array_merge( $excludes, $pages );
+
+		// Set the excludes
+		$query->set( 'post__not_in', $excludes );
+	}
+
+	/**
 	 * Proccesses the request
 	 *
 	 * Callback for "template_redirect" hook in template-loader.php
@@ -261,16 +304,12 @@ class Theme_My_Login extends Theme_My_Login_Abstract {
 			$http_post = ( 'POST' == $_SERVER['REQUEST_METHOD'] );
 			switch ( $this->request_action ) {
 				case 'postpass' :
-					global $wp_hasher;
+					require_once( ABSPATH . 'wp-includes/class-phpass.php' );
+					$hasher = new PasswordHash( 8, true );
 
-					if ( empty( $wp_hasher ) ) {
-						require_once( ABSPATH . 'wp-includes/class-phpass.php' );
-						// By default, use the portable hash from phpass
-						$wp_hasher = new PasswordHash( 8, true );
-					}
-
-					// 10 days
-					setcookie( 'wp-postpass_' . COOKIEHASH, $wp_hasher->HashPassword( stripslashes( $_POST['post_password'] ) ), time() + 864000, COOKIEPATH );
+					$expire = apply_filters( 'post_password_expires', time() + 10 * DAY_IN_SECONDS );
+					$secure = ( 'https' === parse_url( home_url(), PHP_URL_SCHEME ) );
+					setcookie( 'wp-postpass_' . COOKIEHASH, $hasher->HashPassword( wp_unslash( $_POST['post_password'] ) ), $expire, COOKIEPATH, COOKIE_DOMAIN, $secure );
 
 					wp_safe_redirect( wp_get_referer() );
 					exit;
@@ -283,7 +322,14 @@ class Theme_My_Login extends Theme_My_Login_Abstract {
 
 					wp_logout();
 
-					$redirect_to = apply_filters( 'logout_redirect', site_url( 'wp-login.php?loggedout=true' ), isset( $_REQUEST['redirect_to'] ) ? $_REQUEST['redirect_to'] : '', $user );
+					if ( ! empty( $_REQUEST['redirect_to'] ) ) {
+						$redirect_to = $requested_redirect_to = $_REQUEST['redirect_to'];
+					} else {
+						$redirect_to = site_url( 'wp-login.php?loggedout=true' );
+						$requested_redirect_to = '';
+					}
+
+					$redirect_to = apply_filters( 'logout_redirect', $redirect_to, $requested_redirect_to, $user );
 					wp_safe_redirect( $redirect_to );
 					exit;
 					break;
@@ -300,9 +346,9 @@ class Theme_My_Login extends Theme_My_Login_Abstract {
 
 					if ( isset( $_REQUEST['error'] ) ) {
 						if ( 'invalidkey' == $_REQUEST['error'] )
-							$this->errors->add( 'invalidkey', __( 'Sorry, that key does not appear to be valid.', 'theme-my-login' ) );
+							$this->errors->add( 'invalidkey', __( 'Your password reset link appears to be invalid. Please request a new link below.', 'theme-my-login' ) );
 						elseif ( 'expiredkey' == $_REQUEST['error'] )
-							$this->errors->add( 'expiredkey', __( 'Sorry, that key has expired. Please try again.', 'theme-my-login' ) );
+							$this->errors->add( 'expiredkey', __( 'Your password reset link has expired. Please request a new link below.', 'theme-my-login' ) );
 					}
 
 					do_action( 'lost_password' );
@@ -366,7 +412,11 @@ class Theme_My_Login extends Theme_My_Login_Abstract {
 					$user_login = '';
 					$user_email = '';
 					if ( $http_post ) {
-						$user_login = $_POST['user_login'];
+						if ( 'email' == $this->get_option( 'login_type' ) ) {
+							$user_login = $_POST['user_email'];
+						} else {
+							$user_login = $_POST['user_login'];
+						}
 						$user_email = $_POST['user_email'];
 
 						$this->errors = self::register_new_user( $user_login, $user_email );
@@ -566,7 +616,7 @@ if(typeof wpOnload=='function')wpOnload()
 	}
 
 	/**
-	 * Handles e-mail address login
+	 * Handles login type enforcement
 	 *
 	 * @since 6.0
 	 * @access public
@@ -576,11 +626,18 @@ if(typeof wpOnload=='function')wpOnload()
 	 */
 	public function wp_authenticate( &$user_login ) {
 		global $wpdb;
-		if ( is_email( $user_login ) && $this->get_option( 'email_login' ) ) {
+
+		$login_type = $this->get_option( 'login_type' );
+
+		if ( 'default' == $login_type )
+			return;
+
+		if ( ! is_email( $user_login ) && 'email' == $login_type ) {
+			$user_login = -1;
+		} elseif ( is_email( $user_login ) ) {
 			if ( $found = $wpdb->get_var( $wpdb->prepare( "SELECT user_login FROM $wpdb->users WHERE user_email = %s", $user_login ) ) )
 				$user_login = $found;
 		}
-		return;
 	}
 
 
@@ -653,7 +710,7 @@ if(typeof wpOnload=='function')wpOnload()
 	public function logout_url( $logout_url, $redirect ) {
 		$logout_url = self::get_page_link( 'logout' );
 		if ( $redirect )
-			$logout = add_query_arg( 'redirect_to', urlencode( $redirect ), $logout_url );
+			$logout_url = add_query_arg( 'redirect_to', urlencode( $redirect ), $logout_url );
 		return $logout_url;
 	}
 
@@ -700,7 +757,7 @@ if(typeof wpOnload=='function')wpOnload()
 	}
 
 	/**
-	 * Alters menu item title & link according to whether user is logged in or not
+	 * Hide Login & Register if user is logged in, hide Logout if not
 	 *
 	 * Callback for "wp_setup_nav_menu_item" hook in wp_setup_nav_menu_item()
 	 *
@@ -715,12 +772,26 @@ if(typeof wpOnload=='function')wpOnload()
 		if ( is_admin() )
 			return $menu_item;
 
-		if ( 'page' == $menu_item->object && self::is_tml_page( 'login', $menu_item->object_id ) ) {
-			if ( is_user_logged_in() ) {
-				$menu_item->title = $this->get_instance()->get_title( 'logout' );
-				$menu_item->url   = wp_logout_url();
+		if ( 'page' != $menu_item->object )
+			return $menu_item;
+
+		// User  is logged in
+		if ( is_user_logged_in() ) {
+
+			// Hide login, register and lost password
+			if ( self::is_tml_page( array( 'login', 'register', 'lostpassword' ), $menu_item->object_id ) ) {
+				$menu_item->_invalid = true;
+			}
+
+		// User is not logged in
+		} else {
+
+			// Hide Logout
+			if ( self::is_tml_page( 'logout', $menu_item->object_id ) ) {
+				$menu_item->_invalid = true;
 			}
 		}
+
 		return $menu_item;
 	}
 
@@ -824,7 +895,7 @@ if(typeof wpOnload=='function')wpOnload()
 	 *
 	 * @since 6.3
 	 *
-	 * @param string $action The action to check
+	 * @param array|string $action An action or array of actions to check
 	 * @param int|object Post ID or object
 	 * @return bool True if $action is for $page, false otherwise
 	 */
@@ -838,7 +909,10 @@ if(typeof wpOnload=='function')wpOnload()
 		if ( ! $page_action = self::get_page_action( $page->ID ) )
 			return false;
 
-		if ( empty( $action ) || $action == $page_action )
+		if ( empty( $action ) )
+			return true;
+
+		if ( in_array( $page_action, (array) $action ) )
 			return true;
 
 		return false;
@@ -1100,7 +1174,7 @@ if(typeof wpOnload=='function')wpOnload()
 			require_once ABSPATH . WPINC . '/class-phpass.php';
 			$wp_hasher = new PasswordHash( 8, true );
 		}
-		$hashed = $wp_hasher->HashPassword( $key );
+		$hashed = time() . ':' . $wp_hasher->HashPassword( $key );
 		$wpdb->update( $wpdb->users, array( 'user_activation_key' => $hashed ), array( 'user_login' => $user_login ) );
 
 		$message = __( 'Someone requested that the password be reset for the following account:', 'theme-my-login' ) . "\r\n\r\n";
@@ -1159,6 +1233,8 @@ if(typeof wpOnload=='function')wpOnload()
 	 * @return int|WP_Error Either user's ID or error on failure.
 	 */
 	public static function register_new_user( $user_login, $user_email ) {
+		global $wp_version;
+
 		$errors = new WP_Error();
 
 		$sanitized_user_login = sanitize_user( $user_login );
@@ -1193,14 +1269,14 @@ if(typeof wpOnload=='function')wpOnload()
 
 		$user_pass = apply_filters( 'tml_user_registration_pass', wp_generate_password( 12, false ) );
 		$user_id = wp_create_user( $sanitized_user_login, $user_pass, $user_email );
-		if ( ! $user_id ) {
+		if ( ! $user_id || is_wp_error( $user_id ) ) {
 			$errors->add( 'registerfail', sprintf( __( '<strong>ERROR</strong>: Couldn&#8217;t register you... please contact the <a href="mailto:%s">webmaster</a> !', 'theme-my-login' ), get_option( 'admin_email' ) ) );
 			return $errors;
 		}
 
 		update_user_option( $user_id, 'default_password_nag', true, true ); //Set up the Password change nag.
 
-		do_action( 'tml_new_user_registered', $user_id, $user_pass );
+		do_action( 'tml_new_user_registered', $user_id, null, 'both' );
 
 		return $user_id;
 	}

@@ -41,7 +41,8 @@ class WYSIJA_control_back_statistics extends WYSIJA_control_back {
 	/**
 	 * Constructor
 	 */
-	function WYSIJA_control_back_statistics() {
+	function __construct(){
+	  parent::__construct();
 	}
 
 	public function defaultDisplay() {

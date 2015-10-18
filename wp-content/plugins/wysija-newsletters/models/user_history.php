@@ -17,8 +17,8 @@ class WYSIJA_model_user_history extends WYSIJA_model{
 
 
 
-    function WYSIJA_model_user_history(){
-        $this->WYSIJA_model();
+    function __construct(){
+        parent::__construct();
     }
 
     /**

@@ -34,6 +34,8 @@
  * Notices must display the words
  * "Copyright Smackcoders. 2014. All rights reserved".
  ********************************************************************************/
+if ( ! defined( 'ABSPATH' ) )
+        exit; // Exit if accessed directly
 
 class EshopActions extends SkinnyActions {
 
@@ -116,20 +118,30 @@ class EshopActions extends SkinnyActions {
 				similar_text($strippedTextPCont, $strippedText, $p);
 				if ($p == 100) {
 					$this->dupPostCount++;
-					$this->detailedLog[$currentLimit]['post_id'] = "Created record no $currentLimit - failed";
+					$this->detailedLog[$currentLimit]['verify_here'] = "Post-content Already Exists. It can't be imported";
 					return false;
 				}
 			}
 			return true;
 		} else if ($type == 'title') {
 			$post_exist = $wpdb->get_results("select ID from " . $wpdb->posts . " where post_title = \"{$text}\" and post_type = \"{$gettype}\" and post_status in('publish','future','draft','pending','private')");
-			if (count($post_exist) == 0 && ($text != null || $text != ''))
-				return true;
-		}
-		$this->dupPostCount++;
-		$this->detailedLog[$currentLimit]['post_id'] = "Created record no $currentLimit - failed";
-		return false;
-	}
+			 if (!(count($post_exist) == 0 && ($text != null || $text != ''))) {
+                                $this->dupPostCount++;
+                                $this->detailedLog[$currentLimit]['verify_here'] = "Post-title Already Exists. It can't be imported.";
+                                return false;
+                        }
+                return true;
+                } else if ($type == 'title && content') {
+                        $post_exist = $wpdb->get_results("select ID from " . $wpdb->posts . " where post_title = \"{$postTitle}\" and post_content = \"{$text}\"  and post_status IN('publish','future','draft','pending','private')");
+                        if (!(count($post_exist) == 0 && ($text != null || $text != ''))) {
+                                $this->dupPostCount++;
+                                $this->detailedLog[$currentLimit]['verify_here'] = "Post-title and post-content Already Exists. It can't be imported.";
+                                return false;
+                         }
+                        return true;
+                }
+        }
+					
          
        /**
 	 * Get field colum keys
@@ -315,11 +327,22 @@ class EshopActions extends SkinnyActions {
 		$new_post = array();
 		$smack_taxo = array();
 		$custom_array = array();
+		$corecustom_arr = array();
 		$seo_custom_array= array();		
 		$imported_feature_img = array();
 		$headr_count = $ret_array['h2'];
-		for ($i = 0; $i < count($data_rows); $i++) {
-			if (array_key_exists('mapping' . $i, $ret_array)) { 
+		//for ($i = 0; $i < count($data_rows); $i++) {
+                 for ($i = 0; $i <= $ret_array['basic_count']; $i++) {
+                       if(array_key_exists('coremapping' . $i,$ret_array)){
+                               if($ret_array['coretextbox' . $i] != '-- Select --' && $ret_array['coremapping'.$i] != ''){
+                                       $mappedindex = str_replace('textbox','',$ret_array['coretextbox'.$i]);
+                                       $new_post[$ret_array['coremapping'.$i]] = $data_rows[$mappedindex];
+                                       $custom_array[$ret_array['coremapping'.$i]] = $data_rows[$mappedindex];
+				       $corecustom_arr[$ret_array['coremapping'.$i]] = $data_rows[$mappedindex];
+                               }
+                       }
+
+			else if (array_key_exists('mapping' . $i, $ret_array)) { 
 				if($ret_array ['mapping' . $i] != '-- Select --'){
 					if ($ret_array ['mapping' . $i] != 'add_custom' . $i) {
 						$strip_CF = strpos($ret_array['mapping' . $i], 'CF: ');
@@ -409,8 +432,8 @@ class EshopActions extends SkinnyActions {
 							$fimg_path = $full_path;
 
 							$fimg_name = @basename($f_img);
-                                                        $fimg_name =  preg_replace('/\.[^.]*$/', '', $fimg_name);
-                                                        $fimg_name = strtolower(str_replace(' ','-',$fimg_name));
+							$fimg_name = strtolower(str_replace(' ','-',$fimg_name));
+                                                        $fimg_name =  preg_replace('/[^a-zA-Z0-9._\s]/', '', $fimg_name);
 
 							$fimg_name = urlencode($fimg_name);
 							
@@ -420,21 +443,22 @@ class EshopActions extends SkinnyActions {
 								$fimg_name = $fimg_name . '.jpg';
 
 							$f_img_slug = '';
-							$f_img_slug =  preg_replace('/\.[^.]*$/', '',$f_img_slug);
-                                                        $f_img_slug = strtolower(str_replace('','-',$f_img_slug));
+							$f_img_slug = strtolower(str_replace('','-',$f_img_slug));
+							$f_img_slug =  preg_replace('/[^a-zA-Z0-9._\s]/', '',$f_img_slug);
 
 
 							$post_slug_value = strtolower($f_img_slug);
                                                         require_once(WP_CONST_ULTIMATE_CSV_IMP_DIRECTORY.'/includes/WPImporter_includes_helper.php');
                                                         $impCE = new WPImporter_includes_helper();
-							$fimg_name = wp_unique_filename($fimg_path, $fimg_name, $path_parts['extension']);
-							$fimg_name = $fimg_name.'.'.$path_parts['extension'];
+							$path_parts['extension'] = isset($path_parts['extension']) ? $path_parts['extension'] : '';
+							//$fimg_name = wp_unique_filename($fimg_path, $fimg_name, $path_parts['extension']);
+							//$fimg_name = $fimg_name.'.'.$path_parts['extension'];
 							$impCE->get_fimg_from_URL($f_img,$fimg_path,$fimg_name,$post_slug_value,$currentLimit,$this);
 							$filepath = $fimg_path."/" . $fimg_name;
 	
 							if(@getimagesize($filepath)){
 								$img = wp_get_image_editor($filepath);
-								if (!is_wp_error($img)) {
+							/*	if (!is_wp_error($img)) {
 									$sizes_array = array(
 											// #1 - resizes to 1024x768 pixel, square-cropped image
 											array('width' => 1024, 'height' => 768, 'crop' => true),
@@ -446,7 +470,7 @@ class EshopActions extends SkinnyActions {
 											array('width' => 624, 'height' => 468, 'crop' => false)
 											);
 									$resize = $img->multi_resize($sizes_array);
-								}
+								}*/
 								$file ['guid'] = $baseurl."/".$fimg_name;
 								$file ['post_title'] = $fimg_name;
 								$file ['post_content'] = '';
@@ -473,6 +497,9 @@ class EshopActions extends SkinnyActions {
 		if ($this->conDupCheck == 'true' && $this->postFlag)
 			$this->postFlag = $this->duplicateChecks('content', $data_array ['post_content'], $data_array ['post_type'], $currentLimit, $data_array ['post_title']);
 
+		 if ($this->titleDupCheck == 'true' && $this->conDupCheck == 'true') 
+                         $this->postFlag = $this->duplicateChecks('title && content', $data_array ['post_content'], $data_array ['post_type'], $currentLimit, $data_array ['post_title']);
+                
 		if ($this->postFlag) {
 			unset ($sticky);
 			if (empty($data_array['post_status']))
@@ -608,6 +635,11 @@ class EshopActions extends SkinnyActions {
 
 			unset($postauthor);
 			if ($post_id) {
+				if(!empty($corecustom_arr)){
+					foreach ($corecustom_arr as $corecustom_key => $corecustom_value) {
+                                                update_post_meta($post_id, $corecustom_key, $corecustom_value);
+                                        }
+				}
                                 $custom_array = $this->eshopMetaData($new_post, $post_id, $currentLimit);
 				$uploaded_file_name=$session_arr['uploadedFile'];
 				$real_file_name = $session_arr['uploaded_csv_name'];
@@ -692,7 +724,7 @@ class EshopActions extends SkinnyActions {
 					$attachment = array(
 							'guid' => $file ['guid'],
 							'post_mime_type' => 'image/jpeg',
-							'post_title' => preg_replace('/\.[^.]*$/', '', @basename($file ['guid'])),
+							'post_title' => preg_replace('/[^a-zA-Z0-9._\s]/', '', @basename($file ['guid'])),
 							'post_content' => '',
 							'post_status' => 'inherit'
 							);
@@ -702,18 +734,33 @@ class EshopActions extends SkinnyActions {
 						$generate_attachment = $fimg_name;
 					}
 					$uploadedImage = $wp_upload_dir['path'] . '/' . $fimg_name;
-					$attach_id = wp_insert_attachment($attachment, $generate_attachment, $post_id);
+					/*$attach_id = wp_insert_attachment($attachment, $generate_attachment, $post_id);
 					$attach_data = wp_generate_attachment_metadata($attach_id, $uploadedImage);
-					wp_update_attachment_metadata($attach_id, $attach_data);
+					wp_update_attachment_metadata($attach_id, $attach_data);*/
+					$existing_attachment = array();
+                                        $query = $wpdb->get_results("select post_title from $wpdb->posts where post_type = 'attachment' and post_mime_type = 'image/jpeg'");
+                                        foreach($query as $key){
+                                       $existing_attachment[] = $key->post_title;
+                                         }
+                                        if(!in_array($fimg_name ,$existing_attachment)){
+                                        $attach_id = wp_insert_attachment($attachment, $generate_attachment, $post_id);
+                                        $attach_data = wp_generate_attachment_metadata($attach_id, $uploadedImage);
+                                        wp_update_attachment_metadata($attach_id, $attach_data);
+                                         }else{
+                                        $query2 = $wpdb->get_results("select ID from $wpdb->posts where post_title = '$fimg_name' and post_type = 'attachment'");
+                                        foreach($query2 as $key2){
+                                               $attach_id = $key2->ID;
+                                                }
+                                        }
 					set_post_thumbnail($post_id, $attach_id);
 				}
 			}
 			else{
 				$skippedRecords[] = $_SESSION['SMACK_SKIPPED_RECORDS'];
 			}
-		}
+		
 		$this->detailedLog[$currentLimit]['verify_here'] = "<b>Verify Here -</b> <a href='" . get_permalink( $post_id ) . "' title='" . esc_attr( sprintf( __( 'View &#8220;%s&#8221;' ), $data_array['post_title'] ) ) . "' rel='permalink' target='_blank'>" . __( 'Web View' ) . "</a> | <a href='" . get_edit_post_link( $post_id, true ) . "' title='" . esc_attr( __( 'Edit this item' ) ) . "' target='_blank'>" . __( 'Admin View' ) . "</a>";
-
+		}
 		unset($data_array);
 	}
        /**

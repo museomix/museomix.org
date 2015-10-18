@@ -17,7 +17,7 @@ class WYSIJA_module_statistics_model extends WYSIJA_model {
     const STATS_PREFIX = 'sc_'; // prefix of stat tables
 
     public function __construct() {
-        parent::WYSIJA_model();
+        parent::__construct();
         $this->clean_up_out_of_date_tables();
     }
 

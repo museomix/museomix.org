@@ -9,8 +9,9 @@
  * Licensed under the MIT license:
  * http://www.opensource.org/licenses/MIT
  */
-$parse_uri = explode( 'wp-content', $_SERVER['SCRIPT_FILENAME'] );
-require_once($parse_uri[0]."wp-load.php");
+if ( ! defined( 'ABSPATH' ) )
+        exit; // Exit if accessed directly
+
 $impCheckobj = CallWPImporterObj::checkSecurity();
 if($impCheckobj != 'true')
 die($impCheckobj);
@@ -1081,7 +1082,7 @@ class UploadHandler
     protected function handle_file_upload($uploaded_file, $name, $size, $type, $error,
                                           $index = null, $content_range = null)
     {
-	$post_url = admin_url() . 'admin.php?page=' . WP_CONST_ULTIMATE_CSV_IMP_SLUG . '/index.php&__module=' . $_POST['current_module'] . '&step=uploadfile';
+	$post_url = admin_url() . 'admin.php?page=' . WP_CONST_ULTIMATE_CSV_IMP_SLUG . '/index.php&__module=' . $_POST['curr_action']. '&step=uploadfile';
 	$impCheckobj = CallWPImporterObj::checkSecurity();
 		if($impCheckobj != 'true')
 		die($impCheckobj);
@@ -1405,7 +1406,7 @@ class UploadHandler
             );
         }
         # code added by goku to get the uploaded filename
-        $files[0]->uploadedname = $upload['name'][0];
+        $files[0]->uploadedname = $upload['name'];
         return $this->generate_response(
             array($this->options['param_name'] => $files),
             $print_response
@@ -1438,3 +1439,4 @@ class UploadHandler
     }
 
 }
+

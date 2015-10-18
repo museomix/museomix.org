@@ -59,8 +59,9 @@ class WPCOM_JSON_API_List_Comments_Walker extends Walker {
 
 // @todo permissions
 class WPCOM_JSON_API_List_Comments_Endpoint extends WPCOM_JSON_API_Comment_Endpoint {
-	var $response_format = array(
+	public $response_format = array(
 		'found'    => '(int) The total number of comments found that match the request (ignoring limits, offsets, and pagination).',
+		'site_ID'  => '(int) The site ID',
 		'comments' => '(array:comment) An array of comment objects.',
 	);
 
@@ -236,7 +237,10 @@ class WPCOM_JSON_API_List_Comments_Endpoint extends WPCOM_JSON_API_Comment_Endpo
 		foreach ( array_keys( $this->response_format ) as $key ) {
 			switch ( $key ) {
 			case 'found' :
-				$return[$key] = (int) $found;
+				$return[ $key ] = (int) $found;
+				break;
+			case 'site_ID' :
+				$return[ $key ] = (int) $blog_id;
 				break;
 			case 'comments' :
 				$return_comments = array();
@@ -248,10 +252,11 @@ class WPCOM_JSON_API_List_Comments_Endpoint extends WPCOM_JSON_API_Comment_Endpo
 				}
 
 				if ( $return_comments ) {
+					/** This action is documented in json-endpoints/class.wpcom-json-api-site-settings-endpoint.php */
 					do_action( 'wpcom_json_api_objects', 'comments', count( $return_comments ) );
 				}
 
-				$return[$key] = $return_comments;
+				$return[ $key ] = $return_comments;
 				break;
 			}
 		}

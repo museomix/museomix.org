@@ -5,24 +5,21 @@
  * Proprietary and confidential
  * You can contact Smackcoders at email address info@smackcoders.com.
  *******************************************************************************************/
-
-if(!isset($_SERVER['HTTP_REFERER'])) {
+/*if(!isset($_SERVER['HTTP_REFERER'])) {
         die('Your requested url were wrong! Please contact your admin.');
-}
-require_once('../../../../../../wp-load.php');
+}*/
+if ( ! defined( 'ABSPATH' ) )
+        exit; // Exit if accessed directly
 $nonce = $_POST['nonce'];
-//echo '<pre>'; print_r($sitedomain); echo '</pre>';
 if ( ! wp_verify_nonce( $nonce, 'my-nonce' ) ) {
     // This nonce is not valid.
     die( 'Security check: Your requested URL is wrong! Please, Contact your administrator.' );
-} else {
+} 
     // The nonce was valid.
     // Do stuff here.
-}
-
 $ExportObj = new WPCSVProExportData();
-#print('<pre>'); print_r($_POST); //die;
 $ExportObj->executeIndex($_POST);
+
 class WPCSVProExportData {
 	public function __construct() {
 
@@ -63,6 +60,7 @@ class WPCSVProExportData {
 	 */
 	public function generateCSVHeaders($exporttype){
 		global $wpdb;
+		$Header = array();
 		$post_type = $exporttype;
 		$unwantedHeader = array('_eshop_product', '_wp_attached_file', '_wp_page_template', '_wp_attachment_metadata', '_encloseme');
 		if($exporttype == 'woocommerce' || $exporttype == 'marketpress')
@@ -231,7 +229,6 @@ class WPCSVProExportData {
 				$get_post_ids .= " and p.post_author = {$request['postauthor']}";
 			}
 		}
-		#print_r($get_post_ids); die;
 		$result = $wpdb->get_col($get_post_ids);
 		if(isset($request['getdatawithspecificstatus'])) {
 			if(isset($request['postwithstatus']) && $request['postwithstatus'] == 'Sticky') {
@@ -306,9 +303,12 @@ class WPCSVProExportData {
          */
 	public function getTypesFields() {
 		$wptypesfields = get_option('wpcf-fields'); 
+		$typesfields = array();
 		#print('<pre>'); print_r($wptypesfields);
-		foreach($wptypesfields as $typeFkey){
-			$typesfields[$typeFkey['meta_key']] = $typeFkey['name'];
+		if(!empty($wptypesfields) && is_array($wptypesfields)) {
+			foreach($wptypesfields as $typeFkey){
+				$typesfields[$typeFkey['meta_key']] = $typeFkey['name'];
+			}
 		}
 		#print_r($typesfields);
 		return $typesfields;
@@ -319,6 +319,7 @@ class WPCSVProExportData {
 	 */
 	public function getACFvalues($getspecificfieldtype = null) {
 		global $wpdb;
+		$checkbox_option_fields = $acf_fields = array();
                 // Code for ACF fields 
                 $get_acf_fields = $wpdb->get_col ( "SELECT meta_value FROM $wpdb->postmeta
                                 GROUP BY meta_key
@@ -326,7 +327,7 @@ class WPCSVProExportData {
                                 ORDER BY meta_key" );
 
                 foreach ( $get_acf_fields as $acf_value ){
-                        $get_acf_field = unserialize($acf_value);
+                        $get_acf_field = @unserialize($acf_value);
                         $acf_fields[$get_acf_field['name']] = "CF: ".$get_acf_field['name'];
                         $acf_fields_slug[$get_acf_field['name']] = "_".$get_acf_field['name'];
 
@@ -498,7 +499,7 @@ class WPCSVProExportData {
                                 $export_delimiter = $_POST['postwithdelimiter'];
                 }elseif(isset($_POST['getdatawithdelimiter']) && !empty($_POST['others_delimiter'])){
 
-                         $export_delimiter = $_POST['others_delimiter'];
+                         $export_delimiter = $_POST['others_delimiter']; 
                 }else{
 
                         $export_delimiter = ',';
@@ -521,14 +522,16 @@ class WPCSVProExportData {
 		}
 		$Header = $this->generateCSVHeaders($exporttype);
 		$result = $this->get_all_record_ids($exporttype, $request);
+		$PostData = array();
 		#print('<pre>'); print_r($Header); print_r($result); print('</pre>'); die;
 		$fieldsCount = count($result);
 		if(isset($result)) {
 			foreach ($result as $postID) {
-				$pId = $pId . ',' . $postID;
+				#$pId = $pId . ',' . $postID;
 				$PostData[$postID] = $this->getPostDatas($postID);
 				#print('<pre>'); print_r($PostData); #die;
 				$result_query2 = $this->getPostMetaDatas($postID); 
+				$PostMetaData = array();
 				#print('<pre>'); print_r($result_query2); print('</pre>'); #die;
 
 				$possible_values = array('s:', 'a:', ':{');
@@ -609,7 +612,7 @@ class WPCSVProExportData {
 								$eshop_products_unser1 = unserialize($postmeta->meta_value); 
 								$check_attr_count1 = count($eshop_products_unser1);
 								if($check_attr_count1 == 1){
-									$eshop_products_unser2 = unserialize($eshop_products_unser1); 
+									$eshop_products_unser2 = @unserialize($eshop_products_unser1); 
 									$check_attr_count2 = count($eshop_products_unser2);
 								}
 								if($check_attr_count1 < $check_attr_count2){
@@ -640,6 +643,7 @@ class WPCSVProExportData {
 							}
 							else if ($postmeta->meta_key == '_upsell_ids') {
         	                                                $upsellids = array();
+								$upsell_ids = '';
 	                                                        $crosssellids = array();
 #print('<pre>'); print('VALUE for _upsell_ids: '); print_r($postmeta->meta_value); #print_r($PostMetaData); print('</pre>'); #die;
 								if($postmeta->meta_value != '' && $postmeta->meta_value != null) {
@@ -758,11 +762,13 @@ class WPCSVProExportData {
 							#$eshop_products = $postmeta->meta_value;
 							else if ($postmeta->meta_key == 'products') {
 								$PostMetaData[$postmeta->post_id][$postmeta->meta_key] = '';
+								if(isset($eshop_products)) {
 								$eshop_products = unserialize($eshop_products);
 								foreach ($eshop_products as $key) {
 									$PostMetaData[$postmeta->post_id][$postmeta->meta_key] .= $key['option'] . '|' . $key['price'] . '|' . $key['saleprice'] . ',';
 								}
 								$PostMetaData[$postmeta->post_id][$postmeta->meta_key] = substr($PostMetaData[$postmeta->post_id][$postmeta->meta_key], 0, -1);
+								}
 							} // WooCommerce product meta datas end here
 							// MarketPress product meta datas starts here
 							else if ($postmeta->meta_key == 'mp_var_name') {
@@ -809,9 +815,11 @@ class WPCSVProExportData {
                                                         else if ($postmeta->meta_key == 'mp_inventory') {
 								$mp_inventory_value = null;
                                                                 $mp_prod_inventory_values = unserialize($postmeta->meta_value);
+								if(is_array($mp_prod_inventory_values) && !empty($mp_prod_inventory_values)){
                                                                 foreach($mp_prod_inventory_values as $inventory_values) {
                                                                         $mp_inventory_value .= $inventory_values. ',';
                                                                 }
+								}
                                                                 $mp_inventory_value = substr($mp_inventory_value, 0, -1);
                                                                 $PostMetaData[$postmeta->post_id][$postmeta->meta_key] = $mp_inventory_value;
                                                         } // MarketPress product meta datas ends here
@@ -917,7 +925,7 @@ class WPCSVProExportData {
 								$postmeta->meta_key = 'featured_image';
 								$PostMetaData[$postmeta->post_id][$postmeta->meta_key] = $attachment_file;
 							}
-							else if(is_array($checkbox_option_fields) && in_array($postmeta->meta_key,$checkbox_option_fields)){
+							else if(is_array($this->getACFvalues()) && in_array($postmeta->meta_key, $this->getACFvalues())){
 								$PostMetaData[$postmeta->post_id][$postmeta->meta_key] = '';
 								$eshop_products = unserialize($eshop_products); //print_r($eshop_products);
 								foreach ($eshop_products as $key) {
@@ -951,7 +959,7 @@ class WPCSVProExportData {
 */
 				}
 
-				#$ExportData = array();
+				$ExportData = array();
 				// Merge all arrays
 				#echo '<pre>'; print_r($TermsData); die;
 				// echo '<pre>'; print_r($PostData); die('sds');
@@ -1036,22 +1044,31 @@ class WPCSVProExportData {
                         }
 #print('<pre>'); print_r($Header); print('</pre>'); #die;
 #			print('<pre>'); print_r($ExportData); die;
+			$CSVContent = array();
 			foreach ($Header as $header_key) {
 				if (is_array($ExportData)) {
 					foreach ($ExportData as $ED_key => $ED_val) {
 						if (in_array($header_key, $this->getAIOSEOfields())) { #die($header_key);
 							foreach($this->getAIOSEOfields() as $aioseokey => $aioseoval) {
+								if(array_key_exists($aioseokey,$ED_val)){
 								$CSVContent[$ED_key][$aioseoval] = $ED_val[$aioseokey];
+								}
+								
 								#unset($CSVContent[$ED_key][$header_key]);
 							}
 						} else if (in_array($header_key, $this->getYoastSEOfields())) {
 							foreach($this->getYoastSEOfields() as $yoastseokey => $yoastseoval) {
+								if(array_key_exists($yoastseokey,$ED_val)){
 								$CSVContent[$ED_key][$yoastseoval] = $ED_val[$yoastseokey];
+								}
 								#unset($CSVContent[$ED_key][$header_key]);
 							}
 						} else if (in_array($header_key, $this->getTypesFields())) {
 							foreach($this->getTypesFields() as $typesFkey => $typesFval) {
+								if(array_key_exists($typesFkey,$ED_val))
 								$CSVContent[$ED_key][$typesFval] = $ED_val[$typesFkey];
+								else
+								$CSVContent[$ED_key][$typesFval] = '';
 								#unset($CSVContent[$ED_key][$header_key]);
 							}
 						} else if (array_key_exists($header_key, $ED_val)) {
@@ -1074,6 +1091,7 @@ class WPCSVProExportData {
 	public function WPImpExportCategories($request) {
                 global $wpdb;
                 $exporttype = $request['export'];
+		$wpcsvsettings=get_option('wpcsvfreesettings');
 		if(isset($_POST['getdatawithdelimiter']) && isset($_POST['postwithdelimiter']) && $_POST['postwithdelimiter'] != 'Select'){
                         if($_POST['postwithdelimiter'] == "{Space}")
                                 $export_delimiter = " ";
@@ -1101,7 +1119,7 @@ class WPCSVProExportData {
 		$Header[] = 'name';
 		$Header[] = 'slug';
 		$Header[] = 'description';
-		if($wpcsvsettings['rseooption'] == 'yoastseo'){
+		if(is_array($wpcsvsettings) && array_key_exists('rseooption', $wpcsvsettings) && $wpcsvsettings['rseooption'] == 'yoastseo'){
 			$Header[] = 'wpseo_title';
 			$Header[] = 'wpseo_desc';
 			$Header[] = 'wpseo_canonical';
@@ -1129,7 +1147,7 @@ class WPCSVProExportData {
 			$TERM_DATA[$categID]['slug'] = $categSlug;
 			$TERM_DATA[$categID]['description'] = $categDesc;
 		}
-		if($wpcsvsettings['rseooption'] == 'yoastseo'){
+		if(is_array($wpcsvsettings) && array_key_exists('rseooption', $wpcsvsettings) && $wpcsvsettings['rseooption'] == 'yoastseo'){
 			foreach($seo_yoast_taxonomies['category'] as $taxoKey => $taxoValue){
 				$taxoID = $taxoKey;
 				$taxo_wpseo_title = $taxoValue['wpseo_title'];
@@ -1153,7 +1171,9 @@ class WPCSVProExportData {
 	 */
 	public function WPImpExportTags($request) {
 		global $wpdb;
+		$wpcsvsettings=get_option('wpcsvfreesettings');
 		$exporttype = $request['export'];
+		
 		/*if(isset($_POST['getdatawithdelimeter']) && isset($_POST['delimeterstatus'])){
                         $export_delimiter = $_POST['delimeterstatus'];
                 }else{
@@ -1181,7 +1201,7 @@ class WPCSVProExportData {
 		$Header[] = 'name';
 		$Header[] = 'slug';
 		$Header[] = 'description';
-		if($wpcsvsettings['rseooption'] == 'yoastseo'){
+		if(isset($wpcsvsettings['rseooption']) && $wpcsvsettings['rseooption'] == 'yoastseo'){
 			$Header[] = 'wpseo_title';
 			$Header[] = 'wpseo_desc';
 			$Header[] = 'wpseo_canonical';
@@ -1189,8 +1209,10 @@ class WPCSVProExportData {
 			$Header[] = 'wpseo_sitemap_include';
 		}
 		$seo_yoast_taxonomies = get_option('wpseo_taxonomy_meta');
+		if(!empty($seo_yoast_taxonomies) && isset($seo_yoast_taxonomies['post_tag'])){
 		foreach($seo_yoast_taxonomies['post_tag'] as $seo_yoast=>$seo){
 			$val_seo_yoast = $seo;
+		}
 		}
 
 		$get_all_tags = get_tags('hide_empty=0');
@@ -1204,7 +1226,7 @@ class WPCSVProExportData {
 			$TERM_DATA[$tagID]['slug'] = $tagSlug;
 			$TERM_DATA[$tagID]['description'] = $tagDesc;
 		}
-		if($wpcsvsettings['rseooption'] == 'yoastseo'){
+		if(isset($wpcsvsettings['rseooption']) &&  $wpcsvsettings['rseooption'] == 'yoastseo'){
 			foreach($seo_yoast_taxonomies['post_tag'] as $taxoKey => $taxoValue){
 				$tagID = $taxoKey;
 				$taxo_wpseo_title = $taxoValue['wpseo_title'];
@@ -1229,6 +1251,7 @@ class WPCSVProExportData {
 	public function WPImpExportTaxonomies($request) {
                 global $wpdb;
                 $exporttype = $request['export'];
+		$wpcsvsettings=get_option('wpcsvfreesettings');
                /* if(isset($_POST['getdatawithdelimeter']) && isset($_POST['delimeterstatus'])){
                         $export_delimiter = $_POST['delimeterstatus'];
                 }else{
@@ -1258,7 +1281,7 @@ class WPCSVProExportData {
 		$Header[] = 'name';
 		$Header[] = 'slug';
 		$Header[] = 'description';
-		if($wpcsvsettings['rseooption'] == 'yoastseo'){
+		if(isset ($wpcsvsettings['rseooption']) && $wpcsvsettings['rseooption'] == 'yoastseo'){
 			$Header[] = 'wpseo_title';
 			$Header[] = 'wpseo_desc';
 			$Header[] = 'wpseo_canonical';
@@ -1285,7 +1308,7 @@ class WPCSVProExportData {
 			$TERM_DATA[$taxoID]['slug'] = $taxoSlug;
 			$TERM_DATA[$taxoID]['description'] = $taxoDesc;
 		}
-		if($wpcsvsettings['rseooption'] == 'yoastseo'){
+		if(isset($wpcsvsettings['rseooption']) && $wpcsvsettings['rseooption'] == 'yoastseo'){
 			foreach($seo_yoast_taxonomies[$taxonomy_name] as $taxoKey => $taxoValue){
 				$taxoID = $taxoKey;
 				$taxo_wpseo_title = $taxoValue['wpseo_title'];
@@ -1401,9 +1424,38 @@ class WPCSVProExportData {
                         $csv_file_name =$_POST['export_filename'].'.csv';
                 else
                         $csv_file_name='exportas_'.date("Y").'-'.date("m").'-'.date("d").'.csv';
-
-                $commentQuery = "SELECT * FROM $wpdb->comments " . $orderBy;
+			$commentQuery = "SELECT * FROM $wpdb->comments orderBy";
+		if(isset($request['getdatabyspecificauthors'])) {
+			if(isset($request['postauthor'])){ //&& $request['postauthor'] != 0){
+				$comment_author = $request['postauthor'];
+				$getauthorquery = "select user_login from $wpdb->users where id = $comment_author";
+				$getauthor = $wpdb->get_results( $getauthorquery);
+				if(!empty($getauthor))
+				$comment_author = $getauthor[0]->user_login;
+				else
+				$comment_author = '';
+			}
+		}
+		if(isset($request['getdataforspecificperiod'])) {
+			$commentQuery = "SELECT * FROM $wpdb->comments where comment_date >= '".$request['postdatefrom']."' and comment_date <= '". $request['postdateto']."'";
+                }
+		if(isset($request['getdatabyspecificauthors'])) { 
+			if(isset($request['postauthor']) && $request['postauthor'] != 0) {
+				$commentQuery = "SELECT * FROM $wpdb->comments where comment_author = '".$comment_author."'";
+			}
+		}
+		if(isset($request['getdataforspecificperiod']) && isset($request['getdatabyspecificauthors'])){
+			if($commentQuery != null && $commentQuery != '' ){
+				$commentQuery = "SELECT * FROM $wpdb->comments where comment_date >= '".$request['postdatefrom']."' and comment_date <= '". $request['postdateto']."' and comment_author = '".$comment_author."'";
+			}
+			else {
+				$commentQuery = "SELECT * FROM $wpdb->comments where comment_date >= '".$request['postdatefrom']."' and comment_date <= '". $request['postdateto']."'";
+			}
+		}
+		
+		
                 $comments = $wpdb->get_results( $commentQuery);
+//echo '<pre>';print_r($comments);echo '</pre>';die;
                 $mappedHeader = false;
 		$i = 0;
                 foreach($comments as $comment){
@@ -1452,6 +1504,7 @@ class WPCSVProExportData {
                         $csv_file_name='exportas_'.date("Y").'-'.date("m").'-'.date("d").'.csv';
 
 		$uId = '';
+		$Header = array();
 		$header_query1 = "SELECT *FROM $wpdb->users";
 		$header_query2 = "SELECT user_id, meta_key, meta_value FROM  $wpdb->users wp JOIN $wpdb->usermeta wpm ON wpm.user_id = wp.ID where meta_key NOT IN ('_edit_lock','_edit_last')";
 		$result_header_query1 = $wpdb->get_results($header_query1);

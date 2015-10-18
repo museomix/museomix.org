@@ -220,7 +220,7 @@ class Theme_My_Login_Custom_User_Links_Admin extends Theme_My_Login_Abstract {
 	 *
 	 * @param array $link Link data
 	 * @param string $role Name of user role
-	 * @return sring Link row
+	 * @return string Link row
 	 */
 	private static function get_link_row( $link, $role ) {
 		$r = '';

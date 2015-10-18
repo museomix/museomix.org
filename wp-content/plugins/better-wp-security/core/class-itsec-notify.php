@@ -82,55 +82,55 @@ class ITSEC_Notify {
 		if ( $host_count == 0 && $user_count == 0 ) {
 
 			$has_lockouts    = false;
-			$lockout_message = __( 'There have been no lockouts since the last email check.', 'it-l10n-better-wp-security' );
+			$lockout_message = __( 'There have been no lockouts since the last email check.', 'better-wp-security' );
 
 		} elseif ( $host_count === 0 && $user_count > 1 ) {
 
 			$lockout_message = sprintf(
 				'%s %s %s',
-				__( 'There have been', 'it-l10n-better-wp-security' ),
+				__( 'There have been', 'better-wp-security' ),
 				$user_count,
-				__( 'users or usernames locked out for attempting to log in with incorrect credentials.', 'it-l10n-better-wp-security' )
+				__( 'users or usernames locked out for attempting to log in with incorrect credentials.', 'better-wp-security' )
 			);
 
 		} elseif ( $host_count === 0 && $user_count == 1 ) {
 
 			$lockout_message = sprintf(
 				'%s %s %s',
-				__( 'There has been', 'it-l10n-better-wp-security' ),
+				__( 'There has been', 'better-wp-security' ),
 				$user_count,
-				__( 'user or username locked out for attempting to log in with incorrect credentials.', 'it-l10n-better-wp-security' )
+				__( 'user or username locked out for attempting to log in with incorrect credentials.', 'better-wp-security' )
 			);
 
 		} elseif ( $host_count == 1 && $user_count === 0 ) {
 
 			$lockout_message = sprintf(
 				'%s %s %s',
-				__( 'There has been', 'it-l10n-better-wp-security' ),
+				__( 'There has been', 'better-wp-security' ),
 				$host_count,
-				__( 'host locked out.', 'it-l10n-better-wp-security' )
+				__( 'host locked out.', 'better-wp-security' )
 			);
 
 		} elseif ( $host_count > 1 && $user_count === 0 ) {
 
 			$lockout_message = sprintf(
 				'%s %s %s',
-				__( 'There have been', 'it-l10n-better-wp-security' ),
+				__( 'There have been', 'better-wp-security' ),
 				$host_count,
-				__( 'hosts locked out.', 'it-l10n-better-wp-security' )
+				__( 'hosts locked out.', 'better-wp-security' )
 			);
 
 		} else {
 
 			$lockout_message = sprintf(
 				'%s %s %s %s %s %s %s',
-				__( 'There have been', 'it-l10n-better-wp-security' ),
+				__( 'There have been', 'better-wp-security' ),
 				$user_count + $host_count,
-				__( 'lockout(s) including', 'it-l10n-better-wp-security' ),
+				__( 'lockout(s) including', 'better-wp-security' ),
 				$user_count,
-				__( 'user(s) and', 'it-l10n-better-wp-security' ),
+				__( 'user(s) and', 'better-wp-security' ),
 				$host_count,
-				__( 'host(s) locked out of your site.', 'it-l10n-better-wp-security' )
+				__( 'host(s) locked out of your site.', 'better-wp-security' )
 			);
 
 		}
@@ -153,22 +153,22 @@ class ITSEC_Notify {
 
 			$body = sprintf(
 				'<p>%s,</p><p>%s <a href="%s">%s</a></p><p><strong>%s: </strong>%s</p>%s<p>%s %s</p><p>%s <a href="%s">%s</a>.</p>',
-				__( 'Dear Site Admin', 'it-l10n-better-wp-security' ),
-				__( 'The following is a summary of security related activity on your site. For details please visit', 'it-l10n-better-wp-security' ),
+				__( 'Dear Site Admin', 'better-wp-security' ),
+				__( 'The following is a summary of security related activity on your site. For details please visit', 'better-wp-security' ),
 				wp_login_url( get_admin_url( '', 'admin.php?page=toplevel_page_itsec_logs' ) ),
-				__( 'the security logs', 'it-l10n-better-wp-security' ),
-				__( 'Lockouts', 'it-l10n-better-wp-security' ),
+				__( 'the security logs', 'better-wp-security' ),
+				__( 'Lockouts', 'better-wp-security' ),
 				$lockout_message,
 				$module_message,
 				__( 'This email was generated automatically by' ),
 				$itsec_globals['plugin_name'],
-				__( 'To change your email preferences please visit', 'it-l10n-better-wp-security' ),
+				__( 'To change your email preferences please visit', 'better-wp-security' ),
 				wp_login_url( get_admin_url( '', 'admin.php?page=toplevel_page_itsec_settings' ) ),
-				__( 'the plugin settings', 'it-l10n-better-wp-security' )
+				__( 'the plugin settings', 'better-wp-security' )
 			);
 
 			//Setup the remainder of the email
-			$subject = '[' . get_option( 'siteurl' ) . '] ' . __( 'Daily Security Digest', 'it-l10n-better-wp-security' );
+			$subject = '[' . get_option( 'siteurl' ) . '] ' . __( 'Daily Security Digest', 'better-wp-security' );
 			$subject = apply_filters( 'itsec_lockout_email_subject', $subject );
 			$headers = 'From: ' . get_bloginfo( 'name' ) . ' <' . get_option( 'admin_email' ) . '>' . "\r\n";
 

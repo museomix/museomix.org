@@ -450,15 +450,18 @@ class acymailingPHPMailer extends WYSIJA_OBJECT{
 				$result = $this->elasticEmail->sendMail($this);
 				if (!$result) $this->SetError($this->elasticEmail->error);
 				break;
-                        case 'sendgrid' :
+			case 'sendgrid' :
 				$result = $this->sendGrid->sendMail($this);
 				if (!$result) $this->SetError($this->sendGrid->error);
 				break;
-                        case 'wpmail' :
-                                $to = array_filter($this->to[0]);
-                                add_filter('phpmailer_init',array($this,'wpmail_init'),90);
-                                $result = wp_mail($to[0], $this->Subject, $this->Body, $header);
-
+			case 'mailpoet' :
+				$result = $this->mailpoet->send_mail($this);
+				if ( $result !== true ) $this->error($this->mailpoet->error);
+				break;
+			case 'wpmail' :
+				$to = array_filter($this->to[0]);
+				add_filter('phpmailer_init',array($this,'wpmail_init'),90);
+				$result = wp_mail($to[0], $this->Subject, $this->Body, $header);
 				break;
 			default:
 				$result = $this->MailSend($header, $body);

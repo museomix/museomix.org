@@ -1,0 +1,1342 @@
+msgid ""
+msgstr "MIME-Version: 1.0\n"
+
+#. Name.
+msgid "BackWPup Free - WordPress Backup Plugin"
+msgstr ""
+
+#. Short description.
+msgid "Schedule complete automatic backups of your WordPress installation. Decide which content will be stored (Dropbox, S3…). This is the free version"
+msgstr ""
+
+#. Screenshot description.
+msgid "Working job and jobs overview"
+msgstr ""
+
+#. Screenshot description.
+msgid "Job creation/edit"
+msgstr ""
+
+#. Screenshot description.
+msgid "Displaying logs"
+msgstr ""
+
+#. Screenshot description.
+msgid "Manage backup archives"
+msgstr ""
+
+#. Screenshot description.
+msgid "Dashboard"
+msgstr ""
+
+#. Found in description header.
+msgid "Requirements"
+msgstr ""
+
+#. Found in description list item.
+msgid "Database Backup  <em>(needs mysqli)</em>"
+msgstr ""
+
+#. Found in description list item.
+msgid "WordPress XML Export"
+msgstr ""
+
+#. Found in description list item.
+msgid "Generate a file with installed plugins"
+msgstr ""
+
+#. Found in description list item.
+msgid "Optimize Database"
+msgstr ""
+
+#. Found in description list item.
+msgid "Check and repair Database"
+msgstr ""
+
+#. Found in description list item.
+msgid "File backup"
+msgstr ""
+
+#. Found in description list item.
+msgid "Backups in zip, tar, tar.gz, tar.bz2 format <em>(needs gz, bz2, ZipArchive)</em>"
+msgstr ""
+
+#. Found in description list item.
+msgid "Store backup to directory"
+msgstr ""
+
+#. Found in description list item.
+msgid "Store backup to FTP server <em>(needs ftp)</em>"
+msgstr ""
+
+#. Found in description list item.
+msgid "Store backup to Dropbox <em>(needs curl)</em>"
+msgstr ""
+
+#. Found in description list item.
+msgid "Store backup to S3 services <em>(needs curl)</em>"
+msgstr ""
+
+#. Found in description list item.
+msgid "Store backup to Microsoft Azure (Blob) <em>(needs PHP 5.3.2, curl)</em>"
+msgstr ""
+
+#. Found in description list item.
+msgid "Store backup to RackSpaceCloud <em>(needs PHP 5.3.2, curl)</em>"
+msgstr ""
+
+#. Found in description list item.
+msgid "Store backup to SugarSync <em>(needs curl)</em>"
+msgstr ""
+
+#. Found in description list item.
+msgid "PRO: Store backup to Amazon Glacier <em>(needs PHP 5.3.3, curl)</em>"
+msgstr ""
+
+#. Found in description list item.
+msgid "PRO: Store backup to Google Drive <em>(needs PHP 5.3.3, curl)</em>"
+msgstr ""
+
+#. Found in description list item.
+msgid "Send logs and backups by email"
+msgstr ""
+
+#. Found in description list item.
+msgid "Multi-site support only as network admin"
+msgstr ""
+
+#. Found in description list item.
+msgid "Pro version and support available - <a href=\"http://marketpress.com/product/backwpup-pro/\">BackWPup Pro</a>"
+msgstr ""
+
+#. Found in description list item.
+msgid "WordPress 3.4 and PHP 5.2.7 required!"
+msgstr ""
+
+#. Found in description list item.
+msgid "To use the Plugin with full functionality PHP 5.3.3 with mysqli, FTP,gz, bz2, ZipArchive and curl is needed."
+msgstr ""
+
+#. Found in description list item.
+msgid "Plugin functions that don't work because of your server settings, will not be displayed in admin area."
+msgstr ""
+
+#. Found in description paragraph.
+msgid "The <strong>backup plugin</strong> <strong><a href=\"http://marketpress.com/product/backwpup-pro/\">BackWPup Free</a></strong> can be used to save your complete installation including /wp-content/ and push them to an external Backup Service, like <strong>Dropbox</strong>, <strong>S3</strong>, <strong>FTP</strong> and many more, see list below. With a single backup .zip file you are able to easily restore an installation. Please understand: this free version will not be supported as good as the <a href=\"http://marketpress.com/product/backwpup-pro/\">BackWPup Pro version</a>."
+msgstr ""
+
+#. Found in description paragraph.
+msgid "Our friends at <a href=\"https://www.ostraining.com/\">OSTraining</a> have done a tremendous job with their video tutorials on BackWPup. The complete series of five videos have been made <a href=\"https://www.youtube.com/watch?v=pECMkLE27QQ&amp;list=PLtaXuX0nEZk9_54BOxcBYXMI3gx3ZxICQ&amp;index=1\">available for free on YouTube</a>."
+msgstr ""
+
+#. Found in description paragraph.
+msgid "https://www.youtube.com/watch?v=pECMkLE27QQ&amp;w=532&amp;rel=0"
+msgstr ""
+
+#. Found in description paragraph.
+msgid "<em>(Are you a WordPress novice? Check out all of OSTraining’s <a href=\"https://www.ostraining.com/courses/categories/wordpress/\">WordPress video trainings</a>!)</em>"
+msgstr ""
+
+#. Found in description paragraph.
+msgid "<strong>Remember: The most expensive backup is the one you never did! And please test your backups!</strong>"
+msgstr ""
+
+#. Found in description paragraph.
+msgid "Get the <a href=\"http://marketpress.com/product/backwpup-pro/\">BackWPup Pro</a> Version with more features on <a href=\"http://marketpress.com/product/backwpup-pro/\">MarketPress.com</a>"
+msgstr ""
+
+#. Found in description paragraph.
+msgid "<strong>Made by <a href=\"http://inpsyde.com\">Inpsyde</a> &middot; We love WordPress</strong>"
+msgstr ""
+
+#. Found in description paragraph.
+msgid "Have a look at our other premium plugins at <a href=\"http://marketpress.com\">MarketPress.com</a>."
+msgstr ""
+
+#. Found in installation list item.
+msgid "Download the BackWPup plugin."
+msgstr ""
+
+#. Found in installation list item.
+msgid "Decompress the ZIP file and upload the contents of the archive into <code>/wp-content/plugins/</code>."
+msgstr ""
+
+#. Found in installation list item.
+msgid "Activate the plugin through the 'Plugins' menu in WordPress"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: open basedir check"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: Change Zip creation back to use lower resources"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: Deletion of backup files on Dropbrox not refreshes"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: Delete 'doing_cron' transient before job starts"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added: Support for new Amazon S3 storage type 'Standard-Infrequent Access'"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added: Support for MYSQL_CLIENT_FLAGS"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Updated: AWS SDK to Version 2.8.21 (PHP 5.3.3+)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Removed: SIGCONT,SIGCHLD,SIGALRM form signal handler"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Free Removed: Bundled translations. Will be now come from https://translate.wordpress.org/projects/wp-plugins/backwpup"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Pro Updated: Google SDK to Version 1.1.4"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: Sugarsync SSL message"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: Job hang in some configurations"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: RSS Feed in Dashboard"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added: EasyCron API to schedule job starts"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added: Message if job has not configured destinations"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added: Setting for log level and minimize log for normal output"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added: Email logfile to more than one receiver"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added: Creation of web.config for IIS Webserver"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added: Allow relative path to WP_CONTENT_DIR for logs and backups"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added: Prefer plugin translation loading from WP_LANG_DIR"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added: Option to move WordPress installation folder one folder up"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added: Ordering options for jobs page"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added: Added Google storage Bucket regions"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: Archive size check depends on PHP_INT_MAX"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: Excessive transient writes with job start urls"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: Authorisation settings for wp-cron.php"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: Folder checking with open basedir check"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: WP-CLI outputs"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: Role management. Administrators always have BackWPup capabilities"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: Unix Signals handling to caching more"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: fcgi handling to prevent signal 15 errors (thanks to siteground.com)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Updated: AWS SDK to Version 2.7.7 (PHP 5.3.3+)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Updated: MSAZURE SDK to Version 0.4.0-dev"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Updated: Translations from http://translate.marketpress.com/"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Removed: Server script file generation, please use WP-CLI"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: Notice if BuddyPress is active"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: VIEW generation on Database backups"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "PRO Fixed: Authentication for GDrive"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "PRO Fixed: Synchronisation with GDrive"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: removing of % from filename"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: Notice in combination with bbPress"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: Zip Archive \"Entry has been deleted\" messages"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: WP-CLI output a bit"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: var_export not working if output buffering active"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: bug in sending test emails on Backup with email"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: backup archives not deleted if archive name has spaces"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: bug in tar file name length detecting"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: bug in not displaying abort message"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: abort of S3 uploads from other running backups"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Changed: Maximum backup archive size is now 2GB (some filesystems do not support larger files, split the job if you need more)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Changed: WordPress Export will now done by a own class"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Changed: Dropbox now uses oAuth 2 Protocol"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Changed: Dropbox change to TLS Protocol"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Changed: Logs have now a br tag on line end for better reading in emails"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: Dropbox chipper list not on NSS cUrl backend"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: Increased performance on Zip File generation massively"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: Backup archives now deleted to if the archive format changed"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: Archive tarring and its compression"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: Loading of Swift Mailer"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added: GreenQloud to S3 services"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added: Amazon Germany region to S3 and Glacier services"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Removed: Hosteurope from S3 services (terminated to end of 2014)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Updated: SwiftMailer to Version 5.2.0"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Updated: AWS SDK to Version 2.7.3 (PHP 5.3.3+)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Updated: RSC SDK to Version 1.9.2"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Updated: MSAZURE SDK to Version 0.4.0"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Updated: PEAR packeges for MSAZURE"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "PRO: Added: Option to use database backup with mysqli/mysqldump (not longer automatic)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "PRO: Added: Option in GDrive destination to delete files permanently"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "PRO: Updated: Google SDK to 1.1.1"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added: .donotbackup file. Folders and sub folders containing this file in will not be included in backups."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: New multisite installs did not save jobs."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: New multisite installs did not save installed version."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: Fatal error when attempting to clean up inactive jobs from cron"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: Exclude uploads not working"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: Message \"file not readable\" of an excluded folder"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: WP-CLI deprecated and unknown parameter message"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: Bugs in pagination on logs and backups page"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Removed: Banner from plugins page"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: Memory usage during XML export"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: Mime type detection"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: Dropbox SSL handling"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: Certificate bundle file can now be filtered"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: Auto-loading vendor classes"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: Performance when saving other database tables than MyISAM"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Updated: AWS SDK to Version 2.5.2 (PHP 5.3.3+)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Updated: RSC SDK to Version 1.9.1"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Updated: Guzzle SDK to Version 3.8.1"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added: S3 Service: Amazon China (Beijing) region"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added: Rackspace: Hong Kong (HKG) region"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "PRO: Fixed: Duplicating synced files on S3"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "PRO: Update: Google SDK to 0.6.7"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "PRO: Added: Amazon Glacier China (Beijing) region"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: Plugins will not backup"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: Dropped quota check for Dropbox. Will cancel upload only when Dropbox API sends error 507."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: Remove special chars from file names in archives"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: Handling off restarts on archive creation"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: Message about aborted step did not display correctly"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: Incorrect rescheduling of jobs"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: Overall performance while generating backup archives"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: Uploads of backup archives to FTP/S3/Dropbox/Azure/GDrive can be continued"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: Script re-starts based upon time while generating archives and uploading"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: Reduced risk of running scripts being stopped via external processes in fcgi mode"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: Backup destinations and their dependencies only being loaded when needed"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: Required dependencies for destinations being displayed now"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: Displaying of error messages as error messages (red, not yellow)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: Reduced size of vendor/SDK directory by 50%"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: Regex for BackWPup archive file detection"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: Symlink handling for file backup on WordPress folders"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: Use icon font for menu, adminbar and on other places"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: Responsive for WordPress 3.8"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Updated: AWS SDK to Version 2.4.11 (PHP 5.3.3+)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Updated: RSC SDK to Version 1.7.3"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Updated: SwiftMailer to Version 5.0.1"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Removed: DB Optimization, because locking of tables that can make the site not accessible"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "PRO: Wizards using a separate session handling now"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "PRO: Hash that BackWPup uses is changeable"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "PRO: Added Google Drive Support"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "PRO: Added Amazon Glacier Support"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: Redirect when accessing the WordPress backend"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added: Debug Informations to Logfile"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added Sydney region for rackspace cloud"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added London region for rackspace cloud"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: Cross-site scripting issue. Thanks to High-Tech Bridge for helping us: https://www.htbridge.com/advisory/HTB23161"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: Fatal error when uninstalling on WordPress 3.4.2 and older"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: Redirect when accessing the WordPress backend"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added: Russian translation"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added: Simplified chinese translation"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: German log string typo"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: About page will only be shown after install"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Updated: AWS SDK to Version 2.3.1 (PHP 5.3.3+)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: some notices and warnings"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: Change of BackWPup role for other users"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added: Message for Pro version to support plugin"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed only Version on WordPress.org because of SVN upload problems with Symfony folder from AWS"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: Fixed bug in Dropbox temp file fallback"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: Not working if WP-Cron Control active"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "PRO Fixed: Synchronisation of files to Dropbox"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "PRO Changed: About page only displays on new installation not on updates"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added: Sending auth cookie for self requests"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added: Displaying off last error or waring in execution screen"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added: Job end message depending on error's or waring's"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added: Setting of BackWPup role in the user settings"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: Wait time after job start"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: Rights management to work better with Role management Plugins"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Changed: Sessions now only used for wizards in pro version"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Removed: Maintenance Mode support, because to many problems and not really needed"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Updated: RSC SDK to Version 1.5.4"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Updated: AWS SDK to Version 1.6.2"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Updated: AWS SDK to Version 2.3.0 (PHP 5.3.3+)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: Selected database tables not save on tab change"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: Database tables selection on new job"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: adding empty folder names tow archive"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved/Fixed: Dropbox Authentication"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: All job requests will done over wp-cron.php now"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: Ajax calls if blog in maintenance mode"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: Getting of DB_CHARSET"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: FTP file deletion"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: Dropbox authentication (If restrict to job settings page not work you can open the settings page manually again to authenticate)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: No maintenance mode, if a maintenance mode already active"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: Archive file deletion"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Updated: AWS SDK to Version 2.2.1 (PHP 5.3.3+)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: Massages on empty DB prefix"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: Bug in cron calculation"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: Dropbox upload so that it can continuing on next try"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Changed: Display only normal messages on progress bars"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Changed: Detection of multisite blog upload folder"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Changed: Backups list for destination file will not cached."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Changed: Reduced files of AWS SDK to the only needed."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: Side load braking if no folder permissions"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: Multiple backups deletion on backups page not working"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: DB optimize and check not only use WP tables if selected"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: File deletion on Dropbox if folder name has a space"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: False scheduling time in some timezones"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Removed: Option for excluding file, cache, temp folders. Can done with file/folder exclusion too."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added: Option to restart the job on archive creation if a size of files reached"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added: Option to set Zip method (PclZip or ZipArchive)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: Performance if PclZip used."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Updated: AWS SDK to Version 1.6.1"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Updated: AWS SDK to Version 2.2.0 (PHP 5.3.3+)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Changed: default settings for 'Restart on every main step' and 'Reduce server load' to disabled"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: Settings not correctly set to default"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: mysqli::get_charset() undefined method"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: Settings not saved correctly"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: Abort on MySQL Functions Backup"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: MySQLi connection"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added: Server connection test on run now."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added: S3 AWS SDK 1.6.0 for PHP lower than 5.3.3"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: Archive creation performance"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: Problem with S3 Prefix"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: warnings on excluded folders"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: message from putenv"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: not working downloads"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Changed: removed fancybox and uses thickbox because plugin compatibility"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added: folder checking on run now"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: Warnings on job edit tab files"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: folder name on temp cleanup in cron"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: Setting charset on sql backup"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: DB Connection on database backup if hostname has a port"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: Call undefined function apc_clear_cache()"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: wp-content selected folders not excluded"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added: Deactivation off multi part upload for S3 Services"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added: fallback for mysql_ping()"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added: Options for email senders name"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Changed: 5 minutes cron steps back"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Removed: Flashing admin bar icon"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Updated: OpenCloud API to Version 1.4.1"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added: Jobs can now be started with an external link or per command line"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added: Backups can now be compressed with gz or bzip2"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added: All file names can now be adjusted"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added: MySQL dump supports now views"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added: Settings for access control per capability and role"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added: Save a list of installed Plugins"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added: Support for WP-CLI"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: Job edit page with tabs"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: Settings page with tabs"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: Database dump now uses mysqli PHP extension for better performance"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: ZIP archives are now created with PHP Zip if available"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: All passwords are now stored encrypted in database"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: wp-cron job start mechanism"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: Job start mechanism not longer uses URL in plugin directory"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved: Use <code>temp</code> directory in uploads or set it with <code>WP_TEMP_DIR</code>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Changed: Mailing backup archives now with SwiftMailer"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Changed: Job process now back in the WordPress environment"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Changed: License changed to GPLv3"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Changed: Rewrote almost the complete code base to use classes with auto-loading"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Changed: Logs are now displayed with fancybox"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Updated: AWS SDK v2.1.2 (PHP 5.3.3)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Updated: OpenCloud SDK to v1.3 (PHP 5.3)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Updated: Windows Azure SDK v0.3.1_2011-08 (PHP 5.3.2)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Removed: serialized job export"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Removed: tools section - not needed anymore"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Removed: Dashboard widgets are now on the BackWPup plugin dashboard"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed: many, many minor bugs"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Wizards"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Export jobs and settings as XML"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Synchronization of files to backup with destination (filename and size checked)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Wizard to import jobs and settings from XML"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Database dump can backup other MySQL databases"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Database dump can use <code>mysqldump</code> command on commend line"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Database dump can create XML files (phpMyAdmin schema)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Use your own API keys for Dropbox and SugarSync"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Premium Support"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Automatic updates"
+msgstr ""
+
+#. Found in faq header.
+msgid "My backup jobs don’t seem to run as scheduled."
+msgstr ""
+
+#. Found in faq header.
+msgid "Yuk! It says: “ERROR: No destination correctly defined for backup!”"
+msgstr ""
+
+#. Found in faq header.
+msgid "A backup job has started, but nothing seems to be happening—not even when I re-start it manually."
+msgstr ""
+
+#. Found in faq header.
+msgid "I get this error message: `The HTTP response test get a error \"Connection time-out\"`"
+msgstr ""
+
+#. Found in faq header.
+msgid "I get a fatal error: `Can not create folder: […]/wp-content/backwpup-[…]-logs in […]/wp-content/plugins/backwpup/inc/class-job.php …`"
+msgstr ""
+
+#. Found in faq header.
+msgid "How do I restore a backup?"
+msgstr ""
+
+#. Found in faq header.
+msgid "When I edit a job the Files tab loads forever."
+msgstr ""
+
+#. Found in faq header.
+msgid "I generated a list of my installed plugins, but it’s hard to read."
+msgstr ""
+
+#. Found in faq header.
+msgid "My web host notified me BackWPup was causing an inacceptable server load!"
+msgstr ""
+
+#. Found in faq header.
+msgid "Can I cancel a running backup job via FTP?"
+msgstr ""
+
+#. Found in faq header.
+msgid "Can I move the temp directory to a different location?"
+msgstr ""
+
+#. Found in faq header.
+msgid "What do those placeholders in file names stand for?"
+msgstr ""
+
+#. Found in faq list item.
+msgid "Open BackWPup-&gt;Settings"
+msgstr ""
+
+#. Found in faq list item.
+msgid "Go to the Informations tab."
+msgstr ""
+
+#. Found in faq list item.
+msgid "Find <em>Server self connect:</em> in the left column."
+msgstr ""
+
+#. Found in faq list item.
+msgid "If it says something like <em>(401) Authorisation required</em> in the right column, go to the Network tab and set the username and password for server-side authentication."
+msgstr ""
+
+#. Found in faq list item.
+msgid "Try again starting the backup job."
+msgstr ""
+
+#. Found in faq list item.
+msgid "Open wp-config.php and find the line where it says <code>if ( !defined('ABSPATH') )</code>."
+msgstr ""
+
+#. Found in faq list item.
+msgid "Somewhere before that line add this: <code>define( 'ALTERNATE_WP_CRON', true );</code>"
+msgstr ""
+
+#. Found in faq list item.
+msgid "Somewhere <em>before</em> that line add this: <code>define( 'WP_TEMP_DIR', '/absolute/path/to/wp/your/temp-dir' );</code>"
+msgstr ""
+
+#. Found in faq list item.
+msgid "Replace <code>/absolute/path/to/wp/</code> with the absolute path of your WordPress installation and <code>your/temp-dir</code> with the path to your new temp directory."
+msgstr ""
+
+#. Found in faq list item.
+msgid "Save the file."
+msgstr ""
+
+#. Found in faq list item.
+msgid "%d = Two digit day of the month, with leading zeros"
+msgstr ""
+
+#. Found in faq list item.
+msgid "%j = Day of the month, without leading zeros"
+msgstr ""
+
+#. Found in faq list item.
+msgid "%m = Day of the month, with leading zeros"
+msgstr ""
+
+#. Found in faq list item.
+msgid "%n = Representation of the month (without leading zeros)"
+msgstr ""
+
+#. Found in faq list item.
+msgid "%Y = Four digit representation for the year"
+msgstr ""
+
+#. Found in faq list item.
+msgid "%y = Two digit representation of the year"
+msgstr ""
+
+#. Found in faq list item.
+msgid "%a = Lowercase ante meridiem (am) and post meridiem (pm)"
+msgstr ""
+
+#. Found in faq list item.
+msgid "%A = Uppercase ante meridiem (AM) and post meridiem (PM)"
+msgstr ""
+
+#. Found in faq list item.
+msgid "%B = <a href=\"http://en.wikipedia.org/wiki/Swatch_Internet_Time\">Swatch Internet Time</a>"
+msgstr ""
+
+#. Found in faq list item.
+msgid "%g = Hour in 12-hour format, without leading zeros"
+msgstr ""
+
+#. Found in faq list item.
+msgid "%G = Hour in 24-hour format, without leading zeros"
+msgstr ""
+
+#. Found in faq list item.
+msgid "%h = Hour in 12-hour format, with leading zeros"
+msgstr ""
+
+#. Found in faq list item.
+msgid "%H = Hour in 24-hour format, with leading zeros"
+msgstr ""
+
+#. Found in faq list item.
+msgid "%i = Two digit representation of the minute"
+msgstr ""
+
+#. Found in faq list item.
+msgid "%s = Two digit representation of the second"
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "A simple way to find out whether WP Cron works as it should on your site is to create a new post and set its publishing date to some point in the future, i.e. 10 minutes from now. Then leave your site (that’s important), come back after 11 minutes and check whether your scheduled post has been published. If not, you’re very likely to have an issue with WP Cron."
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "That means a backup job has started, but BackWPup doens’t know where to store the backup files. Please cancel the running job and re-edit its configuration. There should be a Tab “To: …” in your backup job’s configuration. Have you set a backup target correctly?"
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "<strong>Solution #1</strong>"
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "<strong>Solution #2</strong>"
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "<strong>Solution #3</strong>"
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "Not really a solution, but a way to identify the real problem: see remarks on WP Cron at the top."
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "Please set CHMOD 775 on the /wp-content/ directory and refresh the BackWPup dashboard. If that doesn’t help, try CHMOD 777. You can revert it to 755 once BackWPup has created its folder."
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "Up to now, there is no feature in BackWPup to restore a backup. You can follow <a href=\"http://codex.wordpress.org/Restoring_Your_Database_From_Backup\">these instructions from the WordPress Codex</a> or <a href=\"http://codex.wordpress.org/WordPress_Backups\">this tutorial (also Codex)</a> for more detailed information on cPanel, Plesk, vDeck and others."
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "Go to Settings-&gt;General and disable “Display folder sizes on files tab if job edited”. Calculating folder sizes can take a while on sites with many folders."
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "Try opening the text file in an editor software like Notepad++ (Windows) or TextMate (Mac) to preserve line-breaks."
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "Go to Settings-&gt;Jobs and try a different option for “Reduce server load”."
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "Yes. Go to your BackWPup temp directory and find a file named <code>backwpup-xyz-working.json</code> where “xyz” is a random string of numbers and characters. Delete that file to cancel the currently running backup job."
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "Yes. You need to have writing access to the wp-config.php file (usually residing in the root directory of your WordPress installation)."
+msgstr ""

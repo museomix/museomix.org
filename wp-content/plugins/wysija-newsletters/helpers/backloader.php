@@ -8,11 +8,10 @@ class WYSIJA_help_backloader extends WYSIJA_help{
 
 	var $jsVariables = '';
 
-	function WYSIJA_help_backloader(){
-
-		parent::WYSIJA_help();
-
+	function __construct() {
+		parent::__construct();
 	}
+
 	/**
 	 *
 	 * @param type $controller

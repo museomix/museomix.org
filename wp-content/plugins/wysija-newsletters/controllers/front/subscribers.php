@@ -5,8 +5,8 @@ class WYSIJA_control_front_subscribers extends WYSIJA_control_front{
     var $model='user';
     var $view='widget_nl';
 
-    function WYSIJA_control_front_subscribers(){
-        parent::WYSIJA_control_front();
+    function __construct(){
+        parent::__construct();
         if(isset($_REQUEST['message_success'])){
             $this->messages['insert'][true]=$_REQUEST['message_success'];
         }else{
@@ -127,7 +127,11 @@ class WYSIJA_control_front_subscribers extends WYSIJA_control_front{
         $widget_NL=new WYSIJA_NL_Widget(true);
         $widget_NL->iFrame=true;
         $subscription_form = $widget_NL->widget($widget_data,$widget_data);
-
+        $subscription_form = str_replace("</head>", '<script type="text/javascript">
+            /* <![CDATA[ */
+            var wysijaAJAX = {"action":"wysija_ajax","controller":"subscribers","ajaxurl":"'.admin_url('admin-ajax.php','absolute').'","loadingTrans":"'.__('Loading...',WYSIJA).'"};
+            /* ]]> */
+            </script></head>', $subscription_form);
         echo $subscription_form;
         exit;
     }

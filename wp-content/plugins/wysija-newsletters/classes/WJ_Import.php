@@ -464,8 +464,8 @@ class WJ_Import extends WYSIJA_object {
 
 		$query .= implode(', ', $lines);
 
-		// update values when the user already exists
-		$query .= ' ON DUPLICATE KEY UPDATE '.implode(', ', array_map(function($v) { return '`'.$v.'` = VALUES(`'.$v.'`)'; }, $this->_data_to_insert));
+	  	// update values when the user already exists
+		$query .= ' ON DUPLICATE KEY UPDATE '.implode(', ', array_map(array($this, 'process_data_to_insert'), $this->_data_to_insert));
 
 		// replace query to import the subscribers
 		$model_wysija = new WYSIJA_model();
@@ -845,5 +845,9 @@ class WJ_Import extends WYSIJA_object {
 
 		return $this->_data_result;
 	}
+
+	private function process_data_to_insert($v) {
+		return '`'.$v.'` = VALUES(`'.$v.'`)';
+  	}
 
 }

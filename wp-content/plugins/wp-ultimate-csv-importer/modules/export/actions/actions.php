@@ -5,7 +5,8 @@
  * Proprietary and confidential
  * You can contact Smackcoders at email address info@smackcoders.com.
  *******************************************************************************************/
-
+if ( ! defined( 'ABSPATH' ) )
+        exit; // Exit if accessed directly
 class ExportActions extends SkinnyActions {
 	public function __construct() {
 
@@ -396,8 +397,8 @@ class ExportActions extends SkinnyActions {
 			}
 		} elseif ($exporttype == 'eshop') {
 			$exporttype = 'post';
-			$header_query1 = "SELECT wp.* FROM  wp_posts wp where post_type = '$exporttype'";
-			$header_query2 = "SELECT post_id, meta_key, meta_value FROM  wp_posts wp JOIN wp_postmeta wpm  ON wpm.post_id = wp.ID where meta_key NOT IN ('_edit_lock','_edit_last')";
+			$header_query1 = "SELECT wp.* FROM  $wpdb->posts wp where post_type = '$exporttype'";
+			$header_query2 = "SELECT post_id, meta_key, meta_value FROM  $wpdb->posts wp JOIN $wpdb->postmeta wpm  ON wpm.post_id = wp.ID where meta_key NOT IN ('_edit_lock','_edit_last')";
 			$result_header_query1 = $wpdb->get_results($header_query1);
 			$result_header_query2 = $wpdb->get_results($header_query2);
 			foreach ($result_header_query1 as $rhq1_key) {
@@ -422,14 +423,14 @@ class ExportActions extends SkinnyActions {
 			$Header[] = 'featured_image';
 			$Header[] = 'post_tag';
 			$Header[] = 'post_category';
-			$get_post_ids = "select DISTINCT ID from wp_posts p join wp_postmeta pm on pm.post_id = p.ID where post_type = '$exporttype' and post_status in ('publish','draft','future','private','pending') and pm.meta_key = 'sku'";
+			$get_post_ids = "select DISTINCT ID from $wpdb->posts p join $wpdb->postmeta pm on pm.post_id = p.ID where post_type = '$exporttype' and post_status in ('publish','draft','future','private','pending') and pm.meta_key = 'sku'";
 
 			$result = $wpdb->get_col($get_post_ids);
 			$fieldsCount = count($result);
 			if ($result) {
 				foreach ($result as $postID) {
 					$pId = $pId . ',' . $postID;
-					$query1 = "SELECT wp.* FROM  wp_posts wp where ID=$postID";
+					$query1 = "SELECT wp.* FROM  $wpdb->posts wp where ID=$postID";
 					$result_query1 = $wpdb->get_results($query1);
 					if (!empty($result_query1)) {
 						foreach ($result_query1 as $posts) {
@@ -455,7 +456,7 @@ class ExportActions extends SkinnyActions {
 							}
 						}
 					}
-					$query2 = "SELECT post_id, meta_key, meta_value FROM  wp_posts wp JOIN wp_postmeta wpm  ON wpm.post_id = wp.ID where meta_key NOT IN ('_edit_lock','_edit_last') AND ID=$postID";
+					$query2 = "SELECT post_id, meta_key, meta_value FROM  $wpdb->posts wp JOIN $wpdb->postmeta wpm  ON wpm.post_id = wp.ID where meta_key NOT IN ('_edit_lock','_edit_last') AND ID=$postID";
 					$result_query2 = $wpdb->get_results($query2);
 					if (!empty($result_query2)) {
 						foreach ($result_query2 as $postmeta) {
@@ -478,7 +479,7 @@ class ExportActions extends SkinnyActions {
 							if ($postmeta->meta_key == '_thumbnail_id') {
 								$attachment_file = '';
 								#TODO: $attachment_file not used in this function / overwritten immediately
-								$get_attachement = "select guid from wp_posts where ID = $postmeta->meta_value AND post_type = 'attachment'";
+								$get_attachement = "select guid from $wpdb->posts where ID = $postmeta->meta_value AND post_type = 'attachment'";
 								$attachment = $wpdb->get_results($get_attachement);
 								$attachment_file = $attachment[0]->guid;
 								$PostMetaData[$postmeta->post_id][$postmeta->meta_key] = '';
@@ -624,8 +625,8 @@ class ExportActions extends SkinnyActions {
 			}
 		} elseif ($exporttype == 'wpcommerce') {
 			$exporttype = 'wpsc-product';
-			$header_query1 = "SELECT wp.* FROM  wp_posts wp where post_type = '$exporttype'";
-			$header_query2 = "SELECT post_id, meta_key, meta_value FROM  wp_posts wp JOIN wp_postmeta wpm  ON wpm.post_id = wp.ID where meta_key NOT IN ('_edit_lock','_edit_last')";
+			$header_query1 = "SELECT wp.* FROM  $wpdb->posts wp where post_type = '$exporttype'";
+			$header_query2 = "SELECT post_id, meta_key, meta_value FROM  $wpdb->posts wp JOIN $wpdb->postmeta wpm  ON wpm.post_id = wp.ID where meta_key NOT IN ('_edit_lock','_edit_last')";
 			$result_header_query1 = $wpdb->get_results($header_query1);
 			$result_header_query2 = $wpdb->get_results($header_query2);
 			foreach ($result_header_query1 as $rhq1_key) {
@@ -673,13 +674,13 @@ class ExportActions extends SkinnyActions {
 			$Header[] = 'table_price';
 			$Header[] = 'google_prohibited';
 
-			$get_post_ids = "select DISTINCT ID from wp_posts p join wp_postmeta pm on pm.post_id = p.ID where post_type = '$exporttype' and post_status in ('publish','draft','future','private','pending') and pm.meta_key = '_wpsc_sku'";
+			$get_post_ids = "select DISTINCT ID from $wpdb->posts p join $wpdb->postmeta pm on pm.post_id = p.ID where post_type = '$exporttype' and post_status in ('publish','draft','future','private','pending') and pm.meta_key = '_wpsc_sku'";
 			$result = $wpdb->get_col($get_post_ids);
 			$fieldsCount = count($result);
 			if ($result) {
 				foreach ($result as $postID) {
 					$pId = $pId . ',' . $postID;
-					$query1 = "SELECT wp.* FROM  wp_posts wp where ID=$postID";
+					$query1 = "SELECT wp.* FROM  $wpdb->posts wp where ID=$postID";
 					$result_query1 = $wpdb->get_results($query1);
 					if (!empty($result_query1)) {
 						foreach ($result_query1 as $posts) {
@@ -705,7 +706,7 @@ class ExportActions extends SkinnyActions {
 							}
 						}
 					}
-					$query2 = "SELECT post_id, meta_key, meta_value FROM  wp_posts wp JOIN wp_postmeta wpm  ON wpm.post_id = wp.ID where meta_key NOT IN ('_edit_lock','_edit_last') AND ID=$postID";
+					$query2 = "SELECT post_id, meta_key, meta_value FROM  $wpdb->posts wp JOIN $wpdb->postmeta wpm  ON wpm.post_id = wp.ID where meta_key NOT IN ('_edit_lock','_edit_last') AND ID=$postID";
 					$result_query2 = $wpdb->get_results($query2);
 					if (!empty($result_query2)) {
 						foreach ($result_query2 as $postmeta) {
@@ -723,7 +724,7 @@ class ExportActions extends SkinnyActions {
 							}
 							if ($postmeta->meta_key == '_thumbnail_id') {
 								$attachment_file = '';
-								$get_attachement = "select guid from wp_posts where ID = $postmeta->meta_value AND post_type = 'attachment'";
+								$get_attachement = "select guid from $wpdb->posts where ID = $postmeta->meta_value AND post_type = 'attachment'";
 								$attachment = $wpdb->get_results($get_attachement);
 								$attachment_file = $attachment[0]->guid;
 								$PostMetaData[$postmeta->post_id][$postmeta->meta_key] = '';
@@ -926,8 +927,8 @@ class ExportActions extends SkinnyActions {
 			}
 		} elseif ($exporttype == 'woocommerce') {
 			$exporttype = 'product';
-			$header_query1 = "SELECT wp.* FROM  wp_posts wp where post_type = '$exporttype'";
-			$header_query2 = "SELECT post_id, meta_key, meta_value FROM  wp_posts wp JOIN wp_postmeta wpm  ON wpm.post_id = wp.ID where meta_key NOT IN ('_edit_lock','_edit_last')";
+			$header_query1 = "SELECT wp.* FROM  $wpdb->posts wp where post_type = '$exporttype'";
+			$header_query2 = "SELECT post_id, meta_key, meta_value FROM  $wpdb->posts wp JOIN $wpdb->postmeta wpm  ON wpm.post_id = wp.ID where meta_key NOT IN ('_edit_lock','_edit_last')";
 			$result_header_query1 = $wpdb->get_results($header_query1);
 			$result_header_query2 = $wpdb->get_results($header_query2);
 			foreach ($result_header_query1 as $rhq1_key) {
@@ -952,14 +953,14 @@ class ExportActions extends SkinnyActions {
 			$Header[] = '_product_attribute_visible';
 			$Header[] = '_product_attribute_variation';
 
-			$get_post_ids = "select DISTINCT ID from wp_posts p join wp_postmeta pm on pm.post_id = p.ID where post_type = '$exporttype' and post_status in ('publish','draft','future','private','pending') and pm.meta_key = '_sku'";
+			$get_post_ids = "select DISTINCT ID from $wpdb->posts p join $wpdb->postmeta pm on pm.post_id = p.ID where post_type = '$exporttype' and post_status in ('publish','draft','future','private','pending') and pm.meta_key = '_sku'";
 
 			$result = $wpdb->get_col($get_post_ids);
 			$fieldsCount = count($result);
 			if ($result) {
 				foreach ($result as $postID) {
 					$pId = $pId . ',' . $postID;
-					$query1 = "SELECT wp.* FROM  wp_posts wp where ID=$postID";
+					$query1 = "SELECT wp.* FROM  $wpdb->posts wp where ID=$postID";
 					$result_query1 = $wpdb->get_results($query1);
 					if (!empty($result_query1)) {
 						foreach ($result_query1 as $posts) {
@@ -994,7 +995,7 @@ class ExportActions extends SkinnyActions {
 							}
 						}
 					}
-					$query2 = "SELECT post_id, meta_key, meta_value FROM  wp_posts wp JOIN wp_postmeta wpm  ON wpm.post_id = wp.ID where meta_key NOT IN ('_edit_lock','_edit_last') AND ID=$postID";
+					$query2 = "SELECT post_id, meta_key, meta_value FROM  $wpdb->posts wp JOIN $wpdb->postmeta wpm  ON wpm.post_id = wp.ID where meta_key NOT IN ('_edit_lock','_edit_last') AND ID=$postID";
 					$result_query2 = $wpdb->get_results($query2);
 					if (!empty($result_query2)) {
 						foreach ($result_query2 as $postmeta) {
@@ -1077,7 +1078,7 @@ class ExportActions extends SkinnyActions {
 							}
 							if ($postmeta->meta_key == '_thumbnail_id') {
 								$attachment_file = '';
-								$get_attachement = "select guid from wp_posts where ID = $postmeta->meta_value AND post_type = 'attachment'";
+								$get_attachement = "select guid from $wpdb->posts where ID = $postmeta->meta_value AND post_type = 'attachment'";
 								$attachment = $wpdb->get_results($get_attachement);
 								$attachment_file = $attachment[0]->guid;
 								$PostMetaData[$postmeta->post_id][$postmeta->meta_key] = '';

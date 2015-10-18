@@ -34,6 +34,8 @@
  * Notices must display the words
  * "Copyright Smackcoders. 2014. All rights reserved".
  ********************************************************************************/
+if ( ! defined( 'ABSPATH' ) )
+        exit; // Exit if accessed directly
 $impObj = new WPImporter_includes_helper();
 $nonceKey = $impObj->create_nonce_key();
 if(! wp_verify_nonce($nonceKey, 'smack_nonce'))

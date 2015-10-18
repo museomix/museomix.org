@@ -5,8 +5,8 @@ class WYSIJA_control_front_email extends WYSIJA_control_front{
     var $model='email';
     var $view='email';
 
-    function WYSIJA_control_front_email(){
-        parent::WYSIJA_control_front();
+    function __construct(){
+        parent::__construct();
     }
 
     function view(){

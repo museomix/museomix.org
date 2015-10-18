@@ -6,8 +6,8 @@ class WYSIJA_view_back_tmce extends WYSIJA_view_back{
     var $icon='icon-options-general';
     var $scripts=array();
 
-    function WYSIJA_view_back_tmce(){
-        $this->WYSIJA_view_back();
+    function __construct(){
+        parent::__construct();
     }
 
     function getScriptsStyles(){

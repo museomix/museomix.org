@@ -2,8 +2,9 @@
 defined('WYSIJA') or die('Restricted access');
 class WYSIJA_help_readme extends WYSIJA_object{
     var $changelog=array();
-    function WYSIJA_help_readme(){
 
+    function __construct(){
+        parent::__construct();
     }
 
     function scan($file=false){

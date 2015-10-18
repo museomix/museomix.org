@@ -95,9 +95,9 @@ class Theme_My_Login_Recaptcha_Admin extends Theme_My_Login_Abstract {
 
 		add_settings_section( 'general', null, '__return_false', $this->options_key );
 
-		add_settings_field( 'public_key',  __( 'Public Key',  'theme-my-login' ), array( &$this, 'settings_field_public_key'  ), $this->options_key, 'general' );
-		add_settings_field( 'private_key', __( 'Private Key', 'theme-my-login' ), array( &$this, 'settings_field_private_key' ), $this->options_key, 'general' );
-		add_settings_field( 'theme',       __( 'Theme',       'theme-my-login' ), array( &$this, 'settings_field_theme'       ), $this->options_key, 'general' );
+		add_settings_field( 'public_key',  __( 'Site Key',   'theme-my-login' ), array( &$this, 'settings_field_public_key'  ), $this->options_key, 'general' );
+		add_settings_field( 'private_key', __( 'Secret Key', 'theme-my-login' ), array( &$this, 'settings_field_private_key' ), $this->options_key, 'general' );
+		add_settings_field( 'theme',       __( 'Theme',      'theme-my-login' ), array( &$this, 'settings_field_theme'       ), $this->options_key, 'general' );
 	}
 
 	/**
@@ -120,10 +120,8 @@ class Theme_My_Login_Recaptcha_Admin extends Theme_My_Login_Abstract {
 	 */
 	public function get_themes() {
 		$recaptcha_themes = array(
-			'red'        => _x( 'Red (Default)', 'recaptcha theme', 'theme-my-login' ),
-			'white'      => _x( 'White',         'recaptcha theme', 'theme-my-login' ),
-			'blackglass' => _x( 'Black Glass',   'recaptcha theme', 'theme-my-login' ),
-			'clean'      => _x( 'Clean',         'recaptcha theme', 'theme-my-login' )
+			'light' => _x( 'Light', 'recaptcha theme', 'theme-my-login' ),
+			'dark'  => _x( 'Dark',  'recaptcha theme', 'theme-my-login' )
 		);
 		return apply_filters( 'theme_my_login_recaptcha_themes', $recaptcha_themes );
 	}

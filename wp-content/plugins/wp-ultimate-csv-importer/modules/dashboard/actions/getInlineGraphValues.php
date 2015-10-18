@@ -34,8 +34,8 @@
  * Notices must display the words
  * "Copyright Smackcoders. 2014. All rights reserved".
  ********************************************************************************/
-
-require_once('../../../../../../wp-load.php');
+if ( ! defined( 'ABSPATH' ) )
+        exit; // Exit if accessed directly
 
 ?>
 <script src= "<?php echo WP_CONTENT_URL; ?>/plugins/<?php echo WP_CONST_ULTIMATE_CSV_IMP_SLUG;?>/js/jquery.js" type="text/javascript"></script>
@@ -45,7 +45,6 @@ require_once('../../../../../../wp-load.php');
 var inserted = skipped = updated = [];
 </script>
 <?php
-//require_once('/var/www/newwordpress/wp/wp-load.php');
 global $wpdb;
 $getDetails = $wpdb->get_results("select * from smackcsv_status_log where sdm_id =".$_REQUEST['sdmid']);
 foreach($getDetails as $getDetail){

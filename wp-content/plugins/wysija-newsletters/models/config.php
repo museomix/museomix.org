@@ -87,7 +87,7 @@ class WYSIJA_model_config extends WYSIJA_object{
 	var $capabilities = array();
 	var $values = array();
 
-	function WYSIJA_model_config(){
+	function __construct(){
 		// global telling us if we're currently running the installation process install/helper
 		global $wysija_installing;
 		// get our WordPress option containing all of our settings

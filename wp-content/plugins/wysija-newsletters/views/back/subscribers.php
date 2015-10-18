@@ -7,10 +7,10 @@ class WYSIJA_view_back_subscribers extends WYSIJA_view_back
     var $icon = "icon-users";
     var $column_action_list = "email";
 
-    function WYSIJA_view_back_subscribers()
+    function __construct()
     {
 	$this->title = __("Lists and Subscribers", WYSIJA);
-	$this->WYSIJA_view_back();
+	parent::__construct();
 
 	$this->search = array("title" => __("Search subscribers", WYSIJA));
 	$this->column_actions = array('editlist' => __('Edit', WYSIJA), 'duplicatelist' => __('Duplicate', WYSIJA), 'deletelist' => __('Delete', WYSIJA));

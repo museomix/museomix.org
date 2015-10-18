@@ -3,7 +3,7 @@ defined( 'WYSIJA' ) or die( 'Restricted access' );
 
 class WYSIJA_help_update extends WYSIJA_object {
 
-	function WYSIJA_help_update(){
+	function __construct(){
 		$this->modelWysija = new WYSIJA_model();
 
 		//IMPORTANT when making db updated or running update processes, add the version and in the big switch below in the runUpdate() method

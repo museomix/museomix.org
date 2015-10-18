@@ -9,7 +9,8 @@
  * Licensed under the MIT license:
  * http://www.opensource.org/licenses/MIT
  */
-
+if ( ! defined( 'ABSPATH' ) )
+        exit; // Exit if accessed directly
 error_reporting(E_ALL | E_STRICT);
 require('UploadHandler.php');
 $current_user = wp_get_current_user();

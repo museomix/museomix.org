@@ -74,12 +74,16 @@ class Theme_My_Login_Themed_Profiles extends Theme_My_Login_Abstract {
 	protected function load() {
 		add_action( 'tml_modules_loaded', array( &$this, 'modules_loaded' ) );
 
-		add_action( 'init',              array( &$this, 'init'              ) );
-		add_action( 'template_redirect', array( &$this, 'template_redirect' ) );
-		add_filter( 'show_admin_bar',    array( &$this, 'show_admin_bar'    ) );
+		add_action( 'init',               array( &$this, 'init'               ) );
+		add_action( 'template_redirect',  array( &$this, 'template_redirect'  ) );
+		add_filter( 'show_admin_bar',     array( &$this, 'show_admin_bar'     ) );
+		add_action( 'wp_enqueue_scripts', array( &$this, 'wp_enqueue_scripts' ) );
+		add_filter( 'body_class',         array( &$this, 'body_class'         ) );
 
 		add_action( 'tml_request_profile', array( &$this, 'tml_request_profile' ) );
 		add_action( 'tml_display_profile', array( &$this, 'tml_display_profile' ) );
+
+		add_filter( 'wp_setup_nav_menu_item', array( &$this, 'wp_setup_nav_menu_item' ), 12 );
 	}
 
 	/**
@@ -189,6 +193,36 @@ class Theme_My_Login_Themed_Profiles extends Theme_My_Login_Abstract {
 			return false;
 
 		return $show_admin_bar;
+	}
+
+	/**
+	 * Enqueue scripts
+	 *
+	 * @since 6.4
+	 * @access public
+	 */
+	public function wp_enqueue_scripts() {
+		wp_enqueue_script( 'tml-themed-profiles', plugins_url( 'theme-my-login/modules/themed-profiles/themed-profiles.js' ), array( 'jquery' ) );
+	}
+
+	/**
+	 * Add a 'no-js' class to the body
+	 *
+	 * @since 6.4
+	 * @access public
+	 *
+	 * @param array $classes Body classes
+	 * @return array Body classes
+	 */
+	public function body_class( $classes ) {
+
+		if ( ! Theme_My_Login::is_tml_page( 'profile' ) )
+			return $classes;
+
+		if ( ! in_array( 'no-js', $classes ) )
+			$classes[] = 'no-js';
+
+		return $classes;
 	}
 
 	/**
@@ -319,6 +353,37 @@ class Theme_My_Login_Themed_Profiles extends Theme_My_Login_Abstract {
 				$url = add_query_arg( array_map( 'rawurlencode', wp_parse_args( $parsed_url['query'] ) ), $url );
 		}
 		return $url;
+	}
+
+	/**
+	 * Hide Profile link if user is not logged in
+	 *
+	 * Callback for "wp_setup_nav_menu_item" hook in wp_setup_nav_menu_item()
+	 *
+	 * @see wp_setup_nav_menu_item()
+	 * @since 6.4
+	 * @access public
+	 *
+	 * @param object $menu_item The menu item
+	 * @return object The (possibly) modified menu item
+	 */
+	public function wp_setup_nav_menu_item( $menu_item ) {
+		if ( is_admin() )
+			return $menu_item;
+
+		if ( 'page' != $menu_item->object )
+			return $menu_item;
+
+		// User is not logged in
+		if ( ! is_user_logged_in() ) {
+
+			// Hide Profile
+			if ( Theme_My_Login::is_tml_page( 'profile', $menu_item->object_id ) ) {
+				$menu_item->_invalid = true;
+			}
+		}
+
+		return $menu_item;
 	}
 }
 

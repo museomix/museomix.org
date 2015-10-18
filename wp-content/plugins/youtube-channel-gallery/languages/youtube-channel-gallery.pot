@@ -1,0 +1,904 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: youtube-channel-gallery\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-07-25 02:03+0200\n"
+"PO-Revision-Date: 2015-07-22 20:54+0100\n"
+"Last-Translator: Javier <javierpose@gmail.com>\n"
+"Language-Team: PoseLab <javierpose@gmail.com>\n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2010-06-23 21:48+0000\n"
+"X-Generator: Poedit 1.8.3\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-KeywordsList: _e;__\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: templates/admin_tabs.php:3 templates/admin_tabs.php:487
+#, fuzzy
+msgid "Title:"
+msgstr "Título:"
+
+#: templates/admin_tabs.php:9
+#, fuzzy
+msgid "Feed"
+msgstr "Feed"
+
+#: templates/admin_tabs.php:10
+#, fuzzy
+msgid "Player"
+msgstr "Reproductor"
+
+#: templates/admin_tabs.php:11
+#, fuzzy
+msgid "Search"
+msgstr "Búsqueda"
+
+#: templates/admin_tabs.php:12
+#, fuzzy
+msgid "Thumbnails"
+msgstr "Miniaturas"
+
+#: templates/admin_tabs.php:13
+#, fuzzy
+msgid "Link"
+msgstr "Enlace"
+
+#: templates/admin_tabs.php:26
+#, fuzzy
+msgid "YouTube API Key:"
+msgstr "YouTube API Key:"
+
+#: templates/admin_tabs.php:28
+#, fuzzy
+msgid "Get your own YouTube API Key and put here."
+msgstr "Obtén tu propia YouTube API Key e insertada aquí"
+
+#: templates/admin_tabs.php:32
+#, fuzzy
+msgid "Video feed type:"
+msgstr "Tipo de feed de vídeo:"
+
+#: templates/admin_tabs.php:34
+#, fuzzy
+msgid "Uploaded by a user"
+msgstr "Subidos por el usuario"
+
+#: templates/admin_tabs.php:35
+#, fuzzy
+msgid "User's favorites"
+msgstr "Favoritos del usuario"
+
+#: templates/admin_tabs.php:36
+#, fuzzy
+msgid "User's likes"
+msgstr "Likes de usuario"
+
+#: templates/admin_tabs.php:37
+#, fuzzy
+msgid "Playlist"
+msgstr "Lista de reproducción"
+
+#: templates/admin_tabs.php:42
+#, fuzzy
+msgid "Identify by:"
+msgstr "Identificar por:"
+
+#: templates/admin_tabs.php:44
+#, fuzzy
+msgid "Username"
+msgstr "Nombre de usuario"
+
+#: templates/admin_tabs.php:45
+#, fuzzy
+msgid "Channel ID"
+msgstr "ID de canal:"
+
+#: templates/admin_tabs.php:49
+#, fuzzy
+msgid "YouTube id:"
+msgstr "Id de Youtube:"
+
+#: templates/admin_tabs.php:50
+#, fuzzy
+msgid "YouTube playlist id:"
+msgstr "Id de lista de reproducción de YouTube:"
+
+#: templates/admin_tabs.php:56
+#, fuzzy
+msgid "Playlist order:"
+msgstr "Orden de lista de reproducción:"
+
+#: templates/admin_tabs.php:58
+#, fuzzy
+msgid "Date Order"
+msgstr "Ordenar por fecha"
+
+#: templates/admin_tabs.php:59
+#, fuzzy
+msgid "Rating Order"
+msgstr "Ordenar por calificación"
+
+#: templates/admin_tabs.php:60
+#, fuzzy
+msgid "Relevance Order"
+msgstr "Ordenar por relevancia"
+
+#: templates/admin_tabs.php:61
+#, fuzzy
+msgid "Title Order"
+msgstr "Ordenar por título"
+
+#: templates/admin_tabs.php:62
+#, fuzzy
+msgid "Video Count Order"
+msgstr "Ordenar por número de vídeos subidos"
+
+#: templates/admin_tabs.php:63
+#, fuzzy
+msgid "View Count Order"
+msgstr "Ordenar por número de reproducciones"
+
+#: templates/admin_tabs.php:70
+#, fuzzy
+msgid "Cache time (hours):"
+msgstr "Tiempo de cache (horas):"
+
+#: templates/admin_tabs.php:72
+#, fuzzy
+msgid ""
+"Hours that RSS data is saved in database, to not make a request every time "
+"the page is displayed. Assign this value according to how often you upgrade "
+"your playlist in YouTube."
+msgstr ""
+"Horas que los datos del RSS se guardan en la base de datos, para no hacer una "
+"solicitud cada vez que se muestra la página. Asigna este valor en función de "
+"la frecuencia con que actualizas la lista de reproducción en YouTube."
+
+#: templates/admin_tabs.php:79
+#, fuzzy
+msgid "Activate cache"
+msgstr "Activar caché"
+
+#: templates/admin_tabs.php:80
+#, fuzzy
+msgid ""
+"If you disable this field the cache will be deleted and will not be used. "
+"This is useful to refresh immediately the YouTube RSS used by the plugin. "
+"Reenable the cache when the gallery shows the changes you made in your "
+"youtube account."
+msgstr ""
+"Si se deshabilita este campo la caché se borrará y no será utilizada. Esto es "
+"útil para actualizar inmediatamente el RSS de YouTube usado por el plugin. "
+"Vuelve a habilitar la caché cuando la galería muestre los cambios que ha "
+"realizado en su cuenta de YouTube."
+
+#: templates/admin_tabs.php:95
+#, fuzzy
+msgid "Player:"
+msgstr "Reproductor:"
+
+#: templates/admin_tabs.php:97
+#, fuzzy
+msgid "Without player"
+msgstr "Sin reproductor"
+
+#: templates/admin_tabs.php:98
+#, fuzzy
+msgid "show player"
+msgstr "mostrar reproductor"
+
+#: templates/admin_tabs.php:99
+#, fuzzy
+msgid "show player in Magnific Popup"
+msgstr "mostrar reproductor en Magnific Popup"
+
+#: templates/admin_tabs.php:106
+#, fuzzy
+msgid "Width:"
+msgstr "Ancho:"
+
+#: templates/admin_tabs.php:109
+msgid "%"
+msgstr ""
+
+#: templates/admin_tabs.php:110
+#, fuzzy
+msgid "px"
+msgstr "px"
+
+#: templates/admin_tabs.php:114 templates/admin_tabs.php:314
+#, fuzzy
+msgid "Aspect ratio:"
+msgstr "Relación de aspecto:"
+
+#: templates/admin_tabs.php:116 templates/admin_tabs.php:316
+#, fuzzy
+msgid "Standard (4x3)"
+msgstr "Estándar (4x3)"
+
+#: templates/admin_tabs.php:117 templates/admin_tabs.php:317
+#, fuzzy
+msgid "Widescreen (16x9)"
+msgstr "Panorámico (16x9)"
+
+#: templates/admin_tabs.php:124
+#, fuzzy
+msgid "Theme:"
+msgstr "Tema:"
+
+#: templates/admin_tabs.php:126
+#, fuzzy
+msgid "Dark"
+msgstr "Oscuro"
+
+#: templates/admin_tabs.php:127
+#, fuzzy
+msgid "Light"
+msgstr "Claro"
+
+#: templates/admin_tabs.php:131
+#, fuzzy
+msgid "Progress bar color:"
+msgstr "Color de barra de progreso:"
+
+#: templates/admin_tabs.php:133
+#, fuzzy
+msgid "Red"
+msgstr "Rojo"
+
+#: templates/admin_tabs.php:134
+#, fuzzy
+msgid "White"
+msgstr "Blanco"
+
+#: templates/admin_tabs.php:141
+#, fuzzy
+msgid "Video quality:"
+msgstr "Calidad del vídeo:"
+
+#: templates/admin_tabs.php:143
+#, fuzzy
+msgid "default"
+msgstr "por defecto"
+
+#: templates/admin_tabs.php:144
+#, fuzzy
+msgid "highres"
+msgstr "alta resolución"
+
+#: templates/admin_tabs.php:145
+#, fuzzy
+msgid "hd1080"
+msgstr "hd1080"
+
+#: templates/admin_tabs.php:146
+#, fuzzy
+msgid "hd720"
+msgstr "hd720"
+
+#: templates/admin_tabs.php:147
+#, fuzzy
+msgid "large"
+msgstr "largo"
+
+#: templates/admin_tabs.php:148
+#, fuzzy
+msgid "medium"
+msgstr "mediano"
+
+#: templates/admin_tabs.php:149
+#, fuzzy
+msgid "small"
+msgstr "pequeño"
+
+#: templates/admin_tabs.php:151
+#, fuzzy
+msgid ""
+"Default value enables YouTube to select the most appropriate playback "
+"quality. If you select a quality level that is not available for the video, "
+"then the quality will be set to the next lowest level that is available."
+msgstr ""
+"El valor predeterminado permite a YouTube seleccionar la calidad de "
+"reproducción más adecuada. Si selecciona un nivel de calidad que no está "
+"disponible para el vídeo, la calidad se ajustará al siguiente nivel más bajo "
+"que este disponible."
+
+#: templates/admin_tabs.php:158
+#, fuzzy
+msgid "Autoplay"
+msgstr "Autoplay"
+
+#: templates/admin_tabs.php:162
+#, fuzzy
+msgid "Show YouTube logo"
+msgstr "Mostrar el logotipo de YouTube"
+
+#: templates/admin_tabs.php:163
+#, fuzzy
+msgid ""
+"Activate this field to show the YouTube logo in the control bar. Setting the "
+"color parameter to white will show the YouTube logo in the control bar."
+msgstr ""
+"Activa este campo para mostrar el logotipo de YouTube en la barra de control. "
+"Un ajuste del parámetro de color a blanco mostrará el logotipo de YouTube en "
+"la barra de control."
+
+#: templates/admin_tabs.php:170
+#, fuzzy
+msgid "Show related videos"
+msgstr "Mostrar los vídeos relacionados"
+
+#: templates/admin_tabs.php:171
+#, fuzzy
+msgid ""
+"Activate this field to show related videos when playback of the video ends."
+msgstr ""
+"Activa este campo para mostrar videos relacionados cuando termine la "
+"reproducción del vídeo."
+
+#: templates/admin_tabs.php:175
+#, fuzzy
+msgid "Show info"
+msgstr "Mostrar información"
+
+#: templates/admin_tabs.php:176
+#, fuzzy
+msgid ""
+"Activate this field to display information like the video title and uploader "
+"before the video starts playing."
+msgstr ""
+"Active este campo para mostrar información como el título del vídeo y nombre "
+"de usuario antes de que el vídeo comience a reproducirse."
+
+#: templates/admin_tabs.php:183 templates/admin_tabs.php:385
+msgid "Show additional content"
+msgstr ""
+
+#: templates/admin_tabs.php:191 templates/admin_tabs.php:393
+#, fuzzy
+msgid "Show title"
+msgstr "Mostrar Título"
+
+#: templates/admin_tabs.php:195 templates/admin_tabs.php:397
+msgid "Show published date"
+msgstr ""
+
+#: templates/admin_tabs.php:202 templates/admin_tabs.php:404
+#, fuzzy
+msgid "Show description"
+msgstr "Mostrar descripción"
+
+#: templates/admin_tabs.php:210 templates/admin_tabs.php:412
+#, fuzzy
+msgid "Title tag:"
+msgstr "Etiqueta de título:"
+
+#: templates/admin_tabs.php:212 templates/admin_tabs.php:414
+#, fuzzy
+msgid "h1"
+msgstr "h1"
+
+#: templates/admin_tabs.php:213 templates/admin_tabs.php:415
+#, fuzzy
+msgid "h2"
+msgstr "h2"
+
+#: templates/admin_tabs.php:214 templates/admin_tabs.php:416
+#, fuzzy
+msgid "h3"
+msgstr "h3"
+
+#: templates/admin_tabs.php:215 templates/admin_tabs.php:417
+#, fuzzy
+msgid "h4"
+msgstr "h4"
+
+#: templates/admin_tabs.php:216 templates/admin_tabs.php:418
+#, fuzzy
+msgid "h5"
+msgstr "h5"
+
+#: templates/admin_tabs.php:217 templates/admin_tabs.php:419
+#, fuzzy
+msgid "h6"
+msgstr "h6"
+
+#: templates/admin_tabs.php:221 templates/admin_tabs.php:423
+#, fuzzy
+msgid "Description words:"
+msgstr "Palabras en descripción:"
+
+#: templates/admin_tabs.php:223 templates/admin_tabs.php:425
+#, fuzzy
+msgid ""
+"Set the maximum number of words that will be displayed of the description. "
+"This field is useful when the descriptions of videos in the gallery have "
+"different sizes."
+msgstr ""
+"Establece el número máximo de palabras que se mostrarán en la descripción. "
+"Este campo es útil cuando la descripción de los vídeos de la galería tienen "
+"diferentes tamaños."
+
+#: templates/admin_tabs.php:232 templates/admin_tabs.php:284
+#: templates/admin_tabs.php:501 templates/admin_tabs.php:538
+msgid "Tab order:"
+msgstr ""
+
+#: templates/admin_tabs.php:249
+#, fuzzy
+msgid "Search input text:"
+msgstr "Campo de búsqueda de texto:"
+
+#: templates/admin_tabs.php:253
+#, fuzzy
+msgid "Restrict search to (# separated):"
+msgstr "Restringir búsqueda a (separa con #):"
+
+#: templates/admin_tabs.php:257
+#, fuzzy
+msgid "You must assing this tags to your videos to restrict the search:"
+msgstr "Debes asignar estas etiquetas a los vídeos para restringir la búsqueda:"
+
+#: templates/admin_tabs.php:266
+#, fuzzy
+msgid "Restrict search by default: It will overwrite results of feed tab)"
+msgstr ""
+"Restringir búsqueda por defecto: Sobreescribirá los resultados de la pestaña "
+"Feed"
+
+#: templates/admin_tabs.php:268 templates/admin_tabs.php:454
+#: templates/search.php:10
+#, fuzzy
+msgid "All"
+msgstr "Todos"
+
+#: templates/admin_tabs.php:276
+#, fuzzy
+msgid "Show search box"
+msgstr "Mostrar caja de búsqueda"
+
+#: templates/admin_tabs.php:280
+#, fuzzy
+msgid "Show select with Playlists"
+msgstr "Show desplegable con Playlistas"
+
+#: templates/admin_tabs.php:298
+#, fuzzy
+msgid "Number of videos to show:"
+msgstr "Vídeos a mostrar:"
+
+#: templates/admin_tabs.php:300
+#, fuzzy
+msgid "The plugin can display a maximum of 50 videos for each page."
+msgstr "El plugin puede mostrar un máximo de 50 vídeos por página."
+
+#: templates/admin_tabs.php:303
+#, fuzzy
+msgid "Thumbnail resolution:"
+msgstr "Resolución de miniaturas:"
+
+#: templates/admin_tabs.php:305
+#, fuzzy
+msgid "Default (120x90 px)"
+msgstr "Por defecto (120x90 px)"
+
+#: templates/admin_tabs.php:306
+#, fuzzy
+msgid "Medium (320x180)"
+msgstr "Media (320x180)"
+
+#: templates/admin_tabs.php:307
+#, fuzzy
+msgid "High (480x360)"
+msgstr "Alta (480x360)"
+
+#: templates/admin_tabs.php:324
+#, fuzzy
+msgid "Thumbnail columns:"
+msgstr "Columnas de las miniaturas:"
+
+#: templates/admin_tabs.php:330
+#, fuzzy
+msgid "Phones:"
+msgstr "Móviles:"
+
+#: templates/admin_tabs.php:338
+#, fuzzy
+msgid "Tablets:"
+msgstr "Tablet"
+
+#: templates/admin_tabs.php:350
+#, fuzzy
+msgid "Medium Desktops:"
+msgstr "Escritorios medio:"
+
+#: templates/admin_tabs.php:358
+#, fuzzy
+msgid "Large Desktops:"
+msgstr "Escritorios grandes:"
+
+#: templates/admin_tabs.php:372
+#, fuzzy
+msgid "Show duration"
+msgstr "Mostrar duración"
+
+#: templates/admin_tabs.php:376
+#, fuzzy
+msgid "Add \"nofollow\" to links"
+msgstr "Añade \"nofollow\" a enlaces"
+
+#: templates/admin_tabs.php:377
+#, fuzzy
+msgid ""
+"\"nofollow\" attribute provides a way for webmasters to tell search engines "
+"\"Don't follow this specific link.\""
+msgstr ""
+"El atributo \"nofollow\" ofrece a los webmasters un modo de indicar a los "
+"motores de búsqueda para no seguir un enlace."
+
+#: templates/admin_tabs.php:431
+#, fuzzy
+msgid "Thumbnail alignment:"
+msgstr "Alineación de miniaturas:"
+
+#: templates/admin_tabs.php:433
+#, fuzzy
+msgid "none"
+msgstr "Ninguno"
+
+#: templates/admin_tabs.php:434
+#, fuzzy
+msgid "Left"
+msgstr "Izquierda"
+
+#: templates/admin_tabs.php:435
+#, fuzzy
+msgid "Right"
+msgstr "Derecha"
+
+#: templates/admin_tabs.php:442
+#, fuzzy
+msgid "Thumbnail width:"
+msgstr "Ancho de miniaturas:"
+
+#: templates/admin_tabs.php:444
+#, fuzzy
+msgid "Extra small"
+msgstr "Extra pequeño"
+
+#: templates/admin_tabs.php:445
+#, fuzzy
+msgid "Small"
+msgstr "Pequeño"
+
+#: templates/admin_tabs.php:446
+#, fuzzy
+msgid "Half"
+msgstr "Medio"
+
+#: templates/admin_tabs.php:447
+#, fuzzy
+msgid "Large"
+msgstr "Grande"
+
+#: templates/admin_tabs.php:448
+#, fuzzy
+msgid "Extra large"
+msgstr "Extra grande"
+
+#: templates/admin_tabs.php:452
+#, fuzzy
+msgid "Min. size with alignment:"
+msgstr "Mín. tamaño con alineación:"
+
+#: templates/admin_tabs.php:455
+#, fuzzy
+msgid "Tablets"
+msgstr "Tablet"
+
+#: templates/admin_tabs.php:456
+#, fuzzy
+msgid "Medium Desktops"
+msgstr "Escritorio medio"
+
+#: templates/admin_tabs.php:457
+#, fuzzy
+msgid "Large devices"
+msgstr "Dispositivos grandes"
+
+#: templates/admin_tabs.php:459
+#, fuzzy
+msgid ""
+"Thumbnails will be aligned only from the size of selected device to prevent "
+"unwanted effects in small sizes."
+msgstr ""
+"Las miniaturas serán alineadas sólo desde el tamaño del dispositivo "
+"seleccionado para prevenir efectos no deseados en dispositivos pequeños."
+
+#: templates/admin_tabs.php:469
+msgid "Open in a new window"
+msgstr ""
+
+#: templates/admin_tabs.php:473
+#, fuzzy
+msgid "Show pagination"
+msgstr "Mostrar paginación"
+
+#: templates/admin_tabs.php:480
+msgid "Thumbnail content tab order:"
+msgstr ""
+
+#: templates/admin_tabs.php:483
+#, fuzzy
+msgid "Thumbnail:"
+msgstr "Miniatura:"
+
+#: templates/admin_tabs.php:491
+msgid "Published date:"
+msgstr ""
+
+#: templates/admin_tabs.php:495
+#, fuzzy
+msgid "Description:"
+msgstr "Descripción:"
+
+#: templates/admin_tabs.php:517
+#, fuzzy
+msgid "Link text:"
+msgstr "Texto del enlace"
+
+#: templates/admin_tabs.php:523
+#, fuzzy
+msgid "Show link to channel"
+msgstr "Mostrar enlace al canal"
+
+#: templates/admin_tabs.php:528
+#, fuzzy
+msgid "Open in a new window or tab"
+msgstr "Abrir en una ventana nueva o pestaña"
+
+#: templates/admin_tabs.php:533
+#, fuzzy
+msgid "Show link to thank the developer"
+msgstr "Mostrar enlace para agradecer al desarrollador"
+
+#: templates/link.php:9
+#, fuzzy
+msgid "By PoseLab"
+msgstr "Por PoseLab"
+
+#: templates/link.php:18
+#, fuzzy
+msgid "Show more videos"
+msgstr "Ver más vídeos"
+
+#: templates/thumb.php:4
+#, fuzzy
+msgid "Private video"
+msgstr "Vídeo privado"
+
+#: templates/thumbs.php:119
+#, fuzzy
+msgid "«Previous"
+msgstr "«Anterior"
+
+#: templates/thumbs.php:128
+#, fuzzy
+msgid "Next»"
+msgstr "Siguiente»"
+
+#: youtube-channel-gallery.php:48
+#, fuzzy
+msgid "Youtube Channel Gallery"
+msgstr "Galería de Canal de Youtube"
+
+#: youtube-channel-gallery.php:50
+#, fuzzy
+msgid "Show a youtube video and a gallery of thumbnails for a youtube channel"
+msgstr "Muestra un vídeo y una galería de miniaturas de una canal de Youtube "
+
+#: youtube-channel-gallery.php:714
+#, fuzzy
+msgid "Show more videos»"
+msgstr "Ver más vídeos"
+
+#: youtube-channel-gallery.php:723
+#, fuzzy
+msgid "There is no video to show."
+msgstr "No hay ningún vídeo para mostrar."
+
+#: youtube-channel-gallery.php:801
+#, fuzzy, php-format
+msgid "Error type: \"%1$s\". "
+msgstr "Tipo de error: \"%1$s\". "
+
+#: youtube-channel-gallery.php:802
+#, fuzzy, php-format
+msgid "Error message: \"%1$s\" "
+msgstr "Mensaje de error: \"%1$s\" "
+
+#: youtube-channel-gallery.php:803
+#, fuzzy, php-format
+msgid "Domain: \"%1$s\". "
+msgstr "Dominio: \"%1$s\". "
+
+#: youtube-channel-gallery.php:804
+#, fuzzy, php-format
+msgid "Reason: \"%1$s\". "
+msgstr "Razón: \"%1$s\". "
+
+#: youtube-channel-gallery.php:805
+#, fuzzy, php-format
+msgid "Location type: \"%1$s\". "
+msgstr "Tipo de localización: \"%1$s\". "
+
+#: youtube-channel-gallery.php:806
+#, fuzzy, php-format
+msgid "Location: \"%1$s\". "
+msgstr "Localización: \"%1$s\". "
+
+#: youtube-channel-gallery.php:808
+#, fuzzy, php-format
+msgid "Check in YouTube if the id %1$s belongs to a %2$s. "
+msgstr "Comprueba en YouTube si el id %1$s corresponde a un %2$s. "
+
+#: youtube-channel-gallery.php:810
+#, fuzzy, php-format
+msgid ""
+"If the user id is correct, check that the channel of the user has list of "
+"\"%1$s\". "
+msgstr ""
+"Si el id de usuario es correcto, comprueba que el canal de usuario tiene una "
+"lista de \"%1$s\". "
+
+#: youtube-channel-gallery.php:812
+#, fuzzy
+msgid ""
+"Check the <a href=\"http://wordpress.org/extend/plugins/youtube-channel-"
+"gallery/faq/\" target=\"_blank\">FAQ</a> of the plugin or send error messages "
+"to <a href=\"https://wordpress.org/support/plugin/youtube-channel-gallery\" "
+"target=\"_blank\">support</a>."
+msgstr ""
+"Revise el <a href=\"http://wordpress.org/extend/plugins/youtube-channel-"
+"gallery/faq/\" target=\"_blank\">FAQ</a> del plugin or envíe los mensajes de "
+"error a <a href=\"https://wordpress.org/support/plugin/youtube-channel-gallery"
+"\" target=\"_blank\">support</a>."
+
+#: youtube-channel-gallery.php:887
+#, fuzzy
+msgid "There are no videos matching selected criteria"
+msgstr "No hay vídeos que se ajusten al criterio seleccionado"
+
+#~ msgid "Message from server: \"%1$s\". "
+#~ msgstr "Mensaje del servidor: \"%1$s\". "
+
+#~ msgid "Show player above thumbnails"
+#~ msgstr "Mostrar reproductor sobre miniaturas"
+
+#~ msgid ""
+#~ "This field is used to assign the appropriate quality of thumbnail images "
+#~ "in top and bottom alignments and to assign width to thumbnails in left and "
+#~ "right alignments. If the quality of thumbnail images is not enough, insert "
+#~ "a larger value. If you are unsure you can assign one of the following "
+#~ "values​​: 120, 320, 480 or 640"
+#~ msgstr ""
+#~ "Este campo se utiliza para asignar la calidad de imagen más adecuada a las "
+#~ "miniaturas en las alineaciones superior e inferior y para asignar ancho a "
+#~ "las miniaturas en las alineaciones izquierda y derecha. Si la calidad de "
+#~ "las imágenes de las miniaturas no es suficiente, introduzca un valor "
+#~ "mayor. Si no está seguro de que valor usar puede asignar uno de los "
+#~ "siguientes valores: 120, 320, 480 ó 640"
+
+#~ msgid "Top"
+#~ msgstr "Arriba"
+
+#~ msgid "Bottom"
+#~ msgstr "Abajo"
+
+#~ msgid "Video width:"
+#~ msgstr "Ancho del vídeo:"
+
+#~ msgid "Show info (title, uploader)"
+#~ msgstr "Mostrar información (título, cargador)"
+
+#~ msgid "You must insert a valid YouTube user id."
+#~ msgstr "Debes introducir un id válido de usuario de YouTube."
+
+#~ msgid "You must insert a valid playlist id."
+#~ msgstr "Debes introducir un id válido de lista de reproducción de YouTube."
+
+#~ msgid "Light:"
+#~ msgstr "Claro"
+
+#~ msgid "No post to duplicate has been supplied!"
+#~ msgstr "No se facilitó ninguna entrada a copiar"
+
+#~ msgid "Post creation failed, could not find original post:"
+#~ msgstr ""
+#~ "Creación realizada sin éxito, no ha sido posible encontrar la entrada "
+#~ "original:"
+
+#~ msgid "No page to duplicate has been supplied!"
+#~ msgstr "No se facilitó ninguna página a copiar"
+
+#~ msgid "Make a duplicate from this post"
+#~ msgstr "Crea una copia de esta entrada"
+
+#~ msgid "Duplicate"
+#~ msgstr "Duplicar"
+
+#~ msgid "Make a duplicate from this page"
+#~ msgstr "Crea una copia de esta página"
+
+#~ msgid "Copy to a new draft"
+#~ msgstr "Copia en un borrador nuevo"
+
+#~ msgid "Duplicate Post Options"
+#~ msgstr "Opciones"
+
+#~ msgid "Duplicate Post"
+#~ msgstr "Duplicate Post"
+
+#~ msgid "Copy post/page date also"
+#~ msgstr "Copiar también fecha del post o la página"
+
+#~ msgid ""
+#~ "Normally, the new draft has publication date set to current time: check "
+#~ "the box to copy the original post/page date"
+#~ msgstr ""
+#~ "Normalmente se establece la fecha de publicación del nuevo borrador a la "
+#~ "fecha actual: compruebe la casilla para copiar la fecha original del post "
+#~ "o la página"
+
+#~ msgid "Do not copy these fields"
+#~ msgstr "No copiar estos campos"
+
+#~ msgid ""
+#~ "Comma-separated list of meta fields that must not be copied when cloning a "
+#~ "post/page"
+#~ msgstr ""
+#~ "Lista separada por comas de meta campos que no pueden ser copiados cuando "
+#~ "se clona una entrada/pagina."
+
+#~ msgid ""
+#~ "Prefix to be added before the original title when cloning a post/page, e."
+#~ "g. \"Copy of\" (blank for no prefix)"
+#~ msgstr ""
+#~ "Prefijo a ser agregado antes del titulo original cuando se clona una "
+#~ "entrada/pagina, ej. \"Copia de\" (en blanco  para no agregar prefijo)"
+
+#~ msgid "Minimum level to copy posts"
+#~ msgstr "Nivel mínimo para copiar posts"
+
+#~ msgid ""
+#~ "Warning: users will be able to copy all posts, even those of higher level "
+#~ "users"
+#~ msgstr ""
+#~ "Atención: los usuarios podrán copiar todos los posts, incluso aquellos de "
+#~ "usuarios de nivel más alto"
+
+#~ msgid "Save Changes"
+#~ msgstr "Guardar los cambios"
+
+#~ msgid "Donate"
+#~ msgstr "Hacer una donación"
+
+#~ msgid "Translate"
+#~ msgstr "Traducir"
+
+#~ msgid "http://www.lopo.it/duplicate-post-plugin/"
+#~ msgstr "Copy text   \t http://www.lopo.it/duplicate-post-plugin/"
+
+#~ msgid "Creates a copy of a post."
+#~ msgstr "Crear una copia de las entradas."
+
+#~ msgid "Enrico Battocchi"
+#~ msgstr "Enrico Battocchi"
+
+#~ msgid "http://www.lopo.it"
+#~ msgstr "http://www.lopo.it"

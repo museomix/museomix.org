@@ -42,13 +42,22 @@ jQuery( document ).ready(function() {
 	 }
 	 if(uploadedFile != '' && select_delim != '') { 
 		 var tmpLoc = jQuery('#tmpLoc').val();
-		 var doaction = 'record_no=1&file_name=' + uploadedFile + '&selected_delimeter=' + select_delim + '&checkmodule=' + checkmodule+'&temloc=' + tmpLoc+'&dir_path=' + dir_path + '&wpnonce=' + noncekey;
+//		 var doaction = 'record_no=1&file_name=' + uploadedFile + '&selected_delimeter=' + select_delim + '&checkmodule=' + checkmodule+'&temloc=' + tmpLoc+'&dir_path=' + dir_path + '&wpnonce=' + noncekey;
 		 if(tmpLoc != '' && tmpLoc != null) {
 			jQuery.ajax({
-				url: tmpLoc + 'templates/readfile.php',
+				url: ajaxurl,
 				type: 'post',
-				data: doaction,
 				dataType: 'json',
+				data: {
+					'record_no' : '1',
+					'file_name' : uploadedFile,
+					'selected_delimeter' : select_delim,
+					'checkmodule' : checkmodule,
+					'temloc' : tmpLoc,
+					'dir_path' : dir_path,
+					'wpnonce' : noncekey,
+					'action' : 'shownextrecords',
+				},
 				success: function (response) {
 					if (response != null) {
 						var totalLength = response.length;
@@ -60,6 +69,7 @@ jQuery( document ).ready(function() {
 	 }
  }
 });
+
 function goto_mapping(id){
 if(id == 'importfile'){
 var currentURL = document.URL; 
@@ -107,12 +117,20 @@ function gotoelement(id) {
             return false;
         }
     }
-    var doaction = 'record_no=' + gotoElement + '&file_name=' + uploadedFile + '&delim='+ delim + '&checkmodule=' + checkmodule+ '&dir_path=' + dir_path + '&wpnonce=' + noncekey;
+//    var doaction = 'record_no=' + gotoElement + '&file_name=' + uploadedFile + '&delim='+ delim + '&checkmodule=' + checkmodule+ '&dir_path=' + dir_path + '&wpnonce=' + noncekey;
     var tmpLoc = document.getElementById('tmpLoc').value;
     jQuery.ajax({
-        url: tmpLoc + 'templates/readfile.php',
+        url: ajaxurl,
         type: 'post',
-        data: doaction,
+        data: {
+              'record_no' : gotoElement,
+	      'file_name' : uploadedFile,
+	      'delim' : delim,
+	      'checkmodule' : checkmodule,
+	      'dir_path' : dir_path,
+	      'wpnonce' : noncekey,
+              'action' : 'shownextrecords',
+        },
         dataType: 'json',
         success: function (response) {
             var totalLength = response.length;
@@ -580,8 +598,8 @@ function importRecordsbySettings(siteurl)
        // var no_of_columns = document.getElementById('h2').value;
         var step = document.getElementById('stepstatus').value;
         var mappingArr = document.getElementById('mappingArr').value;
-	var dupContent = document.getElementById('duplicatecontent').checked;
-	var dupTitle = document.getElementById('duplicatetitle').checked;
+	//var dupContent = document.getElementById('duplicatecontent').checked;
+	//var dupTitle = document.getElementById('duplicatetitle').checked;
 	var currentlimit = document.getElementById('currentlimit').value;
 	var tmpCnt = document.getElementById('tmpcount').value;
 	var no_of_tot_records = document.getElementById('tot_records').value;
@@ -625,8 +643,13 @@ function importRecordsbySettings(siteurl)
 		return false;
 	}
 	var advancemedia = "";
-	if(importas == 'post' || importas == 'page' || importas == 'custompost' || importas == 'eshop')
-	advancemedia = document.getElementById('advance_media_handling').checked;
+	var dupContent = "";
+        var dupTitle = "";
+	if(importas == 'post' || importas == 'page' || importas == 'custompost' || importas == 'eshop'){
+                advancemedia = document.getElementById('advance_media_handling').checked;
+                dupContent = document.getElementById('duplicatecontent').checked;
+                dupTitle = document.getElementById('duplicatetitle').checked;
+        }
 	var postdata = new Array();
 	postdata = {'dupContent':dupContent,'dupTitle':dupTitle,'importlimit':importlimit,'limit':currentlimit,'totRecords':tot_no_of_records,'selectedImporter':importas,'uploadedFile':uploadedFile,'tmpcount':tmpCnt,'importinlineimage':importinlineimage,'inlineimagehandling':imagehandling,'inline_image_location':inline_image_location,'advance_media':advancemedia,'wpnonce':noncekey}
 
@@ -645,13 +668,15 @@ function importRecordsbySettings(siteurl)
                         } 
         	        if(parseInt(tmpCnt) < parseInt(tot_no_of_records)){
 				var terminate_action = document.getElementById('terminateaction').value;
-				if(terminate_action == 'continue'){
 					currentlimit = parseInt(currentlimit)+parseInt(importlimit);
 					document.getElementById('currentlimit').value = currentlimit;
 					console.log('impLmt: '+importlimit+'totRecds: '+tot_no_of_records);
 					document.getElementById('tmpcount').value = parseInt(tmpCnt)+parseInt(importlimit);
+				if(terminate_action == 'continue'){
 					setTimeout(function(){importRecordsbySettings()},0);
 				} else {
+					document.getElementById('log').innerHTML += data+'<br/>';
+					if(parseInt(tmpCnt) < parseInt(tot_no_of_records)-1)
 					document.getElementById('log').innerHTML += "<p style='margin-left:10px;color:red;'>"+translateAlertString('Import process has been terminated.')+"</p>";
                                         document.getElementById('ajaxloader').style.display="none";
                                         document.getElementById('startbutton').style.display = "none";
@@ -692,7 +717,8 @@ function continueprocess() {
     } else {
         document.getElementById('terminatenow').style.display = "";
     }
-    document.getElementById('log').innerHTML += "<div style='margin-left:10px;color:green;'>"+translateAlertString('Import process has been continued.')+"</div></br>";
+    if (parseInt(tmpCnt) < parseInt(tot_no_of_records))
+    document.getElementById('log').innerHTML += "<div style='margin-left:10px;color:green;'>"+translateAlertString(' Import process has been continued.')+"</div></br>";
     document.getElementById('ajaxloader').style.display = "";
     document.getElementById('startbutton').style.display = "";
     document.getElementById('continuebutton').style.display = "none";
@@ -920,6 +946,36 @@ function export_check(value) {
 		jQuery('#ShowMsg').delay(7000).fadeOut();
 	}
 }
+
+function addcorecustomfield(id,countold,csvheader){
+var table_id = id;
+var newrow = table_id.insertRow(-1);
+var count = document.getElementById('basic_count').value;
+count = parseInt(count)+1;
+newrow.id = 'custrow'+count;
+var filename = document.getElementById('uploadedFile').value;
+var row_count = document.getElementById('corecustomcount').value;
+        jQuery.ajax({
+                url: ajaxurl,
+                type: 'post',
+                //dataType: 'json',
+                data: {
+			'headerdata' : csvheader,
+			'filename' : filename,
+			'corecount' : count,
+                        'action' : 'addcorecustomfd',
+                },
+                success: function (response) {
+			newrow.innerHTML = response;
+			row_count = parseInt(row_count) + 1;
+			document.getElementById('corecustomcount').value = row_count;
+			document.getElementById('basic_count').value = count;
+                }
+        });
+
+}
+
+
 function choose_import_method(id) {
         if(id == 'uploadfilefromcomputer') {
                 document.getElementById('boxmethod1').style.border = "1px solid #ccc";
@@ -945,7 +1001,7 @@ function selectModules(id) {
     document.getElementById('post').checked = true;
     document.getElementById('page').checked = true;
     document.getElementById('users').checked = true;
-    document.getElementById('comments').checked = true;
+    //document.getElementById('comments').checked = true;
     document.getElementById('custompost').checked = true;
 
     jQuery('#postlabel').removeClass("disablesetting");
@@ -975,7 +1031,7 @@ function selectModules(id) {
     document.getElementById('post').checked = false;
     document.getElementById('page').checked = false;
     document.getElementById('users').checked = false;
-    document.getElementById('comments').checked = false;
+    //document.getElementById('comments').checked = false;
     document.getElementById('custompost').checked = false;
 
     jQuery('#nopostlabel').removeClass("disablesetting");

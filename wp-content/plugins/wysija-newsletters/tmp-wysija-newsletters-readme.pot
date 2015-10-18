@@ -1,0 +1,2974 @@
+msgid ""
+msgstr "MIME-Version: 1.0\n"
+
+#. Name.
+msgid "MailPoet Newsletters"
+msgstr ""
+
+#. Short description.
+msgid "Send newsletters post notifications or autoresponders from WordPress easily, and beautifully. Start to capture subscribers with our widget now."
+msgstr ""
+
+#. Screenshot description.
+msgid "Sample newsletters."
+msgstr ""
+
+#. Screenshot description.
+msgid "The drag &amp; drop editor."
+msgstr ""
+
+#. Screenshot description.
+msgid "Subscriber management."
+msgstr ""
+
+#. Screenshot description.
+msgid "Newsletter statistics."
+msgstr ""
+
+#. Screenshot description.
+msgid "Subscriber statistics (Premium version)."
+msgstr ""
+
+#. Screenshot description.
+msgid "Sending method configuration in Settings."
+msgstr ""
+
+#. Screenshot description.
+msgid "Importing subscribers with a CSV."
+msgstr ""
+
+#. Found in description header.
+msgid "Check out this 2 minute video."
+msgstr ""
+
+#. Found in description header.
+msgid "Features"
+msgstr ""
+
+#. Found in description header.
+msgid "Premium version"
+msgstr ""
+
+#. Found in description header.
+msgid "Support"
+msgstr ""
+
+#. Found in description header.
+msgid "Translations in your language"
+msgstr ""
+
+#. Found in description list item.
+msgid "Drag &amp; drop newsletter editor"
+msgstr ""
+
+#. Found in description list item.
+msgid "Send your latest posts automatically"
+msgstr ""
+
+#. Found in description list item.
+msgid "Autoresponders, i.e. \"Send email 3 days after someone subscribes\""
+msgstr ""
+
+#. Found in description list item.
+msgid "Send emails to your WordPress users"
+msgstr ""
+
+#. Found in description list item.
+msgid "Start collecting subscribers in 2-clicks with our sign up widget"
+msgstr ""
+
+#. Found in description list item.
+msgid "Single or double opt-in, your choice"
+msgstr ""
+
+#. Found in description list item.
+msgid "Import subscribers in 2 steps"
+msgstr ""
+
+#. Found in description list item.
+msgid "Get stats for your newsletter: opens, clicks, unsubscribes"
+msgstr ""
+
+#. Found in description list item.
+msgid "Drag and drop subscription form designer"
+msgstr ""
+
+#. Found in description list item.
+msgid "Your newsletters look the same in Gmail, iPhone, Android, Outlook, Yahoo, Hotmail, etc."
+msgstr ""
+
+#. Found in description list item.
+msgid "Send with your web host, Gmail, any SMTP, like SendGrid, Amazon SES Mandrill, etc..."
+msgstr ""
+
+#. Found in description list item.
+msgid "Segment your lists based on unopened, opened and clicked"
+msgstr ""
+
+#. Found in description list item.
+msgid "<a href=\"http://www.mailpoet.com/newsletter-templates-wordpress/\">Selection of over 70 themes</a>. Photoshop files included"
+msgstr ""
+
+#. Found in description list item.
+msgid "Sending newsletters in the free version is limited to 2000 subscribers"
+msgstr ""
+
+#. Found in description list item.
+msgid "Send to more than 2000 subscribers"
+msgstr ""
+
+#. Found in description list item.
+msgid "A beautiful statistics dashboard to compare your newsletters, and subscribers"
+msgstr ""
+
+#. Found in description list item.
+msgid "Detailed stats for each subscriber and newsletter"
+msgstr ""
+
+#. Found in description list item.
+msgid "Automated bounce handling, keep your subscribers' list clean"
+msgstr ""
+
+#. Found in description list item.
+msgid "Test your spam score before you send a newsletter to your subscribers"
+msgstr ""
+
+#. Found in description list item.
+msgid "Improve deliverability with DKIM signature"
+msgstr ""
+
+#. Found in description list item.
+msgid "Don't reinstall. Simply install an additional plugin"
+msgstr ""
+
+#. Found in description list item.
+msgid "Priority support: let us optimize your settings!"
+msgstr ""
+
+#. Found in description list item.
+msgid "Arabic"
+msgstr ""
+
+#. Found in description list item.
+msgid "Basque"
+msgstr ""
+
+#. Found in description list item.
+msgid "Catalan"
+msgstr ""
+
+#. Found in description list item.
+msgid "Chinese"
+msgstr ""
+
+#. Found in description list item.
+msgid "Croatian"
+msgstr ""
+
+#. Found in description list item.
+msgid "Czech"
+msgstr ""
+
+#. Found in description list item.
+msgid "Danish"
+msgstr ""
+
+#. Found in description list item.
+msgid "Dutch"
+msgstr ""
+
+#. Found in description list item.
+msgid "French (but of course!)"
+msgstr ""
+
+#. Found in description list item.
+msgid "German"
+msgstr ""
+
+#. Found in description list item.
+msgid "Greek"
+msgstr ""
+
+#. Found in description list item.
+msgid "Hebrew"
+msgstr ""
+
+#. Found in description list item.
+msgid "Hungarian"
+msgstr ""
+
+#. Found in description list item.
+msgid "Indonesian"
+msgstr ""
+
+#. Found in description list item.
+msgid "Italian"
+msgstr ""
+
+#. Found in description list item.
+msgid "Japanese"
+msgstr ""
+
+#. Found in description list item.
+msgid "Norwegian"
+msgstr ""
+
+#. Found in description list item.
+msgid "Persian"
+msgstr ""
+
+#. Found in description list item.
+msgid "Polish"
+msgstr ""
+
+#. Found in description list item.
+msgid "Portuguese PT"
+msgstr ""
+
+#. Found in description list item.
+msgid "Portuguese BR"
+msgstr ""
+
+#. Found in description list item.
+msgid "Romanian"
+msgstr ""
+
+#. Found in description list item.
+msgid "Russian"
+msgstr ""
+
+#. Found in description list item.
+msgid "Serbian"
+msgstr ""
+
+#. Found in description list item.
+msgid "Slovak"
+msgstr ""
+
+#. Found in description list item.
+msgid "Slovenian"
+msgstr ""
+
+#. Found in description list item.
+msgid "Spanish"
+msgstr ""
+
+#. Found in description list item.
+msgid "Swedish"
+msgstr ""
+
+#. Found in description list item.
+msgid "Turkish"
+msgstr ""
+
+#. Found in description paragraph.
+msgid "Create newsletters, automated emails, post notifications and autoresponders. Capture subscribers with our signup widget. Drop your posts, images, social icons in your newsletter. Change fonts and colors on the fly. A simple newsletter solution for WordPress. Finally!"
+msgstr ""
+
+#. Found in description paragraph.
+msgid "We built it with the idea that newsletters in WordPress should be easy. Not hard. Forget MailChimp, Aweber, etc. We're the good guys inside your WordPress."
+msgstr ""
+
+#. Found in description paragraph.
+msgid "https://vimeo.com/130151897"
+msgstr ""
+
+#. Found in description paragraph.
+msgid "<a href=\"http://www.mailpoet.com/premium/\">MailPoet Premium</a> offers these nifty extra features:"
+msgstr ""
+
+#. Found in description paragraph.
+msgid "<a href=\"http://www.mailpoet.com/premium/\">Visit our Premium page</a>."
+msgstr ""
+
+#. Found in description paragraph.
+msgid "Find over 80 articles in our documentation:"
+msgstr ""
+
+#. Found in description paragraph.
+msgid "<a href=\"http://support.mailpoet.com/\">support.mailpoet.com</a>"
+msgstr ""
+
+#. Found in description paragraph.
+msgid "<a href=\"http://support.mailpoet.com/knowledgebase/translations-in-your-language/\">Get a Premium plugin license in exchange for your help in translation</a>"
+msgstr ""
+
+#. Found in installation header.
+msgid "1. The super easy way"
+msgstr ""
+
+#. Found in installation header.
+msgid "2. The easy way"
+msgstr ""
+
+#. Found in installation header.
+msgid "3. The old and reliable way (FTP)"
+msgstr ""
+
+#. Found in installation list item.
+msgid "In your Admin, go to menu Plugins &gt; Add"
+msgstr ""
+
+#. Found in installation list item.
+msgid "Search for <code>mailpoet</code>"
+msgstr ""
+
+#. Found in installation list item.
+msgid "Click to install"
+msgstr ""
+
+#. Found in installation list item.
+msgid "Activate the plugin"
+msgstr ""
+
+#. Found in installation list item.
+msgid "A new menu <code>mailpoet</code> will appear in your Admin"
+msgstr ""
+
+#. Found in installation list item.
+msgid "Download the plugin (.zip file) on the right column of this page"
+msgstr ""
+
+#. Found in installation list item.
+msgid "Select the tab \"Upload\""
+msgstr ""
+
+#. Found in installation list item.
+msgid "Upload the .zip file you just downloaded"
+msgstr ""
+
+#. Found in installation list item.
+msgid "A new menu <code>MailPoet</code> will appear in your Admin"
+msgstr ""
+
+#. Found in installation list item.
+msgid "Upload <code>wysija-newsletters</code> folder to the <code>/wp-content/plugins/</code> directory"
+msgstr ""
+
+#. Found in installation list item.
+msgid "Activate the plugin through the 'Plugins' menu in WordPress"
+msgstr ""
+
+#. Found in installation paragraph.
+msgid "There are 3 ways to install this plugin:"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed URL validation issue"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved newsletter/subscriber search"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed minor issues"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Enhanced redirection check in email URLs."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed old-style PHP constructors."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed newsletter preview bug."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed import issues on old PHP versions."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed minor issues."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added HHVM support"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added MariaDB support"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed import issue where existing subscriber's data was not updated"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed hidden signup confirmation when the theme \"Twenty Fifteen\" is activated"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed import issue on Windows servers, all valid subscribers CSV files can be imported now"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed the filter \"Subscribers in no list\" in the Subscribers' listing in the backend"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed bug in the frontend subscriptions page with the shortcode [wysija_page] not being replaced"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed rendering issue when sending WordPress Post notifications including multiple levels of nested HTML lists(ul &amp; ol)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved performance in the Subscribers' listing"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved scheduled tasks process responses for greater reliability"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added \"WBounce\" to our list of compatible plugins in Settings &gt; Add-ons"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added non-translated strings for the subscribe and unsubscribe admin notifications"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed all of the RTL issues on delivered newsletters and their web version"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed issue when importing subscribers with new custom fields"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed duplicated Monthly post notifications issue"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed View in Browser version deactivation"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Removed option to switch to Beta"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed a conflict with the plugin <a href=\"https://wordpress.org/plugins/magic-action-box/\">Magic Action Box</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed blank export file when exporting subscribers with custom fields"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed the default subscribers ordering in the backend, we now display the most recent first"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed the bug on Bold and Italic commands in our newsletter editor"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed an issue on the new bulk resend confirmation email feature"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed bounce management issue (Premium only), counting until 3 when a mailbox is full"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved security thanks to Dominik Schilling, <a href=\"http://planetzuda.com\">Ryan Satterfield</a> and <a href=\"https://logicaltrust.net/en/\">Logical Trust</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved performance issue"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved email rendering"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved our stats dashboard, now they have a few more goodiness attached to them"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved Subscribers' Export, better data encoding for Windows servers"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved Form Editor, Date fields now accept dates prior to 1970"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed conflict with EditFlow in our Visual Editor"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed rare bug on Windows Server stopping you from sending emails"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added option to Resend confirmation email in the Subscriber's listing"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Hard at work cleaning up our code and making it better"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved protection against CSRF attacks thanks to Yoshinori Matsumoto."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed bug on scheduled newsletters edited back and forth and becoming uneditable."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed when duplicating an email through the stats page of a newsletter, then deleting the duplicate would also delete the original."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Old code Spring cleaning part 2, getting rid of the junk."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved protection of themes upload, unsubscribe links, file access and statistics."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved the \"Send a test email\" function."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed never ending process while sending previews on certain servers."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed a few regular expressions for a better rendering in Outlook."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed memory issue when dropping the \"WordPress Post\" widget on sites with thousands of taxonomies."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed wrong subscribers count in the subscribers' listing."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Old code Spring cleaning, removed unused rusty pieces."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed email display issues caused by responsive CSS. We're truly sorry for this."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "New columns on Subscribers page: \"Never opened or clicked\""
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Removed \"Unconfirmed\" filter on Subscribers page when signup confirmation is off"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed a few minor bugs on the Statistics page for Premium users. Thanks for your feedbacks!"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed our hair with spray to look like cool kids in the eighties"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed security issue reported by our dear Dominic. Thank you sir!"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added 1 more add-on to our plugin's listing"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Implemented a new Email Rendering Engine, with a lot of bugs fixed for Outlook users and Mobile Users"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed broken \"Automatic Latest Content\" settings on sites with lots of tags"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed fatal error when sending to more than 1 million total subscribers"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed subscribers page being inaccessible on some Multisites (very rare bug)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed Outlook 2013 paragraph spacing issue on previous beta"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed security issue reported by <a href=\"http://sucuri.net/\">Sucuri</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed the HTML button on TinyMCE which was hidden in editor"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed the links popup on TinyMCE for IE11 in editor"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed \"automated latest content\" (ALC) bugs with multiple Custom Post Types"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed the upload image functionality in our plugin"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed default item selected on filter lists at the Subscribers page for Firefox and Opera users"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed warning message appearing on the subscription form for Admin Users"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed a few typos in the plugin"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved the CSV export to expand its compatibility with Excel on Windows"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved the performance of the plugin when loading admin assets"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed the Upload Image functionality in our plugin"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed default item selected on filter lists at the Users Page for Firefox and Opera users"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed warning message appearing on the Subscription form for Admin Users"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed some typos in the plugin"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved the performance of the plugin when Loading admin assets"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed TinyMCE issue with WordPress 3.9, our editor in Step 2 is working again"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed conflicting shortcode between MailPoet's custom fields and Ultimate TinyMCE shortcode"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed compatibility issue with WordPress 3.9: the TinyMCE editor in WordPress Posts edition page was broken"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed regular expression on Google analytics tracking code (Premium only)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed the importing method, compatible to more CSV formats"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Hey, we still have an issue with WordPress 3.9, our tinyMCE editor in Step 2 of the newsletter edition is not working properly (buttons are not usable)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "No need to report us that issue, we're already working hard to fix it. Thanks for your patience! :)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed filters on Automated Latest Content for Taxonomies and Post Types"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed White Screen on What's New page after updating"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed display bug, image sitting on top of the text editor in the Step2 of newsletter edition"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added support for <code>mysqli</code> of WordPress 3.9"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Replaced The tooltip script \"qTip2\" in favor of \"Bootstrap's Tooltip\" (JavaScript Library)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed Javascript conflict breaking some of WordPress post editor function (add media upload, etc ...)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed bugs when using bulk actions within WordPress plugins listing"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed a rendering issue on the welcome page"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed ability to make firstname and last name field required fields on the subscription forms"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed rare issue of WordPress media uploader sending HTTP 500 error when uploading an image"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved the performance of the plugin with a better version handling"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved the Import/Export tools"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved \"admin_body_class\" to be more consistent"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved consistency for settings defaults"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved the inner tabs JavaScript on the settings page in premium version"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved the JavaScript on the \"WordPress post\" widget"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Remove badly named functions creating conflicts on step 3 of the newsletter creation process"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed a conflict with the \"Ultimate Shortcode\" plugin breaking our subscription forms"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed automatically inserted text in confirmation/subscription pages"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved CSV special characters handling in the Subscribers import functionality"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved some of our warnings in the backend to make the messages clearer"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved MailPoet Statistics Page with styling compatible to WordPress v3.8"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved handling Big Databases on daily post notifications"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added extra information in the Newsletters' statistics page for an efficient summary"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added German Disclaimer to a new Docs Folder for legal purpose"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Minor changes improving the User Experience in some of our Forms in the backend"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Replaced The autoselection script \"Choosen\" in favor of \"Select2\" (JavaScript Library)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "This is the juiciest of all releases. Ready?"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "a new statistics dashboard in Premium. The beauty of the big picture"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "add more fields in your subscription forms, like phone number, address, or whatever you like"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "display an archive of your past newsletters in a page with a shortcode. Find it in the settings"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "display your posts' author names and categories in the newsletter editor"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "insert several posts at once in the editor, instead of one at a time. Time saver"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "a dozen new display options when you drop your posts in the newsletter, for the control freaks"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "find a list of add-ons in the settings. Plug your MailPoet with your other favorite plugins, like Gravity Forms"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "select your own WordPress pages for your confirmation and unsubscribe pages"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "use your MailPoet shortcodes in your confirmation emails, like [user:firstname | default:reader]"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "MailPoet now abides to German privacy laws. Guten tag Alex!"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "the browser version of your newsletter now include the Google Analytics tracking code (Premium)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "right to left language improvements"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "our user interface is now styled for 3.8"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "needless to say, hundreds of mini improvements"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "we hand over to you 6 months of hard work. Enjoy!"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "The latest Beta for v2.6"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed stable update URL to the Core Repository"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Google Analytics URLs now working as expected"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Update warning fixed"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed links url not being properly saved in some case when using the google campaign code"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed queue processing fatal error, halting the sending process (only in rare case scenarios)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Automatic latest content widget improved"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added minor visual improvements to fit better WP 3.8 style"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Mail-tester now works also on ssl sites"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Theme installation now works with https protected sites too"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Adapted buttons to the WordPress 3.8 style"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Changed some image icons to use <code>dashicons</code>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Removed notices regarding an unused file"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Removed a bug on FROM email input tooltip"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Removed MySQL bugs on Stats dashboard filters"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Enhanced the Widget AJAX URL method"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed some CSS positioning issue around buttons"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Adapted the notices/warnings style to WordPress 3.8"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improvements on Bulk actions for Subscribers and Newsletters"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed domain column missing"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed problems with problem author name for automatic newsletters"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Removed notices on preview on Browser"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improved the update plugin process"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "better CSS for the add-ons bage"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed bug on bulk actions for subscribers and newsletters"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "removing some PHP Notices/Warnings"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improved installing premium plugin process"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added newsletter bulk delete option"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed a bug throwing an error trying to update \"Warning: fopen(...\""
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improved RTL on form editor"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added smoother auto update process free and premium plugin happening together"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "small corrections on statistics dashboard form editor and newsletter editor"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added better support for Retina displays"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added custom fields functionality in the form editor section"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improved stats dashboard for premium users"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added archive page shortcode"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added select your own confirmation page"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed rare bug emails being re-enqueued when a partially sent newsletter was paused and edited from step3"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed improved bounce emails detection to handle more case scenarios (premium only)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added facelift and botoxed lips much needed for our best WP 3.8 looks"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed another rare case where image goes missing when dragging and dropping a WordPress' post into our visual editor"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed post updates taking too long when refreshing automatic newsletters with the \"automated latest content\" widget"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed rare case where image goes missing when dragging and dropping an uploaded image into our visual editor"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed birthday cake for our two years anniversary  http://www.mailpoet.com/two-year-anniversary/"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed issue automatic newsletter not going out when using Wysija's cron triggered by visitors pageview in Settings &gt; Advanced"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed issue wrong separator in export file(CSV or Excel)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed newsletters not being saved in Chrome at visual editor level"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed daily/weekly post notifications missing some articles if other newsletters were being sent at the same time"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed broken redirection when square brackets are present in your URLs"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed rare case where image goes missing when dragging and dropping a WordPress' post into our visual editor"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed \"View in your Browser\" and \"Unsubscribe\" not being translated in your language in daily/weekly post notifications"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed broken links with port specified (e.g.: mysiteurl.com:8888/my-post)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed updating automatically the \"automated latest content\" widget in automatic newsletter on create/update/delete any post"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improved multisite bounce process"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improved email validation"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improved IP recording"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed issue with \"Magic Members\" plugin adding their list of users when one of our forms shortcode was in a post/page"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed notice in the links tracking controller in the frontend"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed cross image in popup was slightly shifted"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed network sending method not inheriting the right parameters in MS (From address, etc...)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed issue when trying to delete first list in list selection widget"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed error firing daily and weekly newsletters"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed premium mail-tester iframe not working on modern browser"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed send_at parameter being updated wrongfully for automatic newsletters"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed missing cron schedules for post notifications and scheduled newsletters"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed issue with auto save when switching themes"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed issue preventing the deletion of newly added image"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed sending method not being override in multisite"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed validation messages not translated on some MS sites due to language locale issue"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improved better use of the language definition so that we understand on which language a WPML site is for instance"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improved better use of the language definition (removed WPLANG) so that we understand on which language a WPML site is for instance"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added retina icons for text editor"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed compatibility issue with WordPress 3.6 and latest jQuery"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed general reply to email settings not applied to sign up confirmation email"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed wild \"Security failure during request.\" in the backend of some server configurations"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed count issues on subscribers and list"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed failing to send post notification newsletter preview with the tag [newsletter:post_title]"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "refactored export and import code"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improved MailPoet's cron in order to respect better the delays between one scheduled task and another"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed broken sending process when DKIM is activated but the openSSL php library goes missing"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed missing update procedure of 2.5.2 for bulk confirm"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed daily post notification sending sometimes one day old posts"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed SQL error on user to subscriber synch"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed frontend notice on subscriptions modifications"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed delete automatic newsletters"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed remove one user from all mailing lists at a time from the admin interface"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added reply-to address in advanced settings"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added hook to delete MailPoet subscribers when a WP multisite user is deleted"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed MailPoet's cron page view auto trigger creating some errors on some servers"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed WordPress user auto import as MailPoet subscribers on multisite"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed rendering issue 2.5.2"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed confusing text alignment not applied in the visual editor's tiny MCE"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed autosave on step 2, the newsletter editor"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed dragged images in IE10 in the newsletters' visual editor"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed subscribers count not being refreshed after a bulk delete"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed bulk confirm option which was missing a subscribed date to be completely working"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added protection to avoid switching to the beta without wanting"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed PHP notices in the newsletter's view in your browser version"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed view in your browser link being left aligned"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed line height issue on some Outlook versions"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added checkbox to select default theme for new newsletters. See Themes tab."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added bulk select all subscribers, like Gmail with conversations"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added bulk actions to move or remove subscribers from lists"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added bulk action \"Confirm unconfirmed subscribers\""
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added \"undo unsubscribe\" in unsubscribed confirmation page"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added option to have the beta version of plugin, see Advanced Settings"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added Styles and Themes tab of visual editor as permissions in Advanced Settings"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improved single automated bounce handling config for all sites in Multisite, for Premium"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improved export feature with semi-colon separated option"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improved sorting of subscribers in stats by open date and time"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed the monthly scheduling of automatic newsletter for \"last day...\""
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed duplicating a post notification email into an autoresponder would prevent from sending previews"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed new shortcode for issue number was not returning the right number"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed send admin notification on subscribe for each list a user subscribes to, not just the first time"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed outlook rendering issue fixed images alignment"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed tea, with milk and sugar"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added translations of the \"loading...\" message in forms.#"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added download link to theme's .zip file in theme detail pages"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added possibility to hide our update page's kitten. It hurt some feelings"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added protection on looping install process resulting in duplication of default list or newsletter"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed sending autoresponders twice after importing same csv file"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improved subscription form rendering and support of unicode/special characters"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improved security on queueing emails"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed missing confirmation message when subscribing to forms (introduced in 2.4.2)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed scheduling issue when sending every month on a given day"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed form editor issues related to data encoding/decoding"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed post notification will not activate on step3 of the newsletter edition"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed scheduled emails generating a queueing error on step3 of the newsletter edition"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed import into a list associated with a retro-active autoresponder was not put into the queue"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed retro-active autoresponder delay calculation"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed issue in form editor. Using quotes in confirmation message prevented Form from being saved."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed autoresponders being automatically queued if modified and saved on step3 of the newsletter edition this resulting in a sql error"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed post notification being queued immediately after changes being saved on step3 related to retroactive autoresponders."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added ability to edit HTML in text blocks of visual editor (beta)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added a form manager in settings, with a drag and drop interface"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added ability for users to share their usage data with MailPoet's team"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added a dozen newsletter themes"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added image resizing of images uploaded in previous versions"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added autosave on browser back button. No more lost changes"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improved sending status with progress bar"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improved translations"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improved autoresponders: now retroactive and will be sent to newly imported subscribers too"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed when sending directly a newsletter which was set as scheduled in step 3"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed dozens of small bugs"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "impressed by your determination in reading the full change log"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed unsubscribe and subscriptions links lead now to view in browser version if the subscriber doesn't exists in the DB anymore (instead of a white screen)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed error when trying to delete a duplicated list"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed view in browser link"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed how spammy is your newsletter and Mandrill"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed variable type issue leading in some case scenario to a Fatal Error in the frontend subscription widget"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed removed autofill value in HTML version of subscription form"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improved memory usage on subscribers import and export processes"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added default value from WordPress' logged in user in the subscription form"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added dropdown selection of statuses (publish, private, scheduled, draft) for WordPress' Posts to be dropped into the visual editor"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added option to MailPoet's CRON (task scheduler) to deactivate the schedule tasks checks on any page view"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed unsubscribe date in the frontend subscriptions management is now translated with date_i18n (thanks Anna :))"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed unsubscribe link in preview emails"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed subscribers count when double optin is deactivated"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed unsubscribe link with Google Analytics"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added drag and drop private or scheduled posts in the visual editor"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed more than one post notification going out monthly, weekly or daily"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed warning in MS settings"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed translation issues for comments checkbox for instance"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed little notice when deleting list"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed buddypress multiple checkbox on registration form"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed on duplicate of a post notification reset the articles already sent in the original so that it starts from scratch"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed import ignoring rows with invalid data to avoid import failure"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed missing title and description of widget"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed multisite only you'll see once the update screen as a network admin"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improved logging options"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed scheduling issue for automatic newsletters"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed message output in case of cron problems"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed wordpress images gallery pagination"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed occasional internal server error on some users with PHP running as FastCGI"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added correction of our commit through svn some files were missing"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added \"shortcodes\" for newsletter. Add more than first and last name, like dates, links Supported in subject line too."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added custom roles to autoresponders so you can send to more than just the default roles (admin, editor, author, etc.)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added single sending method for all sites in Multisite. See new \"MS\" tab in settings for more"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added DKIM optional upgrade to 1024 bits to comply with Gmail (Premium feature)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added support for Premium behind firewall with no possible requests to MailPoet.com"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed images uploaded in MailPoet are now resized to 600px. Next release will include images from media library."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed lightbox (popups) width for right to left languages"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed subscription form on WordPress user registration"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed load translation error on Windows server"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed wrong count for the issue number tag [number] in daily, weekly and monthly post notification"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed immediate custom post notification wrongly triggered"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed browser view error for rare scenarios"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed SendGrid web API not able to send newsletters to subscribers with first name and/or last name"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed WordPress' images browser"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed breakfast, with a buttered toast and nice latte"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "svn error please update your version to the latest one"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed weekly post notifications not having all of the articles of the week, but just of the day"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed immediate single post notification not being triggerred"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed translation issue in confirmation page, message was forced in English"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed display bug in settings, SMTP fields (port, authentication, secure connection) showing where not needed"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed manual bounce processing button not working"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed issue number [number] tag not having the right value"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed small frontend conflict with jquery 1.9.0 and above"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed missing filter in newsletters statistic for the Not Sent status"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed post notification could send some past articles in one specific case scenario"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed wrong count of subscribers in backend interfaces"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed still sending to subscribers manually removed from a list in the backend"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed number of WordPress users don't match with the number in our WordPress Users list"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added support for German umlaut in email addresses"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added script detector in debug mode to help resolve plugin &amp; theme conflicts"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added checkbox option in WordPress registration form. See Advanced Settings."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added on auto newsletter duplication reset the [number] tag"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added a safeguard for manually deleted activation email in database"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added support for SendGrid's web API to avoid blocked SMTP ports"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added a sending status load bar for currently sending newsletter"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improved \"subscribe in comments\" option for better Akismet integration"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improved iframe.css inclusion for MS. All child sites take the main site's styles by default"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "renamed list \"WordPress Synched\" to \"WordPress users\" for clarity"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed \"HTML version\" which was not working for visitors"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed subscription form \"HTML version\" missing hidden fields in post/page widget"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed newsletters themes installation with unsafe paths"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed missing page/post title when subscribing without ajax"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed encoding issue in HTML and PHP version of the subscription form in the widget"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed save issue of subscriber's status in Subscriber's detail page in admin"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed over 25 mini bugs"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed lunch and went for a well deserved beer"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added checkbox to comments in post for visitors to optin. Activate in Settings &gt; Advanced"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improved default newsletter into simple 5 min. guide"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improved over a dozen confusing labels and strings"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improved compatibility with domain mapping"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added hook wysija_preview to browser version of newsletter (thx to Matt)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed autoload new posts on scroll in the newsletter WordPress post widget"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed missing total click stats in newsletter stats"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed saving changes when going back to Step 2 from Step 3"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added sending autoresponders to subscribers added via the admin"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "removed 3 messages after installation. Nobody reads them"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "removed bulk add to synch list"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "removed bulk unsubscribe to all. Too dangerous."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "went for a walk in the park with friends to celebrate this new version"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added get HTML version of form. See in Widgets."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improved MailPoet homemade cron, available in Settings &gt; Advanced"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "removed validation for first name &amp; last name on subscriber profile"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed incompatibility with \"Root Relative URLs\" plugin"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed conflict with plugin \"Magic Members\""
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed crashed on some servers on install"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed in newsletters listing, wrong list appearing in automatic newsletter"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed disappeared bounce email field in Settings &gt; Advanced for free users"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed Internet Explorer issue on WordPress Articles selection widget"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed issue on IE8 where a draggable item was not disappearing after being dropped"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed WordPress Synched list wrong count when sending"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed image not being fetched from post content when inserting a WordPress post"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed not sending auto newsletter with event \"after a new user is added to your site\" when double optin was off"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed various plugins conflicting with our subscription form inserted into the content of a post or page"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added MailPoet custom cron option in Advanced Settings as an alternative to wp-cron"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed translation missing for \"unsubscribe\", \"view in your browser\" and \"manage your subscription\" links"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed escaping quotes on subject in step 3 send preview"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed wrong total of subscribers when sending"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed bounced tab appearing empty for free users"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed wrong selection in WordPress posts widget after a search(in visual editor)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed security issue with swf uploading module"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added basic Custom Post Type support in WordPress post widget"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added resend an Activation Email for another list even when already subscribed"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added posts autoload on scroll when adding single post in newsletter visual editor"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed PHP Notice: step2 of newsletter creation"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed PHP Notice: on debug class"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed our debug hijacking WP_DEBUG in the backend (thanks Ryann)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed deprecated in bounce handling"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed scrollbar issue in WordPress Post popup on Chrome &amp; Safari"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed conflict with Simple Links plugin"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed toolbar tabs disappearing in some languages (will be improved)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed bounce error not properly displayed prevented saving settings"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed Notice: Use of undefined constant WYSIJA_DBG - assumed 'WYSIJA_DBG' in [...]/wp-content/plugins/wysija-newsletters/core/model.php on line 842"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed bulk add subscriber to list when unsubscribed"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed private list removed on edit your subscriber profile"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed shortcodes not being properly stripped from post excerpt"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed line breaks being stripped from posts"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed text alignment issues in Outlook"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed font styling issues in email"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed auto newsletter for new subscriber when single optin"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed new subscriber notification when single optin"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed send preview email on automatic post notification newsletter"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed not sending followup when updating subscriptions"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed missing \"from name\" when using Elastic Email"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed rare issue where Social bookmarks &amp; Automatic latest posts were not saved"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed double scrollbars appearing on article selection popup"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed dkim wrong key"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed filled up sent on parameter without having sent the newsletter"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added restAPI for elasticemail when detected in the smtp configuration"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improved install making sure that no crazy plugins will harm our initial setup (symptoms: Too many redirect crash or posting to social networks)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed SQL comments inserted as tables in some weird server..."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed error 500 on update procedure of 2.1 when some roles were not existing. (add_cap on none object fatal error)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improved install process not creating new sql connection, only using wpdb's one."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed synched plugins (Subscribe2 etc...) when there was just the main list"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "removed global css and javascript"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed issue where the widget would not save"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improved IE9 compatibility"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed excerpt function to keep line breaks"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed links with #parameters GA incompatibility -&gt; Thanks Adam"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "major speed improvement and cache plugin compatibility"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added utf-8 encoding in iframe loaded subscription form."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added security check for translated links (dutch translation issue with view in browser link)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "removed _nonce non sense in the visitors subscription forms."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed loading issue in subscription form"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed styling issue in subscription form"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed accents issue in subscription form"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed DKIM activation settings not being saved"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed non translated unsubscribe and view in browser links"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed warning showing up on some servers configuration when sending a preview of the newsletter"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed popups in IE8 and improved overall display"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed openssl_error_string function breaking our settings screen on some configurations."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed error with dkim on server without openssl functions"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed bounce error with the rule unsubscribe user"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed update 2.1 error : Duplicate column name \"is_public\" may have caused some big slow down on some servers and some auto post to facebook (deepest apologies)."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed Outlook issue where text blocks would not have the proper width"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added ability for subscribers to change their email and lists."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added \"View it in your browser\" option."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added advanced access rights with capabilities for subscribers management, newsletter management, settings and subscription widget."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added new WordPress 3.3 plupload used when possible to use."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added mail-tester.com integration for Premium (fight against spam)."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added DKIM signature for Premium to improve deliverability."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added the possibility to preview your newsletter without images in visual editor."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added background colors for blocks within the visual editor."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added alternate background colors for automatic latest post widget."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added possibility to add total number of subscribers in widget with shortcode."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added widget option \"Display label within for Email field\"."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improved email rendering and email clients compatibility including the new Outlook 2013"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improved image upload with ssl."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improved compatibility with access rights plugins like \"Advanced Access Manager\" or \"User Role Editor\"."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improved import system with clearer message."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improved subscription widget, added security if there is no list selected."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improved Auto newsletter edition, warning added before pausing it."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improved popups for the visual editor (themes, images, add link,...)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "updated TinyMCE to latest version, the editor now reflects the newsletter styles"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "compatibility with <a href=\"http://wordpress.org/extend/plugins/magic-action-box/\">Magic Action Box</a>."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed links style in headings."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed no default value in optin form when JS disabled."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed issue with automatic latest post widget where one article could appear more than once."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed post notification hook when post's status change from publish to draft and back to publish."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed firewall 2 avoid troubles with image uploader automatically"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed problem of confirmation page on some servers when pretty links activated on wysijap post. Default is params link now."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improved debug mode with different level for different needs"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added logging function to monitor post notification process for instance"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improved send immediately post notification (in some case the trigger was not working... using different WordPress hook now)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed post notification interface (step1 and step3) not compatible with WordPress lower than 3.3"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed issue when duplicating sent post notifications. You should not be able to copy a child email and then change it's type like an automatic newsletter etc..."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed zip format error when uploading your own theme (this error was happenning on various browsers)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added default style for subscription notification which was lost"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed php error on subscription form creation"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed php error on helper back"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed strict error appearing on servers below php version 5.4"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed on export to a csv translate fields and don't get the columns namekeys"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added non translated 'Loading...' string on subscription's frontend"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed unreliable WP_PLUGIN_URL when dealing with https constants now using plugins_url() instead"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed automatic newsletter resending itself on unsubscribe"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed when unsubscribing and registering to some lists, you will not be re-registered to your previous lists"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed issue with small height images not displaying in email"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed issue with post excerpt in automatic posts"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improved php 5.4 strictness compatibility"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added extended check of caching plugin activation"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added security to disallow directory browsing"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added subscription form working now with Quick-cache and Hyper cache(Already working with WP Super Cache &amp;&amp; W3 Total Cache)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added onload attribute on iframe subscription form which seems more reliable"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added independant cron manager wysija_cron.php"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added cleaning the queue of deleted users or deleted emails through phpmyadmin for instance"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added theme menu erasing MailPoet's menu when in the position right below ours"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added for dummies check that list exists or subscription form widget not editable"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed problem with plugin wordpress-https when doing ajax subscription"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed issue with scheduled articles not being sent in post notification"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed rare issue when inserting a WordPress post would trigger an error"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed issue wrong count of ignored emails when importing"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed multi forms several send confirmation emails on one subscribing request"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed subject title in email template"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed theme activation not working"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed google analytics code on iframe subscription forms"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed post notification bug with wrong category selected when fetching articles"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed issue regarding category selection in auto responder / post notifications"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed dollar sign being stripped in post titles"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed warning and notices when adding a list"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed on some server unsubscribe page or confirmation page redirecting to 404"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improved iframe system works now with short url and multiple forms"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed missing title on widget when cache plugin activated"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed update procedure to MailPoet version \"2.0\" failed! on some MySQL servers"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed W3C validation for subscription form with empty action: replace with #wysija"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed forbidden iframe subfolder corrected to a home url with params"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improved theme installation with PclZip"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed missing previously sent auto newsletter on newsletters page"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed broken url for images uploaded in WordPress 3.4"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed \"nl 2 br\" on unsubscribed notification messages for admins"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added meta noindex on iframe forms to avoid polluting Google Analytics"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added validation of lists on subscription form"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed issue with image alignment in automatic newsletters"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed url &amp; alternative text encoding in header/footer"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed images thumbs not displaying in Images tab"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed popups' CSS due to WordPress 3.4 update"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed issues when creating new lists from segment"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed subscribers not added to the lists on old type of widget"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added post notifications"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added auto responders"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added scheduling (send in future)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "allow subscribers to select lists"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "embed subscription form outside your WordPress site (find code in the widget)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Subscription forms compatibility with W3 Total Cache and WP Supercache"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Load social bookmarks from theme automatically"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Several bug fixes and micro improvements"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Ability to send snail mail"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improved report after importing csv"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed Warning: sprintf() /helpers/back.php on some environnements"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed roles for creating newsletters or managing subscribers \"parent roles can edit as well as child roles if a child role is selected\""
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed cron MailPoet's frequencies added in a cleaner way to avoid conflict with other plugins"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed w3c validation on confirmation and unsubscription page"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improved avoiding duplicates on environment with high sending frequencies"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "removed php show errors lost in resolveConflicts"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added last name to recipient name in header"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed automatic redirection for https links in newsletter"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed conflict with Advanced Custom Fields (ACF) plugin in the newsletter editor"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed conflict with the WpToFacebook plugin"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed validation on import of addresses with trim"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed dysfunctional unsubscribe link when Google Analytics campaign inserted"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added alphanumeric validation on Google Analytics input"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "display clicked links in stats without Google Analytics parameters"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed page/post newsletter subscription widget when javascript conflict returns base64 string"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed WP users synch when subscriber with same email already exists"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed encoded url recorded in click stats"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added sending status In Queue to differentiate with Not Sent"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed automatic bounce handling"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added custom roles and permissions"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed unsubscribe link redirection"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed rare issue preventing Mac users from uploading images"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added Norwegian translation"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added Slovak translation"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed automatically recreates the subscription page when accidentally deleted"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed more accurate message about folder permissions in wp-content/uploads"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed possibility to delete synchronisable lists"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed pagination on subscribers lists' listing"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed google analytics tracking code"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed relative path to image in newsletter now forced to absolute path"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed widget alignment when labels not within field default value is now within field"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed automatic bounce handling error on some server."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed scripts enqueuing in frontend, will print as long as there is a wp_footer function call in your theme"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed theme manager returns error on install"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed conflict with the SmallBiz theme"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed conflict with the Events plugin (wp-events)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed conflict with the Email Users plugin (email-users)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed outlook 2007 rendering issue"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed small IE8 and IE9 compatibility issues"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed fatal error for new installation"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed MailPoet admin white screen on wordpress due to get_current_screen function"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed unsubscribe link disappearing because of qtranslate fix"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed old separators just blocked the email wizard"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed unsubscribe link disappearing because of default color"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed settings panel redirection"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed update error message corrected :\"An error occurred during the update\" sounding like update failed even though it succeeded"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed rendering of aligned text"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed daily report email information"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed export: first line with comma, the rest with semi colon now is all semi colon"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed filter by list on subscribers when going on next pages with pagination"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed get_avatar during install completely irrelevant"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed wordpress post in editor when an article had an image with height 0px"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed when domain does not exist, trying to send email, we need to flag it as undelivered after 3 tries and remove it from the queue"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed user tags [user:firstname | default:subscriber] left over when sent through queue and on some users"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed get_version when wp-admin folder doesn't exist..."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed Bulk Unsubscribe from all list \"why can't I add him\""
+msgstr ""
+
+#. Found in changelog list item.
+msgid "support for first and last names"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "14 new themes. First Premium themes"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added social bookmarks widget"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added new divider widget"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added first name and last name feature in subscription form, newsletter content and email subject"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "header is now image only and not text/image"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "small changes in Styles tab of visual editor"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "new full width footer image area (600px)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added transparency feature to header, footer, newsletter"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "newsletter width for content narrowed to 564px"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improved line-height for titles in text editor"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed Outlook and Hotmail padding issue with images"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improved speed of editor"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "possibility to import automatically and keep in sync lists from all major plugins: MailPress, Satollo, WP-Autoresponder, Tribulant, Subscribe2, etc."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "possibility to change \"Unsubscribe\" link text in footer"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "choose which role can edit subscribers"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "preview of newsletter in new window and not in popup"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added possibility to choose between excerpt or full article on inserting WP post"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "theme management with API. Themes are now externalized from plugin."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "removed numbered lists from text editor because of inconsistent display, notably Outlook"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added SMTP TLS support, useful for instance with live.com smtp"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added support for special Danish chars in email subscriptions"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed menu position conflict with other themes and plugins"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed subscription form works with jquery 1.3, compatible for themes that use it"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed issue of drag &amp; drop of WP post not working with php magic quotes"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed permissions issue. Only admins could use the plugin despite changing the permissions in Settings &gt; Advanced."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed display of successful subscription in widget displays better in most theme"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed synching of WordPress user registering through frontend /wp-login.php?action=register"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed redirection unsubscribe link from preview emails"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed cross site scripting security threat"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed pagination on newsletter statistics's page"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed javascript conflict with Tribulant's javascript's includes"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improved detection of errors during installation"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Premium upgrade available"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fix image selector width in editor"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fix front stats of email when email preview and show errors all"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fix front stats of email when show errors all"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fix import ONLY subscribed from external plugins such as Tribulant or Satollo"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fix retrieve wp.posts when time is different on mysql server and apache server"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fix changing encoding from utf8 to another was not sending"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "newsletter background colour now displays in new Gmail"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "less confusing queue sending status"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "updated language file (pot) with 20 or so modifications"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed subscribe from a MailPoet confirmation page bug"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed campaigns \"Column does not exists in model ..\""
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed address and unsubscribe links appearing at bottom of newsletter a second time"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed menu submenu no MailPoet but newsletters no js"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed bug statistics opened_at not inserted"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed bug limit subscribers updated on subscribers delete"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed daily cron scandir empty dir"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed subscribe from frontend without javascript error"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed subscribe IP server validation when trying in local"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed CSS issues with WordPress 3.3"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improving interface of email sending in the newsletter's listing"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added delete newsletter option"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added language pot file"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added french translation"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed issue with synched users on multisite(each site synch its users only)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed compatibility issue with wordpress 3.3(thickbox z-index)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed issue with redundant messages after plugin import"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed version number display"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed major issue with browser check preventing Safari users from using the plugin"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed issue with wp_attachment function affecting WordPress post insertion"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed issue when importing subscribers (copy/paste from Gmail)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed issue related to WordPress MU"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "minor bugfixes"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Hello World."
+msgstr ""
+
+#. Found in faq header.
+msgid "Got questions?"
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "Our <a href=\"http://support.mailpoet.com/\">support site</a> has plenty of articles and a ticketing system."
+msgstr ""

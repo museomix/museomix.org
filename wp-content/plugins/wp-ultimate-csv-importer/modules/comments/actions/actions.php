@@ -34,7 +34,8 @@
  * Notices must display the words
  * "Copyright Smackcoders. 2014. All rights reserved".
  ********************************************************************************/
-
+if ( ! defined( 'ABSPATH' ) )
+        exit; // Exit if accessed directly
 class CommentsActions extends SkinnyActions
 {
 	public function __construct()
@@ -319,20 +320,19 @@ class CommentsActions extends SkinnyActions
 		if($post_exists)
 		{
 			$commentid=wp_insert_comment($dat_array); 
-
 			if($commentid) {
 				$this->insPostCount+=1;
-				$this->detailedLog[$currentLimit][] = "Comment added to <b>Post_ID</b> - " . $dat_array ['comment_post_ID'] . ", <b>Author</b> - " . $dat_array['comment_author'] . ", <b>Author Email</b> - " . $dat_array['comment_author_email'] . ", <b>Author URL</b> - " . $dat_array['comment_author_url'] . ", <b>Date</b> - " . $dat_array['comment_date'] . ", <b>Verify Here</b> - <a href='" . get_permalink( $post_id ) . "' rel='permalink'>" . __( 'Web View' ) . "</a> | <a href='" . get_edit_post_link( $post_id, true ) . "' title='" . esc_attr( __( 'Edit this item' ) ) . "'>" . __( 'Admin View' ) . "</a>";
+				$this->detailedLog[][] = "Comment added to <b>Post_ID</b> - " . $dat_array ['comment_post_ID'] . ", <b>Author</b> - " . $dat_array['comment_author'] . ", <b>Author Email</b> - " . $dat_array['comment_author_email'] . ", <b>Author URL</b> - " . $dat_array['comment_author_url'] . ", <b>Date</b> - " . $dat_array['comment_date'] . ", <b>Verify Here</b> - <a href='" . get_permalink( $post_id ) . "' rel='permalink'>" . __( 'Web View' ) . "</a> | <a href='" . get_edit_post_link( $post_id, true ) . "' title='" . esc_attr( __( 'Edit this item' ) ) . "'>" . __( 'Admin View' ) . "</a>";
 			}
 			else {
 				$this->dupPostCount+=1;
-				$this->detailedLog[$currentLimit][] = "<b>Comment - </b>skipped, <b>Post_ID</b> - " . $dat_array ['comment_post_ID']. " not available";
+				$this->detailedLog[][] = "<b>Comment - </b>skipped, <b>Post_ID</b> - " . $dat_array ['comment_post_ID']. " not available";
 			}
 		}
 		else
 		{
 			$this->dupPostCount+=1;
-			$this->detailedLog[$currentLimit][] = "<b>Comment - </b>skipped, <b>Post_ID</b> - " . $dat_array ['comment_post_ID']. " not available";
+			$this->detailedLog[][] = "<b>Comment - </b>skipped, <b>Post_ID</b> - " . $dat_array ['comment_post_ID']. " not available";
 		}
 		return $commentid;
 	}//add comments ends

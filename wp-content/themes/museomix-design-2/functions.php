@@ -599,11 +599,18 @@ array_push($liste,$elm);
 	elseif('equipe'==$id){
 		$contenu .= '<div class="row-fluid">';
 		if($coord=get_field('coordinator_local')){
-			foreach($coord as $coorg){ 
-				$elm = '<td><strong>'.$coorg['prenom'].' '.$coorg['nom_de_famille'].'</strong>';
+			foreach($coord as $coorg){
+				if (empty($coorg['email']))
+					$elm = '<td colspan="2"><strong>'.$coorg['prenom'].' '.$coorg['nom_de_famille'].'</strong>';
+				else
+					$elm = '<td><strong>'.$coorg['prenom'].' '.$coorg['nom_de_famille'].'</strong>';
 				if(!empty($coorg['compte_twitter'])) $elm .=  ' &nbsp; &nbsp; <a href=http://twitter.com/@'.$coorg['compte_twitter'].'>@'.$coorg['compte_twitter'].'</a>';
 				
 				//.' <a href=http://twitter.com/@'.$coorg['compte_twitter'].'>@'.$coorg['compte_twitter'].'</a>';
+				
+					
+				if (!empty($coorg['email']))
+					$elm .=  '</td><td>'.$coorg['email'].'</td>';
 				$elm .=  '<tr><td>'.$coorg['descriptif'].'</td></tr>';
 				
 				$principal[] = $elm;
@@ -618,6 +625,7 @@ array_push($liste,$elm);
 			foreach($coorgs as $coorg){ 
 				$elm = '<td><strong>'.$coorg['prenom'].' '.$coorg['nom_de_famille'].'</strong></td><td>';
 				if(!empty($coorg['compte_twitter'])) $elm .=  '<a href=http://twitter.com/@'.$coorg['compte_twitter'].'>@'.$coorg['compte_twitter'].'</a>';
+				$elm .=  '</td><td>'.$coorg['email'].'</td>';
 				$elm .=  '</td><td>'.$coorg['descriptif'].'</td>';
 				$liste[] = $elm;
 

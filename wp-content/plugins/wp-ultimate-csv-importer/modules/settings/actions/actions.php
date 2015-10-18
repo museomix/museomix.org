@@ -34,6 +34,8 @@
  * Notices must display the words
  * "Copyright Smackcoders. 2014. All rights reserved".
  ********************************************************************************/
+if ( ! defined( 'ABSPATH' ) )
+        exit; // Exit if accessed directly
 
 class SettingsActions extends SkinnyActions
 {
@@ -56,7 +58,7 @@ class SettingsActions extends SkinnyActions
 		if(isset($_POST['savesettings'])){ 
 			update_option('wpcsvfreesettings',$_POST);
 			$data['savesettings'] = 'done';
-			echo "<script> location.reload(); </script>";
+			//echo "<script> location.reload(); </script>";
 		}
 		$setingsArr = array('post', 'page', 'custompost', 'comments', 'categories', 'customtaxonomy', 'users', 'eshop', 'wpcommerce', 'woocommerce', 'custompostuitype', 'cctm', 'acf', 'aioseo', 'yoastseo', 'enable', 'disable', 'nonerseooption', 'nonercustompost', 'nonerecommerce', 'recommerce','enable_plugin_access_for_author', 'send_log_email', 'enable_debug', 'disable_debug', 'debug_mode');
 		foreach($setingsArr as $option)
@@ -70,7 +72,7 @@ class SettingsActions extends SkinnyActions
 //Settings action
 //SEO option
                 $tableseo = get_option('wpcsvfreesettings');
-                $seooption = $tableseo['rseooption'];
+                $seooption = isset($tableseo['rseooption']) ? $tableseo['rseooption'] : '';
                 if ( $seooption == 'aioseo' ) {
                         $data['aioseo'] = 'checked enablesetting';
                         $data['yoastseo'] = 'disablesetting';
@@ -306,7 +308,7 @@ class SettingsActions extends SkinnyActions
 
 //Custom post
                 $tablecustompost = get_option('wpcsvfreesettings');
-                $customoption = $tablecustompost['rcustompost'];
+                $customoption = isset($tablecustompost['rcustompost']) ? $tablecustompost['rcustompost'] : '';
                 if ( $customoption == 'custompostuitype' ) {
                         $data['custompostuitype'] = 'checked enablesetting';
                         $data['wptypes'] = 'disablesetting';
@@ -368,7 +370,7 @@ class SettingsActions extends SkinnyActions
                         $data['podspost_status'] = 'Disabled';
                }
 //Additional Settings
-                $scheduleoption = $tableseo['send_log_email'];
+                $scheduleoption = isset($tableseo['send_log_email']) ? $tableseo['send_log_email'] : '';
                 if ( $scheduleoption == 'send_log_email' ) {
                         $data['schedulelog'] = 'checked enablesetting';
                         $data['schedulenolog'] = 'disablesetting';
@@ -378,7 +380,7 @@ class SettingsActions extends SkinnyActions
                         $data['schedulelog'] = 'disablesetting';
                 }
 
-                $categoryoption = $tableseo['rcateicons'];
+                $categoryoption = isset($tableseo['rcateicons']) ? $tableseo['rcateicons'] : '';
                 if ( $categoryoption == 'enable' ) {
                         $data['catyenable'] = 'checked enablesetting';
                         $data['catydisable'] = 'disablesetting';
@@ -406,7 +408,7 @@ class SettingsActions extends SkinnyActions
                         $data['dropoff_status'] = 'checked';
                 }
 //Eccommerce option
-        $ecommerceoption = $tableseo['recommerce'];
+        $ecommerceoption = isset($tableseo['recommerce']) ? $tableseo['recommerce'] : '';
                 if ( $ecommerceoption == 'eshop' ) {
                         $data['eshop'] = 'checked enablesetting';
                         $data['marketpress'] = 'disablesetting';

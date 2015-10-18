@@ -1,0 +1,2079 @@
+# Translation of Continents & Cities in Arabic
+# This file is distributed under the same license as the Continents & Cities package.
+msgid ""
+msgstr ""
+"Project-Id-Version: youtube-channel-gallery-\n"
+"POT-Creation-Date: 2015-09-28 16:41+0200\n"
+"PO-Revision-Date: 2015-09-28 16:48+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n"
+"%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"X-Generator: Poedit 1.8.5\n"
+"X-Poedit-KeywordsList: _e;__\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: templates/admin_tabs.php:3 templates/admin_tabs.php:489
+msgid "Title:"
+msgstr ""
+
+#: templates/admin_tabs.php:9
+msgid "Feed"
+msgstr ""
+
+#: templates/admin_tabs.php:10
+msgid "Player"
+msgstr ""
+
+#: templates/admin_tabs.php:11
+msgid "Search"
+msgstr ""
+
+#: templates/admin_tabs.php:12
+msgid "Thumbnails"
+msgstr ""
+
+#: templates/admin_tabs.php:13
+msgid "Link"
+msgstr ""
+
+#: templates/admin_tabs.php:26
+msgid "YouTube API Key:"
+msgstr ""
+
+#: templates/admin_tabs.php:28
+msgid "Get your own YouTube API Key and put here."
+msgstr ""
+
+#: templates/admin_tabs.php:29
+msgid ""
+"Get <a href=\"https://console.developers.google.com/\" target=\"_blank\">your "
+"Google API key</a>. See <a href=\"http://poselab.com/en/youtube-channel-gallery-"
+"help/\" target=\"_blank\">help</a>"
+msgstr ""
+
+#: templates/admin_tabs.php:34
+msgid "Video feed type:"
+msgstr ""
+
+#: templates/admin_tabs.php:36
+msgid "Uploaded by a user"
+msgstr ""
+
+#: templates/admin_tabs.php:37
+msgid "User's favorites"
+msgstr ""
+
+#: templates/admin_tabs.php:38
+msgid "User's likes"
+msgstr ""
+
+#: templates/admin_tabs.php:39
+msgid "Playlist"
+msgstr ""
+
+#: templates/admin_tabs.php:44
+msgid "Identify by:"
+msgstr ""
+
+#: templates/admin_tabs.php:46
+msgid "Username"
+msgstr ""
+
+#: templates/admin_tabs.php:47
+msgid "Channel ID"
+msgstr ""
+
+#: templates/admin_tabs.php:51
+msgid "YouTube id:"
+msgstr ""
+
+#: templates/admin_tabs.php:52
+msgid "YouTube playlist id:"
+msgstr ""
+
+#: templates/admin_tabs.php:58
+msgid "Playlist order:"
+msgstr ""
+
+#: templates/admin_tabs.php:60
+msgid "Date Order"
+msgstr ""
+
+#: templates/admin_tabs.php:61
+msgid "Rating Order"
+msgstr ""
+
+#: templates/admin_tabs.php:62
+msgid "Relevance Order"
+msgstr ""
+
+#: templates/admin_tabs.php:63
+msgid "Title Order"
+msgstr ""
+
+#: templates/admin_tabs.php:64
+msgid "Video Count Order"
+msgstr ""
+
+#: templates/admin_tabs.php:65
+msgid "View Count Order"
+msgstr ""
+
+#: templates/admin_tabs.php:72
+msgid "Cache time (hours):"
+msgstr ""
+
+#: templates/admin_tabs.php:74
+msgid ""
+"Hours that RSS data is saved in database, to not make a request every time the "
+"page is displayed. Assign this value according to how often you upgrade your "
+"playlist in YouTube."
+msgstr ""
+
+#: templates/admin_tabs.php:81
+msgid "Activate cache"
+msgstr ""
+
+#: templates/admin_tabs.php:82
+msgid ""
+"If you disable this field the cache will be deleted and will not be used. This is "
+"useful to refresh immediately the YouTube RSS used by the plugin. Reenable the "
+"cache when the gallery shows the changes you made in your youtube account."
+msgstr ""
+
+#: templates/admin_tabs.php:97
+msgid "Player:"
+msgstr ""
+
+#: templates/admin_tabs.php:99
+msgid "Without player"
+msgstr ""
+
+#: templates/admin_tabs.php:100
+msgid "show player"
+msgstr ""
+
+#: templates/admin_tabs.php:101
+msgid "show player in Magnific Popup"
+msgstr ""
+
+#: templates/admin_tabs.php:108
+msgid "Width:"
+msgstr ""
+
+#: templates/admin_tabs.php:111
+msgid "%"
+msgstr ""
+
+#: templates/admin_tabs.php:112
+msgid "px"
+msgstr ""
+
+#: templates/admin_tabs.php:116 templates/admin_tabs.php:316
+msgid "Aspect ratio:"
+msgstr ""
+
+#: templates/admin_tabs.php:118 templates/admin_tabs.php:318
+msgid "Standard (4x3)"
+msgstr ""
+
+#: templates/admin_tabs.php:119 templates/admin_tabs.php:319
+msgid "Widescreen (16x9)"
+msgstr ""
+
+#: templates/admin_tabs.php:126
+msgid "Theme:"
+msgstr ""
+
+#: templates/admin_tabs.php:128
+msgid "Dark"
+msgstr ""
+
+#: templates/admin_tabs.php:129
+msgid "Light"
+msgstr ""
+
+#: templates/admin_tabs.php:133
+msgid "Progress bar color:"
+msgstr ""
+
+#: templates/admin_tabs.php:135
+msgid "Red"
+msgstr ""
+
+#: templates/admin_tabs.php:136
+#, fuzzy
+msgid "White"
+msgstr "وايت هورس"
+
+#: templates/admin_tabs.php:143
+msgid "Video quality:"
+msgstr ""
+
+#: templates/admin_tabs.php:145
+msgid "default"
+msgstr ""
+
+#: templates/admin_tabs.php:146
+msgid "highres"
+msgstr ""
+
+#: templates/admin_tabs.php:147
+msgid "hd1080"
+msgstr ""
+
+#: templates/admin_tabs.php:148
+msgid "hd720"
+msgstr ""
+
+#: templates/admin_tabs.php:149
+msgid "large"
+msgstr ""
+
+#: templates/admin_tabs.php:150
+msgid "medium"
+msgstr ""
+
+#: templates/admin_tabs.php:151
+msgid "small"
+msgstr ""
+
+#: templates/admin_tabs.php:153
+msgid ""
+"Default value enables YouTube to select the most appropriate playback quality. If "
+"you select a quality level that is not available for the video, then the quality "
+"will be set to the next lowest level that is available."
+msgstr ""
+
+#: templates/admin_tabs.php:160
+msgid "Autoplay"
+msgstr ""
+
+#: templates/admin_tabs.php:164
+msgid "Show YouTube logo"
+msgstr ""
+
+#: templates/admin_tabs.php:165
+msgid ""
+"Activate this field to show the YouTube logo in the control bar. Setting the color "
+"parameter to white will show the YouTube logo in the control bar."
+msgstr ""
+
+#: templates/admin_tabs.php:172
+msgid "Show related videos"
+msgstr ""
+
+#: templates/admin_tabs.php:173
+msgid "Activate this field to show related videos when playback of the video ends."
+msgstr ""
+
+#: templates/admin_tabs.php:177
+msgid "Show info"
+msgstr ""
+
+#: templates/admin_tabs.php:178
+msgid ""
+"Activate this field to display information like the video title and uploader "
+"before the video starts playing."
+msgstr ""
+
+#: templates/admin_tabs.php:185 templates/admin_tabs.php:387
+msgid "Show additional content"
+msgstr ""
+
+#: templates/admin_tabs.php:193 templates/admin_tabs.php:395
+msgid "Show title"
+msgstr ""
+
+#: templates/admin_tabs.php:197 templates/admin_tabs.php:399
+msgid "Show published date"
+msgstr ""
+
+#: templates/admin_tabs.php:204 templates/admin_tabs.php:406
+msgid "Show description"
+msgstr ""
+
+#: templates/admin_tabs.php:212 templates/admin_tabs.php:414
+msgid "Title tag:"
+msgstr ""
+
+#: templates/admin_tabs.php:214 templates/admin_tabs.php:416
+msgid "h1"
+msgstr ""
+
+#: templates/admin_tabs.php:215 templates/admin_tabs.php:417
+msgid "h2"
+msgstr ""
+
+#: templates/admin_tabs.php:216 templates/admin_tabs.php:418
+msgid "h3"
+msgstr ""
+
+#: templates/admin_tabs.php:217 templates/admin_tabs.php:419
+msgid "h4"
+msgstr ""
+
+#: templates/admin_tabs.php:218 templates/admin_tabs.php:420
+msgid "h5"
+msgstr ""
+
+#: templates/admin_tabs.php:219 templates/admin_tabs.php:421
+msgid "h6"
+msgstr ""
+
+#: templates/admin_tabs.php:223 templates/admin_tabs.php:425
+msgid "Description words:"
+msgstr ""
+
+#: templates/admin_tabs.php:225 templates/admin_tabs.php:427
+msgid ""
+"Set the maximum number of words that will be displayed of the description. This "
+"field is useful when the descriptions of videos in the gallery have different "
+"sizes."
+msgstr ""
+
+#: templates/admin_tabs.php:234 templates/admin_tabs.php:286
+#: templates/admin_tabs.php:503 templates/admin_tabs.php:540
+msgid "Tab order:"
+msgstr ""
+
+#: templates/admin_tabs.php:251
+msgid "Search input text:"
+msgstr ""
+
+#: templates/admin_tabs.php:255
+msgid "Restrict search to (# separated):"
+msgstr ""
+
+#: templates/admin_tabs.php:259
+msgid "You must assing this tags to your videos to restrict the search:"
+msgstr ""
+
+#: templates/admin_tabs.php:268
+msgid "Restrict search by default: It will overwrite results of feed tab)"
+msgstr ""
+
+#: templates/admin_tabs.php:270 templates/admin_tabs.php:456 templates/search.php:10
+msgid "All"
+msgstr ""
+
+#: templates/admin_tabs.php:278
+msgid "Show search box"
+msgstr ""
+
+#: templates/admin_tabs.php:282
+msgid "Show select with Playlists"
+msgstr ""
+
+#: templates/admin_tabs.php:300
+msgid "Number of videos to show:"
+msgstr ""
+
+#: templates/admin_tabs.php:302
+msgid "The plugin can display a maximum of 50 videos for each page."
+msgstr ""
+
+#: templates/admin_tabs.php:305
+msgid "Thumbnail resolution:"
+msgstr ""
+
+#: templates/admin_tabs.php:307
+msgid "Default (120x90 px)"
+msgstr ""
+
+#: templates/admin_tabs.php:308
+msgid "Medium (320x180)"
+msgstr ""
+
+#: templates/admin_tabs.php:309
+msgid "High (480x360)"
+msgstr ""
+
+#: templates/admin_tabs.php:326
+msgid "Thumbnail columns:"
+msgstr ""
+
+#: templates/admin_tabs.php:332
+msgid "Phones:"
+msgstr ""
+
+#: templates/admin_tabs.php:340
+msgid "Tablets:"
+msgstr ""
+
+#: templates/admin_tabs.php:352
+msgid "Medium Desktops:"
+msgstr ""
+
+#: templates/admin_tabs.php:360
+msgid "Large Desktops:"
+msgstr ""
+
+#: templates/admin_tabs.php:374
+msgid "Show duration"
+msgstr ""
+
+#: templates/admin_tabs.php:378
+msgid "Add \"nofollow\" to links"
+msgstr ""
+
+#: templates/admin_tabs.php:433
+msgid "Thumbnail alignment:"
+msgstr ""
+
+#: templates/admin_tabs.php:435
+msgid "none"
+msgstr ""
+
+#: templates/admin_tabs.php:436
+msgid "Left"
+msgstr ""
+
+#: templates/admin_tabs.php:437
+msgid "Right"
+msgstr ""
+
+#: templates/admin_tabs.php:444
+msgid "Thumbnail width:"
+msgstr ""
+
+#: templates/admin_tabs.php:446
+msgid "Extra small"
+msgstr ""
+
+#: templates/admin_tabs.php:447
+msgid "Small"
+msgstr ""
+
+#: templates/admin_tabs.php:448
+msgid "Half"
+msgstr ""
+
+#: templates/admin_tabs.php:449
+msgid "Large"
+msgstr ""
+
+#: templates/admin_tabs.php:450
+msgid "Extra large"
+msgstr ""
+
+#: templates/admin_tabs.php:454
+msgid "Min. size with alignment:"
+msgstr ""
+
+#: templates/admin_tabs.php:457
+msgid "Tablets"
+msgstr ""
+
+#: templates/admin_tabs.php:458
+msgid "Medium Desktops"
+msgstr ""
+
+#: templates/admin_tabs.php:459
+msgid "Large devices"
+msgstr ""
+
+#: templates/admin_tabs.php:461
+msgid ""
+"Thumbnails will be aligned only from the size of selected device to prevent "
+"unwanted effects in small sizes."
+msgstr ""
+
+#: templates/admin_tabs.php:471
+msgid "Open in a new window"
+msgstr ""
+
+#: templates/admin_tabs.php:475
+msgid "Show pagination"
+msgstr ""
+
+#: templates/admin_tabs.php:482
+msgid "Thumbnail content tab order:"
+msgstr ""
+
+#: templates/admin_tabs.php:485
+msgid "Thumbnail:"
+msgstr ""
+
+#: templates/admin_tabs.php:493
+msgid "Published date:"
+msgstr ""
+
+#: templates/admin_tabs.php:497
+msgid "Description:"
+msgstr ""
+
+#: templates/admin_tabs.php:519
+msgid "Link text:"
+msgstr ""
+
+#: templates/admin_tabs.php:525
+msgid "Show link to channel"
+msgstr ""
+
+#: templates/admin_tabs.php:530
+msgid "Open in a new window or tab"
+msgstr ""
+
+#: templates/admin_tabs.php:535
+msgid "Show link to thank the developer"
+msgstr ""
+
+#: templates/link.php:9
+msgid "By PoseLab"
+msgstr ""
+
+#: templates/link.php:18
+msgid "Show more videos"
+msgstr ""
+
+#: templates/thumb.php:4
+#, fuzzy
+msgid "Private video"
+msgstr "مونتيفيديو"
+
+#: templates/thumbs.php:119
+msgid "«Previous"
+msgstr "« الصفحة السابقة"
+
+#: templates/thumbs.php:130
+msgid "Next»"
+msgstr "الصفحة التالية »"
+
+#: youtube-channel-gallery.php:49
+msgid "Youtube Channel Gallery"
+msgstr ""
+
+#: youtube-channel-gallery.php:51
+msgid "Show a youtube video and a gallery of thumbnails for a youtube channel"
+msgstr ""
+
+#: youtube-channel-gallery.php:726
+msgid "Show more videos»"
+msgstr ""
+
+#: youtube-channel-gallery.php:735
+msgid "There is no video to show."
+msgstr ""
+
+#: youtube-channel-gallery.php:813
+#, php-format
+msgid "Error type: \"%1$s\". "
+msgstr ""
+
+#: youtube-channel-gallery.php:814
+#, php-format
+msgid "Error message: \"%1$s\" "
+msgstr ""
+
+#: youtube-channel-gallery.php:815
+#, php-format
+msgid "Domain: \"%1$s\". "
+msgstr ""
+
+#: youtube-channel-gallery.php:816
+#, php-format
+msgid "Reason: \"%1$s\". "
+msgstr ""
+
+#: youtube-channel-gallery.php:817
+#, php-format
+msgid "Location type: \"%1$s\". "
+msgstr ""
+
+#: youtube-channel-gallery.php:818
+#, php-format
+msgid "Location: \"%1$s\". "
+msgstr ""
+
+#: youtube-channel-gallery.php:821
+msgid ""
+"Did you added your own Google API key? Look at the <a href=\"http://poselab.com/en/"
+"youtube-channel-gallery-help\" target=\"_blank\">help</a>."
+msgstr ""
+
+#: youtube-channel-gallery.php:824
+#, php-format
+msgid "Check in YouTube if the id %1$s belongs to a %2$s. "
+msgstr ""
+
+#: youtube-channel-gallery.php:826
+#, php-format
+msgid ""
+"If the user id is correct, check that the channel of the user has list of \"%1$s"
+"\". "
+msgstr ""
+
+#: youtube-channel-gallery.php:828
+msgid ""
+"Check the <a href=\"http://wordpress.org/extend/plugins/youtube-channel-gallery/"
+"faq/\" target=\"_blank\">FAQ</a> of the plugin or send error messages to <a href="
+"\"https://wordpress.org/support/plugin/youtube-channel-gallery\" target=\"_blank"
+"\">support</a>."
+msgstr ""
+
+#: youtube-channel-gallery.php:905
+msgid "There are no videos matching selected criteria"
+msgstr ""
+
+#~ msgid "Vincennes"
+#~ msgstr "فينسين"
+
+#~ msgid "Winamac"
+#~ msgstr "ويناماك"
+
+#~ msgid "Inuvik"
+#~ msgstr "إينوفيك"
+
+#~ msgid "Iqaluit"
+#~ msgstr "إكاليت"
+
+#~ msgid "Jamaica"
+#~ msgstr "جاميكا"
+
+#~ msgid "Juneau"
+#~ msgstr "جانيو"
+
+#~ msgid "Kentucky"
+#~ msgstr "كنتاكي"
+
+#~ msgid "Louisville"
+#~ msgstr "لويسفيل"
+
+#~ msgid "Monticello"
+#~ msgstr "مونتايسلو"
+
+#~ msgid "Knox IN"
+#~ msgstr "كنوكس إين"
+
+#~ msgid "La Paz"
+#~ msgstr "لاباز"
+
+#~ msgid "Lima"
+#~ msgstr "ليما"
+
+#~ msgid "Los Angeles"
+#~ msgstr "لوس أنجيلوس"
+
+#~ msgid "Maceio"
+#~ msgstr "ماسيو"
+
+#~ msgid "Managua"
+#~ msgstr "ماناغوا"
+
+#~ msgid "Manaus"
+#~ msgstr "مانوس"
+
+#~ msgid "Marigot"
+#~ msgstr "ماريجوت"
+
+#~ msgid "Martinique"
+#~ msgstr "مارتينيك"
+
+#~ msgid "Mazatlan"
+#~ msgstr "مازاتلان"
+
+#~ msgid "Menominee"
+#~ msgstr "منومني"
+
+#~ msgid "Merida"
+#~ msgstr "ميريدا"
+
+#~ msgid "Mexico City"
+#~ msgstr "مدينة المكسيك"
+
+#~ msgid "Miquelon"
+#~ msgstr "ميكلون"
+
+#~ msgid "Moncton"
+#~ msgstr "مونكتون"
+
+#~ msgid "Monterrey"
+#~ msgstr "مونتيري"
+
+#~ msgid "Montreal"
+#~ msgstr "مونتريال"
+
+#~ msgid "Montserrat"
+#~ msgstr "مونتسيرات"
+
+#~ msgid "Nassau"
+#~ msgstr "ناسو"
+
+#~ msgid "New York"
+#~ msgstr "نيويورك"
+
+#~ msgid "Nipigon"
+#~ msgstr "نيبيجون"
+
+#~ msgid "Nome"
+#~ msgstr "نومي"
+
+#~ msgid "Noronha"
+#~ msgstr "نورونها"
+
+#~ msgid "North Dakota"
+#~ msgstr "داكوتا الشمالية"
+
+#~ msgid "Center"
+#~ msgstr "سانتر"
+
+#~ msgid "New Salem"
+#~ msgstr "نيو سليم"
+
+#~ msgid "Panama"
+#~ msgstr "بانما"
+
+#~ msgid "Pangnirtung"
+#~ msgstr "بانجنيتون"
+
+#~ msgid "Paramaribo"
+#~ msgstr "باراماريبو"
+
+#~ msgid "Phoenix"
+#~ msgstr "فونيكس"
+
+#~ msgid "Port-au-Prince"
+#~ msgstr "بوابة الأمير"
+
+#~ msgid "Port of Spain"
+#~ msgstr "بوابة إسبانيا"
+
+#~ msgid "Porto Acre"
+#~ msgstr "بورتو عكا"
+
+#~ msgid "Porto Velho"
+#~ msgstr "بورتو فاليو"
+
+#~ msgid "Puerto Rico"
+#~ msgstr "بورتوريكو"
+
+#~ msgid "Rainy River"
+#~ msgstr "راينيريفر"
+
+#~ msgid "Rankin Inlet"
+#~ msgstr "رانكين إنلت"
+
+#~ msgid "Recife"
+#~ msgstr "ريسيف"
+
+#~ msgid "Regina"
+#~ msgstr "ريجينا"
+
+#~ msgid "Resolute"
+#~ msgstr "ريسولتي"
+
+#~ msgid "Rio Branco"
+#~ msgstr "ريو برانكو"
+
+#~ msgid "Rosario"
+#~ msgstr "روزاريو"
+
+#~ msgid "Santiago"
+#~ msgstr "سانتياجو"
+
+#~ msgid "Santo Domingo"
+#~ msgstr "سانتو دومينغو"
+
+#~ msgid "Sao Paulo"
+#~ msgstr "ساو باولوا"
+
+#~ msgid "Scoresbysund"
+#~ msgstr "سكوريسبايسوند"
+
+#~ msgid "Shiprock"
+#~ msgstr "شيبروك"
+
+#~ msgid "St Barthelemy"
+#~ msgstr "سانت بارتيليمي"
+
+#~ msgid "St Johns"
+#~ msgstr "سانت جونز"
+
+#~ msgid "St Kitts"
+#~ msgstr "سانت كيتس"
+
+#~ msgid "St Lucia"
+#~ msgstr "سانت لوسيا"
+
+#~ msgid "St Thomas"
+#~ msgstr "سانت توماس"
+
+#~ msgid "St Vincent"
+#~ msgstr "سانت فنسنت"
+
+#~ msgid "Swift Current"
+#~ msgstr "سويفت كورونت"
+
+#~ msgid "Tegucigalpa"
+#~ msgstr "تيغوسيغالبا"
+
+#~ msgid "Thule"
+#~ msgstr "ثول"
+
+#~ msgid "Thunder Bay"
+#~ msgstr "ثوندرباي"
+
+#~ msgid "Tijuana"
+#~ msgstr "تيجوانا"
+
+#~ msgid "Toronto"
+#~ msgstr "تورونتو"
+
+#~ msgid "Tortola"
+#~ msgstr "تورتولا"
+
+#~ msgid "Vancouver"
+#~ msgstr "فانكوفر"
+
+#~ msgid "Virgin"
+#~ msgstr "فيرجن"
+
+#~ msgid "Winnipeg"
+#~ msgstr "وينيبيغ"
+
+#~ msgid "Yakutat"
+#~ msgstr "ياكوتات"
+
+#~ msgid "Yellowknife"
+#~ msgstr "يلونايف"
+
+#~ msgid "Antarctica"
+#~ msgstr "أنتراكتيكا"
+
+#~ msgid "Casey"
+#~ msgstr "كيسي"
+
+#~ msgid "Davis"
+#~ msgstr "ديفيس"
+
+#~ msgid "DumontDUrville"
+#~ msgstr "ديمون ديرفيل"
+
+#~ msgid "Mawson"
+#~ msgstr "ماوسن"
+
+#~ msgid "McMurdo"
+#~ msgstr "مكموردو"
+
+#~ msgid "Palmer"
+#~ msgstr "بالمر"
+
+#~ msgid "Rothera"
+#~ msgstr "روثيرا"
+
+#~ msgid "South Pole"
+#~ msgstr "القطب الشمالى"
+
+#~ msgid "Syowa"
+#~ msgstr "سيووا"
+
+#~ msgid "Vostok"
+#~ msgstr "فوستوك"
+
+#~ msgid "Arctic"
+#~ msgstr "أركتيك"
+
+#~ msgid "Longyearbyen"
+#~ msgstr "لونجي يارباين"
+
+#~ msgid "Asia"
+#~ msgstr "آسيا"
+
+#~ msgid "Aden"
+#~ msgstr "عدن"
+
+#~ msgid "Almaty"
+#~ msgstr "ألماتي"
+
+#~ msgid "Amman"
+#~ msgstr "عمان"
+
+#~ msgid "Anadyr"
+#~ msgstr "أنادير"
+
+#~ msgid "Aqtau"
+#~ msgstr "أكتو"
+
+#~ msgid "Aqtobe"
+#~ msgstr "أكتوبي"
+
+#~ msgid "Ashgabat"
+#~ msgstr "أشكبات"
+
+#~ msgid "Ashkhabad"
+#~ msgstr "أشخباد"
+
+#~ msgid "Baghdad"
+#~ msgstr "بغداد"
+
+#~ msgid "Bahrain"
+#~ msgstr "البحرين"
+
+#~ msgid "Baku"
+#~ msgstr "باكو"
+
+#~ msgid "Bangkok"
+#~ msgstr "بانكوك"
+
+#~ msgid "Beirut"
+#~ msgstr "بيروت"
+
+#~ msgid "Bishkek"
+#~ msgstr "بشكيك"
+
+#~ msgid "Brunei"
+#~ msgstr "برونيي"
+
+#~ msgid "Calcutta"
+#~ msgstr "كالكوتا"
+
+#~ msgid "Choibalsan"
+#~ msgstr "شوابالسن"
+
+#~ msgid "Chongqing"
+#~ msgstr "شونج كينج"
+
+#~ msgid "Chungking"
+#~ msgstr "شونج كينج"
+
+#~ msgid "Colombo"
+#~ msgstr "كولمبو"
+
+#~ msgid "Dacca"
+#~ msgstr "دكّا"
+
+#~ msgid "Damascus"
+#~ msgstr "دمشق"
+
+#~ msgid "Dhaka"
+#~ msgstr "دكا"
+
+#~ msgid "Dili"
+#~ msgstr "ديلي"
+
+#~ msgid "Dubai"
+#~ msgstr "دبى"
+
+#~ msgid "Dushanbe"
+#~ msgstr "دوشانبي"
+
+#~ msgid "Gaza"
+#~ msgstr "غزة"
+
+#~ msgid "Harbin"
+#~ msgstr "هاربين"
+
+#~ msgid "Ho Chi Minh"
+#~ msgstr "هوشي منه"
+
+#~ msgid "Hong Kong"
+#~ msgstr "هونج كونج"
+
+#~ msgid "Hovd"
+#~ msgstr "هوود"
+
+#~ msgid "Irkutsk"
+#~ msgstr "ايركوتسك"
+
+#~ msgid "Istanbul"
+#~ msgstr "إسطنبول"
+
+#~ msgid "Jakarta"
+#~ msgstr "جاكارتا"
+
+#~ msgid "Jayapura"
+#~ msgstr "جايابورا"
+
+#~ msgid "Jerusalem"
+#~ msgstr "القدس"
+
+#~ msgid "Kabul"
+#~ msgstr "كابول"
+
+#~ msgid "Kamchatka"
+#~ msgstr "كامتشاتكا"
+
+#~ msgid "Karachi"
+#~ msgstr "كراشى"
+
+#~ msgid "Kashgar"
+#~ msgstr "كاشغر"
+
+#~ msgid "Katmandu"
+#~ msgstr "كاتماندو"
+
+#~ msgid "Kolkata"
+#~ msgstr "كولكاتا"
+
+#~ msgid "Krasnoyarsk"
+#~ msgstr "كراسنويارسك"
+
+#~ msgid "Kuala Lumpur"
+#~ msgstr "كوالا لمبور"
+
+#~ msgid "Kuching"
+#~ msgstr "كوتشينغ"
+
+#~ msgid "Kuwait"
+#~ msgstr "الكويت"
+
+#~ msgid "Macao"
+#~ msgstr "ماكاو"
+
+#~ msgid "Macau"
+#~ msgstr "ماكو"
+
+#~ msgid "Magadan"
+#~ msgstr "ماغادان"
+
+#~ msgid "Makassar"
+#~ msgstr "ماكاسار"
+
+#~ msgid "Manila"
+#~ msgstr "مانيلا"
+
+#~ msgid "Muscat"
+#~ msgstr "مسقط"
+
+#~ msgid "Nicosia"
+#~ msgstr "نيقوسيا"
+
+#~ msgid "Novosibirsk"
+#~ msgstr "نوفوسيبيرسك"
+
+#~ msgid "Omsk"
+#~ msgstr "أومسك"
+
+#~ msgid "Oral"
+#~ msgstr "أورال"
+
+#~ msgid "Phnom Penh"
+#~ msgstr "فونوم بينه"
+
+#~ msgid "Pontianak"
+#~ msgstr "بونتياناك"
+
+#~ msgid "Pyongyang"
+#~ msgstr "بيونغ يانغ"
+
+#~ msgid "Qatar"
+#~ msgstr "قطر"
+
+#~ msgid "Qyzylorda"
+#~ msgstr "كيزي لوردا"
+
+#~ msgid "Rangoon"
+#~ msgstr "رانغون"
+
+#~ msgid "Riyadh"
+#~ msgstr "الرياض"
+
+#~ msgid "Saigon"
+#~ msgstr "سايغون"
+
+#~ msgid "Sakhalin"
+#~ msgstr "سخالين"
+
+#~ msgid "Samarkand"
+#~ msgstr "سمرقند"
+
+#~ msgid "Seoul"
+#~ msgstr "سيول"
+
+#~ msgid "Shanghai"
+#~ msgstr "شانغهاي"
+
+#~ msgid "Singapore"
+#~ msgstr "سنغافورة"
+
+#~ msgid "Taipei"
+#~ msgstr "تايبى"
+
+#~ msgid "Tashkent"
+#~ msgstr "طشقند"
+
+#~ msgid "Tbilisi"
+#~ msgstr "تبليسي"
+
+#~ msgid "Tehran"
+#~ msgstr "طهران"
+
+#~ msgid "Tel Aviv"
+#~ msgstr "تل أبيب"
+
+#~ msgid "Thimbu"
+#~ msgstr "ثيمبو"
+
+#~ msgid "Thimphu"
+#~ msgstr "تيمفو"
+
+#~ msgid "Tokyo"
+#~ msgstr "طوكيو"
+
+#~ msgid "Ujung Pandang"
+#~ msgstr "أوجونغ باندانغ"
+
+#~ msgid "Ulaanbaatar"
+#~ msgstr "منغوليا"
+
+#~ msgid "Ulan Bator"
+#~ msgstr "أولان باتور"
+
+#~ msgid "Urumqi"
+#~ msgstr "اورومتشى"
+
+#~ msgid "Vientiane"
+#~ msgstr "فينتيان"
+
+#~ msgid "Vladivostok"
+#~ msgstr "فلاديفوستوك"
+
+#~ msgid "Yakutsk"
+#~ msgstr "ياكوتسك"
+
+#~ msgid "Yekaterinburg"
+#~ msgstr "ايكاترينبرج"
+
+#~ msgid "Yerevan"
+#~ msgstr "ييريفان"
+
+#~ msgid "Atlantic"
+#~ msgstr "الأطلنطى"
+
+#~ msgid "Azores"
+#~ msgstr "الازور"
+
+#~ msgid "Bermuda"
+#~ msgstr "برمودا"
+
+#~ msgid "Canary"
+#~ msgstr "كاناري"
+
+#~ msgid "Cape Verde"
+#~ msgstr "الرأس الأخضر"
+
+#~ msgid "Faeroe"
+#~ msgstr "فايروي"
+
+#~ msgid "Faroe"
+#~ msgstr "فاروي"
+
+#~ msgid "Jan Mayen"
+#~ msgstr "جان ماين"
+
+#~ msgid "Madeira"
+#~ msgstr "مادييرا"
+
+#~ msgid "Reykjavik"
+#~ msgstr "ريكيافيك"
+
+#~ msgid "South Georgia"
+#~ msgstr "جيورجيا الجنوبية"
+
+#~ msgid "St Helena"
+#~ msgstr "سانت هيلانة"
+
+#~ msgid "Stanley"
+#~ msgstr "ستانلي"
+
+#~ msgid "Australia"
+#~ msgstr "أستراليا"
+
+#~ msgid "ACT"
+#~ msgstr "أست"
+
+#~ msgid "Adelaide"
+#~ msgstr "اديلايد"
+
+#~ msgid "Brisbane"
+#~ msgstr "بريسبان"
+
+#~ msgid "Broken Hill"
+#~ msgstr "بروكين هيل"
+
+#~ msgid "Canberra"
+#~ msgstr "كانبيرا"
+
+#~ msgid "Currie"
+#~ msgstr "كوريي"
+
+#~ msgid "Darwin"
+#~ msgstr "داروين"
+
+#~ msgid "Eucla"
+#~ msgstr "أوسلا"
+
+#~ msgid "Hobart"
+#~ msgstr "هوبارت"
+
+#~ msgid "LHI"
+#~ msgstr "لهي"
+
+#~ msgid "Lindeman"
+#~ msgstr "ليندمان"
+
+#~ msgid "Lord Howe"
+#~ msgstr "لورد هاو"
+
+#~ msgid "Melbourne"
+#~ msgstr "ميلبورن"
+
+#~ msgid "North"
+#~ msgstr "الشمال"
+
+#~ msgid "NSW"
+#~ msgstr "نسيو"
+
+#~ msgid "Perth"
+#~ msgstr "بيرث"
+
+#~ msgid "Queensland"
+#~ msgstr "كوينسلند"
+
+#~ msgid "South"
+#~ msgstr "الجنوب"
+
+#~ msgid "Sydney"
+#~ msgstr "سدني"
+
+#~ msgid "Tasmania"
+#~ msgstr "تسامنيا"
+
+#~ msgid "Victoria"
+#~ msgstr "فيكتوريا"
+
+#~ msgid "West"
+#~ msgstr "الغرب"
+
+#~ msgid "Yancowinna"
+#~ msgstr "يانكووينا"
+
+#~ msgid "Etc"
+#~ msgstr "إتس"
+
+#~ msgid "GMT"
+#~ msgstr "توقيت جرينتش"
+
+#~ msgid "GMT+0"
+#~ msgstr "توقيت جرينتش +0"
+
+#~ msgid "GMT+1"
+#~ msgstr "توقيت جرينتش +1"
+
+#~ msgid "GMT+10"
+#~ msgstr "توقيت جرينتش +10"
+
+#~ msgid "GMT+11"
+#~ msgstr "توقيت جرينتش +11"
+
+#~ msgid "GMT+12"
+#~ msgstr "توقيت جرينتش +12"
+
+#~ msgid "GMT+2"
+#~ msgstr "توقيت جرينتش +2"
+
+#~ msgid "GMT+3"
+#~ msgstr "توقيت جرينتش +3"
+
+#~ msgid "GMT+4"
+#~ msgstr "توقيت جرينتش +4"
+
+#~ msgid "GMT+5"
+#~ msgstr "توقيت جرينتش +5"
+
+#~ msgid "GMT+6"
+#~ msgstr "توقيت جرينتش +6"
+
+#~ msgid "GMT+7"
+#~ msgstr "توقيت جرينتش +7"
+
+#~ msgid "GMT+8"
+#~ msgstr "توقيت جرينتش +8"
+
+#~ msgid "GMT+9"
+#~ msgstr "توقيت جرينتش +9"
+
+#~ msgid "GMT-0"
+#~ msgstr "توقيت جرينتش -0"
+
+#~ msgid "GMT-1"
+#~ msgstr "توقيت جرينتش -1"
+
+#~ msgid "GMT-10"
+#~ msgstr "توقيت جرينتش -10"
+
+#~ msgid "GMT-11"
+#~ msgstr "توقيت جرينتش -11"
+
+#~ msgid "GMT-12"
+#~ msgstr "توقيت جرينتش -12"
+
+#~ msgid "GMT-13"
+#~ msgstr "توقيت جرينتش -13"
+
+#~ msgid "GMT-14"
+#~ msgstr "توقيت جرينتش -14"
+
+#~ msgid "GMT-2"
+#~ msgstr "توقيت جرينتش -2"
+
+#~ msgid "GMT-3"
+#~ msgstr "توقيت جرينتش -3"
+
+#~ msgid "GMT-4"
+#~ msgstr "توقيت جرينتش-4"
+
+#~ msgid "GMT-5"
+#~ msgstr "توقيت جرينتش -5"
+
+#~ msgid "GMT-6"
+#~ msgstr "توقيت جرينتش -6"
+
+#~ msgid "GMT-7"
+#~ msgstr "توقيت جرينتش -7"
+
+#~ msgid "GMT-8"
+#~ msgstr "توقيت جرينتش -8"
+
+#~ msgid "GMT-9"
+#~ msgstr "توقيت جرينتش -9"
+
+#~ msgid "GMT0"
+#~ msgstr "توقيت جرينتش 0"
+
+#~ msgid "Greenwich"
+#~ msgstr "جرينويش"
+
+#~ msgid "UCT"
+#~ msgstr "أوستي"
+
+#~ msgid "Universal"
+#~ msgstr "العالمي"
+
+#~ msgid "UTC"
+#~ msgstr "أوتسي"
+
+#~ msgid "Zulu"
+#~ msgstr "زولو"
+
+#~ msgid "Europe"
+#~ msgstr "أوروبا"
+
+#~ msgid "Amsterdam"
+#~ msgstr "أمستردام"
+
+#~ msgid "Andorra"
+#~ msgstr "أندورا"
+
+#~ msgid "Athens"
+#~ msgstr "أثينا"
+
+#~ msgid "Belfast"
+#~ msgstr "بلفاست"
+
+#~ msgid "Belgrade"
+#~ msgstr "بيلقراد"
+
+#~ msgid "Berlin"
+#~ msgstr "برلين"
+
+#~ msgid "Bratislava"
+#~ msgstr "براتيسلافا"
+
+#~ msgid "Brussels"
+#~ msgstr "لبروسيلس"
+
+#~ msgid "Bucharest"
+#~ msgstr "بخارست"
+
+#~ msgid "Budapest"
+#~ msgstr "بودابست"
+
+#~ msgid "Chisinau"
+#~ msgstr "شيسينو"
+
+#~ msgid "Copenhagen"
+#~ msgstr "كوبنهاجن"
+
+#~ msgid "Dublin"
+#~ msgstr "دبلن"
+
+#~ msgid "Gibraltar"
+#~ msgstr "جبل طارق"
+
+#~ msgid "Guernsey"
+#~ msgstr "جويرنيسي"
+
+#~ msgid "Helsinki"
+#~ msgstr "هيلسينكي"
+
+#~ msgid "Isle of Man"
+#~ msgstr "إسلي أوف مان"
+
+#~ msgid "Jersey"
+#~ msgstr "جيرسى"
+
+#~ msgid "Kaliningrad"
+#~ msgstr "كالينجراد"
+
+#~ msgid "Kiev"
+#~ msgstr "كييف"
+
+#~ msgid "Lisbon"
+#~ msgstr "ليزبون"
+
+#~ msgid "Ljubljana"
+#~ msgstr "لجوبلجانا"
+
+#~ msgid "London"
+#~ msgstr "لندن"
+
+#~ msgid "Luxembourg"
+#~ msgstr "لوكسمبورج"
+
+#~ msgid "Madrid"
+#~ msgstr "مدريد"
+
+#~ msgid "Malta"
+#~ msgstr "مالطا"
+
+#~ msgid "Mariehamn"
+#~ msgstr "مارييهامن"
+
+#~ msgid "Minsk"
+#~ msgstr "مينسك"
+
+#~ msgid "Monaco"
+#~ msgstr "موناكو"
+
+#~ msgid "Moscow"
+#~ msgstr "موسكو"
+
+#~ msgid "Oslo"
+#~ msgstr "أوسلو"
+
+#~ msgid "Paris"
+#~ msgstr "باريس"
+
+#~ msgid "Podgorica"
+#~ msgstr "بودغوريتشا"
+
+#~ msgid "Prague"
+#~ msgstr "براغ"
+
+#~ msgid "Riga"
+#~ msgstr "ريغا"
+
+#~ msgid "Rome"
+#~ msgstr "روما"
+
+#~ msgid "Samara"
+#~ msgstr "سماره"
+
+#~ msgid "San Marino"
+#~ msgstr "سان مارينو"
+
+#~ msgid "Sarajevo"
+#~ msgstr "سرايفو"
+
+#~ msgid "Simferopol"
+#~ msgstr "سيمفيروبول"
+
+#~ msgid "Skopje"
+#~ msgstr "سكوبجي"
+
+#~ msgid "Sofia"
+#~ msgstr "سوفيا"
+
+#~ msgid "Stockholm"
+#~ msgstr "ستوكهولم"
+
+#~ msgid "Tallinn"
+#~ msgstr "تاليين"
+
+#~ msgid "Tirane"
+#~ msgstr "تيرانا"
+
+#~ msgid "Tiraspol"
+#~ msgstr "تيراسبول"
+
+#~ msgid "Uzhgorod"
+#~ msgstr "أوزجورود"
+
+#~ msgid "Vaduz"
+#~ msgstr "فادوز"
+
+#~ msgid "Vatican"
+#~ msgstr "فاتيكان"
+
+#~ msgid "Vienna"
+#~ msgstr "فيينا"
+
+#~ msgid "Vilnius"
+#~ msgstr "فيلنيوس"
+
+#~ msgid "Volgograd"
+#~ msgstr "فولجوجراد"
+
+#~ msgid "Warsaw"
+#~ msgstr "وارسو"
+
+#~ msgid "Zagreb"
+#~ msgstr "زغرب"
+
+#~ msgid "Zaporozhye"
+#~ msgstr "زابوروجييه"
+
+#~ msgid "Zurich"
+#~ msgstr "زيورخ"
+
+#~ msgid "Indian"
+#~ msgstr "إنديانا"
+
+#~ msgid "Antananarivo"
+#~ msgstr "أنتاناناريفو "
+
+#~ msgid "Chagos"
+#~ msgstr "شاجوس"
+
+#~ msgid "Christmas"
+#~ msgstr "كريسماس"
+
+#~ msgid "Cocos"
+#~ msgstr "كوكوس"
+
+#~ msgid "Comoro"
+#~ msgstr "كومورو"
+
+#~ msgid "Kerguelen"
+#~ msgstr "كيرجولين"
+
+#~ msgid "Mahe"
+#~ msgstr "ماهي"
+
+#~ msgid "Maldives"
+#~ msgstr "المالديف"
+
+#~ msgid "Mauritius"
+#~ msgstr "موريشيوس"
+
+#~ msgid "Mayotte"
+#~ msgstr "مايوت "
+
+#~ msgid "Reunion"
+#~ msgstr " ريونيون"
+
+#~ msgid "Pacific"
+#~ msgstr "الهادى"
+
+#~ msgid "Apia"
+#~ msgstr "أبييا"
+
+#~ msgid "Auckland"
+#~ msgstr "أوكلاند"
+
+#~ msgid "Chatham"
+#~ msgstr "شاتهام"
+
+#~ msgid "Easter"
+#~ msgstr "إيستير"
+
+#~ msgid "Efate"
+#~ msgstr "إيفاتي"
+
+#~ msgid "Enderbury"
+#~ msgstr "إينديربورج"
+
+#~ msgid "Fakaofo"
+#~ msgstr "فاكاوفو"
+
+#~ msgid "Fiji"
+#~ msgstr "فيجي"
+
+#~ msgid "Funafuti"
+#~ msgstr "فونافوتي"
+
+#~ msgid "Galapagos"
+#~ msgstr "غالاباغوس"
+
+#~ msgid "Gambier"
+#~ msgstr "جام بيار"
+
+#~ msgid "Guadalcanal"
+#~ msgstr "جزيرة قوادلكانال"
+
+#~ msgid "Guam"
+#~ msgstr "غوام"
+
+#~ msgid "Honolulu"
+#~ msgstr "جزر الهونولولو"
+
+#~ msgid "Johnston"
+#~ msgstr "جونستون"
+
+#~ msgid "Kiritimati"
+#~ msgstr "كيريتيماتي"
+
+#~ msgid "Kosrae"
+#~ msgstr "كوسرايي"
+
+#~ msgid "Kwajalein"
+#~ msgstr "كواجالين "
+
+#~ msgid "Majuro"
+#~ msgstr "ماجورو"
+
+#~ msgid "Marquesas"
+#~ msgstr "ماكويساس"
+
+#~ msgid "Midway"
+#~ msgstr "ميدواي"
+
+#~ msgid "Nauru"
+#~ msgstr "نورو"
+
+#~ msgid "Niue"
+#~ msgstr "نييو"
+
+#~ msgid "Norfolk"
+#~ msgstr "نورفولك"
+
+#~ msgid "Noumea"
+#~ msgstr "نوميا "
+
+#~ msgid "Pago Pago"
+#~ msgstr "باجو باجو"
+
+#~ msgid "Palau"
+#~ msgstr "بالاو"
+
+#~ msgid "Pitcairn"
+#~ msgstr "بيتكيرن"
+
+#~ msgid "Ponape"
+#~ msgstr "بونابي"
+
+#~ msgid "Port Moresby"
+#~ msgstr "بورت موريسبي"
+
+#~ msgid "Rarotonga"
+#~ msgstr "راروتونجا"
+
+#~ msgid "Saipan"
+#~ msgstr "سايبان "
+
+#~ msgid "Samoa"
+#~ msgstr "ساموا"
+
+#~ msgid "Tahiti"
+#~ msgstr "تاهيتى"
+
+#~ msgid "Tarawa"
+#~ msgstr "تاراوا "
+
+#~ msgid "Tongatapu"
+#~ msgstr "تونجاتابو"
+
+#~ msgid "Truk"
+#~ msgstr "تروك"
+
+#~ msgid "Wake"
+#~ msgstr "واكي"
+
+#~ msgid "Wallis"
+#~ msgstr "واليس "
+
+#~ msgid "Yap"
+#~ msgstr "ياب"
+
+#~ msgid "Africa"
+#~ msgstr "أفريقيا"
+
+#~ msgid "Abidjan"
+#~ msgstr "أبيدجان"
+
+#~ msgid "Accra"
+#~ msgstr "أكرا"
+
+#~ msgid "Addis Ababa"
+#~ msgstr "أديس أبابا"
+
+#~ msgid "Algiers"
+#~ msgstr "الجزائر العاصمة"
+
+#~ msgid "Asmara"
+#~ msgstr "أسمرة"
+
+#~ msgid "Asmera"
+#~ msgstr "أسمرة"
+
+#~ msgid "Bamako"
+#~ msgstr "باماكو"
+
+#~ msgid "Bangui"
+#~ msgstr "بانغي"
+
+#~ msgid "Banjul"
+#~ msgstr "بانجول"
+
+#~ msgid "Bissau"
+#~ msgstr "غينيا بيساو"
+
+#~ msgid "Blantyre"
+#~ msgstr "بلانتاير"
+
+#~ msgid "Brazzaville"
+#~ msgstr "برازافيل"
+
+#~ msgid "Bujumbura"
+#~ msgstr "بوجمبورا"
+
+#~ msgid "Cairo"
+#~ msgstr "القاهرة"
+
+#~ msgid "Casablanca"
+#~ msgstr "الدار البيضاء"
+
+#~ msgid "Ceuta"
+#~ msgstr "سبتة"
+
+#~ msgid "Conakry"
+#~ msgstr "كوناكري"
+
+#~ msgid "Dakar"
+#~ msgstr "داكار"
+
+#~ msgid "Dar es Salaam"
+#~ msgstr "دار السلام"
+
+#~ msgid "Djibouti"
+#~ msgstr "جيبوتي"
+
+#~ msgid "Douala"
+#~ msgstr "دوالا"
+
+#~ msgid "El Aaiun"
+#~ msgstr "العيون"
+
+#~ msgid "Freetown"
+#~ msgstr "فريتاون"
+
+#~ msgid "Gaborone"
+#~ msgstr "جابورون"
+
+#~ msgid "Harare"
+#~ msgstr "هراري"
+
+#~ msgid "Johannesburg"
+#~ msgstr "جوهانسبرج"
+
+#~ msgid "Kampala"
+#~ msgstr "كمبالا"
+
+#~ msgid "Khartoum"
+#~ msgstr "الخرطوم "
+
+#~ msgid "Kigali"
+#~ msgstr "كيغالي"
+
+#~ msgid "Kinshasa"
+#~ msgstr "كينشاسا"
+
+#~ msgid "Lagos"
+#~ msgstr "لاغوس"
+
+#~ msgid "Libreville"
+#~ msgstr "ليبرفيل"
+
+#~ msgid "Lome"
+#~ msgstr "لومي"
+
+#~ msgid "Luanda"
+#~ msgstr "لواندا"
+
+#~ msgid "Lubumbashi"
+#~ msgstr "لوبومباشي"
+
+#~ msgid "Lusaka"
+#~ msgstr "لوساكا"
+
+#~ msgid "Malabo"
+#~ msgstr "مالابو"
+
+#~ msgid "Maputo"
+#~ msgstr "مابوتو"
+
+#~ msgid "Maseru"
+#~ msgstr "ماسيرو"
+
+#~ msgid "Mbabane"
+#~ msgstr "مبابان"
+
+#~ msgid "Mogadishu"
+#~ msgstr "مقديشيو"
+
+#~ msgid "Monrovia"
+#~ msgstr "مونروفيا"
+
+#~ msgid "Nairobi"
+#~ msgstr "نيروبي"
+
+#~ msgid "Ndjamena"
+#~ msgstr "إنجامينا"
+
+#~ msgid "Niamey"
+#~ msgstr "نيامي"
+
+#~ msgid "Nouakchott"
+#~ msgstr "نواكشوط"
+
+#~ msgid "Ouagadougou"
+#~ msgstr "واغادوغو"
+
+#~ msgid "Porto-Novo"
+#~ msgstr "بورتو_نوفو"
+
+#~ msgid "Sao Tome"
+#~ msgstr "ساو تومي"
+
+#~ msgid "Timbuktu"
+#~ msgstr "تمبكتو"
+
+#~ msgid "Tripoli"
+#~ msgstr "طرابلس"
+
+#~ msgid "Tunis"
+#~ msgstr "تونس"
+
+#~ msgid "Windhoek"
+#~ msgstr "ويندهوك"
+
+#~ msgid "America"
+#~ msgstr "أمريكا"
+
+#~ msgid "Adak"
+#~ msgstr "أداك"
+
+#~ msgid "Anchorage"
+#~ msgstr "انکوریج"
+
+#~ msgid "Anguilla"
+#~ msgstr "أنغوليا"
+
+#~ msgid "Antigua"
+#~ msgstr "أنتيغوا"
+
+#~ msgid "Araguaina"
+#~ msgstr "أراجواينا"
+
+#~ msgid "Argentina"
+#~ msgstr "الأرجنتين"
+
+#~ msgid "Buenos Aires"
+#~ msgstr "بوينس أيرس"
+
+#~ msgid "Catamarca"
+#~ msgstr "كاتاماركا"
+
+#~ msgid "ComodRivadavia"
+#~ msgstr "كومودورو ريفادافيا"
+
+#~ msgid "Cordoba"
+#~ msgstr "قرطبة"
+
+#~ msgid "Jujuy"
+#~ msgstr "خوخوي"
+
+#~ msgid "La Rioja"
+#~ msgstr "لاريوخا"
+
+#~ msgid "Mendoza"
+#~ msgstr "ميندوزا"
+
+#~ msgid "Rio Gallegos"
+#~ msgstr "ريو جاليجوس"
+
+#~ msgid "San Juan"
+#~ msgstr "سان جوان"
+
+#~ msgid "San Luis"
+#~ msgstr "سان لويس"
+
+#~ msgid "Tucuman"
+#~ msgstr "توكومان"
+
+#~ msgid "Ushuaia"
+#~ msgstr "أوشوايا"
+
+#~ msgid "Aruba"
+#~ msgstr "أروبا"
+
+#~ msgid "Asuncion"
+#~ msgstr "اسونسيون"
+
+#~ msgid "Atikokan"
+#~ msgstr "أتكوكان"
+
+#~ msgid "Atka"
+#~ msgstr "أتكا"
+
+#~ msgid "Bahia"
+#~ msgstr "باهيا"
+
+#~ msgid "Barbados"
+#~ msgstr "بربادوس"
+
+#~ msgid "Belem"
+#~ msgstr "بيليم"
+
+#~ msgid "Belize"
+#~ msgstr "بليز"
+
+#~ msgid "Blanc-Sablon"
+#~ msgstr "بلو - سابلون"
+
+#~ msgid "Boa Vista"
+#~ msgstr "بوا فيستا"
+
+#~ msgid "Bogota"
+#~ msgstr "بوقوتا"
+
+#~ msgid "Boise"
+#~ msgstr "بويز"
+
+#~ msgid "Cambridge Bay"
+#~ msgstr "كامبردج باي"
+
+#~ msgid "Campo Grande"
+#~ msgstr "كامبو غراندي"
+
+#~ msgid "Cancun"
+#~ msgstr "كانكون"
+
+#~ msgid "Caracas"
+#~ msgstr "كاراكاس"
+
+#~ msgid "Cayenne"
+#~ msgstr "كايين"
+
+#~ msgid "Cayman"
+#~ msgstr "كايمان"
+
+#~ msgid "Chicago"
+#~ msgstr "شيكاجو"
+
+#~ msgid "Chihuahua"
+#~ msgstr "تشيهواهوا"
+
+#~ msgid "Coral Harbour"
+#~ msgstr "كورال هاربر"
+
+#~ msgid "Costa Rica"
+#~ msgstr "كوستا ريكا"
+
+#~ msgid "Cuiaba"
+#~ msgstr "كويابا"
+
+#~ msgid "Curacao"
+#~ msgstr "كوراكاو"
+
+#~ msgid "Danmarkshavn"
+#~ msgstr "دانماركشافن"
+
+#~ msgid "Dawson"
+#~ msgstr "داوسون"
+
+#~ msgid "Dawson Creek"
+#~ msgstr "داوسون كريك"
+
+#~ msgid "Denver"
+#~ msgstr "دينفر"
+
+#~ msgid "Detroit"
+#~ msgstr "ديترويت"
+
+#~ msgid "Dominica"
+#~ msgstr "الدومينيك"
+
+#~ msgid "Edmonton"
+#~ msgstr "ادمونتون"
+
+#~ msgid "Eirunepe"
+#~ msgstr "ايرونيبي"
+
+#~ msgid "El Salvador"
+#~ msgstr "السلفادور"
+
+#~ msgid "Ensenada"
+#~ msgstr "إنسينادا"
+
+#~ msgid "Fort Wayne"
+#~ msgstr "فورت واين"
+
+#~ msgid "Fortaleza"
+#~ msgstr "فورتاليزا"
+
+#~ msgid "Glace Bay"
+#~ msgstr "جلاس باي"
+
+#~ msgid "Godthab"
+#~ msgstr "جوثهاب"
+
+#~ msgid "Goose Bay"
+#~ msgstr "جووسباي"
+
+#~ msgid "Grand Turk"
+#~ msgstr "جرانتورك"
+
+#~ msgid "Grenada"
+#~ msgstr "جرينادا"
+
+#~ msgid "Guadeloupe"
+#~ msgstr "جواديلوبي"
+
+#~ msgid "Guatemala"
+#~ msgstr "غواتيمالا"
+
+#~ msgid "Guayaquil"
+#~ msgstr "جواياكويل"
+
+#~ msgid "Guyana"
+#~ msgstr "جويانا"
+
+#~ msgid "Halifax"
+#~ msgstr "هاليفاكس"
+
+#~ msgid "Havana"
+#~ msgstr "هافانا"
+
+#~ msgid "Hermosillo"
+#~ msgstr "هيرموسيلو"
+
+#~ msgid "Indiana"
+#~ msgstr "إنديانا"
+
+#~ msgid "Indianapolis"
+#~ msgstr "انديانابوليس"
+
+#~ msgid "Knox"
+#~ msgstr "نوكس"
+
+#~ msgid "Marengo"
+#~ msgstr "مارينغو"
+
+#~ msgid "Petersburg"
+#~ msgstr "بطرسبورغ"
+
+#~ msgid "Tell City"
+#~ msgstr "تيل سيتي"
+
+#~ msgid "Vevay"
+#~ msgstr "فيفاي"

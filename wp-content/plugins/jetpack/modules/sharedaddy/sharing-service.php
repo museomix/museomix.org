@@ -6,7 +6,7 @@ define( 'WP_SHARING_PLUGIN_VERSION', JETPACK__VERSION );
 
 class Sharing_Service {
 	private $global = false;
-	var $default_sharing_label = '';
+	public $default_sharing_label = '';
 
 	public function __construct() {
 		$this->default_sharing_label = __( 'Share this:', 'jetpack' );
@@ -49,7 +49,6 @@ class Sharing_Service {
 			'facebook'      => 'Share_Facebook',
 			'linkedin'      => 'Share_LinkedIn',
 			'reddit'        => 'Share_Reddit',
-			'stumbleupon'   => 'Share_Stumbleupon',
 			'twitter'       => 'Share_Twitter',
 			'press-this'    => 'Share_PressThis',
 			'google-plus-1' => 'Share_GooglePlus1',
@@ -240,7 +239,7 @@ class Sharing_Service {
 
 		// Defaults
 		$options['global'] = array(
-			'button_style'  => 'icon',
+			'button_style'  => 'icon-text',
 			'sharing_label' => $this->default_sharing_label,
 			'open_links'    => 'same',
 			'show'          => array(),
@@ -411,12 +410,12 @@ class Sharing_Service {
 }
 
 class Sharing_Service_Total {
-	var $id 		= '';
-	var $name 		= '';
-	var $service	= '';
-	var $total 		= 0;
+	public $id 		= '';
+	public $name 		= '';
+	public $service	= '';
+	public $total 		= 0;
 
-	public function Sharing_Service_Total( $id, $total ) {
+	public function __construct( $id, $total ) {
 		$services 		= new Sharing_Service();
 		$this->id 		= esc_html( $id );
 		$this->service 	= $services->get_service( $id );
@@ -433,12 +432,12 @@ class Sharing_Service_Total {
 }
 
 class Sharing_Post_Total {
-	var $id		= 0;
-	var $total	= 0;
-	var $title 	= '';
-	var $url	= '';
+	public $id    = 0;
+	public $total = 0;
+	public $title = '';
+	public $url   = '';
 
-	public function Sharing_Post_Total( $id, $total ) {
+	public function __construct( $id, $total ) {
 		$this->id 		= (int) $id;
 		$this->total 	= (int) $total;
 		$this->title	= get_the_title( $this->id );
@@ -504,16 +503,10 @@ function sharing_add_footer() {
 		if ( apply_filters( 'jetpack_sharing_counts', true ) && is_array( $jetpack_sharing_counts ) && count( $jetpack_sharing_counts ) ) :
 			$sharing_post_urls = array_filter( $jetpack_sharing_counts );
 			if ( $sharing_post_urls ) :
-				$is_jetpack = true === apply_filters( 'is_jetpack_site', false, get_current_blog_id() );
-				$site_id = $is_jetpack ? Jetpack_Options::get_option( 'id' ) : get_current_blog_id();
 ?>
 
 	<script type="text/javascript">
 		window.WPCOM_sharing_counts = <?php echo json_encode( array_flip( $sharing_post_urls ) ); ?>;
-		window.WPCOM_jetpack = <?php echo var_export( $is_jetpack, true ); ?>;
-		<?php if ( is_int( $site_id ) ): ?>
-		window.WPCOM_site_ID = <?php echo $site_id ?>;
-		<?php endif; ?>
 	</script>
 <?php
 			endif;
@@ -544,13 +537,8 @@ function sharing_add_header() {
 	}
 
 	if ( count( $enabled['all'] ) > 0 && sharing_maybe_enqueue_scripts() ) {
-		// @todo: Remove this opt-out filter in the future
-		if ( ( ! defined( 'IS_WPCOM' ) ) || ( ! IS_WPCOM ) || apply_filters( 'wpl_sharing_2014_1', true ) ) {
-			wp_enqueue_style( 'sharedaddy', plugin_dir_url( __FILE__ ) .'sharing.css', array(), JETPACK__VERSION );
-			wp_enqueue_style( 'genericons' );
-		} else {
-			wp_enqueue_style( 'sharedaddy', plugin_dir_url( __FILE__ ) .'sharing-legacy.css', array(), JETPACK__VERSION );
-		}
+		wp_enqueue_style( 'sharedaddy', plugin_dir_url( __FILE__ ) .'sharing.css', array(), JETPACK__VERSION );
+		wp_enqueue_style( 'genericons' );
 	}
 
 }
@@ -577,7 +565,7 @@ function sharing_display( $text = '', $echo = false ) {
 	if ( empty( $post ) )
 		return $text;
 
-	if ( is_preview() || is_admin() ) {
+	if ( ( is_preview() || is_admin() ) && ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
 		return $text;
 	}
 
@@ -617,7 +605,7 @@ function sharing_display( $text = '', $echo = false ) {
 	if ( !is_feed() ) {
 		if ( is_singular() && in_array( get_post_type(), $global['show'] ) ) {
 			$show = true;
-		} elseif ( in_array( 'index', $global['show'] ) && ( is_home() || is_archive() || is_search() || in_array( get_post_type(), $global['show'] ) ) ) {
+		} elseif ( in_array( 'index', $global['show'] ) && ( is_home() || is_front_page() || is_archive() || is_search() || in_array( get_post_type(), $global['show'] ) ) ) {
 			$show = true;
 		}
 	}
@@ -641,7 +629,7 @@ function sharing_display( $text = '', $echo = false ) {
 	// Private post?
 	$post_status = get_post_status( $post->ID );
 
-	if ( $post_status == 'private' ) {
+	if ( 'private' === $post_status ) {
 		$show = false;
 	}
 

@@ -210,20 +210,20 @@ array_push( $tests, $this_test );
 <table class="widefat">
 	<thead>
 	<tr class="thead">
-		<th><?php _e('Relative Path', 'it-l10n-better-wp-security' ); ?></th>
-		<th><?php _e('Suggestion', 'it-l10n-better-wp-security' ); ?></th>
-		<th<?php _e('>Value', 'it-l10n-better-wp-security' ); ?></th>
-		<th><?php _e('Result', 'it-l10n-better-wp-security' ); ?></th>
-		<th style="width: 60px;"><?php _e('Status', 'it-l10n-better-wp-security' ); ?></th>
+		<th><?php _e('Relative Path', 'better-wp-security' ); ?></th>
+		<th><?php _e('Suggestion', 'better-wp-security' ); ?></th>
+		<th<?php _e('>Value', 'better-wp-security' ); ?></th>
+		<th><?php _e('Result', 'better-wp-security' ); ?></th>
+		<th style="width: 60px;"><?php _e('Status', 'better-wp-security' ); ?></th>
 	</tr>
 	</thead>
 	<tfoot>
 	<tr class="thead">
-		<th><?php _e('Relative Path', 'it-l10n-better-wp-security' ); ?></th>
-		<th><?php _e('Suggestion', 'it-l10n-better-wp-security' ); ?></th>
-		<th><?php _e('Value', 'it-l10n-better-wp-security' ); ?></th>
-		<th><?php _e('Result', 'it-l10n-better-wp-security' ); ?></th>
-		<th style="width: 60px;"><?php _e('Status', 'it-l10n-better-wp-security' ); ?></th>
+		<th><?php _e('Relative Path', 'better-wp-security' ); ?></th>
+		<th><?php _e('Suggestion', 'better-wp-security' ); ?></th>
+		<th><?php _e('Value', 'better-wp-security' ); ?></th>
+		<th><?php _e('Result', 'better-wp-security' ); ?></th>
+		<th style="width: 60px;"><?php _e('Status', 'better-wp-security' ); ?></th>
 	</tr>
 	</tfoot>
 	<tbody>

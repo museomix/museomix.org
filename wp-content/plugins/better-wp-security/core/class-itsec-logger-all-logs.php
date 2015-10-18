@@ -145,19 +145,23 @@ final class ITSEC_Logger_All_Logs extends ITSEC_WP_List_Table {
 		global $itsec_logger;
 
 		$raw_data = maybe_unserialize( $item['data'] );
+		
+		$data = apply_filters( "itsec_logger_filter_{$item['type']}_data_column_details", '', $raw_data );
+		
+		if ( empty( $data ) ) {
+			if ( is_array( $raw_data ) && sizeof( $raw_data ) > 0 ) {
 
-		if ( is_array( $raw_data ) && sizeof( $raw_data ) > 0 ) {
+				$data = $itsec_logger->print_array( $raw_data, true );
 
-			$data = $itsec_logger->print_array( $raw_data, true );
+			} elseif ( ! is_array( $raw_data ) ) {
 
-		} elseif ( ! is_array( $raw_data ) ) {
+				$data = sanitize_text_field( $raw_data );
 
-			$data = sanitize_text_field( $raw_data );
+			} else {
 
-		} else {
+				$data = '';
 
-			$data = '';
-
+			}
 		}
 
 		if ( strlen( $data ) > 1 ) {
@@ -166,7 +170,7 @@ final class ITSEC_Logger_All_Logs extends ITSEC_WP_List_Table {
 			$content .= $data;
 			$content .= '</div>';
 
-			$content .= '<a href="itsec-log-all-row-' . $item['id'] . '" class="dialog">' . __( 'Details', 'it-l10n-better-wp-security' ) . '</a>';
+			$content .= '<a href="itsec-log-all-row-' . $item['id'] . '" class="dialog">' . __( 'Details', 'better-wp-security' ) . '</a>';
 
 			return $content;
 
@@ -186,14 +190,14 @@ final class ITSEC_Logger_All_Logs extends ITSEC_WP_List_Table {
 	public function get_columns() {
 
 		return array(
-			'function' => __( 'Function', 'it-l10n-better-wp-security' ),
-			'priority' => __( 'Priority', 'it-l10n-better-wp-security' ),
-			'time'     => __( 'Time', 'it-l10n-better-wp-security' ),
-			'host'     => __( 'Host', 'it-l10n-better-wp-security' ),
-			'user'     => __( 'User', 'it-l10n-better-wp-security' ),
-			'url'      => __( 'URL', 'it-l10n-better-wp-security' ),
-			'referrer' => __( 'Referrer', 'it-l10n-better-wp-security' ),
-			'data'     => __( 'Data', 'it-l10n-better-wp-security' ),
+			'function' => __( 'Function', 'better-wp-security' ),
+			'priority' => __( 'Priority', 'better-wp-security' ),
+			'time'     => __( 'Time', 'better-wp-security' ),
+			'host'     => __( 'Host', 'better-wp-security' ),
+			'user'     => __( 'User', 'better-wp-security' ),
+			'url'      => __( 'URL', 'better-wp-security' ),
+			'referrer' => __( 'Referrer', 'better-wp-security' ),
+			'data'     => __( 'Data', 'better-wp-security' ),
 		);
 
 	}
@@ -223,6 +227,7 @@ final class ITSEC_Logger_All_Logs extends ITSEC_WP_List_Table {
 		foreach ( $items as $item ) { //loop through and group 404s
 
 			$table_data[ $count ]['id']       = $count;
+			$table_data[ $count ]['type']     = sanitize_text_field( $item['log_type'] );
 			$table_data[ $count ]['function'] = sanitize_text_field( $item['log_function'] );
 			$table_data[ $count ]['priority'] = sanitize_text_field( $item['log_priority'] );
 			$table_data[ $count ]['time']     = sanitize_text_field( $item['log_date'] );
@@ -231,7 +236,7 @@ final class ITSEC_Logger_All_Logs extends ITSEC_WP_List_Table {
 			$table_data[ $count ]['user_id']  = sanitize_text_field( $item['log_user'] );
 			$table_data[ $count ]['url']      = sanitize_text_field( $item['log_url'] );
 			$table_data[ $count ]['referrer'] = sanitize_text_field( $item['log_referrer'] );
-			$table_data[ $count ]['data']     = sanitize_text_field( $item['log_data'] );
+			$table_data[ $count ]['data']     = $item['log_data'];
 
 			$count ++;
 

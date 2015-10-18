@@ -1,0 +1,585 @@
+# Spanish translation for duplicate-post
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# This file is distributed under the same license as the duplicate-post package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: youtube-channel-gallery\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-06-05 10:40+0100\n"
+"PO-Revision-Date: 2015-07-30 12:35+0200\n"
+"Last-Translator: Harald Fjogstad <post@thefjogstad.no>\n"
+"Language-Team: Diego <diego.franca@lojainterativa.com>\n"
+"Language: nb_NO\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2010-06-23 21:48+0000\n"
+"X-Generator: Poedit 1.8.2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-KeywordsList: _e;__\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: templates/admin_tabs.php:3 templates/admin_tabs.php:321
+msgid "Title:"
+msgstr "Tittel:"
+
+#: templates/admin_tabs.php:9
+msgid "Feed"
+msgstr "Nyhetstrøm"
+
+#: templates/admin_tabs.php:10
+msgid "Player"
+msgstr "Spiller"
+
+#: templates/admin_tabs.php:11
+msgid "Search"
+msgstr "Søk"
+
+#: templates/admin_tabs.php:12
+msgid "Thumbnails"
+msgstr "Vis miniatyrbilder"
+
+#: templates/admin_tabs.php:13
+msgid "Link"
+msgstr "Link"
+
+#: templates/admin_tabs.php:26
+msgid "YouTube API Key:"
+msgstr "YouTube API Key:"
+
+#: templates/admin_tabs.php:28
+msgid "Get your own YouTube API Key and put here."
+msgstr "Få din egen YouTube API Key og satt her."
+
+#: templates/admin_tabs.php:32
+msgid "Video feed type:"
+msgstr "Video feed type:"
+
+#: templates/admin_tabs.php:34
+msgid "Uploaded by a user"
+msgstr "Lastet opp av en bruker"
+
+#: templates/admin_tabs.php:36
+msgid "Playlist"
+msgstr "Spilleliste"
+
+#: templates/admin_tabs.php:41
+msgid "YouTube user id:"
+msgstr "YouTube-bruker id:"
+
+#: templates/admin_tabs.php:42
+msgid "YouTube playlist id:"
+msgstr "YouTube-spilleliste id:"
+
+#: templates/admin_tabs.php:48
+msgid "Playlist order:"
+msgstr "Spilleliste sortering:"
+
+#: templates/admin_tabs.php:50
+msgid "Ascending Order"
+msgstr "Stigende rekkefølge"
+
+#: templates/admin_tabs.php:51
+msgid "Descending Order"
+msgstr "Spilleliste sortering:"
+
+#: templates/admin_tabs.php:56
+msgid "Cache time (hours):"
+msgstr "Cache tid (timer):"
+
+#: templates/admin_tabs.php:58
+msgid ""
+"Hours that RSS data is saved in database, to not make a request every time "
+"the page is displayed. Assign this value according to how often you upgrade "
+"your playlist in YouTube."
+msgstr ""
+
+#: templates/admin_tabs.php:63
+msgid "Activate cache"
+msgstr "Aktiver cache"
+
+#: templates/admin_tabs.php:64
+msgid ""
+"If you disable this field the cache will be deleted and will not be used. "
+"This is useful to refresh immediately the YouTube RSS used by the plugin. "
+"Reenable the cache when the gallery shows the changes you made in your "
+"youtube account."
+msgstr ""
+
+#: templates/admin_tabs.php:79
+msgid "Player:"
+msgstr "Spiller:"
+
+#: templates/admin_tabs.php:81
+msgid "Without player"
+msgstr "Uten spiller"
+
+#: templates/admin_tabs.php:82
+msgid "show player above thumbnails"
+msgstr "Vis spiller over miniatyrbilde"
+
+#: templates/admin_tabs.php:83
+msgid "show player in Magnific Popup"
+msgstr "vis spiller i Magnific Popup"
+
+#: templates/admin_tabs.php:89
+msgid "Width:"
+msgstr "Bredde:"
+
+#: templates/admin_tabs.php:92
+msgid "%"
+msgstr "%"
+
+#: templates/admin_tabs.php:93
+msgid "px"
+msgstr "px"
+
+#: templates/admin_tabs.php:97 templates/admin_tabs.php:232
+msgid "Aspect ratio:"
+msgstr "Oppløsning"
+
+#: templates/admin_tabs.php:99 templates/admin_tabs.php:234
+msgid "Standard (4x3)"
+msgstr "Standard (4x3)"
+
+#: templates/admin_tabs.php:100 templates/admin_tabs.php:235
+msgid "Widescreen (16x9)"
+msgstr "Widescreen (16x9)"
+
+#: templates/admin_tabs.php:105
+msgid "Theme:"
+msgstr "Tema:"
+
+#: templates/admin_tabs.php:107
+msgid "Dark"
+msgstr "Mørk"
+
+#: templates/admin_tabs.php:108
+msgid "Light"
+msgstr "Lys"
+
+#: templates/admin_tabs.php:113
+msgid "Progress bar color:"
+msgstr "Progress bar farge:"
+
+#: templates/admin_tabs.php:115
+msgid "Red"
+msgstr "Rød"
+
+#: templates/admin_tabs.php:116
+msgid "White"
+msgstr "Hvit"
+
+#: templates/admin_tabs.php:121
+msgid "Video quality:"
+msgstr "Video kvalitet:"
+
+#: templates/admin_tabs.php:123
+msgid "default"
+msgstr "standard"
+
+#: templates/admin_tabs.php:124
+msgid "highres"
+msgstr "highres"
+
+#: templates/admin_tabs.php:125
+msgid "hd1080"
+msgstr "hd1080"
+
+#: templates/admin_tabs.php:126
+msgid "hd720"
+msgstr "hd720"
+
+#: templates/admin_tabs.php:127
+msgid "large"
+msgstr "stor"
+
+#: templates/admin_tabs.php:128
+msgid "medium"
+msgstr "medium"
+
+#: templates/admin_tabs.php:129
+msgid "small"
+msgstr "liten"
+
+#: templates/admin_tabs.php:131
+msgid ""
+"Default value enables YouTube to select the most appropriate playback "
+"quality. If you select a quality level that is not available for the video, "
+"then the quality will be set to the next lowest level that is available."
+msgstr ""
+
+#: templates/admin_tabs.php:135
+msgid "Autoplay"
+msgstr "Autospill"
+
+#: templates/admin_tabs.php:140
+msgid "Show YouTube logo"
+msgstr "Vis YouTube logo"
+
+#: templates/admin_tabs.php:141
+msgid ""
+"Activate this field to show the YouTube logo in the control bar. Setting the "
+"color parameter to white will show the YouTube logo in the control bar."
+msgstr ""
+
+#: templates/admin_tabs.php:146
+msgid "Show related videos"
+msgstr "Vis relaterte videoer"
+
+#: templates/admin_tabs.php:147
+msgid ""
+"Activate this field to show related videos when playback of the video ends."
+msgstr ""
+
+#: templates/admin_tabs.php:152
+msgid "Show info"
+msgstr "Vis info"
+
+#: templates/admin_tabs.php:153
+msgid ""
+"Activate this field to display information like the video title and uploader "
+"before the video starts playing."
+msgstr ""
+
+#: templates/admin_tabs.php:155 templates/admin_tabs.php:207
+#: templates/admin_tabs.php:317 templates/admin_tabs.php:328
+#: templates/admin_tabs.php:365
+msgid "Order:"
+msgstr "Sortering:"
+
+#: templates/admin_tabs.php:172
+msgid "Search input text:"
+msgstr "Angi tekst å søke:"
+
+#: templates/admin_tabs.php:176
+msgid "Restrict search to (# separated):"
+msgstr "Begrens søket til (# separated):"
+
+#: templates/admin_tabs.php:180
+msgid "You must assing this tags to your videos to restrict the search:"
+msgstr ""
+
+#: templates/admin_tabs.php:189
+msgid "Restrict search by default: It will overwrite results of feed tab)"
+msgstr ""
+
+#: templates/admin_tabs.php:191 templates/search.php:10
+msgid "None"
+msgstr "Ingen"
+
+#: templates/admin_tabs.php:199
+msgid "Show search box"
+msgstr "Vis søkeboks"
+
+#: templates/admin_tabs.php:203
+msgid "Show select with Playlists"
+msgstr "Vis valg med spillelister"
+
+#: templates/admin_tabs.php:219
+msgid "Number of videos to show:"
+msgstr "Antall videoer å vise"
+
+#: templates/admin_tabs.php:221
+msgid ""
+"The plugin can display a maximum of 50 videos. This limitation will change in "
+"a future release."
+msgstr ""
+
+#: templates/admin_tabs.php:225
+msgid "Thumbnail width:"
+msgstr "Miniatyrbilde bredde:"
+
+#: templates/admin_tabs.php:227
+msgid ""
+"This field is used to assign the appropriate quality of thumbnail images in "
+"top and bottom alignments and to assign width to thumbnails in left and right "
+"alignments. If the quality of thumbnail images is not enough, insert a larger "
+"value. If you are unsure you can assign one of the following values​​: 120, "
+"320, 480 or 640"
+msgstr ""
+
+#: templates/admin_tabs.php:240
+msgid "Thumbnail columns:"
+msgstr ":"
+
+#: templates/admin_tabs.php:242
+msgid "Phones:"
+msgstr "Telefoner:"
+
+#: templates/admin_tabs.php:244
+msgid "Tablets:"
+msgstr "Nettbrett:"
+
+#: templates/admin_tabs.php:247
+msgid "Medium Desktops:"
+msgstr "Mellomstore skjermer"
+
+#: templates/admin_tabs.php:249
+msgid "Large Desktops:"
+msgstr "Store skjermer"
+
+#: templates/admin_tabs.php:258
+msgid "Show title or description"
+msgstr "Vis tittel eller beskrivelse"
+
+#: templates/admin_tabs.php:265
+msgid "Show title"
+msgstr "Vis tittel"
+
+#: templates/admin_tabs.php:270
+msgid "Show description"
+msgstr "Vis beskrivelse"
+
+#: templates/admin_tabs.php:274
+msgid "Title tag:"
+msgstr "Tittel tag:"
+
+#: templates/admin_tabs.php:276
+msgid "h1"
+msgstr "h1"
+
+#: templates/admin_tabs.php:277
+msgid "h2"
+msgstr "h2"
+
+#: templates/admin_tabs.php:278
+msgid "h3"
+msgstr "h3"
+
+#: templates/admin_tabs.php:279
+msgid "h4"
+msgstr "h4"
+
+#: templates/admin_tabs.php:280
+msgid "h5"
+msgstr "h5"
+
+#: templates/admin_tabs.php:281
+msgid "h6"
+msgstr "h6"
+
+#: templates/admin_tabs.php:286
+msgid "Thumbnail alignment:"
+msgstr "Miniatyrbilde justering:"
+
+#: templates/admin_tabs.php:288
+msgid "none"
+msgstr "ingen"
+
+#: templates/admin_tabs.php:289
+msgid "Left"
+msgstr "Venstre"
+
+#: templates/admin_tabs.php:290
+msgid "Right"
+msgstr "Høyre"
+
+#: templates/admin_tabs.php:295
+msgid "Description words number:"
+msgstr "Beskrivelse words nummer:"
+
+#: templates/admin_tabs.php:297
+msgid ""
+"Set the maximum number of words that will be displayed of the description. "
+"This field is useful when the descriptions of videos in the gallery have "
+"different sizes."
+msgstr ""
+
+#: templates/admin_tabs.php:303
+msgid "Add \"nofollow\" attribute to links"
+msgstr "Legg til \"nofollow\" attributt til linker"
+
+#: templates/admin_tabs.php:304
+msgid ""
+"\"nofollow\" attribute provides a way for webmasters to tell search engines "
+"\"Don't follow this specific link.\""
+msgstr ""
+
+#: templates/admin_tabs.php:310 templates/admin_tabs.php:355
+msgid "Open in a new window or tab"
+msgstr "Åpne i nytt vindu eller fane"
+
+#: templates/admin_tabs.php:315
+msgid "Show pagination"
+msgstr "Vis navigering"
+
+#: templates/admin_tabs.php:319
+msgid "Thumbnail:"
+msgstr "Miniatyrbilde:"
+
+#: templates/admin_tabs.php:323
+msgid "Description:"
+msgstr "Beskrivelse:"
+
+#: templates/admin_tabs.php:344
+msgid "Link text:"
+msgstr "Link tekst:"
+
+#: templates/admin_tabs.php:350
+msgid "Show link to channel"
+msgstr "Vis link til kanal"
+
+#: templates/admin_tabs.php:360
+msgid "Show link to thank the developer"
+msgstr "Vis link til å takke utvikler"
+
+#: templates/link.php:9
+msgid "By PoseLab"
+msgstr "Av PoseLab"
+
+#: templates/link.php:18
+msgid "Show more videos"
+msgstr "Vis flere videoer"
+
+#: templates/thumbs.php:55
+msgid "«Previous"
+msgstr "«Forrige"
+
+#: templates/thumbs.php:64
+msgid "Next»"
+msgstr "Neste»"
+
+#: youtube-channel-gallery.php:48
+msgid "Youtube Channel Gallery"
+msgstr "Youtube kanal gallery"
+
+#: youtube-channel-gallery.php:50
+msgid "Show a youtube video and a gallery of thumbnails for a youtube channel"
+msgstr ""
+
+#: youtube-channel-gallery.php:552
+msgid "Show more videos»"
+msgstr "Vis flere videoer»"
+
+#: youtube-channel-gallery.php:561
+msgid "There is no video to show."
+msgstr "Det er ingen video å vise."
+
+#: youtube-channel-gallery.php:616
+#, php-format
+msgid ""
+"Message from server: %1$s. Check in YouTube if the id <a href=\"%2$s\" target="
+"\"_blank\">%3$s</a> belongs to a %4$s. To locate the id of your %4$s check "
+"the <a href=\"http://wordpress.org/extend/plugins/youtube-channel-gallery/faq/"
+"\" target=\"_blank\">FAQ</a> of the plugin."
+msgstr ""
+
+#~ msgid "Top"
+#~ msgstr "Arriba"
+
+#~ msgid "Bottom"
+#~ msgstr "Abajo"
+
+#~ msgid "Video width:"
+#~ msgstr "Ancho del vídeo:"
+
+#~ msgid "Show info (title, uploader)"
+#~ msgstr "Mostrar información (título, cargador)"
+
+#~ msgid "You must insert a valid YouTube user id."
+#~ msgstr "Debes introducir un id válido de usuario de YouTube."
+
+#~ msgid "You must insert a valid playlist id."
+#~ msgstr "Debes introducir un id válido de lista de reproducción de YouTube."
+
+#~ msgid "User's favorites"
+#~ msgstr "Favoritos del usuario"
+
+#~ msgid "Light:"
+#~ msgstr "Claro"
+
+#~ msgid "No post to duplicate has been supplied!"
+#~ msgstr "No se facilitó ninguna entrada a copiar"
+
+#~ msgid "Post creation failed, could not find original post:"
+#~ msgstr ""
+#~ "Creación realizada sin éxito, no ha sido posible encontrar la entrada "
+#~ "original:"
+
+#~ msgid "No page to duplicate has been supplied!"
+#~ msgstr "No se facilitó ninguna página a copiar"
+
+#~ msgid "Make a duplicate from this post"
+#~ msgstr "Crea una copia de esta entrada"
+
+#~ msgid "Duplicate"
+#~ msgstr "Duplicar"
+
+#~ msgid "Make a duplicate from this page"
+#~ msgstr "Crea una copia de esta página"
+
+#~ msgid "Copy to a new draft"
+#~ msgstr "Copia en un borrador nuevo"
+
+#~ msgid "Duplicate Post Options"
+#~ msgstr "Opciones"
+
+#~ msgid "Duplicate Post"
+#~ msgstr "Duplicate Post"
+
+#~ msgid "Copy post/page date also"
+#~ msgstr "Copiar también fecha del post o la página"
+
+#~ msgid ""
+#~ "Normally, the new draft has publication date set to current time: check "
+#~ "the box to copy the original post/page date"
+#~ msgstr ""
+#~ "Normalmente se establece la fecha de publicación del nuevo borrador a la "
+#~ "fecha actual: compruebe la casilla para copiar la fecha original del post "
+#~ "o la página"
+
+#~ msgid "Do not copy these fields"
+#~ msgstr "No copiar estos campos"
+
+#~ msgid ""
+#~ "Comma-separated list of meta fields that must not be copied when cloning a "
+#~ "post/page"
+#~ msgstr ""
+#~ "Lista separada por comas de meta campos que no pueden ser copiados cuando "
+#~ "se clona una entrada/pagina."
+
+#~ msgid "Title prefix"
+#~ msgstr "Prefijo del titulo"
+
+#~ msgid ""
+#~ "Prefix to be added before the original title when cloning a post/page, e."
+#~ "g. \"Copy of\" (blank for no prefix)"
+#~ msgstr ""
+#~ "Prefijo a ser agregado antes del titulo original cuando se clona una "
+#~ "entrada/pagina, ej. \"Copia de\" (en blanco  para no agregar prefijo)"
+
+#~ msgid "Minimum level to copy posts"
+#~ msgstr "Nivel mínimo para copiar posts"
+
+#~ msgid ""
+#~ "Warning: users will be able to copy all posts, even those of higher level "
+#~ "users"
+#~ msgstr ""
+#~ "Atención: los usuarios podrán copiar todos los posts, incluso aquellos de "
+#~ "usuarios de nivel más alto"
+
+#~ msgid "Save Changes"
+#~ msgstr "Guardar los cambios"
+
+#~ msgid "Donate"
+#~ msgstr "Hacer una donación"
+
+#~ msgid "Translate"
+#~ msgstr "Traducir"
+
+#~ msgid "http://www.lopo.it/duplicate-post-plugin/"
+#~ msgstr "Copy text   \t http://www.lopo.it/duplicate-post-plugin/"
+
+#~ msgid "Creates a copy of a post."
+#~ msgstr "Crear una copia de las entradas."
+
+#~ msgid "Enrico Battocchi"
+#~ msgstr "Enrico Battocchi"
+
+#~ msgid "http://www.lopo.it"
+#~ msgstr "http://www.lopo.it"

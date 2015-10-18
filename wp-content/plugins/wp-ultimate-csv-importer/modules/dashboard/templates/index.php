@@ -34,29 +34,30 @@
  * Notices must display the words
  * "Copyright Smackcoders. 2014. All rights reserved".
  ********************************************************************************/
-
+if ( ! defined( 'ABSPATH' ) )
+        exit; // Exit if accessed directly
 global $wpdb;
 $impCE = new WPImporter_includes_helper(); 
 
 $dashObj = new DashboardActions();
 $ret_arr=array();
-if(isset($_REQUEST['msg']) && $_REQUEST['msg'] == 'filenotfound'){
+#if(isset($_REQUEST['msg']) && $_REQUEST['msg'] == 'filenotfound'){
 ?>
-<script>
+<!--<script>
 	showMapMessages('error',translateAlertString('The files does not exist'));
-</script>
+</script>-->
 <?php
-} ?>
+#} ?>
 <div class="box-one">
 	<div class="top-right-box">
-		<h3><span style="margin: -5px 5px 5px 5px;"><img src="<?php echo WP_CONST_ULTIMATE_CSV_IMP_DIR;?>images/chart_bar.png" /></span><?php echo __('Importers Activity',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?></h3>
+		<h3><span style="margin: -5px 5px 5px 5px;"><img src="<?php echo WP_CONST_ULTIMATE_CSV_IMP_DIR;?>images/chart_bar.png" /></span><?php echo __('Importers Activity','wp-ultimate-csv-importer'); ?></h3>
 		<div class="top-right-content">
 			<div id='dispLabel'></div>
 			<div class='lineStats' id='lineStats' style='height: 250px;width:100%;margin-top:15px; margin-bottom:15px;'></div>
 		</div>
 	</div>
 	<div class="top-right-box">
-		<h3><span style="margin: -5px 5px 5px 5px;"><img src="<?php echo WP_CONST_ULTIMATE_CSV_IMP_DIR;?>images/stat_icon.png"></span><?php echo __('Import Statistics',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?></h3>
+		<h3><span style="margin: -5px 5px 5px 5px;"><img src="<?php echo WP_CONST_ULTIMATE_CSV_IMP_DIR;?>images/stat_icon.png"></span><?php echo __('Import Statistics','wp-ultimate-csv-importer'); ?></h3>
 		<div class="top-right-content">
 			<div id='dispLabel'></div>
 			<div class='pieStats' id='pieStats' style='float:left;height:250px;width:100%;margin-top:15px;margin-bottom:15px;'></div>
@@ -75,12 +76,11 @@ if(isset($_REQUEST['msg']) && $_REQUEST['msg'] == 'filenotfound'){
                 </div>
         </div>
 </div>-->
-
-<?php if(isset($_REQUEST['errormsg'])){
+<?php #if(isset($_REQUEST['errormsg'])){
 ?>
-<script type="text/javascript">
-        showMapMessages('error' , "<?php echo $_REQUEST['errormsg']; ?>");
-</script>
+<!--<script type="text/javascript">
+        showMapMessages('error' , "<?php #echo $_REQUEST['errormsg']; ?>");
+</script>-->
 <?php
-        }
+#        }
 ?>

@@ -120,10 +120,10 @@ class Theme_My_Login_Custom_Email extends Theme_My_Login_Abstract {
 		add_action( 'password_reset',            array( &$this, 'apply_password_reset_filters' ) );
 		add_action( 'tml_new_user_notification', array( &$this, 'apply_new_user_filters' ) );
 
-		remove_action( 'tml_new_user_registered',   'wp_new_user_notification', 10, 2 );
+		remove_action( 'tml_new_user_registered',   'wp_new_user_notification' );
 		remove_action( 'tml_user_password_changed', 'wp_password_change_notification' );
 
-		add_action( 'tml_new_user_registered',   array( &$this, 'new_user_notification' ), 10, 2 );
+		add_action( 'tml_new_user_registered',   array( &$this, 'new_user_notification' ), 10, 3 );
 		add_action( 'tml_user_password_changed', array( &$this, 'password_change_notification' ) );
 
 		add_action( 'register_post',              array( &$this, 'apply_user_moderation_notification_filters' ) );
@@ -406,16 +406,17 @@ class Theme_My_Login_Custom_Email extends Theme_My_Login_Abstract {
 	 * @access public
 	 *
 	 * @param string $title Default message
-	 * @param string $new_pass The user's password
+	 * @param string $key The user's password reset key
 	 * @param int $user_id User ID
 	 * @return string New message
 	 */
-	public function new_user_notification_message_filter( $message, $new_pass, $user_id ) {
+	public function new_user_notification_message_filter( $message, $key, $user_id ) {
 		$_message = $this->get_option( array( 'new_user', 'message' ) );
 		if ( ! empty( $_message ) ) {
+			$user = get_userdata( $user_id );
 			$message = Theme_My_Login_Common::replace_vars( $_message, $user_id, array(
-				'%loginurl%'  => site_url( 'wp-login.php', 'login' ),
-				'%user_pass%' => $new_pass
+				'%reseturl%' => network_site_url( "wp-login.php?action=rp&key=$key&login=" . rawurlencode( $user->user_login ), 'login' ),
+				'%loginurl%' => site_url( 'wp-login.php', 'login' )
 			) );
 		}
 		return $message;
@@ -553,9 +554,10 @@ class Theme_My_Login_Custom_Email extends Theme_My_Login_Abstract {
 					$this->get_option( array( 'user_approval', 'admin_mail_from_name'    ) ),
 					$this->get_option( array( 'user_approval', 'admin_mail_content_type' ) )
 				);
-				add_filter( 'user_approval_admin_notification_mail_to', array( &$this, 'user_approval_admin_notification_mail_to_filter' )        );
-				add_filter( 'user_approval_admin_notification_title',   array( &$this, 'user_approval_admin_notification_title_filter'   ), 10, 2 );
-				add_filter( 'user_approval_admin_notification_message', array( &$this, 'user_approval_admin_notification_message_filter' ), 10, 2 );
+				add_filter( 'user_approval_admin_notification_mail_to',  array( &$this, 'user_approval_admin_notification_mail_to_filter'  )        );
+				add_filter( 'user_approval_admin_notification_title',    array( &$this, 'user_approval_admin_notification_title_filter'    ), 10, 2 );
+				add_filter( 'user_approval_admin_notification_message',  array( &$this, 'user_approval_admin_notification_message_filter'  ), 10, 2 );
+				add_filter( 'send_new_user_approval_admin_notification', array( &$this, 'send_new_user_approval_admin_notification_filter' )        );
 				break;
 		}
 	}
@@ -594,8 +596,9 @@ class Theme_My_Login_Custom_Email extends Theme_My_Login_Abstract {
 			$this->get_option( array( 'user_denial', 'mail_from_name'    ) ),
 			$this->get_option( array( 'user_denial', 'mail_content_type' ) )
 		);
-		add_filter( 'user_denial_notification_title',   array( &$this, 'user_denial_notification_title_filter'   ), 10, 2 );
-		add_filter( 'user_denial_notification_message', array( &$this, 'user_denial_notification_message_filter' ), 10, 2 );
+		add_filter( 'user_denial_notification_title',    array( &$this, 'user_denial_notification_title_filter'    ), 10, 2 );
+		add_filter( 'user_denial_notification_message',  array( &$this, 'user_denial_notification_message_filter'  ), 10, 2 );
+		add_filter( 'send_new_user_denial_notification', array( &$this, 'send_new_user_denial_notification_filter' )        );
 	}
 
 	/**
@@ -668,16 +671,17 @@ class Theme_My_Login_Custom_Email extends Theme_My_Login_Abstract {
 	 * @access public
 	 *
 	 * @param string $title The default message
-	 * @param string $new_pass The user's new password
+	 * @param string $key The user's reset key
 	 * @param int $user_id The user's ID
 	 * @return string The filtered message
 	 */
-	public function user_approval_notification_message_filter( $message, $new_pass, $user_id ) {
+	public function user_approval_notification_message_filter( $message, $key, $user_id ) {
 		$_message = $this->get_option( array( 'user_approval', 'message' ) );
 		if ( ! empty( $_message ) ) {
+			$user = get_user_by( 'id', $user_id );
 			$message = Theme_My_Login_Common::replace_vars( $_message, $user_id, array(
-				'%loginurl%'  => Theme_My_Login::get_object()->get_page_link( 'login' ),
-				'%user_pass%' => $new_pass
+				'%loginurl%' => Theme_My_Login::get_object()->get_page_link( 'login' ),
+				'%reseturl%' => site_url( "wp-login.php?action=rp&key=$key&login=" . rawurlencode( $user->user_login ), 'login' )
 			) );
 		}
 		return $message;
@@ -742,6 +746,24 @@ class Theme_My_Login_Custom_Email extends Theme_My_Login_Abstract {
 	}
 
 	/**
+	 * Determines whether or not to send the new user admin approval notification e-mail
+	 *
+	 * Callback for "send_new_user_approval_admin_notification" hook
+	 *
+	 * @since 6.4
+	 * @access public
+	 *
+	 * @param bool $enable Default setting
+	 * @return bool New setting
+	 */
+	public function send_new_user_approval_admin_notification_filter( $enable ) {
+		if ( $this->get_option( array( 'user_approval', 'admin_disable' ) ) )
+			return false;
+
+		return $enable;
+	}
+
+	/**
 	 * Changes the user denial e-mail subject
 	 *
 	 * Callback for "user_denial_notification_title" hook in Theme_My_Login_User_Moderation_Admin::deny_user()
@@ -778,36 +800,46 @@ class Theme_My_Login_Custom_Email extends Theme_My_Login_Abstract {
 	}
 
 	/**
+	 * Determines whether or not to send the new user denial notification e-mail
+	 *
+	 * @since 6.4
+	 * @access public
+	 *
+	 * @param bool $enable Default setting
+	 * @return bool New setting
+	 */
+	public function send_new_user_denial_notification_filter( $enable ) {
+		if ( $this->get_option( array( 'user_denial', 'disable' ) ) )
+			return false;
+
+		return $enable;
+	}
+
+	/**
 	 * Notify the blog admin of a new user
 	 *
 	 * @since 6.0
 	 * @access public
 	 *
 	 * @param int $user_id User ID
-	 * @param string $plaintext_pass Optional. The user's plaintext password
+	 * @param null Not used (argument deprecated)
+	 * @param string $notify Type of notification that should happen
 	 */
-	public function new_user_notification( $user_id, $plaintext_pass = '' ) {
-		global $current_site;
+	public function new_user_notification( $user_id, $deprecated = null, $notify = '' ) {
+		global $wpdb;
 
-		$user = new WP_User( $user_id );
+		$user = get_userdata( $user_id );
 
-		do_action( 'tml_new_user_notification', $user_id, $plaintext_pass );
+		do_action( 'tml_new_user_notification', $user_id, $notify );
 
-		$user_login = stripslashes( $user->user_login );
-		$user_email = stripslashes( $user->user_email );
-
-		if ( is_multisite() ) {
-			$blogname = $current_site->site_name;
-		} else {
-			// The blogname option is escaped with esc_html on the way into the database in sanitize_option
-			// we want to reverse this for the plain text arena of emails.
-			$blogname = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
-		}
+		// The blogname option is escaped with esc_html on the way into the database in sanitize_option
+		// we want to reverse this for the plain text arena of emails.
+		$blogname = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
 
 		if ( apply_filters( 'send_new_user_admin_notification', true ) ) {
 			$message  = sprintf( __( 'New user registration on your site %s:', 'theme-my-login' ), $blogname   ) . "\r\n\r\n";
-			$message .= sprintf( __( 'Username: %s'                          , 'theme-my-login' ), $user_login ) . "\r\n\r\n";
-			$message .= sprintf( __( 'E-mail: %s'                            , 'theme-my-login' ), $user_email ) . "\r\n";
+			$message .= sprintf( __( 'Username: %s'                          , 'theme-my-login' ), $user->user_login ) . "\r\n\r\n";
+			$message .= sprintf( __( 'E-mail: %s'                            , 'theme-my-login' ), $user->user_email ) . "\r\n";
 
 			$title    = sprintf( __( '[%s] New User Registration'            , 'theme-my-login' ), $blogname   );
 
@@ -819,20 +851,34 @@ class Theme_My_Login_Custom_Email extends Theme_My_Login_Abstract {
 			@wp_mail( $to, $title, $message );
 		}
 
-		if ( empty( $plaintext_pass ) )
+		if ( 'admin' == $notify || empty( $notify ) )
 			return;
 
+		// Generate something random for a password reset key
+		$key = wp_generate_password( 20, false );
+
+		do_action( 'retrieve_password_key', $user->user_login, $key );
+
+		// Now insert the key, hashed, into the DB
+		require_once ABSPATH . WPINC . '/class-phpass.php';
+		$wp_hasher = new PasswordHash( 8, true );
+
+		$hashed = time() . ':' . $wp_hasher->HashPassword( $key );
+		$wpdb->update( $wpdb->users, array( 'user_activation_key' => $hashed ), array( 'user_login' => $user->user_login ) );
+
 		if ( apply_filters( 'send_new_user_notification', true ) ) {
-			$message  = sprintf( __( 'Username: %s', 'theme-my-login' ), $user_login     ) . "\r\n";
-			$message .= sprintf( __( 'Password: %s', 'theme-my-login' ), $plaintext_pass ) . "\r\n";
+			$message  = sprintf( __( 'Username: %s', 'theme-my-login' ), $user->user_login     ) . "\r\n\r\n";
+			$message .= __( 'To set your password, visit the following address:', 'theme-my-login' ) . "\r\n\r\n";
+			$message .= '<' . network_site_url( "wp-login.php?action=rp&key=$key&login=" . rawurlencode( $user->user_login ), 'login' ) . ">\r\n\r\n";
+
 			$message .= wp_login_url() . "\r\n";
 
-			$title = sprintf( __( '[%s] Your username and password', 'theme-my-login' ), $blogname );
+			$title = sprintf( __( '[%s] Your username and password info', 'theme-my-login' ), $blogname );
 
-			$title   = apply_filters( 'new_user_notification_title',   $title,   $user_id                  );
-			$message = apply_filters( 'new_user_notification_message', $message, $plaintext_pass, $user_id );
+			$title   = apply_filters( 'new_user_notification_title',   $title,   $user_id       );
+			$message = apply_filters( 'new_user_notification_message', $message, $key, $user_id );
 
-			wp_mail( $user_email, $title, $message );
+			wp_mail( $user->user_email, $title, $message );
 		}
 	}
 
@@ -851,13 +897,9 @@ class Theme_My_Login_Custom_Email extends Theme_My_Login_Abstract {
 		// send a copy of password change notification to the admin
 		// but check to see if it's the admin whose password we're changing, and skip this
 		if ( $user->user_email != $to && apply_filters( 'send_password_change_notification', true ) ) {
-			if ( is_multisite() ) {
-				$blogname = $current_site->site_name;
-			} else {
-				// The blogname option is escaped with esc_html on the way into the database in sanitize_option
-				// we want to reverse this for the plain text arena of emails.
-				$blogname = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
-			}
+			// The blogname option is escaped with esc_html on the way into the database in sanitize_option
+			// we want to reverse this for the plain text arena of emails.
+			$blogname = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
 
 			$title   = sprintf( __( '[%s] Password Lost/Changed'            , 'theme-my-login' ), $blogname         );
 			$message = sprintf( __( 'Password Lost and Changed for user: %s', 'theme-my-login' ), $user->user_login ) . "\r\n";

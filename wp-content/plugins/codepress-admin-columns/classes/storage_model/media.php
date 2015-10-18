@@ -49,10 +49,20 @@ class CPAC_Storage_Model_Media extends CPAC_Storage_Model {
 		$table   = _get_list_table ( 'WP_Media_List_Table', array( 'screen' => 'upload' ) );
         $columns = (array) $table->get_columns();
 
-		if ( $this->is_settings_page() )
+		if ( $this->is_settings_page() ) {
 			$columns = array_merge( get_column_headers( 'upload' ), $columns );
+		}
 
 		return $columns;
+	}
+
+	/**
+	 * Get original columns
+	 *
+	 * @since 2.4.4
+	 */
+	public function get_default_column_names() {
+		return array( 'cb', 'date', 'parent', 'icon', 'title', 'author', 'comments' );
 	}
 
 	/**
@@ -64,16 +74,7 @@ class CPAC_Storage_Model_Media extends CPAC_Storage_Model {
      */
     public function get_meta() {
         global $wpdb;
-
-        if ( $cache = wp_cache_get( $this->key, 'cac_columns' ) ) {
-        	$result = $cache;
-        }
-        else {
-			$result = $wpdb->get_results( "SELECT DISTINCT meta_key FROM {$wpdb->postmeta} pm JOIN {$wpdb->posts} p ON pm.post_id = p.ID WHERE p.post_type = 'attachment' ORDER BY 1", ARRAY_N );
-			wp_cache_add( $this->key, $result, 'cac_columns', 10 ); // 10 sec.
-		}
-
-		return $result;
+		return $wpdb->get_results( "SELECT DISTINCT meta_key FROM {$wpdb->postmeta} pm JOIN {$wpdb->posts} p ON pm.post_id = p.ID WHERE p.post_type = 'attachment' ORDER BY 1", ARRAY_N );
     }
 
 	/**

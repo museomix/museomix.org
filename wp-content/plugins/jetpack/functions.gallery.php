@@ -9,6 +9,14 @@ class Jetpack_Gallery_Settings {
 	}
 
 	function admin_init() {
+		/**
+		 * Filter the available gallery types.
+		 *
+		 * @since 2.5.1
+		 *
+		 * @param array $value Array of the default thumbnail grid gallery type. Default array contains one key, ‘default’.
+		 *
+		 */
 		$this->gallery_types = apply_filters( 'jetpack_gallery_types', array( 'default' => __( 'Thumbnail Grid', 'jetpack' ) ) );
 
 		// Enqueue the media UI only if needed.
@@ -30,25 +38,21 @@ class Jetpack_Gallery_Settings {
 			wp_register_script( 'jetpack-gallery-settings', plugins_url( 'gallery-settings/gallery-settings.js', __FILE__ ), array( 'media-views' ), '20121225' );
 		}
 
-		/*
-		 * Register Gallery's admin.js here so we can upload images in the customizer
-		 */
-		if ( ! wp_script_is( 'gallery-widget-admin', 'registered' ) ) {
-			wp_register_script( 'gallery-widget-admin', plugins_url( 'modules/widgets/gallery/js/admin.js', __FILE__ ), array(
-				'media-models',
-				'media-views'
-			) );
-		}
-
 		wp_enqueue_script( 'jetpack-gallery-settings' );
-
-		wp_enqueue_script( 'gallery-widget-admin' );
 	}
 
 	/**
 	 * Outputs a view template which can be used with wp.media.template
 	 */
 	function print_media_templates() {
+		/**
+		 * Filter the default gallery type.
+		 *
+		 * @since 2.5.1
+		 *
+		 * @param string $value A string of the gallery type. Default is ‘default’.
+		 *
+		 */
 		$default_gallery_type = apply_filters( 'jetpack_default_gallery_type', 'default' );
 
 		?>

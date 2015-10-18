@@ -3,8 +3,8 @@ defined('WYSIJA') or die('Restricted access');
 class WYSIJA_help_themes extends WYSIJA_object{
     var $extensions = array('png', 'jpg', 'jpeg', 'gif');
 
-    function WYSIJA_help_themes(){
-
+    function __construct(){
+        parent::__construct();
     }
 
     /**

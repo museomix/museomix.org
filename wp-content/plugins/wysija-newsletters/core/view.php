@@ -41,8 +41,8 @@ class WYSIJA_view extends WYSIJA_object {
 	 */
 	var $font_size = 12;
 
-	function WYSIJA_view() {
-
+	function __construct(){
+	  parent::__construct();
 	}
 
 	/**

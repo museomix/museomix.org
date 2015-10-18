@@ -2,6 +2,74 @@
 * Do not modify this file directly.  It is compiled Sass code.
 * @see: jetpack/_inc/jetpack.scss
 */
+#message.jp-identity-crisis {
+  display: table;
+  padding: 0;
+  background: #d94f4f;
+  border: none;
+  color: #fff;
+}
+#message.jp-identity-crisis .service-mark {
+  display: table-cell;
+  vertical-align: middle;
+  padding: 0 20px;
+}
+#message.jp-identity-crisis .service-mark:before {
+  font-family: "jetpack" !important;
+  content: "\f102";
+  font-size: 40px;
+  line-height: 1;
+  color: #fff;
+}
+#message.jp-identity-crisis .jp-id-banner__content {
+  display: table;
+  padding: 10px 10px 10px 0;
+}
+#message.jp-identity-crisis .jp-id-banner__content .success-notice {
+  color: #fff;
+}
+#message.jp-identity-crisis .jp-id-banner__content .banner-content {
+  display: table-row;
+}
+#message.jp-identity-crisis .jp-id-banner__content .banner-content p {
+  margin: 0;
+  font-size: 13px;
+  color: #fff;
+  opacity: 1.0;
+}
+#message.jp-identity-crisis .jp-id-banner__content .banner-content p strong {
+  text-decoration: none;
+  font-weight: 600;
+  color: #fff;
+  opacity: 1.0;
+}
+#message.jp-identity-crisis .jp-id-banner__content .banner-content a {
+  display: inline-block;
+  color: rgba(255, 255, 255, 0.8);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  -webkit-transform: all 1s ease;
+}
+#message.jp-identity-crisis .jp-id-banner__content .jp-btn-group {
+  display: table-row;
+}
+#message.jp-identity-crisis .jp-id-banner__content .jp-btn-group a {
+  display: inline-block;
+  margin: 10px 0 0 0;
+  padding: 0 0 1px 0;
+  color: rgba(255, 255, 255, 0.8);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  -webkit-transform: all 1s ease;
+}
+#message.jp-identity-crisis .jp-id-banner__content .jp-btn-group a:hover {
+  color: white;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+}
+#message.jp-identity-crisis .jp-id-banner__content .jp-btn-group .idc-separator {
+  margin: 0 6px;
+}
+
 #message.jp-banner {
   position: relative;
   margin-bottom: 26px;
@@ -54,9 +122,6 @@
   padding: 0 0 0 20px;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  width: 75%;
-}
-#message .jp-banner__content.is-connection {
   width: 50%;
 }
 @media (max-width: 768px) {
@@ -68,16 +133,19 @@
   }
 }
 #message .jp-banner__content a {
-  background-image: linear-gradient(to bottom, transparent 75%, #fff 50%);
-  background-repeat: repeat-x;
-  background-size: 2px 2px;
-  background-position: 0 1.2em;
-}
-@media not all, only screen and (min-resolution: 2dppx), only screen and (-webkit-min-device-pixel-ratio: 2) {
-  #message .jp-banner__content a {
-    background-image: linear-gradient(to bottom, transparent 75%, #fff 75%);
-    background-repeat: repeat-x;
-  }
+  text-decoration: underline;
+  		/* Medium.com text underline hack - doesn't work well on small mobile devices... reverting to traditional underline
+  		background-image: linear-gradient(to bottom, rgba(0,0,0,0) 75%, #fff 50%);
+  		background-repeat: repeat-x;
+  		background-size: 2px 2px;
+  		background-position: 0 95%;
+  		display: inline-block;
+  
+  		@media not all, only screen and (min-resolution: 2dppx), only screen and (-webkit-min-device-pixel-ratio: 2) {
+  			background-image: linear-gradient(to bottom, rgba(0,0,0,0) 75%, #fff 75%);
+  			background-repeat: repeat-x;
+  		}
+  		*/
 }
 #message .jp-banner__content p {
   margin: 0;
@@ -90,7 +158,7 @@
   top: 0;
   right: 0;
   padding-left: 20px;
-  width: 25%;
+  width: 50%;
   height: 100%;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -108,11 +176,20 @@
   width: 100%;
   height: auto;
 }
-#message .jp-banner__action-container.is-connection {
-  width: 50%;
-}
 @media (max-width: 768px) {
   #message .jp-banner__action-container.is-connection {
+    width: 100%;
+  }
+}
+
+#message.is-opt-in .jp-banner__content {
+  width: 60%;
+}
+#message.is-opt-in .jp-banner__action-container {
+  width: 40%;
+}
+@media (max-width: 768px) {
+  #message.is-opt-in .jp-banner__content, #message.is-opt-in .jp-banner__action-container {
     width: 100%;
   }
 }
@@ -130,9 +207,10 @@
   background: #518d2a;
   box-shadow: 0 4px 0 #3e6c20, 0 2px 3px rgba(0, 0, 0, 0.2);
   font: 400 1.5em/1 'Open Sans', Helvetica, sans-serif;
+  -webkit-transition: all .1s ease-in-out;
   transition: all .1s ease-in-out;
 }
-@media (max-width: 1080px) {
+@media (max-width: 1175px) {
   #message .jp-banner__button {
     font-size: 1.25em;
     right: 110px;
@@ -222,6 +300,34 @@
 #message .jp-banner__dismiss:active {
   opacity: 1;
   outline: none;
+}
+
+#message.jp-banner.protect-error {
+  background: #fff;
+  border-left: 4px #d94f4f solid;
+}
+#message.jp-banner.protect-error .jp-banner__content {
+  color: #444;
+}
+#message.jp-banner.protect-error .jp-banner__content h4, #message.jp-banner.protect-error .jp-banner__content a {
+  color: #d94f4f;
+}
+#message.jp-banner.protect-error .jp-banner__content a:hover {
+  color: #d43a3a;
+}
+#message.jp-banner.protect-error .jp-banner__button {
+  background: #d94f4f;
+  box-shadow: none;
+  color: #fff;
+}
+#message.jp-banner.protect-error .jp-banner__button:hover, #message.jp-banner.protect-error .jp-banner__button:focus, #message.jp-banner.protect-error .jp-banner__button:active {
+  box-shadow: none;
+}
+#message.jp-banner.protect-error .jp-banner__button:hover {
+  background: #d43a3a;
+}
+#message.jp-banner.protect-error .jp-banner__dismiss:before {
+  color: #a0a5aa;
 }
 
 /*# sourceMappingURL=jetpack-banners.css.map */

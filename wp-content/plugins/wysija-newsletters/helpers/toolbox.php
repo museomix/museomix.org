@@ -2,8 +2,8 @@
 defined('WYSIJA') or die('Restricted access');
 class WYSIJA_help_toolbox extends WYSIJA_object{
 
-    function WYSIJA_help_toolbox(){
-
+    function __construct(){
+        parent::__construct();
     }
 
     /**

@@ -3,7 +3,7 @@ defined('WYSIJA') or die('Restricted access');
 
 class WYSIJA_view_back_statistics extends WYSIJA_view_back{
     public $icon = 'icon-stats';
-    function WYSIJA_view_back_statistics(){
+    function __construct(){
         $this->title = __('Stats dashboard');
         if (empty($this->viewObj))
             $this->viewObj = new stdClass ();

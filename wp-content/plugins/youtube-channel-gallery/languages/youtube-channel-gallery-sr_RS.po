@@ -1,0 +1,791 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: youtube-channel-gallery\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-09-28 11:27+0200\n"
+"PO-Revision-Date: 2015-09-28 11:32+0200\n"
+"Last-Translator: Borisa Djuraskovic <borisad@webhostinghub.com>\n"
+"Language-Team: PoseLab <javier@poselab.com>\n"
+"Language: sr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2010-06-23 21:48+0000\n"
+"X-Generator: Poedit 1.8.3\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-KeywordsList: _e;__\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: templates/admin_tabs.php:3 templates/admin_tabs.php:489
+msgid "Title:"
+msgstr "Naslov:"
+
+#: templates/admin_tabs.php:9
+msgid "Feed"
+msgstr "Napajanje"
+
+#: templates/admin_tabs.php:10
+msgid "Player"
+msgstr "Plejer"
+
+#: templates/admin_tabs.php:11
+msgid "Search"
+msgstr "Pretraga"
+
+#: templates/admin_tabs.php:12
+msgid "Thumbnails"
+msgstr "Kratki opisi"
+
+#: templates/admin_tabs.php:13
+msgid "Link"
+msgstr "Link"
+
+#: templates/admin_tabs.php:26
+msgid "YouTube API Key:"
+msgstr "API ključ za YouTube"
+
+#: templates/admin_tabs.php:28
+msgid "Get your own YouTube API Key and put here."
+msgstr "Nabavite sopstveni API ključ za YouTube i unesite ga ovde."
+
+#: templates/admin_tabs.php:29
+msgid ""
+"Get <a href=\"https://console.developers.google.com/\" target=\"_blank"
+"\">your Google API key</a>. See <a href=\"http://poselab.com/en/youtube-"
+"channel-gallery-help/\" target=\"_blank\">help</a>"
+msgstr ""
+
+#: templates/admin_tabs.php:34
+msgid "Video feed type:"
+msgstr "Tip video napajanja:"
+
+#: templates/admin_tabs.php:36
+msgid "Uploaded by a user"
+msgstr "Učitano od strane korisnika"
+
+#: templates/admin_tabs.php:37
+msgid "User's favorites"
+msgstr "Ono što se korisniku najviše dopada"
+
+#: templates/admin_tabs.php:38
+msgid "User's likes"
+msgstr "Ono što se korisniku dopada"
+
+#: templates/admin_tabs.php:39
+msgid "Playlist"
+msgstr "Plej lista"
+
+#: templates/admin_tabs.php:44
+msgid "Identify by:"
+msgstr "Identifikacija prema:"
+
+#: templates/admin_tabs.php:46
+msgid "Username"
+msgstr "Korisničko ime"
+
+#: templates/admin_tabs.php:47
+msgid "Channel ID"
+msgstr "ID kanala"
+
+#: templates/admin_tabs.php:51
+msgid "YouTube id:"
+msgstr "Id You Tube-a:"
+
+#: templates/admin_tabs.php:52
+msgid "YouTube playlist id:"
+msgstr "Id You Tube plej liste:"
+
+#: templates/admin_tabs.php:58
+msgid "Playlist order:"
+msgstr "Radosled na plej listi:"
+
+#: templates/admin_tabs.php:60
+msgid "Date Order"
+msgstr "Redosled datuma"
+
+#: templates/admin_tabs.php:61
+msgid "Rating Order"
+msgstr "Redosled rangiranja"
+
+#: templates/admin_tabs.php:62
+msgid "Relevance Order"
+msgstr "Redosled važnosti"
+
+#: templates/admin_tabs.php:63
+msgid "Title Order"
+msgstr "Redosled naslova"
+
+#: templates/admin_tabs.php:64
+msgid "Video Count Order"
+msgstr "Redosled brojanja video-a"
+
+#: templates/admin_tabs.php:65
+msgid "View Count Order"
+msgstr "Redosled brojanja pregleda"
+
+#: templates/admin_tabs.php:72
+msgid "Cache time (hours):"
+msgstr "Keš vreme (sati):"
+
+#: templates/admin_tabs.php:74
+msgid ""
+"Hours that RSS data is saved in database, to not make a request every time "
+"the page is displayed. Assign this value according to how often you upgrade "
+"your playlist in YouTube."
+msgstr ""
+"Sati za koje su RSS podaci sačuvani u bazi podataka, kako ne bi bio potreban "
+"zahtev svaki put kada se stranica prikazuje. Dodelite ovu vrednost na osnovu "
+"toga koliko često nadograđujete vašu plej listu na You Tube-u."
+
+#: templates/admin_tabs.php:81
+msgid "Activate cache"
+msgstr "Aktivirajte keš"
+
+#: templates/admin_tabs.php:82
+msgid ""
+"If you disable this field the cache will be deleted and will not be used. "
+"This is useful to refresh immediately the YouTube RSS used by the plugin. "
+"Reenable the cache when the gallery shows the changes you made in your "
+"youtube account."
+msgstr ""
+"Ukoliko onemogućite ovo polje keš će se izbrisati i neće se koristiti. Ovo "
+"je korisno za momentalno obnavljanje You Tube RSS-a koji plugin koristi. "
+"Omogućite ponovo keš kada galerija pokaže promene koje ste napravili na "
+"vašem youtube nalogu."
+
+#: templates/admin_tabs.php:97
+msgid "Player:"
+msgstr "Plejer:"
+
+#: templates/admin_tabs.php:99
+msgid "Without player"
+msgstr "Bez plejera"
+
+#: templates/admin_tabs.php:100
+msgid "show player"
+msgstr "pokaži plejer"
+
+#: templates/admin_tabs.php:101
+msgid "show player in Magnific Popup"
+msgstr "pokaži plejer u Magnific Popup-u"
+
+#: templates/admin_tabs.php:108
+msgid "Width:"
+msgstr "Ancho:"
+
+#: templates/admin_tabs.php:111
+msgid "%"
+msgstr "%"
+
+#: templates/admin_tabs.php:112
+msgid "px"
+msgstr "px"
+
+#: templates/admin_tabs.php:116 templates/admin_tabs.php:316
+msgid "Aspect ratio:"
+msgstr "Odnos aspekta:"
+
+#: templates/admin_tabs.php:118 templates/admin_tabs.php:318
+msgid "Standard (4x3)"
+msgstr "Standard (4x3)"
+
+#: templates/admin_tabs.php:119 templates/admin_tabs.php:319
+msgid "Widescreen (16x9)"
+msgstr "Široki ekran (16x9)"
+
+#: templates/admin_tabs.php:126
+msgid "Theme:"
+msgstr "Tema:"
+
+#: templates/admin_tabs.php:128
+msgid "Dark"
+msgstr "Tamno"
+
+#: templates/admin_tabs.php:129
+msgid "Light"
+msgstr "Svetlo"
+
+#: templates/admin_tabs.php:133
+msgid "Progress bar color:"
+msgstr "Boja indikatora progresa:"
+
+#: templates/admin_tabs.php:135
+msgid "Red"
+msgstr "Crvena"
+
+#: templates/admin_tabs.php:136
+msgid "White"
+msgstr "Bela"
+
+#: templates/admin_tabs.php:143
+msgid "Video quality:"
+msgstr "Kvalitet video-a:"
+
+#: templates/admin_tabs.php:145
+msgid "default"
+msgstr "uobičajen"
+
+#: templates/admin_tabs.php:146
+msgid "highres"
+msgstr "highres"
+
+#: templates/admin_tabs.php:147
+msgid "hd1080"
+msgstr "hd1080"
+
+#: templates/admin_tabs.php:148
+msgid "hd720"
+msgstr "hd720"
+
+#: templates/admin_tabs.php:149
+msgid "large"
+msgstr "visok"
+
+#: templates/admin_tabs.php:150
+msgid "medium"
+msgstr "srednji"
+
+#: templates/admin_tabs.php:151
+msgid "small"
+msgstr "nizak"
+
+#: templates/admin_tabs.php:153
+msgid ""
+"Default value enables YouTube to select the most appropriate playback "
+"quality. If you select a quality level that is not available for the video, "
+"then the quality will be set to the next lowest level that is available."
+msgstr ""
+"Uobičajena vrednost omogućava YouTube-u da selektuje najadekvatniji kvalitet "
+"plejbeka. Ako selektujete nivo kvaliteta koji nije dostupan za taj video, "
+"kvalitet će biti podešen na sledeći najniži nivo koji je dostupan."
+
+#: templates/admin_tabs.php:160
+msgid "Autoplay"
+msgstr "Autoplay"
+
+#: templates/admin_tabs.php:164
+msgid "Show YouTube logo"
+msgstr "Pokaži logo YouTube-a"
+
+#: templates/admin_tabs.php:165
+msgid ""
+"Activate this field to show the YouTube logo in the control bar. Setting the "
+"color parameter to white will show the YouTube logo in the control bar."
+msgstr ""
+"Aktivirajte ovo polje da prikažete logo YouTube-a na kontrolnom indikatoru. "
+"Podešavanje boje parametra na belu će prikazati logo YouTube-a na kontrolnom "
+"indikatoru."
+
+#: templates/admin_tabs.php:172
+msgid "Show related videos"
+msgstr "Prikažite vezane video-e"
+
+#: templates/admin_tabs.php:173
+msgid ""
+"Activate this field to show related videos when playback of the video ends."
+msgstr ""
+"Aktivirajte ovo polje da prikažete vezane video-e kada se plejbek video-a "
+"završi."
+
+#: templates/admin_tabs.php:177
+msgid "Show info"
+msgstr "Prikažite informacije"
+
+#: templates/admin_tabs.php:178
+msgid ""
+"Activate this field to display information like the video title and uploader "
+"before the video starts playing."
+msgstr ""
+"Aktivirajte ovo polje da prikažete informacije kao što su naslov video-a i "
+"čitač pre nego što video otpočne."
+
+#: templates/admin_tabs.php:185 templates/admin_tabs.php:387
+msgid "Show additional content"
+msgstr "Prikažite dodatni sadržaj"
+
+#: templates/admin_tabs.php:193 templates/admin_tabs.php:395
+msgid "Show title"
+msgstr "Prikažite naslov"
+
+#: templates/admin_tabs.php:197 templates/admin_tabs.php:399
+msgid "Show published date"
+msgstr "Prikažite objavljeni datum"
+
+#: templates/admin_tabs.php:204 templates/admin_tabs.php:406
+msgid "Show description"
+msgstr "Prikažite opis"
+
+#: templates/admin_tabs.php:212 templates/admin_tabs.php:414
+msgid "Title tag:"
+msgstr "Tag naslova:"
+
+#: templates/admin_tabs.php:214 templates/admin_tabs.php:416
+msgid "h1"
+msgstr "h1"
+
+#: templates/admin_tabs.php:215 templates/admin_tabs.php:417
+msgid "h2"
+msgstr "h2"
+
+#: templates/admin_tabs.php:216 templates/admin_tabs.php:418
+msgid "h3"
+msgstr "h3"
+
+#: templates/admin_tabs.php:217 templates/admin_tabs.php:419
+msgid "h4"
+msgstr "h4"
+
+#: templates/admin_tabs.php:218 templates/admin_tabs.php:420
+msgid "h5"
+msgstr "h5"
+
+#: templates/admin_tabs.php:219 templates/admin_tabs.php:421
+msgid "h6"
+msgstr "h6"
+
+#: templates/admin_tabs.php:223 templates/admin_tabs.php:425
+msgid "Description words:"
+msgstr "Reči opisa:"
+
+#: templates/admin_tabs.php:225 templates/admin_tabs.php:427
+msgid ""
+"Set the maximum number of words that will be displayed of the description. "
+"This field is useful when the descriptions of videos in the gallery have "
+"different sizes."
+msgstr ""
+"Podesite maksimalan broj reči koje će biti prikazane u opisu. Ovo polje je "
+"korisno kada opisi video-a u galeriji imaju različite veličine."
+
+#: templates/admin_tabs.php:234 templates/admin_tabs.php:286
+#: templates/admin_tabs.php:503 templates/admin_tabs.php:540
+msgid "Tab order:"
+msgstr "Redosled tab tastera:"
+
+#: templates/admin_tabs.php:251
+msgid "Search input text:"
+msgstr "Pretraga unesenog teksta:"
+
+#: templates/admin_tabs.php:255
+msgid "Restrict search to (# separated):"
+msgstr "Ograničite pretragu na (# odvojeno):"
+
+#: templates/admin_tabs.php:259
+msgid "You must assing this tags to your videos to restrict the search:"
+msgstr ""
+"Morate dodeliti ove tagove vašim video-ima da biste ograničili pretragu:"
+
+#: templates/admin_tabs.php:268
+msgid "Restrict search by default: It will overwrite results of feed tab)"
+msgstr ""
+"Ograničite pretragu po default-u: to će pisati preko rezultata tastera "
+"napajanja"
+
+#: templates/admin_tabs.php:270 templates/admin_tabs.php:456
+#: templates/search.php:10
+msgid "All"
+msgstr "Sve"
+
+#: templates/admin_tabs.php:278
+msgid "Show search box"
+msgstr "Prikažite odeljak za pretragu"
+
+#: templates/admin_tabs.php:282
+msgid "Show select with Playlists"
+msgstr "Prikažite selekciju sa plej listama"
+
+#: templates/admin_tabs.php:300
+msgid "Number of videos to show:"
+msgstr "Broj video-a za prikazivanje:"
+
+#: templates/admin_tabs.php:302
+msgid "The plugin can display a maximum of 50 videos for each page."
+msgstr "Plugin može da prikaže maksimalno 50 video-a za svaku stranicu."
+
+#: templates/admin_tabs.php:305
+msgid "Thumbnail resolution:"
+msgstr "Rezolucija kratkog opisa:"
+
+#: templates/admin_tabs.php:307
+msgid "Default (120x90 px)"
+msgstr "Uobičajena (120x90 piksela)"
+
+#: templates/admin_tabs.php:308
+msgid "Medium (320x180)"
+msgstr "Srednja (320x180 piksela)"
+
+#: templates/admin_tabs.php:309
+msgid "High (480x360)"
+msgstr "Visoka (480x360 piksela)"
+
+#: templates/admin_tabs.php:326
+msgid "Thumbnail columns:"
+msgstr "Kolone kratkog opisa:"
+
+#: templates/admin_tabs.php:332
+msgid "Phones:"
+msgstr "Telefoni:"
+
+#: templates/admin_tabs.php:340
+msgid "Tablets:"
+msgstr "Tableti:"
+
+#: templates/admin_tabs.php:352
+msgid "Medium Desktops:"
+msgstr "Srednji desktop-ovi:"
+
+#: templates/admin_tabs.php:360
+msgid "Large Desktops:"
+msgstr "Veliki desktop-ovi:"
+
+#: templates/admin_tabs.php:374
+msgid "Show duration"
+msgstr "Prikažite trajanje"
+
+#: templates/admin_tabs.php:378
+msgid "Add \"nofollow\" to links"
+msgstr "Dodajte \"nofollow\" linkovima"
+
+#: templates/admin_tabs.php:433
+msgid "Thumbnail alignment:"
+msgstr "Svrstavanje kratkog opisa:"
+
+#: templates/admin_tabs.php:435
+msgid "none"
+msgstr "nikakvo"
+
+#: templates/admin_tabs.php:436
+msgid "Left"
+msgstr "Levo"
+
+#: templates/admin_tabs.php:437
+msgid "Right"
+msgstr "Desno"
+
+#: templates/admin_tabs.php:444
+msgid "Thumbnail width:"
+msgstr "Širina kratkog opisa:"
+
+#: templates/admin_tabs.php:446
+msgid "Extra small"
+msgstr "Veoma mala"
+
+#: templates/admin_tabs.php:447
+msgid "Small"
+msgstr "Mala"
+
+#: templates/admin_tabs.php:448
+msgid "Half"
+msgstr "Na pola"
+
+#: templates/admin_tabs.php:449
+msgid "Large"
+msgstr "Velika"
+
+#: templates/admin_tabs.php:450
+msgid "Extra large"
+msgstr "Veoma velika"
+
+#: templates/admin_tabs.php:454
+msgid "Min. size with alignment:"
+msgstr "Minimalna veličina sa svrstavanjem:"
+
+#: templates/admin_tabs.php:457
+msgid "Tablets"
+msgstr "Tableti"
+
+#: templates/admin_tabs.php:458
+msgid "Medium Desktops"
+msgstr "Srednji desktop-ovi"
+
+#: templates/admin_tabs.php:459
+msgid "Large devices"
+msgstr "Veliki uređaji"
+
+#: templates/admin_tabs.php:461
+msgid ""
+"Thumbnails will be aligned only from the size of selected device to prevent "
+"unwanted effects in small sizes."
+msgstr ""
+"Kratki opisi će biti svrstani samo po veličini selektovanog uređaja da bi se "
+"sprečili neželjeni efekti kod malih veličina."
+
+#: templates/admin_tabs.php:471
+msgid "Open in a new window"
+msgstr "Otvorite u novom prozoru"
+
+#: templates/admin_tabs.php:475
+msgid "Show pagination"
+msgstr "Prikažite obeležavanje strana"
+
+#: templates/admin_tabs.php:482
+msgid "Thumbnail content tab order:"
+msgstr "Redosled tastera za sadržaj kratkog opisa:"
+
+#: templates/admin_tabs.php:485
+msgid "Thumbnail:"
+msgstr "Kratki opis:"
+
+#: templates/admin_tabs.php:493
+msgid "Published date:"
+msgstr "Objavljeni datum:"
+
+#: templates/admin_tabs.php:497
+msgid "Description:"
+msgstr "Opis:"
+
+#: templates/admin_tabs.php:519
+msgid "Link text:"
+msgstr "Tekst linka:"
+
+#: templates/admin_tabs.php:525
+msgid "Show link to channel"
+msgstr "Prikažite link za kanal"
+
+#: templates/admin_tabs.php:530
+msgid "Open in a new window or tab"
+msgstr "Otvorite u novom prozoru ili tasteru"
+
+#: templates/admin_tabs.php:535
+msgid "Show link to thank the developer"
+msgstr "Prikažite link za zahvalnost developer-u"
+
+#: templates/link.php:9
+msgid "By PoseLab"
+msgstr "Po PoseLab-u"
+
+#: templates/link.php:18
+msgid "Show more videos"
+msgstr "Prikažite više video-a"
+
+#: templates/thumb.php:4
+msgid "Private video"
+msgstr "Privatni video"
+
+#: templates/thumbs.php:119
+msgid "«Previous"
+msgstr "«Prethodni"
+
+#: templates/thumbs.php:128
+msgid "Next»"
+msgstr "Sledeći»"
+
+#: youtube-channel-gallery.php:48
+msgid "Youtube Channel Gallery"
+msgstr "Galerija YouTube kanala"
+
+#: youtube-channel-gallery.php:50
+msgid "Show a youtube video and a gallery of thumbnails for a youtube channel"
+msgstr "Prikažite youtube video i galeriju kratkih opisa za youtube kanal"
+
+#: youtube-channel-gallery.php:725
+msgid "Show more videos»"
+msgstr "Prikažite više video-a»"
+
+#: youtube-channel-gallery.php:734
+msgid "There is no video to show."
+msgstr "Nema nijednog video-a za prikazivanje"
+
+#: youtube-channel-gallery.php:812
+#, php-format
+msgid "Error type: \"%1$s\". "
+msgstr "Greška tipa: \"%1$s\""
+
+#: youtube-channel-gallery.php:813
+#, php-format
+msgid "Error message: \"%1$s\" "
+msgstr "Poruka-greška: \"%1$s\""
+
+#: youtube-channel-gallery.php:814
+#, php-format
+msgid "Domain: \"%1$s\". "
+msgstr "Domen: \"%1$s\""
+
+#: youtube-channel-gallery.php:815
+#, php-format
+msgid "Reason: \"%1$s\". "
+msgstr "Razlog: \"%1$s\""
+
+#: youtube-channel-gallery.php:816
+#, php-format
+msgid "Location type: \"%1$s\". "
+msgstr "Lokacija tipa: \"%1$s\""
+
+#: youtube-channel-gallery.php:817
+#, php-format
+msgid "Location: \"%1$s\". "
+msgstr "Lokacija: \"%1$s\""
+
+#: youtube-channel-gallery.php:820
+msgid ""
+"Did you added your own Google API key? Look at the <a href=\"http://poselab."
+"com/en/youtube-channel-gallery-help\" target=\"_blank\">help</a>."
+msgstr ""
+
+#: youtube-channel-gallery.php:823
+#, php-format
+msgid "Check in YouTube if the id %1$s belongs to a %2$s. "
+msgstr "Prijavite se na YouTube ako id %1$s pripada %2$s-u."
+
+#: youtube-channel-gallery.php:825
+#, php-format
+msgid ""
+"If the user id is correct, check that the channel of the user has list of "
+"\"%1$s\". "
+msgstr ""
+"Ako je identifikacija korisnika tačna, proverite da kanal korisnika ima "
+"listu od  \"%1$s\"."
+
+#: youtube-channel-gallery.php:827
+msgid ""
+"Check the <a href=\"http://wordpress.org/extend/plugins/youtube-channel-"
+"gallery/faq/\" target=\"_blank\">FAQ</a> of the plugin or send error "
+"messages to <a href=\"https://wordpress.org/support/plugin/youtube-channel-"
+"gallery\" target=\"_blank\">support</a>."
+msgstr ""
+"Proverite <a href=\"http://wordpress.org/extend/plugins/youtube-channel-"
+"gallery/faq/\" target=\"_blank\">FAQ</a> plugin-a ili pošaljite poruku-"
+"grešku na <a href=\"https://wordpress.org/support/plugin/youtube-channel-"
+"gallery\" target=\"_blank\">support</a>."
+
+#: youtube-channel-gallery.php:904
+msgid "There are no videos matching selected criteria"
+msgstr "Nema nijednog video-a koji se poklapa sa selektovanim kriterijumima"
+
+#~ msgid ""
+#~ "\"nofollow\" attribute provides a way for webmasters to tell search "
+#~ "engines \"Don't follow this specific link.\""
+#~ msgstr ""
+#~ "\"nofollow\" dodatak omogućava način webmaster-ima da mašinama za "
+#~ "pretragu kažu \"Nemojte pratiti određeni link.\""
+
+#~ msgid "Message from server: \"%1$s\". "
+#~ msgstr "Mensaje del servidor: \"%1$s\". "
+
+#~ msgid "Show player above thumbnails"
+#~ msgstr "Mostrar reproductor sobre miniaturas"
+
+#~ msgid ""
+#~ "This field is used to assign the appropriate quality of thumbnail images "
+#~ "in top and bottom alignments and to assign width to thumbnails in left "
+#~ "and right alignments. If the quality of thumbnail images is not enough, "
+#~ "insert a larger value. If you are unsure you can assign one of the "
+#~ "following values​​: 120, 320, 480 or 640"
+#~ msgstr ""
+#~ "Este campo se utiliza para asignar la calidad de imagen más adecuada a "
+#~ "las miniaturas en las alineaciones superior e inferior y para asignar "
+#~ "ancho a las miniaturas en las alineaciones izquierda y derecha. Si la "
+#~ "calidad de las imágenes de las miniaturas no es suficiente, introduzca un "
+#~ "valor mayor. Si no está seguro de que valor usar puede asignar uno de los "
+#~ "siguientes valores: 120, 320, 480 ó 640"
+
+#~ msgid "Top"
+#~ msgstr "Arriba"
+
+#~ msgid "Bottom"
+#~ msgstr "Abajo"
+
+#~ msgid "Video width:"
+#~ msgstr "Ancho del vídeo:"
+
+#~ msgid "Show info (title, uploader)"
+#~ msgstr "Mostrar información (título, cargador)"
+
+#~ msgid "You must insert a valid YouTube user id."
+#~ msgstr "Debes introducir un id válido de usuario de YouTube."
+
+#~ msgid "You must insert a valid playlist id."
+#~ msgstr "Debes introducir un id válido de lista de reproducción de YouTube."
+
+#~ msgid "Light:"
+#~ msgstr "Claro"
+
+#~ msgid "No post to duplicate has been supplied!"
+#~ msgstr "No se facilitó ninguna entrada a copiar"
+
+#~ msgid "Post creation failed, could not find original post:"
+#~ msgstr ""
+#~ "Creación realizada sin éxito, no ha sido posible encontrar la entrada "
+#~ "original:"
+
+#~ msgid "No page to duplicate has been supplied!"
+#~ msgstr "No se facilitó ninguna página a copiar"
+
+#~ msgid "Make a duplicate from this post"
+#~ msgstr "Crea una copia de esta entrada"
+
+#~ msgid "Duplicate"
+#~ msgstr "Duplicar"
+
+#~ msgid "Make a duplicate from this page"
+#~ msgstr "Crea una copia de esta página"
+
+#~ msgid "Copy to a new draft"
+#~ msgstr "Copia en un borrador nuevo"
+
+#~ msgid "Duplicate Post Options"
+#~ msgstr "Opciones"
+
+#~ msgid "Duplicate Post"
+#~ msgstr "Duplicate Post"
+
+#~ msgid "Copy post/page date also"
+#~ msgstr "Copiar también fecha del post o la página"
+
+#~ msgid ""
+#~ "Normally, the new draft has publication date set to current time: check "
+#~ "the box to copy the original post/page date"
+#~ msgstr ""
+#~ "Normalmente se establece la fecha de publicación del nuevo borrador a la "
+#~ "fecha actual: compruebe la casilla para copiar la fecha original del post "
+#~ "o la página"
+
+#~ msgid "Do not copy these fields"
+#~ msgstr "No copiar estos campos"
+
+#~ msgid ""
+#~ "Comma-separated list of meta fields that must not be copied when cloning "
+#~ "a post/page"
+#~ msgstr ""
+#~ "Lista separada por comas de meta campos que no pueden ser copiados cuando "
+#~ "se clona una entrada/pagina."
+
+#~ msgid ""
+#~ "Prefix to be added before the original title when cloning a post/page, e."
+#~ "g. \"Copy of\" (blank for no prefix)"
+#~ msgstr ""
+#~ "Prefijo a ser agregado antes del titulo original cuando se clona una "
+#~ "entrada/pagina, ej. \"Copia de\" (en blanco  para no agregar prefijo)"
+
+#~ msgid "Minimum level to copy posts"
+#~ msgstr "Nivel mínimo para copiar posts"
+
+#~ msgid ""
+#~ "Warning: users will be able to copy all posts, even those of higher level "
+#~ "users"
+#~ msgstr ""
+#~ "Atención: los usuarios podrán copiar todos los posts, incluso aquellos de "
+#~ "usuarios de nivel más alto"
+
+#~ msgid "Save Changes"
+#~ msgstr "Guardar los cambios"
+
+#~ msgid "Donate"
+#~ msgstr "Hacer una donación"
+
+#~ msgid "Translate"
+#~ msgstr "Traducir"
+
+#~ msgid "http://www.lopo.it/duplicate-post-plugin/"
+#~ msgstr "Copy text   \t http://www.lopo.it/duplicate-post-plugin/"
+
+#~ msgid "Creates a copy of a post."
+#~ msgstr "Crear una copia de las entradas."
+
+#~ msgid "Enrico Battocchi"
+#~ msgstr "Enrico Battocchi"
+
+#~ msgid "http://www.lopo.it"
+#~ msgstr "http://www.lopo.it"

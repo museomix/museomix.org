@@ -30,6 +30,13 @@ class WPCOM_JSON_API_Site_Settings_Endpoint extends WPCOM_JSON_API_Endpoint {
 		}
 
 		if ( 'GET' === $this->api->method ) {
+			/**
+			 * Fires on each GET request to a specific endpoint.
+			 *
+			 * @since 3.2.0
+			 *
+			 * @param string sites.
+			 */
 			do_action( 'wpcom_json_api_objects', 'sites' );
 			return $this->get_settings_response();
 		} else if ( 'POST' === $this->api->method ) {
@@ -76,6 +83,7 @@ class WPCOM_JSON_API_Site_Settings_Endpoint extends WPCOM_JSON_API_Endpoint {
 
 		$response_format = self::$site_format;
 		$blog_id = (int) $this->api->get_blog_id_for_output();
+		/** This filter is documented in class.json-api-endpoints.php */
 		$is_jetpack = true === apply_filters( 'is_jetpack_site', false, $blog_id );
 
 		foreach ( array_keys( $response_format ) as $key ) {
@@ -111,6 +119,11 @@ class WPCOM_JSON_API_Site_Settings_Endpoint extends WPCOM_JSON_API_Endpoint {
 					)
 				);
 
+				$eventbrite_api_token = (int) get_option( 'eventbrite_api_token' );
+				if ( 0 === $eventbrite_api_token ) {
+					$eventbrite_api_token = null;
+				}
+
 				$response[$key] = array(
 
 					// also exists as "options"
@@ -125,7 +138,7 @@ class WPCOM_JSON_API_Site_Settings_Endpoint extends WPCOM_JSON_API_Endpoint {
 					'jetpack_relatedposts_enabled' => (bool) $jetpack_relatedposts_options[ 'enabled' ],
 					'jetpack_relatedposts_show_headline' => (bool) $jetpack_relatedposts_options[ 'show_headline' ],
 					'jetpack_relatedposts_show_thumbnails' => (bool) $jetpack_relatedposts_options[ 'show_thumbnails' ],
-					'default_category'        => get_option('default_category'),
+					'default_category'        => (int) get_option('default_category'),
 					'post_categories'         => (array) $post_categories,
 					'default_post_format'     => get_option( 'default_post_format' ),
 					'default_pingback_flag'   => (bool) get_option( 'default_pingback_flag' ),
@@ -156,6 +169,7 @@ class WPCOM_JSON_API_Site_Settings_Endpoint extends WPCOM_JSON_API_Endpoint {
 					'jetpack_comment_likes_enabled' => (bool) get_option( 'jetpack_comment_likes_enabled', false ),
 					'twitter_via'             => (string) get_option( 'twitter_via' ),
 					'jetpack-twitter-cards-site-tag' => (string) get_option( 'jetpack-twitter-cards-site-tag' ),
+					'eventbrite_api_token'    => $eventbrite_api_token,
 				);
 
 				if ( class_exists( 'Sharing_Service' ) ) {
@@ -190,7 +204,14 @@ class WPCOM_JSON_API_Site_Settings_Endpoint extends WPCOM_JSON_API_Endpoint {
 
 		// $this->input() retrieves posted arguments whitelisted and casted to the $request_format
 		// specs that get passed in when this class is instantiated
-		$input = $this->input();
+		/**
+		 * Filters the settings to be updated on the site.
+		 *
+		 * @since 3.6.0
+		 *
+		 * @param array $input Associative array of site settings to be updated.
+		 */
+		$input = apply_filters( 'rest_api_update_site_settings', $this->input() );
 
 		$jetpack_relatedposts_options = array();
 		$sharing_options = array();
@@ -267,7 +288,7 @@ class WPCOM_JSON_API_Site_Settings_Endpoint extends WPCOM_JSON_API_Endpoint {
 					}
 
 					$enabled_or_disabled = $wga['code'] ? 'enabled' : 'disabled';
-					bump_stats_extras( 'google-analytics', $enabled_or_disabled );
+					do_action( 'jetpack_bump_stats_extras', 'google-analytics', $enabled_or_disabled );
 
 					$business_plugins = WPCOM_Business_Plugins::instance();
 					$business_plugins->activate_plugin( 'wp-google-analytics' );
@@ -289,6 +310,20 @@ class WPCOM_JSON_API_Site_Settings_Endpoint extends WPCOM_JSON_API_Endpoint {
 					break;
 				case 'sharing_label':
 					$sharing_options[ $key ] = $value;
+					break;
+
+				// Keyring token option
+				case 'eventbrite_api_token':
+					// These options can only be updated for sites hosted on WordPress.com
+					if ( defined( 'IS_WPCOM' ) && IS_WPCOM ) {
+						if ( empty( $value ) || WPCOM_JSON_API::is_falsy( $value ) ) {
+							if ( delete_option( $key ) ) {
+								$updated[ $key ] = null;
+							}
+						} else if ( update_option( $key, $value ) ) {
+							$updated[ $key ] = (int) $value;
+						}
+					}
 					break;
 
 				// no worries, we've already whitelisted and casted arguments above

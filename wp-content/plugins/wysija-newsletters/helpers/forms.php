@@ -5,7 +5,7 @@ class WYSIJA_help_forms{
 	var $eachValues    = array();
 	var $eachValuesSec = array();
 
-	function WYSIJA_help_forms(){
+	function __construct(){
 		// I believe this is for translation purpose, making sure the correct language is loaded
 		add_action( 'init', array( $this, 'apply_filters' ), 20 );
 
