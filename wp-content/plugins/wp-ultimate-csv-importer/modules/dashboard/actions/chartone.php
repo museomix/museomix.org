@@ -32,25 +32,24 @@
  * WP Ultimate CSV Importer copyright notice. If the display of the logo is
  * not reasonably feasible for technical reasons, the Appropriate Legal
  * Notices must display the words
- * "Copyright Smackcoders. 2014. All rights reserved".
+ * "Copyright Smackcoders. 2015. All rights reserved".
  ********************************************************************************/
-if ( ! defined( 'ABSPATH' ) )
-        exit; // Exit if accessed directly
+
+if (!defined('ABSPATH')) {
+	exit;
+} // Exit if accessed directly
 global $wpdb;
-if($_REQUEST['postdata']=='firstchartdata')
-{
-require_once(WP_CONST_ULTIMATE_CSV_IMP_DIRECTORY.'lib/skinnymvc/core/base/SkinnyBaseActions.php');
-require_once(WP_CONST_ULTIMATE_CSV_IMP_DIRECTORY.'lib/skinnymvc/core/SkinnyActions.php');
+if ($_REQUEST['postdata'] == 'firstchartdata') {
+	require_once(WP_CONST_ULTIMATE_CSV_IMP_DIRECTORY . 'lib/skinnymvc/core/base/SkinnyBaseActions.php');
+	require_once(WP_CONST_ULTIMATE_CSV_IMP_DIRECTORY . 'lib/skinnymvc/core/SkinnyActions.php');
 	require_once('actions.php');
-	$dashObj= new DashboardActions(); 
-	echo (json_encode($dashObj->piechart()));
-}
-elseif($_REQUEST['postdata']=='secondchartdata')
-{
-require_once(WP_CONST_ULTIMATE_CSV_IMP_DIRECTORY.'lib/skinnymvc/core/base/SkinnyBaseActions.php');
-require_once(WP_CONST_ULTIMATE_CSV_IMP_DIRECTORY.'lib/skinnymvc/core/SkinnyActions.php');
+	$dashObj = new WPImporter_includes_helper();
+	echo(json_encode($dashObj->piechart()));
+} elseif ($_REQUEST['postdata'] == 'secondchartdata') {
+	require_once(WP_CONST_ULTIMATE_CSV_IMP_DIRECTORY . 'lib/skinnymvc/core/base/SkinnyBaseActions.php');
+	require_once(WP_CONST_ULTIMATE_CSV_IMP_DIRECTORY . 'lib/skinnymvc/core/SkinnyActions.php');
 	require_once('actions.php');
-	$dashObj= new DashboardActions();
+	$dashObj = new WPImporter_includes_helper();
 	echo json_encode($dashObj->getStatsWithDate());
 }
 

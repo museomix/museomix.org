@@ -324,7 +324,10 @@ INSTR(LCASE(user_email), 'javascript:')>0
 		'document.write(string.fromcharcode'=>'obsfucated javascript write',
 		'(base64'.'_decode'=>'base64 decode to hide code',
 		'(gz'.'inflate'=>'gzip inflate often used to hide code',
-		'UA-27917097-1'=>'Bogus Google Analytics code'
+		'UA-27917097-1'=>'Bogus Google Analytics code',
+		'w.wpquery.o'=>'Malicious jquery in bootleg plugin or theme',
+		"<scr'+"=>'Obfuscated script tag, usually in bootleg plugin or theme'
+		
 		
 	);
 
@@ -432,7 +435,7 @@ function kpg_ss_scan_for_eval_recurse($dir,$phparray) {
 	if ($dh!==null && $dh!==false) {
 		while (($file = readdir($dh)) !== false) {
 			if (@is_dir($dir .'/'. $file)) {
-				if ($file!='.' && $file!='..' ) {
+				if ($file!='.' && $file!='..' && $file!=':' && strpos('/',$file)===false ) { // that last one does some symbolics?
 					$phparray=kpg_ss_scan_for_eval_recurse($dir .'/'. $file,$phparray);
 				}
 			} else if ( strpos($file,'.php')>0 ) {
@@ -470,7 +473,9 @@ function kpg_ss_look_in_file($file) {
 		'gz'.'inflate',
 		'if(!isset($GLOBALS['."\\'\\a\\e\\0",
 		'passssword',
-		'Bruteforce protection'
+		'Bruteforce protection',
+		'w.wpquery.o',
+		"<scr'+"
 	);
 	while (!@feof($handle)) {
 		$line=fgets($handle);

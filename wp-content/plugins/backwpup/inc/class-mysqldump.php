@@ -114,7 +114,7 @@ class BackWPup_MySQLDump {
 		if ( ! empty( $args[ 'dbcharset' ] ) && method_exists( $this->mysqli, 'set_charset' ) ) {
 			$res = $this->mysqli->set_charset( $args[ 'dbcharset' ] );
 			if ( ! $res ) {
-				throw new BackWPup_MySQLDump_Exception( sprintf( _x( 'Cannot set DB charset to %s','Database Charset', 'backwpup' ), $args[ 'dbcharset' ] ) );
+				throw new BackWPup_MySQLDump_Exception( sprintf( _x( 'Cannot set DB charset to %s error: %s','Database Charset', 'backwpup' ), $args[ 'dbcharset' ], $this->mysqli->error ) );
 			}
 		}
 
@@ -439,11 +439,11 @@ class BackWPup_MySQLDump {
 	public function dump_table( $table, $start = 0, $length = 0 ) {
 
 		if ( ! is_numeric( $start ) ) {
-			throw new BackWPup_MySQLDump_Exception( sprintf( __( 'Start for table backup is not correctly set: %1$s ', 'backwpup' ), $start ) );
+			throw new BackWPup_MySQLDump_Exception( sprintf( __( 'Start for table backup is not correctly set: %1$s', 'backwpup' ), $start ) );
 		}
 
 		if ( ! is_numeric( $length ) ) {
-			throw new BackWPup_MySQLDump_Exception( sprintf( __( 'Length for table backup is not correctly set: %1$s ', 'backwpup' ), $length ) );
+			throw new BackWPup_MySQLDump_Exception( sprintf( __( 'Length for table backup is not correctly set: %1$s', 'backwpup' ), $length ) );
 		}
 
 		$done_records = 0;

@@ -118,9 +118,10 @@ $nonce=wp_create_nonce('kpgstopspam_update');
 	<fieldset style="border:thin solid black;padding:6px;width:100%;">
 	<legend><span style="font-weight:bold;font-size:1.2em" >BotScout API Key</span></legend>
 		<input size="32" name="botscoutapi" type="text" value="<?php echo $botscoutapi; ?>"/><br>
-		This api key is used for querying the Botscount database. It is required if you want to 
+		This api key is used for querying the Botscout database. It is required if you want to 
 		check IP addresses against the Botscout.com database. You can register and get an API key at <a href="http://botscout.com/getkey.htm" target="_blank">www.botscout.com</a>.<br>
-		Allowed values are 0 to 9999. Only numbers are accepted.
+		Allowed values are 0 to 9999. Only numbers are accepted.<br>
+		Please note that botscout is disabled in this release because of policy changes at Botscout.com.
 		<table align="center" cellspacing="1" style="background-color:#CCCCCC;font-size:.9em;">
 			<tr bgcolor="white">
 				<td valign="top">Deny spammers found on BotScout with more than

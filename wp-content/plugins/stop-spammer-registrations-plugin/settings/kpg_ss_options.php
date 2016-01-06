@@ -33,7 +33,8 @@ if (!empty($nonce) && wp_verify_nonce($nonce,'kpgstopspam_update')) {
 	'chkexploits',
 	'chkadminlog',
 	'chkhosting',
-	'chkakismet'
+	'chkakismet',
+	'filterregistrations'
 	);
 	foreach ($optionlist as $check) {
 		$v='N';
@@ -231,6 +232,12 @@ $nonce=wp_create_nonce('kpgstopspam_update');
     Amazon Cloud servers so you may not want to use this. Be careful about blocking Amazon. Sometimes you get spam from
     one of their servers, but they shut it down right away.
     </fieldset>
+   <br>
+    <fieldset style="border:thin solid black;padding:6px;margin:6px;">
+    <legend><span style="font-weight:bold;font-size:1.2em" >Filter Login Requests</span></legend>
+    <input name="filterregistrations" type="checkbox" value="Y" <?php if ($filterregistrations=='Y') echo  "checked=\"checked\"";?>/>
+    Some plugins and themes bypass the standard registration forms. If you check this, Stop Spammers will try to intercept the login int the WordPress user login module. This will cause some overhead, but gives Stop Spammers another shot at detecting Spam. This is turned off by default because it could potentially be called at every page load.
+    </fieldset>
     <br>
     <fieldset style="border:thin solid black;padding:6px;margin:6px;">
     <legend><span style="font-weight:bold;font-size:1.2em" >Block Countries</span></legend>
@@ -293,7 +300,7 @@ $nonce=wp_create_nonce('kpgstopspam_update');
 <div style="float:left;border:black thin solid;margin:2px;padding:2px"> <input name="chkFI" type="checkbox" value="Y" <?php if ($chkFI=="Y") echo "checked=\"checked\"";?>/>Finland</div>
 <div style="float:left;border:black thin solid;margin:2px;padding:2px"> <input name="chkFJ" type="checkbox" value="Y" <?php if ($chkFJ=="Y") echo "checked=\"checked\"";?>/>Fiji</div>
 <div style="float:left;border:black thin solid;margin:2px;padding:2px"> <input name="chkFR" type="checkbox" value="Y" <?php if ($chkFR=="Y") echo "checked=\"checked\"";?>/>France</div>
-<div style="float:left;border:black thin solid;margin:2px;padding:2px"> <input name="chkGB" type="checkbox" value="Y" <?php if ($chkGB=="Y") echo "checked=\"checked\"";?>/>United Kingdom</div>
+<div style="float:left;border:black thin solid;margin:2px;padding:2px"> <input name="chkGB" type="checkbox" value="Y" <?php if ($chkGB=="Y") echo "checked=\"checked\"";?>/>Great Britain</div>
 <div style="float:left;border:black thin solid;margin:2px;padding:2px"> <input name="chkGE" type="checkbox" value="Y" <?php if ($chkGE=="Y") echo "checked=\"checked\"";?>/>Georgia</div>
 <div style="float:left;border:black thin solid;margin:2px;padding:2px"> <input name="chkGF" type="checkbox" value="Y" <?php if ($chkGF=="Y") echo "checked=\"checked\"";?>/>French Guiana</div>
 <div style="float:left;border:black thin solid;margin:2px;padding:2px"> <input name="chkGI" type="checkbox" value="Y" <?php if ($chkGI=="Y") echo "checked=\"checked\"";?>/>Gibraltar</div>

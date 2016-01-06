@@ -1,4 +1,5 @@
 <?php
+
 if (!isset($SectionsPage) || !is_array($SectionsPage))
 	$SectionsPage = array();
 if (!isset($ContenusSections) || !is_array($ContenusSections))
@@ -207,9 +208,8 @@ function ListePrototypes($atts){
 			if(empty($imag)) {
 				$imag= wp_get_attachment_image_src(get_field('visuel_page',$id),"thumbnail");
 			} else {
-				$tmpImage = array();
-				$tmpImage[0] = $imag;
-				$imag = $tmpImage;
+				$imag = wp_get_attachment_image_src($imag,"thumbnail");
+				
 			}
 			if (empty($imag[0]))
 				$imag[0] = get_bloginfo('template_directory').'/images/logo_museomix_prototype.png';
@@ -523,7 +523,7 @@ function ContenuSection($id, $echo = true){
 						} else {
 							$contenu .= '<li class="elm-bloc-actualites news-only-title"><a class="ln-bloc-actualites" href="'.get_permalink($post->ID).'">';
 							$contenu .= '<span class="tx-bloc-actualites">'.get_the_title($post->ID).'</span>';
-							$contenu .= '&nbsp; <span class="date-actualites" style="font-size: 15px; color: #888; margin: 0; text-decoration: none !important; background: #eee">'.DateBillet(get_the_time('U')).'</span>';
+							$contenu .= '  <span class="date-actualites" style="font-size: 15px; color: #888; margin: 0; text-decoration: none !important; background: #eee">'.DateBillet(get_the_time('U')).'</span>';
 							//$contenu .= '<br /><span class="extrait" style="color: #999; font-size: 15px; margin: 0; text-decoration: none !important">'.ExtraitBillet($post).'</span>';
 							$contenu .= '</a></li>';
 						}
@@ -604,7 +604,7 @@ array_push($liste,$elm);
 					$elm = '<td colspan="2"><strong>'.$coorg['prenom'].' '.$coorg['nom_de_famille'].'</strong>';
 				else
 					$elm = '<td><strong>'.$coorg['prenom'].' '.$coorg['nom_de_famille'].'</strong>';
-				if(!empty($coorg['compte_twitter'])) $elm .=  ' &nbsp; &nbsp; <a href=http://twitter.com/@'.$coorg['compte_twitter'].'>@'.$coorg['compte_twitter'].'</a>';
+				if(!empty($coorg['compte_twitter'])) $elm .=  '     <a href=http://twitter.com/@'.$coorg['compte_twitter'].'>@'.$coorg['compte_twitter'].'</a>';
 				
 				//.' <a href=http://twitter.com/@'.$coorg['compte_twitter'].'>@'.$coorg['compte_twitter'].'</a>';
 				

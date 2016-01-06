@@ -42,7 +42,11 @@ class kpg_ss_log_good extends be_module {
 		
 		
 		$stats['hist']=$hist;
-		kpg_ss_set_stats($stats,$post['addon']);
+		if (array_key_exists('addon',$post)) {
+			kpg_ss_set_stats($stats,$post['addon']); // from a plugin
+		} else {
+			// have to figure out why we are here - it is because registration did this - try to fix.
+		}
 	}
 
 

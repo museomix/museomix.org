@@ -11,6 +11,11 @@ class kpg_ss_check_post extends be_module{
 		// returns array 
 		//[0]=class location,[1]=class name (also used as counter),[2]=addon name,
 		//[3]=addon author, [4]=addon description
+		// if already in good cache then exit quick. Prevents looking when good checking has already been done
+		$reason=be_load('chkgcache',kpg_get_ip(),$stats,$options,$post);
+		if ($reason!==false) {
+			return;
+		}
 		$addons=array();
 		$addons=apply_filters('kpg_ss_addons_deny',$addons);
 		if (!empty($addons)&&is_array($addons)) {
@@ -82,7 +87,8 @@ class kpg_ss_check_post extends be_module{
 					break;
 				}
 			}
-			// if the ip is valid reason will be false
+			// if the ip is valid reason will be false - things like 127.0.0.1, etc or ip same as server
+			// can't check the ip based checks because the ip is invalid.
 			if ($reason!==false) return false;
 		}
 		if ($reason===false) 
@@ -95,6 +101,7 @@ class kpg_ss_check_post extends be_module{
 			}
 		}
 		//sfs_debug_msg("check post $ip, ".print_r($post,true));
+		// for testing the cache without doing spam
 		if (array_key_exists('email',$post) && $post['email']=='tester@tester.com') {
 			$post['reason']= "testing IP - will always be blocked"; // use to test plugin
 			be_load('kpg_ss_challenge',kpg_get_ip(),$stats,$options,$post);
@@ -107,7 +114,7 @@ class kpg_ss_check_post extends be_module{
 
 		if ($reason===false) return false;
 		// here because we have a spammer that's been caught
-		
+		$kpg_check_sempahore=true;
 		kpg_ss_log_bad(kpg_get_ip(),$reason,$chk);
 		
 		exit;

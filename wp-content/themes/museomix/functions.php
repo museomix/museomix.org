@@ -11,7 +11,7 @@ function my_custom_init() {
 }
 add_action('after_setup_theme', 'my_theme_setup');
 function my_theme_setup(){
-    load_theme_textdomain('my_theme', get_template_directory());
+    load_theme_textdomain('museomix', get_template_directory().'/lang');
 }
 /* initiation des menus personnalisés 
    ================================== */
@@ -44,8 +44,8 @@ function OrdonnerListes($query){
 add_action('acf/register_fields', 'my_register_fields');
 function my_register_fields()
 {
-	include_once('biblio/acf-field-date-time-picker/acf-date_time_picker.php');
-	include_once('biblio/acf-location/acf-location.php');
+	// include_once('biblio/acf-field-date-time-picker/acf-date_time_picker.php');
+	// include_once('biblio/acf-location/acf-location.php');
 }
 
 /* bloc 'get involved'
@@ -113,7 +113,8 @@ add_shortcode( 'liste-lieux', 'ListeLieux' );
 function ListeLieux($atts){
 	global $SectionsPage;
 	extract(shortcode_atts(array(
-		'edition' => ''
+		'edition' => '',
+		'show_local_website' => ''
 	),$atts));
 	$lieux = get_pages(array('post_type'=>'museomix'));
 	if(!count($lieux)){ return ''; }
@@ -124,7 +125,11 @@ function ListeLieux($atts){
 			if(!$imag=wp_get_attachment_image_src(get_field('vignette_lieu',$id),"thumbnail")) {
 				$imag= wp_get_attachment_image_src(get_field('visuel_page',$id),"large");
 			}
-			$r[] = '<a class="ln-bloc-lieu btn btn-large" style="background: #ffffff url('.$imag[0].') no-repeat center center;" href="'.get_permalink($id).'"><span class="titre-bloc-lieu" ><span class="tx-bloc-lieu">'.$titre.'</span></span></a>';
+			$lien = get_permalink($id);
+			$website = get_field('website', $id);
+			if (!empty($website) && isset($atts['show_local_website']) && !empty($atts['show_local_website']))
+				$lien = $website;
+			$r[] = '<a class="ln-bloc-lieu btn btn-large" style="background: #ffffff url('.$imag[0].') no-repeat center center;" href="'.$lien.'"><span class="titre-bloc-lieu" ><span class="tx-bloc-lieu">'.$titre.'</span></span></a>';
 		}
 	}
 	if(!$r) return '';
@@ -199,6 +204,7 @@ function ListePrototypes($atts){
 		if(get_field('museomix',$id)->ID==$musId || $musId=="all" || (is_null(icl_object_id($id,'any',false,'en')) && get_field('museomix',$id)->ID == icl_object_id($atts['lieu'],'museomix',true)) || (is_null(icl_object_id($id,'any',false,'fr')) && get_field('museomix',$id)->ID==icl_object_id($atts['lieu'],'museomix',true)) ) {
 			$titre = str_replace(' &#8211; ','<br />',$proto->post_title);
 			$imag=get_field('visuel_prototype',$id);
+			echo $imag;
 			if(empty($imag)) {
 				$imag= wp_get_attachment_image_src(get_field('visuel_page',$id),"thumbnail");
 			} else {
@@ -262,13 +268,16 @@ function TableurGoogle($atts){
 add_filter('pre_get_posts', 'pre_get_posts_hook' );
 function pre_get_posts_hook($wp_query) {
 	global $OrdreMenuTypesPages;
-	$type = $wp_query->query['post_type'];
-    if (is_archive()&&in_array($type,$OrdreMenuTypesPages))
-    {
-        $wp_query->set( 'orderby', 'menu_order' );
-        $wp_query->set( 'order', 'ASC' );
-        return $wp_query;
-    }
+	if (isset($wp_query->query['post_type'])) {
+		$type = $wp_query->query['post_type'];
+		if (is_archive()&&in_array($type,$OrdreMenuTypesPages))
+		{
+			$wp_query->set( 'orderby', 'menu_order' );
+			$wp_query->set( 'order', 'ASC' );
+			return $wp_query;
+		}
+	}
+	return $wp_query;
 }
 
 /* Nouvelle taille d'image */
@@ -515,7 +524,7 @@ function ContenuSection($id, $echo = true){
 						} else {
 							$contenu .= '<li class="elm-bloc-actualites news-only-title"><a class="ln-bloc-actualites" href="'.get_permalink($post->ID).'">';
 							$contenu .= '<span class="tx-bloc-actualites">'.get_the_title($post->ID).'</span>';
-							$contenu .= '&nbsp; <span class="date-actualites" style="font-size: 15px; color: #888; margin: 0; text-decoration: none !important; background: #eee">'.DateBillet(get_the_time('U')).'</span>';
+							$contenu .= '  <span class="date-actualites" style="font-size: 15px; color: #888; margin: 0; text-decoration: none !important; background: #eee">'.DateBillet(get_the_time('U')).'</span>';
 							//$contenu .= '<br /><span class="extrait" style="color: #999; font-size: 15px; margin: 0; text-decoration: none !important">'.ExtraitBillet($post).'</span>';
 							$contenu .= '</a></li>';
 						}
@@ -581,7 +590,7 @@ function ContenuSection($id, $echo = true){
 array_push($liste,$elm);
 
 			}
-			$contenu = '<ul class="landscape"><li>'.implode('</li><li>',$liste).'</li></ul>';
+			$contenu = '<ul class="landscape"><li class="span6">'.implode('</li><li class="span6">',$liste).'</li></ul>';
 		}else{
 			//$contenu = '<span style="margin-left: 25px;color: #999;">pas de partenaires (champ: partenaires)</span>';		
 		}
@@ -591,25 +600,33 @@ array_push($liste,$elm);
 	elseif('equipe'==$id){
 		$contenu .= '<div class="row-fluid">';
 		if($coord=get_field('coordinator_local')){
-			foreach($coord as $coorg){ 
-				$elm = '<td><strong>'.$coorg['prenom'].' '.$coorg['nom_de_famille'].'</strong>';
-				if(!empty($coorg['compte_twitter'])) $elm .=  ' &nbsp; &nbsp; <a href=http://twitter.com/@'.$coorg['compte_twitter'].'>@'.$coorg['compte_twitter'].'</a>';
+			foreach($coord as $coorg){
+				if (empty($coorg['email']))
+					$elm = '<td colspan="2"><strong>'.$coorg['prenom'].' '.$coorg['nom_de_famille'].'</strong>';
+				else
+					$elm = '<td><strong>'.$coorg['prenom'].' '.$coorg['nom_de_famille'].'</strong>';
+				if(!empty($coorg['compte_twitter'])) $elm .=  '     <a href=http://twitter.com/@'.$coorg['compte_twitter'].'>@'.$coorg['compte_twitter'].'</a>';
 				
 				//.' <a href=http://twitter.com/@'.$coorg['compte_twitter'].'>@'.$coorg['compte_twitter'].'</a>';
+				
+					
+				if (!empty($coorg['email']))
+					$elm .=  '</td><td>'.$coorg['email'].'</td>';
 				$elm .=  '<tr><td>'.$coorg['descriptif'].'</td></tr>';
 				
 				$principal[] = $elm;
 			}	
 			$contenu .= '<div class="span5 rond-5" style="float: left; background: #fff; padding: 10px; border: 1px solid #ccc; margin-bottom: 20px;">';
-			ICL_LANGUAGE_CODE == 'en' ? $coordinator = 'Local coordinator' : $coordinator = 'Coordinateur local';
+			ICL_LANGUAGE_CODE == 'en' ? $coordinator = 'Local coordinators' : $coordinator = 'Coordinateurs locaux';
 			$contenu .= '<h4 style="color: #666; padding-bottom: 10px; ">'.$coordinator.'</h4>';
-			$contenu .= '<table class="table table-striped"><tr>'.$principal[0].'</tr></table>';
+			$contenu .= '<table class="table table-striped"><tr>'.implode('</tr><tr>',$principal).'</tr></table>';
 			$contenu .= '</div>'; 
 		}
 		if($coorgs=get_field('co-organisateurs')){
 			foreach($coorgs as $coorg){ 
 				$elm = '<td><strong>'.$coorg['prenom'].' '.$coorg['nom_de_famille'].'</strong></td><td>';
 				if(!empty($coorg['compte_twitter'])) $elm .=  '<a href=http://twitter.com/@'.$coorg['compte_twitter'].'>@'.$coorg['compte_twitter'].'</a>';
+				$elm .=  '</td><td>'.$coorg['email'].'</td>';
 				$elm .=  '</td><td>'.$coorg['descriptif'].'</td>';
 				$liste[] = $elm;
 
@@ -659,12 +676,12 @@ function DescriptionMusee() {
 			if(is_object($valeur)){
 				$id = $valeur->ID;
 				$url = get_field('lien',$id);
-				$html .= '<div class="row museum">';
-				$html .= '<div class="row"><div class="span7"><h2 class="museumTitre"><a href="'.$url.'">'.get_the_title($id).'</a></h2></div></div>';
-				$html .= '<div class="row">';
+				$html .= '<div class=" museum">';
+				$html .= '<div class="row-fluid"><div class="span7"><h2 class="museumTitre"><a href="'.$url.'">'.get_the_title($id).'</a></h2></div></div>';
+				$html .= '<div class="row-fluid">';
 				$imag = wp_get_attachment_image_src(get_field('image_musee',$id),"thumbnail");
 				$html .= '<div class="span2"><a href="'.$url.'"><img src="'.$imag[0].'" width='.$imag[1].' height='.$imag[2].' class=""></a></div>';
-				$html .= '<div class="span5">
+				$html .= '<div class="span10">
 							<table class="table">
 							<tr><td><i class="icon-home"></i></td><td>'.get_field('court_descriptif_musee',$id).'</td></tr>
 							<tr><td><i class="icon-map-marker"></i></td><td>'.get_field('adresse',$id).' <br />'.get_field('ville',$id).' '.get_field('pays',$id).'</td></tr>
@@ -687,8 +704,10 @@ function DescriptionMusee() {
 
 
 
-function ExtraitBillet($thePost){
-		
+function ExtraitBillet($thePost = null){
+		global $post;
+		if (empty($thePost))
+			$thePost = $post;
 		$max = 100;
 		$texte = strip_tags($thePost->post_content);
 		if(strlen($texte)>($max-10)){

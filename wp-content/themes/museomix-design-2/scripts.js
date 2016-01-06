@@ -14,19 +14,26 @@ $(document).ready(function(){
 	});
 		/* Header on home animation */
 	if ($('body.home').length>0) {
-		$(window).scroll(function() {
+		$(window).on('scroll load',function() {
 		   if($(window).scrollTop() > $('#museomix_banner').height()) {
 				$('#museomix_banner').css( 'opacity' , 0);
 				$('.bouton-nav-accueil').show();
 				$('div.navbar-fixed-top').css('position','fixed');
+				$('body').addClass('menu-fixed');
 		   }
 		   if($(window).scrollTop() < ($('#museomix_banner').height()-10)) {
 				$('.bouton-nav-accueil').hide();
 				$('#museomix_banner').css( 'opacity' , 1);
 				$('div.navbar-fixed-top').css('position','relative');
+				$('body').removeClass('menu-fixed');
 		   }
 		});
 	}
+	
+	$('.btn-navbar').on('click',function(){
+  	$('body').toggleClass('show-menu');
+	});
+	
 });
 /*
 $(function(){

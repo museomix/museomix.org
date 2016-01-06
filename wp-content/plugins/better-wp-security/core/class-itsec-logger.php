@@ -325,16 +325,20 @@ final class ITSEC_Logger {
 				
 				$query_format = "INSERT INTO `{$wpdb->base_prefix}itsec_log` ($columns) VALUES ($placeholders)";
 				
-				$wpdb->hide_errors(); //Don't show error if table isn't present. Instead we'll just try to reconstruct the tables.
+				$cached_show_errors_setting = $wpdb->hide_errors();
 				$result = $wpdb->query( $wpdb->prepare( $query_format, $values ) );
-				$wpdb->show_errors();
 				
 				if ( ! $result ) {
+					$wpdb->show_errors();
+					
 					ITSEC_Lib::create_database_tables();
 					
 					// Attempt the query again. Since errors will now be shown, a remaining issue will be display an error.
 					$result = $wpdb->query( $wpdb->prepare( $query_format, $values ) );
 				}
+				
+				// Set $wpdb->show_errors back to its original setting.
+				$wpdb->show_errors( $cached_show_errors_setting );
 			}
 
 			if ( isset( $itsec_globals['settings']['log_type'] ) && ( $itsec_globals['settings']['log_type'] === 1 || $itsec_globals['settings']['log_type'] == 2 ) ) {

@@ -3718,7 +3718,7 @@ input[type="button"].btn-block {
     margin: 2px 0 0;
     font-size: 14px;
     list-style: none;
-    color:#fff;
+    color: #fff;
     background-color: #222222;
     border: 1px solid #cccccc;
     border: 1px solid rgba(0, 0, 0, 0.15);
@@ -4515,8 +4515,8 @@ textarea.input-group-sm > .input-group-btn > .btn {
     min-height: 50px;
     margin-bottom: 20px;
     border: 1px solid transparent;
-    background-color:#222222 !important;
-    width:98%;
+    background-color: #222222 !important;
+    width: 98%;
 }
 
 .navbar:before,
@@ -4541,8 +4541,8 @@ textarea.input-group-sm > .input-group-btn > .btn {
 
 @media (min-width: 768px) {
     .navbar {
-        margin-top:25px;
-        margin-right:15px;
+        margin-top: 25px;
+        margin-right: 15px;
     }
 }
 
@@ -6302,7 +6302,7 @@ button.close {
     display: block;
     font-size: 12px;
     line-height: 1.4;
-/ / opacity : 0;
+/ / opacity: 0;
     filter: alpha(opacity=0);
     visibility: visible;
 }
@@ -7452,8 +7452,8 @@ td.visible-print {
 .nav .open > a:hover,
 .nav .open > a:focus {
     background-color: #0074A2 !important;
-    color:#fff;
-   /* border-color: #428bca; */
+    color: #fff;
+    /* border-color: #428bca; */
 }
 
 .nav .nav-divider {

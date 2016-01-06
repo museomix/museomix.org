@@ -291,3 +291,7 @@
 	Enhancement: Improved IP detection when proxy detection is active by processing the header set by CloudFlare.
 	Enhancement: Added a filter named itsec_filter_remote_addr_headers which can be used to change which headers are searched for the client IP. This allows for tailoring the IP detection for specific reverse proxies and load balancers.
 	Bug Fix: Updated the Banned Users settings to no longer add a newline to the Ban Hosts input each time the settings page is saved.
+2.0.1 - 2015-11-10 - Chris Jean
+	Enhancement: Removed Yandex and Sogou from the HackRepair blacklist as they are legitimate search engine bots.
+	Enhancement: Added detailed information about Sucuri malware scan errors to Malware Scan log details.
+	Bug Fix: No longer enables display of database errors when an event is logged.

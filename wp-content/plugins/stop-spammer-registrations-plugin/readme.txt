@@ -1,7 +1,6 @@
 === Stop Spammers Spam Prevention ===
-Tags: spam, comment, registration, login
-Tags: akismet, all-in-one, antispam, anti-spam, block spam, captcha, comment, comment spam, comments, contact, contact form, contact forms, form, forms, javascript, login, multisite, protection, register, registration, registration spam, security, signup, signup spam, spam, spam blocker, spam filter, trackback, trackbacks, user registration spam, widget, spam, spam, spam, spam, spam, lovely spam, wonderful spam, lovely spam, wonderful spam
-Tested up to: 4.2
+Tags: spam,  antispam, anti-spam, spam blocker, block spam, signup spam, comment spam, spam filter, registration spam, spammer, spammers, spamming, xss. malware, virus, captcha, comment, comments, contact, contact form, contact forms, form, forms, login, multisite, protection, register, registration, security, signup, trackback, trackbacks, user registration spam, widget, wonderful spam, lovely spam, wonderful spam
+Tested up to: 4.5-alpha
 Contributors: Keith Graham
 Stable tag: trunk
 License: GPLv2 or later
@@ -33,6 +32,26 @@ THEN
 4. Under the settings, review options that are enabled. The plugin will operate very well without changing any settings. You may wish to update Web Services APIs for reporting spam and change the captcha settings from the default OpenCapture.  
 
 == Changelog ==
+
+= 6.13 =
+* Added IP address to debug info.
+* Added some extra checks on the invalid ip routine to avoid throwing an error on really broken IP addresses.
+* Added new PayPal allow IP ranges.
+* Added ClickBank IP addresses to Misc Allow List
+* Preserved 404 status return on malicious 404 checks. Tell spammers nothing to see here, move along.
+* Added a second security check to Ajax functions.
+* Added an additional spam check on logins and registrations in case theme or plugin hides login event. (This is a big deal).
+* Fixed bug in Hosting check module. Was reporting false positives. Fixed same bug in three other modules.
+* fixed bug from 4.3 (or 4.4) that caused the plugin to send out an extra email to the users on registration.
+* Disabled Botscout support. The service lowered their daily limits making it dangerous to rely on.
+* Fixed bug in ChkValid that allowed some ips to pass early.
+* stopped showing passwords on failed login attempts. Users complained. Might be a security risk.
+* removed admin registration link from email routine. WP kept breaking my code. I will put it back some day.
+* experimental add-on install seems to work. Still testing.
+* I did not update the country ips or the deny lists. I may make these add-ons in the future.
+* I did not get around to adding threat scan exceptions for WP 4.3 and 4.4. Will add in next release. Threat scan will thow a bunch of false positives.
+* fixed issue with plugin getting confused between Great Britain and United Kingdom. Not the same thing.
+* Removed OpenCaptcha - gives me a 500 error all the time. Need to use google or dumb or nothing (looking for an open captcha alternative).
 
 = 6.12 =
 * Removed a pregreplace backdoor signature from threat scan. Securi thinks that my search for the string is the actual string, so it reported the plugin as malware. I will release immediately.
@@ -173,4 +192,5 @@ I am slowing down maintenance on this plugin. I don't have time to work on it. D
 == Support ==
 
 2/21/2015: I found that I cannot handle support other than try to fix problems when pointed out. If you are locked out of your website, delete the plugin and don't use it again. If you find it is too aggressive then start un-checking boxes in the configuration until it works. My sites are hosted on SiteGround.com. I pay for this service, and the plugin works perfectly. I can recommend www.SiteGround.com wholeheartedly. If you self-host or you are on a free or cheap hosting company that uses a proxy server or does not implement basic PHP functions then you cannot use this plugin.
+
 

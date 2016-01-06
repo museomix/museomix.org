@@ -67,10 +67,11 @@ class kpg_ss_get_options {
 		'wlreqmail'=>'', // email where the request go to
 		'wlreq'=>'Y', // using this to see iff we display the notify form
 		'redir'=>'N',
-		'chkcaptcha'=>'Y',
+		'chkcaptcha'=>'A',
 		'chkxff'=>'N', //????
 		'notify'=>'Y',
-		'chkspoof'=>'N' //???
+		'chkspoof'=>'N', //???
+		'filterregistrations'=>'Y' // filter registration attempts, even if not from post.
 		);
 		$defaultARRAY=array(
 		'badagents'=>array(

@@ -1,21 +1,21 @@
-=== Import CSV with Ultimate CSV Importer ===
+=== WP Ultimate CSV Importer ===
 Contributors: smackcoders
 Donate link: http://www.smackcoders.com/donate.html
 Tags: admin, administration, author, automatic, blog, categories, category, cms, contact, content, custom, custom post, dashboard, database, e-commerce, ecommerce, edit, event, events, feed, Formatting, free, gallery, image, images, import, integration, language, link, links, list, marketing, media, menu, meta, mobile, multisite, navigation, News, page, pages, performance, photo, photos, picture, pictures, plugin, plugins, Post, posts, profile, registration, rss, seo, Share, sharing, shop, shortcode, shortcodes, statistics, stats, store, tag, tags, Taxonomy, template, text, thumbnail, thumbnails, title, upload, url, user, users, video, woocommerce, wordpress, wpmu, xml, youtube,
-Requires at least: 4.2
-Tested up to: 4.2.4
-Stable tag: 3.8.3
-Version: 3.8.3
+Requires at least: 4.3.1
+Tested up to: 4.4
+Stable tag: 3.8.6
+Version: 3.8.6
 Author: smackcoders
 Author URI: http://profiles.wordpress.org/smackcoders/
 
 License: GPLv2 or later
 
-Import CSV with CSV Importer made simple to import & export posts, pages, custom posts and custom fields in few simple clicks 
+WP Ultimate CSV Importer made simple to import & export posts, pages, custom posts and custom fields in few simple clicks 
 
 == Description ==
 
-Import CSV data to WordPress is made very easy even for novice users as in few clicks and 3 simple steps with CSV Importer plugin. 
+WP Ultimate CSV Importer is made very easy even for novice users as in few clicks and 3 simple steps with CSV Importer plugin. 
 
 Now csv importer supports multi language and almost every WordPress modules and plugin fields as follows. Import data feed periodically from csv file as 
 
@@ -28,7 +28,6 @@ Now csv importer supports multi language and almost every WordPress modules and 
 * WordPress themes custom posts
 * Custom post type UI plugin Post types
 * Users with roles
-* Comments
 * Custom Fields
 * Author
 * Tags import and multi tag for each post import
@@ -41,6 +40,7 @@ Now csv importer supports multi language and almost every WordPress modules and 
 * Inline image handling shortcode with image attributes Example:[WPIMPINLINE:greensroad.jpg|width='150'|height='80'|alt='post_title_redtree']
 * Fixed user reported Warnings and Bugs
 * Any delimiter support for csv export
+* Create Add Custom Field for any csv header on the fly in mapping 
 
 Note: Now you can import no. of images in in-line post content as image shortcodes using advanced media handling option as zip files.
 
@@ -48,9 +48,7 @@ Note: Now you can import no. of images in in-line post content as image shortcod
 
 WP Ultimate CSV Importer Plugin proven much effective advanced CSV Importer With Ultimate User Friendly Features. It is much easy now even for newbies to import csv file exported from any tool, app or software. Import as any WordPress post type and associated fields by simple mapping feature. Now import any CSV file as thousands of post, page and custom post types. This is admin side free plugin helps you in bulk edit, create and import posts type for your blog or site. 
 
-It is more easy to import csv database maintained in Excel xls or spread sheets into valuable content for your web site without missing any. It is possible now to schedule a import csv periodically for content update, maintenance,  prices, offers, coupons and inventory etc.
-   
-Much improved User interface with most flexible jquery plugin features and bootstrap UI design makes csv import more simple, easy, fast and even more flexible for better user experience. With improved Multi site, buddy press compatibility (except user import module) works well for most of the best WordPress themes available online. Now manage multi site & buddy press, Amazon data import, affiliates blog, product inventory, ecommerce store, multi author blog, automatic news import, photo blog etc periodically with simple click import. 
+Much improved User interface with most flexible jquery plugin features and bootstrap UI design makes csv import more simple, easy, fast and even more flexible for better user experience. With improved Multi site, buddy press compatibility (except user import module) works well for most of the best WordPress themes available online. 
 
 = Helpful Links =
 
@@ -60,7 +58,7 @@ Much improved User interface with most flexible jquery plugin features and boots
 
 [Get Started Sample CSV Files](https://www.smackcoders.com/blog/wordpress-ultimate-csv-importer-csv-sample-files-and-updates.html?utm_source=WpOrg&utm_medium=Readme&utm_campaign=ListingTraffic)
 
-[Documentation and Tutorial for CSV Importer ](https://www.smackcoders.com/documentation/ultimate-csv-importer-pro?utm_source=WpOrg&utm_medium=Readme&utm_campaign=ListingTraffic)
+[Documentation and Tutorial for CSV Importer ](https://www.wpultimatecsvimporter.com/documentation/all-import/wordpress-ultimate-csv-importer/?utm_source=WpOrg&utm_medium=Readme&utm_campaign=ListingTraffic)
 
 
 = Video Walkthrough =
@@ -68,7 +66,7 @@ Much improved User interface with most flexible jquery plugin features and boots
 <p>https://www.youtube.com/watch?v=Guv5zR7fgW0&list=PL2k3Ck1bFtbQqFhOK7g08kxENI4qQkmC</p>
 
 = Highlights =
-* import csv from any source as WordPress posts
+* Import csv from any source as WordPress posts
 * New Terminate & Continue feature is added.
 * Complete export feature with improved filters
 * Import external/internal images in line to any posts
@@ -81,7 +79,6 @@ Much improved User interface with most flexible jquery plugin features and boots
 * Control post status (Publish, Private, Pending, Draft, Sticky and Protected)
 * Simple yet Powerful mapping feature 
 * Convert any csv import as perfect posts and fields
-* Scheduled Publishing
 * Duplicate Title and content handling
 * Multi Lingual import (CSV format must be UTF-8 without BOM)
 * Multi-site also supported now
@@ -109,7 +106,6 @@ Much improved User interface with most flexible jquery plugin features and boots
 * All CSV files should be should be strictly UTF-8 CSV format. Now this can be handled by plugin.
 * All WordPress supported languages can imported with csv format as UTF-8 without BOM (See FAQ for instructions).
 * User import option is disabled for multi site mode.
-* To Schedule posts for publishing provide future date and time in date column in CSV File.
 
 Featured Image Support
 Your WordPress theme should support featured image. If not, please add the following code to where you need to display E.g. wp-contents/themes/header.php
@@ -128,7 +124,7 @@ Your WordPress theme should support featured image. If not, please add the follo
 * DB Optimizer, System status etc.
 
 Compare Free Vs Pro[Features](https://www.wpultimatecsvimporter.com/wp-ultimate-csv-importer-plugin?utm_source=WpOrg&utm_medium=Readme&utm_campaign=ListingTraffic)>>
-Learn More from [User Manual](https://www.wpultimatecsvimporter.com/documentation?utm_source=WpOrg&utm_medium=Readme&utm_campaign=ListingTraffic)>>
+Learn More from [User Manual](https://www.wpultimatecsvimporter.com/documentation/all-import/wordpress-ultimate-csv-importer/?utm_source=WpOrg&utm_medium=Readme&utm_campaign=ListingTraffic)>>
 
 
 = Common Issues =
@@ -174,19 +170,18 @@ Also you can follow the instructions as given here
 
 == Installation ==
 
-* [Step By Step Installation with Snaps](http://www.wpultimatecsvimporter.com/documentation?utm_source=WpOrg&utm_medium=Readme&utm_campaign=ListingTraffic)
+* [Step By Step Installation with Snaps](https://www.wpultimatecsvimporter.com/documentation/all-import/wordpress-ultimate-csv-importer/?utm_source=WpOrg&utm_medium=Readme&utm_campaign=ListingTraffic)
 
 
 == Screenshots ==
 
 1. New Interactive Dashboard with Chart and Graph
-2. Advanced CSV Importer With Ultimate User Friendly Features with drag and drop etc.
-3. User friendly easy mapping for any csv file data to WordPress field attributes with sampling.
+2. Upload the CSV file of the selected module.
+3. Mapping view of the uploaded CSV fields with WordPress fields
 4. Advanced duplicate post name and content check with server request control for high performance factor.
 5. Detailed real time log to know pinpoint status.
-6. Module based environment for easy and reduced interface to enable most required modules and when ever needed.
-7. Inbuilt support form for easy feedback, support, feature request with all useful links for easy and better csv import.
-8. New export module for posts, page, eshop, users, comments and all custom posts type plugins.
+6. Settings with php.ini details.
+7. New export module for posts, page, eshop, users, comments and all custom posts type plugins.
 
 
 == Frequently Asked Questions ==
@@ -203,9 +198,28 @@ php_value auto_append_file none
 
 This will solve your issue or get support from hosting if you dint have sufficient permission.
 
-[Click Here for More Details](http://www.wpultimatecsvimporter.com/documentation?utm_source=WpOrg&utm_medium=Readme&utm_campaign=ListingTraffic)
+[Click Here for More Details](https://www.wpultimatecsvimporter.com/documentation/all-import/user-guide/simple-step-by-step-user-guide/?utm_source=WpOrg&utm_medium=Readme&utm_campaign=ListingTraffic)
 
 == Changelog ==
+
+= 3.8.6 =
+* Fixed: Support to import default CPTs.
+* Fixed: WordPress 4.4 compatibility checked.
+* Fixed: Much improved Support page.
+* Fixed: post_date issue was fixed.
+
+= 3.8.5 = 
+* post_status validation issue fix.
+* Empty password validation updated.
+* Improve log sectionwith stats issue fix.
+* SEO Fields mapping issue fix.
+* Improved Export with known issue fixes.
+* JS validation fix.
+* TypeError fix.
+* Much improved settings
+
+= 3.8.4 =
+* Modified: Changed the Dashboard view.
 
 = 3.8.3 =
 * Fixed : Text domain is added for language translation system.
@@ -484,6 +498,15 @@ This will solve your issue or get support from hosting if you dint have sufficie
 
 
 == Upgrade Notice ==
+
+= 3.8.6 =
+* Upgrade now for import the default CPTs.
+
+= 3.8.5 = 
+* Upgrade now for known bug fixes.
+
+= 3.8.4 =
+* Upgrade now for new dashboard view.
 
 = 3.8.3 =
 * Upgrade now for improvements in multi language translation.

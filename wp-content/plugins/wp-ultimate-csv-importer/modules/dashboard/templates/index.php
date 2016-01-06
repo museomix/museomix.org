@@ -64,23 +64,5 @@ $ret_arr=array();
 		</div>
 	</div>
 </div>
-
-
-<!--<div class= "promobox" id="pluginpromo" style="width:98%;">
-        <div class="accordion-group" >
-                <div class="accordion-body in collapse">
-	                <div>
-        	                <?php // $impCE->common_footer_for_other_plugin_promotions(); ?>
                 	        <?php $impCE->common_footer(); ?>
-	                </div>
-                </div>
-        </div>
-</div>-->
-<?php #if(isset($_REQUEST['errormsg'])){
-?>
-<!--<script type="text/javascript">
-        showMapMessages('error' , "<?php #echo $_REQUEST['errormsg']; ?>");
-</script>-->
-<?php
-#        }
-?>
+

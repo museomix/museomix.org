@@ -4,6 +4,8 @@ if (!defined('ABSPATH')) exit;
 
 class chkbotscout extends be_module { 
 	public function process($ip,&$stats=array(),&$options=array(),&$post=array()) {
+		$disabled=true;
+		if ($disabled) return false;
 		if (strpos($ip,'.')===false) return false;
 		if (empty($stats)) return false;
 		if (!array_key_exists('botscoutapi',$options)) return false;

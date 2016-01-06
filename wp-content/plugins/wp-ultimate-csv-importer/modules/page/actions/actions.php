@@ -32,27 +32,27 @@
  * WP Ultimate CSV Importer copyright notice. If the display of the logo is
  * not reasonably feasible for technical reasons, the Appropriate Legal
  * Notices must display the words
- * "Copyright Smackcoders. 2014. All rights reserved".
+ * "Copyright Smackcoders. 2015. All rights reserved".
  ********************************************************************************/
-if ( ! defined( 'ABSPATH' ) )
-        exit; // Exit if accessed directly
+
+if (!defined('ABSPATH')) {
+	exit;
+} // Exit if accessed directly
 
 class PageActions extends SkinnyActions {
 
-    public function __construct()
-    {
-    }
+	public function __construct() {
+	}
 
-  /**
-   * The actions index method
-   * @param array $request
-   * @return array
-   */
-    public function executeIndex($request)
-    {
-        // return an array of name value pairs to send data to the template
-        $data = array();
-        return $data;
-    }
+	/**
+	 * The actions index method
+	 * @param array $request
+	 * @return array
+	 */
+	public function executeIndex($request) {
+		// return an array of name value pairs to send data to the template
+		$data = array();
+		return $data;
+	}
 
 }

@@ -2,7 +2,7 @@
 /******************************
  * Plugin Name: WP Ultimate CSV Importer
  * Description: A plugin that helps to import the data's from a CSV file.
- * Version: 3.8.3
+ * Version: 3.8.6
  * Author: smackcoders.com
  * Text Domain: wp-ultimate-csv-importer
  * Domain Path: /languages
@@ -49,7 +49,8 @@ if ( ! defined( 'ABSPATH' ) )
         exit; // Exit if accessed directly
 
 $get_debug_mode = get_option('wpcsvfreesettings');
-if(isset($get_debug_mode['debug_mode']) && $get_debug_mode['debug_mode'] != 'enable_debug') {
+$debug_md = isset($get_debug_mode['debug_mode']) ? $get_debug_mode['debug_mode'] : '';
+if($debug_md != 'enable_debug'){
 	error_reporting(0);
 	ini_set('display_errors', 'Off');
 }
@@ -79,7 +80,7 @@ define('WP_CONST_ULTIMATE_CSV_IMP_URL', 'http://www.smackcoders.com/wp-ultimate-
 define('WP_CONST_ULTIMATE_CSV_IMP_NAME', 'WP Ultimate CSV Importer');
 define('WP_CONST_ULTIMATE_CSV_IMP_SLUG', 'wp-ultimate-csv-importer');
 define('WP_CONST_ULTIMATE_CSV_IMP_SETTINGS', 'WP Ultimate CSV Importer');
-define('WP_CONST_ULTIMATE_CSV_IMP_VERSION', '3.8.2');
+define('WP_CONST_ULTIMATE_CSV_IMP_VERSION', '3.8.6');
 define('WP_CONST_ULTIMATE_CSV_IMP_DIR', WP_PLUGIN_URL . '/' . WP_CONST_ULTIMATE_CSV_IMP_SLUG . '/');
 define('WP_CONST_ULTIMATE_CSV_IMP_DIRECTORY', plugin_dir_path(__FILE__));
 define('WP_CSVIMP_PLUGIN_BASE', WP_CONST_ULTIMATE_CSV_IMP_DIRECTORY);
@@ -139,40 +140,18 @@ function action_csv_imp_admin_init() {
 		
 		// Code for use the global wordpress functons in javascript
 
-	/*	wp_register_script('ultimate-importer-free', plugins_url('js/ultimate-importer-free.js', __FILE__));
-		wp_enqueue_script('ultimate-importer-free',plugins_url('js/ultimate-importer-free.js', __FILE__),array('ultimate-importer-free'));
-		$pa = array(
-				'plugin_url' => plugins_url(),
-				'ajax_url'   => admin_url( 'admin-ajax.php'),
-				'abspath' => ABSPATH,
-			   );
-		wp_localize_script( 'ultimate-importer-free', 'csvimporterfree', $pa);*/
-
 		wp_enqueue_script('jquery-ui-datepicker');
 		wp_enqueue_style('jquery-style', plugins_url('css/jquery-ui.css', __FILE__));
 		wp_register_script('ultimate-importer-js', plugins_url('js/ultimate-importer-free.js', __FILE__));
 		wp_enqueue_script('ultimate-importer-js');
-		wp_register_script('ultimate-importer-button', plugins_url('js/buttons.js', __FILE__));
-		wp_enqueue_script('ultimate-importer-button');
-		wp_enqueue_style('ultimate_importer_font_awesome', plugins_url('css/font-awesome.css', __FILE__));
-		wp_register_script('jquery-min', plugins_url('js/jquery.js', __FILE__));
-		wp_enqueue_script('jquery-min');
-		wp_register_script('jquery-widget', plugins_url('js/jquery.ui.widget.js', __FILE__));
-		wp_enqueue_script('jquery-widget');
-		wp_register_script('jquery-fileupload', plugins_url('js/jquery.fileupload.js', __FILE__));
-		wp_enqueue_script('jquery-fileupload');
-		wp_register_script('bootstrap-collapse', plugins_url('js/bootstrap-collapse.js', __FILE__));
-		wp_enqueue_script('bootstrap-collapse');
 		wp_enqueue_style('style', plugins_url('css/style.css', __FILE__));
-		wp_enqueue_style('jquery-fileupload', plugins_url('css/jquery.fileupload.css', __FILE__));
 		wp_enqueue_style('bootstrap-css', plugins_url('css/bootstrap.css', __FILE__));
 		wp_enqueue_style('ultimate-importer-css', plugins_url('css/main.css', __FILE__));
+		wp_enqueue_style('morris-css', plugins_url('css/morris.css', __FILE__));
 		// For chart js
-		wp_enqueue_script('high_chart', plugins_url('js/highcharts.js', __FILE__));
-		wp_enqueue_script('export_module', plugins_url('js/exporting.js', __FILE__));
-		wp_enqueue_script('pie_chart', plugins_url('js/highcharts-3d.js', __FILE__));
 		wp_enqueue_script('dropdown', plugins_url('js/dropdown.js', __FILE__));
-
+		wp_enqueue_script('raphael-min-js', plugins_url('js/raphael-min.js', __FILE__));
+		wp_enqueue_script('morris-min-js', plugins_url('js/morris.min.js', __FILE__));
 		wp_enqueue_script('data', plugins_url('js/dashchart.js', __FILE__));
 
 	}
@@ -193,12 +172,12 @@ function smackcsvfree_change_menu_order( $menu_order ) {
 add_filter( 'custom_menu_order', '__return_true' );
 add_filter( 'menu_order', 'smackcsvfree_change_menu_order' );
 
-function firstchart() {
+function firstultimatecsvchart() {
 	require_once("modules/dashboard/actions/chartone.php");
 	die();
 }
 
-add_action('wp_ajax_firstchart', 'firstchart');
+add_action('wp_ajax_firstultimatecsvchart', 'firstultimatecsvchart');
 
 function shownextrecords() {
 	require_once("templates/readfile.php");
@@ -212,12 +191,12 @@ function uploadfilehandle() {
 }
 add_action('wp_ajax_uploadfilehandle','uploadfilehandle');
 
-function secondchart() {
+function secondultimatecsvchart() {
 	require_once("modules/dashboard/actions/chartone.php");
 	die();
 }
 
-add_action('wp_ajax_secondchart', 'secondchart');
+add_action('wp_ajax_secondultimatecsvchart', 'secondultimatecsvchart');
 
 function thirdchart() {
 	require_once("modules/dashboard/actions/chartone.php");
@@ -230,16 +209,9 @@ add_action('wp_ajax_thirdchart', 'thirdchart');
 function roundchart() {
 	global $wpdb;
 	ob_flush();
-	require_once(WP_CONST_ULTIMATE_CSV_IMP_DIRECTORY . 'lib/skinnymvc/core/base/SkinnyBaseActions.php');
-	require_once(WP_CONST_ULTIMATE_CSV_IMP_DIRECTORY . 'lib/skinnymvc/core/SkinnyActions.php');
-
-	require_once("modules/dashboard/actions/actions.php");
-	?>
-	<?php
-	$myObj = new DashboardActions(); 
-
-	$content = "<form name='piechart' onload='pieStats();'> <div id ='pieStats' style='height:250px;'>";
-	$content .= $myObj->piechart();
+	$myObj = new WPImporter_includes_helper(); 
+	$content = "<form name='piechart'> <div id ='ultimatecsv_pieStats' style='height:250px;'>";
+	$myObj->piechart();
 	$content .= "</div></form>"; 
 	echo $content;
 }
@@ -247,16 +219,9 @@ function roundchart() {
 function linetwoStats() {
 	global $wpdb;
 	ob_flush();
-	require_once(WP_CONST_ULTIMATE_CSV_IMP_DIRECTORY . 'lib/skinnymvc/core/base/SkinnyBaseActions.php');
-	require_once(WP_CONST_ULTIMATE_CSV_IMP_DIRECTORY . 'lib/skinnymvc/core/SkinnyActions.php');
-
-	require_once("modules/dashboard/actions/actions.php");
-	?>
-	<?php
-	$myObj = new DashboardActions(); 
-
-	$content = "<form name='piechart' onload='pieStats();'> <div id ='lineStats' style='height:250px'>";
-	$content .= $myObj->getStatsWithDate();
+	$myObj = new WPImporter_includes_helper(); 
+	$content = "<form name='piechart'> <div id ='ultimatecsv_lineStats' style='height:250px'>";
+	$myObj->getStatsWithDate();
 	$content .= "</div></form>"; 
 	echo $content;
 }
@@ -264,10 +229,10 @@ function linetwoStats() {
 
 function wpcsvimporter_add_dashboard_widgets() {
 
-	wp_enqueue_script('dashpiechart', plugins_url('js/dashchart-widget.js', __FILE__));
-	wp_enqueue_script('high_chart', plugins_url('js/highcharts.js', __FILE__));
-	wp_enqueue_script('export_module', plugins_url('js/exporting.js', __FILE__));
-	wp_enqueue_script('pie_chart', plugins_url('js/highcharts-3d.js', __FILE__));
+	wp_enqueue_script('dashultimatecsvchart', plugins_url('js/dashchart-widget.js', __FILE__));
+	wp_enqueue_style('morris-css', plugins_url('css/morris.css', __FILE__));
+	wp_enqueue_script('raphael-min-js', plugins_url('js/raphael-min.js', __FILE__));
+        wp_enqueue_script('morris-min-js', plugins_url('js/morris.min.js', __FILE__));
 	wp_add_dashboard_widget('wpcsvimporter_dashboard_piehart', 'Ultimate-CSV-Importer-Statistics', 'roundchart',$screen = get_current_screen() , 'advanced' ,'high' );
 	wp_add_dashboard_widget('wpcsvimporter_dashboard_linechart', 'Ultimate-CSV-Importer-Activity', 'linetwoStats',$screen = get_current_screen(),'advanced','high');
 }

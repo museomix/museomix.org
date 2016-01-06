@@ -95,5 +95,14 @@
 }
 
 .navbar .nav > li > a {
-padding: 12px 15px 10px;
+padding: 13px 10px 9px;
+}
+
+.navbar-fixed-top .brand {
+  padding: 12px 20px 10px;
+  height: 20px;
+}
+
+.navbar-fixed-top .brand:hover {
+  color:black !important;
 }

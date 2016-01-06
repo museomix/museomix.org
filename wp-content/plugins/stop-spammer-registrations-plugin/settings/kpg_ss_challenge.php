@@ -130,11 +130,9 @@ $nonce=wp_create_nonce('kpgstopspam_update');
 ?>
     <p> The plugin is extremely aggressive and will probably block some small number of legitimate users. You can give users a second chance by displaying a CAPTCHA image and asking them to type in the letters that they see. This prevents lockouts.<br>
       This option will override the email notification option above.<br>
-      By default the plugin will support OpenCaptcha which is OK. For better results I have included the ability to use Google's ReCaptcha, or you can try SolveMedia's captcha using ads which can provide a revenue stream.<br>
+      By default the plugin will support the arithmetic question which is OK. For better results I have included the ability to use Google's ReCaptcha, or you can try SolveMedia's captcha using ads which can provide a revenue stream.<br>
       <input type="radio" value="N" name="chkcaptcha" <?php if ($chkcaptcha=='N') echo "checked=\"checked\""; ?>/>
       No Captcha (default)<br>
-      <input type="radio" value="Y" name="chkcaptcha" <?php if ($chkcaptcha=='Y') echo "checked=\"checked\""; ?>/>
-      Open Captcha<br>
       <input type="radio" value="G" name="chkcaptcha" <?php if ($chkcaptcha=='G') echo "checked=\"checked\""; ?>/>
       Google ReCaptcha<br>
       <input type="radio" value="S" name="chkcaptcha" <?php if ($chkcaptcha=='S') echo "checked=\"checked\""; ?>/>
@@ -142,7 +140,7 @@ $nonce=wp_create_nonce('kpgstopspam_update');
       <input type="radio" value="A" name="chkcaptcha" <?php if ($chkcaptcha=='A') echo "checked=\"checked\""; ?>/>
       Really stupid arithmetic question<br>
     </p>
-    <p>In odder to use Solve Media or Google reCaptcha you will need to get an API key.
+    <p>In odder to use Solve Media or Google reCaptcha you will need to get an API key. Open Captcha is no longer supported so the arithmetic question will be used for those that had it set.</p>
     </fieldset>
     <br>
     <fieldset style="border:thin solid black;padding:6px;width:100%;">

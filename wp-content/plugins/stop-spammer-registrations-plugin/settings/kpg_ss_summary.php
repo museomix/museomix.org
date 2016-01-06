@@ -99,7 +99,7 @@ $counters=array(
 'cntchkFI'=>'Finland',
 'cntchkFJ'=>'Fiji',
 'cntchkFR'=>'France',
-'cntchkGB'=>'United Kingdom',
+'cntchkGB'=>'Great Britain',
 'cntchkGE'=>'Georgia',
 'cntchkGF'=>'French Guiana',
 'cntchkGI'=>'Gibraltar',
@@ -386,7 +386,7 @@ filled out the form requesting access to your site.</li>
 </li>
 <li> <a href="?page=kpg_ss_webservices_settings">Web Services</a>: This is where you enter the API keys for StopForumSpam.com and other web checking services. You don't need to have these set for the plugin to work, but if you do, you will have better protection and the ability to report spam. 
 </li>
-<li> <a href="?page=ss_challenge">Challenge and Deny</a>: This sets up Captcha and Notification options. You can give users who trigger the plugin a second chance to use a captcha. Supports OpenCaptcha, Google ReCaptcha and Solve Media Captcha. 
+<li> <a href="?page=ss_challenge">Challenge and Deny</a>: This sets up Captcha and Notification options. You can give users who trigger the plugin a second chance to use a captcha. Supports Google ReCaptcha and Solve Media Captcha. 
 </li>
 <li> <a href="?page=ss_threat_scan">Threat Scan</a>: Searches options and local system files for exploits. This can sometimes detect if your site has been hacked.
 </li>
@@ -400,22 +400,51 @@ filled out the form requesting access to your site.</li>
 <li> <a href="?page=ss_contribute">Contribute</a>: The plugin is free, but I would appreciate your support. 
 </li>
 </ol>
+
+<h4>More of Keith's Plugins at WordPress.org</h4>
+<p>These are plugins are written for myself. Many I've used and then stopped using. Some are very useful.<br>
+I do not upload to wordpress very often so check the Beta Plugins page to see if there is a newer version on my site.</p>
+<ol>
+<li><a href="https://wordpress.org/plugins/akismet-wedge-for-mu-plugin/">Akismet Wedge for MU Plugin</a>: Globalizes the akismet api key so it can be used across blogs.</li>
+<li><a href="https://wordpress.org/plugins/amazon-product-link-widget/">Amazon Product Link Widget</a>: Displays a random Amazon link box from a list of asin product ids.</li>
+<li><a href="https://wordpress.org/plugins/collapse-page-and-category-plugin/">Collapse Page and Category Plugin</a>: Uses CSS and Javascript to collapse children on Pages and Categories or any Unordered List that uses the css class &#039;children&#039;.</li>
+<li><a href="https://wordpress.org/plugins/custom-post-type-list-widget/">Custom Post Type List Widget</a>: Displays a list of Custom Posts Type entries in a sidebar.</li>
+<li><a href="https://wordpress.org/plugins/email-php-errors-plugin/">Email PHP Errors Plugin</a>: Catches php errors, and reports last 25. Can also email the results. Good for debugging themes and plugins.</li>
+<li><a href="https://wordpress.org/plugins/exit-screen-plugin/">Exit Screen Plugin</a>: Prompts the user when they leave your blog, showing a &quot;last chance&quot; exit page behind the prompt.</li>
+<li><a href="https://wordpress.org/plugins/feed-ads-plugin/">Feed Ads Plugin</a>: Feed Ads will randomly insert text at the end of rss entries. Useful for ads, taglines, news, or links.</li>
+<li><a href="https://wordpress.org/plugins/keywords-widget/">Keywords Widget</a>: Watches for hits arriving from search engines. Puts a list of recent keywords as a widget.</li>
+<li><a href="https://wordpress.org/plugins/looser-search-plugin/">Looser Search Plugin</a>: A more more relaxed search. It is much more like to find something right or almost right than the built-in wordpress search.</li>
+<li><a href="https://wordpress.org/plugins/mu-global-options-plugin/">MU Global Options Plugin</a>: Plugin that uses options from main blog in other blogs.</li>
+<li><a href="https://wordpress.org/plugins/mu-manage-comments-plugin/">MU Manage Comments Plugin</a>: Lists on one page unmoderated and spam comments for all MU blogs for moderation.</li>
+<li><a href="https://wordpress.org/plugins/no-right-click-images-plugin/">No Right Click Images Plugin</a>: Disables right click context menu on images to help deter leeches from glomming images.</li>
+<li><a href="https://wordpress.org/plugins/open-in-new-window-plugin/">Open in New Window Plugin</a>: Opens external links in a new window, keeping your blog page in the browser so you don&#039;t lose surfers to another site.</li>
+<li><a href="https://wordpress.org/plugins/outbound-click-tracker/">Outbound Click Tracker Plugin</a>: Tracks clicks on outbound links without Google Analytics. Find out where your readers are going.</li>
+<li><a href="https://wordpress.org/plugins/permalink-finder/">Permalink Finder Plugin</a>: Never get a 404 page not found again. If you have restructured or moved your blog, this plugin will find the right post or page every time.</li>
+<li><a href="https://wordpress.org/plugins/recent-google-searches-widget/">Recent Google Searches Widget</a>: Watches for hits arriving from search engines. Puts a list of recent queries as a widget.</li>
+<li><a href="https://wordpress.org/plugins/remove-color-widget/">Remove Color Widget</a>: Removes text styling from blogs displaying black text on white background.</li>
+<li><a href="https://wordpress.org/plugins/search-engine-keywords-related-posts-widget/">Search Engine Keywords Related Posts Widget</a>: Watches for hits arriving from search engines. Displays a list of posts related to the search engine keywords.</li>
+<li><a href="https://wordpress.org/plugins/shortcode-grab-bag/">ShortCode Grab Bag Plugin</a>: List active shortcodes on post edit page with drag and drop to post. Includes a few simple shortcodes.</li>
+<li><a href="https://wordpress.org/plugins/simple-rich-text-widget/">Simple Rich Text Widget</a>: A simple rich text format widget for adding formatted HTML to sidebars.</li>
+<li><a href="https://wordpress.org/plugins/static-pages/">Static Pages</a>: Automatically wrap a WordPress Theme around static HTML pages, pdf files, audio or video files. Add the look and feel of WordPress to legacy static files</li>
+<li><a href="https://wordpress.org/plugins/stop-spammer-registrations-plugin/">Stop Spammers Spam Prevention</a>: Aggressive anti-spam plugin that eliminates comment spam, trackback spam, contact form spam and registration spam. Protects against malicious attacks.</li>
+<li><a href="https://wordpress.org/plugins/youtube-poster-plugin/">YouTube Poster Plugin</a>: Runs searches on YouTube and automatically creates a blog post for each video found.</li>
+
+</ol>
+<p>There are many more plugins that are not available on the Wordpress site. These can be updated through the Update plugin I've written. It will be available and ready through the addons page here.</p>
 </div>
 <div style="width:240px;float:right;">
 Powered By <a href="http://www.siteground.com/recommended?referrer_id=6975888" target="_blank">SiteGround.com</a>
-<?php
-echo "<h4>Plugin Support Forum</h4>";
-echo '<ol>';
-display_feed('https://wordpress.org/support/rss/plugin/stop-spammer-registrations-plugin');
-echo '</ol>';
-?>
-</div>
-<div style="width:240px;float:right;clear:right"><?php
-echo "<h4>Posts at BlogsEye.com</h4>";
-echo '<ol>';
-display_feed('http://www.blogseye.com/feed.xml');
-echo '</ol>';
-?>
+
+
+<h4>Plugin Support Forum</h4>
+<ol>
+<?php display_feed('https://wordpress.org/support/rss/plugin/stop-spammer-registrations-plugin'); ?>
+</ol>
+<h4>Posts at BlogsEye.com</h4>
+<ol>
+<?php display_feed('http://www.blogseye.com/feed.xml'); ?>
+</ol>
+
 </div>
 </div>
 <?php

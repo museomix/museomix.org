@@ -44,8 +44,8 @@ class Theme_My_Login_Custom_Passwords extends Theme_My_Login_Abstract {
 		add_filter( 'wpmu_validate_user_signup', array( &$this, 'ms_password_errors'       ) );
 		add_filter( 'add_signup_meta',           array( &$this, 'ms_save_password'         ) );
 
-		add_action( 'tml_new_user_registered', array( &$this, 'remove_default_password_nag' ) );
-		add_action( 'approve_user',            array( &$this, 'remove_default_password_nag' ) );
+		add_action( 'register_new_user', array( &$this, 'remove_default_password_nag' ) );
+		add_action( 'approve_user',      array( &$this, 'remove_default_password_nag' ) );
 
 		add_filter( 'tml_register_passmail_template_message', array( &$this, 'register_passmail_template_message' ) );
 		add_action( 'tml_request',                            array( &$this, 'action_messages'                    ) );
@@ -65,10 +65,14 @@ class Theme_My_Login_Custom_Passwords extends Theme_My_Login_Abstract {
 	public function password_fields() {
 		$template = Theme_My_Login::get_object()->get_active_instance();
 		?>
-		<p><label for="pass1<?php $template->the_instance(); ?>"><?php _e( 'Password', 'theme-my-login' ); ?></label>
-		<input autocomplete="off" name="pass1" id="pass1<?php $template->the_instance(); ?>" class="input" size="20" value="" type="password" /></p>
-		<p><label for="pass2<?php $template->the_instance(); ?>"><?php _e( 'Confirm Password', 'theme-my-login' ); ?></label>
-		<input autocomplete="off" name="pass2" id="pass2<?php $template->the_instance(); ?>" class="input" size="20" value="" type="password" /></p>
+		<p class="tml-user-pass1-wrap">
+			<label for="pass1<?php $template->the_instance(); ?>"><?php _e( 'Password', 'theme-my-login' ); ?></label>
+			<input autocomplete="off" name="pass1" id="pass1<?php $template->the_instance(); ?>" class="input" size="20" value="" type="password" />
+		</p>
+		<p class="tml-user-pass2-wrap">
+			<label for="pass2<?php $template->the_instance(); ?>"><?php _e( 'Confirm Password', 'theme-my-login' ); ?></label>
+			<input autocomplete="off" name="pass2" id="pass2<?php $template->the_instance(); ?>" class="input" size="20" value="" type="password" />
+		</p>
 		<?php
 	}
 
@@ -239,9 +243,9 @@ class Theme_My_Login_Custom_Passwords extends Theme_My_Login_Abstract {
 	/**
 	 * Removes the default password nag
 	 *
-	 * Callback for "tml_new_user_registered" hook in Theme_My_Login::register_new_user()
+	 * Callback for "register_new_user" hook in register_new_user()
 	 *
-	 * @see Theme_My_Login::register_new_user()
+	 * @see register_new_user()
 	 * @since 6.0
 	 * @access public
 	 *

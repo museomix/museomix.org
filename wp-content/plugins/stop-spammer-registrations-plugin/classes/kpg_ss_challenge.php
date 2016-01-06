@@ -70,30 +70,6 @@ class kpg_ss_challenge extends be_module{
 				}
 				// they submitted a captcha
 				switch ($chkcaptcha) {
-				case 'Y':
-					// open captcha
-					if (array_key_exists('img',$_POST) &&!empty($_POST['img'])&&!empty($_POST['code'])) {
-						//sfs_debug_msg('open capcha 2');
-						// validate open captcha
-						$fff='http://www.opencaptcha.com/validate.php?ans=';
-						$fff.=sanitize_text_field($_POST['code']);
-						$fff.='&img=';
-						$fff.=sanitize_text_field($_POST['img']);
-						$sn=kpg_read_file($fff);
-						if($sn=='pass') {
-							// restore the post
-							//$kp=base64_encode(serialize($_POST));
-							$_POST=unserialize(base64_decode($kp));
-							////sfs_debug_msg("trying to return the post to the comments program".print_r($_POST,true));
-							// success add to cache
-							kpg_ss_log_good($ip,'passed open captcha','pass');
-							do_action('kpg_stop_spam_OK',$ip,$post); // So plugins can undo spam report
-							return false;
-						} else {
-							$msg="Open Captcha entry does not match, try again.";
-						}
-					}
-					break;					
 				case 'G':
 					if (array_key_exists('recaptcha',$_POST) &&!empty($_POST['recaptcha'])&&array_key_exists('g-recaptcha-response',$_POST)) {
 						// check recaptcha
@@ -184,7 +160,7 @@ class kpg_ss_challenge extends be_module{
 							$_POST=unserialize(base64_decode($kp));
 							////sfs_debug_msg("trying to return the post to the comments program".print_r($_POST,true));
 							// success add to cache
-							kpg_ss_log_good($ip,'passed open captcha','pass');
+							kpg_ss_log_good($ip,'passed solve media captcha','pass');
 							do_action('kpg_stop_spam_OK',$ip,$post); // So plugins can undo spam report
 							return false;
 						} else {
@@ -193,6 +169,7 @@ class kpg_ss_challenge extends be_module{
 					}
 					break;					
 				case 'A':
+				case 'Y':
 
 					if (array_key_exists('nums',$_POST) &&!empty($_POST['nums'])) {
 						// simple arithmetic - at lease it is different for each website and changes occasionally
@@ -206,7 +183,7 @@ class kpg_ss_challenge extends be_module{
 							$_POST=unserialize(base64_decode($kp));
 							////sfs_debug_msg("trying to return the post to the comments program".print_r($_POST,true));
 							// success add to cache
-							kpg_ss_log_good($ip,'passed open captcha','pass');
+							kpg_ss_log_good($ip,'passed Simple Aritmetic captcha','pass');
 							do_action('kpg_stop_spam_OK',$ip,$post); // So plugins can undo spam report
 							return false;
 						} else {
@@ -280,24 +257,6 @@ message <!-- not email -->:<br><textarea name=\"km\"></textarea>
 		// now the captchas
 		$cap='';
 		switch ($chkcaptcha) {
-		case 'Y':
-			$date = date("Ymd");
-			$rand = rand(0,9999999999999);
-			$height = "80";
-			$width  = "240";
-			$img    = "$date$rand-$height-$width.jpgx";
-			$imgloc='http://www.opencaptcha.com/img/';
-			$root=site_url();
-			$imgloc=site_url().'?ocimg=';
-//http://localhost/wordpress?ocimg=20150410628305005-80-240.jpgx			
-			$cap="
-<br>
-<hr/>
-<img src='$imgloc$img' height='$height' alt='captcha' width='$width' border='0' />
-<input type='hidden' name='img' value='$img'><br>
-Enter the code: <input type=text name=code value='' size='35' />
-";
-			break;
 		case 'G':
 			// recaptcha
 			$recaptchaapisite=$options['recaptchaapisite'];
@@ -328,6 +287,7 @@ Enter the code: <input type=text name=code value='' size='35' />
 
 			break;
 		case 'A':
+		case 'Y':
 			// arithmetic
 			$n1=rand ( 1 , 9 );
 			$n2=rand ( 1 , 9 );

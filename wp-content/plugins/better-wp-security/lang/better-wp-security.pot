@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the iThemes Security package.
 msgid ""
 msgstr ""
-"Project-Id-Version: iThemes Security 5.1.0\n"
+"Project-Id-Version: iThemes Security 5.1.1\n"
 "Report-Msgid-Bugs-To: http://ithemes.com/support/\n"
-"POT-Creation-Date: 2015-10-15 13:59:17+00:00\n"
+"POT-Creation-Date: 2015-11-10 19:58:28+00:00\n"
 "PO-Revision-Date: 2015-MO-DA HO:MI+ZONE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -13,9 +13,9 @@ msgstr ""
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
-#. #-#-#-#-#  better-wp-security.pot (iThemes Security 5.1.0)  #-#-#-#-#
+#. #-#-#-#-#  better-wp-security.pot (iThemes Security 5.1.1)  #-#-#-#-#
 #. Plugin Name of the plugin/theme
-#: better-wp-security.php:26
+#: better-wp-security.php:28
 msgid "iThemes Security"
 msgstr ""
 
@@ -1065,32 +1065,32 @@ msgstr ""
 msgid "Clear Logs"
 msgstr ""
 
-#: core/class-itsec-logger.php:377
+#: core/class-itsec-logger.php:381
 msgid "Below are various logs of information collected by"
 msgstr ""
 
-#: core/class-itsec-logger.php:379
+#: core/class-itsec-logger.php:383
 msgid ""
 "This information can help you get a picture of what is happening with your "
 "site and the level of success you have achieved in your security efforts."
 msgstr ""
 
-#: core/class-itsec-logger.php:397
+#: core/class-itsec-logger.php:401
 msgid ""
 "To view logs within the plugin you must enable database logging in the "
 "plugin settings. File logging is not available for access within the plugin "
 "itself."
 msgstr ""
 
-#: core/class-itsec-logger.php:414
+#: core/class-itsec-logger.php:418
 msgid "To adjust logging options visit the global settings page."
 msgstr ""
 
-#: core/class-itsec-logger.php:416
+#: core/class-itsec-logger.php:420
 msgid "Select Filter: "
 msgstr ""
 
-#: core/class-itsec-logger.php:418
+#: core/class-itsec-logger.php:422
 msgid "All Log Data"
 msgstr ""
 
@@ -2368,7 +2368,7 @@ msgstr ""
 #: core/modules/backup/class-itsec-backup.php:366
 #: core/modules/backup/class-itsec-backup.php:385
 #: core/modules/malware/class-itsec-malware-log.php:109
-#: core/modules/malware/class-itsec-malware-scan-results-template.php:157
+#: core/modules/malware/class-itsec-malware-scan-results-template.php:166
 msgid "Error"
 msgstr ""
 
@@ -3934,13 +3934,13 @@ msgid "Scan Details"
 msgstr ""
 
 #: core/modules/malware/class-itsec-malware-log.php:111
-#: core/modules/malware/class-itsec-malware-scan-results-template.php:155
+#: core/modules/malware/class-itsec-malware-scan-results-template.php:164
 msgid "Warning"
 msgstr ""
 
 #: core/modules/malware/class-itsec-malware-log.php:113
 #: core/modules/malware/class-itsec-malware-log.php:119
-#: core/modules/malware/class-itsec-malware-scan-results-template.php:153
+#: core/modules/malware/class-itsec-malware-scan-results-template.php:162
 msgid "Clean"
 msgstr ""
 
@@ -3961,7 +3961,7 @@ msgid "Malware Scan Report"
 msgstr ""
 
 #: core/modules/malware/class-itsec-malware-scan-results-template.php:22
-#: core/modules/malware/class-itsec-malware-scan-results-template.php:136
+#: core/modules/malware/class-itsec-malware-scan-results-template.php:145
 msgid "The scan failed to properly scan the site."
 msgstr ""
 
@@ -3973,56 +3973,62 @@ msgstr ""
 msgid "Error Code: <code>%s</code>"
 msgstr ""
 
-#: core/modules/malware/class-itsec-malware-scan-results-template.php:32
+#: core/modules/malware/class-itsec-malware-scan-results-template.php:31
+msgid ""
+"If you contact support about this error, please provide the following debug "
+"details:"
+msgstr ""
+
+#: core/modules/malware/class-itsec-malware-scan-results-template.php:41
 msgid "Blacklist"
 msgstr ""
 
-#: core/modules/malware/class-itsec-malware-scan-results-template.php:60
+#: core/modules/malware/class-itsec-malware-scan-results-template.php:69
 msgid "Malware"
 msgstr ""
 
-#: core/modules/malware/class-itsec-malware-scan-results-template.php:76
+#: core/modules/malware/class-itsec-malware-scan-results-template.php:85
 msgid "Security warning in the URL"
 msgstr ""
 
-#: core/modules/malware/class-itsec-malware-scan-results-template.php:78
+#: core/modules/malware/class-itsec-malware-scan-results-template.php:87
 msgid "Malware found on URL"
 msgstr ""
 
-#: core/modules/malware/class-itsec-malware-scan-results-template.php:87
+#: core/modules/malware/class-itsec-malware-scan-results-template.php:96
 msgid "Infected URL: <a href=\"%1$s\" target=\"_blank\">%2$s</a>"
 msgstr ""
 
-#: core/modules/malware/class-itsec-malware-scan-results-template.php:97
+#: core/modules/malware/class-itsec-malware-scan-results-template.php:106
 msgid "*Known Spam detected"
 msgstr ""
 
-#: core/modules/malware/class-itsec-malware-scan-results-template.php:101
+#: core/modules/malware/class-itsec-malware-scan-results-template.php:110
 msgid "Type: %1$s"
 msgstr ""
 
-#: core/modules/malware/class-itsec-malware-scan-results-template.php:103
+#: core/modules/malware/class-itsec-malware-scan-results-template.php:112
 msgid "Documentation: <a href=\"%1$s\" target=\"_blank\">%2$s</a>"
 msgstr ""
 
-#: core/modules/malware/class-itsec-malware-scan-results-template.php:116
+#: core/modules/malware/class-itsec-malware-scan-results-template.php:125
 msgid "Payload:<pre>%s</pre>"
 msgstr ""
 
 #. translators: Scan result listing. %1$s is the status. %2$s is the
 #. description.
-#: core/modules/malware/class-itsec-malware-scan-results-template.php:164
+#: core/modules/malware/class-itsec-malware-scan-results-template.php:173
 msgctxt "scan status, scan description"
 msgid "%1$s %2$s"
 msgstr ""
 
-#: core/modules/malware/class-itsec-malware-scan-results-template.php:166
+#: core/modules/malware/class-itsec-malware-scan-results-template.php:175
 msgid "Show Details"
 msgstr ""
 
 #. translators: Scan result listing. %1$s is the status. %2$s is the
 #. description. %3$s is the details link.
-#: core/modules/malware/class-itsec-malware-scan-results-template.php:169
+#: core/modules/malware/class-itsec-malware-scan-results-template.php:178
 msgctxt "scan status, scan description, scan details link"
 msgid "%1$s %2$s %3$s"
 msgstr ""
@@ -4033,19 +4039,30 @@ msgid ""
 "indicate an issue with WordPress."
 msgstr ""
 
-#: core/modules/malware/class-itsec-malware-scanner.php:101
+#: core/modules/malware/class-itsec-malware-scanner.php:105
 msgid ""
-"The Sucuri server returned an invalid content type. A content type of <code>"
-"%s</code> was received when a content type of <code>application/json</code> "
-"was expected. This could indicate a temporary issue with the Sucuri servers."
+"The scan did not complete successfully. The Sucuri server should send its "
+"response in JSON encoding. The response indicates that the encoding is JSON, "
+"but the data could not be decoded. This problem could be due to a temporary "
+"Sucuri server issue or a compatibility issue on your server. If the problem "
+"continues, please contact iThemes Security support."
 msgstr ""
 
-#: core/modules/malware/class-itsec-malware-scanner.php:108
+#: core/modules/malware/class-itsec-malware-scanner.php:107
+msgid ""
+"The scan did not complete successfully. The Sucuri server should send its "
+"response in JSON encoding. The data received from the Sucuri server could "
+"not be decoded. In addition, a content type of <code>%s</code> was received "
+"when a content type of <code>application/json</code> was expected. This "
+"could indicate a temporary issue with the Sucuri servers."
+msgstr ""
+
+#: core/modules/malware/class-itsec-malware-scanner.php:111
 msgid ""
 "The scan did not complete successfully. Sucuri sent the following error: %s"
 msgstr ""
 
-#: core/modules/malware/class-itsec-malware-scanner.php:111
+#: core/modules/malware/class-itsec-malware-scanner.php:114
 msgid ""
 "An unknown error prevented the scan from completing successfully. The Sucuri "
 "server responded with a <code>%s</code> error code."

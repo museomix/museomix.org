@@ -39,7 +39,7 @@ class kpg_ss_log_bad extends be_module{
 		$kpg_sp_hist=$options['kpg_sp_hist'];
 
 		while (count($hist)>$kpg_sp_hist) array_shift($hist);
-		if (!empty($pwd)) $author=$author.'/'.$pwd;
+		// if (!empty($pwd)) $author=$author.'/'.$pwd; // show bad passwwords????
 		$hist[$now]=array($ip,$email,$author,$sname,$reason,$blog);
 		
 		

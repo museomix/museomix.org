@@ -32,17 +32,21 @@
  * WP Ultimate CSV Importer copyright notice. If the display of the logo is
  * not reasonably feasible for technical reasons, the Appropriate Legal
  * Notices must display the words
- * "Copyright Smackcoders. 2014. All rights reserved".
+ * "Copyright Smackcoders. 2015. All rights reserved".
  ********************************************************************************/
-if ( ! defined( 'ABSPATH' ) )
-        exit; // Exit if accessed directly
+
+if (!defined('ABSPATH')) {
+	exit;
+} // Exit if accessed directly
 $noncevar = isset($_POST['postdata']['wpnonce']) ? $_POST['postdata']['wpnonce'] : '';
-if(!wp_verify_nonce($noncevar, 'smack_nonce'))
-die('You are not allowed to do this operation.Please contact your admin.');
+if (!wp_verify_nonce($noncevar, 'smack_nonce')) {
+	die('You are not allowed to do this operation.Please contact your admin.');
+}
 
 $impCheckobj = CallWPImporterObj::checkSecurity();
-if($impCheckobj != 'true')
-die($impCheckobj);
+if ($impCheckobj != 'true') {
+	die($impCheckobj);
+}
 require_once(WP_CONST_ULTIMATE_CSV_IMP_DIRECTORY . 'lib/skinnymvc/core/base/SkinnyBaseActions.php');
 require_once(WP_CONST_ULTIMATE_CSV_IMP_DIRECTORY . 'lib/skinnymvc/core/SkinnyActions.php');
 $skinnyObj = new CallWPImporterObj();
@@ -67,7 +71,7 @@ if ($curr_action == 'post' || $curr_action == 'page' || $curr_action == 'customp
 	$importObj->MultiImages = $_POST['postdata']['importinlineimage'];
 } elseif ($curr_action == 'eshop') {
 	$importObj = new EshopActions();
-        $importedAs = 'Eshop';
+	$importedAs = 'Eshop';
 	$importObj->MultiImages = $_POST['postdata']['importinlineimage'];
 } elseif ($curr_action == 'wpcommerce') {
 	$importObj = new WpcommerceActions();
@@ -107,6 +111,7 @@ if ($count < $totRecords) {
 $resultArr = array();
 $res2 = array();
 $res1 = array();
+$get_mapped_array = array();
 $mapping_value = '';
 $filename = $_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['uploadedFile'];
 $delim = $_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['select_delimeter'];
@@ -118,76 +123,80 @@ if ($_POST['postdata']['dupContent']) {
 	$importObj->conDupCheck = $_POST['postdata']['dupContent'];
 }
 $csv_rec_count = $_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['h2'];
-
+$available_groups = $skinnyObj->get_availgroups($curr_action);
 //mapped and unmapped count
-for($i=0;$i<$csv_rec_count;$i++) {
-	if(array_key_exists($_POST['postdata']['uploadedFile'],$_SESSION))
-        $mapping_value = $_SESSION[$_POST['postdata']['uploadedFile']]['SMACK_MAPPING_SETTINGS_VALUES']['mapping'.$i];
-        if($mapping_value == '-- Select --' ) {
-                $res1[] = $mapping_value;
-        }
-        else {
-                $res2[] = $mapping_value;
-        }
+foreach ($_SESSION['SMACK_MAPPING_SETTINGS_VALUES'] as $seskey => $sesval ) {
+       foreach($available_groups as $groupKey => $groupVal) {
+               $current_mapped = explode($groupVal.'mapping', $seskey);
+                       if(is_array($current_mapped) && count($current_mapped) == 2) {
+                               $get_mapped_array['mapping'.$current_mapped[1]] = $sesval;
+                               if($sesval == '-- Select --' ) {
+                                       $res1[$seskey] = $sesval;
+                               }
+                               else {
+                                       if ($sesval != '')
+                                       $res2[] = $sesval;
+                               }
+                       }
+       }
 }
 $mapped = count($res2);
 $unmapped = count($res1);
 
 for ($i = $limit; $i < $count; $i++) {
-        if ($limit == 0) {
-                echo "<div style='margin-left:10px;'> Total no of records - " . $totRecords . ".</div><br>";
-                echo "<div style='margin-left:10px;'> Total no of mapped fields for single record - " . $mapped . ".</div><br>";
-                echo "<div style='margin-left:10px;'> Total no of unmapped fields for a record - " . $unmapped . ".</div><br>";
+	if ($limit == 0) {
+		echo "<div style='margin-left:10px;'> Total no of records - " . $totRecords . ".</div><br>";
+		echo "<div style='margin-left:10px;'> Total no of mapped fields for single record - " . $mapped . ".</div><br>";
+		echo "<div style='margin-left:10px;'> Total no of unmapped fields for a record - " . $unmapped . ".</div><br>";
 		echo "<div style='margin-left:10px;'> Chosen server request is " . $count . " .</div><br>";
-        }
+	}
 	$colCount = count($resultArr[$i]);
 	$_SESSION['SMACK_SKIPPED_RECORDS'] = $i;
-	foreach($resultArr[$i] as $resultKey => $resultVal) {
-		$to_be_import_rec[] = $resultVal;
-	}  
+	$to_be_import_rec = $resultArr[$i];
 	$importObj->detailedLog = array();
 	$extracted_image_location = null;
 	$importinlineimageoption = null;
-	if(isset($_POST['postdata']['inline_image_location'])) {
+	if (isset($_POST['postdata']['inline_image_location'])) {
 		$importinlineimageoption = 'imagewithextension';
-	        $extracted_image_location = $_POST['postdata']['inline_image_location'];
+		$extracted_image_location = $_POST['postdata']['inline_image_location'];
 	}
-	if($_POST['postdata']['inlineimagehandling'] != 'imagewithextension') {
+	if ($_POST['postdata']['inlineimagehandling'] != 'imagewithextension') {
 		$importinlineimageoption = 'imagewithurl';
 		$extracted_image_location = $_POST['postdata']['inline_image_location'];
 		$sample_inlineimage_url = $_POST['postdata']['inlineimagehandling'];
 	}
-	$importObj->processDataInWP($to_be_import_rec,$_SESSION['SMACK_MAPPING_SETTINGS_VALUES'], $_SESSION['SMACK_MAPPING_SETTINGS_VALUES'], $i, $extracted_image_location, $importinlineimageoption, $sample_inlineimage_url);
-	$logarr = array('post_id','assigned_author','category','tags','postdate','image','poststatus');
+	$importObj->processDataInWP($to_be_import_rec, $_SESSION['SMACK_MAPPING_SETTINGS_VALUES'], $_SESSION['SMACK_MAPPING_SETTINGS_VALUES'], $i, $extracted_image_location, $importinlineimageoption, $sample_inlineimage_url);
+	$logarr = array('post_id', 'assigned_author', 'category', 'tags', 'postdate', 'image', 'poststatus');
 	if ($curr_action == 'post' || $curr_action == 'page' || $curr_action == 'custompost' || $curr_action == 'eshop') {
-		foreach($importObj->detailedLog as $logKey => $logVal) {
-		     if(array_key_exists($logarr[0],$logVal)) {
-			foreach($logarr as $logarrkey){
-				if(!array_key_exists($logarrkey,$logVal)){
-					$logVal[$logarrkey] = '';
+		foreach ($importObj->detailedLog as $logKey => $logVal) {
+			if (array_key_exists($logarr[0], $logVal)) {
+				foreach ($logarr as $logarrkey) {
+					if (!array_key_exists($logarrkey, $logVal)) {
+						$logVal[$logarrkey] = '';
+					}
 				}
-			}
-			echo "<p style='margin-left:10px;'> " . $logVal['post_id'] . " , " . $logVal['assigned_author'] . " , " . $logVal['category'] . " , " . $logVal['tags'] . " , " . $logVal['postdate'] . " , " . $logVal['image'] . " , " . $logVal['poststatus'];
-			if($curr_action == 'eshop') {
-				echo " , " . $logVal['SKU'] . ", " . $logVal['verify_here'] . "</p>";
+				echo "<p style='margin-left:10px;'> " . $logVal['post_id'] . " , " . $logVal['assigned_author'] . " , " . $logVal['category'] . " , " . $logVal['tags'] . " , " . $logVal['postdate'] . " , " . $logVal['image'] . " , " . $logVal['poststatus'];
+				if ($curr_action == 'eshop') {
+					echo " , " . $logVal['SKU'] . ", " . $logVal['verify_here'] . "</p>";
+				} else {
+					echo " , " . $logVal['verify_here'] . "</p>";
+				}
 			} else {
-				echo " , " . $logVal['verify_here'] . "</p>";
-			}  } 
-		        else {
-                                   echo "<p style='margin-left:10px;'>" . $logVal['verify_here'] . "</p>";
-                        }
+				echo "<p style='margin-left:10px;'>" . $logVal['verify_here'] . "</p>";
+			}
 		}
-	}
-	else if ($curr_action == 'comments' || $curr_action == 'users') {
-		foreach($importObj->detailedLog as $logVal) {
-			for ($l = 0; $l < count($logVal); $l++) {
-				echo "<p style='margin-left:10px;'> " . $logVal[$l] . "</p>";
+	} else {
+		if ($curr_action == 'comments' || $curr_action == 'users') {
+			foreach ($importObj->detailedLog as $logVal) {
+				for ($l = 0; $l < count($logVal); $l++) {
+					echo "<p style='margin-left:10px;'> " . $logVal[$l] . "</p>";
+				}
 			}
 		}
 	}
 
 	$limit++;
-        unset($to_be_import_rec);
+	unset($to_be_import_rec);
 }
 
 if ($limit >= $totRecords) {
@@ -198,7 +207,7 @@ if ($limit >= $totRecords) {
 	$inline_image_dirname = $get_inline_imageDir[$explodedCount - 1];
 	$uploadDir = $skinnyObj->getUploadDirectory('inlineimages');
 	$inline_images_dir = $uploadDir . '/smack_inline_images/' . $inline_image_dirname;
-	if($advancemedia == 'true'){
+	if ($advancemedia == 'true') {
 		$skinnyObj->deletefileafterprocesscomplete($inline_images_dir);
 	}
 	$skinnyObj->deletefileafterprocesscomplete($dir);
@@ -223,15 +232,15 @@ if ($importObj->insPostCount != 0 || $importObj->dupPostCount != 0 || $importObj
 		$_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['captureId'] = $importObj->capturedId;
 	}
 }
-//if ($totRecords <= ($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['insPostCount'] + $_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['dupPostCount'] + $_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['updatedPostCount'])) {
+
 $inserted_post_count = $_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['insPostCount'];
 if ($inserted_post_count != 0) {
 	if (!isset($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['captureId'])) {
 		$_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['captureId'] = 0;
 	}
-		$importObj->addStatusLog($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['insPostCount'], $importedAs);
-		$importObj->addPieChartEntry($importedAs, $inserted_post_count);
-		$inserted_post_count = 0;
+	$importObj->addStatusLog($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['insPostCount'], $importedAs);
+	$importObj->addPieChartEntry($importedAs, $inserted_post_count);
+	$inserted_post_count = 0;
 	$_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['insPostCount'] = 0;
 	$_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['dupPostCount'] = 0;
 	$_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['updatedPostCount'] = 0;
@@ -243,103 +252,10 @@ if ($inserted_post_count != 0) {
 }
 if ($limit == $totRecords) {
 	echo "<br><div style='margin-left:10px; color:green;'>";
-	 echo __('Import successfully completed!.','wp-ultimate-csv-importer');
+	echo __('Import successfully completed!.', 'wp-ultimate-csv-importer');
 	echo "</div>";
 }
-/*if ($curr_action == 'users') {
-	echo "<div style='margin-left:7px;'>";
-	if (($limit == $requested_limit) && ($limit <= $count)) {
-		echo "<div style='margin-left:3px;'>Chosen server request is " . $count . " .</div><br>";
-	}
-	echo "[" . date('h:m:s') . "] - No of user(s) Skipped - " . $importObj->dupPostCount . ".<br>";
-	echo "[" . date('h:m:s') . "] - No of user(s) Inserted - " . $importObj->insPostCount . '.<br>';
-	if ($limit == $totRecords) {
-		echo "<br><div style='margin-left:3px;'>Import successfully completed!.</div>";
-	}
-	echo "</div>";
-} elseif ($curr_action == 'comments') {
-	echo "<div style='margin-left:7px;'>";
-	if (($limit == $requested_limit) && ($limit <= $count)) {
-		echo "<div style='margin-left:3px;'>Chosen server request is " . $count . " .</div><br>";
-	}
-	echo "[" . date('h:m:s') . "] - No of comment(s) Skipped - " . $importObj->dupPostCount . '.<br>';
-	echo "[" . date('h:m:s') . "] - No of comment(s) Inserted - " . $importObj->insPostCount . ".<br>";
-	if ($limit == $totRecords) {
-		echo "<br><div style='margin-left:3px;'>Import successfully completed!.</div>";
-	}
-	echo "</div>";
-} elseif ($curr_action == 'customtaxonomy') {
-	echo "<div style='margin-left:7px;'>";
-	if (($limit == $requested_limit) && ($limit <= $count)) {
-		echo "<div style='margin-left:3px;'>Chosen server request is " . $count . " .</div><br>";
-	}
-	echo "[" . date('h:m:s') . "] - No of customtaxonomies Skipped - " . $importObj->dupPostCount . ".<br>";
-	echo "[" . date('h:m:s') . "] - No of customtaxonomies Inserted - " . $importObj->insPostCount . ".<br>";
-	if ($limit == $totRecords) {
-		echo "<br><div style='margin-left:3px;'>Import successfully completed!.</div>";
-	}
-	echo "</div>";
-} elseif ($curr_action == 'categories') {
-	echo "<div style='margin-left:7px;'>";
-	if (($limit == $requested_limit) && ($limit <= $count)) {
-		echo "<div style='margin-left:3px;'>Chosen server request is " . $count . " .</div><br>";
-	}
-	echo "[" . date('h:m:s') . "] - No of categories Skipped - " . $importObj->dupPostCount . '.<br>';
-	echo "[" . date('h:m:s') . "] - No of categories Inserted - " . $importObj->insPostCount . '.<br>';
-	if ($limit == $totRecords) {
-		echo "<br><div style='margin-left:3px;'>Import successfully completed!.</div>";
-	}
-	echo "</div>";
-} elseif ($curr_action == 'post') {
-	echo "<div style='margin-left:7px;'>";
-	if (($limit == $requested_limit) && ($limit <= $count)) {
-		echo "<div style='margin-left:3px;'>Chosen server request is " . $count . " .</div><br>";
-	}
-	echo "[" . date('h:m:s') . "] - No of post(s) Skipped - " . $importObj->dupPostCount . '.<br>';
-	echo "[" . date('h:m:s') . "] - No of post(s) Inserted - " . $importObj->insPostCount . '.<br>';
-	echo "[" . date('h:m:s') . "] - No of post(s) are assigned as admin - " . $importObj->noPostAuthCount . ".<br>";
-	if ($limit == $totRecords) {
-		echo "<br><div style='margin-left:3px;'>Import successfully completed!.</div>";
-	}
-	echo "</div>";
-} elseif ($curr_action == 'page') {
-	echo "<div style='margin-left:7px;'>";
-	if (($limit == $requested_limit) && ($limit <= $count)) {
-		echo "<div style='margin-left:3px;'>Chosen server request is " . $count . " .</div><br>";
-	}
-	echo "[" . date('h:m:s') . "] - No of page(s) Skipped - " . $importObj->dupPostCount . '.<br>';
-	echo "[" . date('h:m:s') . "] - No of page(s) Inserted - " . $importObj->insPostCount . '.<br>';
-	echo "[" . date('h:m:s') . "] - No of page(s) are assigned as admin - " . $importObj->noPostAuthCount . '.<br>';
-	if ($limit == $totRecords) {
-		echo "<br><div style='margin-left:3px;'>Import successfully completed!.</div>";
-	}
-	echo "</div>";
-} elseif ($curr_action == 'custompost') {
-	$customposttype = $_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['custompostlist'];
-	echo "<div style='margin-left:7px;'>";
-	if (($limit == $requested_limit) && ($limit <= $count)) {
-		echo "<div style='margin-left:3px;'>Chosen server request is " . $count . " .</div><br>";
-	}
-	echo "[" . date('h:m:s') . "] - No of " . $customposttype . " Skipped - " . $importObj->dupPostCount . '.<br>';
-	echo "[" . date('h:m:s') . "] - No of " . $customposttype . " Inserted - " . $importObj->insPostCount . '.<br>';
-	echo "[" . date('h:m:s') . "] - No of " . $customposttype . " are assigned as admin - " . $importObj->noPostAuthCount . ".<br>";
-	if ($limit == $totRecords) {
-		echo "<br><div style='margin-left:3px;'>Import successfully completed!.</div>";
-                
-	}
-	echo "</div>";
-}elseif ($curr_action == 'eshop') {
-        echo "<div style='margin-left:7px;'>";
-        if (($limit == $requested_limit) && ($limit <= $count)) {
-                echo "<div style='margin-left:3px;'>Chosen server request is " . $count . " .</div><br>";
-        }
-        echo "[" . date('h:m:s') . "] - No of products(s) Skipped - " . $importObj->dupPostCount . '.<br>';
-        echo "[" . date('h:m:s') . "] - No of products(s) Inserted - " . $importObj->insPostCount . ".<br>";
-        if ($limit == $totRecords) {
-                echo "<br><div style='margin-left:3px;'>Import successfully completed!.</div>";
-        }
-        echo "</div>";
-} */
+
 foreach ($_SESSION['SMACK_MAPPING_SETTINGS_VALUES'] as $key => $value) {
 	for ($j = 0; $j < $csv_rec_count; $j++) {
 		if ($key == 'mapping' . $j) {

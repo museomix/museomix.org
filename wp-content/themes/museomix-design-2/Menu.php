@@ -68,7 +68,7 @@
 	</div>
 <?php endif; ?>
 	<div class="navbar navbar-inverse navbar-fixed-top" style="">
-	  <div class="navbar-inner" style="background: #FFEC00; border-color: #d4d4d4;">
+	  <div class="navbar-inner" style="background: transparent; border-color: #d4d4d4;">
 			 
 		<div class="container nav<?php if(is_front_page()) echo ' menu-accueil';  ?>">
 

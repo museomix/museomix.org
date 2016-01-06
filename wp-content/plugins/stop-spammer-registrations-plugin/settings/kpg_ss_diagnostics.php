@@ -20,7 +20,10 @@ $now=date('Y/m/d H:i:s',time() + ( get_option( 'gmt_offset' ) * 3600 ));
 //}
 
 $ip=kpg_get_ip();
-$hip=$_SERVER['SERVER_ADDR'];
+$hip="unknown";
+if (array_key_exists('SERVER_ADDR',$_SERVER)) {
+	$hip=$_SERVER["SERVER_ADDR"];
+}
 $email='';
 $author='';
 $subject='';
@@ -239,7 +242,7 @@ if (!empty($nonce) && wp_verify_nonce($nonce,'kpgstopspam_update')) {
 </form>
 <?php
 // if there is a log file we can display it here
-$dfile=KPG_SS_PLUGIN_FILE.'includes/.sfs_debug_output.txt';
+$dfile=KPG_SS_PLUGIN_DATA.'.sfs_debug_output.txt';
 if (file_exists($dfile)) {
 	if (array_key_exists('kpg_stop_spammers_control',$_POST)) $nonce=$_POST['kpg_stop_spammers_control'];
 	if (!empty($nonce) && wp_verify_nonce($nonce,'kpgstopspam_update')) { 

@@ -458,6 +458,18 @@
   }
 }
 
+@media (max-width: 1200px) {
+  
+  /*
+  .menu-fixed #lang_sel_click,
+  .menu-fixed #lang_sel_click {
+    display:none
+  }*/
+  .navbar-fixed-top .brand {
+    font-size:0;
+  }
+}
+
 @media (min-width: 768px) and (max-width: 979px) {
   .row {
     margin-left: -20px;
@@ -483,6 +495,25 @@
   .navbar-fixed-bottom .container {
     width: 724px;
   }
+  
+  #museomix_banner {
+    width: 724px !important;
+    margin-left:auto !important;
+    margin-right:auto !important;
+    padding-left:0;
+    padding-right:0;
+  }
+  
+  .navbar-inner {
+    width:auto !important;
+    padding-left:10px !important;
+    padding-right:10px !important;
+  }
+  
+  #big_header {
+    width:auto;
+  }
+  
   .span12 {
     width: 724px;
   }
@@ -803,7 +834,21 @@
   body {
     padding-right: 20px;
     padding-left: 20px;
+    background:#EEE
   }
+  
+  #big_header {
+    margin-left:-20px;
+    margin-right:-20px;
+    padding-left:20px;
+    padding-right:20px;
+    background:#FFEC00
+  }
+	
+	#museomix_banner {
+  	height:auto;
+	}
+  
   .navbar-fixed-top,
   .navbar-fixed-bottom,
   .navbar-static-top {
@@ -947,15 +992,18 @@
   .carousel-caption {
     position: static;
   }
+  
+  
 }
 
 @media (max-width: 979px) {
   body {
     padding-top: 0;
   }
+	
   .navbar-fixed-top,
   .navbar-fixed-bottom {
-    position: static;
+  /*  position: static; */
   }
   .navbar-fixed-top {
     margin-bottom: 20px;
@@ -965,7 +1013,7 @@
   }
   .navbar-fixed-top .navbar-inner,
   .navbar-fixed-bottom .navbar-inner {
-    padding: 5px;
+    padding: 0 5px;
   }
   .navbar .container {
     width: auto;
@@ -1092,9 +1140,58 @@
     height: 0;
     overflow: hidden;
   }
-  .navbar .btn-navbar {
-    display: block;
+  
+  
+	
+  .menu-main-container,
+  #lang_sel_click,
+  .home.menu-fixed .menu-main-container,
+  .home.menu-fixed #lang_sel_click {
+  	display:none;
+	}
+  
+	.show-menu .menu-main-container,
+	.show-menu #lang_sel_click,
+	.home .menu-main-container,
+	.home #lang_sel_click,
+	.menu-fixed.show-menu .menu-main-container,
+	.menu-fixed.show-menu #lang_sel_click,
+	.home.menu-fixed.show-menu .menu-main-container,
+	.home.menu-fixed.show-menu #lang_sel_click {
+  	display:block;
+	}
+	
+	
+	.menu-main-container {
+  	clear:both;
+	}
+  
+  .navbar-fixed-top {
+    margin-bottom:0 !important;
   }
+  
+  
+  
+  .navbar .btn-navbar,
+  .home.menu-fixed .navbar .btn-navbar {
+    display: block;
+    position: absolute;
+    right: 4px;
+    top: 0px;
+  }
+  
+  .home .navbar .btn-navbar {
+    display:none;
+  }
+  
+  .navbar-inner .bouton-nav-accueil {
+    padding-left:15px !important
+  }
+  
+  .navbar-fixed-top .brand {
+    font-size:19px;
+  }
+    
   .navbar-static .navbar-inner {
     padding-right: 10px;
     padding-left: 10px;
@@ -1106,4 +1203,76 @@
     height: auto !important;
     overflow: visible !important;
   }
+}
+
+
+
+@media (max-width: 860px) {
+   
+  .navbar .btn-navbar,
+  .home .navbar .btn-navbar {
+    display:block !important;
+  }
+  
+  body {
+    background:#EEE !important
+  }
+  
+  #big_header {
+    background:#FFEC00
+  }
+  
+  .home .navbar {
+    background:transparent;
+    height: 0px;
+  }
+  
+  .home .menu-main-container,
+  .home #lang_sel_click {
+    display:none;
+  }
+  
+  .show-menu .menu-main-container,
+	.show-menu #lang_sel_click,
+	.menu-fixed.show-menu .menu-main-container,
+	.menu-fixed.show-menu #lang_sel_click,
+	.home.menu-fixed.show-menu .menu-main-container,
+	.home.menu-fixed.show-menu #lang_sel_click {
+  	display:block;
+	}
+	
+  
+  .show-menu .navbar,
+  .home.menu-fixed .navbar {
+    background:#FFEC00;
+    height: auto;
+  }
+  
+  .navbar .nav {
+    float:none;
+    margin:0 -10px
+  }
+  .navbar .nav > li {
+    float:none;
+    text-align:center;
+    width:auto
+  }
+  .mixroom-live a:before {
+    display:none !important;
+  }
+  .mixroom-live a:after {
+    display:inline-block !important;
+    float:none !important
+  }
+  #lang_sel_click {
+    margin:10px auto;
+    float:none !important;
+    clear:both;
+  }
+}
+
+@media (max-width: 768px) {
+  #museomix_banner {
+    height:auto !important;
+  } 
 }

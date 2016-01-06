@@ -3,7 +3,7 @@
 if (!defined('ABSPATH')) exit;
 			
 class chkGB extends be_module {
-	public $searchname='United Kingdom';
+	public $searchname='Great Britain';
 	public $searchlist=array(
 	array('002024000000','002032000000'),
 	array('002096000000','002104000000'),
@@ -132,7 +132,7 @@ class chkGB extends be_module {
 	array('078143248000','078143252000'),
 	array('078144000000','078152000000'),
 	array('078157192000','078157224000'),
-	array('079064000000','079080000000'),
+	// array('079064000000','079080000000'), // TalkTalk
 	array('079099071000','079099072000'),
 	array('079141161000','079141162000'),
 	array('079143080000','079143084000'),

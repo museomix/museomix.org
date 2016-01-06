@@ -5,9 +5,11 @@ if (!defined('ABSPATH')) exit;
 
 class chkvalidip {
 	public function process($ip,&$stats=array(),&$options=array(),&$post=array()) {
-		if (defined('AF_INET6')&&strpos($ip,'.')===false) {
+		if (empty($ip)) return 'invalid ip: '.$ip; 
+		if (strpos($ip,':')===false&&strpos($ip,'.')===false) return 'invalid ip: '.$ip; 
+		if (defined('AF_INET6')&&strpos($ip,':')!==false) {
 			try {
-				if (!inet_pton($ip)) return 'invalid ip: '.$ip;
+				if (!@inet_pton($ip)) return 'invalid ip: '.$ip;
 			} catch ( Exception $e) {
 				return 'invalid ip: '.$ip;
 			}
@@ -17,13 +19,14 @@ class chkvalidip {
 			return 'Accessing site through localhost';
 		}
 		$priv=array(
-		array('10.0.0.0','10.255.255.255'),
-		array('172.16.0.0','172.31.255.255'),
-		array('192.168.0.0','192.168.255.255')
+		array('100000000000','100255255255'),
+		array('172016000000','172031255255'),
+		array('192168000000','192168255255')
 		);
+		$ip2=be_module::ip2numstr($ip);
 		foreach($priv as $ips) {
-			if ($ip>=$ips[0] && $ip<=$ips[1]) return 'local IP address:'.$ip;
-			if ($ip<$ips[1]) break; // sorted so we can bail
+			if ($ip2>=$ips[0] && $ip2<=$ips[1]) return 'local IP address:'.$ip;
+			if ($ip2<$ips[1]) break; // sorted so we can bail
 		}
 		//use the experimental check fake ip routine
 		// doesn't work on older PHPs or some servers without IP6 support enables.

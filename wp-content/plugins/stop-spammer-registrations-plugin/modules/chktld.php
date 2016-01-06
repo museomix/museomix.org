@@ -10,6 +10,8 @@ class chktld { // change name
 	public function process($ip,&$stats=array(),&$options=array(),&$post=array()) {
 		// this checks the .xxx or .ru, etc in emails. Only works if there is an email
 		$tld=$options['badTLDs'];
+		//sfs_debug_msg('chktlds post '.print_r($post,true));
+		//sfs_debug_msg('chktlds tlds '.print_r($tld,true));
 		if (empty($tld)) return false;		
 		// look in tlds for the tld in the email
 		foreach($post as $key=>$value) {

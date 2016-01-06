@@ -34,38 +34,38 @@
  * Notices must display the words
  * "Copyright Smackcoders. 2014. All rights reserved".
  ********************************************************************************/
+
 $impObj = new WPImporter_includes_helper();
 $nonceKey = $impObj->create_nonce_key();
-if(! wp_verify_nonce($nonceKey, 'smack_nonce'))
-die('You are not allowed to do this operation.Please contact your admin.');
+if (!wp_verify_nonce($nonceKey, 'smack_nonce')) {
+	die('You are not allowed to do this operation.Please contact your admin.');
+}
 ?>
 
-<style> #ui-datepicker-div { display:none } </style>
-<div id = 'notification_wp_csv'> </div>
+	<style> #ui-datepicker-div {
+			display: none
+		} </style>
+	<div id='notification_wp_csv'></div>
 <?php
- 	$impCEM = CallWPImporterObj::getInstance();
-     	$impCEM->renderMenu();
-	if(isset($_REQUEST['action'])){
-		$impCEM->requestedAction($_REQUEST['action'],isset($_REQUEST['step']));
-	}
-	else if(isset($_REQUEST['__module']))
-	{
-#		print_r($skinny_content);
+$impCEM = CallWPImporterObj::getInstance();
+$impCEM->renderMenu();
+if (isset($_REQUEST['action'])) {
+	$impCEM->requestedAction($_REQUEST['action'], isset($_REQUEST['step']));
+} else {
+	if (isset($_REQUEST['__module'])) {
+		#		print_r($skinny_content);
 		if (isset($_REQUEST['__module'])) {
-                        if ( current_user_can( 'administrator' ) ) { //uthor' ) && current_user_can( 'editor' ) ) {
-                                print_r($skinny_content);
-                        } else {
-                                if($_REQUEST['__module'] == 'users' || $_REQUEST['__module'] == 'settings') {
-                                        die('<p id="warning-msg" class="alert alert-warning" style="margin-top:50px;">You are not having the permission to access this page. Please, Contact your administrator.</p>');
-                                } else {
-                                        print_r($skinny_content);
-                                }
-                        }
-                }
+			if (current_user_can('administrator')) { //uthor' ) && current_user_can( 'editor' ) ) {
+				print_r($skinny_content);
+			} else {
+				if ($_REQUEST['__module'] == 'users' || $_REQUEST['__module'] == 'settings') {
+					die('<p id="warning-msg" class="alert alert-warning" style="margin-top:50px;">You are not having the permission to access this page. Please, Contact your administrator.</p>');
+				} else {
+					print_r($skinny_content);
+				}
+			}
+		}
+	} else {
+		echo "<div align='center' style='width:100%;'> <p class='warnings' style='width:50%;text-align:center;color:red;'>" . __('This feature is only available in PRO!.', 'wp-ultimate-csv-importer') . "</p></div>";
 	}
-	else
-	{
-		echo "<div align='center' style='width:100%;'> <p class='warnings' style='width:50%;text-align:center;color:red;'>".__('This feature is only available in PRO!.','wp-ultimate-csv-importer')."</p></div>";
-	}
-
-?>
+}

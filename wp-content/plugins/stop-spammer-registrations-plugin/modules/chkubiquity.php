@@ -2,12 +2,10 @@
 
 if (!defined('ABSPATH')) exit;
 
-class chkubiquity {
-	public function process($ip,&$stats=array(),&$options=array(),&$post=array()) {
+class chkubiquity extends be_module { 
+		public $searchname='Ubiquity';
+		public $searchlist=array(
 		// ubiquity ip numbers as of 6/13/2014
-		if (empty($ip)) return false;
-		if (strpos($ip,'.')===false) return false;
-		$userve=array(
 		'XSServer',
 		array('46.251.228.0','46.251.229.255'),
 		array('109.230.197.0','109.230.197.255'),
@@ -172,15 +170,5 @@ class chkubiquity {
 		array('159.224.130.96','159.224.130.96'),
 		array('162.244.8.0','162.244.15.255')
 		);
-		foreach($userve as $ips) {
-			if (!is_array($ips)) {
-				$reason=$ips;
-			} else if ($ip>=$ips[0] && $ip<=$ips[1]) {
-				// found the answer
-				return $reason;
-			}
-		}
-		return(false);
-	}
 }
 ?>

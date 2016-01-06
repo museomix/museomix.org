@@ -32,10 +32,11 @@
  * WP Ultimate CSV Importer copyright notice. If the display of the logo is
  * not reasonably feasible for technical reasons, the Appropriate Legal
  * Notices must display the words
- * "Copyright Smackcoders. 2014. All rights reserved".
+ * "Copyright Smackcoders. 2015. All rights reserved".
  ********************************************************************************/
+
 if ( ! defined( 'ABSPATH' ) )
-        exit; // Exit if accessed directly
+        {exit;} // Exit if accessed directly
 require_once(WP_CONST_ULTIMATE_CSV_IMP_DIRECTORY.'/includes/WPImporter_includes_helper.php');
 $impCE = new WPImporter_includes_helper();
 $nonce_Key = $impCE->create_nonce_key();
@@ -85,17 +86,8 @@ else {
         </script>
         <?php
         }
-        else {
-                if ($skinnyData['is_enable'] == 'off'){ ?>
-                <script> var warnings = document.getElementById("noPlugin");
-                        warnings.innerHTML = '<strong><font size="4" color="red">Please enable Eshop plugin in settings.</font></strong>';
-                        jQuery('#noPlugin').css('display', 'block');
-                </script>
-                <?php
-                }
         }
-}
-if ($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['isplugin_avail'] != 'not_avail' && $_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['isplugin_activ'] != 'not_activ' && $skinnyData['is_enable'] == 'on'){ ?>
+if ($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['isplugin_avail'] != 'not_avail' && $_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['isplugin_activ'] != 'not_activ'){ ?>
 	<div id='filenamedisplay'></div><!--<form class="add:the-list: validate" style="clear:both;" method="post" enctype="multipart/form-data" onsubmit="return file_exist();">-->
 
 	<div class="container">
@@ -115,16 +107,6 @@ if ($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['isplugin_avail'] != 'not_avail' 
           <div class="form-group" style="padding-bottom:20px;">
                                 <table>
                                 <tr>
-                                 <div id='showmappingtemplate' style='float:left;padding-left:10px;'> 
-                                  <select disabled/>
-                               <option value ='select template' > <?php echo __('select template','wp-ultimate-csv-importer'); ?> </option>
-                                   </select>
-				<img src="<?php echo WP_CONTENT_URL; ?>/plugins/<?php echo WP_CONST_ULTIMATE_CSV_IMP_SLUG; ?>/images/pro_icon.gif" title="PRO Feature" />
-                                   </div>
-                                <!-- code ends here -->
-                                </div>
-
-                                </div>
                                   
                                 <div style="float:right;">
                                 <input type='button' name='clearform' id='clearform' value='<?php echo __("Clear",'wp-ultimate-csv-importer'); ?>' onclick="Reload();" class='btn btn-warning' style="margin-right:15px"/>
@@ -133,111 +115,11 @@ if ($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['isplugin_avail'] != 'not_avail' 
                                 </div>
                                 </tr>
                                 </table>
-                                <!--<div class="warning" id="warning" name="warning" style="display:none;"></div>-->
                                 <!-- The container for the uploaded files -->
                                 <div id="files" class="files"></div>
                                    <br>
                                 </div>
-	<script>
-	var check_upload_dir = document.getElementById('is_uploadfound').value;  
-	if(check_upload_dir == 'notfound'){
-                document.getElementById('browsefile').style.display = 'none';
-		jQuery('#defaultpanel').css('visibility','hidden');
-		jQuery('<p/>').text("").appendTo('#warning');
-		jQuery( "#warning" ).empty();
-		jQuery('#warning').css('display','inline');
-		jQuery('<p/>').text("Warning:   Sorry. There is no uploads directory Please create it with write permission.").appendTo('#warning');
-		jQuery('#warning').css('color','red');
-		jQuery('#warning').css('font-weight','bold');
-		jQuery('#progress .progress-bar').css('visibility','hidden');
-	}
-	else{
-                jQuery(function () {
-                'use strict';
-                var url = (document.getElementById('pluginurl').value+'/plugins/<?php echo WP_CONST_ULTIMATE_CSV_IMP_SLUG;?>/modules/default/templates/index.php');
-                var filesdata;
-                var uploadPath = document.getElementById('uploaddir').value;
-                function prepareUpload(event){
-                        filesdata = event.target.files;
-                        var curraction = '<?php echo $_REQUEST['__module']; ?>';
-                        var frmdata = new FormData();
-                        var uploadfile_data = jQuery('#fileupload').prop('files')[0];
-                        frmdata.append('files', uploadfile_data);
-                        frmdata.append('action','uploadfilehandle');
-                        frmdata.append('curr_action', curraction);
-                        frmdata.append('uploadPath', uploadPath);
-                        jQuery.ajax({
-                                url : ajaxurl,
-                                type : 'post',
-                                data : frmdata,
-                                cache: false,
-                                contentType : false,
-                                processData: false,
-                                success : function(data) {
-                                        var fileobj =JSON.parse(data);
-                                        jQuery.each(fileobj,function(objkey,objval){
-                                                        jQuery.each(objval,function(o_key,file){
-                                                                document.getElementById('uploadFileName').value=file.name;
-                                                                var filewithmodule = file.uploadedname.split(".");
-                                                                var check_file = filewithmodule[filewithmodule.length - 1];
-                                                                if(check_file != "csv" && check_file != "txt") {
-                                                                        alert('Un Supported File Format');
-                                                                        return false;
-                                                                }
-                                                                if(check_file == "csv"){
-                                                                        var filenamecsv = file.uploadedname.split(".csv");
-                                                                        file.uploadedname = filenamecsv[0] + "-<?php echo $_REQUEST['__module']; ?>" + ".csv";
-                                                                }
-                                                                if(check_file == "txt"){
-                                                                        var filenametxt = file.uploadedname.split(".txt");
-                                                                        file.uploadedname = filenametxt[0] + "-<?php echo $_REQUEST['__module']; ?>" + ".txt";
-                                                                }
-                                                                document.getElementById('upload_csv_realname').value = file.uploadedname; 
-                                                                var get_version1 = file.name.split("-<?php echo $_REQUEST['__module']; ?>");
-                                                                var get_version2 = get_version1[1].split(".csv");
-                                                                var get_version3 = get_version2[0].split("-");
-                                                                document.getElementById('current_file_version').value = get_version3[1];
-                                                                jQuery('#uploadedfilename').val(file.uploadedname);
-                                                                jQuery( "#filenamedisplay" ).empty();
-                                                                if(file.size>1024 && file.size<(1024*1024))
-                                                                {
-                                                                        var fileSize =(file.size/1024).toFixed(2)+' kb';
-                                                                }
-                                                                else if(file.size>(1024*1024))
-                                                                {
-                                                                        var fileSize =(file.size/(1024*1024)).toFixed(2)+' mb';
-                                                                }
-                                                                else
-                                                                {
-                                                                        var fileSize= (file.size)+' byte';
-                                                                }
-                                                                jQuery('<p/>').text((file.name)+' - '+fileSize).appendTo('#filenamedisplay');
-                                                                jQuery('#importfile').attr('disabled', false);
-                                                                jQuery('#fileupload').prop('disabled', !jQuery.support.fileInput)
-                                                                .parent().addClass(jQuery.support.fileInput ? undefined : 'disabled');
-                                                        });
-                                        });
-
-                                }
-                        });
-                }        
-        jQuery('#fileupload').on('change', prepareUpload);
-        jQuery('#fileupload').fileupload({
-		url : url,
-                progressall: function (e, data) {
-                var progress = parseInt(data.loaded / data.total * 100, 10);
-                jQuery('#progress .progress-bar').css('width', progress + '%' );
-                }
-        });
-	});
-	}
-	</script>
 	<input type = 'hidden' name = 'importid' id = 'importid' >
-<!--	<div class='section-one' align='center'>
-	<input type = 'button' name='clearform' id='clearform' value='Clear' onclick="Reload();" class = 'btn btn-warning' /> 
-	<input type = 'submit' name='importfile' id='importfile' value='Next>>' disabled class = 'btn btn-primary' /> 
-	<input type = 'hidden' name = 'importid' id = 'importid' >
-	</div> -->
 		</form>
 	</div>
 	</div>
@@ -344,9 +226,8 @@ if ($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['isplugin_avail'] != 'not_avail' 
 				}
 			}
 			?>	
-			<table style="font-size: 12px;" class = "table table-striped"> 
+			<table style="font-size: 12px;" class = "table table-striped" id='FIELDGRP'> 
 			<tr>
-			<td colspan='4'>
 			<div align='center' style='float:right;'>
 			<?php $cnt = count($impCE->defCols) + 2;
 			$cnt1 = count($impCE->headers);
@@ -369,13 +250,7 @@ if ($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['isplugin_avail'] != 'not_avail' 
 			<input type='hidden' id='stepstatus' name='stepstatus' value='<?php if(isset($_REQUEST['step'])){ echo $_REQUEST['step']; }  ?>' />
 			<input type='hidden' id='mappingArr' name='mappingArr' value='' />
 			<input type='hidden' id='inline_image_location' name='inline_image_location' value='<?php if(isset($extracted_image_location)){ echo $extracted_image_location;} ?>' />
-			<input type='button' id='prev_record' name='prev_record' class="btn btn-primary" value='<<' onclick='gotoelement(this.id);' />
-			 <label style="padding-right:10px;" id='preview_of_row'><?php echo __('Showing preview of row # 1','wp-ultimate-csv-importer'); ?> </label>
-                        <input type='button' id='next_record' name='next_record' class="btn btn-primary" value='>>' onclick='gotoelement(this.id);' />
-			<label id="importalign" style="margin-right:8px;"> <?php echo __('Go To Row #','wp-ultimate-csv-importer'); ?></label><input type='text' id='goto_element' name='goto_element' />
-			<input type='button' id='apply_element' name='apply_element' class="btn btn-success" value='<?php echo __('Show','wp-ultimate-csv-importer'); ?>' onclick='gotoelement(this.id);' style="margin-right:10px;margin-left:5px"/>
 			</div>
-			</td>
 			</tr> 
 			<?php
 			$count = 0;
@@ -388,114 +263,185 @@ if ($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['isplugin_avail'] != 'not_avail' 
                                 unset($impCE->defCols['wp_page_template']);
 			}
 			?>
-			<tr><td class="left_align columnheader"> <b><?php echo __('CSV HEADER','wp-ultimate-csv-importer'); ?></b> </td><td class="columnheader"> <b><?php echo __('WP FIELDS','wp-ultimate-csv-importer'); ?></b> </td><td class="columnheader"> <b><?php echo __('CSV ROW','wp-ultimate-csv-importer'); ?></b> </td><td></td></tr>
+			 <tr>
+                        <td colspan='4' class="left_align columnheader" style='background-color: #F5F5F5; border: 1px solid #d6e9c6;padding: 10px; width:100%;'>
+                        <div id = 'custfield_core' style='font-size:18px; font-family:times;'><b><?php echo __('WordPress Fields:','wp-ultimate-importer'); ?></b>
+                        </div>
+                        </td>
+                        </tr>
+			<tr>
+                        <td class="left_align columnheader" style='padding-left:170px;'> <b><?php echo __('WP FIELDS','wp-ultimate-csv-importer'); ?></b> </td><td class="columnheader" style='padding-left:55px;'> <b><?php echo __('CSV HEADER','wp-ultimate-csv-importer'); ?></b> </td><td> </td><td></td></tr>
 			<?php
-                         $eshopObj = new EshopActions();
-			foreach ($impCE->headers as $key => $value) 
-			{ ?>
-				<tr>
-					<td class="left_align csvheader"> <label> <?php print($value);?> </label> </td>
-					<td class="left_align"> <select name="mapping<?php print($count); ?>" id="mapping<?php print($count); ?>" class="uiButton" onchange="addcustomfield(this.value,<?php echo $count; ?>);">
-					<option id = "select">-- Select --</option>
-					<?php
-					foreach ($eshopObj->defCols as $key1 => $value1) 
-					{
-						if ($key1 == 'post_name')
-							$key1 = 'post_slug';
-						if ($value == 'post_name')
-							$value = 'post_slug';
+                        foreach ($eshopObj->defCols as $key => $value)
+                        {
+                                if(!strstr($key,'CF:') && !strstr($key,'SEO:')){?>
 
-					
-							?> 
-								<option value = "<?php print($key1); ?>">  <?php
+                        <tr>
+                                <td class="left_align" style='padding-left:150px;'>
+                        <input type='hidden' name ='fieldname<?php print($count); ?>' id = 'fieldname<?php print($count); ?>' value = '<?php echo $key; ?>' />
+                        <label class='wpfields'><?php print('<b>'.$key.'</b></label><br><label class="samptxt" style="padding-left:20px">[Name: '.$key.']'); ?></label>
+                                </td>
 
-						if ($key1 != 'post_name')
-						{
-							print ($key1);
-							$mappingFields_arr[$key1] = $key1;
-						}
-						else
-						{
-							print 'post_slug';
-							$mappingFields_arr['post_slug'] = 'post_slug';
-						}
-						?>
-							</option>
-							<?php
-					}
+                                <td>
+						
+								<?php if($key == 'post_status'){ ?>
+                                                                               <select name="mapping<?php print($count); ?>" id="mapping<?php print($count); ?>" onChange=changefield();>
+                                                                               <?php }else{ ?>
+                                                                               <select name="mapping<?php print($count); ?>"
+                                                                                               id="mapping<?php print($count); ?>">
+                                                                               <?php } ?>
+                                        <option><?php echo __('-- Select --',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?></option>
+                                        <?php foreach($impCE->headers as $key1 => $value1){?>
 
-					foreach (get_taxonomies() as $taxokey => $taxovalue) 
-					{
-						if ($taxokey != 'category' && $taxokey != 'link_category' && $taxokey != 'post_tag' && $taxokey != 'nav_menu' && $taxokey != 'post_format') 
-						{ ?>
-							<option value="<?php print($taxokey); ?>"> <?php print($taxovalue);?> </option>
-								<?php $mappingFields_arr[$taxovalue] = $taxovalue;
-						}
-					}
-					?>
-					<!--<option value="add_custom<?php //print($count); ?>"><?php //echo __('Add Custom Field',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?></option>-->
-					</select>
-                                        <script type="text/javascript">
+                                                <option><?php echo $value1; ?></option>
+                                        <?php }?>
+                                        </select>
+				<script type="text/javascript">
                                         jQuery("select#mapping<?php print($count); ?>").find('option').each(function() {
-                                                        if(jQuery(this).val() == "<?php print($value);?>") {
+                                                        if(jQuery(this).val() == "<?php print($key);?>") {
                                                         jQuery(this).prop('selected', true);
                                                         }
                                         });
-                                        </script> 
-					</td>
-					<td class="left_align csvcolumnvalue">
-					<?php 
-					$getrecords[0][$value] = htmlspecialchars($getrecords[0][$value], ENT_COMPAT, "UTF-8");
-					if(strlen($getrecords[0][$value])>32)
-					{
-						$getrecords[0][$value] = substr($getrecords[0][$value], 0, 28).'...';
-					} ?>
-					<span id='elementVal_<?php echo $key; ?>' > <?php echo ($getrecords[0][$value]); ?> </span>
-					</td>
-					<td width = "180px;">
-					<input class="customfieldtext" type="text" id="textbox<?php print($count); ?>" name="textbox<?php print($count); ?>" TITLE="Replace the default value" style="display: none;float:left;width:160px;" value="<?php echo $value ?>"/>
-					<span style="display: none;float:left" id="customspan<?php echo $count ?>">
-					<a href="#" class="tooltip">
-					<img src="<?php echo WP_PLUGIN_URL . '/' .WP_CONST_ULTIMATE_CSV_IMP_SLUG.'/images/help.png'; ?>" />
-					<span class="tooltipPostStatus">
-					<img class="callout" src="<?php echo WP_PLUGIN_URL . '/'. WP_CONST_ULTIMATE_CSV_IMP_SLUG.'/images/callout.gif'; ?>" />
-					<strong><?php echo __('Give a name for your new custom field','wp-ultimate-csv-importer'); ?></strong>
-					<img src="<?php echo WP_PLUGIN_URL . '/' . WP_CONST_ULTIMATE_CSV_IMP_SLUG.'/images/help.png' ; ?>" style="margin-top: 6px;float:right;" />
-					</span>
-					</a> 
-					</span>
-					<span style="display: none; color: red; margin-left: 5px;" id="customspan<?php echo $count ?>"><?php echo __('Replace the custom value','wp-ultimate-csv-importer'); ?></span>
-					</td>
-					</tr>
-					<?php
-					$count++;
-			}
-			foreach($mappingFields_arr as $mkey => $mval){
-				$mFieldsArr .= $mkey.',';
-			}
-			$mFieldsArr = substr($mFieldsArr, 0, -1);
-			?>
+                                        </script>
+
+                                </td>
+
+                                <td>
+
+				</td><td></td>
+                                </tr>
+                                        <?php
+                                        $count++;
+                        }
+                        }
+?>
+			<input type='hidden' id='wpfields' name='wpfields' value='<?php echo($count) ?>' />
+			</table>
+<script>
+</script>
+<?php
+                        foreach($mappingFields_arr as $mkey => $mval){
+                                $mFieldsArr .= $mkey.',';
+                        }
+                        $mFieldsArr = substr($mFieldsArr, 0, -1);
+                        ?>
+			<table style="font-size: 12px;" class = "table table-striped" id='CF_FIELDGRP'>
+                        <tr>
+
+                        <td colspan = 5 class='left_align columnheader' style='background-color: #F5F5F5; border: 1px solid #d6e9c6;padding: 10px; width:100%;'>
+                        <div id = 'custfield_core' style='font-size:18px; font-family:times;'><b><?php echo __('Custom Fields:','wp-ultimate-csv-importer'); ?></b>
+                        </div>
+
+                        </td>
+                        </tr>
+                        <?php
+                        foreach($impCE->defCols as $key => $value){
+                                if(strstr($key,'CF:')){
+                        ?>
+
+			<tr>
+                                <td class="left_align" style='width:53%; padding-left:150px;'>
+				<input type='hidden' name ='corefieldname<?php print($count); ?>' id = 'corefieldname<?php print($count); ?>' value = '<?php echo $key; ?>' />
+
+                        <label class='wpfields'><?php print('<b>'.$value.'</b></label><br><label class="samptxt" style="padding-left:20px">[Name: '.$value.']'); ?></label>
+                                </td>
+                                <td>
+                                        <select name="coremapping<?php print($count); ?>" id="coremapping<?php print($count); ?>">
+                                        <option><?php echo __('-- Select --',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?></option>
+                                        <?php foreach($impCE->headers as $key1 => $value1){?>
+                                                <option><?php echo $value1; ?></option>
+                                        <?php }?>
+                                        </select>
+
+                                        <script type="text/javascript">
+                                        jQuery("select#mapping<?php print($count); ?>").find('option').each(function() {
+                                                        if(jQuery(this).val() == "<?php print($key);?>") {
+                                                        jQuery(this).prop('selected', true);
+                                                        }
+                                        });
+                                        </script>
+                                </td>
+				<td>
+				</td><td></td>
+                                </tr>
+                                        <?php
+                                        $count++;
+                        }
+                        }?>
+			<input type='hidden' id='customfields' name='customfields' value='<?php echo($count) ?>' />
+			</table>
+<table>
+<tr>
+<td colspan= '4'>
+<input type='button' class='btn btn-primary' name='addcustomfd' value='Add Custom Field' style='margin-left:20px;margin-bottom:15px;margin-top:20px;' onclick = 'addcorecustomfield(CF_FIELDGRP);'>
+<input type='hidden' id ='addcorecustomfields' value ='' >
+</td>
+</tr>
+</table>
+
+			<?php
+                        $wpcsvfreesettings = get_option('wpcsvfreesettings');
+                        $active_plugins = get_option('active_plugins');
+                                if(in_array('all-in-one-seo-pack/all_in_one_seo_pack.php', $active_plugins)){
+?>
+			<table style="font-size: 12px;" class = "table table-striped" id='SEO_FIELDGRP'>
+                        <tr>
+
+                        <td colspan = 5 class='left_align columnheader' style='background-color: #F5F5F5; border: 1px solid #d6e9c6;padding: 10px; width:100%;'>
+                        <div id = 'custfield_core' style='font-size:18px; font-family:times;'><b><?php echo __('SEO Fields:','wp-ultimate_csv-importer'); ?></b>
+                        </div>
+
+                        </td>
+                        </tr>
+                        <?php
+                        foreach($impCE->defCols as $key => $value){
+                                if(strstr($key,'SEO:')){
+                                $value = str_replace('SEO:','',$value)
+                        ?>
+			<tr>
+                                <td class="left_align" style='width:53%; padding-left:150px;'>
+                                 <input type='hidden' name ='seofieldname<?php print($count); ?>' id = 'seofieldname<?php print($count); ?>' value = '<?php echo $key; ?>' />
+
+                        <label class='wpfields'><?php print('<b>'.$value.'</b></label><br><label class="samptxt" style="padding-left:20px">[Name: '.$value.']'); ?></label>
+                                </td>
+                                <td>
+                                        <select name="seomapping<?php print($count); ?>" id="seomapping<?php print($count); ?>">
+                                        <option><?php echo __('-- Select --',WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?></option>
+                                        <?php foreach($impCE->headers as $key1 => $value1){?>
+                                                <option><?php echo $value1; ?></option>
+                                        <?php }?>
+                                        </select>
+
+                                        <script type="text/javascript">
+                                        jQuery("select#mapping<?php print($count); ?>").find('option').each(function() {
+                                                        if(jQuery(this).val() == "<?php print($key);?>") {
+                                                        jQuery(this).prop('selected', true);
+                                                        }
+                                        });
+                                        </script>
+                                </td>
+                                <td>
+                                <td>
+				</td><td></td>
+                                </tr>
+
+				<?php
+                                        $count++;
+                        }
+                        }?>
+		<input type='hidden' id='seofields' name='seofields' value='<?php echo($count) ?>' />
 		</table>
+                <?php } ?>
+
                 <?php $basic_count = $count - 1; ?>
                 <input type="hidden" id="basic_count" name="basic_count" value="<?php echo $basic_count; ?>" />
                 <input type="hidden" id="corecustomcount" name="corecustomcount" value=0 />
-                <?php echo $impCE->customfieldui($count);?>
 
 		<input type="hidden" id="mapping_fields_array" name="mapping_fields_array" value="<?php if(isset($mFieldsArr)) { print_r($mFieldsArr); }  ?>"/>
 		<div>
-			<div class="goto_import_options" align=center>
+			<div class="goto_import_options" style='padding-left:330px;'>
 		<div class="mappingactions" style="margin-top;26px;">
 		<input type='button' id='clear_mapping' title = '<?php echo __('clear Mapping','wp-ultimate-csv-importer'); ?>' class='clear_mapping btn btn-warning' name='clear_mapping' value='<?php echo __('Clear','wp-ultimate-csv-importer'); echo ' ';echo $impCE->reduceStringLength(__(' Mapping','wp-ultimate-csv-importer'),'Mapping'); ?>' onclick='clearMapping();' style = 'float:left'/>
-		<span style = ''>
-		<a href="#" class="tooltip tooltip_smack"  style = ''>
-		<img src="<?php echo WP_CONST_ULTIMATE_CSV_IMP_DIR; ?>images/help.png" />
-		<span class="tooltipClearMapping">
-		<img class="callout" src="<?php echo WP_CONST_ULTIMATE_CSV_IMP_DIR; ?>images/callout.gif" />
-		<strong><?php echo __('Refresh to re-map fields','wp-ultimate-csv-importer'); ?></strong>
-		<img src="<?php echo WP_CONST_ULTIMATE_CSV_IMP_DIR; ?>images/help.png" style="margin-top: 6px;float:right;" />
-		</span>
-		</a>
-		</span>
 		</div>
 		<div class="mappingactions" >
 		<input type='submit' id='goto_importer_setting' title = '<?php echo __("Next",'wp-ultimate-csv-importer'); ?>' class='goto_importer_setting btn btn-info' name='goto_importer_setting' value='<?php echo $impCE->reduceStringLength(__('Next','wp-ultimate-csv-importer'),'Next'); ?> >>' /> 
@@ -538,39 +484,18 @@ if ($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['isplugin_avail'] != 'not_avail' 
              <?php } ?>
 		<!-- Import settings options -->
 		<div class="postbox" id="options" style=" margin-bottom:0px;">
-		<!--        <h4 class="hndle">Search settings</h4>-->
 		<div class="inside">
                  <label id='importalign'><input type ='radio' id='importNow' name='importMode' value='' onclick='choose_import_mode(this.id);' checked/> <?php echo __("Import right away",'wp-ultimate-csv-importer'); ?> </label> 
-                                        <label id='importalign'><input type ='radio' id='scheduleNow' name='importMode' value='' onclick='choose_import_mode(this.id);' disabled/> <?php echo __("Schedule now",'wp-ultimate-csv-importer'); ?> </label>
+                                        <label id='importalign'><input type ='radio' id='scheduleNow' name='importMode' value='' onclick='choose_import_mode(this.id);' disabled/> <?php echo __("Schedule now",'wp-ultimate-csv-importer'); ?> 
+					<img src="<?php echo WP_CONTENT_URL; ?>/plugins/<?php echo WP_CONST_ULTIMATE_CSV_IMP_SLUG; ?>/images/pro_icon.gif" title="PRO Feature"/> </label>
                   <div id='schedule' style='display:none'>
                                  <input type ='hidden' id='select_templatename' name='#select_templatename' value = '<?php if(isset($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['templateid'])) { echo $_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['templateid'] ; } ?>'>
-                                <?php //echo WPImporter_includes_schedulehelper::generatescheduleHTML(); ?>
                                     </div>
  <div id='importrightaway' style='display:block'>
 
 		<form method="POST" >
 		<ul id="settings">
 		<li>
-		<!--Get all posts with an <strong>content-similarity</strong> of more than:                        <strong><span id="similarity_amount">80</span>%</strong>
-		<div id="similarity" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" aria-disabled="false"><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 60%;"></a></div>
-		</li>
-		<input type="hidden" value="80" name="similarity">
-		<li id="statuses">Include these <strong>statuses</strong>: <br>
-		<input name="status[]" type="checkbox" value="draft"> Draft<br><input name="status[]" type="checkbox" value="pending"> Pending Review<br><input name="status[]" type="checkbox" value="private"> Private<br><input name="status[]" type="checkbox" value="publish" checked=""> Published<br>                    </li>
-		<li id="dates">Limit by <strong>post date</strong>:<br>
-		from <input id="datefrom" name="datefrom" class="datepicker hasDatepicker" type="text" value="" readonly="readonly"><img class="ui-datepicker-trigger" src="images/date-button.gif" alt="..." title="..."> until                        <input id="dateto" name="dateto" class="datepicker hasDatepicker" type="text" value="" readonly="readonly"><img class="ui-datepicker-trigger" src="images/date-button.gif" alt="..." title="...">
-		</li>
-		<li>
-		Compare <select name="search_field" id="search_field">
-		<option value="0" selected="selected">
-		content (post_content)                            </option>
-		<option value="1">
-		title (post_title)                            </option>
-		<option value="2">
-		content and title                            </option>
-		</select><br>
-		<input name="filterhtml" id="filterhtml" type="checkbox" value="1"> Filter out HTML-Tags while comparing <br>
-		<input name="filterhtmlentities" id="filterhtmlentities" type="checkbox" value="1"> Decode HTML-Entities before comparing <br>-->
 		<label id='importalign'><input name='duplicatecontent' id='duplicatecontent' type="checkbox" value=""> <?php echo __('Detect duplicate post content','wp-ultimate-csv-importer'); ?></label> <br>
 		<input type='hidden' name='wpnoncekey' id='wpnoncekey' value='<?php echo $nonce_Key; ?>' />
 		<label id='importalign'><input name='duplicatetitle' id='duplicatetitle' type="checkbox" value="" > <?php echo __('Detect duplicate post title','wp-ultimate-csv-importer'); ?></label> <br>
@@ -581,22 +506,13 @@ if ($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['isplugin_avail'] != 'not_avail' 
 		<input type="hidden" id="terminateaction" name="terminateaction" value="continue" />
 		<label id="innertitle"><?php echo __('Inline image options','wp-ultimate-csv-importer'); ?></label><br />
                 <label id='importalign'> <input type ='checkbox' id='multiimage' name='multiimage' value = ''><?php echo __('Insert Inline Images','wp-ultimate-csv-importer'); ?> </label><br>
-          <!--      <div id='inlineimageoption' style="display:none;" >
-                <label id='importalign'><input type="radio" name="inlineimage_location" id="imagewithextension" value="imagewithextension" onclick="inline_image_option(this.value);" /> Image name with extension </label>
-                <label id='importalign'><input type="radio" name="inlineimage_location" id="inlineimage_location" value="inlineimage_location" onclick="inline_image_option(this.value);" /> <input type="text" name="imagelocation" id="imagelocation" placeholder="Inline Image Location" value="" onblur="customimagelocation(this.value);" style="margin-top:5px;margin-left:10px"/></label>
-                </div> -->
                 <input type='hidden' id='inlineimagevalue' name='inlineimagevalue' value='none' />
 		</li>
-<!--		<li>
-		Ignore these words while comparing <input name="filterwords" id="filterwords" type="text" value="">
-		</li>-->
 		</ul>
-<!--		<input id="goto_back" name="goto_back" class="btn btn-warning" type="button" value="<< Back" onclick="gotoback();" /> -->
 		<input id="startbutton" class="btn btn-primary" type="button" value="<?php echo __('Import Now','wp-ultimate-csv-importer'); ?>" style="color: #ffffff;background:#2E9AFE;" onclick="importRecordsbySettings('<?php echo site_url(); ?>');" >
 		<input id="terminatenow" class="btn btn-danger btn-sm" type="button" value="<?php echo __('Terminate Now','wp-ultimate-csv-importer'); ?>" style="display:none;" onclick="terminateProcess();" />
 		<input class="btn btn-warning" type="button" value="<?php echo __('Reload','wp-ultimate-csv-importer'); ?>" id="importagain" style="display:none" onclick="import_again();" />
                 <input id="continuebutton" class="btn btn-lg btn-success" type="button" value="<?php echo __('Continue','wp-ultimate-csv-importer'); ?>" style="display:none;color: #ffffff;" onclick="continueprocess();">
-		<!--<input id="continuebutton" class="button" type="button" value="Continue old search" style="color: #ffffff;background:#2E9AFE;">-->
 		<div id="ajaxloader" style="display:none"><img src="<?php echo WP_CONST_ULTIMATE_CSV_IMP_DIR; ?>images/ajax-loader.gif"> <?php echo __('Processing...','wp-ultimate-csv-importer'); ?></div>
            
 		<div class="clear"></div>
@@ -604,7 +520,6 @@ if ($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['isplugin_avail'] != 'not_avail' 
                  </div>
 		<div class="clear"></div>
 		<br>
-<!--		Compared <span id="done">0</span> of <span id="count">6</span> posts<br>Found <span id="found">0</span> duplicates            <br><input id="deletebutton" style="display: none" class="button" type="button" value="Move selected posts to trash">-->
 		</div>
 		</div>
                 <?php } ?>
@@ -638,7 +553,6 @@ if ($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['isplugin_avail'] != 'not_avail' 
 		<div class="accordion-group" >
 		<div class="accordion-body in collapse">
 		<div>
-		<?php //$impCE->common_footer_for_other_plugin_promotions(); ?>
 		<?php $impCE->common_footer(); ?>
 		</div>
 		</div>

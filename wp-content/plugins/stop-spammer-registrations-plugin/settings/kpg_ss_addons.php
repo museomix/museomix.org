@@ -1,31 +1,72 @@
 <?php
 /*
 	Stop Spammers Plugin 
-	Options Setup Page for MU switch
-	
 */
 if (!defined('ABSPATH')) exit; // just in case
 
 if(!current_user_can('manage_options')) {
 	die('Access Denied');
 }
+$updateable=array("beta-updater","RedHerring","multicheck","LogReport","TorList","SFSToxicList");
+if (array_key_exists("kpg_ss_nonce",$_POST)&&wp_verify_nonce($_POST['kpg_ss_nonce'],'kpg_ss') ) {
+	if (!function_exists('kpg_install_update')) { // adding update function to main plugin?
+		include("kpg_install_update.php");
+	}
+	// go through the possible updates
+	foreach($updateable as $key) {
+		if (array_key_exists($key,$_POST)) {
+			kpg_install_update($key);
+			break;
+		}
+	}
+}
+
 ?>
 
 <div class="wrap">
-<p>Programmers may write Add-Ons that extend this plugin.</p>
-<p>There are three sample addons available at <a href="http://www.blogseye.com/beta-test-plugins/" target="_blank">Blogseye.com</a>. The addon for Red Herring Forms, especially, seems to stop a lot of spam. I will be moving it to a premium site, soon, so download it now before it is gone.</p>
-<p>Add-ons are plugins that hook into the Stop Spammer plugin to add functionality.<p>
-<p>I have written a sample addon plugin that checks for Tor Exit points available on my site. This catches a couple of hits a day on my site.</p>
-<p>I have written several premium add-ons that will be available. 
-They extend reporting, allow updating of .htaccess files ip deny entries, and blocking certain types of exploit attempts not covered by the basic plugin.
-I will provide links to these add-ons as soon as the plugin is complete and stable.</p> 
-<p>Some of the addons that I am working on:<br>
-Reporting: This is an addon that collects all data on spam in a SQL tables and produces reports and graphs.<br>
-Export to Excel: Exports collected spam data to Excel<br>
-Red Herring Forms: I removed red herring forms from the plugin because they clashed with many themes. This will allow users to install a red herring form and honey pot links.<br>
-Scan for Spammers: Scan registered users for spam. This will run on a cron job in the background and produce a report.</p>
-<p>I am researching using a digital sales plugin, or a pay site like Sellfy, CodeCanyon or WpEden for selling these addons.
-</p>
+<p>I've written several add-ons for Stop Spammers. Add-ons add additional functionality. There are several available. These add-ons are available from www.blogseye.com, but can be installed here with one click.</p>
+<p>Some time in the future, I will start charging for these add ons</p>
+<form method="post" action="#">
+	<?php wp_nonce_field( 'kpg_ss', 'kpg_ss_nonce' ) ?>
+	<table width="80%" align="center" bgcolor="#d0d0d0" cellspacing="2px">
+	<tr bgcolor="#f0f0f0">
+		<td>Beta Updater</td>
+		<td><input type="submit" name="beta-updater" value="Install/update Beta Updater"></td>
+		<td>Update Stop Spammers from the beta version. The plugin goes through frequent changes. I update the Wordpress repository infrequently. The latest stable version is always available for download.<br>
+		Install the add-on so that you can update Stop Spammers whenever you like. <p>
+		This allows your to update Stop Spammers directly from my website. 
+		
+		</p></td>
+	</tr>
+	<tr bgcolor="#f0f0f0">
+		<td>Red Herring</td>
+		<td><input type="submit" name="RedHerring" value="Install/update Red Herring"></td>
+		<td>The Red Herring plugin places a dummy form on your web pages. Spammers see the Red Herring Form and try to leave spam, login or register using the dummy form. Their request is ignored by Wordpress and their IP address is added to the bad cache so they will be blocked in the future. <br>
+		This is an effective way to stop spam. </td>
+	</tr>
+	<tr bgcolor="#f0f0f0">
+		<td>Check system.multicall</td>
+		<td><input type="submit" name="multicheck" value="Install/update system.multicall checker"></td>
+		<td>Spammers use the system.multicall option of xmlrpc.php to check thousands of login ids and passwords at a time. This protects agains this.</td>
+	</tr>
+	<tr bgcolor="#f0f0f0">
+		<td>Log Reporter</td>
+		<td><input type="submit" name="LogReport" value="Install/update Log Reporter"></td>
+		<td>Saves spammers in a CVS file and provides a download link in Excel Format. Useful for seeing all log events and not just the last few.</td>
+	</tr>
+	<tr bgcolor="#f0f0f0">
+		<td>Tor Check</td>
+		<td><input type="submit" name="TorList" value="Install/update Tor List Checker"></td>
+		<td>Check users IP against a list of Tor exit nodes. Rejects comments and login attempts from users coming from Tor.</td>
+	</tr>
+	<tr bgcolor="#f0f0f0">
+		<td>SFS Toxic List</td>
+		<td><input type="submit" name="SFSToxicList" value="Install/update SFS Toxic List"></td>
+		<td>Stop Forum Spam keeps a master list of Toxic IP addesses. These can be downloaded once a day and Stop Spammers will use the list to check for spam. This will let you check for spammers before hitting the SFS site.</td>
+	</tr>
+	</table>
+</form>
+<hr />
 <?php
 // get a list of all the addons using the filter
 $addons=array();
@@ -40,7 +81,7 @@ if (empty($addons)) {
 <fieldset style="border:thin solid black;padding:6px;width:100%;">
 <legend><span style="font-weight:bold;font-size:1.2em" >Installed Addons</span></legend>
 <ol>
-<?php
+	<?php
 	foreach($addons as $add) {
 	$ad0=$add[0];
 	$ad1=$add[1];
@@ -55,5 +96,6 @@ if (empty($addons)) {
 </fieldset>
 <?php
 }
+
 ?>
 </div>

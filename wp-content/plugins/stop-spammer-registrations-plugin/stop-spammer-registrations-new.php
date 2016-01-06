@@ -3,7 +3,7 @@
 Plugin Name: Stop Spammers Spam Control
 Plugin URI: http://wordpress.org/plugins/stop-spammer-registrations-plugin/
 Description: The Stop Spammers Plugin blocks spammers from leaving comments or logging in. Protects sites from robot registrations and malicious attacks.
-Version: 6.12
+Version: 6.13
 Author: Keith P. Graham
 
 This software is distributed in the hope that it will be useful,
@@ -12,11 +12,11 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
 // networking requires a couple of globals
 
-define('KPG_SS_VERSION', '6.12');
+define('KPG_SS_VERSION', '6.13');
 define( 'KPG_SS_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'KPG_SS_PLUGIN_FILE', plugin_dir_path( __FILE__ ) );
-
-$kpg_check_sempahore=false;
+define( 'KPG_SS_PLUGIN_DATA', plugin_dir_path( __FILE__ ).'data/' );
+$kpg_check_sempahore=false; 
 
 
 if (!defined('ABSPATH')) exit;
@@ -60,7 +60,8 @@ How it works:
 */
 
 function kpg_ss_init() {
-	remove_action('init','kpg_ss_init'); 
+	remove_action('init','kpg_ss_init');
+	add_filter( 'pre_user_login', kpg_ss_user_reg_filter, 1, 1 );
 	// incompatible with a jetpack submit
 	if ($_POST!=null&&array_key_exists('jetpack_protect_num',$_POST)) return;
 	// emember trying to log in - disable plugin for emember logins.
@@ -72,15 +73,8 @@ function kpg_ss_init() {
 	// set up the akismet hit
 	add_action('akismet_spam_caught','kpg_ss_log_akismet'); //hook akismet spam
 	$muswitch='N';
-	// fcheck to see if this is an opencpatcha image request - we need this to get the image
-	if ($_GET!=null&&array_key_exists('ocimg',$_GET)) {
-		// returns the image
-		$s=$_GET['ocimg'];
-		header('Content-Type: image/jpeg');
-		$response=wp_remote_get('http://www.opencaptcha.com/img/'.$s);
-		echo wp_remote_retrieve_body($response);
-		exit();
-	}
+	
+	
 
 	if (function_exists('is_multisite') && is_multisite()) {
 		$muswitch='Y';
@@ -107,6 +101,7 @@ function kpg_ss_init() {
 		// check to see if we need to hook the settings
 		// load the settings if logged in
 		if(is_user_logged_in()) {
+			remove_filter( 'pre_user_login', kpg_ss_user_reg_filter, 1);
 			if(current_user_can('manage_options')) {
 				kpg_sp_require('includes/ss-admin-options.php');
 				return;
@@ -124,7 +119,7 @@ function kpg_ss_init() {
 	if (function_exists('wp_emember_is_member_logged_in')) { 
 		if (wp_emember_is_member_logged_in()) return;
 	}
-
+    // can we check for $_GET registrations?
 	if (isset($_POST) && !empty($_POST)) {
 		// see if we are returning from a deny
 		if (array_key_exists('kpg_deny',$_POST)&&array_key_exists('kn',$_POST )) {
@@ -148,6 +143,7 @@ function kpg_ss_init() {
 		// check to see if we are doing a post with values
 		$post=get_post_variables();
 		if (!empty($post['email']) || !empty($post['author'])|| !empty($post['comment'])) { // must be a login or a comment which require minimum stuff 
+			//remove_filter( 'pre_user_login', kpg_ss_user_reg_filter, 1);
 			//sfs_debug_msg('email or author '.print_r($post,true));
 			$reason=kpg_ss_check_white();
 			if($reason!==false) {
@@ -176,6 +172,7 @@ function kpg_ss_init() {
 					$reason=be_load($add,kpg_get_ip(),$stats,$options);
 					if ($reason!==false) {
 						// need to log a passed hit on post here.
+						remove_filter( 'pre_user_login', kpg_ss_user_reg_filter, 1);
 						kpg_ss_log_bad(kpg_get_ip(),$reason,$add[1],$add);					
 						return;
 					}
@@ -343,7 +340,8 @@ function kpg_ss_check_white() {
 	sfs_errorsonoff('off');
 	return $ansa;
 	
-}function kpg_ss_check_white_block() { 
+}
+function kpg_ss_check_white_block() { // ??
 	sfs_errorsonoff();
 	$options=kpg_ss_get_options();
 	$stats=kpg_ss_get_stats();
@@ -433,8 +431,8 @@ function get_post_variables() {
 		return $ansa;
 	}
 	$search=array(
-	'email'=>array('email','address'), // 'input_' = woo forms
-	'author'=>array('author','log','user','signup_for','name','_id'),
+	'email'=>array('user_email','email','address'), // 'input_' = woo forms
+	'author'=>array('author','name','user_login','signup_for','log','user','name','_id'),
 	'pwd'=>array('psw','pwd','pass','secret'),
 	'comment'=>array('comment','message','body','excerpt'),
 	'subject'=>array('subj','topic'),
@@ -509,7 +507,7 @@ function get_post_variables() {
 	return $ansa;
 }
 function kpg_ss_addons_d($config=array()) {
-	// dunny function for testing
+	// dummy function for testing
 	return $config;
 }
 function kpg_caught_action($ip='',$post=array()) {
@@ -539,9 +537,11 @@ function load_be_module() {
 	} 
 }
 function kpg_new_user_ip($user_id) {
+	$x=$_SERVER['REQUEST_URI'];
+	$ip=kpg_get_ip();
+	//sfs_debug_msg("Checking reg filter login $x (kpg_user_ip)=".$ip.", method=".$_SERVER['REQUEST_METHOD'].", request=".print_r($_REQUEST,true));
+    // check to see if the user is OK
 	// add the users ip to new users
-	//$ip=kpg_get_ip();
-	$ip=$_SERVER['REMOTE_ADDR'];
 	update_user_meta($user_id, 'signup_ip', $ip);
 }
 function kpg_sfs_ip_column_head($column_headers) {
@@ -562,46 +562,62 @@ function kpg_log_user_ip($user_login="", $user="") {
 		update_user_meta($user_id, 'signup_ip', $ip);
 	}
 }
-// stolen directly from pluggable
-if ( !function_exists('wp_new_user_notification') ) {
-	/**
-* Email login credentials to a newly-registered user.
-*
-* A new user registration notification is also sent to admin email.
-*
-* @since 2.0.0
-*
-* @param int    $user_id        User ID.
-* @param string $plaintext_pass Optional. The user's plaintext password. Default empty.
-*/
-	function wp_new_user_notification($user_id, $plaintext_pass = '') {
-		$user = get_userdata( $user_id );
 
-		// The blogname option is escaped with esc_html on the way into the database in sanitize_option
-		// we want to reverse this for the plain text arena of emails.
-		$blogname = wp_specialchars_decode(get_option('blogname'), ENT_QUOTES);
+/***********************************
 
-		$message  = sprintf(__('New user registration on your site %s:'), $blogname) . "\r\n\r\n";
-		$message .= sprintf(__('Username: %s'), $user->user_login) . "\r\n\r\n";
-		$message .= sprintf(__('E-mail: %s'), $user->user_email) . "\r\n";
-		// additional line to link back to moderation page
-		$message.="\r\n Check users ".admin_url("users.php")." \r\n";
-		// done
+$user_email = apply_filters( 'user_registration_email', $user_email );
 
-		@wp_mail(get_option('admin_email'), sprintf(__('[%s] New User Registration'), $blogname), $message);
+I am going to start checking this filter for registrations.
+add_filter( 'user_registration_email', kpg_ss_user_reg_filter, 1, 1 );
 
-		if ( empty($plaintext_pass) )
-		return;
+***********************************/
 
-		$message  = sprintf(__('Username: %s'), $user->user_login) . "\r\n";
-		$message .= sprintf(__('Password: %s'), $plaintext_pass) . "\r\n";
-		$message .= wp_login_url() . "\r\n";
+function kpg_ss_user_reg_filter($user_login) {
+	// the plugin should be all initialized
+	// check the ip, etc.
+	sfs_errorsonoff();
+	$options=kpg_ss_get_options();
+	$stats=kpg_ss_get_stats();
+	
+	// fake out the post variables
+	$post=get_post_variables();
+	$post['author']=$user_login;
+	$post['addon']='chkRegister'; // no really an addon - but may be moved out when working.
 
-		wp_mail($user->user_email, sprintf(__('[%s] Your username and password'), $blogname), $message);
-
+	if ($options['filterregistrations']!='Y') {
+		remove_filter( 'pre_user_login', kpg_ss_user_reg_filter, 1);
+		sfs_errorsonoff('off');
+		return $user_login;
 	}
+	// if the suspect is already in the bad cache he does not get a second chance?
+	// prevents looping	
+	$reason=be_load('chkbcache',kpg_get_ip(),$stats,$options,$post);
+	sfs_errorsonoff();
+	if ($reason!==false) {
+		$rejectmessage=$options['rejectmessage'];
+		$post['reason']='Failed Registration: bad cache';
+		$host['chk']='chkbcache';
+		$ansa= be_load('kpg_ss_log_bad',kpg_get_ip(),$stats,$options,$post);
+		wp_die("$rejectmessage","Login Access Denied",array('response' => 403));
+		exit();
+	}
+	// check the white list
+	$reason=kpg_ss_check_white();
+	sfs_errorsonoff();
+	if ($reason!==false) {
+		$post['reason']='passed registration:'.$reason;
+		$ansa= be_load('kpg_ss_log_good',kpg_get_ip(),$stats,$options,$post);
+		sfs_errorsonoff('off');
+		return $user_login;
+    }
+	// check the black list
+	//sfs_debug_msg("Checking black list on registration: /r/n".print_r($post,true));
+	$ret=be_load('kpg_ss_check_post',kpg_get_ip(),$stats,$options,$post);
+	$post['reason']='Passed Registration '.$ret;
+	$ansa=be_load('kpg_ss_log_good',kpg_get_ip(),$stats,$options,$post);
+	
+	return $user_login;
 }
-
 
 
 require_once('includes/stop-spam-utils.php');

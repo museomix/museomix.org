@@ -12,13 +12,13 @@ if (KPG_SS_MU=='Y'){
 	add_action('mu_rightnow_end', 'kpg_sp_rightnow');
 	add_filter( 'network_admin_plugin_action_links_' . plugin_basename( __FILE__ ), 'kpg_sp_plugin_action_links' );
 	add_filter('plugin_row_meta', 'kpg_sp_plugin_action_links', 10, 2);
-    add_filter('wpmu_users_columns', 'kpg_sfs_ip_column_head');
+	add_filter('wpmu_users_columns', 'kpg_sfs_ip_column_head');
 
 } else {
 	add_action('admin_menu', 'kpg_ss_admin_menu');
 	add_action('rightnow_end', 'kpg_sp_rightnow');
 	add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'kpg_sp_plugin_action_links' );
-    add_filter('manage_users_columns', 'kpg_sfs_ip_column_head');
+	add_filter('manage_users_columns', 'kpg_sfs_ip_column_head');
 }
 
 add_action('network_admin_menu', 'kpg_ss_admin_menu');
@@ -164,6 +164,9 @@ function ipChkk() {
 
 
 function sfs_handle_ajax_sub($data) {
+	// check to see if it user can manage options
+	if(!is_user_logged_in()) return;
+	if(!current_user_can('manage_options')) return;
 	// suddenly loading before 'init' has loaded things?
 	// get the stuff from the $_GET and call stop forum spam
 	// this tages the stuff from the get and uses it to do the get from sfs
@@ -283,6 +286,8 @@ function sfs_handle_ajax_check($data) {
 	return;
 }
 function sfs_handle_ajax_sfs_process($data) {
+	if(!is_user_logged_in()) return;
+	if(!current_user_can('manage_options')) return;
 	sfs_errorsonoff();
 	sfs_handle_ajax_sfs_process_watch($data);
 	sfs_errorsonoff('off');
@@ -315,14 +320,14 @@ function sfs_handle_ajax_sfs_process_watch($data) {
 	case 'delete_gcache':
 		// deletes a good cache item
 		$ansa=be_load('kpg_ss_remove_gcache',$ip,$stats,$options);
-	    $show=be_load('kpg_ss_get_gcache','x',$stats,$options);
+		$show=be_load('kpg_ss_get_gcache','x',$stats,$options);
 		echo $show;
 		exit();
 		break;
 	case 'delete_bcache':
 		// deletes a bad cache item
 		$ansa=be_load('kpg_ss_remove_bcache',$ip,$stats,$options);
-	    $show=be_load('kpg_ss_get_bcache','x',$stats,$options);
+		$show=be_load('kpg_ss_get_bcache','x',$stats,$options);
 		echo $show;
 		exit();
 		break;
@@ -350,17 +355,17 @@ function sfs_handle_ajax_sfs_process_watch($data) {
 		// if it is not good or bad ip we don't need the container as it is the log
 		break;
 	case 'delete_wl_row': // this is from the allow request list
-	    $ansa=be_load('kpg_ss_get_alreq',$ip,$stats,$options);
+		$ansa=be_load('kpg_ss_get_alreq',$ip,$stats,$options);
 		echo $ansa;
 		exit();
 		break;
 	case 'delete_wlip': // this is from the allow request list
-	    $ansa=be_load('kpg_ss_get_alreq',$ip,$stats,$options);
+		$ansa=be_load('kpg_ss_get_alreq',$ip,$stats,$options);
 		echo $ansa;
 		exit();
 		break;
 	case 'delete_wlem': // this is from the allow request list
-	    $ansa=be_load('kpg_ss_get_alreq',$ip,$stats,$options);
+		$ansa=be_load('kpg_ss_get_alreq',$ip,$stats,$options);
 		echo $ansa;
 		exit();
 		break;
@@ -372,17 +377,17 @@ function sfs_handle_ajax_sfs_process_watch($data) {
 	$cachedel='delete_gcache';
 	switch ($container) {
 	case 'badips':
-	    $show=be_load('kpg_ss_get_bcache','x',$stats,$options);
+		$show=be_load('kpg_ss_get_bcache','x',$stats,$options);
 		echo $show;
 		exit();
 		break;
 	case 'goodips':
-	    $show=be_load('kpg_ss_get_gcache','x',$stats,$options);
+		$show=be_load('kpg_ss_get_gcache','x',$stats,$options);
 		echo $show;
 		exit();
 		break;
 	case 'wlreq':
-	    $ansa=be_load('kpg_ss_get_alreq',$ip,$stats,$options);
+		$ansa=be_load('kpg_ss_get_alreq',$ip,$stats,$options);
 		echo $ansa;
 		exit();
 	default:

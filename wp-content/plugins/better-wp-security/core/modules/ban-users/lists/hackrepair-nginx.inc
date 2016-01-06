@@ -125,7 +125,6 @@ if ($http_user_agent ~* "^WPScan"){return 403;}
 if ($http_user_agent ~* "^WWW\-Mechanize"){return 403;}
 if ($http_user_agent ~* "^WWWOFFLE"){return 403;}
 if ($http_user_agent ~* "^Xaldon WebSpider"){return 403;}
-if ($http_user_agent ~* "^Yandex"){return 403;}
 if ($http_user_agent ~* "^Zeus"){return 403;}
 if ($http_user_agent ~* "^zmeu"){return 403;}
 if ($http_user_agent ~* "360Spider"){return 403;}
@@ -160,7 +159,6 @@ if ($http_user_agent ~* "SBIder"){return 403;}
 if ($http_user_agent ~* "SearchmetricsBot"){return 403;}
 if ($http_user_agent ~* "SeznamBot"){return 403;}
 if ($http_user_agent ~* "Snoopy"){return 403;}
-if ($http_user_agent ~* "Sogou"){return 403;}
 if ($http_user_agent ~* "Steeler"){return 403;}
 if ($http_user_agent ~* "URI\:\:Fetch"){return 403;}
 if ($http_user_agent ~* "urllib"){return 403;}

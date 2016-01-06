@@ -22,7 +22,10 @@ class chklong { // change name
 				if (strlen($post['author'])>64) {
 					return "author too long:$author";
 				}
-				// short author is OK.
+				// short author is OK?.
+				if (strlen($post['author'])<3) {
+					return "author too short:$author";
+				}
 			}
 		}
 		if (array_key_exists('psw',$post)) {

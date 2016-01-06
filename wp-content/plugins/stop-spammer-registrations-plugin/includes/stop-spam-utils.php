@@ -7,7 +7,7 @@
 function kpg_append_file($filename,&$content) {
 	// this writes content to a file in the uploads director in the 'stop-spammer-registrations' directory
 	// changed to write to the current directory - content_dir is a bad place
-	$file=dirname(__FILE__).'/'.$filename;
+	$file=KPG_SS_PLUGIN_DATA.$filename;
 	$f=@fopen($file,'a');
 	if (!$f) return false;
 	fwrite($f,$content);
@@ -40,7 +40,7 @@ function kpg_read_file($f,$method='GET') {
 }
 function kpg_read_filex($filename) {
 	// read file
-	$file=dirname(__FILE__).'/'.$filename;
+	$file=KPG_SS_PLUGIN_DATA.$filename;
 	if (file_exists($file)) {
 		return file_get_contents($file);
 	}
@@ -48,12 +48,12 @@ function kpg_read_filex($filename) {
 }
 
 function kpg_file_exists($filename) {
-	$file=dirname(__FILE__).'/'.$filename;
+	$file=KPG_SS_PLUGIN_DATA.$filename;
 	if (!file_exists($file)) return false;
 	return filesize($file);
 }
 function kpg_file_delete($filename) {
-	$file=dirname(__FILE__).'/'.$filename;
+	$file=KPG_SS_PLUGIN_DATA.$filename;
 	return @unlink($file);
 }
 // debug functions
@@ -70,6 +70,7 @@ function sfs_errorsonoff($old=null) {
 function sfs_debug_msg($msg) {
 	// used to aid debugging. Adds to debug file
 	$debug=true;
+    $ip=kpg_get_ip();
 	if (!$debug) return;
 	$now=date('Y/m/d H:i:s',time() + ( get_option( 'gmt_offset' ) * 3600 ));
 	// get the program that is running
@@ -79,9 +80,9 @@ function sfs_debug_msg($msg) {
 	}
 	
 	$f='';
-	$f=@fopen(dirname(__FILE__)."/.sfs_debug_output.txt",'a');
+	$f=@fopen(KPG_SS_PLUGIN_DATA.".sfs_debug_output.txt",'a');
 	if(empty($f)) return false;
-	@fwrite($f,$now.": ".$sname.", ".$msg."\r\n");
+	@fwrite($f,$now.": ".$sname.", ".$msg.", ".$ip."\r\n");
 	@fclose($f);
 
 }
@@ -117,11 +118,13 @@ function sfs_ErrorHandler($errno, $errmsg, $filename, $linenum, $vars) {
 	$now=date('Y/m/d H:i:s',time() + ( get_option( 'gmt_offset' ) * 3600 ));
 	$m1=memory_get_usage(true);
 	$m2=memory_get_peak_usage(true);
+	$ip=kpg_get_ip();
 	$msg="
 	Time: $now
 	Error number: $errno
 	Error type: $serrno
 	Error Msg: $errmsg
+	IP address: $ip
 	File name: $filename
 	Line Number: $linenum
 	Memory used, peak: $m1, $m2
@@ -129,7 +132,7 @@ function sfs_ErrorHandler($errno, $errmsg, $filename, $linenum, $vars) {
 	";
 	// write out the error
 	$f='';
-	$f=@fopen(dirname(__FILE__)."/.sfs_debug_output.txt",'a');
+	$f=@fopen(KPG_SS_PLUGIN_DATA.".sfs_debug_output.txt",'a');
 	if(empty($f)) return false;
 	@fwrite($f,$msg);
 	@fclose($f);

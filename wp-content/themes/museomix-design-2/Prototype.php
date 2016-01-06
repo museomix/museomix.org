@@ -97,9 +97,9 @@ function ListeRelationsObjets($typeCible){
 	<section class="section-1"  style="min-height:100px;"><?php 
 			
 					if($contenu=get_field('resume_du_projet')){
-
-						if($photo=get_field('visuel_prototype')){
-							echo '<img style="float:left;margin-right:20px;" class="logo-elm-part" src="'.$photo.'">';
+						$photo=get_field('visuel_prototype');
+						if($photo){
+							echo '<img style="float:left;margin-right:20px;" class="logo-elm-part" src="'.wp_get_attachment_url($photo, 'thumbnail').'">';
 						}
 						echo '<blockquote>'.$contenu.'</blockquote>';
 					}
