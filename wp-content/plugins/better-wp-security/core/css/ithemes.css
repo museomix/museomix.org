@@ -8,6 +8,10 @@
 	margin : 0 0 0 6px;
 }
 
+.wrap h2.nav-tab-wrapper {
+	padding-bottom: 0;
+}
+
 div.inside ul {
 	margin-left : 20px;
 }

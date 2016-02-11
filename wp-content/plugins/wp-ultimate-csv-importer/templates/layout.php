@@ -53,9 +53,8 @@ if (isset($_REQUEST['action'])) {
 	$impCEM->requestedAction($_REQUEST['action'], isset($_REQUEST['step']));
 } else {
 	if (isset($_REQUEST['__module'])) {
-		#		print_r($skinny_content);
 		if (isset($_REQUEST['__module'])) {
-			if (current_user_can('administrator')) { //uthor' ) && current_user_can( 'editor' ) ) {
+			if (current_user_can('administrator')) {
 				print_r($skinny_content);
 			} else {
 				if ($_REQUEST['__module'] == 'users' || $_REQUEST['__module'] == 'settings') {

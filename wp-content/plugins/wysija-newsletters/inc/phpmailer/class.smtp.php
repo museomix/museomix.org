@@ -1087,6 +1087,8 @@ class acymailingSMTP
 	function StartTLS() {
 		$this->error = null; # to avoid confusion
 
+		stream_context_set_option($this->smtp_conn, "ssl", "verify_peer", false);
+
 		if(!$this->connected()) {
 			$this->error = array("error" => "Called StartTLS() without being connected");
 			return false;

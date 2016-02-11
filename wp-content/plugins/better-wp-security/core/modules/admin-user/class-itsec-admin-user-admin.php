@@ -14,7 +14,6 @@ class ITSEC_Admin_User_Admin {
 
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_script' ) ); //enqueue scripts for admin page
 		add_action( 'itsec_add_admin_meta_boxes', array( $this, 'add_admin_meta_boxes' ) ); //add meta boxes to admin page
-		add_filter( 'itsec_add_dashboard_status', array( $this, 'dashboard_status' ) ); //add information for plugin status
 
 		if ( ! empty( $_POST ) ) {
 			add_action( 'itsec_admin_init', array( $this, 'initialize_admin' ) ); //initialize admin area
@@ -161,59 +160,6 @@ class ITSEC_Admin_User_Admin {
 	}
 
 	/**
-	 * Sets the status in the plugin dashboard
-	 *
-	 * @since 4.0
-	 *
-	 * @return array array of statuses
-	 */
-	public function dashboard_status( $statuses ) {
-
-		if ( ! username_exists( 'admin' ) ) {
-
-			$status_array = 'safe-high';
-			$status       = array(
-				'text' => __( 'The <em>admin</em> user has been removed or renamed.', 'better-wp-security' ),
-				'link' => '#itsec_authentication_admin_user_username', 'advanced' => true,
-			);
-
-		} else {
-
-			$status_array = 'high';
-			$status       = array(
-				'text' => __( 'The <em>admin</em> user still exists.', 'better-wp-security' ),
-				'link' => '#itsec_authentication_admin_user_username', 'advanced' => true,
-			);
-
-		}
-
-		array_push( $statuses[$status_array], $status );
-
-		if ( ! ITSEC_Lib::user_id_exists( 1 ) ) {
-
-			$status_array = 'safe-medium';
-			$status       = array(
-				'text' => __( 'The user with id 1 has been removed.', 'better-wp-security' ),
-				'link' => '#itsec_authentication_admin_user_userid', 'advanced' => true,
-			);
-
-		} else {
-
-			$status_array = 'medium';
-			$status       = array(
-				'text' => __( 'A user with id 1 still exists.', 'better-wp-security' ),
-				'link' => '#itsec_authentication_admin_user_userid', 'advanced' => true,
-			);
-
-		}
-
-		array_push( $statuses[$status_array], $status );
-
-		return $statuses;
-
-	}
-
-	/**
 	 * Execute admin initializations
 	 *
 	 * @return void
@@ -223,8 +169,11 @@ class ITSEC_Admin_User_Admin {
 		$this->settings = ( username_exists( 'admin' ) || ITSEC_Lib::user_id_exists( 1 ) ) ? false : true;
 
 		if ( ! $this->settings === true && isset( $_POST['itsec_enable_admin_user'] ) && $_POST['itsec_enable_admin_user'] == 'true' ) {
+			if ( empty( $_POST['admin_user_nonce'] ) ) {
+				return;
+			}
 
-			if ( ! wp_verify_nonce( $_POST['wp_nonce'], 'ITSEC_admin_save' ) ) {
+			if ( ! wp_verify_nonce( $_POST['admin_user_nonce'], 'save_admin_user_settings' ) ) {
 				die( __( 'Security check', 'better-wp-security' ) );
 			}
 
@@ -310,7 +259,7 @@ class ITSEC_Admin_User_Admin {
 			<form method="post" action="?page=toplevel_page_itsec_advanced&settings-updated=true"
 			      class="itsec-form">
 
-				<?php wp_nonce_field( 'ITSEC_admin_save', 'wp_nonce' ); ?>
+				<?php wp_nonce_field( 'save_admin_user_settings', 'admin_user_nonce' ); ?>
 
 				<table class="form-table">
 					<tr valign="top">

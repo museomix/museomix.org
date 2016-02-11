@@ -46,10 +46,10 @@ $nonce_Key = $impCE->create_nonce_key();
 		<table class="table-importer">
 			<tr>
 				<td>
-					<h3><?php echo __('CSV Import Options', 'wp-ultimate-csv-importer'); ?></h3>
+					<h3><?php echo esc_html__('CSV Import Options', 'wp-ultimate-csv-importer'); ?></h3>
 
 					<div
-						id='sec-one' <?php if ($_REQUEST['step'] != 'uploadfile') { ?> style='display:none;' <?php } ?>>
+						id='sec-one' <?php if (sanitize_text_field($_REQUEST['step']) !== 'uploadfile') { ?> style='display:none;' <?php } ?>>
 						<?php if (is_dir($impCE->getUploadDirectory('default'))) {
 							if (!is_writable($impCE->getUploadDirectory('default'))) {
 								if (!chmod($impCE->getUploadDirectory('default'), 0777)) { ?>
@@ -64,8 +64,7 @@ $nonce_Key = $impCE->create_nonce_key();
 						<?php } ?>
 						<div class="warning" id="warning" name="warning"
 							 style="display:none;margin: 4% 0 4% 22%;"></div>
-						<form
-							action='<?php echo admin_url() . 'admin.php?page=' . WP_CONST_ULTIMATE_CSV_IMP_SLUG . '/index.php&__module=' . $_REQUEST['__module'] . '&step=mapping_settings' ?>'
+							<form action='<?php echo esc_url(add_query_arg(array('page' => WP_CONST_ULTIMATE_CSV_IMP_SLUG.'/index.php', '__module' => sanitize_text_field($_REQUEST['__module']), 'step' => 'mapping_settings'), $impCE->baseUrl)); ?>'
 							id='browsefile' enctype="multipart/form-data" method='post' name='browsefile'>
 							<div class="importfile" align='center'>
 								<div id='filenamedisplay'></div>
@@ -84,7 +83,7 @@ $nonce_Key = $impCE->create_nonce_key();
 									<input type='hidden' id='current_file_version' name='current_file_version' value=''>
 									<input type='hidden' id='current_module' name='current_module'
 										   value='<?php if (isset($_REQUEST['__module'])) {
-											   echo $_REQUEST['__module'];
+											   echo sanitize_text_field($_REQUEST['__module']);
 										   } ?>'>
 									</span>
 									<!-- The global progress bar -->
@@ -93,13 +92,13 @@ $nonce_Key = $impCE->create_nonce_key();
 											<tr>
 									<div style="float:right;">
 										<input type='button' name='clearform' id='clearform'
-											   value='<?php echo __("Clear", 'wp-ultimate-csv-importer'); ?>'
+											   value='<?php echo esc_attr__("Clear", 'wp-ultimate-csv-importer'); ?>'
 											   onclick="Reload();"
 											   class='btn btn-warning' style="margin-right:15px"/>
 										<input type='submit' name='importfile'
-											   title='<?php echo __('Next', 'wp-ultimate-csv-importer'); ?>'
+											   title='<?php echo esc_attr__('Next', 'wp-ultimate-csv-importer'); ?>'
 											   id='importfile'
-											   value='<?php echo $impCE->reduceStringLength(__("Next", 'wp-ultimate-csv-importer'), 'Next');
+											   value='<?php echo $impCE->reduceStringLength(esc_attr__("Next", 'wp-ultimate-csv-importer'), 'Next');
 											   echo(" >>"); ?>' disabled
 											   class='btn btn-primary' style="margin-right:15px"/>
 									</div>
@@ -110,7 +109,6 @@ $nonce_Key = $impCE->create_nonce_key();
 		<div id="files" class="files"></div>
 		<br>
 	</div>
-	<input type='hidden' name='importid' id='importid'>
 	</form>
 </div>
 </div>
@@ -119,29 +117,26 @@ $nonce_Key = $impCE->create_nonce_key();
 <tr>
 	<td>
 		<form name='mappingConfig'
-			  action="<?php echo admin_url(); ?>admin.php?page=<?php echo WP_CONST_ULTIMATE_CSV_IMP_SLUG; ?>/index.php&__module=<?php echo $_REQUEST['__module'] ?>&step=importoptions"
+			action='<?php echo esc_url(add_query_arg(array('page' => WP_CONST_ULTIMATE_CSV_IMP_SLUG.'/index.php', '__module' => sanitize_text_field($_REQUEST['__module']), 'step' => 'importoptions'), $impCE->baseUrl)); ?>'
 			  method="post" onsubmit="return import_csv();">
 			<div class='msg' id='showMsg' style='display:none;'></div>
 			<?php $_SESSION['SMACK_MAPPING_SETTINGS_VALUES'] = $_POST;
-			if (isset($_POST['mydelimeter'])) {
-				$_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['delim'] = $_POST['mydelimeter'];
-			}
 			$wpcsvsettings = array();
 			$custom_key = array();
 			$wpcsvsettings = get_option('wpcsvfreesettings');
 			?>
-			<h3><?php echo __('Map CSV to WP fields/attributes', 'wp-ultimate-csv-importer'); ?></h3>
-			<?php if (isset($_REQUEST['step']) && $_REQUEST['step'] == 'mapping_settings') { ?>
-			<div id='sec-two' <?php if ($_REQUEST['step'] != 'mapping_settings') { ?> style='display:none;' <?php } ?> >
+			<h3><?php echo esc_html__('Map CSV to WP fields/attributes', 'wp-ultimate-csv-importer'); ?></h3>
+			<?php if (isset($_REQUEST['step']) && sanitize_text_field($_REQUEST['step']) === 'mapping_settings') { ?>
+			<div id='sec-two' <?php if (sanitize_text_field($_REQUEST['step']) !== 'mapping_settings') { ?> style='display:none;' <?php } ?> >
 				<div class='mappingsection'>
 					<h2>
 						<div
-							class="secondformheader"><?php echo __('Import Data Configuration', 'wp-ultimate-csv-importer'); ?></div>
+							class="secondformheader"><?php echo esc_html__('Import Data Configuration', 'wp-ultimate-csv-importer'); ?></div>
 					</h2>
 					<?php
 					if (isset($_FILES['inlineimages'])) {
-						if (isset($_POST['uploadfilename']) && $_POST['uploadfilename'] != '') {
-							$get_file_name = $_POST['uploadfilename'];
+						if (isset($_POST['uploadfilename']) && sanitize_file_name($_POST['uploadfilename'] != '')) {
+							$get_file_name = sanitize_file_name($_POST['uploadfilename']);
 							$filehashkey = $impCE->convert_string2hash_key($get_file_name);
 						}
 						$uploaded_compressedFile = $_FILES['inlineimages']['tmp_name'];
@@ -163,69 +158,72 @@ $nonce_Key = $impCE->create_nonce_key();
 						}
 					}
 					?>
-					<?php if (isset($_REQUEST['__module']) && $_REQUEST['__module'] == 'custompost') { 
+					<?php if (isset($_REQUEST['__module']) && sanitize_text_field($_REQUEST['__module']) === 'custompost') { 
 						$activeplugins = get_option('active_plugins');	
 					?>
-						<div class='importstatus' style='display:true;'>
+						<div class='importstatus' style=''>
 							<input type="hidden" id="customposts" name="customposts" value="">
 
 							<div style='float:left'><label
-									id="importalign"> <?php echo __('Select Post Type', 'wp-ultimate-csv-importer'); ?> </label>
+									id="importalign"> <?php echo esc_html__('Select Post Type', 'wp-ultimate-csv-importer'); ?> </label>
 								<span class="mandatory"> * </span></div>
 							<div style='float:left;margin-right:10px'>
 								<select name='custompostlist' id='custompostlist'>
 									<option value='select'>---Select---</option>
 									<?php
 									$cust_post_list_count = 0;
+				if(is_array(get_post_types())){
 				foreach (get_post_types() as $key => $value) {
                                 $cctm_post_type = array();
                                 $cctm_post_type = get_option('cctm_data');
-                                if(!empty($cctm_post_type)){
+                                if(!empty($cctm_post_type) && is_array($cctm_post_type)){
                                         foreach($cctm_post_type['post_type_defs'] as $cctmptkey => $cctmptval) {
-                                                if($cctmptkey == $value){
+                                                if($cctmptkey === $value){
                                                         $value = 'createdByCCTM';
                                                 }
                                         }
                                 }
                                 $types_post_types = array();
                                 $types_post_types = get_option('wpcf-custom-types');
-                                if(!empty($types_post_types)) {
+                                if(!empty($types_post_types) && is_array($types_post_types)) {
                                         foreach($types_post_types as $tptKey => $tptVal){
-                                                if($tptKey == $value) {
+                                                if($tptKey === $value) {
                                                         $value = 'createdByTypes';
                                                 }
                                         }
                                 }
 				$pods_post_types = array();
 				$pods_post_types = get_option('_transient_pods_get_type_post_type');
-				if(!empty($pods_post_types)){
+				if(!empty($pods_post_types) && is_array($pods_post_types)){
                                 	foreach($pods_post_types as $podskey => $podsvalue){
-                                        	if($podsvalue['name'] == $value){
+                                        	if($podsvalue['name'] === $value){
                                                         $value = 'createdByPODS';
                                                 }
                                 	}
 				}
-                                        if (($value != 'featured_image') && ($value != 'attachment') && ($value != 'wpsc-product') && ($value != 'wpsc-product-file') && ($value != 'revision') && ($value != 'nav_menu_item') && ($value != 'post') && ($value != 'page') && ($value != 'wp-types-group') && ($value != 'wp-types-user-group') && ($value != 'product') && ($value != 'product_variation') && ($value != 'shop_order') && ($value != 'shop_coupon') && ($value != 'acf') && ($value != 'acf-field-group') && ($value != 'acf-field') && ($value != '_pods_pod') && ($value != '_pods_field') && ($value != 'mp_order') && ($value != 'createdByTypes') &&($value != 'createdByCCTM') && ($value != 'createdByPODS')) {?>
+                                        if (($value !== 'featured_image') && ($value !== 'attachment') && ($value !== 'wpsc-product') && ($value !== 'wpsc-product-file') && ($value !== 'revision') && ($value !== 'nav_menu_item') && ($value !== 'post') && ($value !== 'page') && ($value !== 'wp-types-group') && ($value !== 'wp-types-user-group') && ($value !== 'product') && ($value !== 'product_variation') && ($value !== 'shop_order') && ($value !== 'shop_coupon') && ($value !== 'acf') && ($value !== 'acf-field-group') && ($value !== 'acf-field') && ($value !== '_pods_pod') && ($value !== '_pods_field') && ($value !== 'mp_order') && ($value !== 'createdByTypes') &&($value !== 'createdByCCTM') && ($value !== 'createdByPODS')) {?>
                                                 <option id="<?php echo($value); ?>"> <?php echo($value);?> </option>
                                                         <?php
                                                         $cust_post_list_count++;
                                         }
+				}
 									} ?>
 								</select>
+	
 								<input type='hidden' id='cust_post_list_count' name='cust_post_list_count'
 									   value='<?php echo $cust_post_list_count; ?>'>
 							</div>
 							<div style='float:left'>
 								<a href="#" class="tooltip">
-									<img src="<?php echo WP_CONST_ULTIMATE_CSV_IMP_DIR; ?>images/help.png"/>
+									<img src="<?php echo esc_url(WP_CONST_ULTIMATE_CSV_IMP_DIR .'images/help.png');?>"/>
 			<span class="tooltipCustompost">
-			<img class="callout" src="<?php echo WP_CONST_ULTIMATE_CSV_IMP_DIR; ?>images/callout.gif"/>
-			<strong><?php echo __('Select your custompost type', 'wp-ultimate-csv-importer'); ?></strong>
-			<img src="<?php echo WP_CONST_ULTIMATE_CSV_IMP_DIR; ?>images/help.png"
+			<img class="callout" src="<?php echo esc_url(WP_CONST_ULTIMATE_CSV_IMP_DIR.'images/callout.gif');?>"/>
+			<strong><?php echo esc_html__('Select your custompost type', 'wp-ultimate-csv-importer'); ?></strong>
+			<img src="<?php echo esc_url(WP_CONST_ULTIMATE_CSV_IMP_DIR.'images/help.png');?>"
 				 style="margin-top: 6px;float:right;"/>
 			</span>
 								</a><label id='cust_post_empty'
-										   style='display:none'><?php echo __('CUSTOMPOST LIST IS EMPTY', 'wp-ultimate-csv-importer'); ?></label>
+										   style='display:none'><?php echo esc_html__('CUSTOMPOST LIST IS EMPTY', 'wp-ultimate-csv-importer'); ?></label>
 							</div>
 						</div>
 					<?php } ?>
@@ -233,28 +231,24 @@ $nonce_Key = $impCE->create_nonce_key();
 				</div>
 				<div id='mappingheader' class='mappingheader'>
 					<?php
-					//   $impCE = CallSkinnyObj::getInstance();
 					$allcustomposts = '';
-					$mFieldsArr = '';
-					$delimeter = '';
 					$filename = '';
 					$records = '';
-					if (isset($_POST['uploadfilename']) && $_POST['uploadfilename'] != '') {
-						$file_name = $_POST['uploadfilename'];
+					if (isset($_POST['uploadfilename']) && sanitize_file_name($_POST['uploadfilename']) != '') {
+						$file_name = sanitize_file_name($_POST['uploadfilename']);
 						$filename = $impCE->convert_string2hash_key($file_name);
 					}
-					if (isset($_POST['mydelimeter'])) {
-						$delimeter = $_POST['mydelimeter'];
-					}
-					if (isset($_POST['upload_csv_realname']) && $_POST['upload_csv_realname'] != '') {
-						$uploaded_csv_name = $_POST['upload_csv_realname'];
+					if (isset($_POST['upload_csv_realname']) && sanitize_file_name($_POST['upload_csv_realname']) != '') {
+						$uploaded_csv_name = sanitize_file_name($_POST['upload_csv_realname']);
 					}
 					$getrecords = $impCE->csv_file_data($filename);
 					$getcustomposts = get_post_types();
+					if(!empty($getcustomposts) && is_array($getcustomposts)) {
 					foreach ($getcustomposts as $keys => $value) {
-						if (($value != 'featured_image') && ($value != 'attachment') && ($value != 'wpsc-product') && ($value != 'wpsc-product-file') && ($value != 'revision') && ($value != 'nav_menu_item') && ($value != 'post') && ($value != 'page') && ($value != 'wp-types-group') && ($value != 'wp-types-user-group')) {
+						if (($value !== 'featured_image') && ($value !== 'attachment') && ($value !== 'wpsc-product') && ($value !== 'wpsc-product-file') && ($value !== 'revision') && ($value !== 'nav_menu_item') && ($value !== 'post') && ($value !== 'page') && ($value !== 'wp-types-group') && ($value !== 'wp-types-user-group')) {
 							$allcustomposts .= $value . ',';
 						}
+					}
 					}
 					?>
 					<table style="font-size: 12px;" class="table table-striped" id='FIELDGRP'>
@@ -276,10 +270,8 @@ $nonce_Key = $impCE->create_nonce_key();
 									} ?>"/>
 									<input type='hidden' name='selectedImporter' id='selectedImporter'
 										   value="<?php if (isset($_REQUEST['__module'])) {
-											   echo $_REQUEST['__module'];
+											   echo sanitize_text_field($_REQUEST['__module']);
 										   } ?>"/>
-									<input type="hidden" id="prevoptionindex" name="prevoptionindex" value=""/>
-									<input type="hidden" id="prevoptionvalue" name="prevoptionvalue" value=""/>
 									<input type='hidden' id='current_record' name='current_record' value='0'/>
 									<input type='hidden' id='totRecords' name='totRecords'
 										   value='<?php if (isset($records)) {
@@ -298,15 +290,10 @@ $nonce_Key = $impCE->create_nonce_key();
 										   value="<?php if (isset($uploaded_csv_name)) {
 											   echo $uploaded_csv_name;
 										   } ?>"/>
-									<input type='hidden' id='select_delimeter' name='select_delimeter'
-										   value="<?php if (isset($delimeter)) {
-											   echo $delimeter;
-										   } ?>"/>
 									<input type='hidden' id='stepstatus' name='stepstatus'
 										   value='<?php if (isset($_REQUEST['step'])) {
 											   echo $_REQUEST['step'];
 										   } ?>'/>
-									<input type='hidden' id='mappingArr' name='mappingArr' value=''/>
 									<input type='hidden' id='inline_image_location' name='inline_image_location'
 										   value='<?php if (isset($extracted_image_location)) {
 											   echo $extracted_image_location;
@@ -315,12 +302,12 @@ $nonce_Key = $impCE->create_nonce_key();
 						</tr>
 						<?php
 						$count = 0;
-						if (isset($_REQUEST['__module']) && $_REQUEST['__module'] == 'page') {
+						if (isset($_REQUEST['__module']) && sanitize_text_field($_REQUEST['__module']) === 'page') {
 							unset($impCE->defCols['post_category']);
 							unset($impCE->defCols['post_tag']);
 							unset($impCE->defCols['post_format']);
 						}
-						if (isset($_REQUEST['__module']) && $_REQUEST['__module'] != 'page') {
+						if (isset($_REQUEST['__module']) && sanitize_text_field($_REQUEST['__module']) !== 'page') {
 							unset($impCE->defCols['menu_order']);
 							unset($impCE->defCols['wp_page_template']);
 						}
@@ -328,21 +315,22 @@ $nonce_Key = $impCE->create_nonce_key();
 						<tr>
 							<td colspan='4' class="left_align columnheader"
 								style='background-color: #F5F5F5; border: 1px solid #d6e9c6;padding: 10px; width:100%;'>
-								<div id='custfield_core' style='font-size:18px; font-family:times;'><b><?php echo __('WordPress Fields:','wp-ultimate-importer'); ?></b>
+								<div id='custfield_core' style='font-size:18px; font-family:times;'><b><?php echo esc_html__('WordPress Fields:','wp-ultimate-importer'); ?></b>
 								</div>
 							</td>
 						</tr>
 						<tr>
 							<td class="left_align columnheader" style = 'padding-left:170px;'>
-								<b><?php echo __('WP FIELDS', 'wp-ultimate-csv-importer'); ?></b></td>
-							<td class="columnheader" style = 'padding-left:55px;'><b><?php echo __('CSV HEADER', 'wp-ultimate-csv-importer'); ?></b>
+								<b><?php echo esc_html__('WP FIELDS', 'wp-ultimate-csv-importer'); ?></b></td>
+							<td class="columnheader" style = 'padding-left:55px;'><b><?php echo esc_html__('CSV HEADER', 'wp-ultimate-csv-importer'); ?></b>
 							</td>
 							<td>	</td>
 							<td></td>
 						</tr>
 						<?php
+						if(!empty($impCE->defCols) && is_array($impCE->defCols)) {
 						foreach ($impCE->defCols as $key => $value) {
-							if (!strstr($key, 'CF:') && !strstr($key, 'SEO:')) {
+							if (!strstr($key, 'CF:') && !strstr($key, 'SEO:') && !strstr($key,'TERMS:')) {
 								?>
 
 								<tr>
@@ -355,21 +343,23 @@ $nonce_Key = $impCE->create_nonce_key();
 
 									<td>
 
-										<?php if($key == 'post_status'){ ?>
+										<?php if($key === 'post_status'){ ?>
                                                                                <select name="mapping<?php print($count); ?>" id="mapping<?php print($count); ?>" onChange=changefield();>
                                                                                <?php }else{ ?>
                                                                                <select name="mapping<?php print($count); ?>"
                                                                                                id="mapping<?php print($count); ?>">
                                                                                <?php } ?>
-											<option><?php echo __('-- Select --', WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?></option>
-											<?php foreach ($impCE->headers as $key1 => $value1) { ?>
+											<option>-- Select --</option>
+											<?php if(is_array($impCE->headers) && !empty($impCE->headers)) {
+											foreach ($impCE->headers as $key1 => $value1) { ?>
 
 												<option><?php echo $value1; ?></option>
-											<?php } ?>
+											<?php }
+ 											} ?>
 										</select>
 										<script type="text/javascript">
-											jQuery("select#mapping<?php print($count); ?>").find('option').each(function () {
-												if (jQuery(this).val() == "<?php print($key);?>") {
+											jQuery("select#mapping<?php print(esc_js($count)); ?>").find('option').each(function () {
+												if (jQuery(this).val() == "<?php print(esc_js($key));?>") {
 													jQuery(this).prop('selected', true);
 												}
 											});
@@ -385,6 +375,7 @@ $nonce_Key = $impCE->create_nonce_key();
 								$count++;
 							}
 						}
+						}
 						?>
 						<input type='hidden' id='wpfields' name='wpfields' value='<?php echo($count) ?>'/>
 					</table>
@@ -396,12 +387,13 @@ $nonce_Key = $impCE->create_nonce_key();
 
 							<td colspan=5 class='left_align columnheader'
 								style='background-color: #F5F5F5; border: 1px solid #d6e9c6;padding: 10px; width:100%;'>
-								<div id='custfield_core' style='font-size:18px; font-family:times;'><b><?php echo __('Custom Fields:','wp-ultimate-csv-importer'); ?></b>
+								<div id='custfield_core' style='font-size:18px; font-family:times;'><b><?php echo esc_html__('Custom Fields:','wp-ultimate-csv-importer'); ?></b>
 								</div>
 
 							</td>
 						</tr>
 						<?php
+						if(!empty($impCE->defCols) && is_array($impCE->defCols)) {
 						foreach ($impCE->defCols as $key => $value) {
 							if (strstr($key, 'CF:')) {
 								?>
@@ -418,15 +410,17 @@ $nonce_Key = $impCE->create_nonce_key();
 									<td>
 										<select name="coremapping<?php print($count); ?>"
 												id="coremapping<?php print($count); ?>">
-											<option><?php echo __('-- Select --', WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?></option>
-											<?php foreach ($impCE->headers as $key1 => $value1) { ?>
+											<option>-- Select --</option>
+											<?php if(is_array($impCE->headers) && !empty($impCE->headers)) {
+												foreach ($impCE->headers as $key1 => $value1) { ?>
 												<option><?php echo $value1; ?></option>
-											<?php } ?>
+											<?php }
+											} ?>
 										</select>
 
 										<script type="text/javascript">
-											jQuery("select#mapping<?php print($count); ?>").find('option').each(function () {
-												if (jQuery(this).val() == "<?php print($key);?>") {
+											jQuery("select#coremapping<?php print(esc_js($count)); ?>").find('option').each(function () {
+												if (jQuery(this).val() == "<?php print(esc_js($value));?>") {
 													jQuery(this).prop('selected', true);
 												}
 											});
@@ -440,19 +434,71 @@ $nonce_Key = $impCE->create_nonce_key();
 								<?php
 								$count++;
 							}
+						}
 						} ?>
 						<input type='hidden' id='customfields' name='customfields' value='<?php echo($count) ?>'/>
 					</table>
-					<table>
-						<tr>
-							<td colspan='4'>
-								<input type='button' class='btn btn-primary' name='addcustomfd' value='Add Custom Field'
-									   style='margin-left:20px;margin-bottom:15px;margin-top:20px;'
-									   onclick='addcorecustomfield(CF_FIELDGRP);'>
-								<input type='hidden' id ='addcorecustomfields' value ='' >
-							</td>
-						</tr>
-					</table>
+
+                                        <table>
+                                                <tr>
+                                                        <td colspan='4'>
+                                                                <input type='button' class='btn btn-primary' name='addcustomfd' value='Add Custom Field'
+                                                                           style='margin-left:20px;margin-bottom:15px;margin-top:20px;'
+                                                                           onclick='addcorecustomfield(CF_FIELDGRP);'>
+                                                                <input type='hidden' id ='addcorecustomfields' value ='' >
+                                                        </td>
+                                                </tr>
+                                        </table>
+
+                                        <!-- Terms and Taxonomy -->
+                                        <table style="font-size: 12px;" class="table table-striped" id='TERMS_FIELDGRP'>
+                                                <tr>
+                                                        <td colspan=5 class='left_align columnheader' style='background-color: #F5F5F5; border: 1px solid #d6e9c6;padding: 10px; width:100%;'>
+                                                        <div id='terms_field' style='font-size:18px; font-family:times;'><b><?php echo esc_html__('Terms / Taxonomies Fields:','wp-ultimate-csv-importer'); ?></b>
+                                                        </div>
+                                                        </td>
+                                                </tr>
+                                                <?php
+						if(!empty($impCE->defCols) && is_array($impCE->defCols)) {
+                                                foreach ($impCE->defCols as $key => $value) {
+                                                        if (strstr($key, 'TERMS:')) {
+                                                                $key = str_replace('TERMS:', '', $key);
+                                                ?>
+                                                                        <tr>
+                                                                                <td class="left_align" style='width:53%;padding-left:150px'>
+                                                                                <input type='hidden' name='termfieldname<?php print($count); ?>' id='termfieldname<?php print($count); ?>' value='<?php echo $value; ?>'/>
+                                                                                <label class='wpfields'><?php print('<b>' . $key . '</b></label><br><label class="samptxt" style="padding-left:20px">[Name: ' . $value . ']'); ?></label>
+                                                                                </td>
+                                                                                <td>
+                                                                                <select name="term_mapping<?php print($count); ?>" id="term_mapping<?php print($count); ?>">
+                                                                                        <option>-- Select --</option>
+                                                                                        <?php 
+											if(is_array($impCE->headers) && !empty($impCE->headers)) {
+											foreach ($impCE->headers as $key1 => $value1) { ?>
+                                                                                                <option><?php echo $value1; ?></option>
+                                                                                        <?php } 
+											}?>
+                                                                                </select>
+                                                                                <script type="text/javascript">
+                                                                                        jQuery("select#term_mapping<?php print(esc_js($count)); ?>").find('option').each(function () {
+                                                                                                        if (jQuery(this).val() == "<?php print(esc_js($key));?>") {
+                                                                                                        jQuery(this).prop('selected', true);
+                                                                                                        }
+                                                                                                        });
+                                                                                </script>
+                                                                                </td>
+                                                                                <td>
+                                                                                </td>
+                                                                                <td></td>
+                                                                        </tr>
+                                                                        <?php
+                                                                        $count++;
+                                                        }
+						}
+                                                } ?>
+                                                <input type='hidden' id='termfields' name='termfields' value='<?php echo($count) ?>'/>
+                                                </table>
+                                        <!-- End Terms and Taxonomy -->
 					<?php
 					$wpcsvfreesettings = get_option('wpcsvfreesettings');
 					$active_plugins = get_option('active_plugins');
@@ -460,20 +506,18 @@ $nonce_Key = $impCE->create_nonce_key();
 								?>
 								<table style="font-size: 12px;" class="table table-striped" id='SEO_FIELDGRP'>
 									<tr>
-
 										<td colspan=5 class='left_align columnheader'
 											style='background-color: #F5F5F5; border: 1px solid #d6e9c6;padding: 10px; width:100%;'>
-											<div id='custfield_core' style='font-size:18px; font-family:times;'><b><?php echo __('SEO Fields:','wp-ultimate-csv-importer'); ?></b>
+											<div id='custfield_core' style='font-size:18px; font-family:times;'><b><?php echo esc_html__('SEO Fields:','wp-ultimate-csv-importer'); ?></b>
 											</div>
-
 										</td>
 									</tr>
 									<?php
+									if(!empty($impCE->defCols) && is_array($impCE->defCols)) {
 									foreach ($impCE->defCols as $key => $value) {
-										if (strstr($key, 'SEO:')) {
-											$value = str_replace('SEO:', '', $value)
+										if (strstr($key, 'SEO: ')) {
+											$value = str_replace('SEO: ', '', $value)
 											?>
-
 											<tr>
 												<td class="left_align" style='width:53%; padding-left:150px;'>
 													<input type='hidden' name='seofieldname<?php print($count); ?>'
@@ -486,15 +530,18 @@ $nonce_Key = $impCE->create_nonce_key();
 												<td>
 													<select name="seomapping<?php print($count); ?>"
 															id="seomapping<?php print($count); ?>">
-														<option><?php echo __('-- Select --', WP_CONST_ULTIMATE_CSV_IMP_SLUG); ?></option>
-														<?php foreach ($impCE->headers as $key1 => $value1) { ?>
+														<option>-- Select --</option>
+														<?php 
+															if(is_array($impCE->headers) && !empty($impCE->headers)) {
+															foreach ($impCE->headers as $key1 => $value1) { ?>
 															<option><?php echo $value1; ?></option>
-														<?php } ?>
+														<?php } 
+														}?>
 													</select>
 
 													<script type="text/javascript">
-														jQuery("select#mapping<?php print($count); ?>").find('option').each(function () {
-															if (jQuery(this).val() == "<?php print($key);?>") {
+														jQuery("select#seomapping<?php print(esc_js($count)); ?>").find('option').each(function () {
+															if (jQuery(this).val() == "<?php print(esc_js($value));?>") {
 																jQuery(this).prop('selected', true);
 															}
 														});
@@ -505,41 +552,35 @@ $nonce_Key = $impCE->create_nonce_key();
 												</td>
 												<td></td>
 											</tr>
-
 											<?php
 											$count++;
 										}
+									}
 									} ?>
 									<input type='hidden' id='seofields' name='seofields' value='<?php echo($count) ?>'/>
 								</table>
 							<?php }
 					?>
-
 					<?php $basic_count = $count - 1; ?>
 					<input type="hidden" id="basic_count" name="basic_count" value="<?php echo $basic_count; ?>"/>
-					<input type="hidden" id="corecustomcount" name="corecustomcount" value=0/>
-					<input type="hidden" id="mapping_fields_array" name="mapping_fields_array"
-						   value="<?php if (isset($mFieldsArr)) {
-							   print_r($mFieldsArr);
-						   } ?>"/>
-
+					<input type="hidden" id="corecustomcount" name="corecustomcount" value= 0 />
 					<div>
 						<div class="goto_import_options" align=center>
 							<div class="mappingactions" style="margin-top:26px;">
 								<input type='button' id='clear_mapping'
-									   title='<?php echo __('Clear Mapping', 'wp-ultimate-csv-importer'); ?>'
+									   title='<?php echo esc_attr__('Clear Mapping', 'wp-ultimate-csv-importer'); ?>'
 									   class='clear_mapping btn btn-warning' name='clear_mapping'
-									   value='<?php echo __('Clear', 'wp-ultimate-csv-importer');
+									   value='<?php echo esc_attr__('Clear', 'wp-ultimate-csv-importer');
 									   echo ' ';
-									   echo $impCE->reduceStringLength(__(' Mapping', 'wp-ultimate-csv-importer'), 'Mapping'); ?>'
+									   echo $impCE->reduceStringLength(esc_attr__(' Mapping', 'wp-ultimate-csv-importer'), 'Mapping'); ?>'
 									   onclick='clearMapping();' style='float:left'/>
                 <span style=''>
                 <a href="#" class="tooltip tooltip_smack" style=''>
-					<img src="<?php echo WP_CONST_ULTIMATE_CSV_IMP_DIR; ?>images/help.png"/>
+					<img src="<?php echo esc_url(WP_CONST_ULTIMATE_CSV_IMP_DIR.'images/help.png');?>"/>
                 <span class="tooltipClearMapping">
-                <img class="callout" src="<?php echo WP_CONST_ULTIMATE_CSV_IMP_DIR; ?>images/callout.gif"/>
+                <img class="callout" src="<?php echo esc_url(WP_CONST_ULTIMATE_CSV_IMP_DIR.'images/callout.gif');?>"/>
                 <strong><?php echo __('Refresh to re-map fields', 'wp-ultimate-csv-importer'); ?></strong>
-                <img src="<?php echo WP_CONST_ULTIMATE_CSV_IMP_DIR; ?>images/help.png"
+                <img src="<?php echo esc_url(WP_CONST_ULTIMATE_CSV_IMP_DIR.'images/help.png');?>"
 					 style="margin-top: 6px;float:right;"/>
                 </span>
 				</a>
@@ -547,9 +588,9 @@ $nonce_Key = $impCE->create_nonce_key();
 							</div>
 							<div class="mappingactions">
 								<input type='submit' id='goto_importer_setting'
-									   title='<?php echo __('Next', 'wp-ultimate-csv-importer'); ?>'
+									   title='<?php echo esc_attr__('Next', 'wp-ultimate-csv-importer'); ?>'
 									   class='goto_importer_setting btn btn-info' name='goto_importer_setting'
-									   value='<?php echo $impCE->reduceStringLength(__('Next', 'wp-ultimate-csv-importer'), 'Next'); ?> >>'/>
+									   value='<?php echo $impCE->reduceStringLength(esc_attr__('Next', 'wp-ultimate-csv-importer'), 'Next'); ?> >>'/>
 							</div>
 						</div>
 					</div>
@@ -561,57 +602,45 @@ $nonce_Key = $impCE->create_nonce_key();
 </tr>
 <tr>
 	<td>
-		<h3><?php echo __('Settings and Performance', 'wp-ultimate-csv-importer'); ?></h3>
-		<?php if (isset($_REQUEST['step']) && $_REQUEST['step'] == 'importoptions') { ?>
-		<div id='sec-three' <?php if ($_REQUEST['step'] != 'importoptions') { ?> style='display:none;' <?php } ?> >
-			<?php //$prevoptionindex='';?>
-			<input type="hidden" id="prevoptionindex" name="prevoptionindex" value="<?php
-			if (isset($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['prevoptionindex'])) {
-				echo $_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['prevoptionindex'];
-			}
-			?>"/>
+		<h3><?php echo esc_html__('Settings and Performance', 'wp-ultimate-csv-importer'); ?></h3>
+		<?php if (isset($_REQUEST['step']) && sanitize_text_field($_REQUEST['step']) === 'importoptions') { ?>
+		<div id='sec-three' <?php if (sanitize_text_field($_REQUEST['step']) !== 'importoptions') { ?> style='display:none;' <?php } ?> >
 			<?php if (isset($_SESSION['SMACK_MAPPING_SETTINGS_VALUES'])) { ?>
-				<input type="hidden" id="prevoptionvalue" name="prevoptionvalue"
-					   value="<?php echo $_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['prevoptionvalue']; ?>"/>
 				<input type='hidden' id='current_record' name='current_record'
-					   value='<?php echo $_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['current_record']; ?>'/>
+					   value='<?php echo sanitize_text_field($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['current_record']); ?>'/>
 				<input type='hidden' id='tot_records' name='tot_records'
-					   value='<?php echo $_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['totRecords']; ?>'/>
+					   value='<?php echo sanitize_text_field($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['totRecords']); ?>'/>
 				<input type='hidden' id='checktotal' name='checktotal'
-					   value='<?php echo $_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['totRecords']; ?>'/>
+					   value='<?php echo sanitize_text_field($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['totRecords']); ?>'/>
 				<input type='hidden' id='stepstatus' name='stepstatus'
-					   value='<?php echo $_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['stepstatus']; ?>'/>
+					   value='<?php echo sanitize_text_field($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['stepstatus']); ?>'/>
 				<input type='hidden' id='selectedImporter' name='selectedImporter'
-					   value='<?php echo $_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['selectedImporter']; ?>'/>
+					   value='<?php echo sanitize_text_field($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['selectedImporter']); ?>'/>
 			<?php } ?>
 			<?php if (isset($_POST)) { ?>
 				<input type='hidden' id='tmpLoc' name='tmpLoc' value='<?php echo WP_CONST_ULTIMATE_CSV_IMP_DIR; ?>'/>
-				<input type='hidden' id='checkfile' name='checkfile' value='<?php echo $_POST['uploadedFile']; ?>'/>
-				<input type='hidden' id='select_delim' name='select_delim'
-					   value='<?php echo $_POST['select_delimeter']; ?>'/>
+				<input type='hidden' id='checkfile' name='checkfile' value='<?php echo sanitize_file_name($_POST['uploadedFile']); ?>'/>
 				<input type='hidden' id='uploadedFile' name='uploadedFile'
-					   value='<?php echo $_POST['uploadedFile']; ?>'/>
+					   value='<?php echo sanitize_text_field($_POST['uploadedFile']); ?>'/>
 				<input type='hidden' id='inline_image_location' name='location_inlineimages'
-					   value='<?php echo $_POST['inline_image_location']; ?>'/>
+					   value='<?php echo sanitize_text_field($_POST['inline_image_location']); ?>'/>
 			<?php } ?>
-			<input type='hidden' id='mappingArr' name='mappingArr' value=''/>
 			<!-- Import settings options -->
 			<div class="postbox" id="options" style=" margin-bottom:0px;">
-				<!--        <h4 class="hndle">Search settings</h4>-->
 				<div class="inside">
 					<label id="importalign"><input type='radio' id='importNow' name='importMode' value=''
 												   onclick='choose_import_mode(this.id);'
-												   checked/> <?php echo __("Import right away", 'wp-ultimate-csv-importer'); ?>
+												   checked/> <?php echo esc_html__("Import right away", 'wp-ultimate-csv-importer'); ?>
 					</label>
 					<label id="importalign"><input type='radio' id='scheduleNow' name='importMode' value=''
 												   onclick='choose_import_mode(this.id);'
-												   disabled/> <?php echo __("Schedule now", 'wp-ultimate-csv-importer'); ?>
-					<img src="<?php echo WP_CONTENT_URL; ?>/plugins/<?php echo WP_CONST_ULTIMATE_CSV_IMP_SLUG; ?>/images/pro_icon.gif" title="PRO Feature"/> </label>
+												   disabled/> <?php echo esc_html__("Schedule now", 'wp-ultimate-csv-importer'); ?>
+					<img src="<?php echo esc_url(WP_CONST_ULTIMATE_CSV_IMP_DIR .'images/pro_icon.gif');?>" title="PRO Feature"/> </label>
 
 					<div id='schedule' style='display:none'>
 						<input type='hidden' id='select_templatename' name='#select_templatename'
 							   value='<?php if (isset($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['templateid'])) {
-								   echo $_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['templateid'];
+								   echo sanitize_text_field($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['templateid']);
 							   } ?>'>
 					</div>
 					<div id='importrightaway' style='display:block'>
@@ -620,46 +649,46 @@ $nonce_Key = $impCE->create_nonce_key();
 								<li>
 									<label id="importalign"><input name='duplicatecontent' id='duplicatecontent'
 																   type="checkbox"
-																   value=""> <?php echo __('Detect duplicate post content', 'wp-ultimate-csv-importer'); ?>
+																   value=""> <?php echo esc_html__('Detect duplicate post content', 'wp-ultimate-csv-importer'); ?>
 									</label> <br>
 									<input type='hidden' name='wpnoncekey' id='wpnoncekey'
 										   value='<?php echo $nonce_Key; ?>'/>
 									<label id="importalign"><input name='duplicatetitle' id='duplicatetitle'
 																   type="checkbox"
-																   value=""> <?php echo __('Detect duplicate post title', 'wp-ultimate-csv-importer'); ?>
+																   value=""> <?php echo esc_html__('Detect duplicate post title', 'wp-ultimate-csv-importer'); ?>
 									</label> <br>
 									<label
-										id="importalign"><?php echo __('No. of posts/rows per server request', 'wp-ultimate-csv-importer'); ?></label>
+										id="importalign"><?php echo esc_html__('No. of posts/rows per server request', 'wp-ultimate-csv-importer'); ?></label>
 									<span class="mandatory" style="margin-left:-13px;margin-right:10px">*</span> <input
 										name="importlimit" id="importlimit" type="text" value="1" placeholder="10"
 										onblur="check_allnumeric(this.value);"></label> <?php echo $impCE->helpnotes(); ?>
 									<br>
 									<span class='msg' id='server_request_warning'
-										  style="display:none;color:red;margin-left:-10px;"><?php echo __('You can set upto', 'wp-ultimate-csv-importer'); ?><?php echo $_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['totRecords']; ?><?php echo __('per request.', 'wp-ultimate-csv-importer'); ?></span>
+										  style="display:none;color:red;margin-left:-10px;"><?php echo esc_html__('You can set upto', 'wp-ultimate-csv-importer'); ?><?php echo sanitize_text_field($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['totRecords']); ?><?php echo esc_html__('per request.', 'wp-ultimate-csv-importer'); ?></span>
 									<input type="hidden" id="currentlimit" name="currentlimit" value="0"/>
 									<input type="hidden" id="tmpcount" name="tmpcount" value="0"/>
 									<input type="hidden" id="terminateaction" name="terminateaction" value="continue"/>
 									<label id="innertitle">Inline image options</label><br/>
 									<label id='importalign'> <input type='checkbox' id='multiimage' name='multiimage'
-																	value=''> <?php echo __('Insert Inline Images', 'wp-ultimate-csv-importer'); ?>
+																	value=''> <?php echo esc_attr__('Insert Inline Images', 'wp-ultimate-csv-importer'); ?>
 									</label><br>
 									<input type='hidden' id='inlineimagevalue' name='inlineimagevalue' value='none'/>
 								</li>
 							</ul>
 							<input id="startbutton" class="btn btn-primary" type="button"
-								   value="<?php echo __('Import Now', 'wp-ultimate-csv-importer'); ?>"
+								   value="<?php echo esc_attr__('Import Now', 'wp-ultimate-csv-importer'); ?>"
 								   style="color: #ffffff;background:#2E9AFE;" onclick="importRecordsbySettings();">
 							<input id="terminatenow" class="btn btn-danger btn-sm" type="button"
-								   value="<?php echo __('Terminate Now', 'wp-ultimate-csv-importer'); ?>"
+								   value="<?php echo esc_attr__('Terminate Now', 'wp-ultimate-csv-importer'); ?>"
 								   style="display:none;" onclick="terminateProcess();"/>
 							<input class="btn btn-warning" type="button"
-								   value="<?php echo __('Reload', 'wp-ultimate-csv-importer'); ?>" id="importagain"
+								   value="<?php echo esc_attr__('Reload', 'wp-ultimate-csv-importer'); ?>" id="importagain"
 								   style="display:none" onclick="import_again();"/>
 							<input id="continuebutton" class="btn btn-lg btn-success" type="button"
-								   value="<?php echo __('Continue', 'wp-ultimate-csv-importer'); ?>"
+								   value="<?php echo esc_attr__('Continue', 'wp-ultimate-csv-importer'); ?>"
 								   style="display:none;color: #ffffff;" onclick="continueprocess();">
 							<div id="ajaxloader" style="display:none"><img
-									src="<?php echo WP_CONST_ULTIMATE_CSV_IMP_DIR; ?>images/ajax-loader.gif"> <?php echo __('Processing...', 'wp-ultimate-csv-importer'); ?>
+									src="<?php echo esc_url(WP_CONST_ULTIMATE_CSV_IMP_DIR.'images/ajax-loader.gif');?>"> <?php echo __('Processing...', 'wp-ultimate-csv-importer'); ?>
 							</div>
 							<div class="clear"></div>
 						</form>
@@ -680,14 +709,13 @@ $nonce_Key = $impCE->create_nonce_key();
 		<table class="table-importer">
 			<tr>
 				<td>
-					<h3><?php echo __("Summary", 'wp-ultimate-csv-importer'); ?></h3>
+					<h3><?php echo esc_html__("Summary", 'wp-ultimate-csv-importer'); ?></h3>
 
 					<div id='reportLog' class='postbox' style='display:none;'>
 						<input type='hidden' name='csv_version' id='csv_version'
 							   value="<?php if (isset($_POST['uploaded_csv_name'])) {
-								   echo $_POST['uploaded_csv_name'];
+								   echo sanitize_file_name($_POST['uploaded_csv_name']);
 							   } ?>">
-
 						<div id="logtabs" class="logcontainer">
 							<div id="log" class='log'>
 							</div>
@@ -707,5 +735,4 @@ $nonce_Key = $impCE->create_nonce_key();
 			</div>
 		</div>
 	</div>
-</div>
 </div>

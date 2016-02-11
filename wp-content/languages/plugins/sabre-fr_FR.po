@@ -1,0 +1,948 @@
+# Translation of Stable (latest release) in French (France)
+# This file is distributed under the same license as the Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2015-10-12 12:45:27+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: GlotPress/1.0-alpha-1100\n"
+"Project-Id-Version: Stable (latest release)\n"
+
+#: classes/sabre_class_admin.php:344
+msgid "(List of valid invitation codes - Usage is the number of time the code can be used - Validity is the expiration date in YYYY-MM-DD format)"
+msgstr "(Liste des codes invit&eacute;s valides. Usage est le nombre d'utilisations possibles du code - Validit&eacute; est la date d'expiration au format AAAA-MM-JJ)"
+
+#: classes/sabre_class_admin.php:344
+msgid "Validity"
+msgstr "Validit&eacute;"
+
+#: classes/sabre_class_admin.php:347
+msgid "Miscellaneous options"
+msgstr "Options diverses"
+
+#: classes/sabre_class_admin.php:350
+msgid "User's password:"
+msgstr "Mot de passe de l'utilisateur:"
+
+#: classes/sabre_class_admin.php:350
+msgid "(User can choose his own password during registration)"
+msgstr "(L'utilisateur peut choisir lui-m&ecirc;me son mot de passe pendant l'enregistrement)"
+
+#: classes/sabre_class_admin.php:354
+msgid "Show banner:"
+msgstr "Inclure la banni&egrave;re:"
+
+#: classes/sabre_class_admin.php:354
+msgid "(Mention Sabre at the bottom of the registration form)"
+msgstr "(Mentionner Sabre au bas du formulaire d'inscription)"
+
+#: classes/sabre_class_admin.php:355
+msgid "Show on dashboard:"
+msgstr "Afficher sur le tableau de bord:"
+
+#: classes/sabre_class_admin.php:355
+msgid "(Include Sabre statistics on the dashboard)"
+msgstr "(Inclure les statistiques de Sabre dans le tableau de bord)"
+
+#: classes/sabre_class_admin.php:356
+msgid "Show in profile:"
+msgstr "Afficher dans le profil:"
+
+#: classes/sabre_class_admin.php:356
+msgid "(Include Sabre informations in the user profile)"
+msgstr "(Inclure les informations de Sabre dans le profil utilisateur)"
+
+#: classes/sabre_class_admin.php:357
+msgid "Suppress Sabre:"
+msgstr "Supprimer Sabre:"
+
+#: classes/sabre_class_admin.php:357
+msgid "(Delete all Sabre stuff when deactivating the plugin - Use with caution!)"
+msgstr "(Effacer toutes les informations concernant Sabre quand le plugin est d&eacute;sactiv&eacute; - A utiliser avec pr&eacute;caution !)"
+
+#: classes/sabre_class_admin.php:352
+msgid "Sender's name:"
+msgstr "Nom de l'exp&eacute;diteur:"
+
+#: classes/sabre_class_admin.php:352
+msgid "(Name used in mails sent by Sabre - Blog's name used if left blank)"
+msgstr "(Nom de l'exp&eacute;diteur des mails envoy&eacute;s par Sabre - Nom du blog si zone &agrave blanc)"
+
+#: classes/sabre_class_admin.php:353
+msgid "Sender's email:"
+msgstr "Adresse mail de l'exp&eacute;diteur:"
+
+#: classes/sabre_class_admin.php:353
+msgid "(Mail address in mails sent by Sabre - Administrator's mail used if left blank)"
+msgstr "(Adresse mail de l'exp&eacute;diteur des mails envoy&eacute;s par Sabre - Mail de l'administrateur si zone &agrave; blanc)"
+
+#: classes/sabre_class_admin.php:367
+msgid "Save options"
+msgstr "Enregistrer les options"
+
+#: sabre.php:63
+msgid "New user registration on your site %s:"
+msgstr "Enregistrement d'un nouvel utilisateur sur votre site %s"
+
+#: sabre.php:73
+msgid "[%s] New User Registration"
+msgstr "[%s] Inscription d'un nouvel utilisateur"
+
+#: sabre.php:85
+msgid "Thank you for registering on %s"
+msgstr "Merci pour votre inscription sur %s."
+
+#: sabre.php:89
+msgid "Password: %s"
+msgstr "Mot de passe: %s"
+
+#: sabre.php:88
+msgid "Use the password defined during your registration"
+msgstr "Utilisez le mot de passe choisi pendant l'enregistrement"
+
+#: sabre.php:102
+msgid "[%s] - Your registration information"
+msgstr "[%s] - Vos informations d'enregistrement"
+
+#: sabre.php:91
+msgid "You must confirm your registration within %s day by following the link below"
+msgid_plural "You must confirm your registration within %s days by following the link below"
+msgstr[0] "Vous devez confirmer votre inscription avant %s jour en cliquant sur le lien ci-dessous"
+msgstr[1] "Vous devez confirmer votre inscription avant %s jours en cliquant sur le lien ci-dessous"
+
+#: sabre.php:95
+msgid "Your registration has to be validated by the administrator before you can sign on the site. You will be advised by e-mail upon completion."
+msgstr "Votre inscription n&eacute;cessite la validation de l'administrateur avant que vous puissiez vous connecter au site. Vous recevrez un courriel quand cela sera fait."
+
+#: classes/sabre_class.php:489
+msgid "Registration stopped by Sabre."
+msgstr "Inscription stopp&eacute;e par Sabre."
+
+#: classes/sabre_class.php:1528
+msgid "Sorry, but you can't run this plugin, it requires WordPress 3.0 or higher."
+msgstr "D&eacute;sol&eacute;, mais ce plugin requiert au minimum WordPress 3.0 pour fonctionner. Mettez &agrave; jour votre site."
+
+#: classes/sabre_class.php:1533 classes/sabre_class.php:1559
+msgid "Sorry, but you have no authority to manage this plugin."
+msgstr "D&eacute;sol&eacute;, mais vous n'avez pas les droits suffisants pour g&eacute;rer ce plugin."
+
+#: classes/sabre_class.php:1481
+msgid "Registration's informations from Sabre"
+msgstr "Informations sur l'inscription via Sabre"
+
+#: classes/sabre_class.php:1484
+msgid "Status"
+msgstr "Status"
+
+#: classes/sabre_class.php:1485
+msgid "State of registration."
+msgstr "Etat de l'inscription"
+
+#: classes/sabre_class.php:1488
+msgid "Date"
+msgstr "Date"
+
+#: classes/sabre_class.php:1489
+msgid "Last modification date."
+msgstr "Date de derni&egrave;re modification"
+
+#: classes/sabre_class.php:1492
+msgid "Invite code"
+msgstr "Code invit&eacute;"
+
+#: classes/sabre_class.php:1493
+msgid "Invitation code used."
+msgstr "Code invit&eacute; utilis&eacute;."
+
+#: classes/sabre_class.php:171
+msgid "Strength indicator"
+msgstr "Indicateur de s&ucirc;ret&eacute;"
+
+#: classes/sabre_class.php:172
+msgid "Hint: Your password should be at least seven characters long. To make it stronger, use upper and lower case letters, numbers and symbols like ! \" ? $ % ^ &amp; )."
+msgstr "Conseil: Votre mot de passe doit comporter au moins sept caract&egrave;res. Pour le rendre plus s&ucirc;r, utilisez des majuscules, des minuscules, des chiffres et des symboles tels que ! \" ? $ % ^ &amp; )."
+
+#: classes/sabre_class.php:172 classes/sabre_class.php:971
+msgid "Too short"
+msgstr "Tr&egrave;s faible"
+
+#: classes/sabre_class.php:972
+msgid "Bad"
+msgstr "Faible"
+
+#: classes/sabre_class.php:973
+msgid "Good"
+msgstr "Moyenne"
+
+#: classes/sabre_class.php:974
+msgid "Strong"
+msgstr "Forte"
+
+#: classes/sabre_class.php:975
+msgid "Mismatch"
+msgstr "Non identique"
+
+#: classes/sabre_class.php:219
+msgid "Please enter your invitation code:"
+msgstr "Entrez votre code invit&eacute;:"
+
+#: classes/sabre_class.php:162
+msgid "Please enter your password twice:"
+msgstr "Entrez deux fois votre mot de passe:"
+
+#: classes/sabre_class.php:181
+msgid "Please enter the code shown above:"
+msgstr "Tapez le code ci-dessus, svp:"
+
+#: classes/sabre_class.php:189
+msgid "Please enter the result: %s"
+msgstr "Tapez le r&eacute;sultat de l'op&eacute;ration suivante: %s"
+
+#: classes/sabre_class.php:197
+msgid "Please enter the %s letter of the word %s"
+msgstr "Tapez la %s lettre du mot %s"
+
+#: classes/sabre_class.php:231
+msgid "Please don't modify this field:"
+msgstr "Ne pas modifier ce champ, svp:"
+
+#: classes/sabre_class.php:304
+msgid "Protected by"
+msgstr "Prot&eacute;g&eacute; par"
+
+#: classes/sabre_class.php:304
+msgid " %s alien stopped."
+msgid_plural " %s aliens stopped."
+msgstr[0] " %s extra-terrestre arr&ecirc;t&eacute;. "
+msgstr[1] " %s extra-terrestres arr&ecirc;t&eacute;s. "
+
+#: classes/sabre_class.php:214
+msgid "I agree"
+msgstr "Je suis d'accord"
+
+#: classes/sabre_class.php:329 classes/sabre_class.php:525
+#: classes/sabre_class.php:574
+msgid "<strong>ERROR</strong>: "
+msgstr "<strong>ERREUR </strong>: "
+
+#: classes/sabre_class.php:462 classes/sabre_class.php:470
+#: classes/sabre_class.php:479
+msgid "Invalid invitation code."
+msgstr "Code invit&eacute; invalide."
+
+#: classes/sabre_class.php:436
+msgid "Invalid code."
+msgstr "Code invalide."
+
+#: classes/sabre_class.php:452
+msgid "Invalid letter."
+msgstr "Lettre invalide."
+
+#: classes/sabre_class.php:425
+msgid "Policy not accepted."
+msgstr "Conditions g&eacute;n&eacute;rales non accept&eacute;es."
+
+#: classes/sabre_class.php:337
+msgid "Unknown session."
+msgstr "Session inconnue."
+
+#: classes/sabre_class.php:343
+msgid "Invalid session status."
+msgstr "Status de la session invalide."
+
+#: classes/sabre_class.php:351
+msgid "Invalid IP address."
+msgstr "Adresse IP invalide."
+
+#: classes/sabre_class.php:357
+msgid "Banned IP address."
+msgstr "Adresse IP bannie."
+
+#: classes/sabre_class.php:373
+msgid "Session timed out."
+msgstr "Session expir&eacute;e."
+
+#: classes/sabre_class.php:379
+msgid "Speedy Gonzales was here."
+msgstr "Speedy Gonzales est pass&eacute; par ici."
+
+#: classes/sabre_class.php:386
+msgid "Fake user."
+msgstr "Utilisateur simul&eacute;."
+
+#: classes/sabre_class.php:393
+msgid "No Javascript capabilities."
+msgstr "Pas de Javascript."
+
+#: classes/sabre_class.php:400
+msgid "Fake Javascript capabilities."
+msgstr "Javascript simul&eacute;."
+
+#: classes/sabre_class.php:593
+msgid "Confirmation pending. See registration e-mail."
+msgstr "En attente de confirmation. Consulter le courriel d'inscription."
+
+#: classes/sabre_class.php:599
+msgid "Registration not yet validated by the site's administrator. Wait for confirmation e-mail."
+msgstr "Inscription non valid&eacute;e par l'administrateur du site. Attendre le courriel de confirmation."
+
+#: classes/sabre_class.php:544 classes/sabre_class.php:583
+#: classes/sabre_class.php:1071
+msgid "Exceeded period for confirmation of registration."
+msgstr "D&eacute;lai de confirmation d&eacute;pass&eacute;."
+
+#: classes/sabre_class.php:605
+msgid "Invalid registration status."
+msgstr "Status d'inscription invalide."
+
+#: classes/sabre_class.php:552
+msgid "Unexpected confirmation of registration."
+msgstr "Confirmation d'inscription inattendue."
+
+#: classes/sabre_class.php:444
+msgid "Invalid math result."
+msgstr "R&eacute;sultat op&eacute;ration invalide."
+
+#: classes/sabre_class.php:409
+msgid "Missing password."
+msgstr "Mot de passe non renseign&eacute;."
+
+#: classes/sabre_class.php:413
+msgid "Mismatch between password fields."
+msgstr "Les deux mots de passe sont diff&eacute;rents."
+
+#: classes/sabre_class.php:417
+msgid "Password length is less than 6 characters."
+msgstr "Mot de passe de moins de 6 caract&egrave;res."
+
+#: classes/sabre_class.php:533
+msgid "Registration confirmed. You can now use your credentials to enter in this site."
+msgstr "Inscription confirm&eacute;e. Vous pouvez maintenant utiliser votre identifiant pour entrer sur ce site."
+
+#: classes/sabre_class.php:1512
+msgid "Configure"
+msgstr "Configurer"
+
+#: classes/sabre_class.php:1512
+msgid "Set Sabre's parameters"
+msgstr "Param&egrave;trer Sabre"
+
+#: classes/sabre_class.php:30
+msgid "Sabre Options"
+msgstr "Sabre - Options"
+
+#: classes/sabre_class_admin.php:27 classes/sabre_class_admin.php:263
+msgid "General Options"
+msgstr "Options g&eacute;n&eacute;rales"
+
+#: classes/sabre_class_admin.php:27
+msgid "Blocked Registrations"
+msgstr "Inscriptions bloqu&eacute;es"
+
+#: classes/sabre_class_admin.php:27
+msgid "Approved Registrations"
+msgstr "Inscriptions autoris&eacute;es"
+
+#: classes/sabre_class_admin.php:27
+msgid "Registrations to confirm"
+msgstr "Inscriptions &agrave; confirmer"
+
+#: classes/sabre_class_about.php:4 classes/sabre_class_admin.php:27
+msgid "About"
+msgstr "A propos"
+
+#: classes/sabre_class_admin.php:78
+msgid "Invalid registration list"
+msgstr "Liste des inscriptions invalides"
+
+#: classes/sabre_class_admin.php:170
+msgid "User name"
+msgstr "Nom utilisateur"
+
+#: classes/sabre_class_admin.php:170
+msgid "User E-mail"
+msgstr "E-mail utilisateur"
+
+#: classes/sabre_class_admin.php:170
+msgid "User IP"
+msgstr "IP utilisateur"
+
+#: classes/sabre_class_admin.php:170
+msgid "When"
+msgstr "Quand"
+
+#: classes/sabre_class_admin.php:170
+msgid "Errors"
+msgstr "Erreurs"
+
+#: classes/sabre_class_admin.php:170
+msgid "User ID"
+msgstr "ID utilisateur"
+
+#: classes/sabre_class_admin.php:83
+msgid "Valid registration list"
+msgstr "Liste des inscriptions valides"
+
+#: classes/sabre_class_admin.php:88
+msgid "To confirm registration list"
+msgstr "Liste des inscriptions &agrave; confirmer"
+
+#: classes/sabre_class_admin.php:223
+msgid "Events history"
+msgstr "Historique des &eacute;v&egrave;nements"
+
+#: classes/sabre_class_admin.php:341
+msgid "Invitation options"
+msgstr "Options d'invitation"
+
+#: classes/sabre_class_admin.php:343
+msgid "Enable invitation:"
+msgstr "Activer les invitations:"
+
+#: classes/sabre_class_admin.php:343
+msgid "(User must provide an invitation code to register)"
+msgstr "(L'utilisateur doit fournir un code invit&eacute; pour s'enregistrer)"
+
+#: classes/sabre_class_admin.php:344
+msgid "Invitation codes:"
+msgstr "Codes invit&eacute;."
+
+#: classes/sabre_class_admin.php:344
+msgid "Code"
+msgstr "Code"
+
+#: classes/sabre_class_admin.php:344
+msgid "Usage"
+msgstr "Usage"
+
+#: classes/sabre_class.php:886 classes/sabre_class.php:1142
+#: classes/sabre_class.php:1145
+msgid "Gen"
+msgstr "Gen"
+
+#: classes/sabre_class.php:887 classes/sabre_class.php:1142
+msgid "Del"
+msgstr "Sup"
+
+#: classes/sabre_class_admin.php:333
+msgid "Policy options"
+msgstr "Options des conditions d'utilisation"
+
+#: classes/sabre_class_admin.php:335
+msgid "Enable policy agreement:"
+msgstr "Activer l'accord d'utilisation:"
+
+#: classes/sabre_class_admin.php:335
+msgid "(Ask for user's acceptance of site's policy)"
+msgstr "(Demander &agrave; l'utilisateur d'accepter les conditions du site)"
+
+#: classes/sabre_class_admin.php:336
+msgid "Policy name:"
+msgstr "Nom de l'accord:"
+
+#: classes/sabre_class_admin.php:336
+msgid "(Name of agreement like Disclaimer, Licence agreement, General policy, etc...Will be shown on the registration form)"
+msgstr "(Titre des conditions. Exemple: Avertissement, Conditions G&eacute;n&eacute;rales, Accord de licence, etc... Sera affich&eacute; sur le formulaire d'inscription) "
+
+#: classes/sabre_class_admin.php:337
+msgid "Policy link:"
+msgstr "Lien vers l'accord:"
+
+#: classes/sabre_class_admin.php:337
+msgid "(URL of the policy text. If not blank, the name of the agreement above will turn into a link to that URL on the registration form. Can be a WordPress page or an external html file.)"
+msgstr "(URL du texte de l'agr&eacute;ment. Si renseign&eacute;, le nom de l'agr&eacute;ment ci-dessus deviendra un lien vers cette URL dans l'&eacute;cran d'enregistrement. Peut &ecirc;tre une page WordPress ou un fichier html externe.)"
+
+#: classes/sabre_class_admin.php:338
+msgid "Policy text:"
+msgstr "Texte de l'accord:"
+
+#: classes/sabre_class_admin.php:338
+msgid "(Enter the text to be displayed on the registration form)"
+msgstr "(Taper le texte des conditions qui sera affich&eacute;)"
+
+#: classes/sabre_class_admin.php:309
+msgid "Stealth options"
+msgstr "Options furtives"
+
+#: classes/sabre_class_admin.php:311
+msgid "Enable stealth test:"
+msgstr "Activer le test furtif:"
+
+#: classes/sabre_class_admin.php:311
+msgid "(Turn silent control on/off)"
+msgstr "(Active/D&eacute;sactive les contr&ocirc;les silencieux)"
+
+#: classes/sabre_class_admin.php:313
+msgid "Session time out:"
+msgstr "Expiration de session:"
+
+#: classes/sabre_class_admin.php:313
+msgid "(Max. time in seconds before session expires)"
+msgstr "(Temps maxi. en secondes avant expiration de la session)"
+
+#: classes/sabre_class_admin.php:314
+msgid "Speed limit:"
+msgstr "Vitesse maxi:"
+
+#: classes/sabre_class_admin.php:314
+msgid "(Min. time in seconds to fill the registration form)"
+msgstr "(Temps mini. en secondes pour remplir le formulaire d'inscription)"
+
+#: classes/sabre_class_admin.php:312
+msgid "Block if Javascript unsupported:"
+msgstr "Bloquer si Javascript non support&eacute;:"
+
+#: classes/sabre_class_admin.php:312
+msgid "(Consider that a lack of Javascript capabilities is a spambot's footprint)"
+msgstr "(Consid&eacute;rer que l'absence de support du Javascript est la marque d'un spam)"
+
+#: classes/sabre_class_admin.php:315
+msgid "Check DNS Blacklists:"
+msgstr "V&eacute;rifier DNS Blacklists:"
+
+#: classes/sabre_class_admin.php:315
+msgid "(Control if user IP address is blacklisted on DNSBL servers)"
+msgstr "(Controler si l'adresse IP n'est pas bannie par les serveurs DNSBL)"
+
+#: classes/sabre_class_admin.php:272
+msgid "Captcha options"
+msgstr "Options du Captcha"
+
+#: classes/sabre_class_admin.php:274
+msgid "Enable captcha test:"
+msgstr "Activer le test Captcha:"
+
+#: classes/sabre_class_admin.php:274
+msgid "(Turn captcha generation on/off)"
+msgstr "(Active/D&eacute;sactive le Captcha dans le formulaire d'inscription)"
+
+#: classes/sabre_class_admin.php:275
+msgid "Use white background:"
+msgstr "Utiliser un fond blanc:"
+
+#: classes/sabre_class_admin.php:275
+msgid "(Captcha is displayed on a white background. Black background if not checked)"
+msgstr "(Le captcha est affich&eacute; sur un fond blanc. Fond noir si case non coch&eacute;e)"
+
+#: classes/sabre_class_admin.php:276
+msgid "Accepted characters:"
+msgstr "Caract&egrave;res accept&eacute;s:"
+
+#: classes/sabre_class_admin.php:276
+msgid "(List of valid characters for code generation)"
+msgstr "(Liste des caract&egrave;res valides pour la g&eacute;n&eacute;ration du code)"
+
+#: classes/sabre_class_admin.php:277
+msgid "String length:"
+msgstr "Longueur du code:"
+
+#: classes/sabre_class_admin.php:277
+msgid "(Number of characters for code)"
+msgstr "(Nombre de caract&egrave;res du code)"
+
+#: classes/sabre_class_admin.php:278
+msgid "Contrast:"
+msgstr "Contraste:"
+
+#: classes/sabre_class_admin.php:278
+msgid "(The higher the number, the better the contrast)"
+msgstr "(Plus le chiffre est grand, meilleur est le contraste)"
+
+#: classes/sabre_class_admin.php:279
+msgid "Number of polygons:"
+msgstr "Nombre de polygones:"
+
+#: classes/sabre_class_admin.php:279
+msgid "(Number of triangles to draw.  0 = none)"
+msgstr "(Nombre de triangles &agrave; dessiner. 0 = aucun)"
+
+#: classes/sabre_class_admin.php:280
+msgid "Number of ellipses:"
+msgstr "Nombre d'ellipses:"
+
+#: classes/sabre_class_admin.php:280
+msgid "(Number of ellipses to draw.  0 = none)"
+msgstr "(Nombre d'ellipses &agrave; dessiner. 0 = aucune)"
+
+#: classes/sabre_class_admin.php:281
+msgid "Number of lines:"
+msgstr "Nombre de lignes:"
+
+#: classes/sabre_class_admin.php:281
+msgid "(Number of lines to draw.  0 = none)"
+msgstr "(Nombre de lignes &agrave; dessiner. 0 = aucune)"
+
+#: classes/sabre_class_admin.php:282
+msgid "Number of dots:"
+msgstr "Nombre de points:"
+
+#: classes/sabre_class_admin.php:282
+msgid "(Number of dots to draw.  0 = none)"
+msgstr "(Nombre de points &agrave; dessiner. 0 = aucun)"
+
+#: classes/sabre_class_admin.php:283
+msgid "Min. thickness:"
+msgstr "Epaisseur min.:"
+
+#: classes/sabre_class_admin.php:283
+msgid "(Minimum thickness of lines in pixels)"
+msgstr "(Epaisseur minimum des lignes en pixels)"
+
+#: classes/sabre_class_admin.php:284
+msgid "Max. thickness:"
+msgstr "Epaisseur max.:"
+
+#: classes/sabre_class_admin.php:284
+msgid "(Maximum thickness of lines in pixels)"
+msgstr "(Epaisseur maximum des lignes en pixels)"
+
+#: classes/sabre_class_admin.php:285
+msgid "Min. radius:"
+msgstr "Rayon min.:"
+
+#: classes/sabre_class_admin.php:285
+msgid "(Minimum radius of ellipses)"
+msgstr "(Rayon minimum des ellipses)"
+
+#: classes/sabre_class_admin.php:286
+msgid "Max. radius:"
+msgstr "Rayon max.:"
+
+#: classes/sabre_class_admin.php:286
+msgid "(Maximum radius of ellipses)"
+msgstr "(Rayon maximum des ellipses)"
+
+#: classes/sabre_class_admin.php:287
+msgid "Object alpha:"
+msgstr "Coeff. alpha:"
+
+#: classes/sabre_class_admin.php:287
+msgid "(How opaque should the obscuring objects be. 0 is opaque, 127 is transparent)"
+msgstr "(Taux d'opacit&eacute; des objets recouvrant le code. 0 = opaque, 127 = transparent)"
+
+#: classes/sabre_class.php:645 classes/sabre_class.php:670 sabre.php:64
+#: sabre.php:86
+msgid "Username: %s"
+msgstr "Identifiant: %s"
+
+#: classes/sabre_class.php:646 sabre.php:65
+msgid "E-mail: %s"
+msgstr "Adresse E-mail: %s"
+
+#: classes/sabre_class.php:644
+msgid "New user registration confirmed on your site %s:"
+msgstr "Confirmation de l'enregistrement d'un nouvel utilisateur sur votre site %s"
+
+#: classes/sabre_class.php:648 classes/sabre_class.php:673
+msgid "[%s] New User Registration Confirmation"
+msgstr "[%s] Confirmation d'inscription d'un nouvel utilisateur"
+
+#: classes/sabre_class.php:669
+msgid "Your registration on %s is now confirmed. You can freely sign in using the credentials given in a previous mail. Thank you for your interest."
+msgstr "Votre inscription sur %s est maintenant confirmee. Vous pouvez vous connecter en utilisant les informations en votre possession. Merci pour votre interet."
+
+#: classes/sabre_class_about.php:12
+msgid "SABRE (<b>S</b>imple <b>A</b>nti <b>B</b>ot <b>R</b>egistration <b>E</b>ngine) is dedicated to the protection of your site against automatic registration by spammers."
+msgstr "SABRE (<b>S</b>imple <b>A</b>nti <b>B</b>ot <b>R</b>egistration <b>E</b>ngine) est d&eacute;di&eacute; &agrave; la protection de votre site contre l'inscription automatique par des spammeurs."
+
+#: classes/sabre_class_admin.php:250
+msgid "Quick figures"
+msgstr "Quelques chiffres"
+
+#: classes/sabre_class.php:1599 classes/sabre_class_admin.php:252
+msgid "Total number of registrations stopped:"
+msgstr "Nombre total d'inscriptions stopp&eacute;es :"
+
+#: classes/sabre_class.php:1600 classes/sabre_class_admin.php:253
+msgid "Total number of registrations accepted:"
+msgstr "Nombre total d'inscriptions accept&eacute;es :"
+
+#: classes/sabre_class_admin.php:158
+msgid "Browse"
+msgstr "Passer en revue"
+
+#: classes/sabre_class_admin.php:162
+msgid "Display"
+msgstr "Afficher"
+
+#: classes/sabre_class_admin.php:163
+msgid "lines per page, skipping first: "
+msgstr "lignes par page, en passant les premiers: "
+
+#: classes/sabre_class_admin.php:319
+msgid "Confirmation options"
+msgstr "Options de confirmation"
+
+#: classes/sabre_class_admin.php:321
+msgid "Enable confirmation:"
+msgstr "Activer la confirmation:"
+
+#: classes/sabre_class_admin.php:322
+msgid "None"
+msgstr "Aucune"
+
+#: classes/sabre_class_admin.php:323
+msgid "By user"
+msgstr "Par l'utilisateur"
+
+#: classes/sabre_class_admin.php:324
+msgid "By admin"
+msgstr "Par l'administrateur"
+
+#: classes/sabre_class_admin.php:325
+msgid "(Ask user or site's admin to confirm registration)"
+msgstr "(Demander &agrave; l'utilisateur ou &agrave; l'administrateur de confirmer l'inscription)"
+
+#: classes/sabre_class_admin.php:326
+msgid "Number of days:"
+msgstr "Nombre de jours:"
+
+#: classes/sabre_class_admin.php:326
+msgid "(Period of time for the user to confirm his registration)"
+msgstr "(D&eacute;lai donn&eacute; &agrave; l'utilisateur pour confirmer son inscription)"
+
+#: classes/sabre_class_admin.php:327
+msgid "Deny early sign-in:"
+msgstr "Interdire l'utilisation anticip&eacute;e:"
+
+#: classes/sabre_class_admin.php:327
+msgid "(Don't allow users to sign in before their confirmation)"
+msgstr "(Les utilisateurs ne peuvent pas se connecter avant leur confirmation)"
+
+#: classes/sabre_class_admin.php:328
+msgid "Send mail when confirmed:"
+msgstr "Envoyer un mail si confirmation:"
+
+#: classes/sabre_class_admin.php:328
+msgid "(Send a mail to the administrator upon user's confirmation)"
+msgstr "(Envoyer un mail &agrave; l'administrateur quand l'utilisateur a confirm&eacute; son inscription)"
+
+#: classes/sabre_class_admin.php:329
+msgid "Suppress unregistered users:"
+msgstr "Supprimer les utilisateurs non enregistr&eacute;s:"
+
+#: classes/sabre_class_admin.php:329
+msgid "(Delete user account when registration is canceled)"
+msgstr "(Supprimer le compte utilisateur quand l'inscription est annul&eacute;e)"
+
+#: classes/sabre_class.php:1601 classes/sabre_class_admin.php:254
+msgid "Number of pending confirmation:"
+msgstr "Nombre de confirmations en attente:"
+
+#: classes/sabre_class_admin.php:290
+msgid "Math options"
+msgstr "Options du test math&eacute;matique"
+
+#: classes/sabre_class_admin.php:292
+msgid "Enable math test:"
+msgstr "Activer le test math&eacute;matique:"
+
+#: classes/sabre_class_admin.php:292
+msgid "(Turn math control on/off)"
+msgstr "(Active/D&eacute;sactive le test dans le formulaire d'inscription)"
+
+#: classes/sabre_class_admin.php:293
+msgid "Accepted operations:"
+msgstr "Op&eacute;rations accept&eacute;es:"
+
+#: classes/sabre_class_admin.php:293
+msgid "(List of valid operations for math test)"
+msgstr "(Liste des op&eacute;rations valides pour le calcul)"
+
+#: classes/sabre_class_admin.php:296
+msgid "Text captcha options"
+msgstr "Options du Captcha texte"
+
+#: classes/sabre_class_admin.php:298
+msgid "Enable text test:"
+msgstr "Activer le test textuel:"
+
+#: classes/sabre_class_admin.php:298
+msgid "(Turn text challenge on/off - The user will be asked to type the nth letter of a random word)"
+msgstr "(Active/D&eacute;sactive le test textuel - Si actif, l'utilisateur devra taper la n-i&egrave;me lettre d'un mot choisi au hasard)"
+
+#: classes/sabre_class_admin.php:112
+msgid "Manual registration"
+msgstr "Inscription manuelle"
+
+#: classes/sabre_class_admin.php:114
+msgid "Add"
+msgstr "Ajouter"
+
+#: classes/sabre_class_admin.php:115
+msgid "Enter WordPress user name or check the box to add all existing WordPress users "
+msgstr "Taper le nom de l'utilisateur WordPress ou cocher la case pour ajouter tous les utilisateurs WordPress existants "
+
+#: classes/sabre_class_admin.php:119
+msgid "Manual deregistration"
+msgstr "D&eacute;sinscription manuelle"
+
+#: classes/sabre_class_admin.php:121
+msgid "Unregister"
+msgstr "D&eacute;sinscrire"
+
+#: classes/sabre_class_admin.php:121
+msgid "Unregister selected users"
+msgstr "D&eacute;sinscrire les utilisateurs s&eacute;lectionn&eacute;s"
+
+#: classes/sabre_class_admin.php:146
+msgid "Confirm registration"
+msgstr "Confirmation des inscriptions"
+
+#: classes/sabre_class_admin.php:148
+msgid "Confirm"
+msgstr "Confirmer"
+
+#: classes/sabre_class_admin.php:148
+msgid "Validate selected registrations"
+msgstr "Valider les inscriptions s&eacute;lectionn&eacute;es"
+
+#: classes/sabre_class_admin.php:151
+msgid "Refuse registration"
+msgstr "Refus des inscriptions"
+
+#: classes/sabre_class_admin.php:153
+msgid "Refuse"
+msgstr "Refuser"
+
+#: classes/sabre_class_admin.php:153
+msgid "Refuse selected registrations"
+msgstr "Refuser les inscriptions  s&eacute;lectionn&eacute;es"
+
+#: classes/sabre_class_admin.php:136
+msgid "Warning!"
+msgstr "Attention !"
+
+#: classes/sabre_class_admin.php:139
+msgid "You set Sabre's behaviour to ask for user's confirmation of his registration. Normally, you don't have to intervene here but you can confirm or refuse it manually if needed."
+msgstr "Vous avez param&eacute;tr&eacute; Sabre pour demander &agrave; l'utilisateur de confirmer son inscription. Normalement, vous n'avez pas &agrave; intervenir mais vous pouvez confirmer ou refuser vous-m&ecirc;me en cas de besoin."
+
+#: classes/sabre_class_admin.php:141
+msgid "You set Sabre's behaviour to ask for your confirmation of user's registration. You have to confirm or refuse it manually to complete the process."
+msgstr "Vous avez param&eacute;tr&eacute; Sabre pour que les inscriptions soient confirm&eacute;es par l'administrateur. Vous devez donc confirmer ou refuser les inscriptions list&eacute;es ci-dessous pour terminer le processus."
+
+#: classes/sabre_class_admin.php:142
+msgid "You set Sabre's behaviour to register the user without confirmation. This screen will always be empty."
+msgstr "Vous avez param&eacute;tr&eacute; Sabre pour que les inscriptions se fassent sans confirmation. Cette &eacute;cran restera donc vide."
+
+#: classes/sabre_class_admin.php:301
+msgid "Sequence of tests"
+msgstr "S&eacute;quence des tests"
+
+#: classes/sabre_class_admin.php:303
+msgid "Tests to perform:"
+msgstr "Tests &agrave; ex&eacute;cuter:"
+
+#: classes/sabre_class_admin.php:306
+msgid "(How do we use the above tests?)"
+msgstr "(Comment utiliser les tests ci-dessus ?)"
+
+#: classes/sabre_class_admin.php:304
+msgid "All"
+msgstr "Tous"
+
+#: classes/sabre_class_admin.php:305
+msgid "Randomly"
+msgstr "Au hasard"
+
+#: classes/sabre_class_admin.php:126
+msgid "Purge log"
+msgstr "Purge de l'historique"
+
+#: classes/sabre_class_admin.php:128
+msgid "Delete"
+msgstr "Supprimer"
+
+#: classes/sabre_class_admin.php:129
+msgid "Log older than"
+msgstr "Enregistrements de plus de"
+
+#: classes/sabre_class_admin.php:130
+msgid "days"
+msgstr "jours"
+
+#: classes/sabre_class_admin.php:131
+msgid "And do it automatically now"
+msgstr "Et le faire automatiquement maintenant"
+
+#: classes/sabre_class.php:734 classes/sabre_class.php:761
+msgid "WordPress user successfully registered."
+msgstr "Utilisateur WordPress enregistr&eacute; avec succ&egrave;s."
+
+#: classes/sabre_class.php:742
+msgid "WordPress user is already registered. Manual registration ineffective."
+msgstr "Utilisateur WordPress d&eacute;j&agrave; enregistr&eacute;. Enregistrement manuel sans effet."
+
+#: classes/sabre_class.php:744
+msgid "WordPress user doesn't need to confirm registration. Manual registration ineffective."
+msgstr "Utilisateur WordPress n'a pas besoin de confirmer son inscription. Enregistrement manuel sans effet."
+
+#: classes/sabre_class.php:746
+msgid "Unknown WordPress user. Manual registration failed."
+msgstr "Utilisateur WordPress inexistant. Enregistrement manuel a &eacute;chou&eacute;."
+
+#: classes/sabre_class.php:795
+msgid "%s user manually unregistered."
+msgid_plural "%s users manually unregistered."
+msgstr[0] "%s utilisateur d&eacute;sinscrit manuellement."
+msgstr[1] "%s utilisateurs d&eacute;sinscrits manuellement."
+
+#: classes/sabre_class.php:783
+msgid "Manually unregistered"
+msgstr "D&eacute;sinscription manuelle"
+
+#: classes/sabre_class.php:768
+msgid "%s/%s WordPress user successfully registered."
+msgid_plural "%s/%s WordPress users successfully registered."
+msgstr[0] "%s/%s utilisateur WordPress enregistr&eacute; avec succ&egrave;s."
+msgstr[1] "%s/%s utilisateurs WordPress enregistr&eacute;s avec succ&egrave;s."
+
+#: classes/sabre_class.php:814
+msgid "%s record deleted."
+msgid_plural "%s records deleted."
+msgstr[0] "%s enregistrement supprim&eacute;"
+msgstr[1] "%s enregistrements supprim&eacute;s"
+
+#: classes/sabre_class.php:831
+msgid "Registration refused by admin"
+msgstr "Inscription refus&eacute;e par l&quote;administrateur"
+
+#: classes/sabre_class.php:844
+msgid "%s registration refused."
+msgid_plural "%s registrations refused."
+msgstr[0] "%s inscription refus&eacute;e."
+msgstr[1] "%s inscriptions refus&eacute;es."
+
+#: classes/sabre_class.php:862
+msgid "Registration confirmed by admin"
+msgstr "Inscription valid&eacute;e par l&quote;administrateur"
+
+#: classes/sabre_class.php:874
+msgid "%s registration confirmed."
+msgid_plural "%s registrations confirmed."
+msgstr[0] "%s inscription valid&eacute;e"
+msgstr[1] "%s inscriptions valid&eacute;es"
+
+#: classes/sabre_class.php:738 classes/sabre_class.php:740
+#: classes/sabre_class.php:797 classes/sabre_class.php:816
+#: classes/sabre_class.php:847 classes/sabre_class.php:877
+msgid "Unexpected SQL error. Current operation failed."
+msgstr "Erreur SQL inattendue. L'op&eacute;ration en cours a &eacute;chou&eacute;."
+
+#: classes/sabre_class_admin.php:244
+msgid "Options successfully saved."
+msgstr "Options sauvegard&eacute;es avec succ&egrave;s."
+
+#: classes/sabre_class_about.php:7
+msgid "Current version: "
+msgstr "Version actuelle: "
+
+#: classes/sabre_class_about.php:15
+msgid "This modular protection can run a set of unobstrusive controls for a regular user and include a captcha or math test in the registration form. You can choose to include both or one test or let the plugin choose randomly the test.</br></br>Another possibility is to ask the user to confirm his registration by clicking on a link submitted by mail after he registered. This confirmation must take place within a maximum period of time or the account will become unusable."
+msgstr "Cette protection modulable peut d&eacute;rouler une s&eacute;rie de tests non invasifs pour l'utilisateur et ajouter un captcha ou un test de calcul dans le formulaire d'inscription. Vous pouvez choisir d'activer un ou plusieurs tests ou laisser le plugin choisir au hasard.</br></br>Il est &eacute;galement possible de demander la confirmation de l'inscription par l'envoi d'un lien par mail &agrave; l'utilisateur. Celui-ci doit cliquer sur ce lien dans un d&eacute;lai imparti pour valider son inscription sur le blog. Pass&eacute; ce d&eacute;lai et faute de confirmation, le compte cr&eacute;&eacute; devient inutilisable."
+
+#: classes/sabre_class.php:1609
+msgid "Sabre quick figures"
+msgstr "Sabre en quelques chiffres"

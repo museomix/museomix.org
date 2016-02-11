@@ -38,7 +38,7 @@
 if (!defined('ABSPATH')) {
 	exit;
 } // Exit if accessed directly
-$nonce = $_POST['nonce'];
+$nonce = sanitize_text_field($_POST['nonce']);
 if (!wp_verify_nonce($nonce, 'my-nonce')) {
 	// This nonce is not valid.
 	die('Security check: Your requested URL is wrong! Please, Contact your administrator.');
@@ -59,26 +59,25 @@ class WPCSVProExportData {
 	 * @return array
 	 */
 	public function executeIndex($request) {
-		#print('<pre>'); print_r($request); print('</pre>'); die;
-		if ($request['export'] == 'category') {
+		if (sanitize_text_field($request['export']) == 'category') {
 			$this->WPImpExportCategories($request);
 		} else {
-			if ($request['export'] == 'tags') {
+			if (sanitize_text_field($request['export']) == 'tags') {
 				$this->WPImpExportTags($request);
 			} else {
-				if ($request['export'] == 'customtaxonomy') {
+				if (sanitize_text_field($request['export']) == 'customtaxonomy') {
 					$this->WPImpExportTaxonomies($request);
 				} else {
-					if ($request['export'] == 'customerreviews') {
+					if (sanitize_text_field($request['export']) == 'customerreviews') {
 						$this->WPImpExportCustomerReviews($request);
 					} else {
-						if ($request['export'] == 'comments') {
+						if (sanitize_text_field($request['export']) == 'comments') {
 							$this->WPImpExportComments($request);
 						} else {
-							if ($request['export'] == 'users') {
+							if (sanitize_text_field($request['export']) == 'users') {
 								$this->WPImpExportUsers($request);
 							} else {
-								$this->WPImpPROExportData($request);#die;
+								$this->WPImpPROExportData($request);
 							}
 						}
 					}
@@ -105,19 +104,20 @@ class WPCSVProExportData {
 			$post_type = 'post';
 		}
 		if ($exporttype == 'custompost') {
-			$post_type = $_POST['export_post_type'];
+			$post_type = sanitize_text_field($_POST['export_post_type']);
 		}
 		$header_query1 = "SELECT wp.* FROM  $wpdb->posts wp where post_type = '$post_type'";
 		$header_query2 = "SELECT post_id, meta_key, meta_value FROM  $wpdb->posts wp JOIN $wpdb->postmeta wpm  ON wpm.post_id = wp.ID where meta_key NOT IN ('_edit_lock','_edit_last') and meta_key NOT LIKE 'field_%' and meta_key NOT LIKE '_wp_types%'";
 		$result_header_query1 = $wpdb->get_results($header_query1);
 		$result_header_query2 = $wpdb->get_results($header_query2);
-
+		if(!empty($result_header_query1)){
 		foreach ($result_header_query1 as $rhq1_key) {
 			foreach ($rhq1_key as $rhq1_headkey => $rhq1_headval) {
 				if (!in_array($rhq1_headkey, $Header)) {
 					$Header[] = $rhq1_headkey;
 				}
 			}
+		}
 		}
 		foreach ($this->getACFvalues() as $acfKey => $acfVal) {
 			$unwantedHeader[] = '_' . $acfKey;
@@ -143,14 +143,14 @@ class WPCSVProExportData {
 			$unwantedHeader[] = $yoastseokey;
 		}
 		$alltaxonomies = get_taxonomies();
-                if(!empty($alltaxonomies)){
-                        foreach($alltaxonomies as $alltaxkey){
+		if(!empty($alltaxonomies)){
+			foreach($alltaxonomies as $alltaxkey){
 				if($alltaxkey == 'category')
 					$Header[] = 'post_category';
-				else 
-                                	$Header[] = $alltaxkey;
-                        }
-                }
+				else
+					$Header[] = $alltaxkey;
+			}
+		}
 		foreach ($result_header_query2 as $rhq2_headkey) {
 			if (!in_array($rhq2_headkey->meta_key, $Header)) {
 				if (!in_array($rhq2_headkey->meta_key, $unwantedHeader)) {
@@ -215,7 +215,6 @@ class WPCSVProExportData {
 			foreach ($this->getYoastSEOfields() as $yoastseokey => $yoastseoval) {
 				$ProHeader[] = $yoastseoval;
 			}
-			#print('<pre>'); print_r($ProHeader); die;
 			$ProHeader[] = 'featured_image';
 			return $ProHeader;
 		}
@@ -229,7 +228,7 @@ class WPCSVProExportData {
 	public function get_all_record_ids($exporttype, $request) {
 		global $wpdb;
 		$post_type = $exporttype;
-		$get_post_ids = "select DISTINCT ID from $wpdb->posts p join $wpdb->postmeta pm on pm.post_id = p.ID";
+		$get_post_ids = "select DISTINCT ID from $wpdb->posts p left join $wpdb->postmeta pm on pm.post_id = p.ID";
 		if ($post_type == 'woocommerce' || $post_type == 'marketpress') {
 			$post_type = 'product';
 		}
@@ -245,25 +244,25 @@ class WPCSVProExportData {
 
 		$get_post_ids .= " where p.post_type = '$post_type'";
 		if (isset($request['getdatawithspecificstatus'])) {
-			if (isset($request['postwithstatus']) && $request['postwithstatus'] == 'All') {
+			if (isset($request['postwithstatus']) && sanitize_text_field($request['postwithstatus']) == 'All') {
 				$get_post_ids .= " and p.post_status in ('publish','draft','future','private','pending')";
 			} else {
-				if (isset($request['postwithstatus']) && ($request['postwithstatus'] == 'Publish' || $request['postwithstatus'] == 'Sticky')) {
+				if (isset($request['postwithstatus']) && (sanitize_text_field($request['postwithstatus']) == 'Publish' || sanitize_text_field($request['postwithstatus']) == 'Sticky')) {
 					$get_post_ids .= " and p.post_status in ('publish')";
 				} else {
-					if (isset($request['postwithstatus']) && $request['postwithstatus'] == 'Draft') {
+					if (isset($request['postwithstatus']) && sanitize_text_field($request['postwithstatus']) == 'Draft') {
 						$get_post_ids .= " and p.post_status in ('draft')";
 					} else {
-						if (isset($request['postwithstatus']) && $request['postwithstatus'] == 'Scheduled') {
+						if (isset($request['postwithstatus']) && sanitize_text_field($request['postwithstatus']) == 'Scheduled') {
 							$get_post_ids .= " and p.post_status in ('future')";
 						} else {
-							if (isset($request['postwithstatus']) && $request['postwithstatus'] == 'Private') {
+							if (isset($request['postwithstatus']) && sanitize_text_field($request['postwithstatus']) == 'Private') {
 								$get_post_ids .= " and p.post_status in ('private')";
 							} else {
-								if (isset($request['postwithstatus']) && $request['postwithstatus'] == 'Pending') {
+								if (isset($request['postwithstatus']) && sanitize_text_field($request['postwithstatus']) == 'Pending') {
 									$get_post_ids .= " and p.post_status in ('pending')";
 								} else {
-									if (isset($request['postwithstatus']) && $request['postwithstatus'] == 'Protected') {
+									if (isset($request['postwithstatus']) && sanitize_text_field($request['postwithstatus']) == 'Protected') {
 										$get_post_ids .= " and p.post_status in ('publish') and post_password != ''";
 									}
 								}
@@ -276,10 +275,10 @@ class WPCSVProExportData {
 			$get_post_ids .= " and p.post_status in ('publish','draft','future','private','pending')";
 		}
 		if (isset($request['getdataforspecificperiod'])) {
-			$get_post_ids .= " and p.post_date >= '" . $request['postdatefrom'] . "' and p.post_date <= '" . $request['postdateto'] . "'";
+			$get_post_ids .= " and p.post_date >= '" . sanitize_text_field($request['postdatefrom']) . "' and p.post_date <= '" . sanitize_text_field($request['postdateto']) . "'";
 		}
 		if ($exporttype == 'eshop') {
-			$get_post_ids .= " and pm.meta_key = 'sku'";
+			$get_post_ids .= " and pm.meta_key = '_eshop_product'";
 		}
 		if ($post_type == 'woocommerce') {
 			$get_post_ids .= " and pm.meta_key = '_sku'";
@@ -290,19 +289,14 @@ class WPCSVProExportData {
 		if ($post_type == 'wpcommerce') {
 			$get_post_ids .= " and pm.meta_key = '_wpsc_sku'";
 		}
-
-		/*                if($exporttype == 'woocommerce') {
-								$post_type = 'product';
-					$get_post_ids = "select DISTINCT ID from $wpdb->posts p join $wpdb->postmeta pm on pm.post_id = p.ID where post_type = '$post_type' and post_status in ('publish','draft','future','private','pending') and pm.meta_key = '_sku'";
-				} */
 		if (isset($request['getdatabyspecificauthors'])) {
-			if (isset($request['postauthor']) && $request['postauthor'] != 0) {
-				$get_post_ids .= " and p.post_author = {$request['postauthor']}";
+			if (isset($request['postauthor']) && sanitize_text_field($request['postauthor']) != 0) {
+				$get_post_ids .= " and p.post_author = " . sanitize_text_field($request['postauthor']);
 			}
 		}
 		$result = $wpdb->get_col($get_post_ids);
 		if (isset($request['getdatawithspecificstatus'])) {
-			if (isset($request['postwithstatus']) && $request['postwithstatus'] == 'Sticky') {
+			if (isset($request['postwithstatus']) && sanitize_text_field($request['postwithstatus']) == 'Sticky') {
 				$get_sticky_posts = get_option('sticky_posts');
 				foreach ($get_sticky_posts as $sticky_post_id) {
 					if (in_array($sticky_post_id, $result)) {
@@ -312,8 +306,6 @@ class WPCSVProExportData {
 				return $sticky_posts;
 			}
 		}
-		#print_r($get_sticky_posts);
-		#print_r($result);die;
 		return $result;
 	}
 
@@ -365,7 +357,6 @@ class WPCSVProExportData {
 	public function getPostMetaDatas($postID) {
 		global $wpdb;
 		$query2 = "SELECT post_id, meta_key, meta_value FROM $wpdb->posts wp JOIN $wpdb->postmeta wpm  ON wpm.post_id = wp.ID where meta_key NOT IN ('_edit_lock','_edit_last') AND ID=$postID";
-		#print($query2); print('<br>');
 		$result = $wpdb->get_results($query2);
 		return $result;
 	}
@@ -376,13 +367,11 @@ class WPCSVProExportData {
 	public function getTypesFields() {
 		$wptypesfields = get_option('wpcf-fields');
 		$typesfields = array();
-		#print('<pre>'); print_r($wptypesfields);
 		if (!empty($wptypesfields) && is_array($wptypesfields)) {
 			foreach ($wptypesfields as $typeFkey) {
 				$typesfields[$typeFkey['meta_key']] = $typeFkey['name'];
 			}
 		}
-		#print_r($typesfields);
 		return $typesfields;
 	}
 
@@ -402,7 +391,6 @@ class WPCSVProExportData {
 			$get_acf_field = @unserialize($acf_value);
 			$acf_fields[$get_acf_field['name']] = "CF: " . $get_acf_field['name'];
 			$acf_fields_slug[$get_acf_field['name']] = "_" . $get_acf_field['name'];
-
 			if ($get_acf_field['type'] == 'checkbox') {
 				$checkbox_option_fields[] = $get_acf_field['name'];
 			}
@@ -414,7 +402,6 @@ class WPCSVProExportData {
 		}
 	}
 
-
 	/**
 	 *
 	 */
@@ -422,9 +409,9 @@ class WPCSVProExportData {
 		global $wpdb;
 		$active_plugins = get_option('active_plugins');
 		if(in_array('all-in-one-seo-pack/all_in_one_seo_pack.php',$active_plugins))
-		$aioseofields = array('_aioseop_keywords' => 'seo_keywords', '_aioseop_description' => 'seo_description', '_aioseop_title' => 'seo_title', '_aioseop_noindex' => 'seo_noindex', '_aioseop_nofollow' => 'seo_nofollow', '_aioseop_disable' => 'seo_disable', '_aioseop_disable_analytics' => 'seo_disable_analytics', '_aioseop_noodp' => 'seo_noodp', '_aioseop_noydir' => 'seo_noydir',);
+			$aioseofields = array('_aioseop_keywords' => 'seo_keywords', '_aioseop_description' => 'seo_description', '_aioseop_title' => 'seo_title', '_aioseop_noindex' => 'seo_noindex', '_aioseop_nofollow' => 'seo_nofollow', '_aioseop_disable' => 'seo_disable', '_aioseop_disable_analytics' => 'seo_disable_analytics', '_aioseop_noodp' => 'seo_noodp', '_aioseop_noydir' => 'seo_noydir',);
 		else
-		$aioseofields = array();
+			$aioseofields = array();
 		return $aioseofields;
 	}
 
@@ -433,11 +420,11 @@ class WPCSVProExportData {
 	 */
 	public function getYoastSEOfields() {
 		global $wpdb;
-                $active_plugins = get_option('active_plugins');
+		$active_plugins = get_option('active_plugins');
 		if(in_array('wordpress-seo/wp-seo.php',$active_plugins))
-		$yoastseofields = array('_yoast_wpseo_focuskw' => 'focus_keyword', '_yoast_wpseo_title' => 'title', '_yoast_wpseo_metadesc' => 'meta_desc', '_yoast_wpseo_meta-robots-noindex' => 'meta-robots-noindex', '_yoast_wpseo_meta-robots-nofollow' => 'meta-robots-nofollow', '_yoast_wpseo_meta-robots-adv' => 'meta-robots-adv', '_yoast_wpseo_sitemap-include' => 'sitemap-include', '_yoast_wpseo_sitemap-prio' => 'sitemap-prio', '_yoast_wpseo_canonical' => 'canonical', '_yoast_wpseo_redirect' => 'redirect', '_yoast_wpseo_opengraph-description' => 'opengraph-description', '_yoast_wpseo_google-plus-description' => 'google-plus-description',);
+			$yoastseofields = array('_yoast_wpseo_focuskw' => 'focus_keyword', '_yoast_wpseo_title' => 'title', '_yoast_wpseo_metadesc' => 'meta_desc', '_yoast_wpseo_meta-robots-noindex' => 'meta-robots-noindex', '_yoast_wpseo_meta-robots-nofollow' => 'meta-robots-nofollow', '_yoast_wpseo_meta-robots-adv' => 'meta-robots-adv', '_yoast_wpseo_sitemap-include' => 'sitemap-include', '_yoast_wpseo_sitemap-prio' => 'sitemap-prio', '_yoast_wpseo_canonical' => 'canonical', '_yoast_wpseo_redirect' => 'redirect', '_yoast_wpseo_opengraph-description' => 'opengraph-description', '_yoast_wpseo_google-plus-description' => 'google-plus-description',);
 		else
-		$yoastseofields = array();
+			$yoastseofields = array();
 		return $yoastseofields;
 	}
 
@@ -511,7 +498,6 @@ class WPCSVProExportData {
 				$TermsData['post_category'] = $postCategory;
 			}
 		}
-		#print('<pre>'); print_r($TermsData); die;
 		return $TermsData;
 	}
 
@@ -553,45 +539,38 @@ class WPCSVProExportData {
 	 */
 	public function WPImpPROExportData($request) {
 		global $wpdb;
-		$exporttype = $_POST['export'];
-		if (isset($_POST['getdatawithdelimiter']) && isset($_POST['postwithdelimiter']) && $_POST['postwithdelimiter'] != 'Select') {
-			if ($_POST['postwithdelimiter'] == "{Space}") {
+		$exporttype = sanitize_text_field($_POST['export']);
+		if (isset($_POST['getdatawithdelimiter']) && isset($_POST['postwithdelimiter']) && sanitize_text_field($_POST['postwithdelimiter']) != 'Select') {
+			if (sanitize_text_field($_POST['postwithdelimiter']) == "{Space}") {
 				$export_delimiter = " ";
-			} elseif ($_POST['postwithdelimiter'] == "{Tab}") {
+			} elseif (sanitize_text_field($_POST['postwithdelimiter']) == "{Tab}") {
 				$export_delimiter = "\t";
 			} else {
-				$export_delimiter = $_POST['postwithdelimiter'];
+				$export_delimiter = sanitize_text_field($_POST['postwithdelimiter']);
 			}
 		} elseif (isset($_POST['getdatawithdelimiter']) && !empty($_POST['others_delimiter'])) {
-
-			$export_delimiter = $_POST['others_delimiter'];
+			$export_delimiter = sanitize_text_field($_POST['others_delimiter']);
 		} else {
-
 			$export_delimiter = ',';
 		}
-		if ($_POST['export_filename']) {
-			$csv_file_name = $_POST['export_filename'] . '.csv';
+		if (sanitize_text_field($_POST['export_filename'])) {
+			$csv_file_name = sanitize_text_field($_POST['export_filename']) . '.csv';
 		} else {
 			$csv_file_name = 'exportas_' . date("Y") . '-' . date("m") . '-' . date("d") . '.csv';
 		}
 		$wptypesfields = get_option('wpcf-fields');
-		//if($exporttype=='post' || $exporttype=='page' || $exporttype=='custompost') {
 		if ($exporttype == 'custompost') {
-			$exporttype = $_POST['export_post_type'];
+			$exporttype = sanitize_text_field($_POST['export_post_type']);
 		}
 		$Header = $this->generateCSVHeaders($exporttype);
 		$result = $this->get_all_record_ids($exporttype, $request);
 		$PostData = array();
 		$PostMetaData = array();
-		#print('<pre>'); print_r($Header); print_r($result); print('</pre>'); die;
 		$fieldsCount = count($result);
 		if (isset($result)) {
 			foreach ($result as $postID) {
 				$PostData[$postID] = $this->getPostDatas($postID);
-				#print('<pre>'); print_r($PostData); #die;
 				$result_query2 = $this->getPostMetaDatas($postID);
-				#print('<pre>'); print_r($result_query2); print('</pre>'); #die;
-
 				$possible_values = array('s:', 'a:', ':{');
 				if (!empty($result_query2)) {
 					foreach ($result_query2 as $postmeta) {
@@ -662,7 +641,6 @@ class WPCSVProExportData {
 							// WooCommerce product meta datas
 							else {
 								if ($postmeta->meta_key == '_product_attributes') {
-									#print_r($postmeta->meta_value); #die;
 									$PostMetaData[$postmeta->post_id][$postmeta->meta_key] = '';
 									$product_attribute_name = $product_attribute_value = $product_attribute_visible = $product_attribute_variation = '';
 									$PostMetaData[$postmeta->post_id]['_product_attribute_name'] = '';
@@ -680,7 +658,7 @@ class WPCSVProExportData {
 									} else {
 										$unserialized_attributes = $eshop_products_unser1;
 									}
-
+									if(!empty($unserialized_attributes)){	
 									foreach ($unserialized_attributes as $key) {
 										foreach ($key as $attr_header => $attr_value) {
 											if ($attr_header == 'name') {
@@ -699,17 +677,16 @@ class WPCSVProExportData {
 											}
 										}
 									}
+									}
 									$PostMetaData[$postmeta->post_id]['_product_attribute_name'] = substr($product_attribute_name, 0, -1);
 									$PostMetaData[$postmeta->post_id]['_product_attribute_value'] = substr($product_attribute_value, 0, -1);
 									$PostMetaData[$postmeta->post_id]['_product_attribute_visible'] = substr($product_attribute_visible, 0, -1);
 									$PostMetaData[$postmeta->post_id]['_product_attribute_variation'] = substr($product_attribute_variation, 0, -1);
-									#print('<pre>'); print_r($PostMetaData); die;
 								} else {
 									if ($postmeta->meta_key == '_upsell_ids') {
 										$upsellids = array();
-										$upsell_ids = '';
+										$upsell_ids = $crosssell_ids = $downloadable_value = $downloadable_all = '';
 										$crosssellids = array();
-										#print('<pre>'); print('VALUE for _upsell_ids: '); print_r($postmeta->meta_value); #print_r($PostMetaData); print('</pre>'); #die;
 										if ($postmeta->meta_value != '' && $postmeta->meta_value != null) {
 											$upsellids = unserialize($postmeta->meta_value);
 											if (is_array($upsellids)) {
@@ -720,9 +697,8 @@ class WPCSVProExportData {
 											} else {
 												$PostMetaData[$postmeta->post_id]['_upsell_ids'] = '';
 											}
-											#print('<pre>'); print('VALUE for _upsell_ids: '); print_r($postmeta->meta_value); print_r($PostMetaData);
 										}
-									} #print('<pre>'); print('VALUE for _upsell_ids: '); print_r($postmeta->meta_value); print_r($PostMetaData); print('</pre>'); #die;
+									}
 									else {
 										if ($postmeta->meta_key == '_crosssell_ids') {
 											if ($postmeta->meta_value != '' && $postmeta->meta_value != null) {
@@ -756,7 +732,7 @@ class WPCSVProExportData {
 											} else {
 												if ($postmeta->meta_key == '_thumbnail_id') {
 													$attachment_file = '';
-													$get_attachement = "select guid from $wpdb->posts where ID = $postmeta->meta_value AND post_type = 'attachment'";
+													$get_attachement = $wpdb->prepare("select guid from $wpdb->posts where ID = %d AND post_type = %s",$postmeta->meta_value,'attachment');
 													$attachment = $wpdb->get_results($get_attachement);
 													$attachment_file = $attachment[0]->guid;
 													$PostMetaData[$postmeta->post_id][$postmeta->meta_key] = '';
@@ -778,10 +754,6 @@ class WPCSVProExportData {
 														}
 													} else {
 														if ($postmeta->meta_key == '_stock_status') {
-															/*if($postmeta->meta_value == 'instock')
-																$PostMetaData[$postmeta->post_id][$postmeta->meta_key] = 1;
-															if($postmeta->meta_value == 'outofstock')
-																$PostMetaData[$postmeta->post_id][$postmeta->meta_key] = 2;*/
 															$PostMetaData[$postmeta->post_id][$postmeta->meta_key] = $postmeta->meta_value;
 														} else {
 															if ($postmeta->meta_key == '_tax_status') {
@@ -839,9 +811,6 @@ class WPCSVProExportData {
 																					$PostMetaData[$postmeta->post_id]['product_type'] = 4;
 																				}
 																			}
-																			/* else if($postmeta->meta_key != '_eshop_product' && $postmeta->meta_key != '_thumbnail_id') {
-																				$PostMetaData[$postmeta->post_id][$postmeta->meta_key] = $postmeta->meta_value;
-																			} */ #$eshop_products = $postmeta->meta_value;
 																			else {
 																				if ($postmeta->meta_key == 'products') {
 																					$PostMetaData[$postmeta->post_id][$postmeta->meta_key] = '';
@@ -911,9 +880,8 @@ class WPCSVProExportData {
 																										else {
 																											if ($postmeta->meta_key == '_wpsc_product_metadata') {
 																												$wpecomm_product_metadata = unserialize($postmeta->meta_value);
-																												#print('<pre>'); print_r($wpecomm_product_metadata); die;
 																												foreach ($wpecomm_product_metadata as $prod_md_key => $prod_md_val) {
-																													if ($prod_md_key == 'dimensions') { #die('summa');
+																													if ($prod_md_key == 'dimensions') { 
 																														foreach ($prod_md_val as $prod_dimen_key => $prod_dimen_val) {
 																															$PostMetaData[$postmeta->post_id][$prod_dimen_key] = $prod_dimen_val;
 																														}
@@ -983,7 +951,6 @@ class WPCSVProExportData {
 																																	if ($postmeta->meta_key == '_eshop_product') {
 																																		$product_attr_details = unserialize($postmeta->meta_value);
 																																		$prod_option = $sale_price = $reg_price = null;
-																																		#print('<pre>');print_r($product_attr_details); #die;
 																																		foreach ($product_attr_details as $prod_att_det_Key => $prod_att_det_Val) {
 																																			if ($prod_att_det_Key == 'sku') {
 																																				$PostMetaData[$postmeta->post_id]['sku'] = $prod_att_det_Val;
@@ -1003,12 +970,11 @@ class WPCSVProExportData {
 																																				}
 																																			}
 																																		}
-																																		#$PostMetaData[$postmeta->post_id]['cart_option'] = $postmeta->meta_value;
 																																	} // Eshop product meta datas ends here
 																																	else {
 																																		if ($postmeta->meta_key == '_thumbnail_id') {
 																																			$attachment_file = '';
-																																			$get_attachement = "select guid from $wpdb->posts where ID = $postmeta->meta_value AND post_type = 'attachment'";
+													$get_attachement = $wpdb->prepare("select guid from $wpdb->posts whereID = %d AND post_type = %s",$postmeta->meta_value,'attachment');
 																																			$attachment = $wpdb->get_results($get_attachement);
 																																			$attachment_file = $attachment[0]->guid;
 																																			$PostMetaData[$postmeta->post_id][$postmeta->meta_key] = '';
@@ -1056,34 +1022,15 @@ class WPCSVProExportData {
 						}
 					}
 				}
-				#				print('PostMetaData: '); print('<pre>'); print_r($Header); print_r($PostMetaData); #die;
 				$TermsData[$postID] = $this->getAllTerms($postID, $exporttype);
-				/*
-								// Tags & Categories
-								$get_tags = wp_get_post_tags($postID, array('fields' => 'names'));
-								$postTags = $postCategory = '';
-								foreach ($get_tags as $tags) {
-									$postTags .= $tags . ',';
-								}
-								$postTags = substr($postTags, 0, -1);
-								$TermsData[$postID]['post_tag'] = $postTags;
-								$get_categotries = wp_get_post_categories($postID, array('fields' => 'names'));
-								foreach ($get_categotries as $category) {
-									$postCategory .= $category . '|';
-								}
-								$postCategory = substr($postCategory, 0, -1);
-								$TermsData[$postID]['post_category'] = $postCategory;
-				*/
 			}
 
 			$ExportData = array();
 			// Merge all arrays
-			#echo '<pre>'; print_r($TermsData); die;
-			// echo '<pre>'; print_r($PostData); die('sds');
+			if(!empty($PostData)){
 			foreach ($PostData as $pd_key => $pd_val) {
 				if (array_key_exists($pd_key, $PostMetaData)) {
 					$ExportData[$pd_key] = array_merge($PostData[$pd_key], $PostMetaData[$pd_key]);
-					//  echo '<pre>'; print_r($ExportData); die('exist');
 				} else {
 					$ExportData[$pd_key] = $PostData[$pd_key];
 				}
@@ -1094,26 +1041,11 @@ class WPCSVProExportData {
 					$ExportData[$pd_key] = array_merge($ExportData[$pd_key], $TermsData[$pd_key]);
 				}
 			}
+			}
 		}
-		#print('<pre>'); print_r($Header); die;
-		#print('<pre>'); print_r($ExportData); die;
 		if ($exporttype == 'woocommerce') {
 			foreach ($Header as $hkey) {
 				foreach ($ExportData as $edkey => $edval) {
-					/*if(array_key_exists($hkey, $this->getACFvalues())) {
-						$ExportData[$edkey][$hkey] = $edval[$hkey];
-						unset($ExportData[$edkey]['_'.$hkey]);
-					}
-					else if(in_array($hkey, $this->getAIOSEOfields())) {
-						foreach($this->getAIOSEOfields() as $aioseokey => $aioseoval) {
-							$ExportData[$edkey][$aioseoval] = $edval[$aioseokey];
-							unset($ExportData[$edkey][$hkey]);
-						}
-					}
-					else if(array_key_exists('_'.$hkey, $edval)) {
-						$ExportData[$edkey][$hkey] = $edval['_'.$hkey];
-						unset($ExportData[$edkey]['_'.$hkey]);
-					} */
 					foreach ($this->WoocommerceMetaHeaders() as $woohkey => $woohval) {
 						if (array_key_exists($woohval, $ExportData[$edkey])) {
 							$ExportData[$edkey][$woohkey] = $edval[$woohval];
@@ -1123,14 +1055,13 @@ class WPCSVProExportData {
 				}
 			}
 		}
-		#			MarketPressHeaders
+		#MarketPressHeaders
 		if ($exporttype == 'marketpress') {
 			foreach ($Header as $hkey) {
 				foreach ($ExportData as $edkey => $edval) {
 					foreach ($this->MarketPressHeaders() as $mphkey => $mphval) {
 						if (array_key_exists($mphval, $ExportData[$edkey])) {
 							$ExportData[$edkey][$mphkey] = $edval[$mphval];
-							//                                                                unset($ExportData[$edkey][$mphval]);
 						}
 					}
 				}
@@ -1142,7 +1073,6 @@ class WPCSVProExportData {
 					foreach ($this->WpeCommerceHeaders() as $wpcomhkey => $wpcomhval) {
 						if (array_key_exists($wpcomhval, $ExportData[$edkey])) {
 							$ExportData[$edkey][$wpcomhkey] = $edval[$wpcomhval];
-							//                                                                unset($ExportData[$edkey][$wpcomhval]);
 						}
 					}
 				}
@@ -1154,24 +1084,21 @@ class WPCSVProExportData {
 					foreach ($this->EshopHeaders() as $eshophkey => $eshophval) {
 						if (array_key_exists($eshophval, $ExportData[$edkey])) {
 							$ExportData[$edkey][$eshophkey] = $edval[$eshophval];
-							//                                                                unset($ExportData[$edkey][$wpcomhval]);
 						}
 					}
 				}
 			}
 		}
-		#print('<pre>'); print_r($Header); print('</pre>'); #die;
-		#			print('<pre>'); print_r($ExportData); die;
 		$CSVContent = array();
 		foreach ($Header as $header_key) {
 			if (is_array($ExportData)) {
 				foreach ($ExportData as $ED_key => $ED_val) {
 					foreach($ED_val as $unkey => $unval){
- 					       if(!in_array($unkey,$Header)){
-					                unset($ED_val[$unkey]);
-					        }
-				}
-					if (in_array($header_key, $this->getAIOSEOfields())) { #die($header_key);
+						if(!in_array($unkey,$Header)){
+							unset($ED_val[$unkey]);
+						}
+					}
+					if (in_array($header_key, $this->getAIOSEOfields())) { 
 						foreach ($this->getAIOSEOfields() as $aioseokey => $aioseoval) {
 							if (array_key_exists($aioseokey, $ED_val)) {
 								$CSVContent[$ED_key][$aioseoval] = $ED_val[$aioseokey];
@@ -1190,7 +1117,6 @@ class WPCSVProExportData {
 								else {
 									$CSVContent[$ED_key][$yoastseoval] = null;
 								}
-								#unset($CSVContent[$ED_key][$header_key]);
 							}
 						} else {
 							if (in_array($header_key, $this->getTypesFields())) {
@@ -1200,7 +1126,6 @@ class WPCSVProExportData {
 									} else {
 										$CSVContent[$ED_key][$typesFval] = '';
 									}
-									#unset($CSVContent[$ED_key][$header_key]);
 								}
 							} else {
 								if (array_key_exists($header_key, $ED_val)) {
@@ -1211,11 +1136,9 @@ class WPCSVProExportData {
 							}
 						}
 					}
-			}
+				}
 			}
 		}
-//echo '<pre>';print_r(count($Header));echo '</pre>';
-//die;
 		$csv = new WPImpCSVParserLib();
 		$csv->output($csv_file_name, $CSVContent, $Header, $export_delimiter);
 	}
@@ -1225,30 +1148,24 @@ class WPCSVProExportData {
 	 */
 	public function WPImpExportCategories($request) {
 		global $wpdb;
-		$exporttype = $request['export'];
+		$exporttype = sanitize_text_field($request['export']);
 		$wpcsvsettings = get_option('wpcsvfreesettings');
-		if (isset($_POST['getdatawithdelimiter']) && isset($_POST['postwithdelimiter']) && $_POST['postwithdelimiter'] != 'Select') {
-			if ($_POST['postwithdelimiter'] == "{Space}") {
+		if (isset($_POST['getdatawithdelimiter']) && isset($_POST['postwithdelimiter']) && sanitize_text_field($_POST['postwithdelimiter']) != 'Select') {
+			if (sanitize_text_field($_POST['postwithdelimiter']) == "{Space}") {
 				$export_delimiter = " ";
-			} elseif ($_POST['postwithdelimiter'] == "{Tab}") {
+			} elseif (sanitize_text_field($_POST['postwithdelimiter']) == "{Tab}") {
 				$export_delimiter = "\t";
 			} else {
-				$export_delimiter = $_POST['postwithdelimiter'];
+				$export_delimiter = sanitize_text_field($_POST['postwithdelimiter']);
 			}
 		} elseif (isset($_POST['getdatawithdelimiter']) && !empty($_POST['others_delimiter'])) {
-
-			$export_delimiter = $_POST['others_delimiter'];
+			$export_delimiter = sanitize_text_field($_POST['others_delimiter']);
 		} else {
 
 			$export_delimiter = ',';
 		}
-		/*if(isset($_POST['getdatawithdelimeter']) && isset($_POST['delimeterstatus'])){
-			 $export_delimiter = $_POST['delimeterstatus'];
-	 }else{
-			 $export_delimiter = ',';
-	 }*/
-		if ($_POST['export_filename']) {
-			$csv_file_name = $_POST['export_filename'] . '.csv';
+		if (sanitize_text_field($_POST['export_filename'])) {
+			$csv_file_name = sanitize_text_field($_POST['export_filename']) . '.csv';
 		} else {
 			$csv_file_name = 'exportas_' . date("Y") . '-' . date("m") . '-' . date("d") . '.csv';
 		}
@@ -1269,6 +1186,7 @@ class WPCSVProExportData {
 		foreach ($seo_yoast_taxonomies as $seo_yoast => $seo) {
 			$val_seo_yoast = $seo;
 		}
+		if(!empty($get_all_categories)){
 		foreach ($get_all_categories as $cateKey => $cateValue) {
 			$categID = $cateValue->term_id;
 			$categName = $cateValue->cat_name;
@@ -1283,6 +1201,7 @@ class WPCSVProExportData {
 			}
 			$TERM_DATA[$categID]['slug'] = $categSlug;
 			$TERM_DATA[$categID]['description'] = $categDesc;
+		}
 		}
 		if (is_array($wpcsvsettings) && array_key_exists('rseooption', $wpcsvsettings) && $wpcsvsettings['rseooption'] == 'yoastseo') {
 			foreach ($seo_yoast_taxonomies['category'] as $taxoKey => $taxoValue) {
@@ -1310,29 +1229,22 @@ class WPCSVProExportData {
 		global $wpdb;
 		$wpcsvsettings = get_option('wpcsvfreesettings');
 		$exporttype = $request['export'];
-
-		/*if(isset($_POST['getdatawithdelimeter']) && isset($_POST['delimeterstatus'])){
-                        $export_delimiter = $_POST['delimeterstatus'];
-                }else{
-                        $export_delimiter = ',';
-                }*/
-		if (isset($_POST['getdatawithdelimiter']) && isset($_POST['postwithdelimiter']) && $_POST['postwithdelimiter'] != 'Select') {
-			if ($_POST['postwithdelimiter'] == "{Space}") {
+		if (isset($_POST['getdatawithdelimiter']) && isset($_POST['postwithdelimiter']) && sanitize_text_field($_POST['postwithdelimiter']) != 'Select') {
+			if (sanitize_text_field($_POST['postwithdelimiter']) == "{Space}") {
 				$export_delimiter = " ";
-			} elseif ($_POST['postwithdelimiter'] == "{Tab}") {
+			} elseif (sanitize_text_field($_POST['postwithdelimiter']) == "{Tab}") {
 				$export_delimiter = "\t";
 			} else {
-				$export_delimiter = $_POST['postwithdelimiter'];
+				$export_delimiter = sanitize_text_field($_POST['postwithdelimiter']);
 			}
 		} elseif (isset($_POST['getdatawithdelimiter']) && !empty($_POST['others_delimiter'])) {
-
-			$export_delimiter = $_POST['others_delimiter'];
+			$export_delimiter = sanitize_text_field($_POST['others_delimiter']);
 		} else {
 
 			$export_delimiter = ',';
 		}
-		if ($_POST['export_filename']) {
-			$csv_file_name = $_POST['export_filename'] . '.csv';
+		if (sanitize_text_field($_POST['export_filename'])) {
+			$csv_file_name = sanitize_text_field($_POST['export_filename']) . '.csv';
 		} else {
 			$csv_file_name = 'exportas_' . date("Y") . '-' . date("m") . '-' . date("d") . '.csv';
 		}
@@ -1356,6 +1268,7 @@ class WPCSVProExportData {
 
 		$get_all_tags = get_tags('hide_empty=0');
 		$fieldsCount = count($get_all_tags);
+		if(!empty($get_all_tags)){
 		foreach ($get_all_tags as $tagKey => $tagValue) {
 			$tagID = $tagValue->term_id;
 			$tagName = $tagValue->name;
@@ -1364,6 +1277,7 @@ class WPCSVProExportData {
 			$TERM_DATA[$tagID]['name'] = $tagName;
 			$TERM_DATA[$tagID]['slug'] = $tagSlug;
 			$TERM_DATA[$tagID]['description'] = $tagDesc;
+		}
 		}
 		if (isset($wpcsvsettings['rseooption']) && $wpcsvsettings['rseooption'] == 'yoastseo') {
 			foreach ($seo_yoast_taxonomies['post_tag'] as $taxoKey => $taxoValue) {
@@ -1389,35 +1303,28 @@ class WPCSVProExportData {
 	 */
 	public function WPImpExportTaxonomies($request) {
 		global $wpdb;
-		$exporttype = $request['export'];
+		$exporttype = sanitize_text_field($request['export']);
 		$wpcsvsettings = get_option('wpcsvfreesettings');
-		/* if(isset($_POST['getdatawithdelimeter']) && isset($_POST['delimeterstatus'])){
-				 $export_delimiter = $_POST['delimeterstatus'];
-		 }else{
-				 $export_delimiter = ',';
-		 }*/
-		if (isset($_POST['getdatawithdelimiter']) && isset($_POST['postwithdelimiter']) && $_POST['postwithdelimiter'] != 'Select') {
-			if ($_POST['postwithdelimiter'] == "{Space}") {
+		if (isset($_POST['getdatawithdelimiter']) && isset($_POST['postwithdelimiter']) && sanitize_text_field($_POST['postwithdelimiter']) != 'Select') {
+			if (sanitize_text_field($_POST['postwithdelimiter']) == "{Space}") {
 				$export_delimiter = " ";
-			} elseif ($_POST['postwithdelimiter'] == "{Tab}") {
+			} elseif (sanitize_text_field($_POST['postwithdelimiter']) == "{Tab}") {
 				$export_delimiter = "\t";
 			} else {
-				$export_delimiter = $_POST['postwithdelimiter'];
+				$export_delimiter = sanitize_text_field($_POST['postwithdelimiter']);
 			}
 		} elseif (isset($_POST['getdatawithdelimiter']) && !empty($_POST['others_delimiter'])) {
-
-			$export_delimiter = $_POST['others_delimiter'];
+			$export_delimiter = sanitize_text_field($_POST['others_delimiter']);
 		} else {
-
 			$export_delimiter = ',';
 		}
-		if ($_POST['export_filename']) {
-			$csv_file_name = $_POST['export_filename'] . '.csv';
+		if (sanitize_text_field($_POST['export_filename'])) {
+			$csv_file_name = sanitize_text_field($_POST['export_filename']) . '.csv';
 		} else {
 			$csv_file_name = 'exportas_' . date("Y") . '-' . date("m") . '-' . date("d") . '.csv';
 		}
 
-		$taxonomy_name = $_POST['export_taxo_type'];
+		$taxonomy_name = sanitize_text_field($_POST['export_taxo_type']);
 		$taxonomies = get_terms($taxonomy_name, 'orderby=count&hide_empty=0');
 		$Header[] = 'name';
 		$Header[] = 'slug';
@@ -1434,6 +1341,7 @@ class WPCSVProExportData {
 		foreach ($seo_yoast_taxonomies as $seo_yoast => $seo) {
 			$val_seo_yoast = $seo;
 		}
+		if(!empty($taxonomies)){
 		foreach ($taxonomies as $taxoKey => $taxoValue) {
 			$taxoID = $taxoValue->term_id;
 			$taxoName = $taxoValue->name;
@@ -1448,6 +1356,7 @@ class WPCSVProExportData {
 			}
 			$TERM_DATA[$taxoID]['slug'] = $taxoSlug;
 			$TERM_DATA[$taxoID]['description'] = $taxoDesc;
+		}
 		}
 		if (isset($wpcsvsettings['rseooption']) && $wpcsvsettings['rseooption'] == 'yoastseo') {
 			foreach ($seo_yoast_taxonomies[$taxonomy_name] as $taxoKey => $taxoValue) {
@@ -1473,29 +1382,23 @@ class WPCSVProExportData {
 	 */
 	public function WPImpExportCustomerReviews($request) {
 		global $wpdb;
-		$exporttype = $request['export'];
-		/*if(isset($_POST['getdatawithdelimeter']) && isset($_POST['delimeterstatus'])){
-                        $export_delimiter = $_POST['delimeterstatus'];
-                }else{
-                        $export_delimiter = ',';
-                }*/
-		if (isset($_POST['getdatawithdelimiter']) && isset($_POST['postwithdelimiter']) && $_POST['postwithdelimiter'] != 'Select') {
-			if ($_POST['postwithdelimiter'] == "{Space}") {
+		$Header = array();
+		$exporttype = sanitize_text_field($request['export']);
+		if (isset($_POST['getdatawithdelimiter']) && isset($_POST['postwithdelimiter']) && sanitize_text_field($_POST['postwithdelimiter']) != 'Select') {
+			if (sanitize_text_field($_POST['postwithdelimiter']) == "{Space}") {
 				$export_delimiter = " ";
-			} elseif ($_POST['postwithdelimiter'] == "{Tab}") {
+			} elseif (sanitize_text_field($_POST['postwithdelimiter']) == "{Tab}") {
 				$export_delimiter = "\t";
 			} else {
-				$export_delimiter = $_POST['postwithdelimiter'];
+				$export_delimiter = sanitize_text_field($_POST['postwithdelimiter']);
 			}
 		} elseif (isset($_POST['getdatawithdelimiter']) && !empty($_POST['others_delimiter'])) {
-
-			$export_delimiter = $_POST['others_delimiter'];
+			$export_delimiter = sanitize_text_field($_POST['others_delimiter']);
 		} else {
-
 			$export_delimiter = ',';
 		}
-		if ($_POST['export_filename']) {
-			$csv_file_name = $_POST['export_filename'] . '.csv';
+		if (sanitize_text_field($_POST['export_filename'])) {
+			$csv_file_name = sanitize_text_field($_POST['export_filename']) . '.csv';
 		} else {
 			$csv_file_name = 'exportas_' . date("Y") . '-' . date("m") . '-' . date("d") . '.csv';
 		}
@@ -1504,12 +1407,14 @@ class WPCSVProExportData {
 		$header_query2 = "SELECT id FROM  wp_wpcreviews";
 
 		$result_header_query1 = $wpdb->get_results($header_query1);
+		if(!empty($result_header_query1)){
 		foreach ($result_header_query1 as $rhq1_key) {
 			foreach ($rhq1_key as $rhq1_headkey => $rhq1_headval) {
 				if (!in_array($rhq1_headkey, $Header)) {
 					$Header[] = $rhq1_headkey;
 				}
 			}
+		}
 		}
 
 		$result = $wpdb->get_results($header_query1);
@@ -1543,37 +1448,30 @@ class WPCSVProExportData {
 	 */
 	public function WPImpExportComments($request) {
 		global $wpdb;
-		$exporttype = $request['export'];
-		/*if( isset($_POST['getdatawithdelimeter']) && isset($_POST['delimeterstatus'])){
-				  $export_delimiter = $_POST['delimeterstatus'];
-		  }else{
-				  $export_delimiter = ',';
-		  }*/
-		if (isset($_POST['getdatawithdelimiter']) && isset($_POST['postwithdelimiter']) && $_POST['postwithdelimiter'] != 'Select') {
-			if ($_POST['postwithdelimiter'] == "{Space}") {
+		$exporttype = sanitize_text_field($request['export']);
+		if (isset($_POST['getdatawithdelimiter']) && isset($_POST['postwithdelimiter']) && sanitize_text_field($_POST['postwithdelimiter']) != 'Select') {
+			if (sanitize_text_field($_POST['postwithdelimiter']) == "{Space}") {
 				$export_delimiter = " ";
-			} elseif ($_POST['postwithdelimiter'] == "{Tab}") {
+			} elseif (sanitize_text_field($_POST['postwithdelimiter']) == "{Tab}") {
 				$export_delimiter = "\t";
 			} else {
-				$export_delimiter = $_POST['postwithdelimiter'];
+				$export_delimiter = sanitize_text_field($_POST['postwithdelimiter']);
 			}
 		} elseif (isset($_POST['getdatawithdelimiter']) && !empty($_POST['others_delimiter'])) {
-
-			$export_delimiter = $_POST['others_delimiter'];
+			$export_delimiter = sanitize_text_field($_POST['others_delimiter']);
 		} else {
-
 			$export_delimiter = ',';
 		}
-		if ($_POST['export_filename']) {
-			$csv_file_name = $_POST['export_filename'] . '.csv';
+		if (sanitize_text_field($_POST['export_filename'])) {
+			$csv_file_name = sanitize_text_field($_POST['export_filename']) . '.csv';
 		} else {
 			$csv_file_name = 'exportas_' . date("Y") . '-' . date("m") . '-' . date("d") . '.csv';
 		}
 		$commentQuery = "SELECT * FROM $wpdb->comments orderBy";
 		if (isset($request['getdatabyspecificauthors'])) {
-			if (isset($request['postauthor'])) { //&& $request['postauthor'] != 0){
-				$comment_author = $request['postauthor'];
-				$getauthorquery = "select user_login from $wpdb->users where id = $comment_author";
+			if (isset($request['postauthor'])) { 
+				$comment_author = sanitize_text_field($request['postauthor']);
+				$getauthorquery = $wpdb->prepare("select user_login from $wpdb->users where id = %d",$comment_author);
 				$getauthor = $wpdb->get_results($getauthorquery);
 				if (!empty($getauthor)) {
 					$comment_author = $getauthor[0]->user_login;
@@ -1583,37 +1481,36 @@ class WPCSVProExportData {
 			}
 		}
 		if (isset($request['getdataforspecificperiod'])) {
-			$commentQuery = "SELECT * FROM $wpdb->comments where comment_date >= '" . $request['postdatefrom'] . "' and comment_date <= '" . $request['postdateto'] . "'";
+			$commentQuery = "SELECT * FROM $wpdb->comments where comment_date >= '" . sanitize_text_field($request['postdatefrom']) . "' and comment_date <= '" . sanitize_text_field($request['postdateto']) . "'";
 		}
 		if (isset($request['getdatabyspecificauthors'])) {
-			if (isset($request['postauthor']) && $request['postauthor'] != 0) {
+			if (isset($request['postauthor']) && sanitize_text_field($request['postauthor']) != 0) {
 				$commentQuery = "SELECT * FROM $wpdb->comments where comment_author = '" . $comment_author . "'";
 			}
 		}
 		if (isset($request['getdataforspecificperiod']) && isset($request['getdatabyspecificauthors'])) {
 			if ($commentQuery != null && $commentQuery != '') {
-				$commentQuery = "SELECT * FROM $wpdb->comments where comment_date >= '" . $request['postdatefrom'] . "' and comment_date <= '" . $request['postdateto'] . "' and comment_author = '" . $comment_author . "'";
+				$commentQuery = "SELECT * FROM $wpdb->comments where comment_date >= '" . sanitize_text_field($request['postdatefrom']) . "' and comment_date <= '" . sanitize_text_field($request['postdateto']) . "' and comment_author = '" . $comment_author . "'";
 			} else {
-				$commentQuery = "SELECT * FROM $wpdb->comments where comment_date >= '" . $request['postdatefrom'] . "' and comment_date <= '" . $request['postdateto'] . "'";
+				$commentQuery = "SELECT * FROM $wpdb->comments where comment_date >= '" . sanitize_text_field($request['postdatefrom']) . "' and comment_date <= '" . sanitize_text_field($request['postdateto']) . "'";
 			}
 		}
 
-
 		$comments = $wpdb->get_results($commentQuery);
-		//echo '<pre>';print_r($comments);echo '</pre>';die;
 		$mappedHeader = false;
 		$i = 0;
+		if(!empty($comments)){
 		foreach ($comments as $comment) {
 			foreach ($comment as $key => $value) {
 				if (!$mappedHeader) {
-					$Header[] = $key; // ."$export_delimiter";
+					$Header[] = $key;
 				}
-				$ExportData[$i][$key] = $value; //'"'.$value.'"'."$export_delimiter";
+				$ExportData[$i][$key] = $value;
 			}
 			$mappedHeader = true;
 			$i++;
 		}
-		#print('<pre>'); print_r($header); print_r($singleCommentContent);die;
+		}
 		$csv = new WPImpCSVParserLib();
 		$csv->output($csv_file_name, $ExportData, $Header, $export_delimiter);
 	}
@@ -1623,29 +1520,22 @@ class WPCSVProExportData {
 	 */
 	public function WPImpExportUsers($request) {
 		global $wpdb;
-		$exporttype = $request['export'];
-		/*if( isset($_POST['getdatawithdelimeter']) && isset($_POST['delimeterstatus'])){
-				$export_delimiter = $_POST['delimeterstatus'];
-		}else{
-				$export_delimiter = ',';
-		}*/
-		if (isset($_POST['getdatawithdelimiter']) && isset($_POST['postwithdelimiter']) && $_POST['postwithdelimiter'] != 'Select') {
-			if ($_POST['postwithdelimiter'] == "{Space}") {
+		$exporttype = sanitize_text_field($request['export']);
+		if (isset($_POST['getdatawithdelimiter']) && isset($_POST['postwithdelimiter']) && sanitize_text_field($_POST['postwithdelimiter']) != 'Select') {
+			if (sanitize_text_field($_POST['postwithdelimiter']) == "{Space}") {
 				$export_delimiter = " ";
-			} elseif ($_POST['postwithdelimiter'] == "{Tab}") {
+			} elseif (sanitize_text_field($_POST['postwithdelimiter']) == "{Tab}") {
 				$export_delimiter = "\t";
 			} else {
-				$export_delimiter = $_POST['postwithdelimiter'];
+				$export_delimiter = sanitize_text_field($_POST['postwithdelimiter']);
 			}
 		} elseif (isset($_POST['getdatawithdelimiter']) && !empty($_POST['others_delimiter'])) {
-
-			$export_delimiter = $_POST['others_delimiter'];
+			$export_delimiter = sanitize_text_field($_POST['others_delimiter']);
 		} else {
-
 			$export_delimiter = ',';
 		}
-		if ($_POST['export_filename']) {
-			$csv_file_name = $_POST['export_filename'] . '.csv';
+		if (sanitize_text_field($_POST['export_filename'])) {
+			$csv_file_name = sanitize_text_field($_POST['export_filename']) . '.csv';
 		} else {
 			$csv_file_name = 'exportas_' . date("Y") . '-' . date("m") . '-' . date("d") . '.csv';
 		}
@@ -1656,8 +1546,7 @@ class WPCSVProExportData {
 		$header_query2 = "SELECT user_id, meta_key, meta_value FROM  $wpdb->users wp JOIN $wpdb->usermeta wpm ON wpm.user_id = wp.ID where meta_key NOT IN ('_edit_lock','_edit_last')";
 		$result_header_query1 = $wpdb->get_results($header_query1);
 		$result_header_query2 = $wpdb->get_results($header_query2);
-		/*		print('<pre>');	print_r($result_header_query1);
-					print_r($result_header_query2);die;  */
+		if(!empty( $result_header_query1)){
 		foreach ($result_header_query1 as $rhq1_key) {
 			foreach ($rhq1_key as $rhq1_headkey => $rhq1_headval) {
 				if (!in_array($rhq1_headkey, $Header)) {
@@ -1665,6 +1554,8 @@ class WPCSVProExportData {
 				}
 			}
 		}
+		}
+		if(!empty($result_header_query2)){
 		foreach ($result_header_query2 as $rhq2_headkey) {
 			if (!in_array($rhq2_headkey->meta_key, $Header)) {
 				if ($rhq2_headkey->meta_key == 'mp_shipping_info') {
@@ -1685,9 +1576,8 @@ class WPCSVProExportData {
 				}
 			}
 		}
-		#echo '<pre>'; print_r($Header); die('dsd');
+		}
 		$get_user_ids = "select DISTINCT ID from $wpdb->users u join $wpdb->usermeta um on um.user_id = u.ID";
-
 		$result = $wpdb->get_col($get_user_ids);
 		$fieldsCount = count($result);
 		if (isset($result)) {
@@ -1702,14 +1592,11 @@ class WPCSVProExportData {
 						}
 					}
 				}
-				//  echo '<pre>'; print_r($UserData); die ('dfdf'); 
 				$query2 = "SELECT user_id, meta_key, meta_value FROM  $wpdb->users wp JOIN $wpdb->usermeta wpm  ON wpm.user_id = wp.ID where ID=$userID";
 				$possible_values = array('s:', 'a:', ':{');
 				$result_query2 = $wpdb->get_results($query2);
 				if (!empty($result_query2)) {
 					foreach ($result_query2 as $usermeta) {
-						//  echo '<pre>'; print_r($usermeta);
-
 						foreach ($possible_values as $posval) {
 							if (strpos($usermeta->meta_value, $posval)) {
 								if ($usermeta->meta_key == 'mp_shipping_info' || $usermeta->meta_key == 'mp_billing_info') {
@@ -1743,7 +1630,6 @@ class WPCSVProExportData {
 							} else {
 								if ($usermeta->meta_key == 'wp_capabilities') {
 									$getUserRole = unserialize($usermeta->meta_value);
-									//  echo '<pre>'; print_r($getUserRole); die('ddf');
 									foreach ($getUserRole as $urKey => $urVal) {
 										$getUserRole = get_role($urKey);
 									}
@@ -1756,7 +1642,6 @@ class WPCSVProExportData {
 										}
 									}
 									$rolelevel = $rolelevel - 1;
-									#$UserData[$userID][$usermeta->meta_key] = $rolelevel;
 								}
 							}
 						} else {
@@ -1770,7 +1655,7 @@ class WPCSVProExportData {
 							}
 
 						}
-					} #echo '<pre>'; print_r($UserData); die('dd');
+					} 
 				}
 			}
 		}

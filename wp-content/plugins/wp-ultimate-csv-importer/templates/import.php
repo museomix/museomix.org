@@ -114,7 +114,6 @@ $res1 = array();
 $get_mapped_array = array();
 $mapping_value = '';
 $filename = $_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['uploadedFile'];
-$delim = $_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['select_delimeter'];
 $resultArr = $skinnyObj->csv_file_data($filename);
 if ($_POST['postdata']['dupTitle']) {
 	$importObj->titleDupCheck = $_POST['postdata']['dupTitle'];
@@ -125,6 +124,7 @@ if ($_POST['postdata']['dupContent']) {
 $csv_rec_count = $_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['h2'];
 $available_groups = $skinnyObj->get_availgroups($curr_action);
 //mapped and unmapped count
+if(!empty($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']) && is_array($_SESSION['SMACK_MAPPING_SETTINGS_VALUES'])){ 
 foreach ($_SESSION['SMACK_MAPPING_SETTINGS_VALUES'] as $seskey => $sesval ) {
        foreach($available_groups as $groupKey => $groupVal) {
                $current_mapped = explode($groupVal.'mapping', $seskey);
@@ -140,6 +140,7 @@ foreach ($_SESSION['SMACK_MAPPING_SETTINGS_VALUES'] as $seskey => $sesval ) {
                        }
        }
 }
+}
 $mapped = count($res2);
 $unmapped = count($res1);
 
@@ -148,7 +149,6 @@ for ($i = $limit; $i < $count; $i++) {
 		echo "<div style='margin-left:10px;'> Total no of records - " . $totRecords . ".</div><br>";
 		echo "<div style='margin-left:10px;'> Total no of mapped fields for single record - " . $mapped . ".</div><br>";
 		echo "<div style='margin-left:10px;'> Total no of unmapped fields for a record - " . $unmapped . ".</div><br>";
-		echo "<div style='margin-left:10px;'> Chosen server request is " . $count . " .</div><br>";
 	}
 	$colCount = count($resultArr[$i]);
 	$_SESSION['SMACK_SKIPPED_RECORDS'] = $i;
@@ -166,8 +166,9 @@ for ($i = $limit; $i < $count; $i++) {
 		$sample_inlineimage_url = $_POST['postdata']['inlineimagehandling'];
 	}
 	$importObj->processDataInWP($to_be_import_rec, $_SESSION['SMACK_MAPPING_SETTINGS_VALUES'], $_SESSION['SMACK_MAPPING_SETTINGS_VALUES'], $i, $extracted_image_location, $importinlineimageoption, $sample_inlineimage_url);
-	$logarr = array('post_id', 'assigned_author', 'category', 'tags', 'postdate', 'image', 'poststatus');
+	$logarr = array('post_id','Failed','assigned_author', 'category', 'tags', 'postdate', 'image', 'poststatus');
 	if ($curr_action == 'post' || $curr_action == 'page' || $curr_action == 'custompost' || $curr_action == 'eshop') {
+		if(!empty($importObj->detailedLog) && is_array($importObj->detailedLog)){
 		foreach ($importObj->detailedLog as $logKey => $logVal) {
 			if (array_key_exists($logarr[0], $logVal)) {
 				foreach ($logarr as $logarrkey) {
@@ -177,20 +178,29 @@ for ($i = $limit; $i < $count; $i++) {
 				}
 				echo "<p style='margin-left:10px;'> " . $logVal['post_id'] . " , " . $logVal['assigned_author'] . " , " . $logVal['category'] . " , " . $logVal['tags'] . " , " . $logVal['postdate'] . " , " . $logVal['image'] . " , " . $logVal['poststatus'];
 				if ($curr_action == 'eshop') {
-					echo " , " . $logVal['SKU'] . ", " . $logVal['verify_here'] . "</p>";
+					$sku = isset($logVal['SKU']) ? $logVal['SKU'] : '';
+					echo " , " . $sku . ", " . $logVal['verify_here'] . "</p>";
 				} else {
 					echo " , " . $logVal['verify_here'] . "</p>";
 				}
 			} else {
-				echo "<p style='margin-left:10px;'>" . $logVal['verify_here'] . "</p>";
+				if (array_key_exists($logarr[1], $logVal)) {
+					if($logVal['Failed'])
+						echo "<p style='margin-left:10px;'>" . $logVal['Failed'] . "</p>";
+				}else{
+					echo "<p style='margin-left:10px;'>" . $logVal['verify_here'] . "</p>";
+				}
 			}
+		}
 		}
 	} else {
 		if ($curr_action == 'comments' || $curr_action == 'users') {
+			if(!empty($importObj->detailedLog) && is_array($importObj->detailedLog)){
 			foreach ($importObj->detailedLog as $logVal) {
 				for ($l = 0; $l < count($logVal); $l++) {
 					echo "<p style='margin-left:10px;'> " . $logVal[$l] . "</p>";
 				}
+			}
 			}
 		}
 	}
@@ -233,7 +243,7 @@ if ($importObj->insPostCount != 0 || $importObj->dupPostCount != 0 || $importObj
 	}
 }
 
-$inserted_post_count = $_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['insPostCount'];
+$inserted_post_count = isset($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['insPostCount']) ? $_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['insPostCount'] : '';
 if ($inserted_post_count != 0) {
 	if (!isset($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['captureId'])) {
 		$_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['captureId'] = 0;
@@ -255,11 +265,12 @@ if ($limit == $totRecords) {
 	echo __('Import successfully completed!.', 'wp-ultimate-csv-importer');
 	echo "</div>";
 }
-
+if(is_array($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']) && !empty($_SESSION['SMACK_MAPPING_SETTINGS_VALUES'])){  
 foreach ($_SESSION['SMACK_MAPPING_SETTINGS_VALUES'] as $key => $value) {
 	for ($j = 0; $j < $csv_rec_count; $j++) {
 		if ($key == 'mapping' . $j) {
 			$mapArr[$j] = $value;
 		}
 	}
+}
 }

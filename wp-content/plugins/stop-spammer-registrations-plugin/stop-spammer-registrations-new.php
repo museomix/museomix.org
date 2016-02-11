@@ -3,7 +3,7 @@
 Plugin Name: Stop Spammers Spam Control
 Plugin URI: http://wordpress.org/plugins/stop-spammer-registrations-plugin/
 Description: The Stop Spammers Plugin blocks spammers from leaving comments or logging in. Protects sites from robot registrations and malicious attacks.
-Version: 6.13
+Version: 6.15
 Author: Keith P. Graham
 
 This software is distributed in the hope that it will be useful,
@@ -12,7 +12,7 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
 // networking requires a couple of globals
 
-define('KPG_SS_VERSION', '6.13');
+define('KPG_SS_VERSION', '6.15');
 define( 'KPG_SS_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'KPG_SS_PLUGIN_FILE', plugin_dir_path( __FILE__ ) );
 define( 'KPG_SS_PLUGIN_DATA', plugin_dir_path( __FILE__ ).'data/' );
@@ -61,7 +61,7 @@ How it works:
 
 function kpg_ss_init() {
 	remove_action('init','kpg_ss_init');
-	add_filter( 'pre_user_login', kpg_ss_user_reg_filter, 1, 1 );
+	add_filter( 'pre_user_login', 'kpg_ss_user_reg_filter', 1, 1 );
 	// incompatible with a jetpack submit
 	if ($_POST!=null&&array_key_exists('jetpack_protect_num',$_POST)) return;
 	// emember trying to log in - disable plugin for emember logins.
@@ -101,7 +101,7 @@ function kpg_ss_init() {
 		// check to see if we need to hook the settings
 		// load the settings if logged in
 		if(is_user_logged_in()) {
-			remove_filter( 'pre_user_login', kpg_ss_user_reg_filter, 1);
+			remove_filter( 'pre_user_login', 'kpg_ss_user_reg_filter', 1);
 			if(current_user_can('manage_options')) {
 				kpg_sp_require('includes/ss-admin-options.php');
 				return;

@@ -68,31 +68,7 @@ class ITSEC_Setup {
 				break;
 
 			case 'uninstall': //uninstall plugin
-
-				//Don't run the uninstall script if another version of the plugin is active
-				$free_base = 'better-wp-security/better-wp-security.php';
-				$pro_base  = 'ithemes-security-pro/ithemes-security-pro.php';
-
-				if ( $pro_base == $itsec_globals['plugin_base'] ) {
-					$plugin = $free_base;
-				} else {
-					$plugin = $pro_base;
-				}
-
-				if ( is_multisite() ) {
-
-					$active = is_plugin_active_for_network( $plugin );
-
-				} else {
-
-					$active = is_plugin_active( $plugin );
-
-				}
-
-				if ( $active === false ) {
-					$this->uninstall_execute();
-				}
-
+				$this->uninstall_execute();
 				break;
 
 		}
@@ -105,34 +81,8 @@ class ITSEC_Setup {
 	 * @return void
 	 */
 	function do_modules() {
-
-		global $itsec_globals;
-
-		$free_modules_folder = trailingslashit( $itsec_globals['plugin_dir'] ) . 'core/modules';
-		$pro_modules_folder  = trailingslashit( $itsec_globals['plugin_dir'] ) . 'pro';
-
-		$has_pro = is_dir( $pro_modules_folder );
-
-		if ( $has_pro ) {
-
-			foreach ( $itsec_globals['pro_modules'] as $module => $info ) {
-
-				if ( file_exists( $pro_modules_folder . '/' . $module . '/setup.php' ) ) {
-					require( $pro_modules_folder . '/' . $module . '/setup.php' );
-				}
-
-			}
-
-		}
-
-		foreach ( $itsec_globals['free_modules'] as $module => $info ) {
-
-			if ( ( $has_pro === false || ! in_array( $module, $itsec_globals['pro_modules'] ) ) && file_exists( $free_modules_folder . '/' . $module . '/setup.php' ) ) {
-				require( $free_modules_folder . '/' . $module . '/setup.php' );
-			}
-
-		}
-
+		$itsec_modules = ITSEC_Modules::get_instance();
+		$itsec_modules->run_activation();
 	}
 
 	/**
@@ -431,11 +381,13 @@ class ITSEC_Setup {
 	 * */
 	private function deactivate_execute() {
 
-		global $itsec_files, $wpdb;
+		global $itsec_globals, $itsec_files, $wpdb;
 
 		wp_clear_scheduled_hook( 'itsec_purge_lockouts' );
 
-		$this->do_modules();
+		require_once( trailingslashit( $itsec_globals['plugin_dir'] ) . 'core/class-itsec-modules.php' );
+		$itsec_modules = ITSEC_Modules::get_instance();
+		$itsec_modules->run_deactivation();
 
 		$itsec_files->do_deactivate();
 
@@ -485,6 +437,9 @@ class ITSEC_Setup {
 		global $itsec_globals, $itsec_files, $wpdb;
 
 		$this->deactivate_execute();
+
+		require_once( trailingslashit( $itsec_globals['plugin_dir'] ) . 'core/class-itsec-modules.php' );
+		ITSEC_Modules::run_uninstall();
 
 		$itsec_files->do_deactivate();
 

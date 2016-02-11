@@ -18,7 +18,6 @@ class ITSEC_SSL_Admin {
 		add_action( 'current_screen', array( $this, 'plugin_init' ) );
 		add_action( 'itsec_add_admin_meta_boxes', array( $this, 'add_admin_meta_boxes' ) ); //add meta boxes to admin page
 		add_action( 'itsec_admin_init', array( $this, 'initialize_admin' ) ); //initialize admin area
-		add_filter( 'itsec_add_dashboard_status', array( $this, 'dashboard_status' ) ); //add information for plugin status
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_script' ) ); //enqueue scripts for admin page
 		add_filter( 'itsec_tracking_vars', array( $this, 'tracking_vars' ) );
 
@@ -36,6 +35,10 @@ class ITSEC_SSL_Admin {
 
 
 		add_filter( 'itsec_filter_wp_config_modification', array( $this, 'filter_wp_config_modification' ) );
+	}
+
+	public function enabled() {
+		return ( isset( $this->settings['frontend'] ) && in_array( $this->settings['frontend'], array( 1, 2 ) ) );
 	}
 
 	/**
@@ -144,33 +147,6 @@ class ITSEC_SSL_Admin {
 	}
 
 	/**
-	 * Sets the status in the plugin dashboard
-	 *
-	 * @since 4.0
-	 *
-	 * @return array statuses
-	 */
-	public function dashboard_status( $statuses ) {
-		if ( ( defined( 'FORCE_SSL_ADMIN' ) && FORCE_SSL_ADMIN ) || ( defined( 'FORCE_SSL_LOGIN' ) && FORCE_SSL_LOGIN ) ) {
-			$status_array = 'safe-low';
-			$status       = array(
-				'text' => __( 'You are requiring a secure connection for accessing the dashboard.', 'better-wp-security' ),
-				'link' => '#itsec_ssl_admin',
-			);
-		} else {
-			$status_array = 'low';
-			$status       = array(
-				'text' => __( 'You are not requiring a secure connection for accessing the dashboard.', 'better-wp-security' ),
-				'link' => '#itsec_ssl_admin',
-			);
-		}
-		
-		array_push( $statuses[$status_array], $status );
-		
-		return $statuses;
-	}
-
-	/**
 	 * Execute admin initializations.
 	 *
 	 * Adds settings fields and tries to determine whether SSL is even possible.
@@ -229,9 +205,9 @@ class ITSEC_SSL_Admin {
 		} else {
 			$frontend = 0;
 		}
-		
+
 		echo '<select id="itsec_ssl_frontend" name="itsec_ssl[frontend]">';
-		
+
 		echo '<option value="0" ' . selected( $frontend, '0', false ) . '>' . __( 'Off', 'better-wp-security' ) . '</option>';
 		echo '<option value="1" ' . selected( $frontend, '1', false ) . '>' . __( 'Per Content', 'better-wp-security' ) . '</option>';
 		echo '<option value="2" ' . selected( $frontend, '2', false ) . '>' . __( 'Whole Site', 'better-wp-security' ) . '</option>';
@@ -302,17 +278,17 @@ class ITSEC_SSL_Admin {
 
 	public function filter_wp_config_modification( $modification ) {
 		$input = get_site_option( 'itsec_ssl', false );
-		
+
 		if ( ! is_array( $input ) ) {
 			return $modification;
 		}
-		
-		
+
+
 		if ( ( isset( $input['login'] ) && ( true == $input['login'] ) ) || ( isset( $input['admin'] ) && ( true == $input['admin'] ) ) ) {
 			$modification .= "define( 'FORCE_SSL_LOGIN', true ); // " . __( 'Force SSL for Dashboard - Security > Settings > Secure Socket Layers (SSL) > SSL for Dashboard', 'better-wp-security' ) . "\n";
 			$modification .= "define( 'FORCE_SSL_ADMIN', true ); // " . __( 'Force SSL for Dashboard - Security > Settings > Secure Socket Layers (SSL) > SSL for Dashboard', 'better-wp-security' ) . "\n";
 		}
-		
+
 		return $modification;
 	}
 

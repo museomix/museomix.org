@@ -19,7 +19,7 @@ class WYSIJA_object{
 	 * Static variable holding core MailPoet's version
 	 * @var array
 	 */
-	static $version = '2.6.19';
+	static $version = '2.7';
 
 	function __construct(){}
 
@@ -270,7 +270,7 @@ class WYSIJA_help extends WYSIJA_object{
 	  add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 	  add_filter( 'admin_body_class', array( $this, 'admin_body_class' ) );
 	}
-  
+
 	function widgets_init() {
 		//load the widget file
 		require_once(WYSIJA_WIDGETS.'wysija_nl.php');
@@ -392,7 +392,7 @@ class WYSIJA_help extends WYSIJA_object{
 
                         // let's make sure the requested task exist
 			if( method_exists( $this->controller , $_REQUEST['task'] ) ){
-				$result_array['result'] = $this->controller->$_REQUEST['task']();
+				$result_array['result'] = call_user_func(array($this->controller, $_REQUEST['task']));
 			}else{
 				$this->error( 'Method "' . $_REQUEST['task'] . '" doesn\'t exist for controller : "'.$_REQUEST['controller'] );
 			}

@@ -63,7 +63,6 @@ class ITSEC_File_Change_Admin {
 		add_action( 'wp_ajax_itsec_file_change_warning_ajax', array( $this, 'wp_ajax_itsec_file_change_warning_ajax' ) );
 		add_action( 'wp_ajax_itsec_jquery_filetree_ajax', array( $this, 'wp_ajax_itsec_jquery_filetree_ajax' ) );
 
-		add_filter( 'itsec_add_dashboard_status', array( $this, 'itsec_add_dashboard_status' ) ); //add information for plugin status
 		add_filter( 'itsec_logger_displays', array( $this, 'itsec_logger_displays' ) ); //adds logs metaboxes
 		add_filter( 'itsec_tracking_vars', array( $this, 'itsec_tracking_vars' ) );
 
@@ -106,8 +105,6 @@ class ITSEC_File_Change_Admin {
 				'itsec_file_change_js',
 				'itsec_file_change',
 				array(
-					'mem_limit'            => ITSEC_Lib::get_memory_limit(),
-					'text'                 => __( 'Warning: Your server has less than 128MB of RAM dedicated to PHP. If you have many files in your installation or a lot of active plugins activating this feature may result in your site becoming disabled with a memory error. See the plugin homepage for more information.', 'better-wp-security' ),
 					'module_path'          => $this->module_path,
 					'button_text'          => isset( $this->settings['split'] ) && true === $this->settings['split'] ? __( 'Scan Next File Chunk', 'better-wp-security' ) : __( 'Scan Files Now', 'better-wp-security' ),
 					'scanning_button_text' => __( 'Scanning...', 'better-wp-security' ),
@@ -251,18 +248,17 @@ class ITSEC_File_Change_Admin {
 	 * @return void
 	 */
 	public function file_change_form( $origin ) {
-
-		if ( isset( $this->settings['enabled'] ) && true === $this->settings['enabled'] ) {
-
-			echo '<form id="itsec_one_time_file_check" method="post" action="">';
-			echo wp_nonce_field( 'itsec_do_file_check', 'wp_nonce' );
-			echo '<input type="hidden" name="itsec_file_change_origin" value="' . sanitize_text_field( $origin ) . '">';
-			echo '<p>' . __( "Press the button below to scan your site's files for changes. Note that if changes are found this will take you to the logs page for details.", 'better-wp-security' ) . '</p>';
-			echo '<p><input type="submit" id="itsec_one_time_file_check_submit" class="button-primary" value="' . ( isset( $this->settings['split'] ) && true === $this->settings['split'] ? __( 'Scan Next File Chunk', 'better-wp-security' ) : __( 'Scan Files Now', 'better-wp-security' ) ) . '" /></p>';
-			echo '<div id="itsec_file_change_status"><p></p></div>';
-			echo '</form>';
-
+		if ( empty( $this->settings['enabled'] ) ) {
+			return;
 		}
+
+		echo '<form id="itsec_one_time_file_check" method="post" action="">';
+		echo wp_nonce_field( 'itsec_do_file_check', 'wp_nonce' );
+		echo '<input type="hidden" name="itsec_file_change_origin" value="' . sanitize_text_field( $origin ) . '">';
+		echo '<p>' . __( "Press the button below to scan your site's files for changes. Note that if changes are found this will take you to the logs page for details.", 'better-wp-security' ) . '</p>';
+		echo '<p><input type="submit" id="itsec_one_time_file_check_submit" class="button-primary" value="' . ( isset( $this->settings['split'] ) && true === $this->settings['split'] ? __( 'Scan Next File Chunk', 'better-wp-security' ) : __( 'Scan Files Now', 'better-wp-security' ) ) . '" /></p>';
+		echo '<div id="itsec_file_change_status"><p></p></div>';
+		echo '</form>';
 
 	}
 
@@ -296,44 +292,6 @@ class ITSEC_File_Change_Admin {
 				'title' => $title,
 			)
 		);
-
-	}
-
-	/**
-	 * Sets the status in the plugin dashboard
-	 *
-	 * Sets a medium priority item for the module's functionality in the plugin
-	 * dashboard.
-	 *
-	 * @since 4.0.0
-	 *
-	 * @param array $statuses array of existing plugin dashboard statuses
-	 *
-	 * @return array statuses
-	 */
-	public function itsec_add_dashboard_status( $statuses ) {
-
-		if ( isset( $this->settings['enabled'] ) && true === $this->settings['enabled'] ) {
-
-			$status_array = 'safe-medium';
-			$status       = array(
-				'text' => __( 'Your site will detect changes to your files.', 'better-wp-security' ),
-				'link' => '#itsec_file_change_enabled',
-			);
-
-		} else {
-
-			$status_array = 'medium';
-			$status       = array(
-				'text' => __( 'Your website is not looking for changed files. Consider turning on file change detections.', 'better-wp-security' ),
-				'link' => '#itsec_file_change_enabled',
-			);
-
-		}
-
-		array_push( $statuses[ $status_array ], $status );
-
-		return $statuses;
 
 	}
 
@@ -470,15 +428,11 @@ class ITSEC_File_Change_Admin {
 	 */
 	public function itsec_logger_displays( $displays ) {
 
-		if ( isset( $this->settings['enabled'] ) && true === $this->settings['enabled'] ) {
-
-			$displays[] = array(
-				'module'   => 'file_change',
-				'title'    => __( 'File Change History', 'better-wp-security' ),
-				'callback' => array( $this, 'logs_metabox_content' )
-			);
-
-		}
+		$displays[] = array(
+			'module'   => 'file_change',
+			'title'    => __( 'File Change History', 'better-wp-security' ),
+			'callback' => array( $this, 'logs_metabox_content' )
+		);
 
 		return $displays;
 
@@ -527,33 +481,30 @@ class ITSEC_File_Change_Admin {
 			require( dirname( __FILE__ ) . '/class-itsec-file-change-log.php' );
 		}
 
-		if ( isset( $this->settings['enabled'] ) && true === $this->settings['enabled'] ) {
 
-			// If we're splitting the file check run it every 6 hours. Else daily.
-			if ( isset( $this->settings['split'] ) && true === $this->settings['split'] ) {
+		// If we're splitting the file check run it every 6 hours. Else daily.
+		if ( isset( $this->settings['split'] ) && true === $this->settings['split'] ) {
 
-				$interval = 12342;
+			$interval = 12342;
 
-			} else {
+		} else {
 
-				$interval = 86400;
-
-			}
-
-			$next_run_raw = $this->settings['last_run'] + $interval;
-
-			if ( date( 'j', $next_run_raw ) == date( 'j', $itsec_globals['current_time'] ) ) {
-				$next_run_day = __( 'Today', 'better-wp-security' );
-			} else {
-				$next_run_day = __( 'Tomorrow', 'better-wp-security' );
-			}
-
-			$next_run = $next_run_day . ' at ' . date( 'g:i a', $next_run_raw );
-
-			echo '<p>' . __( 'Next automatic scan at: ', 'better-wp-security' ) . '<strong>' . $next_run . '*</strong></p>';
-			echo '<p><em>*' . __( 'Automatic file change scanning is triggered by a user visiting your page and may not happen exactly at the time listed.', 'better-wp-security' ) . '</em>';
+			$interval = 86400;
 
 		}
+
+		$next_run_raw = $this->settings['last_run'] + $interval;
+
+		if ( date( 'j', $next_run_raw ) == date( 'j', $itsec_globals['current_time'] ) ) {
+			$next_run_day = __( 'Today', 'better-wp-security' );
+		} else {
+			$next_run_day = __( 'Tomorrow', 'better-wp-security' );
+		}
+
+		$next_run = $next_run_day . ' at ' . date( 'g:i a', $next_run_raw );
+
+		echo '<p>' . __( 'Next automatic scan at: ', 'better-wp-security' ) . '<strong>' . $next_run . '*</strong></p>';
+		echo '<p><em>*' . __( 'Automatic file change scanning is triggered by a user visiting your page and may not happen exactly at the time listed.', 'better-wp-security' ) . '</em>';
 
 		$log_display = new ITSEC_File_Change_Log();
 
@@ -575,6 +526,10 @@ class ITSEC_File_Change_Admin {
 	public function metabox_advanced_file_change_settings() {
 
 		echo '<p>' . __( 'Even the best security solutions can fail. How do you know if someone gets into your site? You will know because they will change something. File Change detection will tell you what files have changed in your WordPress installation alerting you to changes not made by yourself. Unlike other solutions this plugin will look only at your installation and compare files to the last check instead of comparing them with a remote installation thereby taking into account whether or not you modify the files yourself.', 'better-wp-security' ) . '</p>';
+
+		if ( ITSEC_Lib::get_memory_limit() < 128 ) {
+			echo '<div class="itsec-warning-message">' . __( 'Warning: Your server has less than 128MB of RAM dedicated to PHP. If you have many files in your installation or a lot of active plugins activating this feature may result in your site becoming disabled with a memory error. See the plugin homepage for more information.', 'better-wp-security' ) . '</div>';
+		}
 
 		echo $this->file_change_form( 'logs' );
 
@@ -720,6 +675,7 @@ class ITSEC_File_Change_Admin {
 	}
 
 	/**
+	 *
 	 * echos Enable File Change Detection Field
 	 *
 	 * Echo's the settings field that determines whether or not the file change detection module is enabled.
@@ -935,8 +891,17 @@ class ITSEC_File_Change_Admin {
 		}
 
 		$directory = sanitize_text_field( $_POST['dir'] );
-
 		$directory = urldecode( $directory );
+		$directory = realpath( $directory );
+
+		$base_directory = realpath( ITSEC_Lib::get_home_path() );
+
+		// Ensure that requests cannot traverse arbitrary directories.
+		if ( 0 !== strpos( $directory, $base_directory ) ) {
+			$directory = $base_directory;
+		}
+
+		$directory .= '/';
 
 		if ( file_exists( $directory ) ) {
 

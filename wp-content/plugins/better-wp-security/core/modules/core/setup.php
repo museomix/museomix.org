@@ -6,30 +6,10 @@ if ( ! class_exists( 'ITSEC_Core_Setup' ) ) {
 
 		public function __construct() {
 
-			global $itsec_setup_action;
-
-			if ( isset( $itsec_setup_action ) ) {
-
-				switch ( $itsec_setup_action ) {
-
-					case 'activate':
-						$this->execute_activate();
-						break;
-					case 'upgrade':
-						$this->execute_upgrade();
-						break;
-					case 'deactivate':
-						$this->execute_deactivate();
-						break;
-					case 'uninstall':
-						$this->execute_uninstall();
-						break;
-
-				}
-
-			} else {
-				wp_die( 'error' );
-			}
+			add_action( 'itsec_modules_do_plugin_activation',   array( $this, 'execute_activate'   )          );
+			add_action( 'itsec_modules_do_plugin_deactivation', array( $this, 'execute_deactivate' )          );
+			add_action( 'itsec_modules_do_plugin_uninstall',    array( $this, 'execute_uninstall'  )          );
+			add_action( 'itsec_modules_do_plugin_upgrade',      array( $this, 'execute_upgrade'    ), null, 2 );
 
 		}
 

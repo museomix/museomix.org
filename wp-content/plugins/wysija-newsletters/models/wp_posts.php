@@ -48,7 +48,6 @@ class WYSIJA_model_wp_posts extends WYSIJA_model {
      * WHERE C.term_id IN (326) AND A.post_type IN ('post') AND A.post_status IN ('publish') ORDER BY post_date DESC LIMIT 0,10;
      *
      */
-
     $default_args = array(
       'post_limit' => 10,
       'offset' => 0,
@@ -97,14 +96,36 @@ class WYSIJA_model_wp_posts extends WYSIJA_model {
       'A.post_status'
     );
 
+    $additional_post_fields = array(
+      'post_date',
+      'post_date_gmt',
+      'comment_status',
+      'ping_status',
+      'post_name',
+      'to_ping',
+      'pinged',
+      'post_modified',
+      'post_modified_gmt',
+      'post_content_filtered',
+      'post_parent',
+      'guid',
+      'menu_order',
+      'post_mime_type',
+      'comment_count'
+    );
+
     // look for manual fields to select
     if(isset($args['post_fields']) && is_array($args['post_fields']) && !empty($args['post_fields'])) {
-      $extra_post_fields = $args['post_fields'];
+      $extra_post_fields = array_values(
+        array_intersect(
+          $additional_post_fields,
+          array_map('esc_sql', $args['post_fields'])
+        )
+      );
       // merge both fields selection
       $post_fields = array_merge(array('A.ID'), $extra_post_fields);
     }
 
-    // build query
     $query = sprintf('SELECT DISTINCT %s FROM `[wp]' . $this->table_name . '` A ', join(', ', $post_fields));
 
     if($args['is_search_query'] === true) {

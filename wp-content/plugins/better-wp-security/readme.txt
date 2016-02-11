@@ -2,8 +2,8 @@
 Contributors: ithemes, chrisjean, aaroncampbell, gerroald, mattdanner
 Tags: security, malware, secure, multi-site, network, mu, login, lockdown, htaccess, hack, header, cleanup, ban, restrict, access, protect, protection, disable, images, image, hotlink, admin, username, database, prefix, wp-content, rename, directory, directories, secure, SSL, iThemes, BackupBuddy, Exchange, iThemes Exchange
 Requires at least: 4.1
-Tested up to: 4.3.1
-Stable tag: 5.1.1
+Tested up to: 4.4.2
+Stable tag: 5.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -188,6 +188,35 @@ Free support may be available with the help of the community in the <a href="htt
 5. Easy-to-navigate Security dashboard
 
 == Changelog ==
+
+= 5.2.1 =
+* Bug Fix: Comparisons of IPv4 addresses and ranges now include the IP's at the edge of the ranges.
+* Bug Fix: IPv4 tests now work as expected when deciding if a blacklisted IP or range overlaps a whitelisted IP's and ranges.
+* Bug Fix: Fixed styling issue that affected the display of the horizontal tabs on settings pages in WordPress 4.5.
+* Bug Fix: Replaced old module sorting order in settings screens.
+* Bug Fix: Fixed PHP 7 compatibility issue that triggers the following error: "Uncaught Error: Call to undefined function mysql_get_client_info()".
+* Bug Fix: Fixed warnings and errors that could occur when deleting the plugin.
+* Bug Fix: Fixed warning that could occur on a failed login when Local Brute Force Detection is disabled.
+* Bug Fix: All data added to the options table by iThemes Security is removed on uninstall.
+* Bug Fix: Fixed the cause of the following warning: call_user_func_array() expects parameter 1 to be a valid callback, class 'ITSEC_SSL_Setup' does not have a method 'execute_deactivate'
+* Enhancement: When a lockout is being executed, wp_logout() will only be called if the current page request comes from a logged in user. This prevents plugins that log logout events from logging log outs from unknown users.
+* Enhancement: Improved the descriptions used for some of the data displayed in the "System Information" section of Security > Dashboard.
+* Enhancement: Added "Use MySQLi" entry to the "System Information" section of Security > Dashboard to show whether the MySQLi driver is enabled.
+* Enhancement: Updated the "SQL Mode" entry in the "System Information" section of Security > Dashboard to show the full details if that value is set.
+* Enhancement: Improved code that ensures that tables and options table entries created by iThemes Security are removed on uninstall only when no other iThemes Security plugin is active.
+
+= 5.2.0 =
+* Security Fix: Fixed PHP code that could allow AJAX requests to list directories and files outside the directory structure of the WordPress installation. Note that these AJAX requests required a logged in user with admin-level privileges. This vulnerability was unable to be exploited by non-privileged or anonymous requests.
+* Bug Fix: Updated the SSL feature to use 301 redirects rather than 302 redirects.
+* Bug Fix: Fixed situations where security nonces would incorrectly trigger "security check" errors when enabling specific combinations of features on the settings page.
+* Bug Fix: Enabling scheduled database backups and setting a backup interval of 0 days no longer results in a backup being created on every page load.
+* Bug Fix: Module-specific data is properly initialized/removed on plugin activation, deactivation, and uninstallation.
+* Feature Removal: Removed the "Security Status" portion of the Security > Dashboard page. This is in preparation for a new tool that provides suggestions tailored to the site and server that Security is running on.
+* Enhancement: Updated the way the feature modules function in order to allow them to be redesigned in a more efficient and flexible way for future releases.
+* Enhancement: Updated the File Change Detection feature to attempt a max memory limit of 256M rather than 128M as some users experience out of memory issues which could be fixed with the higher memory limit.
+* Enhancement: Updated the Database Backup feature to attempt a max memory limit of 256M rather than 128M as some users experience out of memory issues which could be fixed with the higher memory limit.
+* Enhancement: Added localization support for some non-localized strings.
+* Enhancement: Improved detection of multiple active versions of iThemes Security.
 
 = 5.1.1 =
 * Enhancement: Removed Yandex and Sogou from the HackRepair blacklist as they are legitimate search engine bots.

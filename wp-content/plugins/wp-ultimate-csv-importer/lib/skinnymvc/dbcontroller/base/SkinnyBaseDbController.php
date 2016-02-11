@@ -8,7 +8,7 @@ class SkinnyBaseDbController extends PDO {
 
 	protected static $connections = array();
 
-	protected function SkinnyBaseDbController($dbKey, $mode, $dsn, $username = null, $password = null, $driver_options = null) {
+	public function __construct($dbKey, $mode, $dsn, $username = null, $password = null, $driver_options = null) {
 		parent::__construct($dsn, $username, $password, $driver_options);
 		self::$connections[$dbKey][$mode] = $this;
 	}

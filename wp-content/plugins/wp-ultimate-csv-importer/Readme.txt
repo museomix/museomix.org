@@ -1,372 +1,307 @@
 === WP Ultimate CSV Importer ===
 Contributors: smackcoders
 Donate link: http://www.smackcoders.com/donate.html
-Tags: admin, administration, author, automatic, blog, categories, category, cms, contact, content, custom, custom post, dashboard, database, e-commerce, ecommerce, edit, event, events, feed, Formatting, free, gallery, image, images, import, integration, language, link, links, list, marketing, media, menu, meta, mobile, multisite, navigation, News, page, pages, performance, photo, photos, picture, pictures, plugin, plugins, Post, posts, profile, registration, rss, seo, Share, sharing, shop, shortcode, shortcodes, statistics, stats, store, tag, tags, Taxonomy, template, text, thumbnail, thumbnails, title, upload, url, user, users, video, woocommerce, wordpress, wpmu, xml, youtube,
-Requires at least: 4.3.1
-Tested up to: 4.4
-Stable tag: 3.8.6
-Version: 3.8.6
+Tags: categories, category, custom post type, e-commerce, ecommerce, free, html, html5, image, images, import, multisite, page, pages, picture, plugin, Post, products, rss, seo, shortcode, tag, Taxonomy, template, thumbnail, upload, url, user, woocommerce, WordPress, wpmu, xml.
+Requires at least: 4.0
+Tested up to: 4.4.2
+Stable tag: 3.9
+Version: 3.9
 Author: smackcoders
 Author URI: http://profiles.wordpress.org/smackcoders/
 
 License: GPLv2 or later
 
-WP Ultimate CSV Importer made simple to import & export posts, pages, custom posts and custom fields in few simple clicks 
+WP Ultimate CSV Importer is a WordPress extension to import and export CSV files.
 
 == Description ==
 
-WP Ultimate CSV Importer is made very easy even for novice users as in few clicks and 3 simple steps with CSV Importer plugin. 
+WP Ultimate CSV Importer is a import and export tool that helps to build WordPress site at the drop of a hat by importing Post, Page, Custom Post, Users, WordPress Custom Fields, Products of eShop and SEO fields of All in One SEO. The plugin supports export and import of Custom Post Type created with CPT UI plugin and default WordPress functions. The import is for selective modules but the export is for all the core modules along with few third party plugins.
 
-Now csv importer supports multi language and almost every WordPress modules and plugin fields as follows. Import data feed periodically from csv file as 
+= Modules supported in Import and Export  =
 
-= Supported Core Modules and Attributes =
-* Post
-* Page
-* Featured image support
-* Post inline image handling
-* Standard WP Custom Post types
-* WordPress themes custom posts
-* Custom post type UI plugin Post types
-* Users with roles
-* Custom Fields
-* Author
-* Tags import and multi tag for each post import
-* Categories import and multi category for each post
-* Eshop
-* All-in-one SEO 
+* Core Modules - Post, Page, Custom Post and Users.
+* eCommerce Products - eShop.
+* Custom Post - CPT UI and default WordPress Custom Post.
+* SEO field - All in One SEO.
 
-= Highlights of 3.8 =
-* Multilanguage support (fr_FR,es_ES,nl_NL)
-* Inline image handling shortcode with image attributes Example:[WPIMPINLINE:greensroad.jpg|width='150'|height='80'|alt='post_title_redtree']
-* Fixed user reported Warnings and Bugs
-* Any delimiter support for csv export
-* Create Add Custom Field for any csv header on the fly in mapping 
+= Modules supported in Export =
 
-Note: Now you can import no. of images in in-line post content as image shortcodes using advanced media handling option as zip files.
+* Core Modules - Category, Tag, Custom Taxonomy, Customer Reviews, Comments.
+* eCommerce Products - WP e-Commerce, WooCommerce, MarketPress.
+* Custom fields and SEO fields imported along with these modules can be exported.
 
-= CSV Importer =
+= Highlighted Feature  =
 
-WP Ultimate CSV Importer Plugin proven much effective advanced CSV Importer With Ultimate User Friendly Features. It is much easy now even for newbies to import csv file exported from any tool, app or software. Import as any WordPress post type and associated fields by simple mapping feature. Now import any CSV file as thousands of post, page and custom post types. This is admin side free plugin helps you in bulk edit, create and import posts type for your blog or site. 
+* Imports inline images with shortcodes and images from external URL.
+* WordPress core custom fields can be dynamically registered on the flow of import.
+* Can be used in WordPress multisite.
+* Multi category and multi tag import.
+* Handles duplicate with title and content.
+* CSV with any delimiter in UTF-8 format can be imported.
+* Exports all the imported files of different modules with filters.
 
-Much improved User interface with most flexible jquery plugin features and bootstrap UI design makes csv import more simple, easy, fast and even more flexible for better user experience. With improved Multi site, buddy press compatibility (except user import module) works well for most of the best WordPress themes available online. 
+= Note =
+
+* Users module is disabled in multisite.
+* Password protected image can't be imported in featured image.
+* All languages supported by WordPress can be imported in UTF-8 without BOM format.
+
+= Ultimate CSV Importer PRO =
+
+Ultimate CSV Importer PRO has all the features of Ultimate CSV Importer and it is extended with lot of features that enables to import, schedule, update and export both CSV and XML files. The import details over an year is maintained in dashboard chart and the site updates can be tracked in a fraction of second. Any changes like modifying existing content or appending new content can be done with update. The update or import can be performed periodically with scheduler. The update or schedule is done with the templates which is created with mapped fields in the mapping section of the import. The export option enables to export the imported modules as CSV based on the filters.
+
+= Supported Modules To Import and Export  =
+
+* Core Module - Post, Page, Custom Post, Category, Tags, Users, Customer Reviews.
+* eCommerce Products – eShop, WP e-Commerce, WooCommerce, MarketPress.
+* SEO field - All in One SEO and Yoast SEO.
+* Custom fields – ACF, CCTM, Pods, Types.
+* Custom Post – CPT UI, CCTM, Pods, Types.
+
+= Highlighted Feature of PRO =
+
+* Import inline image with shortcode and featured images with shortcode or external URL.
+* The image zip can be uploaded even after the completion of import flow to populate the shortcode image.
+* Registers Custom Fields of ACF, Types, Pods and WordPress fields on the flow of import.
+* Supports Custom Posts created with CPT UI, CCTM, Types and Pods
+* Specific record import. (I.e) Selective records in a CSV/XML can be imported or scheduled.
+* Imported modules can be managed in File manager.
+
+Compare Free Vs Pro [Features](https://www.wpultimatecsvimporter.com/wp-ultimate-csv-importer-plugin?utm_source=WpOrg&utm_medium=Readme&utm_campaign=ListingTraffic)>>
+Learn More from [User Manual](https://www.wpultimatecsvimporter.com/documentation/all-import/wordpress-ultimate-csv-importer/?utm_source=WpOrg&utm_medium=Readme&utm_campaign=ListingTraffic)>>
 
 = Helpful Links =
 
-[Get More Details Here>>](https://www.smackcoders.com/wp-ultimate-csv-importer-pro.html?utm_source=WpOrg&utm_medium=Readme&utm_campaign=ListingTraffic) 
+[Documentation](https://www.wpultimatecsvimporter.com/documentation/all-import/wordpress-ultimate-csv-importer/)
 
-[Test Drive Our Live Demo](http://demo.smackcoders.com/demowpthree/wp-admin/admin.php?page=wp-ultimate-csv-importer-pro/index.php&__module=dashboard?utm_source=WpOrg&utm_medium=Readme&utm_campaign=ListingTraffic)
-
-[Get Started Sample CSV Files](https://www.smackcoders.com/blog/wordpress-ultimate-csv-importer-csv-sample-files-and-updates.html?utm_source=WpOrg&utm_medium=Readme&utm_campaign=ListingTraffic)
-
-[Documentation and Tutorial for CSV Importer ](https://www.wpultimatecsvimporter.com/documentation/all-import/wordpress-ultimate-csv-importer/?utm_source=WpOrg&utm_medium=Readme&utm_campaign=ListingTraffic)
+[Live Demo](http://demo.smackcoders.com/demowpthree/wp-login.php?redirect_to=http%3A%2F%2Fdemo.smackcoders.com%2Fdemowpthree%2Fwp-admin%2Fadmin.php%3Fpage%3Dwp-ultimate-csv-importer-pro%2Findex.php%26__module%3Ddashboard&reauth=1)
 
 
 = Video Walkthrough =
+[youtube https://www.youtube.com/watch?v=S1P8KebpLaU&list=PL2k3Ck1bFtbTtSX3hEFoBvK_Ka0pfYwp_]
 
-<p>https://www.youtube.com/watch?v=Guv5zR7fgW0&list=PL2k3Ck1bFtbQqFhOK7g08kxENI4qQkmC</p>
-
-= Highlights =
-* Import csv from any source as WordPress posts
-* New Terminate & Continue feature is added.
-* Complete export feature with improved filters
-* Import external/internal images in line to any posts
-* Upload images related to each csv 
-* Auto delimiter
-* Auto UTF-8 handling
-* All-in-SEO import support.
-* Drag drop import
-* Define any type of post 
-* Control post status (Publish, Private, Pending, Draft, Sticky and Protected)
-* Simple yet Powerful mapping feature 
-* Convert any csv import as perfect posts and fields
-* Duplicate Title and content handling
-* Multi Lingual import (CSV format must be UTF-8 without BOM)
-* Multi-site also supported now
-* Compatible to WordPress themes
-* Better alternative for xml
-* Post Format option added
-* Page template attribute feature
-* EShop Products import (included from V3.6.3)
-= Power Import Features to Control your csv import =
-* Post title, content and even excerpt 
-* Text, WYSIWYG/HTML, in line CSS in post content
-* Images, Youtube, Videos in post content
-* Featured image by Url 
-* Multi authors
-* Multiple tags and categories 
-* Non existing tags and categories are created automatically
-* Any Short Codes in post content
-* Assign sidebar widget, slider, slide show as short codes
-* Manual slug feature for SEO friendly urls
-* Different post status for each post in CSV file.
-* Custom fields support for WP standard
-* Map custom fields by adding new on the fly.
-
-= Imp. Notes =
-* All CSV files should be should be strictly UTF-8 CSV format. Now this can be handled by plugin.
-* All WordPress supported languages can imported with csv format as UTF-8 without BOM (See FAQ for instructions).
-* User import option is disabled for multi site mode.
-
-Featured Image Support
-Your WordPress theme should support featured image. If not, please add the following code to where you need to display E.g. wp-contents/themes/header.php
-`<?php add_theme_support( 'post-thumbnails' ); ?>`
-
-= Pro Features =
-* Advanced Features
-* Multi language Support
-* Woocommerce Support with woocommerce_products, woocommerce_variations, woocommerce_refunds, woocommerce_orders, woocommerce_coupons
-* Market press
-* ACF, TYPES, PODS, CCTM Custom Fields
-* Advanced Export with Delimiter and Filters
-* Advanced Media Handling
-* Schedule Imports
-* Dashboard, CSV Manager and Custom Mapping Templates
-* DB Optimizer, System status etc.
-
-Compare Free Vs Pro[Features](https://www.wpultimatecsvimporter.com/wp-ultimate-csv-importer-plugin?utm_source=WpOrg&utm_medium=Readme&utm_campaign=ListingTraffic)>>
-Learn More from [User Manual](https://www.wpultimatecsvimporter.com/documentation/all-import/wordpress-ultimate-csv-importer/?utm_source=WpOrg&utm_medium=Readme&utm_campaign=ListingTraffic)>>
-
-
-= Common Issues =
-
-How to solve auto_prepend_file and auto_append_file error?
-
-Check your phpinfo.php. Ensure that auto_prepend_file and auto_append_file options are disabled. If not you can disable it in php.ini settings file your self. You can also do it by a .htaccess file
-
-Create an .htaccess file in root and set the following values.
-php_value auto_prepend_file none
-php_value auto_append_file none
-
-This will solve your issue or get support from hosting if you dint have sufficient permission.
-
-Also you can follow the instructions as given here
-
-* [http://codex.wordpress.org/Function_Reference/the_post_thumbnail](http://codex.wordpress.org/Function_Reference/the_post_thumbnail)
-* [http://codex.wordpress.org/Post_Thumbnails](http://codex.wordpress.org/Post_Thumbnails)
-* [http://wordpress.org/support/topic/featured-image-not-showing-7?replies=5](http://wordpress.org/support/topic/featured-image-not-showing-7?replies=5)
-
-
-= Extended Pro Power Features in WP Ultimate CSV Importer = 
-* Types Plugin support
-* Woocommerce CSV importer with product variation
-* Marketpress Lite Importer
-* WP Members Importer
-* WP Customer Reviews Importer
-* Auto Schedule all your Imports
-* Save mapping as Templates for reuse
-* Auto Mapping Feature
-* Strict UTF-8 auto conversion
-* All In One SEO Fields Import 
-* WordPress SEO by Yoast Fields Import
-* Custom Post Type UI plugin import
-* Advanced Custom Fields Import 
-* CCTM Posts and Fields Import
-* Woocommerce CSV Importer, 
-* WP ecommerce Products CSV Importer with WP e-Commerce Custom Fields 
-* Categories & tags Import with Category icons plugin support
-* Custom Taxonomy import
-
-= And we thank @respectyoda, @alantygel and @James Golovich for their wonderful support to us. =
 
 == Installation ==
 
-* [Step By Step Installation with Snaps](https://www.wpultimatecsvimporter.com/documentation/all-import/wordpress-ultimate-csv-importer/?utm_source=WpOrg&utm_medium=Readme&utm_campaign=ListingTraffic)
-
+1. Extract the wp-ultimate-csv-importer.zip in wordpress/wp-content/plugins using FTP or with plugin install in wp-admin.
+2. Create folder named “uploads” within wp-content.
+3. Give 755 permission for both wp-content and uploads folder. (i.e) In terminal run the command, chmod 755 -R wp-content
+4. Activate the plugin in WordPress plugin list.
 
 == Screenshots ==
 
-1. New Interactive Dashboard with Chart and Graph
-2. Upload the CSV file of the selected module.
-3. Mapping view of the uploaded CSV fields with WordPress fields
-4. Advanced duplicate post name and content check with server request control for high performance factor.
-5. Detailed real time log to know pinpoint status.
+1. Dashboard view of the importer
+2. Upload section view of CSV/XML.
+3. Mapping view of the uploaded CSV/XML fields with WordPress fields
+4. Duplicate identification and performance improvement section.
+5. Detailed real time log.
 6. Settings with php.ini details.
-7. New export module for posts, page, eshop, users, comments and all custom posts type plugins.
-
+7. Export module with filters.
 
 == Frequently Asked Questions ==
 
 = Common Issues =
 
 How to solve auto_prepend_file and auto_append_file error?
+Check your phpinfo.php. Ensure that auto_prepend_file and auto_append_file options are disabled.
 
-Check your phpinfo.php. Ensure that auto_prepend_file and auto_append_file options are disabled. If not you can disable it in php.ini settings file your self. You can also do it by a .htaccess file
-
+If not you can disable it in php.ini settings file yourself. You can also do it by a .htaccess file
 Create an .htaccess file in root and set the following values.
+
 php_value auto_prepend_file none
 php_value auto_append_file none
 
-This will solve your issue or get support from hosting if you dint have sufficient permission.
-
-[Click Here for More Details](https://www.wpultimatecsvimporter.com/documentation/all-import/user-guide/simple-step-by-step-user-guide/?utm_source=WpOrg&utm_medium=Readme&utm_campaign=ListingTraffic)
+This will solve your issue or get support from hosting if you didn’t have sufficient permission.
 
 == Changelog ==
 
-= 3.8.6 =
-* Fixed: Support to import default CPTs.
-* Fixed: WordPress 4.4 compatibility checked.
-* Fixed: Much improved Support page.
-* Fixed: post_date issue was fixed.
+= 3.9 =
+* Added: PHP 7 compatibility.
+* Added: Support for all post date formats.
+* Fixed: Featured image and Inline image naming issues.
+* Fixed: Auto mapping issues in Custom Fields and SEO Fields.
 
-= 3.8.5 = 
-* post_status validation issue fix.
-* Empty password validation updated.
-* Improve log sectionwith stats issue fix.
-* SEO Fields mapping issue fix.
-* Improved Export with known issue fixes.
-* JS validation fix.
-* TypeError fix.
-* Much improved settings
+= 3.8.8 =
+* Added: Localize script for multi language support.
+* Added: WordPress 4.4.1 compatibility.
+* Improved: Code cleanups with WordPress standards.
+* Fixed: Vulnerability security issue.
+* Fixed: Export issue.
+* Fixed: Custom Taxonomy import issue.
+* Fixed: User mail notification on new user imports.
+* Fixed: Category & Tag import issue in eShop module.
+* Removed: Mod security check.
+
+= 3.8.6 =
+* Added: Compatibility for WordPress 4.4.
+* Modified: Support page UI.
+* Fixed: Post date issue.
+* Fixed: Custom Post Type listing issue.
+
+= 3.8.5 =
+* Added:  Restriction to view the image without password for protected status content.
+* Modified: Settings page UI.
+* Fixed: post_status mandatory validation issue.
+* Fixed: SEO Fields mapping issue.
+* Fixed: Known issues in export.
+* Fixed: Mandatory validation issues.
+* Fixed: Console TypeError issue.
+
 
 = 3.8.4 =
 * Modified: Changed the Dashboard view.
 
 = 3.8.3 =
-* Fixed : Text domain is added for language translation system.
-* Fixed : Bugs fixed for detecting duplicate post content and title option.
+* Added : Text domain for language translation system.
+* Fixed : Detect duplicate issue.
 
 = 3.8.2 =
-* Fixed : Wordpress 4.3.1 compatibility added.
-* Fixed : Dashboard entry issue fix.
-* Fixed : Featured image filename with empty space import issue fix.
-* Fixed : Duplicate featured images on import fixed.
-* Fixed : Core custom Field mapping group added
+* Added : Compatibility for WordPress 4.3.1.
+* Added : Grouped core custom field in mapping section.
+* Added : Image import with spaces in image name.
+* Fixed : Module entry count in dashboard issue.
+* Fixed : Duplication of image in media gallery.
 
 = 3.8.1 =
-* Fixed : WordPress 4.2.3 and 4.2.4 compatibility checked.
-* Fixed : Fixed the unwanted warnings in all files.
+* Added : Compatibility for WordPress 4.2.3 and 4.2.4.
+* Added : Export by specific date and author option in comments.
+* Fixed : warnings triggered in console.
 * Fixed : XSS vulnerability.
-* Fixed : Removed the ../../../../../../wp-load.php and used the wordpress ajax call. 
-* Fixed : Removed the wp-content that are directly used in some files.
-* Added : Checked the ABSPATH in each file.
-* Added : Comments are exported by specific date and author option.
+* Removed :  ../../../../../../wp-load.php and replaced with WordPress ajax call.
+* Removed : Direct usage of wp-content.
+
 
 = 3.8 =
-* Multilanguage support (fr_FR,es_ES,nl_NL)
-* Inline image handling shortcode with image attributes
-* Warnings and bugs Fixes
-* Any delimiter support for csv export
+* Added : Multilanguage support (fr_FR,es_ES,nl_NL).
+* Added : Inline image handling with shortcode along with image attributes.
+* Added: Any delimiter support for csv export.
+* Fixed: Warnings and bugs Fixes
+
 
 = 3.7.4 =
-* Fixed : Allow Editor/Author to import.(Multisite also).
 * Added : WordPress 4.2.2 compatibility.
+* Fixed : Allow Editor/Author to import.(Multisite also).
 
 = 3.7.3 =
-* Fixed: Vulnerablility security issue fix. 
+* Fixed: Vulnerability security issue.
 
 = 3.7.2 =
 * Added: WordPress 4.2 and 4.2.1 compatibility.
-* Fixed: Blank page conflict issue 
+* Fixed: Blank page issue conflicts.
 
-= 3.7.1 = 
+= 3.7.1 =
 * Added: Security fix for curl.
 * Added: Security fix for session status.
 
 = 3.7 =
-* Fixed: Featured image hotlink issue.
+* Fixed: Featured image hot link issue.
 
 = 3.6.78 =
-* Added: Hot security fix in readfile.php. ( Thanks - @James Golovich )
+* Added: Hot security fix in readfile.php.
 
-= 3.6.77 = 
-* Added: WordPress 4.1.1 compatibility checked.
-* Improved: Inline image import feature. Added recursive method to assign the image.
+= 3.6.77 =
+* Added: WordPress 4.1.1 compatibility.
+* Improved: Inline image import feature.
+* Added recursive method to assign the image.
 * Fixed: Featured image naming issue. [Solved](https://wordpress.org/support/topic/problem-in-import-with-the-image-name)
-* Fixed: Removed unwanted warnings.
+* Removed: Warnings.
 
 = 3.6.76 =
 * Improved: Post Format.
-* Fixed: Export eshop data issue.
+* Fixed: Export eShop content issue.
 * Fixed: Import with image name issue.
 * Fixed: Groups plugin conflict.
 
 = 3.6.75 =
-* Added: Terminate & Continue option in import section.
-* Improved: Log section. Issue fixed in Web View & Admin View.
-* Fixed: Security fix for export module.
+* Added: Terminate & Continue option in import.
+* Improved: Log section.
+* Fixed: Web View & Admin View issue.
+* Fixed: Security issue in export module.
 
 = 3.6.74 =
-* Added: Security fix.
+* Fixed: Security issue.
 
 = 3.6.73 =
-* Added: WordPress 4.0 compatibility checked.
+* Added: WordPress 4.0 compatibility.
 * Added: https format support for all WP instances.
-* Added: Warning to guide user to create uploads directory with writeable permissions.
-* Fixed: Image handling issues in featured image.
-* Fixed: Multisite compatible issue.
+* Added: Warning to guide user to create uploads directory with writable permissions.
+* Improved: Security and performance tab under settings module.
+* Fixed: Featured image handling issues.
+* Fixed: Multisite compatibility issue.
+* Fixed: All console warnings.
 * Removed: Post Content field mandatory option.
-* Removed: All console warnings.
-* Improved: Details added in security and performance tab under settings module. 
+
 
 = 3.6.72 =
 * Added: Debug mode enable/disable options.
 * Modified: Menu order changes.
 
 = 3.6.71 =
-* Minor bug fixed
+* Fixed: Minor bugs.
 
 = 3.6.7 =
 * Added: Export features for all missing modules.
 * Fixed: All console warnings and reported logs.
 
 = 3.6.6 =
-* Dashboard chart issue fixed for multi site.
-* UI improvements along with easy usability.
-* Fixed Groups plugin conflicts
+* Fixed: Dashboard chart issue in multi site.
+* Modified: UI to improve usability.
+* Fixed: Groups plugin conflicts.
 
 = 3.6.5 =
-* Added in line image support with advance media handling
-* PDO check added
+* Added : Inline image support with advanced media handling.
+* Added: PDO check.
 
 = 3.6.4 =
+* Added: WordPress 4.0 compatibility.
 * Added: Advanced export features with filter options.
 * Improved: Advanced log section.
-* Fixed reported jquery issues.
-* WordPress 4.0 compatibility checked.
+* Fixed: jQuery issues.
 
 = 3.6.3 =
-* Added: Eshop import support.
-* Fixed reported conflicts with other plugins.
-* WordPress 3.9.2 compatibility checked.
+* Added: eShop import support.
+* Added: WordPress 3.9.2 compatibility.
+* Fixed: Conflicts with other plugins.
 
 = 3.6.2 =
-* Hot security fix added.
+* Fixed: Hot security issue.
 
 = 3.6.1 =
-* Multi-site support issue fixed
-* Duplicate import issue fixed
-* Security issue fixed
+* Fixed: Multi-site support issue.
+* Fixed: Duplicate import issue.
+* Fixed: Security issue.
 
 = 3.6 =
-* New interactive graphs and charts in plugin dashboard
-* New Admin dashboard widgets
-* Added Users and comments export feature
-* Auto delimiter handling
-* Auto mapping feature
-* Now allow authors to access import features
+* Added: Interactive graphs and charts in plugin dashboard.
+* Added: Admin dashboard widgets.
+* Added: Users and comments export feature.
+* Added: Auto delimiter handling.
+* Added: Auto mapping feature.
+* Added: Allow authors to access import features.
 
 = 3.5.5 =
-* post_format attribute support added
-* page_template attribute added
-* update_post_meta added for duplicate meta issue (Thanks to @alantygel)
-* Type error issue in jQuery fixed
+* Added: post_format attribute support.
+* Added: page_template attribute.
+* Added: update_post_meta for duplicate meta issue
+* Fixed: TypeError issue in jQuery.
 
 = 3.5.4 =
 * Added: All-in-SEO import support.
-* WordPress 3.9.1 compatibility added.
+* Added: WordPress 3.9.1 compatibility.
 
 = 3.5.3 =
-* Added: Compatible up to WordPress 3.9.
-* Added: Export feature added for posts, page, custom posts type plugins.
-* Improved: Removed all warnings.
-* Fixed reported bugs
+* Added: Compatibility for WordPress 3.9.
+* Added: Export feature for Posts, Page, Custom Post.
+* Fixed: Reported bugs
+* Removed: all warnings.
+
 
 = 3.5.2 =
 * Import posts with author names as numerical apart from User ID
-* Added menu_order attribute import
-* Added Auto image rename option
+* Added: menu_order attribute import
+* Added: Auto image rename option
 * Option to cancel an partial import at middle
-* Improved image handling even special characters in Url
+* Improved image handling even special characters in URL
 * Import can handle image urls without any extensions
 * User reported bugs fixed
 
@@ -374,7 +309,7 @@ This will solve your issue or get support from hosting if you dint have sufficie
 * User reported issue fixes
 * Activation and other plugin conflict issue solved like Jet pack
 * Admin UI freezing issues - screen option, Help links issues fixed.
-* WYSIWIG editor UI issue fixed.
+* WYSIWYG editor UI issue fixed.
 
 = 3.5.0 =
 * Combined major release version of 3.5 and 3.4
@@ -387,7 +322,7 @@ This will solve your issue or get support from hosting if you dint have sufficie
 * Added: Support made easy now from plugin.
 
 = 3.3.1 =
-* Added: Multi site compatibility except User import.
+* Added: Multisite compatibility except User import.
 * Added: Comments, Users modules mandatory fields validation added.
 * Improved: Removed unwanted warnings.
 
@@ -396,7 +331,7 @@ This will solve your issue or get support from hosting if you dint have sufficie
 * Added: Bulk users with role import feature.
 * Added: Comments import feature with relevant post ids.
 
-= 3.2.3 = 
+= 3.2.3 =
 * Added: WordPress 3.7.1 compatibility added.
 * Added: Different media path support added.
 * Added: Sub folder installations support added.
@@ -404,33 +339,33 @@ This will solve your issue or get support from hosting if you dint have sufficie
 * Improved: Removed unwanted warnings.
 * Improved: Performance check.
 
-= 3.2.2 = 
+= 3.2.2 =
 * Added: WordPress 3.6.1 compatibility added.
 * Added: Mapping UI improved with on select dynamic update feature
 * Added: Help content added
 * Fixed: Post slug issue fixed and tested for 3.6 and 3.6.1
 
-= 3.2.1 = 
+= 3.2.1 =
 * Improved: Performance improvements on SQL and CSV parsing
 * Fixed: Plugin deactivation issue fixed and updated the code.
 * Fixed: Links in the cells makes problems with the "quote"
 * Fixed: Loading content from more than one column
 * Fixed: Custom Post type issues fixed
 
-= 3.2.0 = 
+= 3.2.0 =
 * Improved: User interface improvements
 * Improved:WordPress 3.6 compatibility added, Much Improved UI.
 * Fixed: Featured image issues fixed for WordPress-3.6.
 
-= 3.1.0 = 
+= 3.1.0 =
 * Improved: Much Improved Featured Image feature
 * Fixed: Image url for featured image issues fixed
 * Fixed: PHP 5.4 upgrade fix
-		
-= 3.0.0 = 
+
+= 3.0.0 =
 * Added: Category in numericals are restricted and skipped to Uncategorized
-* Added: Now password should be mentioned as {password}
-* Added: Post authors can be User ID or name 
+* Added: Protected status password inclusion as {password}.
+* Added: Post authors can be User ID or name
 * Improved: Much improved work flow
 * Improved: Add custom field option improved.
 * Improved: Date format handling improved
@@ -447,62 +382,68 @@ This will solve your issue or get support from hosting if you dint have sufficie
 * Fixed: Password field fixed for Protected
 * Fixed: Status as in CSV option improved and fixed
 
-= 2.7.0 =  
-* Added: Added more post status options 
+= 2.7.0 =
+* Added: Added more post status options
 * Added: Publish, Sticky, Private, Draft and Pending Status for whole import
 * Added: Protected status with a common password option added
-* Added: "Status as in CSV" to assign status for individual post through CSV as ID or Field Tag		
+* Added: "Status as in CSV" to assign status for individual post through CSV as ID or Field Tag
 * Added: User ID and User Name support for Post author feature added
 * Added: In case of missing or false IDs post assigned to admin as draft
 * Added: Add Custom Field Text box auto-filled with CSV header tag.
 * Added: Duplicate detection for post content and post title added as options.
 * Added: User can choose either one or both to avoid duplicate issues.
 * Improved: 6 Standard date format added as drop down to choose.
-* Improved: Renamed post_name as post_slug to avoid confusion	
+* Improved: Renamed post_name as post_slug to avoid confusion
 * Improved: Mapping Fields
 * Improved: Field tags are formatted to support auto mapping option (next milestone)
 * Improved: Listed custom fields with prefix as CF: Name for easy identification.
 * Fixed: Date format conflict at import fixed.
 
 
-= 2.6.0 =	
+= 2.6.0 =
 * Fixed: Major Bug fixed
 * Fixed: Added UTF-8 support.
 * Fixed: Fixed Html tag conflicts.
 
-= 2.5.0 = 	
+= 2.5.0 =
 * Major issues fixed and updated to WordPress-3.5.1 compatibility.
 
-= 2.0.1 =	
+= 2.0.1 =
 * Update to WordPress-3.5 compatibility.
 
-= 2.0.0 =	
+= 2.0.0 =
 * WPDEBUG errors fixed. CSV import folder changed to WP native uploads folder.
 
-= 1.1.1 =	
+= 1.1.1 =
 * Renamed the mapping field attachment as featured_image and category as post_category.
 
-= 1.1.0 =	
+= 1.1.0 =
 * Added featured image import feature along with post/page/custom post.
 
-= 1.0.2 = 
-* Bug fixed to recognize the trimmed trailing space in the CSV file 
+= 1.0.2 =
+* Bug fixed to recognize the trimmed trailing space in the CSV file
 * Added validation for the duplicate field mapping.
 
-= 1.0.1 =	
+= 1.0.1 =
 * Added features to import multiple tags and categories with different delimiters.
 
-= 1.0.0 =	
+= 1.0.0 =
 * Initial release version. Tested and found works well without any issues.
 
 
 
 == Upgrade Notice ==
 
+= 3.9 =
+* Upgrade now for PHP 7 and WordPress 4.4.2 compatibility.
+
+= 3.8.8 =
+* Upgrade now for security fix and WordPress 4.1.1 compatibility with minor bug fixes.
+
 = 3.8.6 =
 * Upgrade now for import the default CPTs.
 
-= 3.8.5 = 
+= 3.8.5 =
 * Upgrade now for known bug fixes.
 
 = 3.8.4 =
@@ -511,7 +452,7 @@ This will solve your issue or get support from hosting if you dint have sufficie
 = 3.8.3 =
 * Upgrade now for improvements in multi language translation.
 
-= 3.8.2 = 
+= 3.8.2 =
 * Upgrade now for more improvements.
 
 = 3.8.1 =
@@ -529,7 +470,7 @@ This will solve your issue or get support from hosting if you dint have sufficie
 = 3.7.2 =
 * Important Upgrade for wordpress 4.2 and above
 
-= 3.7.1 = 
+= 3.7.1 =
 * Upgrade now for security fix.
 
 = 3.7 =
@@ -554,7 +495,7 @@ This will solve your issue or get support from hosting if you dint have sufficie
 * Upgrade now for WordPress 4.0 compatibility and minor bug fixes.
 
 = 3.6.72 =
-* Upgrade to enable/disable debug mode in settings. 
+* Upgrade to enable/disable debug mode in settings.
 
 = 3.6.71 =
 * Upgrade now for complete export features as in Pro with bug fix.
@@ -569,10 +510,10 @@ This will solve your issue or get support from hosting if you dint have sufficie
 * Upgrade Now for advanced media handling for post in line images
 
 = 3.6.4 =
-* Upgrade Now for filtered export and improved log features. 
+* Upgrade Now for filtered export and improved log features.
 
 = 3.6.3 =
-* Upgrade now for Eshop product import feature. 
+* Upgrade now for Eshop product import feature.
 
 = 3.6.2 =
 * Important Security Update
@@ -581,78 +522,80 @@ This will solve your issue or get support from hosting if you dint have sufficie
 * Important issue fixes update
 
 = 3.6 =
-* Must upgrade with major values added features 
+* Must upgrade with major values added features
 
-= 3.5.5 = 
+= 3.5.5 =
 * Upgrade for minor bug fix, conflicts and new attribute support.
 
-= 3.5.4 = 
+= 3.5.4 =
 * Upgrade now for All-in-SEO import support.
 
 = 3.5.3 =
-* Upgrade for added export feature and bug fixes
+* Upgrade to add export feature and fix bug.
 
 = 3.5.2 =
 * Upgrade for bug free version and improved image handling
 
-= 3.5.1 = 
+= 3.5.1 =
 * Must upgrade now for 3.5 bug fixes
 
 = 3.5.0 =
 * Upgrade now for major release 3.5. Note - Old version files need to be deleted.
 
-= 3.3.1 = 
-* Upgrade now for multi site compatibility.
+= 3.3.1 =
+* Upgrade now for multisite compatibility.
 
 = 3.3.0 =
 * Upgrade now for WP 3.8 compatibility and added bulk user,comments feature.
 
-= 3.2.3 = 
-* Upgrade for WordPress 3.7.1 compatibility and minor bug fixes
+= 3.2.3 =
+* WordPress 3.7.1 compatibility and minor bug fixes
 
-= 3.2.2 = 
-* WordPress 3.6.1 compatible, bug fix and UI improvements
+= 3.2.2 =
+* WordPress 3.6.1 compatibility, bug fix and UI improvements
 
-= 3.2.1 = 
+= 3.2.1 =
 * Performance improvements on SQL and CSV parsing
 
-= 3.2.0 = 
-* Now compatible with 3.6 and improved featured image
+= 3.2.0 =
+* Compatibility for 3.6 and improved featured image.
 
-= 3.1.0 = 
-* Now Much Improved Featured Image and url handling
+= 3.1.0 =
+* Improved Featured image and URL handling
 
-= 3.0.0 = 
-* Must upgrade to have Major improvements, performance fixes and issue fixes
+= 3.0.0 =
+* Major performance improvements and issue fixes.
 
-= 2.7.0 = 
+= 2.7.0 =
 * Major improvements and feature changes.
 
-= 2.6.0 = 
+= 2.6.0 =
 * Bug fixed and should upgrade.
 
-= 2.5.0 = 
+= 2.5.0 =
 * Duplicate detection added.
 * Added more information in success message.
 * Import memory issues solved.
 
-= 2.0.1 =	
-* Update to WordPress-3.5 compatibility.
+= 2.0.1 =
+* WordPress-3.5 compatibility.
 
-= 2.0.0 =	
-* Major Bug fixed and should upgrade. WPDEBUG errors fixed. CSV import folder changed to WP native uploads folder.
+= 2.0.0 =
+* Major Bug fix and need to be upgraded.
+* WPDEBUG error fixed.
+* CSV import folder changed to WP native uploads folder.
 
-= 1.1.1 =	
+= 1.1.1 =
 * Minor correction and fix applied.
 
-= 1.1.0 = 	
-* A major new feature added in this version. Update needed.
+= 1.1.0 =
+* Major feature added.
 
-= 1.0.2 =	
-* This version have important bug fixes and newly added features. Must be upgrade immediately.
+= 1.0.2 =
+* Bug fixes along with new features. Need to be upgraded immediately.
 
-= 1.0.1 =	
+= 1.0.1 =
 * Added features to import multiple tags and categories with different delimiters.
 
-= 1.0.0 =	
-* Initial release of plugin. 
+= 1.0.0 =
+* Initial release of plugin.

@@ -22,9 +22,6 @@ class ITSEC_Away_Mode_Admin {
 		) ); //add meta boxes to admin page
 		add_action( 'itsec_admin_init', array( $this, 'initialize_admin' ) ); //initialize admin area
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_script' ) ); //enqueue scripts for admin page
-		add_filter( 'itsec_add_dashboard_status', array(
-			$this, 'dashboard_status'
-		) ); //add information for plugin status
 		add_filter( 'itsec_tracking_vars', array( $this, 'tracking_vars' ) );
 
 		//manually save options on multisite
@@ -268,39 +265,6 @@ class ITSEC_Away_Mode_Admin {
 		$content .= '<label for="itsec_away_mode_type"> ' . __( 'Select the type of restriction you would like to enable', 'better-wp-security' ) . '</label>';
 
 		echo $content;
-
-	}
-
-	/**
-	 * Sets the status in the plugin dashboard
-	 *
-	 * @since 4.0
-	 *
-	 * @return array array of statuses
-	 */
-	public function dashboard_status( $statuses ) {
-
-		if ( $this->settings['enabled'] === true ) {
-
-			$status_array = 'safe-medium';
-			$status       = array(
-				'text' => __( 'Away Mode is enabled and your WordPress Dashboard is not available when you will not be needing it.', 'better-wp-security' ),
-				'link' => '#itsec_away_mode_enabled',
-			);
-
-		} else {
-
-			$status_array = 'medium';
-			$status       = array(
-				'text' => __( 'Your WordPress Dashboard is available 24/7. Do you really update 24 hours a day? Consider using Away Mode.', 'better-wp-security' ),
-				'link' => '#itsec_away_mode_enabled',
-			);
-
-		}
-
-		array_push( $statuses[$status_array], $status );
-
-		return $statuses;
 
 	}
 

@@ -20,7 +20,6 @@ class ITSEC_Content_Directory_Admin {
 		}
 
 		if ( ! $this->is_custom_directory() || $this->is_modified_by_it_security() ) {
-			add_action( 'admin_enqueue_scripts', array( $this, 'admin_script' ) );
 			add_action( 'itsec_add_admin_meta_boxes', array( $this, 'add_admin_meta_boxes' ) );
 		}
 	}
@@ -78,23 +77,6 @@ class ITSEC_Content_Directory_Admin {
 			'advanced',
 			'core'
 		);
-	}
-
-	/**
-	 * Add Away mode Javascript
-	 *
-	 * @return void
-	 */
-	public function admin_script() {
-
-		global $itsec_globals;
-
-		if ( isset( get_current_screen()->id ) && strpos( get_current_screen()->id, 'security_page_toplevel_page_itsec_advanced' ) !== false ) {
-
-			wp_enqueue_script( 'itsec_content_directory_js', $this->module_path . 'js/admin-content_directory.js', array( 'jquery' ), $itsec_globals['plugin_build'] );
-
-		}
-
 	}
 
 	/**

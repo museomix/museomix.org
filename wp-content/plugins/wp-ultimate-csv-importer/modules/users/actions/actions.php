@@ -71,7 +71,7 @@ class UsersActions extends SkinnyActions {
 	/**
 	 * Mapping fields
 	 */
-	public $defCols = array('user_login' => null, 'first_name' => null, 'last_name' => null, 'nickname' => null, 'user_email' => null, 'user_url' => null, 'aim' => null, 'yim' => null, 'jabber/gtalk' => null, 'role' => null, 'description' => null,);
+	public $defCols = array('user_login' => null, 'first_name' => null, 'last_name' => null, 'nickname' => null, 'user_email' => null, 'user_url' => null, 'role' => null, 'description' => null,);
 
 	public function getRoles() {
 		global $wp_roles;
@@ -121,10 +121,9 @@ class UsersActions extends SkinnyActions {
 				HAVING meta_key NOT LIKE '\_%'
 				ORDER BY meta_key
 				LIMIT $limit");
+		if(is_array($new_post) && !empty($new_post)){
 		foreach ($new_post as $ckey => $cval) {
-			if ($ckey == 'jabber/gtalk') {
-				$data_array['jabber'] = $new_post[$ckey];
-			} elseif ($ckey == 'role') {
+			if ($ckey == 'role') {
 				$data_array_ckey = '';
 				for ($i = 0; $i <= $new_post[$ckey]; $i++) {
 					$data_array_ckey .= $i . ",";
@@ -134,13 +133,16 @@ class UsersActions extends SkinnyActions {
 				$data_array[$ckey] = $new_post[$ckey];
 			}
 		}
+		}
 		$data_array['user_pass'] = wp_generate_password(12, false);
 		$getUsers = $wpdb->get_results("select count(ID) as users from $user_table");
 		$userscount = $getUsers[0]->users;
+		if(is_array($roles) && !empty($roles)){
 		foreach ($roles as $rkey => $rval) {
 			if ($rval == $data_array['role']) {
 				$data_array['role'] = $rkey;
 			}
+		}
 		}
 		if (!array_key_exists($data_array['role'], $roles)) {
 			$data_array['role'] = 'subscriber';
@@ -150,7 +152,8 @@ class UsersActions extends SkinnyActions {
 		$user_table = $wpdb->users;
 		$user_id = '';
 		$user_role = '';
-		$getUserId = $wpdb->get_results("select ID from $user_table where user_email = '" . $data_array["user_email"] . "' or user_login = '" . $data_array["user_login"] . "'");
+		//$getUserId = $wpdb->get_results("select ID from $user_table where user_email = '" . $data_array["user_email"] . "' or user_login = '" . $data_array["user_login"] . "'");
+		$getUserId = $wpdb->get_results($wpdb->prepare("select ID from $user_table where user_email = %s or user_login = %s",$data_array["user_email"],$data_array["user_login"]));
 		if (!empty($getUserId)) {
 			$user_id = $getUserId[0]->ID;
 		}
@@ -163,7 +166,7 @@ class UsersActions extends SkinnyActions {
 				return false;
 			}
 			$user = new WP_User($user_id);
-			if (!empty($user->roles) && is_array($user->roles)) {
+			if (!empty($user->roles)) {
 				foreach ($user->roles as $role) {
 					$user_role = $role;
 				}
@@ -186,9 +189,7 @@ class UsersActions extends SkinnyActions {
 			$message = "Hi,You've been invited with the role of " . $user_role . ". Here, your login details." . "\n" . "username: " . $data_array['user_login'] . "\n" . "userpass: " . $data_array['user_pass'] . "\n" . "Please click here to login " . wp_login_url();
 			$emailaddress = $data_array['user_email'];
 			$subject = 'Login Details';
-			if (isset($_POST['send_password'])) {
-				wp_mail($emailaddress, $subject, $message, $headers);
-			}
+			wp_mail($emailaddress, $subject, $message, $headers);
 		}
 		$UC1 = $wpdb->get_results("select count(ID) as users from $user_table");
 		$last_count = $UC1[0]->users;
@@ -217,7 +218,8 @@ class UsersActions extends SkinnyActions {
 	public function addPieChartEntry($imported_as, $count) {
 		//add total counts
 		global $wpdb;
-		$getTypeID = $wpdb->get_results("select * from smackcsv_pie_log where type = '$imported_as'");
+		//$getTypeID = $wpdb->get_results("select * from smackcsv_pie_log where type = '$imported_as'");
+		$getTypeID = $wpdb->get_results($wpdb->prepare("select * from smackcsv_pie_log where type = %s",$imported_as));
 		if (count($getTypeID) == 0) {
 			$wpdb->insert('smackcsv_pie_log', array('type' => $imported_as, 'value' => $count));
 		} else {

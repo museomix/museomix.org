@@ -15,7 +15,7 @@ class SkinnyUser {
 
 	private $attributes = array();
 
-	private function SkinnyUser() {
+	public function __construct() {
 	}
 
 	/**

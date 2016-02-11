@@ -4,40 +4,41 @@ class CPAC_Storage_Model_Post extends CPAC_Storage_Model {
 
 	public $post_type;
 
-	private $post_type_object;
-
 	/**
 	 * @since 2.0
 	 */
 	public function __construct( $post_type ) {
 
-		$this->set_post_type( $post_type );
+		$this->key = $post_type;
+		$this->post_type = $post_type;
+		$this->type = 'post';
+		$this->meta_type = 'post';
+		$this->page = 'edit';
+		$this->menu_type = 'post';
 
-		$this->key            = $this->post_type;
-		$this->label          = $this->post_type_object->labels->name;
-		$this->singular_label = $this->post_type_object->labels->singular_name;
-		$this->type           = 'post';
-		$this->meta_type      = 'post';
-		$this->page           = 'edit';
-		$this->menu_type      = 'post';
+		$this->set_labels();
+
+		parent::__construct();
+	}
+
+	/**
+	 * @since 2.4.9
+	 */
+	public function init_manage_columns() {
 
 		// Headings
 
 		// Since 3.1
-		add_filter( "manage_{$post_type}_posts_columns", array( $this, 'add_headings' ), 100 );
+		add_filter( "manage_{$this->post_type}_posts_columns", array( $this, 'add_headings' ), 100 );
 
 		// Deprecated ( as of 3.1 ) Note: This one is still used by woocommerce.
 		// Priority set to 100 top make sure the WooCommerce headings are overwritten by CAC
 		// Filter is located in get_column_headers().
 		// @todo_minor check compatibility issues for this deprecated filter
-		add_filter( "manage_{$this->page}-{$post_type}_columns", array( $this, 'add_headings' ), 100 );
+		add_filter( "manage_{$this->page}-{$this->post_type}_columns", array( $this, 'add_headings' ), 100 );
 
 		// values
 		add_action( "manage_{$this->post_type}_posts_custom_column", array( $this, 'manage_value_callback' ), 100, 2 );
-
-		add_action( 'load-edit.php', array( $this, 'set_columns_on_current_screen' ), 1000 );
-
-		parent::__construct();
 	}
 
 	/**
@@ -58,15 +59,17 @@ class CPAC_Storage_Model_Post extends CPAC_Storage_Model {
 			'fields'        => 'ids',
 			'no_found_rows' => 1, // lowers our carbon footprint
 		);
+
 		return (array) get_posts( array_merge( $defaults, $args ) );
 	}
 
 	/**
-	 * @since 2.3.5
+	 * @since 2.7.2
 	 */
-	private function set_post_type( $post_type ) {
-		$this->post_type        = $post_type;
-		$this->post_type_object = get_post_type_object( $post_type );
+	private function set_labels() {
+		$post_type_object = get_post_type_object( $this->post_type );
+		$this->label = $post_type_object->labels->name;
+		$this->singular_label = $post_type_object->labels->singular_name;
 	}
 
 	/**
@@ -78,7 +81,7 @@ class CPAC_Storage_Model_Post extends CPAC_Storage_Model {
 
 		// Setup post data for current post
 		$post_old = $post;
-		$post     = get_post( $id );
+		$post = get_post( $id );
 		setup_postdata( $post );
 
 		// Remove Admin Columns action for this column's value
@@ -88,7 +91,8 @@ class CPAC_Storage_Model_Post extends CPAC_Storage_Model {
 		// Run WordPress native actions to display column content
 		if ( is_post_type_hierarchical( $this->post_type ) ) {
 			do_action( 'manage_pages_custom_column', $column, $id );
-		} else {
+		}
+		else {
 			do_action( 'manage_posts_custom_column', $column, $id );
 		}
 
@@ -145,17 +149,10 @@ class CPAC_Storage_Model_Post extends CPAC_Storage_Model {
 	/**
 	 * @since 2.2
 	 */
-	public function is_columns_screen() {
+	public function is_current_screen() {
+		$post_type = isset( $_REQUEST['post_type'] ) ? $_REQUEST['post_type'] : 'post';
 
-		$is_columns_screen = parent::is_columns_screen();
-
-		if ( ! $is_columns_screen ) {
-			if ( ! empty( $_REQUEST['_inline_edit'] ) && wp_verify_nonce( $_REQUEST['_inline_edit'], 'inlineeditnonce' ) ) {
-				$is_columns_screen = true;
-			}
-		}
-
-		return $is_columns_screen;
+		return ( $this->post_type === $post_type ) && parent::is_current_screen();
 	}
 
 	/**
@@ -211,10 +208,10 @@ class CPAC_Storage_Model_Post extends CPAC_Storage_Model {
 
 		// Setup post data for current post
 		$post_old = $post;
-		$post     = get_post( $post_id );
+		$post = get_post( $post_id );
 		setup_postdata( $post );
 
-		$value = $column->get_value( $post_id );
+		$value = $column->get_display_value( $post_id );
 
 		$value = apply_filters( "cac/column/value", $value, $post_id, $column, $this->key );
 		$value = apply_filters( "cac/column/value/{$this->type}", $value, $post_id, $column, $this->key );
@@ -239,7 +236,8 @@ class CPAC_Storage_Model_Post extends CPAC_Storage_Model {
 			ob_start();
 			$this->manage_value( $column_name, $post_id );
 			ob_end_clean();
-		} else {
+		}
+		else {
 			$this->manage_value( $column_name, $post_id );
 		}
 	}

@@ -38,16 +38,18 @@
 if (!defined('ABSPATH')) {
 	exit;
 } // Exit if accessed directly
-$filename = isset($_POST['filename']) ? $_POST['filename'] : '';
-$count = isset($_POST['corecount']) ? $_POST['corecount'] : '';
+$filename = isset($_POST['filename']) ? sanitize_text_field($_POST['filename']) : '';
+$count = isset($_POST['corecount']) ? sanitize_text_field($_POST['corecount']) : '';
 $impobj = new WPImporter_includes_helper();
 $getrec = $impobj->csv_file_data($filename);
 $csvheaders = $impobj->headers;
 $returndata = "<tr><td class='left_align' style='width:54.5%; padding-left:150px;'><input type='text' name='addcorefieldname$count' id = 'addcorefieldname$count'/></td>";
 $returndata .= "<td class='left_align'> <select name='addcoremapping$count' id='addcoremapping$count' class='uiButton'>";
 $returndata .= "<option id = 'select'>-- Select --</option>";
+if(!empty($csvheaders) && is_array($csvheaders)){
 foreach ($csvheaders as $headerkey => $headervalue) {
 	$returndata .= "<option value = '$headervalue'>$headervalue</option>";
+}
 }
 $returndata .= "</select></td>";
 $returndata .= "<td></td><td></td></tr>";

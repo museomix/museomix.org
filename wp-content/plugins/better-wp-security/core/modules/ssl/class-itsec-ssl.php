@@ -77,7 +77,7 @@ class ITSEC_SSL {
 		}
 		
 		if ( isset( $redirect ) ) {
-			wp_redirect( $redirect, 302 );
+			wp_redirect( $redirect, 301 );
 			exit();
 		}
 	}

@@ -63,25 +63,32 @@ $htaccess = ITSEC_Lib::get_htaccess();
 
 <li>
 	<h4><?php _e( 'Database Information', 'better-wp-security' ); ?></h4>
-	<ul>
-		<li><?php _e( 'MySQL Database Version', 'better-wp-security' ); ?>
-			: <?php $sqlversion = $wpdb->get_var( "SELECT VERSION() AS version" ); ?>
-			<strong><?php echo $sqlversion; ?></strong></li>
-		<li><?php _e( 'MySQL Client Version', 'better-wp-security' ); ?>: <strong><?php echo mysql_get_client_info(); ?></strong></li>
-		<li><?php _e( 'Database Host', 'better-wp-security' ); ?>: <strong><?php echo DB_HOST; ?></strong></li>
-		<li><?php _e( 'Database Name', 'better-wp-security' ); ?>: <strong><?php echo DB_NAME; ?></strong></li>
-		<li><?php _e( 'Database User', 'better-wp-security' ); ?>: <strong><?php echo DB_USER; ?></strong></li>
-		<?php $mysqlinfo = $wpdb->get_results( "SHOW VARIABLES LIKE 'sql_mode'" );
-		if ( is_array( $mysqlinfo ) ) {
-			$sql_mode = $mysqlinfo[0]->Value;
+	<?php
+		$use_mysqli = $wpdb->use_mysqli;
+		$mysql_server_version = $wpdb->get_var( "SELECT VERSION() AS version" );
+		
+		if ( $use_mysqli && is_callable( 'mysqli_get_client_info' ) ) {
+			$mysql_client_version = mysqli_get_client_info();
+		} else if ( ! $use_mysqli && is_callable( 'mysql_get_client_info' ) ) {
+			$mysql_client_version = mysql_get_client_info();
+		} else {
+			$mysql_client_version = __( 'Unknown', 'unknown MySQL version', 'better-wp-security' );
 		}
+		
+		$sql_mode = $wpdb->get_var( "SHOW VARIABLES LIKE 'sql_mode'", 1 );
+		
 		if ( empty( $sql_mode ) ) {
 			$sql_mode = __( 'Not Set', 'better-wp-security' );
-		} else {
-			$sql_mode = __( 'Off', 'better-wp-security' );
 		}
-		?>
-		<li><?php _e( 'SQL Mode', 'better-wp-security' ); ?>: <strong><?php echo $sql_mode; ?></strong></li>
+	?>
+	<ul>
+		<li><?php _e( 'MySQL Database Version', 'better-wp-security' ); ?>: <strong><?php echo esc_html( $mysql_server_version ); ?></strong></li>
+		<li><?php _e( 'MySQL Client Version', 'better-wp-security' ); ?>: <strong><?php echo esc_html( $mysql_client_version ); ?></strong></li>
+		<li><?php _e( 'Database Host', 'better-wp-security' ); ?>: <strong><?php echo esc_html( DB_HOST ); ?></strong></li>
+		<li><?php _e( 'Database Name', 'better-wp-security' ); ?>: <strong><?php echo esc_html( DB_NAME ); ?></strong></li>
+		<li><?php _e( 'Database User', 'better-wp-security' ); ?>: <strong><?php echo esc_html( DB_USER ); ?></strong></li>
+		<li><?php _e( 'Use MySQLi', 'better-wp-security' ); ?>: <strong><?php echo esc_html( $use_mysqli ? __( 'Yes', 'better-wp-security' ) : __( 'No', 'better-wp-security' ) ); ?></strong></li>
+		<li><?php _e( 'SQL Mode', 'better-wp-security' ); ?>: <strong><?php echo esc_html( $sql_mode ); ?></strong></li>
 	</ul>
 </li>
 
@@ -306,8 +313,8 @@ $htaccess = ITSEC_Lib::get_htaccess();
 		?>
 		<li><?php _e( 'WP Permalink Structure', 'better-wp-security' ); ?>:
 			<strong> <?php echo $copen . $permalink_structure . $cclose; ?></strong></li>
-		<li><?php _e( 'Wp-config Location', 'better-wp-security' ); ?>: <strong><?php echo $config_file ?></strong></li>
-		<?php $active_plugins = implode( ',', get_option( 'active_plugins' ) ); ?>
+		<li><?php _e( 'wp-config.php Location', 'better-wp-security' ); ?>: <strong><?php echo $config_file ?></strong></li>
+		<?php $active_plugins = implode( ', ', get_option( 'active_plugins' ) ); ?>
 		<li><?php _e( 'Active Plugins', 'better-wp-security' ); ?>: <strong><?php echo $active_plugins ?></strong></li>
 		<li><?php _e( 'Content Directory', 'better-wp-security' ); ?>: <strong><?php echo WP_CONTENT_DIR ?></strong></li>
 	</ul>

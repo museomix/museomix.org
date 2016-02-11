@@ -16,9 +16,7 @@ class ITSEC_Strong_Passwords_Admin {
 		add_action( 'itsec_add_admin_meta_boxes', array( $this, 'add_admin_meta_boxes' ) ); //add meta boxes to admin page
 		add_action( 'itsec_admin_init', array( $this, 'initialize_admin' ) ); //initialize admin area
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_script' ) ); //enqueue scripts for admin page
-		add_filter( 'itsec_add_dashboard_status', array( $this, 'dashboard_status' ) ); //add information for plugin status
 		add_filter( 'itsec_tracking_vars', array( $this, 'tracking_vars' ) );
-		add_filter( 'itsec_one_click_settings', array( $this, 'one_click_settings' ) );
 
 		//manually save options on multisite
 		if ( is_multisite() ) {
@@ -69,47 +67,6 @@ class ITSEC_Strong_Passwords_Admin {
 			wp_enqueue_script( 'itsec_strong_passwords_js', $this->module_path . 'js/admin-strong-passwords.js', array( 'jquery' ), $itsec_globals['plugin_build'] );
 
 		}
-
-	}
-
-	/**
-	 * Sets the status in the plugin dashboard
-	 *
-	 * @since 4.0
-	 *
-	 * @return array array of statuses
-	 */
-	public function dashboard_status( $statuses ) {
-
-		if ( $this->settings['enabled'] === true && $this->settings['roll'] == 'subscriber' ) {
-
-			$status_array = 'safe-high';
-			$status       = array(
-				'text' => __( 'You are enforcing strong passwords for all users.', 'better-wp-security' ),
-				'link' => '#itsec_strong_passwords_enabled',
-			);
-
-		} elseif ( $this->settings['enabled'] === true ) {
-
-			$status_array = 'low';
-			$status       = array(
-				'text' => __( 'You are enforcing strong passwords, but not for all users.', 'better-wp-security' ),
-				'link' => '#itsec_strong_passwords_enabled',
-			);
-
-		} else {
-
-			$status_array = 'high';
-			$status       = array(
-				'text' => __( 'You are not enforcing strong passwords for any users.', 'better-wp-security' ),
-				'link' => '#itsec_strong_passwords_enabled',
-			);
-
-		}
-
-		array_push( $statuses[$status_array], $status );
-
-		return $statuses;
 
 	}
 
@@ -182,26 +139,6 @@ class ITSEC_Strong_Passwords_Admin {
 		echo '<input class="button-primary" name="submit" type="submit" value="' . __( 'Save All Changes', 'better-wp-security' ) . '" />' . PHP_EOL;
 
 		echo '</p>' . PHP_EOL;
-
-	}
-
-	/**
-	 * Register one-click settings
-	 *
-	 * @since 4.0
-	 *
-	 * @param array $one_click_settings array of one-click settings
-	 *
-	 * @return array array of one-click settings
-	 */
-	public function one_click_settings( $one_click_settings ) {
-
-		$one_click_settings['itsec_strong_passwords'][] = array(
-			'option' => 'enabled',
-			'value'  => 1,
-		);
-
-		return $one_click_settings;
 
 	}
 

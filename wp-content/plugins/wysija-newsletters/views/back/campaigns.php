@@ -412,7 +412,6 @@ class WYSIJA_view_back_campaigns extends WYSIJA_view_back {
 									if (isset($row['params']['schedule']['isscheduled']) && $row['status'] == 4) {
 										$helper_toolbox = WYSIJA::get('toolbox', 'helper');
 
-
 										//no recording just conversion
 										$scheduletimenoffset = strtotime($row['params']['schedule']['day'] . ' ' . $row['params']['schedule']['time']);
 										$timeleft = $helper_toolbox->localtime_to_servertime($scheduletimenoffset) - time();
@@ -431,8 +430,6 @@ class WYSIJA_view_back_campaigns extends WYSIJA_view_back {
 											}
 
 										}
-
-
 
 										$statusshared = $durationsent;
 										echo __('Scheduled', WYSIJA);
@@ -652,7 +649,6 @@ class WYSIJA_view_back_campaigns extends WYSIJA_view_back {
 
 								break;
 							case -1:
-
 								if ($row['type'] == 2) {
 									$resumelink = __('Not active.', WYSIJA) . ' | <a href="admin.php?page=wysija_campaigns&id=' . $row['email_id'] . '&action=resume&_wpnonce='.$this->secure(array('action' => 'resume' , 'id' => $row["email_id"]), true).'" class="submitedit">' . __('Activate', WYSIJA) . '</a>';
 									echo $resumelink;
@@ -701,8 +697,6 @@ class WYSIJA_view_back_campaigns extends WYSIJA_view_back {
 				echo '<p>' . $row['sent_at'] . '</p>';
 			}
 			?></td>
-
-
 					</tr><?php
 			$alt = !$alt;
 		}
@@ -1326,14 +1320,23 @@ class WYSIJA_view_back_campaigns extends WYSIJA_view_back {
 
 			function saveWYSIJA(callback) {
 				wysijaAJAX.task = 'save_editor';
-                                wysijaAJAX._wpnonce = wysijanonces.campaigns.save_editor;
+				wysijaAJAX._wpnonce = wysijanonces.campaigns.save_editor;
 				wysijaAJAX.wysijaData = Wysija.save();
 				WYSIJA_SYNC_AJAX({success: callback});
 			}
 
 			// trigger the save on these links/buttons (save, next step, view in browser, unsubscribe)
-			$$('#wysija-do-save, #wysija-next-step, #wysija_viewbrowser a, #wysija_unsubscribe a').invoke('observe', 'click', function() {
-				saveWYSIJA();
+			$$('#wysija-do-save, #wysija-next-step, #wysija_viewbrowser a, #wysija_unsubscribe a').invoke('observe', 'click', function(e) {
+				if (this.id === 'wysija-next-step') {
+					e.preventDefault();
+					var id = this.id,
+					    href = this.href;
+					var callback = function () {
+						if (id === 'wysija-next-step') window.location.href = href
+					};
+				}
+				else var callback = function() {};
+				saveWYSIJA(callback);
 				return false;
 			});
 
@@ -3147,7 +3150,7 @@ class WYSIJA_view_back_campaigns extends WYSIJA_view_back {
 		// returning the new data array
 		return $data;
 	}
-  
+
 	private function _get_social_buttons($inline=true){
 
 		 if($inline){

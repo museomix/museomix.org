@@ -26,9 +26,6 @@ class ITSEC_Four_Oh_Four_Admin {
 		) ); //add meta boxes to admin page
 		add_action( 'itsec_admin_init', array( $this, 'initialize_admin' ) ); //initialize admin area
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_script' ) ); //enqueue scripts for admin page
-		add_filter( 'itsec_add_dashboard_status', array(
-			$this, 'dashboard_status'
-		) ); //add information for plugin status
 		add_filter( 'itsec_logger_displays', array( $this, 'register_logger_displays' ) ); //adds logs metaboxes
 		add_filter( 'itsec_tracking_vars', array( $this, 'tracking_vars' ) );
 
@@ -86,39 +83,6 @@ class ITSEC_Four_Oh_Four_Admin {
 			                   array( 'jquery' ), $itsec_globals['plugin_build'] );
 
 		}
-
-	}
-
-	/**
-	 * Sets the status in the plugin dashboard
-	 *
-	 * @since 4.0
-	 *
-	 * @return array statuses
-	 */
-	public function dashboard_status( $statuses ) {
-
-		if ( $this->settings['enabled'] === true ) {
-
-			$status_array = 'safe-medium';
-			$status       = array(
-				'text' => __( 'Your site is protecting against bots looking for known vulnerabilities.', 'better-wp-security' ),
-				'link' => '#itsec_four_oh_four_enabled',
-			);
-
-		} else {
-
-			$status_array = 'medium';
-			$status       = array(
-				'text' => __( 'Your website is not protected against bots looking for known vulnerabilities. Consider turning on 404 protection.',
-				              'better-wp-security' ), 'link' => '#itsec_four_oh_four_enabled',
-			);
-
-		}
-
-		array_push( $statuses[$status_array], $status );
-
-		return $statuses;
 
 	}
 
@@ -325,23 +289,31 @@ class ITSEC_Four_Oh_Four_Admin {
 	 */
 	public function metabox_advanced_four_oh_four_settings() {
 
-		global $itsec_lockout;
+		if ( ( get_option( 'permalink_structure' ) == '' || get_option( 'permalink_structure' ) == false ) && ! is_multisite() ) {
 
-		echo '<p>' . __( '404 detection looks at a user who is hitting a large number of non-existent pages and getting a large number of 404 errors. 404 detection assumes that a user who hits a lot of 404 errors in a short period of time is scanning for something (presumably a vulnerability) and locks them out accordingly. This also gives the added benefit of helping you find hidden problems causing 404 errors on unseen parts of your site. All errors will be logged in the \"View Logs\" page. You can set thresholds for this feature below.', 'better-wp-security' ) . '</p>';
-		echo $itsec_lockout->get_lockout_description();
+			$adminurl = is_multisite() ? admin_url() . 'network/' : admin_url();
 
-		$this->core->do_settings_section( 'security_page_toplevel_page_itsec_settings', 'four_oh_four-enabled', false );
-		$this->core->do_settings_section( 'security_page_toplevel_page_itsec_settings', 'four_oh_four-settings',
-		                                  false );
+			printf( '<p class="noPermalinks">%s <a href="%soptions-permalink.php">%s</a> %s</p>',
+			                    __( 'You must turn on', 'better-wp-security' ), $adminurl, __( 'WordPress permalinks', 'better-wp-security' ),
+			                    __( 'to use this feature.', 'better-wp-security' ) );
+		} else {
+			global $itsec_lockout;
 
-		echo '<p>' . PHP_EOL;
+			echo '<p>' . __( '404 detection looks at a user who is hitting a large number of non-existent pages and getting a large number of 404 errors. 404 detection assumes that a user who hits a lot of 404 errors in a short period of time is scanning for something (presumably a vulnerability) and locks them out accordingly. This also gives the added benefit of helping you find hidden problems causing 404 errors on unseen parts of your site. All errors will be logged in the "View Logs" page. You can set thresholds for this feature below.', 'better-wp-security' ) . '</p>';
+			echo $itsec_lockout->get_lockout_description();
 
-		settings_fields( 'security_page_toplevel_page_itsec_settings' );
+			$this->core->do_settings_section( 'security_page_toplevel_page_itsec_settings', 'four_oh_four-enabled', false );
+			$this->core->do_settings_section( 'security_page_toplevel_page_itsec_settings', 'four_oh_four-settings', false );
 
-		echo '<input class="button-primary" name="submit" type="submit" value="' . __( 'Save All Changes',
-		                                                                               'better-wp-security' ) . '" />' . PHP_EOL;
+			echo '<p>' . PHP_EOL;
 
-		echo '</p>' . PHP_EOL;
+			settings_fields( 'security_page_toplevel_page_itsec_settings' );
+
+			echo '<input class="button-primary" name="submit" type="submit" value="' . __( 'Save All Changes',
+																						   'better-wp-security' ) . '" />' . PHP_EOL;
+
+			echo '</p>' . PHP_EOL;
+		}
 
 	}
 

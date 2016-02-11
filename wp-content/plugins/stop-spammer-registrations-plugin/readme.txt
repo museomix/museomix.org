@@ -33,6 +33,12 @@ THEN
 
 == Changelog ==
 
+= 6.15 =
+* Committed changes again.
+
+= 6.14 =
+* fixed typo in last commit
+
 = 6.13 =
 * Added IP address to debug info.
 * Added some extra checks on the invalid ip routine to avoid throwing an error on really broken IP addresses.

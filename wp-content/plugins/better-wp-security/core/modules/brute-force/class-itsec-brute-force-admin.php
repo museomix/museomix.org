@@ -17,9 +17,7 @@ class ITSEC_Brute_Force_Admin {
 		add_action( 'itsec_add_admin_meta_boxes', array( $this, 'itsec_add_admin_meta_boxes' ) ); //add meta boxes to admin page
 		add_action( 'itsec_admin_init', array( $this, 'itsec_admin_init' ) ); //initialize admin area
 
-		add_filter( 'itsec_add_dashboard_status', array( $this, 'itsec_add_dashboard_status' ) ); //add information for plugin status
 		add_filter( 'itsec_logger_displays', array( $this, 'itsec_logger_displays' ) ); //adds logs metaboxes
-		add_filter( 'itsec_one_click_settings', array( $this, 'itsec_one_click_settings' ) );
 		add_filter( 'itsec_tracking_vars', array( $this, 'itsec_tracking_vars' ) );
 
 		//manually save options on multisite
@@ -71,47 +69,6 @@ class ITSEC_Brute_Force_Admin {
 			           'title' => $title,
 		           )
 		);
-
-	}
-
-	/**
-	 * Sets the status in the plugin dashboard
-	 *
-	 * @since 4.0
-	 *
-	 * @param array $statuses array of statuses
-	 *
-	 * @return array array of statuses
-	 */
-	public function itsec_add_dashboard_status( $statuses ) {
-
-		$ipcheck = get_site_option( 'itsec_ipcheck' );
-		$api_ban = false;
-
-		if ( class_exists( 'ITSEC_IPCheck_Admin' ) && isset( $ipcheck['api_key'] ) && isset( $ipcheck['api_s'] ) && isset( $ipcheck['api_ban'] ) && $ipcheck['api_ban'] === true ) {
-			$api_ban = true;
-		}
-
-		if ( isset( $this->settings['enabled'] ) && $this->settings['enabled'] === true && $api_ban === true ) {
-
-			$status_array = 'safe-high';
-			$status       = array( 'text' => __( 'Your login area is protected from brute force attacks.', 'better-wp-security' ), 'link' => '#itsec_brute_force_settings', );
-
-		} elseif ( ( ( ! isset( $this->settings['enabled'] ) || $this->settings['enabled'] === false ) && $api_ban === true ) || ( ( isset( $this->settings['enabled'] ) && $this->settings['enabled'] === true ) && $api_ban === false ) ) {
-
-			$status_array = 'medium';
-			$status       = array( 'text' => __( 'Your login area is partially protected from brute force attacks. We recommend you use both network and local blocking for full security.', 'better-wp-security' ), 'link' => '#itsec_brute_force_settings', );
-
-		} else {
-
-			$status_array = 'high';
-			$status       = array( 'text' => __( 'Your login area is not protected from brute force attacks.', 'better-wp-security' ), 'link' => '#itsec_brute_force_settings', );
-
-		}
-
-		array_push( $statuses[$status_array], $status );
-
-		return $statuses;
 
 	}
 
@@ -210,26 +167,6 @@ class ITSEC_Brute_Force_Admin {
 		}
 
 		return $displays;
-
-	}
-
-	/**
-	 * Register one-click settings
-	 *
-	 * @since 4.0
-	 *
-	 * @param array $one_click_settings array of one-click settings
-	 *
-	 * @return array array of one-click settings
-	 */
-	public function itsec_one_click_settings( $one_click_settings ) {
-
-		$one_click_settings['itsec_brute_force'][] = array(
-			'option' => 'enabled',
-			'value'  => 1,
-		);
-
-		return $one_click_settings;
 
 	}
 

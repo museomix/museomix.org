@@ -139,10 +139,9 @@ class UploadHandler {
 
 	protected function get_upload_path($file_name = null, $version = null) {
 		$HelperObj = new WPImporter_includes_helper();
-		//$uploadDir = 'ultimate_importer';
 		$uploadDir = $HelperObj->uploadDir;
 
-		$file_name = $file_name ? $file_name : '';
+		$file_name = $file_name ? sanitize_file_name($file_name) : '';
 		if (empty($version)) {
 			$version_path = '';
 		} else {
@@ -226,12 +225,14 @@ class UploadHandler {
 			$file->name = $file_name;
 			$file->size = $this->get_file_size($this->get_upload_path($file_name));
 			$file->url = $this->get_download_url($file->name);
+			if(!empty($this->options['image_versions'])){
 			foreach ($this->options['image_versions'] as $version => $options) {
 				if (!empty($version)) {
 					if (is_file($this->get_upload_path($file_name, $version))) {
 						$file->{$version . 'Url'} = $this->get_download_url($file->name, $version);
 					}
 				}
+			}
 			}
 			$this->set_additional_file_properties($file);
 			return $file;
@@ -384,11 +385,6 @@ class UploadHandler {
 
 		$rem_csv = explode(".csv", $name);
 		$version_zero = explode("(", $rem_csv[0]);
-		/*	if(!is_array($version_zero)){
-				return $version_zero[0];
-			}else{
-				return 'HERE';
-			}*/
 		$file_name_arr = array();
 		$file_name_arr = explode('.csv', $name);
 		$current_action = $_REQUEST['curr_action'];
@@ -666,10 +662,12 @@ class UploadHandler {
 		if ($image->getImageFormat() === 'GIF') {
 			// Handle animated GIFs:
 			$images = $image->coalesceImages();
+			if(!empty($images)){
 			foreach ($images as $frame) {
 				$image = $frame;
 				$this->imagick_set_image_object($file_name, $image);
 				break;
+			}
 			}
 		}
 		$image_oriented = false;
@@ -832,6 +830,7 @@ class UploadHandler {
 
 	protected function handle_image_file($file_path, $file) {
 		$failed_versions = array();
+		if(!empty($this->options['image_versions'])){
 		foreach ($this->options['image_versions'] as $version => $options) {
 			if ($this->create_scaled_image($file->name, $version, $options)) {
 				if (!empty($version)) {
@@ -842,6 +841,7 @@ class UploadHandler {
 			} else {
 				$failed_versions[] = $version;
 			}
+		}
 		}
 		switch (count($failed_versions)) {
 			case 0:
@@ -857,17 +857,16 @@ class UploadHandler {
 	}
 
 	protected function handle_file_upload($uploaded_file, $name, $size, $type, $error, $index = null, $content_range = null) {
-		$post_url = admin_url() . 'admin.php?page=' . WP_CONST_ULTIMATE_CSV_IMP_SLUG . '/index.php&__module=' . $_POST['curr_action'] . '&step=uploadfile';
 		$impCheckobj = CallWPImporterObj::checkSecurity();
 		if ($impCheckobj != 'true') {
 			die($impCheckobj);
 		}
 		if ($_SERVER['HTTP_REFERER'] != urldecode($_SERVER['HTTP_REFERER'])) {
-			if ($post_url != urldecode($_SERVER['HTTP_REFERER'])) {
+			if (!$_SERVER['HTTP_REFERER']) {
 				die('Your requested url were wrong! Please contact your admin.');
 			}
 		} else {
-			if ($post_url != $_SERVER['HTTP_REFERER']) {
+			if (!$_SERVER['HTTP_REFERER']) {
 				die('Your requested url were wrong! Please contact your admin.');
 			}
 		}
@@ -976,8 +975,10 @@ class UploadHandler {
 
 	protected function get_file_names_params() {
 		$params = isset($_GET[$this->options['param_name']]) ? $_GET[$this->options['param_name']] : array();
+		if(!empty($params)){
 		foreach ($params as $key => $value) {
 			$params[$key] = basename(stripslashes($value));
+		}
 		}
 		return $params;
 	}
@@ -1092,16 +1093,6 @@ class UploadHandler {
 
 
 		$upload = isset($_FILES[$this->options['param_name']]) ? $_FILES[$this->options['param_name']] : null;
-		// Parse the Content-Disposition header, if available:
-		/*added by prem
-			$fil_nam=explode(".csv",$upload['name'][0]);
-		   $fileExists = $this->checkFileExists($fil_nam[0].'-'.$_REQUEST['curr_action'].' (1).csv');//var_dump($fileExists);
-		   if($fileExists){
-			$fileExistsArray = array('fileExists' => $fileExists);
-				return $this->generate_response($fileExistsArray,true);
-		}*/
-
-
 		$file_name = $this->get_server_var('HTTP_CONTENT_DISPOSITION') ? rawurldecode(preg_replace('/(^[^"]+")|("$)/', '', $this->get_server_var('HTTP_CONTENT_DISPOSITION'))) : null;
 		$content_range = $this->get_server_var('HTTP_CONTENT_RANGE') ? preg_split('/[^0-9]+/', $this->get_server_var('HTTP_CONTENT_RANGE')) : null;
 		$size = $content_range ? $content_range[3] : null;
@@ -1124,6 +1115,7 @@ class UploadHandler {
 			$file_names = array($this->get_file_name_param());
 		}
 		$response = array();
+		if(!empty($file_names)){
 		foreach ($file_names as $file_name) {
 			$file_path = $this->get_upload_path($file_name);
 			$success = is_file($file_path) && $file_name[0] !== '.' && unlink($file_path);
@@ -1138,6 +1130,7 @@ class UploadHandler {
 				}
 			}
 			$response[$file_name] = $success;
+		}
 		}
 		return $this->generate_response($response, $print_response);
 	}

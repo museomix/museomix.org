@@ -50,11 +50,11 @@ class Theme_My_Login_Admin extends Theme_My_Login_Abstract {
 	 * @access public
 	 */
 	protected function load() {
-		add_action( 'admin_init', array( &$this, 'admin_init' ) );
-		add_action( 'admin_menu', array( &$this, 'admin_menu' ), 8 );
-		add_action( 'admin_enqueue_scripts', array( &$this, 'admin_enqueue_scripts' ), 11 );
+		add_action( 'admin_init', array( $this, 'admin_init' ) );
+		add_action( 'admin_menu', array( $this, 'admin_menu' ), 8 );
+		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ), 11 );
 
-		register_uninstall_hook( WP_PLUGIN_DIR . '/theme-my-login/theme-my-login.php', array( 'Theme_My_Login_Admin', 'uninstall' ) );
+		register_uninstall_hook( THEME_MY_LOGIN_PATH . '/theme-my-login.php', array( 'Theme_My_Login_Admin', 'uninstall' ) );
 	}
 
 	/**
@@ -93,7 +93,7 @@ class Theme_My_Login_Admin extends Theme_My_Login_Abstract {
 	public function admin_init() {
 
 		// Register setting
-		register_setting( 'theme_my_login', 'theme_my_login',  array( &$this, 'save_settings' ) );
+		register_setting( 'theme_my_login', 'theme_my_login',  array( $this, 'save_settings' ) );
 
 		// Install/Upgrade
 		if ( version_compare( $this->get_option( 'version', 0 ), Theme_My_Login::VERSION, '<' ) )
@@ -104,9 +104,9 @@ class Theme_My_Login_Admin extends Theme_My_Login_Abstract {
 		add_settings_section( 'modules',    __( 'Modules', 'theme-my-login'    ), '__return_false', $this->options_key );
 
 		// Add fields
-		add_settings_field( 'enable_css', __( 'Stylesheet', 'theme-my-login' ), array( &$this, 'settings_field_enable_css' ), $this->options_key, 'general' );
-		add_settings_field( 'login_type', __( 'Login Type', 'theme-my-login' ), array( &$this, 'settings_field_login_type' ), $this->options_key, 'general' );
-		add_settings_field( 'modules',    __( 'Modules',    'theme-my-login' ), array( &$this, 'settings_field_modules'    ), $this->options_key, 'modules' );
+		add_settings_field( 'enable_css', __( 'Stylesheet', 'theme-my-login' ), array( $this, 'settings_field_enable_css' ), $this->options_key, 'general' );
+		add_settings_field( 'login_type', __( 'Login Type', 'theme-my-login' ), array( $this, 'settings_field_login_type' ), $this->options_key, 'general' );
+		add_settings_field( 'modules',    __( 'Modules',    'theme-my-login' ), array( $this, 'settings_field_modules'    ), $this->options_key, 'modules' );
 	}
 
 	/**
@@ -116,7 +116,7 @@ class Theme_My_Login_Admin extends Theme_My_Login_Abstract {
 	 * @access public
 	 */
 	public function admin_enqueue_scripts() {
-		wp_enqueue_script( 'theme-my-login-admin', plugins_url( 'theme-my-login/admin/js/theme-my-login-admin.js' ), array( 'jquery' ), Theme_My_Login::VERSION, true );
+		wp_enqueue_script( 'theme-my-login-admin', plugins_url( 'js/theme-my-login-admin.js', __FILE__ ), array( 'jquery' ), Theme_My_Login::VERSION, true );
 		wp_localize_script( 'theme-my-login-admin', 'tmlAdmin', array(
 			'interim_login_url' => site_url( 'wp-login.php?interim-login=1', 'login' )
 		) );
@@ -197,7 +197,7 @@ class Theme_My_Login_Admin extends Theme_My_Login_Abstract {
 	 * @access public
 	 */
 	public function settings_field_modules() {
-		foreach ( get_plugins( '/theme-my-login/modules' ) as $path => $data ) {
+		foreach ( get_plugins( sprintf( '/%s/modules', plugin_basename( THEME_MY_LOGIN_PATH ) ) ) as $path => $data ) {
 			$id = sanitize_key( $data['Name'] );
 		?>
 		<input name="theme_my_login[active_modules][]" type="checkbox" id="theme_my_login_active_modules_<?php echo $id; ?>" value="<?php echo $path; ?>"<?php checked( in_array( $path, (array) $this->get_option( 'active_modules' ) ) ); ?> />
@@ -227,8 +227,8 @@ class Theme_My_Login_Admin extends Theme_My_Login_Abstract {
 		// If we have modules to activate
 		if ( $activate = array_diff( $settings['active_modules'], $this->get_option( 'active_modules', array() ) ) ) {
 			foreach ( $activate as $module ) {
-				if ( file_exists( WP_PLUGIN_DIR . '/theme-my-login/modules/' . $module ) )
-					include_once( WP_PLUGIN_DIR . '/theme-my-login/modules/' . $module );
+				if ( file_exists( THEME_MY_LOGIN_PATH . '/modules/' . $module ) )
+					include_once( THEME_MY_LOGIN_PATH . '/modules/' . $module );
 				do_action( 'tml_activate_' . $module );
 			}
 		}
@@ -345,8 +345,8 @@ class Theme_My_Login_Admin extends Theme_My_Login_Abstract {
 
 		// Activate modules
 		foreach ( $this->get_option( 'active_modules', array() ) as $module ) {
-			if ( file_exists( WP_PLUGIN_DIR . '/theme-my-login/modules/' . $module ) )
-				include_once( WP_PLUGIN_DIR . '/theme-my-login/modules/' . $module );
+			if ( file_exists( THEME_MY_LOGIN_PATH . '/modules/' . $module ) )
+				include_once( THEME_MY_LOGIN_PATH . '/modules/' . $module );
 			do_action( 'tml_activate_' . $module );
 		}
 
@@ -387,12 +387,12 @@ class Theme_My_Login_Admin extends Theme_My_Login_Abstract {
 		require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 
 		// Run module uninstall hooks
-		$modules = get_plugins( '/theme-my-login/modules' );
+		$modules = get_plugins( sprintf( '/%s/modules', plugin_basename( THEME_MY_LOGIN_PATH ) ) );
 		foreach ( array_keys( $modules ) as $module ) {
 			$module = plugin_basename( trim( $module ) );
 
-			if ( file_exists( WP_PLUGIN_DIR . '/theme-my-login/modules/' . $module ) )
-				@include ( WP_PLUGIN_DIR . '/theme-my-login/modules/' . $module );
+			if ( file_exists( THEME_MY_LOGIN_PATH . '/modules/' . $module ) )
+				@include ( THEME_MY_LOGIN_PATH . '/modules/' . $module );
 
 			do_action( 'tml_uninstall_' . $module );
 		}

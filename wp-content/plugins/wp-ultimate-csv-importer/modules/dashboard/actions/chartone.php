@@ -39,17 +39,16 @@ if (!defined('ABSPATH')) {
 	exit;
 } // Exit if accessed directly
 global $wpdb;
-if ($_REQUEST['postdata'] == 'firstchartdata') {
+$dashObj = new WPImporter_includes_helper();
+if (sanitize_text_field($_REQUEST['postdata']) == 'firstchartdata') {
 	require_once(WP_CONST_ULTIMATE_CSV_IMP_DIRECTORY . 'lib/skinnymvc/core/base/SkinnyBaseActions.php');
 	require_once(WP_CONST_ULTIMATE_CSV_IMP_DIRECTORY . 'lib/skinnymvc/core/SkinnyActions.php');
 	require_once('actions.php');
-	$dashObj = new WPImporter_includes_helper();
 	echo(json_encode($dashObj->piechart()));
-} elseif ($_REQUEST['postdata'] == 'secondchartdata') {
+} elseif (sanitize_text_field($_REQUEST['postdata']) == 'secondchartdata') {
 	require_once(WP_CONST_ULTIMATE_CSV_IMP_DIRECTORY . 'lib/skinnymvc/core/base/SkinnyBaseActions.php');
 	require_once(WP_CONST_ULTIMATE_CSV_IMP_DIRECTORY . 'lib/skinnymvc/core/SkinnyActions.php');
 	require_once('actions.php');
-	$dashObj = new WPImporter_includes_helper();
 	echo json_encode($dashObj->getStatsWithDate());
 }
 

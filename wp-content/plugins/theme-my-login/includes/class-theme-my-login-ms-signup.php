@@ -36,20 +36,20 @@ class Theme_My_Login_MS_Signup extends Theme_My_Login_Abstract {
 
 		$theme_my_login = Theme_My_Login::get_object();
 
-		add_action( 'tml_request_register', array( &$this, 'tml_request_register' ) );
-		add_action( 'tml_request_activate', array( &$this, 'tml_request_activate' ) );
-		add_action( 'tml_display_register', array( &$this, 'tml_display_register' ) );
-		add_action( 'tml_display_activate', array( &$this, 'tml_display_activate' ) );
-		add_filter( 'tml_title',            array( &$this, 'tml_title'            ), 10, 2 );
+		add_action( 'tml_request_register', array( $this, 'tml_request_register' ) );
+		add_action( 'tml_request_activate', array( $this, 'tml_request_activate' ) );
+		add_action( 'tml_display_register', array( $this, 'tml_display_register' ) );
+		add_action( 'tml_display_activate', array( $this, 'tml_display_activate' ) );
+		add_filter( 'tml_title',            array( $this, 'tml_title'            ), 10, 2 );
 
-		add_action( 'switch_blog',   array( &$theme_my_login, 'load_options'  ) );
-		add_action( 'wpmu_new_blog', array( &$this,           'wpmu_new_blog' ), 10, 2 );
+		add_action( 'switch_blog',   array( $theme_my_login, 'load_options'  ) );
+		add_action( 'wpmu_new_blog', array( $this,           'wpmu_new_blog' ), 10, 2 );
 
-		add_filter( 'site_url',         array( &$this, 'site_url'         ),  9, 3 );
-		add_filter( 'home_url',         array( &$this, 'site_url'         ),  9, 3 );
-		add_filter( 'network_site_url', array( &$this, 'network_site_url' ), 10, 3 );
-		add_filter( 'network_home_url', array( &$this, 'network_site_url' ), 10, 3 );
-		add_filter( 'clean_url',        array( &$this, 'clean_url'        ), 10, 3 );
+		add_filter( 'site_url',         array( $this, 'site_url'         ),  9, 3 );
+		add_filter( 'home_url',         array( $this, 'site_url'         ),  9, 3 );
+		add_filter( 'network_site_url', array( $this, 'network_site_url' ), 10, 3 );
+		add_filter( 'network_home_url', array( $this, 'network_site_url' ), 10, 3 );
+		add_filter( 'clean_url',        array( $this, 'clean_url'        ), 10, 3 );
 	}
 
 	/**
@@ -64,7 +64,7 @@ class Theme_My_Login_MS_Signup extends Theme_My_Login_Abstract {
 		global $current_site;
 
 		add_action( 'wp_head', 'wp_no_robots' );
-		add_action( 'wp_head', array( &$this, 'signup_header' ) );
+		add_action( 'wp_head', array( $this, 'signup_header' ) );
 
 		if ( is_array( get_site_option( 'illegal_names' )) && isset( $_GET[ 'new' ] ) && in_array( $_GET[ 'new' ], get_site_option( 'illegal_names' ) ) == true ) {
 			wp_redirect( network_home_url() );
@@ -371,7 +371,7 @@ class Theme_My_Login_MS_Signup extends Theme_My_Login_Abstract {
 		if ( is_object( $wp_object_cache ) )
 			$wp_object_cache->cache_enabled = false;
 
-		add_action( 'wp_head', array( &$this, 'activate_header' ) );
+		add_action( 'wp_head', array( $this, 'activate_header' ) );
 	}
 
 	/**
@@ -484,8 +484,8 @@ class Theme_My_Login_MS_Signup extends Theme_My_Login_Abstract {
 	public function wpmu_new_blog( $blog_id, $user_id ) {
 		global $wpdb;
 		require_once ( ABSPATH . '/wp-admin/includes/plugin.php' );
-		if ( is_plugin_active_for_network( 'theme-my-login/theme-my-login.php' ) ) {
-			require_once( WP_PLUGIN_DIR . '/theme-my-login/admin/class-theme-my-login-admin.php' );
+		if ( is_plugin_active_for_network( plugin_basename( THEME_MY_LOGIN_PATH ) . '/theme-my-login.php' ) ) {
+			require_once( THEME_MY_LOGIN_PATH . '/admin/class-theme-my-login-admin.php' );
 			switch_to_blog( $blog_id );
 			$admin = Theme_My_Login_Admin::get_object();
 			$admin->install();

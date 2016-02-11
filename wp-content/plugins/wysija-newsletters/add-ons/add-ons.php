@@ -11,7 +11,7 @@ class MailPoet_Add_ons {
 		$this->plugin_path = WYSIJA_DIR;
 		$this->wp_plugin_path = str_replace( 'wysija-newsletters', '', $this->plugin_path );
 		$this->plugin_url = WYSIJA_URL;
-		$this->image_url = 'http://ps.w.org/wysija-newsletters/assets/add-ons/';
+		$this->image_url = '//ps.w.org/wysija-newsletters/assets/add-ons/';
 
 		$this->mailpoet_add_on_activated_notice();
 		$this->mailpoet_add_on_deactivated_notice();

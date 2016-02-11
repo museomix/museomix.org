@@ -17,8 +17,6 @@ class ITSEC_Tweaks_Admin {
 		add_filter( 'itsec_tracking_vars', array( $this, 'tracking_vars' ) );
 		add_action( 'itsec_add_admin_meta_boxes', array( $this, 'add_admin_meta_boxes' ) ); //add meta boxes to admin page
 		add_action( 'itsec_admin_init', array( $this, 'initialize_admin' ) ); //initialize admin area
-		add_filter( 'itsec_add_dashboard_status', array( $this, 'dashboard_status' ) ); //add information for plugin status
-		add_filter( 'itsec_one_click_settings', array( $this, 'one_click_settings' ) );
 
 		//manually save options on multisite
 		if ( is_multisite() ) {
@@ -410,7 +408,7 @@ class ITSEC_Tweaks_Admin {
 		echo '<option value="1" ' . selected( $setting, '1' ) . '>' . __( 'Disable Pingbacks', 'better-wp-security' ) . '</option>';
 		echo '<option value="0" ' . selected( $setting, '0' ) . '>' . __( 'Enable XML-RPC', 'better-wp-security' ) . '</option>';
 		echo '</select></p>';
-		
+
 		printf(
 			'<ul><li>%s</li><li>%s</li><li>%s</li></ul>',
 			__( '<strong>Disable XML-RPC</strong> - XML-RPC is disabled on the site. This setting is highly recommended if Jetpack, the WordPress mobile app, pingbacks, and other services that use XML-RPC are not used.', 'better-wp-security' ),
@@ -639,10 +637,10 @@ class ITSEC_Tweaks_Admin {
 	public function filter_litespeed_server_config_modification( $modification ) {
 		return $this->filter_apache_server_config_modification( $modification, 'litespeed' );
 	}
-	
+
 	public function filter_apache_server_config_modification( $modification, $server = 'apache' ) {
 		$input = get_site_option( 'itsec_tweaks' );
-		
+
 		if ( true === $input['protect_files'] ) {
 			$files = array(
 				'.htaccess',
@@ -651,13 +649,13 @@ class ITSEC_Tweaks_Admin {
 				'install.php',
 				'wp-config.php',
 			);
-			
+
 			$modification .= "\n";
 			$modification .= "\t# " . __( 'Protect System Files - Security > Settings > System Tweaks > System Files', 'better-wp-security' ) . "\n";
-			
+
 			foreach ( $files as $file ) {
 				$modification .= "\t<files $file>\n";
-				
+
 				if ( 'apache' === $server ) {
 					$modification .= "\t\t<IfModule mod_authz_core.c>\n";
 					$modification .= "\t\t\tRequire all denied\n";
@@ -672,16 +670,16 @@ class ITSEC_Tweaks_Admin {
 					$modification .= "\t\t\tDeny from all\n";
 					$modification .= "\t\t</IfModule>\n";
 				}
-				
+
 				$modification .= "\t</files>\n";
 			}
 		}
-		
+
 		if ( 2 == $input['disable_xmlrpc'] ) {
 			$modification .= "\n";
 			$modification .= "\t# " . __( 'Disable XML-RPC - Security > Settings > WordPress Tweaks > XML-RPC', 'better-wp-security' ) . "\n";
 			$modification .= "\t<files xmlrpc.php>\n";
-			
+
 			if ( 'apache' === $server ) {
 				$modification .= "\t\t<IfModule mod_authz_core.c>\n";
 				$modification .= "\t\t\tRequire all denied\n";
@@ -696,19 +694,19 @@ class ITSEC_Tweaks_Admin {
 				$modification .= "\t\t\tDeny from all\n";
 				$modification .= "\t\t</IfModule>\n";
 			}
-			
+
 			$modification .= "\t</files>\n";
 		}
-		
+
 		if ( true == $input['directory_browsing'] ) {
 			$modification .= "\n";
 			$modification .= "\t# " . __( 'Disable Directory Browsing - Security > Settings > System Tweaks > Directory Browsing', 'better-wp-security' ) . "\n";
 			$modification .= "\tOptions -Indexes\n";
 		}
-		
-		
+
+
 		$rewrites = '';
-		
+
 		if ( true == $input['protect_files'] ) {
 			$rewrites .= "\n";
 			$rewrites .= "\t\t# " . __( 'Protect System Files - Security > Settings > System Tweaks > System Files', 'better-wp-security' ) . "\n";
@@ -719,28 +717,28 @@ class ITSEC_Tweaks_Admin {
 			$rewrites .= "\t\tRewriteRule ^wp-includes/js/tinymce/langs/.+\.php - [F]\n";
 			$rewrites .= "\t\tRewriteRule ^wp-includes/theme-compat/ - [F]\n";
 		}
-		
+
 		if ( true === $input['uploads_php'] ) {
 			require_once( trailingslashit( $GLOBALS['itsec_globals']['plugin_dir'] ) . 'core/lib/class-itsec-lib-utility.php' );
-			
+
 			$dir = ITSEC_Lib_Utility::get_relative_upload_url_path();
-			
+
 			if ( ! empty( $dir ) ) {
 				$dir = preg_quote( $dir );
-				
+
 				$rewrites .= "\n";
 				$rewrites .= "\t\t# " . __( 'Disable PHP in Uploads - Security > Settings > System Tweaks > Uploads', 'better-wp-security' ) . "\n";
 				$rewrites .= "\t\tRewriteRule ^$dir/.*\.(?:php[1-6]?|pht|phtml?)$ - [NC,F]\n";
 			}
 		}
-		
+
 		if ( true == $input['request_methods'] ) {
 			$rewrites .= "\n";
 			$rewrites .= "\t\t# " . __( 'Filter Request Methods - Security > Settings > System Tweaks > Request Methods', 'better-wp-security' ) . "\n";
 			$rewrites .= "\t\tRewriteCond %{REQUEST_METHOD} ^(TRACE|DELETE|TRACK) [NC]\n";
 			$rewrites .= "\t\tRewriteRule ^.* - [F]\n";
 		}
-		
+
 		if ( true == $input['suspicious_query_strings'] ) {
 			$rewrites .= "\n";
 			$rewrites .= "\t\t# " . __( 'Filter Suspicious Query Strings in the URL - Security > Settings > System Tweaks > Suspicious Query Strings', 'better-wp-security' ) . "\n";
@@ -765,22 +763,22 @@ class ITSEC_Tweaks_Admin {
 			$rewrites .= "\t\tRewriteCond %{HTTP_REFERER} !^http://maps\.googleapis\.com(.*)$\n";
 			$rewrites .= "\t\tRewriteRule ^.* - [F]\n";
 		}
-		
+
 		if ( true == $input['non_english_characters'] ) {
 			$rewrites .= "\n";
 			$rewrites .= "\t\t# " . __( 'Filter Non-English Characters - Security > Settings > System Tweaks > Non-English Characters', 'better-wp-security' ) . "\n";
 			$rewrites .= "\t\tRewriteCond %{QUERY_STRING} ^.*(%0|%A|%B|%C|%D|%E|%F).* [NC]\n";
 			$rewrites .= "\t\tRewriteRule ^.* - [F]\n";
 		}
-		
+
 		if ( true == $input['comment_spam'] ) {
 			$valid_referers = $this->get_valid_referers( 'apache' );
-			
+
 			$rewrites .= "\n";
 			$rewrites .= "\t\t# " . __( 'Reduce Comment Spam - Security > Settings > System Tweaks > Comment Spam', 'better-wp-security' ) . "\n";
 			$rewrites .= "\t\tRewriteCond %{REQUEST_METHOD} POST\n";
 			$rewrites .= "\t\tRewriteCond %{REQUEST_URI} /wp-comments-post\.php\$\n";
-			
+
 			if ( empty( $valid_referers ) || in_array( '*', $valid_referers ) ) {
 				$rewrites .= "\t\tRewriteCond %{HTTP_USER_AGENT} ^$\n";
 			} else {
@@ -788,21 +786,21 @@ class ITSEC_Tweaks_Admin {
 					if ( '*.' == substr( $referer, 0, 2 ) ) {
 						$referer = '([^/]+.)?' . substr( $referer, 2 );
 					}
-					
+
 					$referer = str_replace( '.', '\.', $referer );
 					$referer = rtrim( $referer, '/' );
-					
+
 					$valid_referers[$index] = $referer;
 				}
 				$valid_referers = implode( '|', $valid_referers );
-				
+
 				$rewrites .= "\t\tRewriteCond %{HTTP_USER_AGENT} ^$ [OR]\n";
 				$rewrites .= "\t\tRewriteCond %{HTTP_REFERER} !^https?://($valid_referers)(/|$) [NC]\n";
 			}
-			
+
 			$rewrites .= "\t\tRewriteRule ^.* - [F]\n";
 		}
-		
+
 		if ( ! empty( $rewrites ) ) {
 			$modification .= "\n";
 			$modification .= "\t<IfModule mod_rewrite.c>\n";
@@ -810,14 +808,14 @@ class ITSEC_Tweaks_Admin {
 			$modification .= $rewrites;
 			$modification .= "\t</IfModule>\n";
 		}
-		
-		
+
+
 		return $modification;
 	}
-	
+
 	public function filter_nginx_server_config_modification( $modification ) {
 		$input = get_site_option( 'itsec_tweaks' );
-		
+
 		if ( true === $input['protect_files'] ) {
 			$modification .= "\n";
 			$modification .= "\t# " . __( 'Protect System Files - Security > Settings > System Tweaks > System Files', 'better-wp-security' ) . "\n";
@@ -829,35 +827,35 @@ class ITSEC_Tweaks_Admin {
 			$modification .= "\tlocation ^wp-includes/(.*).php { deny all; }\n";
 			$modification .= "\tlocation ^/wp-admin/includes(.*)$ { deny all; }\n";
 		}
-		
+
 		if ( 2 == $input['disable_xmlrpc'] ) {
 			$modification .= "\n";
 			$modification .= "\t# " . __( 'Disable XML-RPC - Security > Settings > WordPress Tweaks > XML-RPC', 'better-wp-security' ) . "\n";
 			$modification .= "\tlocation ~ xmlrpc.php { deny all; }\n";
 		}
-		
+
 		// Rewrite Rules for Disable PHP in Uploads
 		if ( true === $input['uploads_php'] ) {
 			require_once( trailingslashit( $GLOBALS['itsec_globals']['plugin_dir'] ) . 'core/lib/class-itsec-lib-utility.php' );
-			
+
 			$dir = ITSEC_Lib_Utility::get_relative_upload_url_path();
-			
+
 			if ( ! empty( $dir ) ) {
 				$dir = preg_quote( $dir );
-				
+
 				$modification .= "\n";
 				$modification .= "\t# " . __( 'Disable PHP in Uploads - Security > Settings > System Tweaks > Uploads', 'better-wp-security' ) . "\n";
 				$modification .= "\tlocation ^$dir/(.*).php(.?) { deny all; }\n";
 			}
 		}
-		
+
 		// Apache rewrite rules for disable http methods
 		if ( true == $input['request_methods'] ) {
 			$modification .= "\n";
 			$modification .= "\t# " . __( 'Filter Request Methods - Security > Settings > System Tweaks > Request Methods', 'better-wp-security' ) . "\n";
 			$modification .= "\tif (\$request_method ~* \"^(TRACE|DELETE|TRACK)\") { return 403; }\n";
 		}
-		
+
 		// Process suspicious query rules
 		if ( true == $input['suspicious_query_strings'] ) {
 			$modification .= "\n";
@@ -884,42 +882,42 @@ class ITSEC_Tweaks_Admin {
 			$modification .= "\tif (\$http_referer !~ \"^http://maps.googleapis.com(.*)\$\") { set \$susquery 0; }\n";
 			$modification .= "\tif (\$susquery = 1) { return 403; } \n";
 		}
-		
+
 		// Process filtering of foreign characters
 		if ( true == $input['non_english_characters'] ) {
 			$modification .= "\n";
 			$modification .= "\t# " . __( 'Filter Non-English Characters - Security > Settings > System Tweaks > Non-English Characters', 'better-wp-security' ) . "\n";
 			$modification .= "\tif (\$args ~* \"(%0|%A|%B|%C|%D|%E|%F)\") { return 403; }\n";
 		}
-		
+
 		// Process Comment spam rules
 		if ( true == $input['comment_spam'] ) {
 			$valid_referers = $this->get_valid_referers( 'nginx' );
-			
+
 			$modification .= "\n";
 			$modification .= "\t# " . __( 'Reduce Comment Spam - Security > Settings > System Tweaks > Comment Spam', 'better-wp-security' ) . "\n";
 			$modification .= "\t# " . __( 'Help reduce spam', 'better-wp-security' ) . "\n";
 			$modification .= "\tlocation /wp-comments-post.php {\n";
 			$modification .= "\t\tlimit_except POST { deny all; }\n";
 			$modification .= "\t\tif (\$http_user_agent ~ \"^$\") { return 403; }\n";
-			
+
 			if ( ! empty( $valid_referers ) && ! in_array( '*', $valid_referers ) ) {
 				$modification .= "\t\tvalid_referers " . implode( ' ', $valid_referers ) . ";\n";
 				$modification .= "\t\tif (\$invalid_referer) { return 403; }\n";
 			}
-			
+
 			$modification .= "\t}\n";
 		}
-		
+
 		return $modification;
 	}
-	
+
 	protected function get_valid_referers( $server_type ) {
 		$valid_referers = array();
-		
+
 		if ( 'apache' === $server_type ) {
 			$domain = ITSEC_Lib::get_domain( get_site_url() );
-			
+
 			if ( '*' == $domain ) {
 				$valid_referers[] = $domain;
 			} else {
@@ -930,491 +928,36 @@ class ITSEC_Tweaks_Admin {
 		} else {
 			return array();
 		}
-		
+
 		$valid_referers[] = 'jetpack.wordpress.com/jetpack-comment/';
 		$valid_referers = apply_filters( 'itsec_filter_valid_comment_referers', $valid_referers, $server_type );
-		
+
 		if ( is_string( $valid_referers ) ) {
 			$valid_referers = array( $valid_referers );
 		} else if ( ! is_array( $valid_referers ) ) {
 			$valid_referers = array();
 		}
-		
+
 		foreach ( $valid_referers as $index => $referer ) {
 			$valid_referers[$index] = preg_replace( '|^https?://|', '', $referer );
 		}
-		
+
 		return $valid_referers;
 	}
-	
+
 	public function filter_wp_config_modification( $modification ) {
 		$input = get_site_option( 'itsec_tweaks', false );
-		
+
 		if ( ! is_array( $input ) ) {
 			return $modification;
 		}
-		
-		
+
+
 		if ( isset( $input['file_editor'] ) && $input['file_editor'] ) {
 			$modification .= "define( 'DISALLOW_FILE_EDIT', true ); // " . __( 'Disable File Editor - Security > Settings > WordPress Tweaks > File Editor', 'better-wp-security' ) . "\n";
 		}
-		
+
 		return $modification;
-	}
-
-	/**
-	 * Sets the status in the plugin dashboard
-	 *
-	 * @since 4.0
-	 *
-	 * @return array array of statuses
-	 */
-	public function dashboard_status( $statuses ) {
-
-		if ( isset( $this->settings['protect_files'] ) && $this->settings['protect_files'] === true ) {
-
-			$status_array = 'safe-medium';
-			$status       = array(
-				'text' => __( 'You are protecting common WordPress files from access.', 'better-wp-security' ),
-				'link' => '#itsec_tweaks_server_protect_files',
-			);
-
-		} else {
-
-			$status_array = 'medium';
-			$status       = array(
-				'text' => __( 'You are not protecting common WordPress files from access. Click here to protect WordPress files.', 'better-wp-security' ),
-				'link' => '#itsec_tweaks_server_protect_files',
-			);
-
-		}
-
-		array_push( $statuses[ $status_array ], $status );
-
-		if ( ITSEC_Lib::get_server() != 'nginx' ) {
-
-			if ( isset( $this->settings['directory_browsing'] ) && $this->settings['directory_browsing'] === true && ITSEC_Lib::get_server() != 'nginx' ) {
-
-				$status_array = 'safe-low';
-				$status       = array(
-					'text' => __( 'You have successfully disabled directory browsing on your site.', 'better-wp-security' ),
-					'link' => '#itsec_tweaks_server_directory_browsing',
-				);
-
-			} else {
-
-				$status_array = 'low';
-				$status       = array(
-					'text' => __( 'You have not disabled directory browsing on your site. Click here to prevent a user from seeing every file present in your WordPress site.', 'better-wp-security' ),
-					'link' => '#itsec_tweaks_server_directory_browsing',
-				);
-
-			}
-
-		}
-
-		array_push( $statuses[ $status_array ], $status );
-
-		if ( isset( $this->settings['request_methods'] ) && $this->settings['request_methods'] === true ) {
-
-			$status_array = 'safe-low';
-			$status       = array(
-				'text' => __( 'You are blocking HTTP request methods you do not need.', 'better-wp-security' ),
-				'link' => '#itsec_tweaks_server_request_methods',
-			);
-
-		} else {
-
-			$status_array = 'low';
-			$status       = array(
-				'text' => __( 'You are not blocking HTTP request methods you do not need. Click here to block extra HTTP request methods that WordPress should not normally need.', 'better-wp-security' ),
-				'link' => '#itsec_tweaks_server_request_methods',
-			);
-
-		}
-
-		array_push( $statuses[ $status_array ], $status );
-
-		if ( isset( $this->settings['suspicious_query_strings'] ) && $this->settings['suspicious_query_strings'] === true ) {
-
-			$status_array = 'safe-medium';
-			$status       = array(
-				'text' => __( 'Your WordPress site is blocking suspicious looking information in the URL.', 'better-wp-security' ),
-				'link' => '#itsec_tweaks_server_suspicious_query_strings',
-			);
-
-		} else {
-
-			$status_array = 'medium';
-			$status       = array(
-				'text' => __( 'Your WordPress site is not blocking suspicious looking information in the URL. Click here to block users from trying to execute code that they should not be able to execute.', 'better-wp-security' ),
-				'link' => '#itsec_tweaks_server_suspicious_query_strings',
-			);
-
-		}
-
-		array_push( $statuses[ $status_array ], $status );
-
-		if ( isset( $this->settings['non_english_characters'] ) && $this->settings['non_english_characters'] === true ) {
-
-			$status_array = 'safe-low';
-			$status       = array(
-				'text' => __( 'Your WordPress site is blocking non-english characters in the URL.', 'better-wp-security' ),
-				'link' => '#itsec_tweaks_server_non_english_characters',
-			);
-
-		} else {
-
-			$status_array = 'low';
-			$status       = array(
-				'text' => __( 'Your WordPress site is not blocking non-english characters in the URL. Click here to fix this.', 'better-wp-security' ),
-				'link' => '#itsec_tweaks_server_non_english_characters',
-			);
-
-		}
-
-		array_push( $statuses[ $status_array ], $status );
-
-		if ( isset( $this->settings['long_url_strings'] ) && $this->settings['long_url_strings'] === true ) {
-
-			$status_array = 'safe-low';
-			$status       = array(
-				'text' => __( 'Your installation does not accept long URLs.', 'better-wp-security' ),
-				'link' => '#itsec_tweaks_server_long_url_strings',
-			);
-
-		} else {
-
-			$status_array = 'low';
-			$status       = array(
-				'text' => __( 'Your installation accepts long (over 255 character) URLS. This can lead to vulnerabilities. Click here to fix this.', 'better-wp-security' ),
-				'link' => '#itsec_tweaks_server_long_url_strings',
-			);
-
-		}
-
-		array_push( $statuses[ $status_array ], $status );
-
-		if ( isset( $this->settings['write_permissions'] ) && $this->settings['write_permissions'] === true ) {
-
-			$status_array = 'safe-low';
-			$status       = array(
-				'text' => __( 'Your wp-config.php and .htaccess files are not writeable.', 'better-wp-security' ),
-				'link' => '#itsec_tweaks_server_write_permissions',
-			);
-
-		} else {
-
-			$status_array = 'low';
-			$status       = array(
-				'text' => __( 'Your wp-config.php and .htaccess files are writeable. This can lead to vulnerabilities. Click here to fix this.', 'better-wp-security' ),
-				'link' => '#itsec_tweaks_server_write_permissions',
-			);
-
-		}
-
-		array_push( $statuses[ $status_array ], $status );
-
-		if ( isset( $this->settings['wlwmanifest_header'] ) && $this->settings['wlwmanifest_header'] === true ) {
-
-			$status_array = 'safe-low';
-			$status       = array(
-				'text' => __( 'Your WordPress installation is not publishing the Windows Live Writer header.', 'better-wp-security' ),
-				'link' => '#itsec_tweaks_server_wlwmanifest_header',
-			);
-
-		} else {
-
-			$status_array = 'low';
-			$status       = array(
-				'text' => __( 'Your WordPress installation is publishing the Windows Live Writer header. Click here to fix this.', 'better-wp-security' ),
-				'link' => '#itsec_tweaks_server_wlwmanifest_header',
-			);
-
-		}
-
-		array_push( $statuses[ $status_array ], $status );
-
-		if ( isset( $this->settings['edituri_header'] ) && $this->settings['edituri_header'] === true ) {
-
-			$status_array = 'safe-low';
-			$status       = array(
-				'text' => __( 'Your WordPress installation is not publishing the Really Simple Discovery (RSD) header.', 'better-wp-security' ),
-				'link' => '#itsec_tweaks_server_edituri_header',
-			);
-
-		} else {
-
-			$status_array = 'low';
-			$status       = array(
-				'text' => __( 'Your WordPress installation is publishing the Really Simple Discovery (RSD) header. Click here to fix this.', 'better-wp-security' ),
-				'link' => '#itsec_tweaks_server_edituri_header',
-			);
-
-		}
-
-		array_push( $statuses[ $status_array ], $status );
-
-		if ( is_multisite() ) {
-
-			if ( isset( $this->settings['theme_updates'] ) && $this->settings['theme_updates'] === true ) {
-
-				$status_array = 'safe-medium';
-				$status       = array(
-					'text' => __( 'Your WordPress installation is not telling users who cannot update themes about theme updates.', 'better-wp-security' ),
-					'link' => '#itsec_tweaks_server_theme_updates',
-				);
-
-			} else {
-
-				$status_array = 'medium';
-				$status       = array(
-					'text' => __( 'Your WordPress installation is telling users who cannot update themes about theme updates. Click here to fix this.', 'better-wp-security' ),
-					'link' => '#itsec_tweaks_server_theme_updates',
-				);
-
-			}
-
-			array_push( $statuses[ $status_array ], $status );
-
-			if ( isset( $this->settings['plugin_updates'] ) && $this->settings['plugin_updates'] === true ) {
-
-				$status_array = 'safe-medium';
-				$status       = array(
-					'text' => __( 'Your WordPress installation is not telling users who cannot update plugins about plugin updates.', 'better-wp-security' ),
-					'link' => '#itsec_tweaks_server_plugin_updates',
-				);
-
-			} else {
-
-				$status_array = 'medium';
-				$status       = array(
-					'text' => __( 'Your WordPress installation is telling users who cannot update plugins about plugin updates. Click here to fix this.', 'better-wp-security' ),
-					'link' => '#itsec_tweaks_server_plugin_updates',
-				);
-
-			}
-
-			array_push( $statuses[ $status_array ], $status );
-
-			if ( isset( $this->settings['core_updates'] ) && $this->settings['core_updates'] === true ) {
-
-				$status_array = 'safe-medium';
-				$status       = array(
-					'text' => __( 'Your WordPress installation is not telling users who cannot update WordPress core about WordPress core updates.', 'better-wp-security' ),
-					'link' => '#itsec_tweaks_server_core_updates',
-				);
-
-			} else {
-
-				$status_array = 'medium';
-				$status       = array(
-					'text' => __( 'Your WordPress installation is telling users who cannot update WordPress core about WordPress core updates. Click here to fix this.', 'better-wp-security' ),
-					'link' => '#itsec_tweaks_server_core_updates',
-				);
-
-			}
-
-			array_push( $statuses[ $status_array ], $status );
-
-		}
-
-		if ( isset( $this->settings['comment_spam'] ) && $this->settings['comment_spam'] === true ) {
-
-			$status_array = 'safe-medium';
-			$status       = array(
-				'text' => __( 'Your WordPress installation is not allowing users without a user agent to post comments.', 'better-wp-security' ),
-				'link' => '#itsec_tweaks_server_comment_spam',
-			);
-
-		} else {
-
-			$status_array = 'medium';
-			$status       = array(
-				'text' => __( 'Your WordPress installation is allowing users without a user agent to post comments. Fix this to reduce comment spam.', 'better-wp-security' ),
-				'link' => '#itsec_tweaks_server_comment_spam',
-			);
-
-		}
-
-		array_push( $statuses[ $status_array ], $status );
-
-		if ( isset( $this->settings['file_editor'] ) && $this->settings['file_editor'] === true ) {
-
-			$status_array = 'safe-low';
-			$status       = array(
-				'text' => __( 'Users cannot edit plugin and themes files directly from within the WordPress Dashboard.', 'better-wp-security' ),
-				'link' => '#itsec_tweaks_server_file_editor',
-			);
-
-		} else {
-
-			$status_array = 'low';
-			$status       = array(
-				'text' => __( 'Users can edit plugin and themes files directly from within the WordPress Dashboard. Click here to fix this.', 'better-wp-security' ),
-				'link' => '#itsec_tweaks_server_file_editor',
-			);
-
-		}
-
-		array_push( $statuses[ $status_array ], $status );
-
-		if ( isset( $this->settings['disable_xmlrpc'] ) && $this->settings['disable_xmlrpc'] === 2 ) {
-
-			$status_array = 'safe-low';
-			$status       = array(
-				'text' => __( 'XML-RPC is not available on your WordPress installation.', 'better-wp-security' ),
-				'link' => '#itsec_tweaks_server_disable_xmlrpc',
-			);
-
-		} elseif ( isset( $this->settings['disable_xmlrpc'] ) && $this->settings['disable_xmlrpc'] === 1 ) {
-
-			$status_array = 'low';
-			$status       = array(
-				'text' => __( 'XML-RPC is protecting you from the trackback and pingback attack but is still available on your site.', 'better-wp-security' ),
-				'link' => '#itsec_tweaks_server_disable_xmlrpc',
-			);
-
-		} else {
-
-			$status_array = 'medium';
-			$status       = array(
-				'text' => __( 'XML-RPC is available on your WordPress installation. Attackers can use this feature to attack your site. Click here to disable access to XML-RPC.', 'better-wp-security' ),
-				'link' => '#itsec_tweaks_server_disable_xmlrpc',
-			);
-
-		}
-
-		array_push( $statuses[ $status_array ], $status );
-
-		if ( ! isset( $this->settings['allow_xmlrpc_multiauth'] ) || true === $this->settings['allow_xmlrpc_multiauth'] ) {
-			$status_array = 'high';
-			$status       = array(
-				'text' => __( 'XML-RPC requests can try multiple authentication attempts per request. Attackers can use this to speed up their brute force attacks.', 'better-wp-security' ),
-				'link' => '#itsec_tweaks_server_allow_xmlrpc_multiauth',
-			);
-		} else {
-			$status_array = 'safe-high';
-			$status       = array(
-				'text' => __( 'XML-RPC requests with multiple authentication attempts are blocked.', 'better-wp-security' ),
-				'link' => '#itsec_tweaks_server_allow_xmlrpc_multiauth',
-			);
-		}
-		
-		array_push( $statuses[ $status_array ], $status );
-
-		if ( isset( $this->settings['uploads_php'] ) && $this->settings['uploads_php'] === true ) {
-
-			$status_array = 'safe-medium';
-			$status       = array(
-				'text' => __( 'Users cannot execute PHP from the uploads folder.', 'better-wp-security' ),
-				'link' => '#itsec_tweaks_server_uploads_php',
-			);
-
-		} else {
-
-			$status_array = 'medium';
-			$status       = array(
-				'text' => __( 'Users can execute PHP from the uploads folder.', 'better-wp-security' ),
-				'link' => '#itsec_tweaks_server_uploads_php',
-			);
-
-		}
-
-		array_push( $statuses[ $status_array ], $status );
-
-		$safe_jquery = ITSEC_Lib::safe_jquery_version();
-
-		if ( $safe_jquery === true ) {
-
-			$status_array = 'safe-high';
-			$status       = array(
-				'text' => __( 'The front page of your site is using a safe version of jQuery.', 'better-wp-security' ),
-				'link' => '#itsec_tweaks_wordpress_safe_jquery',
-			);
-
-		} elseif ( $safe_jquery === false ) {
-
-			$status_array = 'high';
-			$status       = array(
-				'text' => __( 'The front page of your site is not using a safe version of jQuery or the version of jQuery cannot be determined.', 'better-wp-security' ),
-				'link' => '#itsec_tweaks_wordpress_safe_jquery',
-			);
-
-		} else {
-
-			$status_array = 'low';
-			$status       = array(
-				'text' => __( 'Your version of jQuery has not been determined. Load your homepage while logged in to determine the version of jQuery you are using', 'better-wp-security' ),
-				'link' => '#itsec_tweaks_wordpress_safe_jquery',
-			);
-
-		}
-
-		array_push( $statuses[ $status_array ], $status );
-
-		if ( isset( $this->settings['force_unique_nicename'] ) && $this->settings['force_unique_nicename'] === true ) {
-
-			$status_array = 'safe-high';
-			$status       = array(
-				'text' => __( "User's nicknames are different from their display name.", 'better-wp-security' ),
-				'link' => '#itsec_tweaks_server_force_unique_nicename',
-			);
-
-		} else {
-
-			$status_array = 'high';
-			$status       = array(
-				'text' => __( "User nicknames may be the same as their login name. This means their login user name may be publicly available throughout the site.", 'better-wp-security' ),
-				'link' => '#itsec_tweaks_server_force_unique_nicename',
-			);
-
-		}
-
-		array_push( $statuses[ $status_array ], $status );
-
-		if ( isset( $this->settings['login_errors'] ) && $this->settings['login_errors'] === true ) {
-
-			$status_array = 'safe-low';
-			$status       = array(
-				'text' => __( 'Your login page is not giving out unnecessary information upon failed login.', 'better-wp-security' ),
-				'link' => '#itsec_tweaks_server_login_errors',
-			);
-
-		} else {
-
-			$status_array = 'low';
-			$status       = array(
-				'text' => __( 'Your login page is giving out unnecessary information upon failed login.', 'better-wp-security' ),
-				'link' => '#itsec_tweaks_server_login_errors',
-			);
-
-		}
-
-		array_push( $statuses[ $status_array ], $status );
-
-		if ( isset( $this->settings['disable_unused_author_pages'] ) && $this->settings['disable_unused_author_pages'] === true ) {
-
-			$status_array = 'safe-medium';
-			$status       = array(
-				'text' => __( 'User profiles for users without content are not publicly available.', 'better-wp-security' ),
-				'link' => '#itsec_tweaks_server_disable_unused_author_pages',
-			);
-
-		} else {
-
-			$status_array = 'medium';
-			$status       = array(
-				'text' => __( 'User profiles for users without content are publicly available. This can make it relatively easy to gain the username of important users.', 'better-wp-security' ),
-				'link' => '#itsec_tweaks_server_disable_unused_author_pages',
-			);
-
-		}
-
-		array_push( $statuses[ $status_array ], $status );
-
-		return $statuses;
-
 	}
 
 	/**
@@ -1701,56 +1244,6 @@ class ITSEC_Tweaks_Admin {
 	}
 
 	/**
-	 * Register one-click settings
-	 *
-	 * @since 4.0
-	 *
-	 * @param array $one_click_settings array of one-click settings
-	 *
-	 * @return array array of one-click settings
-	 */
-	public function one_click_settings( $one_click_settings ) {
-
-		$one_click_settings['itsec_tweaks'][] = array(
-			'option' => 'wlwmanifest_header',
-			'value'  => 1,
-		);
-
-		$one_click_settings['itsec_tweaks'][] = array(
-			'option' => 'theme_updates',
-			'value'  => 1,
-		);
-
-		$one_click_settings['itsec_tweaks'][] = array(
-			'option' => 'plugin_updates',
-			'value'  => 1,
-		);
-
-		$one_click_settings['itsec_tweaks'][] = array(
-			'option' => 'core_updates',
-			'value'  => 1,
-		);
-
-		$one_click_settings['itsec_tweaks'][] = array(
-			'option' => 'login_errors',
-			'value'  => 1,
-		);
-
-		$one_click_settings['itsec_tweaks'][] = array(
-			'option' => 'force_unique_nicename',
-			'value'  => 1,
-		);
-
-		$one_click_settings['itsec_tweaks'][] = array(
-			'option' => 'disable_unused_author_pages',
-			'value'  => 1,
-		);
-
-		return $one_click_settings;
-
-	}
-
-	/**
 	 * Register ban users for file writer
 	 *
 	 * @param  array $file_modules array of file writer modules
@@ -1833,24 +1326,24 @@ class ITSEC_Tweaks_Admin {
 		if ( $input['write_permissions'] === true ) {
 			// Always set permissions to 0444 when saving the settings.
 			// This ensures that the file permissions are fixed each time the settings are saved.
-			
+
 			$new_permissions = 0444;
 		} else if ( $input['write_permissions'] !== $this->settings['write_permissions'] ) {
 			// Only revert the settings to the defaults when disabling the setting.
 			// This avoids changing the file permissions when the setting has yet to be enabled and disabled.
-			
+
 			$new_permissions = 0664;
 		}
-		
+
 		if ( isset( $new_permissions ) ) {
 			// Only change the permissions when needed.
-			
+
 			require_once( trailingslashit( $GLOBALS['itsec_globals']['plugin_dir'] ) . 'core/lib/class-itsec-lib-config-file.php' );
 			require_once( trailingslashit( $GLOBALS['itsec_globals']['plugin_dir'] ) . 'core/lib/class-itsec-lib-file.php' );
-			
+
 			$server_config_file = ITSEC_Lib_Config_File::get_server_config_file_path();
 			$wp_config_file = ITSEC_Lib_Config_File::get_wp_config_file_path();
-			
+
 			ITSEC_Lib_File::chmod( $server_config_file, $new_permissions );
 			ITSEC_Lib_File::chmod( $wp_config_file, $new_permissions );
 		}

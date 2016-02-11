@@ -58,7 +58,6 @@ class ITSEC_Salts_Admin {
 		$this->settings    = false;
 
 		add_action( 'itsec_add_admin_meta_boxes', array( $this, 'itsec_add_admin_meta_boxes' ) ); //add meta boxes to admin page
-		add_filter( 'itsec_add_dashboard_status', array( $this, 'itsec_add_dashboard_status' ) ); //add information for plugin status
 		add_filter( 'itsec_tracking_vars', array( $this, 'itsec_tracking_vars' ) ); //Usage information tracked via Google Analytics (opt-in)
 
 		if ( ! empty( $_POST ) ) {
@@ -86,56 +85,6 @@ class ITSEC_Salts_Admin {
 			'advanced',
 			'core'
 		);
-
-	}
-
-	/**
-	 * Sets the status in the plugin dashboard
-	 *
-	 * Sets a low priority item for the module's functionality in the plugin
-	 * dashboard.
-	 *
-	 * @since 4.6.0
-	 *
-	 * @param array $statuses array of existing plugin dashboard statuses
-	 *
-	 * @return array statuses
-	 */
-	public function itsec_add_dashboard_status( $statuses ) {
-
-		global $itsec_globals;
-
-		$last_update = get_site_option( 'itsec_salts' );
-
-		if ( false === $last_update ) {
-
-			$status_array = 'low';
-			$status       = array(
-				'text' => __( 'Your WordPress Salts have not been changed. You should change them now.', 'better-wp-security' ),
-				'link' => '#itsec_enable_salts', 'advanced' => true,
-			);
-
-		} elseif ( absint( $last_update ) < ( $itsec_globals['current_time_gmt'] - ( 30 * 24 * 60 * 60 ) ) ) {
-
-			$status_array = 'low';
-			$status       = array(
-				'text' => __( 'Your WordPress Salts have not been changed 30 days. You should change them now.', 'better-wp-security' ),
-				'link' => '#itsec_enable_salts', 'advanced' => true,
-			);
-
-		} else {
-
-			$status_array = 'safe-low';
-			$status       = array(
-				'text' => __( 'You have recently changed your WordPress Salts.', 'better-wp-security' ),
-				'link' => '#itsec_enable_salts', 'advanced' => true,
-			);
-
-		}
-
-		array_push( $statuses[$status_array], $status );
-
-		return $statuses;
 
 	}
 
@@ -260,12 +209,12 @@ class ITSEC_Salts_Admin {
 	protected function get_salt() {
 		$characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789`~!@#$%^&*()-_=+[]{}|;:<>,./? ';
 		$salt = '';
-		
+
 		for ( $count = 0; $count < 64; $count++ ) {
 			$character_index = rand( 0, strlen( $characters ) - 1 );
 			$salt .= $characters[$character_index];
 		}
-		
+
 		return $salt;
 	}
 
@@ -276,15 +225,15 @@ class ITSEC_Salts_Admin {
 	 */
 	public function process_salts() {
 		global $itsec_globals;
-		
-		
+
+
 		require_once( trailingslashit( $GLOBALS['itsec_globals']['plugin_dir'] ) . 'core/lib/class-itsec-lib-config-file.php' );
 		require_once( trailingslashit( $GLOBALS['itsec_globals']['plugin_dir'] ) . 'core/lib/class-itsec-lib-file.php' );
-		
+
 		$config_file_path = ITSEC_Lib_Config_File::get_wp_config_file_path();
 		$config = ITSEC_Lib_File::read( $config_file_path );
 		$error = '';
-		
+
 		if ( is_wp_error( $config ) ) {
 			$error = sprintf( __( 'Unable to read the <code>wp-config.php</code> file in order to update the salts. Error details as follows: %1$s (%2$s)', 'better-wp-security' ), $config->get_error_message(), $config->get_error_code() );
 		} else {
@@ -298,22 +247,22 @@ class ITSEC_Salts_Admin {
 				'LOGGED_IN_SALT',
 				'NONCE_SALT',
 			);
-			
+
 			foreach ( $defines as $define ) {
 				$new_salt = $this->get_salt();
 				$new_salt = str_replace( '$', '\\$', $new_salt );
-				
+
 				$regex = "/(define\s*\(\s*(['\"])$define\\2\s*,\s*)(['\"]).+?\\3(\s*\)\s*;)/";
 				$config = preg_replace( $regex, "\${1}'$new_salt'\${4}", $config );
 			}
-			
+
 			$write_result = ITSEC_Lib_File::write( $config_file_path, $config );
-			
+
 			if ( is_wp_error( $write_result ) ) {
 				$error = sprintf( __( 'Unable to update the <code>wp-config.php</code> file in order to update the salts. Error details as follows: %1$s (%2$s)', 'better-wp-security' ), $config->get_error_message(), $config->get_error_code() );
 			}
 		}
-		
+
 		if ( ! empty( $error ) ) {
 			add_settings_error( 'itsec', esc_attr( 'settings_updated' ), $error, 'error' );
 			add_site_option( 'itsec_manual_update', true );
@@ -355,4 +304,3 @@ class ITSEC_Salts_Admin {
 	}
 
 }
-

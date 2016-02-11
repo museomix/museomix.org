@@ -92,7 +92,15 @@ class ITSEC_Ban_Users {
 					$ip_min = ip2long( $ip_range[0] );
 					$ip_max = ip2long( $ip_range[1] );
 
-					if ( ( $check_min < $ip_min && $ip_min < $check_max ) || ( $check_min < $ip_max && $ip_max < $check_max ) ) {
+					/**
+					 * Checks cover the following scenarios:
+					 *  - min-a, min-b, max-a, max-b : min-b is in a range and min-a is in b range
+					 *  - min-b, min-a, max-b, max-a : max-b is in a range and max-a is in b range
+					 *  - min-a, min-b, max-b, max-a : range b is encapsulated by range a
+					 *  - min-b, min-a, max-a, max-b : range a is encapsulated by range b
+					 */
+					if ( ( $check_min <= $ip_min && $ip_min <= $check_max ) || ( $check_min <= $ip_max && $ip_max <= $check_max ) ||
+					     ( $ip_min <= $check_min && $check_min <= $ip_max ) || ( $ip_min <= $check_max && $check_max <= $ip_max ) ) {
 						return true;
 					}
 
@@ -100,7 +108,7 @@ class ITSEC_Ban_Users {
 
 					$ip = ip2long( $ip_range[0] );
 
-					if ( $check_min < $ip && $ip < $check_max ) {
+					if ( $check_min <= $ip && $ip <= $check_max ) {
 						return true;
 					}
 
@@ -115,7 +123,7 @@ class ITSEC_Ban_Users {
 					$ip_min = ip2long( $ip_range[0] );
 					$ip_max = ip2long( $ip_range[1] );
 
-					if ( $ip_min < $check && $check < $ip_max ) {
+					if ( $ip_min <= $check && $check <= $ip_max ) {
 						return true;
 					}
 

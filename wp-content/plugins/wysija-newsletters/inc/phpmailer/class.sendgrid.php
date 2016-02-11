@@ -21,7 +21,7 @@ class acymailingSendgrid {
 	 * First, we do the test if we have enough credit to send emails.
 	 */
 	function sendMail(& $object) {
-            $url = 'http://sendgrid.com/';
+            $url = 'https://api.sendgrid.com';
 
             $to = array_merge(array($object->to[0][0]), $object->cc, $object->bcc);
             /*foreach($to as $oneRecipient){
@@ -64,7 +64,7 @@ class acymailingSendgrid {
 
 
             $params['headers']=json_encode($header);
-            $request = $url.'api/mail.send.json';
+            $request = $url.'/api/mail.send.json';
 
             // Generate curl request
             $session = curl_init($request);

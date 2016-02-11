@@ -42,7 +42,6 @@ body {
 
 
 .container-fluid {
-    /*  padding-left: 20px;  */
     width: 100%;
     *zoom: 1;
 }
@@ -188,7 +187,6 @@ body {
 
 .container-fluid label {
     display: block;
-    /*font-size: 1.2em;*/
     padding: 7px 10px;
 }
 
@@ -232,8 +230,6 @@ td.plugintype {
     padding: 10px;
     background: #222222;
     border-color: #D2E3EB;
-    /*border-top-left-radius: 5px;
-    border-top-right-radius: 5px; */
     font-weight: normal;
     font-size: 1.5em;
     color: #ffffff;
@@ -257,7 +253,6 @@ td.plugintype {
 .manager-content {
     height: auto;
     margin-top: -12px;
-    /*border: 1px solid #2e8965;*/
     border: 1px solid #dddddd;
     border-top: 1px solid #333333;
 }
@@ -300,7 +295,6 @@ td.plugintype {
 }
 
 .form-group label {
-    /* margin-top:8px; */
     margin-top: 0px;
     -webkit-margin-start: 8px;
     -webkit-margin-end: 0px;
@@ -315,7 +309,6 @@ td.plugintype {
 }
 
 .importstatus span {
-    /*margin-top:15px;*/
     padding: 0 5px;
 }
 

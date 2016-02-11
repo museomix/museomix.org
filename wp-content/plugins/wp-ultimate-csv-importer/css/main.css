@@ -85,7 +85,6 @@ margin-top:-45px;
     background: #222222;
     border: 1px solid #333333;
     margin-top: -10px;
-    /*text-transform:uppercase;  */
 }
 
 #accordion h3:hover {
@@ -135,8 +134,6 @@ margin-top:-45px;
     -webkit-padding-start: 15px;
     border: 1px solid #333333;
     color: #000;
-    /*text-transform:uppercase; */
-    /*background: #F7F7F7 url(../images/tabbg2.gif) repeat-x 0 0;*/
     background: #222222;
     border-radius: 3px 3px 0 0;
     outline: none;
@@ -152,15 +149,11 @@ margin-top:-45px;
 }
 
 .csv-top-navigation-wrapper li:hover {
-    /*background:White url(../images/tabbg.gif) repeat-x 0 0;*/
     background: #333333;
 }
 
 .csv-top-navigation-wrapper li.selected {
-    /*background:White url(../images/tabbg.gif) repeat-x 0 0;*/
-    /*font-weight: bold;*/
     background: #0074A2;
-    /*text-transform:uppercase;*/
 }
 
 .csv-top-navigation-wrapper li.selected a:hover {
@@ -189,7 +182,6 @@ margin-top:-45px;
 }
 
 .importfile {
-    /* height : 300px; */
 }
 
 .uploadlabel {
@@ -203,7 +195,6 @@ margin-top:-45px;
 }
 
 .progress {
-    /*margin:10px 10px 0px 15px; */
     width: 90%;
     float: right;
     margin-top: 5px;
@@ -363,7 +354,6 @@ margin-top:-45px;
     background: #222;
     border: 1px solid #CCC;
     margin-top: -13px;
-    /*text-transform:uppercase; */
     -webkit-margin-before: 1em;
     -webkit-margin-after: 1em;
     -webkit-margin-start: 0px;
@@ -489,7 +479,6 @@ a.tooltip span {
 }
 
 .clear_mapping {
-    /*margin-left:25px;*/
 }
 
 .maperror {
@@ -532,7 +521,6 @@ a.tooltip span {
     border-radius: 4px;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
-    /* top:190px; */
     position: relative;
 }
 
@@ -545,7 +533,6 @@ a.tooltip span {
 }
 
 .left_align {
-    /*padding-left: 15px;*/
 }
 
 .table-importer {
@@ -622,9 +609,6 @@ a.tooltip span {
 }
 
 .plugintags a {
-    /*background-color: #767676;
-    border-radius: 0 2px 2px 0;
-    color: #fff;  */
     display: inline-block;
     font-size: 11px;
     font-weight: 700;
@@ -632,14 +616,10 @@ a.tooltip span {
     margin: 2px 4px 2px 10px;
     padding: 3px 7px;
     position: relative;
-    /*text-transform: uppercase; */
     text-decoration: none;
 }
 
 .plugintags a:before {
-    /*border-top: 10px solid transparent;
-    border-right: 8px solid #767676;
-    border-bottom: 10px solid transparent;  */
     content: "";
     height: 0;
     position: absolute;
@@ -660,10 +640,6 @@ a.tooltip span {
 }
 
 .plugintags a:hover {
-    /*background: #2ea2cc;
-    color: #fff;
-    text-shadow: none;
-    */
 }
 
 .moreMenuList {

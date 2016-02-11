@@ -17,7 +17,6 @@ class ITSEC_Ban_Users_Admin {
 		add_action( 'itsec_add_admin_meta_boxes', array( $this, 'add_admin_meta_boxes' ) ); //add meta boxes to admin page
 		add_action( 'itsec_admin_init', array( $this, 'initialize_admin' ) ); //initialize admin area
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_script' ) ); //enqueue scripts for admin page
-		add_filter( 'itsec_add_dashboard_status', array( $this, 'dashboard_status' ) ); //add information for plugin status
 		add_filter( 'itsec_tracking_vars', array( $this, 'tracking_vars' ) );
 
 		//manually save options on multisite
@@ -193,53 +192,53 @@ class ITSEC_Ban_Users_Admin {
 		$modification .= $this->get_server_config_default_blacklist_rules( 'apache' );
 		$modification .= $this->get_server_config_ban_hosts_rules( 'apache' );
 		$modification .= $this->get_server_config_ban_user_agents_rules( 'apache' );
-		
+
 		return $modification;
 	}
-	
+
 	public function filter_nginx_server_config_modification( $modification ) {
 		$modification .= $this->get_server_config_default_blacklist_rules( 'nginx' );
 		$modification .= $this->get_server_config_ban_hosts_rules( 'nginx' );
 		$modification .= $this->get_server_config_ban_user_agents_rules( 'nginx' );
-		
+
 		return $modification;
 	}
-	
+
 	public function filter_litespeed_server_config_modification( $modification ) {
 		$modification .= $this->get_server_config_default_blacklist_rules( 'litespeed' );
 		$modification .= $this->get_server_config_ban_hosts_rules( 'litespeed' );
 		$modification .= $this->get_server_config_ban_user_agents_rules( 'litespeed' );
-		
+
 		return $modification;
 	}
-	
+
 	protected function get_server_config_default_blacklist_rules( $server_type ) {
 		if ( true !== $this->settings['default'] ) {
 			return '';
 		}
-		
-		
+
+
 		$rules = '';
-		
+
 		require_once( trailingslashit( $GLOBALS['itsec_globals']['plugin_dir'] ) . 'core/lib/class-itsec-lib-file.php' );
-		
+
 		$file = plugin_dir_path( __FILE__ ) . "lists/hackrepair-$server_type.inc";
-		
+
 		if ( ITSEC_Lib_File::is_file( $file ) ) {
 			$default_list = ITSEC_Lib_File::read( $file );
-			
+
 			if ( ! empty( $default_list ) ) {
 				$default_list = preg_replace( '/^/m', "\t", $default_list );
-				
+
 				$rules .= "\n";
 				$rules .= "\t# " . __( 'Enable HackRepair.com\'s blacklist feature - Security > Settings > Banned Users > Default Blacklist', 'better-wp-security' ) . "\n";
 				$rules .= $default_list;
 			}
 		}
-		
+
 		return $rules;
 	}
-	
+
 	protected function get_server_config_ban_hosts_rules( $server_type ) {
 		if ( true !== $this->settings['enabled']  ) {
 			return '';
@@ -247,65 +246,65 @@ class ITSEC_Ban_Users_Admin {
 		if ( ! is_array( $this->settings['host_list'] ) || empty( $this->settings['host_list'] ) ) {
 			return '';
 		}
-		
-		
-		
+
+
+
 		if ( ! class_exists( 'ITSEC_Ban_Users' ) ) {
 			require( dirname( __FILE__ ) . '/class-itsec-ban-users.php' );
 		}
-		
-		
+
+
 		$host_rules = '';
 		$set_env_rules = '';
 		$deny_rules = '';
 		$require_rules = '';
-		
+
 		// process hosts list
 		foreach ( $this->settings['host_list'] as $host ) {
 			$host = ITSEC_Lib::ip_wild_to_mask( $host );
 			$host = trim( $host );
-			
+
 			if ( empty( $host ) ) {
 				continue;
 			}
-			
+
 			if ( ITSEC_Ban_Users::is_ip_whitelisted( $host ) ) {
 				/**
 				 * @todo warn the user the ip to be banned is whitelisted
 				 */
 				continue;
 			}
-			
-			
+
+
 			if ( in_array( $server_type, array( 'apache', 'litespeed' ) ) ) {
 				$converted_host = ITSEC_Lib::ip_mask_to_range( $host );
 				$converted_host = trim( $converted_host );
-				
+
 				if ( empty( $converted_host ) ) {
 					continue;
 				}
-				
-				
+
+
 				$set_env_host = str_replace( '.', '\\.', $converted_host );
-				
+
 				$set_env_rules .= "\tSetEnvIF REMOTE_ADDR \"^$set_env_host$\" DenyAccess\n"; // Ban IP
 				$set_env_rules .= "\tSetEnvIF X-FORWARDED-FOR \"^$set_env_host$\" DenyAccess\n"; // Ban IP from a proxy
 				$set_env_rules .= "\tSetEnvIF X-CLUSTER-CLIENT-IP \"^$set_env_host$\" DenyAccess\n"; // Ban IP from a load balancer
 				$set_env_rules .= "\n";
-				
-				
+
+
 				$require_host = str_replace( '.[0-9]+', '', $converted_host );
-				
+
 				$require_rules .= "\t\t\tRequire not ip $require_host\n";
 				$deny_rules .= "\t\tDeny from $require_host\n";
 			} else if ( 'nginx' === $server_type ) {
 				$host_rules .= "\tdeny $host;\n";
 			}
 		}
-		
-		
+
+
 		$rules = '';
-		
+
 		if ( 'apache' === $server_type ) {
 			if ( ! empty( $set_env_rules ) ) {
 				$rules .= "\n";
@@ -344,10 +343,10 @@ class ITSEC_Ban_Users_Admin {
 				$rules .= $host_rules;
 			}
 		}
-		
+
 		return $rules;
 	}
-	
+
 	protected function get_server_config_ban_user_agents_rules( $server_type ) {
 		if ( true !== $this->settings['enabled']  ) {
 			return '';
@@ -355,21 +354,21 @@ class ITSEC_Ban_Users_Admin {
 		if ( ! is_array( $this->settings['agent_list'] ) || empty( $this->settings['agent_list'] ) ) {
 			return '';
 		}
-		
-		
+
+
 		$agent_rules = '';
 		$rewrite_rules = '';
-		
+
 		foreach ( $this->settings['agent_list'] as $index => $agent ) {
 			$agent = trim( $agent );
-			
+
 			if ( empty( $agent ) ) {
 				continue;
 			}
-			
-			
+
+
 			$agent = preg_quote( $agent );
-			
+
 			if ( in_array( $server_type, array( 'apache', 'litespeed' ) ) ) {
 				$agent = str_replace( ' ', '\\ ', $agent );
 				$rewrite_rules .= "\t\tRewriteCond %{HTTP_USER_AGENT} ^$agent [NC,OR]\n";
@@ -378,60 +377,27 @@ class ITSEC_Ban_Users_Admin {
 				$agent_rules .= "if (\$http_user_agent ~* \"^$agent\") { return 403; }\n";
 			}
 		}
-		
+
 		if ( in_array( $server_type, array( 'apache', 'litespeed' ) ) && ! empty( $rewrite_rules ) ) {
 			$rewrite_rules = preg_replace( "/\[NC,OR\]\n$/", "[NC]\n", $rewrite_rules );
-			
+
 			$agent_rules .= "\t<IfModule mod_rewrite.c>\n";
 			$agent_rules .= "\t\tRewriteEngine On\n";
 			$agent_rules .= $rewrite_rules;
 			$agent_rules .= "\t\tRewriteRule ^.* - [F]\n";
 			$agent_rules .= "\t</IfModule>\n";
 		}
-		
-		
+
+
 		$rules = '';
-		
+
 		if ( ! empty( $agent_rules ) ) {
 			$rules .= "\n";
 			$rules .= "\t# " . __( 'Ban User Agents - Security > Settings > Banned Users', 'better-wp-security' ) . "\n";
 			$rules .= $agent_rules;
 		}
-		
+
 		return $rules;
-	}
-
-	/**
-	 * Sets the status in the plugin dashboard
-	 *
-	 * @since 4.0
-	 *
-	 * @return array statuses
-	 */
-	public function dashboard_status( $statuses ) {
-
-		if ( $this->settings['enabled'] === true ) {
-
-			$status_array = 'safe-low';
-			$status       = array(
-				'text' => __( 'You are blocking known bad hosts and agents with the ban users tool.', 'better-wp-security' ),
-				'link' => '#itsec_ban_users_enabled',
-			);
-
-		} else {
-
-			$status_array = 'low';
-			$status       = array(
-				'text' => __( 'You are not blocking any users that are known to be a problem. Consider turning on the Ban Users feature.', 'better-wp-security' ),
-				'link' => '#itsec_ban_users_enabled',
-			);
-
-		}
-
-		array_push( $statuses[$status_array], $status );
-
-		return $statuses;
-
 	}
 
 	/**
@@ -581,7 +547,7 @@ class ITSEC_Ban_Users_Admin {
 
 		foreach ( $agents as $agent ) {
 			$agent = trim( sanitize_text_field( $agent ) );
-			
+
 			if ( ! empty( $agent ) ) {
 				$good_agents[] = $agent;
 			}
@@ -601,26 +567,26 @@ class ITSEC_Ban_Users_Admin {
 		if ( ! class_exists( 'ITSEC_Ban_Users' ) ) {
 			require( dirname( __FILE__ ) . '/class-itsec-ban-users.php' );
 		}
-		
+
 		$bad_ips   = array();
 		$white_ips = array();
 		$raw_ips   = array();
-		
+
 		foreach ( $addresses as $index => $address ) {
 			$address = trim( $address );
-			
+
 			if ( empty( $address ) ) {
 				continue;
 			}
-			
+
 			if ( ! ITSEC_Lib::validates_ip_address( $address ) ) {
 				$bad_ips[] = trim( filter_var( $address, FILTER_SANITIZE_STRING ) );
 			}
-			
+
 			if ( ITSEC_Ban_Users::is_ip_whitelisted( $address, null, true ) ) {
 				$white_ips[] = trim( filter_var( $address, FILTER_SANITIZE_STRING ) );
 			}
-			
+
 			$raw_ips[] = trim( filter_var( $address, FILTER_SANITIZE_STRING ) );
 		}
 

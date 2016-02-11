@@ -319,15 +319,6 @@ html {
     font-size: 62.5%;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
-
-/*body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  line-height: 1.428571429;
-  color: #333333;
-  background-color: #ffffff;
-}*/
-
 input,
 button,
 select,
@@ -833,19 +824,16 @@ pre code {
 
 @media (min-width: 768px) {
     .container {
-        /*    width: 750px; */
     }
 }
 
 @media (min-width: 992px) {
     .container {
-        /*  width: 970px; */
     }
 }
 
 @media (min-width: 1200px) {
     .container {
-        /*  width: 1170px;*/
     }
 }
 
@@ -1821,7 +1809,6 @@ th {
 
 .table {
     width: 100%;
-    /*  margin-bottom: 20px;*/
 }
 
 .table > thead > tr > th,
@@ -1882,7 +1869,6 @@ th {
 
 .table-bordered > thead > tr > th,
 .table-bordered > thead > tr > td {
-    /*  border-bottom-width: 2px;*/
 }
 
 .table-striped > tbody > tr:nth-child(odd) > td,
@@ -2054,7 +2040,6 @@ legend {
 label {
     display: inline-block;
     margin-bottom: 5px;
-    /*  font-weight: bold; */
 }
 
 input[type="search"] {
@@ -7453,7 +7438,6 @@ td.visible-print {
 .nav .open > a:focus {
     background-color: #0074A2 !important;
     color: #fff;
-    /* border-color: #428bca; */
 }
 
 .nav .nav-divider {
@@ -7511,7 +7495,6 @@ td.visible-print {
 .pagination {
     display: inline-block;
     padding-left: 0;
-    /*margin: 20px 0;*/
     border-radius: 4px;
 }
 

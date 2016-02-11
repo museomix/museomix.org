@@ -28,15 +28,17 @@ class WYSIJA_control_front_stats extends WYSIJA_control_front{
             if(!empty($WJ_Stats->clicked_url)){
                 // clicked stats
                 $url = $this->encode_url($WJ_Stats->subscriber_clicked());
-                $external_url = htmlentities($WJ_Stats->subscriber_clicked()); // escape HTML characters (that's how URLs are saved in the DB)
-                $external_url = preg_replace('!/?\?utm.*!', '', $external_url); // remove anything that starts with ?utm or /?utm
-                $internal_site_url = htmlentities(get_site_url());
-                $internal_home_url = htmlentities(get_home_url());
+                $external_url_unescaped_and_without_utm = preg_replace('!/?\?utm.*!i', '', $url);
+                $external_url_escaped_and_without_utm = preg_replace('!/?\?utm.*!i', '', htmlentities($WJ_Stats->subscriber_clicked())); // remove anything that starts with ?utm or /?utm
+                $internal_site_url = preg_replace('!https?://!i', '', htmlentities(get_site_url()));
+                $internal_home_url = preg_replace('!https?://!i', '', htmlentities(get_home_url()));
                 $model_email = WYSIJA::get('email', 'model');
                 $email_object = $model_email->getOne(false,array('email_id' => $_REQUEST['email_id']));
-                if (preg_match('/'. preg_quote($external_url, '/') .'/', $email_object['body']) ||
-                    preg_match('/^'. preg_quote($internal_site_url, '/') .'/', $url) ||
-                    preg_match('/^'. preg_quote($internal_home_url, '/') .'/', $url)
+                if (preg_match('!'. preg_quote($external_url_unescaped_and_without_utm, '!') .'!i', $email_object['body']) ||
+                    preg_match('!'. preg_quote($external_url_escaped_and_without_utm, '!') .'!i', $email_object['body']) ||
+                    preg_match('!^https?://'. preg_quote($internal_site_url, '!') .'!i', $url) ||
+                    preg_match('!^https?://'. preg_quote($internal_home_url, '!') .'!i', $url)
+
                 ) {
                     do_action('mpoet_click_stats', $WJ_Stats);
                     $this->redirect($url);

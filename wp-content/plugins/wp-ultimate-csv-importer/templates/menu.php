@@ -51,106 +51,121 @@ if ($impCheckobj != 'true') {
 $post = $page = $custompost = $users = $eshop = $settings = $support = $dashboard = $filemanager = $mappingtemplate = $schedulemapping = $export = '';
 $active_plugins = get_option('active_plugins');
 if(in_array('eshop/eshop.php', $active_plugins)){
-        $eshop = true;
+	$eshop = true;
 }
-        $custompost = true;
+$custompost = true;
 $impCEM = CallWPImporterObj::getInstance();
 $get_settings = array();
 $get_settings = $impCEM->getSettings();
-$mod = isset($_REQUEST['__module']) ? $_REQUEST['__module'] : '';
+$requestedModule = sanitize_text_field($_REQUEST['__module']);
+$requestedAction = isset($_REQUEST['action']) ? sanitize_text_field($_REQUEST['action']) : '' ;
+$mod = isset($requestedModule) ? $requestedModule : '';
 $module = $manager = '';
 if (is_array($get_settings) && !empty($get_settings)) {
 	foreach ($get_settings as $key) {
 		$key = true;
 	}
 }
-if (isset($_POST['post_csv']) && $_POST['post_csv'] == 'Import') {
-	$dashboard = 'activate';
+if (isset($requestedAction) && $requestedAction != '') {
+	$action = $requestedAction;
+	$$action = 'activate';
 } else {
-	if (isset($_REQUEST['action'])) {
-		$action = $_REQUEST['action'];
-
-		$$action = 'activate';
-	} else {
-		if (isset($mod) && !empty($mod)) {
-			$module_array = array('post', 'page', 'custompost', 'users', 'eshop', 'dashboard');
-			foreach ($module_array as $val) {
-				if ($val = $mod) {
-					$$mod = 'activate';
-					if ($mod != 'filemanager' && $mod != 'schedulemapping' && $mod != 'mappingtemplate' && $mod != 'support' && $mod != 'export' && $mod != 'settings' && $mod != 'dashboard') {
-						$module = 'activate';
-						$manager = 'deactivate';
+	if (isset($mod) && !empty($mod)) {
+		$module_array = array('post', 'page', 'custompost', 'users', 'eshop', 'dashboard');
+		if(is_array($module_array) && !empty($module_array)){
+		foreach ($module_array as $val) {
+			if ($val = $mod) {
+				$$mod = 'activate';
+				if ($mod != 'filemanager' && $mod != 'schedulemapping' && $mod != 'mappingtemplate' && $mod != 'support' && $mod != 'export' && $mod != 'settings' && $mod != 'dashboard') {
+					$module = 'activate';
+					$manager = 'deactivate';
+					$dashboard = 'deactivate';
+				} else {
+					if ($mod != 'support' && $mod != 'export' && $mod != 'settings' && $mod != 'dashboard') {
+						$manager = 'activate';
+						$module = 'deactivate';
 						$dashboard = 'deactivate';
 					} else {
-						if ($mod != 'support' && $mod != 'export' && $mod != 'settings' && $mod != 'dashboard') {
-							$manager = 'activate';
+						if ($mod == 'dashboard') {
+							$manager = 'deactivate';
 							$module = 'deactivate';
-							$dashboard = 'deactivate';
-						} else {
-							if ($mod == 'dashboard') {
-								$manager = 'deactivate';
-								$module = 'deactivate';
-							}
 						}
 					}
 				}
 			}
-		} else {
-			if (!isset($_REQUEST['action'])) {
-				$dashboard = 'deactivate';
-			}
+		}
+		}
+	} else {
+		if (!isset($_REQUEST['action'])) {
+			$dashboard = 'deactivate';
 		}
 	}
 }
 $tab_inc = 1;
-
 $menuHTML = "<nav class='navbar navbar-default' role='navigation'>
    <div>
       <ul class='nav navbar-nav'>
-         <li  class = '{$dashboard}' ><a href='admin.php?page=" . WP_CONST_ULTIMATE_CSV_IMP_SLUG . "/index.php&__module=dashboard'  >" . __('Dashboard', 'wp-ultimate-csv-importer') . "</a></li>
-         <li class='dropdown {$module} '>
+         <li class = '".sanitize_html_class($dashboard)."' >";
+$menuHTML .= "<a href='" . esc_url(add_query_arg(array('page' => WP_CONST_ULTIMATE_CSV_IMP_SLUG.'/index.php', '__module' => 'dashboard'), $impObj->baseUrl)) . "'> " . __('Dashboard', 'wp-ultimate-csv-importer') . "</a>";
+$menuHTML .= "</li>
+         <li class='dropdown ".sanitize_html_class($module)."'>
             <a href='#'  data-toggle='dropdown'>
                " . __('Imports', 'wp-ultimate-csv-importer') . "
                <b class='caret'></b>
             </a>
-            <ul class='dropdown-menu'>
-               <li class= '{$post}'><a href= 'admin.php?page=" . WP_CONST_ULTIMATE_CSV_IMP_SLUG . "/index.php&__module=post&step=uploadfile'>" . __('Post', 'wp-ultimate-csv-importer') . "</a></li>
-               <li class = '{$page}'><a href='admin.php?page=" . WP_CONST_ULTIMATE_CSV_IMP_SLUG . "/index.php&__module=page&step=uploadfile'>" . __('Page', 'wp-ultimate-csv-importer') . "</a></li>";
+            <ul class='dropdown-menu'>";
+$menuHTML .= "<li class= '".sanitize_html_class($post)."'>";
+$menuHTML .= "<a href='" . esc_url(add_query_arg(array('page' => WP_CONST_ULTIMATE_CSV_IMP_SLUG.'/index.php', '__module' => 'post', 'step' => 'uploadfile'), $impObj->baseUrl)) . "'> " . __('Post', 'wp-ultimate-csv-importer') . "</a>";
+$menuHTML .= "</li>";
+$menuHTML .= "<li class = '".sanitize_html_class($page)."'>";
+$menuHTML .= "<a href='" . esc_url(add_query_arg(array('page' => WP_CONST_ULTIMATE_CSV_IMP_SLUG.'/index.php', '__module' => 'page', 'step' => 'uploadfile'), $impObj->baseUrl)) . "'> " . __('Page', 'wp-ultimate-csv-importer') . "</a>";
+$menuHTML .= "</li>";
 if ($custompost) {
-               $menuHTML .= "<li class = '{$custompost}'><a href= 'admin.php?page=" . WP_CONST_ULTIMATE_CSV_IMP_SLUG . "/index.php&__module=custompost&step=uploadfile'>" . __('Custom Post', 'wp-ultimate-csv-importer') . "</a></li>";
+	$menuHTML .= "<li class = '".sanitize_html_class($custompost)."'>";
+	$menuHTML .= "<a href='" . esc_url(add_query_arg(array('page' => WP_CONST_ULTIMATE_CSV_IMP_SLUG.'/index.php', '__module' => 'custompost', 'step' => 'uploadfile'), $impObj->baseUrl)) . "'> " . __('Custom Post', 'wp-ultimate-csv-importer') . "</a>";
+	$menuHTML .= "</li>";
 }
-	$menuHTML .= "<li class = '{$users}'><a href='admin.php?page=" . WP_CONST_ULTIMATE_CSV_IMP_SLUG . "/index.php&__module=users&step=uploadfile'>" . __('Users', 'wp-ultimate-csv-importer') . "</a></li>";
+$menuHTML .= "<li class = '".sanitize_html_class($users)."'>";
+$menuHTML .= "<a href='" . esc_url(add_query_arg(array('page' => WP_CONST_ULTIMATE_CSV_IMP_SLUG.'/index.php', '__module' => 'users', 'step' => 'uploadfile'), $impObj->baseUrl)) . "'> " . __('Users', 'wp-ultimate-csv-importer') . "</a>";
+$menuHTML .= "</li>";
 
 if ($eshop) {
-	$menuHTML .= "<li class = '{$eshop}'><a href='admin.php?page=" . WP_CONST_ULTIMATE_CSV_IMP_SLUG . "/index.php&__module=eshop&step=uploadfile'>" . __('Eshop', 'wp-ultimate-csv-importer') . "</a></li>";
+	$menuHTML .= "<li class = '".sanitize_html_class($eshop)."'>";
+	$menuHTML .= "<a href='" . esc_url(add_query_arg(array('page' => WP_CONST_ULTIMATE_CSV_IMP_SLUG.'/index.php', '__module' => 'eshop', 'step' => 'uploadfile'), $impObj->baseUrl)) . "'> " . __('Eshop', 'wp-ultimate-csv-importer') . "</a>";
+	$menuHTML .= "</li>";
 }
 $menuHTML .= "</ul>
-         </li>
-         <li class='dropdown {$manager}'>
-            <a href='#'  data-toggle='dropdown'>
-		" . __('Managers', 'wp-ultimate-csv-importer') . "
-		 <b class='caret'></b>
-	    </a>
-            <ul class='dropdown-menu'>
-               <li class = '{$filemanager}'><a href='admin.php?page=" . WP_CONST_ULTIMATE_CSV_IMP_SLUG . "/index.php&__module=filemanager'>" . __('File Manager', 'wp-ultimate-csv-importer') . "</a></li>
-               <li class = '{$schedulemapping}'><a href='admin.php?page=" . WP_CONST_ULTIMATE_CSV_IMP_SLUG . "/index.php&__module=schedulemapping'>" . __('Smart Scheduler', 'wp-ultimate-csv-importer') . "</a></li>
-               <li class = '{$mappingtemplate}'><a href='admin.php?page=" . WP_CONST_ULTIMATE_CSV_IMP_SLUG . "/index.php&__module=mappingtemplate'>" . __('Templates', 'wp-ultimate-csv-importer') . "</a></li>
-            </ul>
          </li>";
-$menuHTML .= "<li class = '{$export}'><a href='admin.php?page=" . WP_CONST_ULTIMATE_CSV_IMP_SLUG . "/index.php&__module=export'>" . __('Export', 'wp-ultimate-csv-importer') . "</a></li>";
-$menuHTML .= "<li class=  '{$settings}'><a href='admin.php?page=" . WP_CONST_ULTIMATE_CSV_IMP_SLUG . "/index.php&__module=settings'  />" . __('Settings', 'wp-ultimate-csv-importer') . "</a></li>
-         <li class = '{$support}'><a href= 'admin.php?page=" . WP_CONST_ULTIMATE_CSV_IMP_SLUG . "/index.php&__module=support'>" . __('Support', 'wp-ultimate-csv-importer') . "</a></li>
-         
-         <li ><a href='https://www.wpultimatecsvimporter.com?utm_source=WpPlugin&utm_medium=Free&utm_campaign=SupportTraffic' target='_blank'>" . __('Go Pro Now', 'wp-ultimate-csv-importer') . "</a></li>
-         <li ><a href='http://demo.smackcoders.com/demowpthree/wp-admin/admin.php?page=wp-ultimate-csv-importer-pro/index.php&__module=dashboard' target='_blank'>" . __('Try Live Demo Now', 'wp-ultimate-csv-importer') . "</a></li>
+$menuHTML .= "<li class='dropdown ".sanitize_html_class($manager)."'>";
+$menuHTML .= "<a href='#'  data-toggle='dropdown'>" . __('Managers', 'wp-ultimate-csv-importer') . " <b class='caret'></b></a>";
+$menuHTML .= "<ul class='dropdown-menu'>";
+$menuHTML .= "<li class = '".sanitize_html_class($filemanager)."'>";
+$menuHTML .= "<a href='" . esc_url(add_query_arg(array('page' => WP_CONST_ULTIMATE_CSV_IMP_SLUG.'/index.php', '__module' => 'filemanager'), $impObj->baseUrl)) . "'> " . __('File Manager', 'wp-ultimate-csv-importer') . "</a>";
+$menuHTML .= "</li>";
+$menuHTML .= "<li class = '".sanitize_html_class($schedulemapping)."'>";
+$menuHTML .= "<a href='" . esc_url(add_query_arg(array('page' => WP_CONST_ULTIMATE_CSV_IMP_SLUG.'/index.php', '__module' => 'schedulemapping'), $impObj->baseUrl)) . "'> " . __('Smart Scheduler', 'wp-ultimate-csv-importer') . "</a>";
+$menuHTML .= "</li>";
+$menuHTML .= "<li class = '".sanitize_html_class($mappingtemplate)."'>";
+$menuHTML .= "<a href='" . esc_url(add_query_arg(array('page' => WP_CONST_ULTIMATE_CSV_IMP_SLUG.'/index.php', '__module' => 'mappingtemplate'), $impObj->baseUrl)) . "'> " . __('Templates', 'wp-ultimate-csv-importer') . "</a>";
+$menuHTML .= "</li>";
+$menuHTML .= "</ul>
+         </li>";
+$menuHTML .= "<li class = '".sanitize_html_class($export)."'>";
+$menuHTML .= "<a href='" . esc_url(add_query_arg(array('page' => WP_CONST_ULTIMATE_CSV_IMP_SLUG.'/index.php', '__module' => 'export'), $impObj->baseUrl)) . "'> " . __('Export', 'wp-ultimate-csv-importer') . "</a>";
+$menuHTML .= "</li>";
+$menuHTML .= "<li class=  '".sanitize_html_class($settings)."'>";
+$menuHTML .= "<a href='" . esc_url(add_query_arg(array('page' => WP_CONST_ULTIMATE_CSV_IMP_SLUG.'/index.php', '__module' => 'settings'), $impObj->baseUrl)) . "'> " . __('Settings', 'wp-ultimate-csv-importer') . "</a>";
+$menuHTML .= "</li>";
+$menuHTML .= "<li class = '".sanitize_html_class($support)."'>";
+$menuHTML .= "<a href='" . esc_url(add_query_arg(array('page' => WP_CONST_ULTIMATE_CSV_IMP_SLUG.'/index.php', '__module' => 'support'), $impObj->baseUrl)) . "'> " . __('Support', 'wp-ultimate-csv-importer') . "</a>";
+$menuHTML .= "</li>";
+$menuHTML .= "<li><a href=".esc_url('https://www.wpultimatecsvimporter.com?utm_source=WpPlugin&utm_medium=Free&utm_campaign=SupportTraffic')." target='_blank'>" . __('Go Pro Now', 'wp-ultimate-csv-importer') . "</a></li>
+         <li ><a href=".esc_url('http://demo.smackcoders.com/demowpthree/wp-admin/admin.php?page=wp-ultimate-csv-importer-pro/index.php&__module=dashboard')." target='_blank'>" . __('Try Live Demo Now', 'wp-ultimate-csv-importer') . "</a></li>
       </ul>";
 $plugin_version = get_option('ULTIMATE_CSV_IMP_VERSION');
 $menuHTML .= "</div>";
 $menuHTML .= "<div class='msg' id = 'showMsg' style = 'display:none;'></div>";
 $menuHTML .= "<input type='hidden' id='current_url' name='current_url' value='" . get_admin_url() . "admin.php?page=" . WP_CONST_ULTIMATE_CSV_IMP_SLUG . "/index.php&__module=" . $_REQUEST['__module'] . "&step=uploadfile'/>";
 $menuHTML .= "<input type='hidden' name='checkmodule' id='checkmodule' value='" . $_REQUEST['__module'] . "' />";
-
-$menuHTML .= "
-</nav>";
-
+$menuHTML .= "</nav>";
 echo $menuHTML;

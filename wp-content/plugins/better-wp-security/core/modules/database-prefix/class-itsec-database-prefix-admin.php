@@ -18,7 +18,6 @@ class ITSEC_Database_Prefix_Admin {
 
 		add_action( 'itsec_admin_init', array( $this, 'initialize_admin' ) ); //initialize admin area
 		add_action( 'itsec_add_admin_meta_boxes', array( $this, 'add_admin_meta_boxes' ) ); //add meta boxes to admin page
-		add_filter( 'itsec_add_dashboard_status', array( $this, 'dashboard_status' ) ); //add information for plugin status
 		add_filter( 'itsec_tracking_vars', array( $this, 'tracking_vars' ) );
 
 		if ( ! empty( $_POST ) ) {
@@ -43,41 +42,6 @@ class ITSEC_Database_Prefix_Admin {
 			'advanced',
 			'core'
 		);
-
-	}
-
-	/**
-	 * Sets the status in the plugin dashboard
-	 *
-	 * @since 4.0
-	 *
-	 * @return array statuses
-	 */
-	public function dashboard_status( $statuses ) {
-
-		if ( $this->settings !== true ) {
-
-			$status_array = 'safe-medium';
-			$status       = array(
-				'text'     => sprintf( '%s wp_.', __( 'Your database table prefix is not using', 'better-wp-security' ) ),
-				'link'     => '#itsec_change_table_prefix',
-				'advanced' => true,
-			);
-
-		} else {
-
-			$status_array = 'medium';
-			$status       = array(
-				'text'     => sprintf( '%s wp_.', __( 'Your database table prefix should not be', 'better-wp-security' ) ),
-				'link'     => '#itsec_change_table_prefix',
-				'advanced' => true,
-			);
-
-		}
-
-		array_push( $statuses[ $status_array ], $status );
-
-		return $statuses;
 
 	}
 

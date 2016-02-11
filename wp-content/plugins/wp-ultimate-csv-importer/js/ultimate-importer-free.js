@@ -4,8 +4,8 @@ jQuery(document).ready(function () {
     if (checkmodule != 'dashboard' && checkmodule != 'filemanager' && checkmodule != 'support' && checkmodule != 'export' && checkmodule != 'settings' && checkmodule != 'mappingtemplate' && checkmodule != 'schedulemapping') {
         var get_log = document.getElementById('log').innerHTML;
         if (!jQuery.trim(jQuery('#log').html()).length) {
-            document.getElementById('log').innerHTML = '<p style="margin:15px;color:red;">' + translateAlertString("NO LOGS YET NOW.") + '</p>';
-	}
+            document.getElementById('log').innerHTML = '<p style="margin:15px;color:red;">' + wp_ultimate_translate_importer.dashboard_msg + '</p>';
+        }
     }
     if (checkmodule == 'custompost') {
         var step = jQuery('#stepstatus').val();
@@ -20,148 +20,111 @@ jQuery(document).ready(function () {
         var dir_path = jQuery('#dirpathval').val();
         var uploadedFile = jQuery('#uploadedFile').val();
         var noncekey = jQuery('#nonceKey').val();
-        var select_delimeter = jQuery('#select_delim').val();
-        var select_delim = jQuery('#select_delim').val();
         var get_log = jQuery('#log').val();
         var checkmodule = jQuery('#checkmodule').val();
         if (!jQuery.trim(jQuery('#log').html()).length) {
             if (checkmodule != 'dashboard')
-                document.getElementById('log').innerHTML = '<p style="margin:15px;color:red;">' + translateAlertString("NO LOGS YET NOW.") + '</p>';
-        }
-
-        if (select_delimeter != '') {
-            select_delim = select_delimeter;
-        }
-        if (uploadedFile != '' && select_delim != '') {
-            var tmpLoc = jQuery('#tmpLoc').val();
-            if (tmpLoc != '' && tmpLoc != null) {
-                jQuery.ajax({
-                    url: ajaxurl,
-                    type: 'post',
-                    dataType: 'json',
-                    data: {
-                        'record_no': '1',
-                        'file_name': uploadedFile,
-                        'selected_delimeter': select_delim,
-                        'checkmodule': checkmodule,
-                        'temloc': tmpLoc,
-                        'dir_path': dir_path,
-                        'wpnonce': noncekey,
-                        'action': 'shownextrecords',
-                    },
-                    success: function (response) {
-                        if (response != null) {
-                            var totalLength = response.length;
-                            var setHeight = (parseInt(totalLength) * 30) + 250;
-                        }
-                    }
-                });
-            }
+                document.getElementById('log').innerHTML = '<p style="margin:15px;color:red;">' + wp_ultimate_translate_importer.dashboard_msg + '</p>';
         }
     }
 });
 
 jQuery(function() {
-   jQuery('marquee').mouseover(function() {
-       jQuery(this).attr('scrollamount',0,0);
-   }).mouseout(function() {
+    jQuery('marquee').mouseover(function() {
+        jQuery(this).attr('scrollamount',0,0);
+    }).mouseout(function() {
         jQuery(this).attr('scrollamount',5,0);
-   });
+    });
 });
 
 function prepareUpload(){
-	var check_upload_dir = document.getElementById('is_uploadfound').value;
-	if (check_upload_dir == 'notfound') {
-		document.getElementById('browsefile').style.display = 'none';
-		jQuery('#defaultpanel').css('visibility', 'hidden');
-		jQuery('<p/>').text("").appendTo('#warning');
-		jQuery("#warning").empty();
-		jQuery('#warning').css('display', 'inline');
-		jQuery('<p/>').text("Warning:   Sorry. There is no uploads directory Please create it with write permission.").appendTo('#warning');
-		jQuery('#warning').css('color', 'red');
-		jQuery('#warning').css('font-weight', 'bold');
-		jQuery('#progress .progress-bar').css('visibility', 'hidden');
-	}
-	else {
-	var uploadPath = document.getElementById('uploaddir').value;
-	var curraction = document.getElementById('current_module').value;
-	var frmdata = new FormData();
-	var uploadfile_data = jQuery('#fileupload').prop('files')[0];
-	frmdata.append('files', uploadfile_data);
-	frmdata.append('action','uploadfilehandle');
-	frmdata.append('curr_action', curraction);
-	frmdata.append('uploadPath', uploadPath);
-	jQuery.ajax({
-		url : ajaxurl,
-		type : 'post',
-		data : frmdata,
-		cache: false,
-		contentType : false,
-		processData: false,
-		success : function(data) {
-			var fileobj =JSON.parse(data);
-			jQuery.each(fileobj,function(objkey,objval){
-			jQuery.each(objval,function(o_key,file){
-			document.getElementById('uploadFileName').value=file.name;
-			var filewithmodule = file.uploadedname.split(".");
-			var check_file = filewithmodule[filewithmodule.length - 1];
-			if(check_file != "csv" && check_file != "txt") {
-				alert('Un Supported File Format');
-				return false;
-			}
-			if(check_file == "csv"){
-				var filenamecsv = file.uploadedname.split(".csv");
-				file.uploadedname = filenamecsv[0] + curraction + ".csv";
-			}
-			if(check_file == "txt"){
-				var filenametxt = file.uploadedname.split(".txt");
-				file.uploadedname = filenametxt[0] + curraction + ".txt";
-			}	
-			document.getElementById('upload_csv_realname').value = file.uploadedname;
-			document.getElementById('progressbar').value = '100';
-			var get_version1 = file.name.split(curraction);
-			var get_version2 = get_version1[1].split(".csv");
-			var get_version3 = get_version2[0].split("-");
-			document.getElementById('current_file_version').value = get_version3[1];
-			jQuery('#uploadedfilename').val(file.uploadedname);
-			jQuery( "#filenamedisplay" ).empty();
-			if(file.size>1024 && file.size<(1024*1024))
-			{
-				var fileSize =(file.size/1024).toFixed(2)+' kb';
+    var check_upload_dir = document.getElementById('is_uploadfound').value;
+    if (check_upload_dir == 'notfound') {
+        document.getElementById('browsefile').style.display = 'none';
+        jQuery('#defaultpanel').css('visibility', 'hidden');
+        jQuery('<p/>').text("").appendTo('#warning');
+        jQuery("#warning").empty();
+        jQuery('#warning').css('display', 'inline');
+        jQuery('<p/>').text("Warning:   Sorry. There is no uploads directory Please create it with write permission.").appendTo('#warning');
+        jQuery('#warning').css('color', 'red');
+        jQuery('#warning').css('font-weight', 'bold');
+        jQuery('#progress .progress-bar').css('visibility', 'hidden');
+    }
+    else {
+        var uploadPath = document.getElementById('uploaddir').value;
+        var curraction = document.getElementById('current_module').value;
+        var frmdata = new FormData();
+        var uploadfile_data = jQuery('#fileupload').prop('files')[0];
+        frmdata.append('files', uploadfile_data);
+        frmdata.append('action','uploadfilehandle');
+        frmdata.append('curr_action', curraction);
+        frmdata.append('uploadPath', uploadPath);
+	frmdata.append('secure_key',wp_ultimate_translate_importer.secure_key);
+        jQuery.ajax({
+            url : ajaxurl,
+            type : 'post',
+            data : frmdata,
+            cache: false,
+            contentType : false,
+            processData: false,
+            success : function(data) {
+                var fileobj =JSON.parse(data);
+                jQuery.each(fileobj,function(objkey,objval){
+                    jQuery.each(objval,function(o_key,file){
+                        document.getElementById('uploadFileName').value=file.name;
+                        var filewithmodule = file.uploadedname.split(".");
+                        var check_file = filewithmodule[filewithmodule.length - 1];
+                        if(check_file != "csv" && check_file != "txt") {
+                            alert(wp_ultimate_translate_importer.fileformatmsg);
+                            return false;
+                        }
+                        if(check_file == "csv"){
+                            var filenamecsv = file.uploadedname.split(".csv");
+                            file.uploadedname = filenamecsv[0] + curraction + ".csv";
+                        }
+                        if(check_file == "txt"){
+                            var filenametxt = file.uploadedname.split(".txt");
+                            file.uploadedname = filenametxt[0] + curraction + ".txt";
+                        }
+                        document.getElementById('upload_csv_realname').value = file.uploadedname;
+                        document.getElementById('progressbar').value = '100';
+                        var get_version1 = file.name.split(curraction);
+                        var get_version2 = get_version1[1].split(".csv");
+                        var get_version3 = get_version2[0].split("-");
+                        document.getElementById('current_file_version').value = get_version3[1];
+                        jQuery('#uploadedfilename').val(file.uploadedname);
+                        jQuery( "#filenamedisplay" ).empty();
+                        if(file.size>1024 && file.size<(1024*1024))
+                        {
+                            var fileSize =(file.size/1024).toFixed(2)+' kb';
                         }
                         else if(file.size>(1024*1024))
                         {
-                                var fileSize =(file.size/(1024*1024)).toFixed(2)+' mb';
+                            var fileSize =(file.size/(1024*1024)).toFixed(2)+' mb';
                         }
                         else
                         {
-                                var fileSize= (file.size)+' byte';
+                            var fileSize= (file.size)+' byte';
                         }
                         jQuery('<p/>').text((file.name)+' - '+fileSize).appendTo('#filenamedisplay');
                         jQuery('#importfile').attr('disabled', false);
-                        });
                     });
+                });
 
-                 }
-            });
-	}
+            }
+        });
+    }
 }
 
 function selectpoststatus() {
-    var poststate = '';
+    var poststate = document.getElementById('wpfields').value;
     var importer = document.getElementById('selectedImporter').value;
-    if (importer == 'post' || importer == 'custompost')
-        poststate = 12;
-    if (importer == 'page' || importer == 'users')
-        poststate = 11;
-    if (importer == 'eshop')
-        poststate = 24;
     var ps = document.getElementById("importallwithps");
     var selectedpsindex = ps.options[ps.selectedIndex].value;
     if (selectedpsindex == 6) {
         document.getElementById('globalpassword_label').style.display = "block";
         document.getElementById('globalpassword_text').style.display = "block";
-	document.getElementById('globalpassword_txt').focus();
+        document.getElementById('globalpassword_txt').focus();
     }
     else {
         document.getElementById('globalpassword_label').style.display = "none";
@@ -174,9 +137,9 @@ function selectpoststatus() {
         for (var i = 0; i < poststate; i++) {
 
             dropdown = document.getElementById("fieldname" + i);
-		if(dropdown.value == "post_status"){
-			document.getElementById("mapping"+i).selectedIndex = "0";
-		}
+            if(dropdown.value == "post_status"){
+                document.getElementById("mapping"+i).selectedIndex = "0";
+            }
         }
 
     }
@@ -184,56 +147,52 @@ function selectpoststatus() {
 
 function changefield()
 {
-       var importer = document.getElementById('selectedImporter').value;
-       if (importer == 'post' || importer == 'custompost')
-               poststate = 12;
-       if (importer == 'page' || importer == 'users')
-               poststate = 11;
-       if (importer == 'eshop')
-               poststate = 24;
-       for(var i=0;i < poststate;i++)
-               {
-                       dropdown = document.getElementById("fieldname"+i);
-                       if(dropdown.value == "post_status"){
+    var importer = document.getElementById('selectedImporter').value;
+    var poststate = document.getElementById('wpfields').value;
+    for(var i=0;i < poststate;i++)
+    {
+        dropdown = document.getElementById("fieldname"+i);
+        if(dropdown.value == "post_status"){
 
-                       if(document.getElementById("mapping"+i).selectedIndex != 0)
-                               document.getElementById("importallwithps").selectedIndex = "0";
-                       }
-       }
-       var ps = document.getElementById("importallwithps");
-       var selectedpsindex = ps.options[ps.selectedIndex].value;
-       if(selectedpsindex == 0){
-               document.getElementById('globalpassword_label').style.display = "none";
-               document.getElementById('globalpassword_text').style.display = "none";
-       }
+            if(document.getElementById("mapping"+i).selectedIndex != 0)
+                document.getElementById("importallwithps").selectedIndex = "0";
+        }
+    }
+    var ps = document.getElementById("importallwithps");
+    var selectedpsindex = ps.options[ps.selectedIndex].value;
+    if(selectedpsindex == 0){
+        document.getElementById('globalpassword_label').style.display = "none";
+        document.getElementById('globalpassword_text').style.display = "none";
+    }
 }
 
 
 // Function for add customfield
 
 function addcorecustomfield(id){
-var table_id = id;
-var newrow = table_id.insertRow(-1);
-var count = document.getElementById('basic_count').value;
-count = parseInt(count)+1;
-newrow.id = 'custrow'+count;
-var filename = document.getElementById('uploadedFile').value;
-var row_count = document.getElementById('corecustomcount').value;
-        jQuery.ajax({
-                url: ajaxurl,
-                type: 'post',
-                data: {
-                        'filename' : filename,
-                        'corecount' : count,
-                        'action' : 'addcorecustomfd',
-                },
-                success: function (response) {
-                        newrow.innerHTML = response;
-                        row_count = parseInt(row_count) + 1;
-                        document.getElementById('corecustomcount').value = row_count;
-                        document.getElementById('basic_count').value = count;
-                }
-        });
+    var table_id = id;
+    var newrow = table_id.insertRow(-1);
+    var count = document.getElementById('basic_count').value;
+    count = parseInt(count)+1;
+    newrow.id = 'custrow'+count;
+    var filename = document.getElementById('uploadedFile').value;
+    var row_count = document.getElementById('corecustomcount').value;
+    jQuery.ajax({
+        url: ajaxurl,
+        type: 'post',
+        data: {
+            'filename' : filename,
+            'corecount' : count,
+            'action' : 'addcorecustomfd',
+	    'secure_key' : wp_ultimate_translate_importer.secure_key
+        },
+        success: function (response) {
+            newrow.innerHTML = response;
+            row_count = parseInt(row_count) + 1;
+            document.getElementById('corecustomcount').value = row_count;
+            document.getElementById('basic_count').value = count;
+        }
+    });
 
 }
 
@@ -241,6 +200,10 @@ var row_count = document.getElementById('corecustomcount').value;
 function clearMapping() {
     var importer = document.getElementById('selectedImporter').value;
     var wpfield = document.getElementById('wpfields').value;
+    var termfield = 0;
+    if(document.getElementById('termfields')){
+    termfield = document.getElementById('termfields').value;
+    }
     for (var j = 0; j < wpfield; j++) {
         document.getElementById('mapping' + j).selectedIndex = "0";
     }
@@ -249,34 +212,44 @@ function clearMapping() {
         for (var j = wpfield; j < customfield; j++) {
             document.getElementById('coremapping' + j).selectedIndex = "0";
         }
-	if(document.getElementById("seofields") && document.getElementById("addcorecustomfields")){
-                var seofield = document.getElementById('seofields').value;
-                var addcorecustomfield= document.getElementById('basic_count').value;
+	for(var j = customfield; j < termfield; j++) {
+	    document.getElementById('term_mapping'+j).selectedIndex = "0";
+	}
+        if(document.getElementById("seofields") && document.getElementById("addcorecustomfields")){
+            var seofield = document.getElementById('seofields').value;
+            var addcorecustomfield= document.getElementById('basic_count').value;
         }
         if(seofield != null && addcorecustomfield != null){
-        	for(var j=customfield;j<seofield;j++) {
-                	document.getElementById('seomapping'+j).selectedIndex = "0";
-                }
-                for(var j=seofield;j<=addcorecustomfield;j++) {
-                        document.getElementById('addcoremapping'+j).selectedIndex = "0";
-                }
+	if(termfield != 0){
+            for(var j=termfield;j<seofield;j++) {
+                document.getElementById('seomapping'+j).selectedIndex = "0";
+            }
+	}
+	else {
+		           for(var j=customfield;j<seofield;j++) {
+                document.getElementById('seomapping'+j).selectedIndex = "0";
+            }
+	}
+            for(var j=seofield;j<=addcorecustomfield;j++) {
+                document.getElementById('addcoremapping'+j).selectedIndex = "0";
+            }
         }
         else if(document.getElementById("seofields")){
-                var seofield = document.getElementById('seofields').value;
-                if(seofield != null){
-                	for(var j=customfield;j<seofield;j++) {
-                        	document.getElementById('seomapping'+j).selectedIndex = "0";
-                        }
+            var seofield = document.getElementById('seofields').value;
+            if(seofield != null){
+                for(var j=termfield;j<seofield;j++) {
+                    document.getElementById('seomapping'+j).selectedIndex = "0";
                 }
+            }
         }
         else if(document.getElementById("addcorecustomfields")){
-        	var addcorecustomfield= document.getElementById('basic_count').value;
-                if(addcorecustomfield != null){
-                	for(var j=customfield;j<=addcorecustomfield;j++) {
-                        	document.getElementById('addcoremapping'+j).selectedIndex = "0";
-                        }
+            var addcorecustomfield= document.getElementById('basic_count').value;
+            if(addcorecustomfield != null){
+                for(var j=customfield;j<=addcorecustomfield;j++) {
+                    document.getElementById('addcoremapping'+j).selectedIndex = "0";
                 }
-       }
+            }
+        }
     }
 }
 
@@ -304,26 +277,6 @@ function shownotification(msg, alerts) {
         'slow');
 }
 
-function translateAlertString(alertstring) {
-    var convertedStr = "";
-    jQuery.ajax({
-        type: 'POST',
-        url: ajaxurl,
-        async: false,
-        data: {
-            'action': 'trans_alert_str',
-            'alertmsg': alertstring,
-        },
-        success: function (response) {
-            convertedStr = response;
-        },
-        error: function (errorThrown) {
-            console.log(errorThrown);
-        }
-    });
-    return convertedStr;
-}
-
 function import_csv() {
     // code added by goku to check whether templatename
     var mapping_checked = jQuery('#mapping_templatename_checked').is(':checked');
@@ -334,7 +287,7 @@ function import_csv() {
             mapping_tempname = jQuery('#mapping_templatename_edit').val();
 
         if (jQuery.trim(mapping_tempname) == '') {
-            alert(translateAlertString('Template name is empty'));
+            alert(wp_ultimate_translate_importer.emptytemplate);
             return false;
         }
         else {
@@ -360,173 +313,125 @@ function import_csv() {
     }
     var mapping_tempname = jQuery('#mapping_templatename').val();
     if (mapping_checked_radio == 'saveas')
-    //mapping_tempname = jQuery('#mapping_templatename_edit').val();
-
         if (mapping_tempname == '' && (mapping_checked || mapping_templatename_edit == 'saveas')) {
-            alert(translateAlertString('Template Name already exists'));
+            alert(wp_ultimate_translate_importer.exist_template);
             return false;
         }
     // code ends here on checking templatename
-    var total = '';
+    var total = document.getElementById('wpfields').value;
     var importer = document.getElementById('selectedImporter').value;
     var pwdvalidation = document.getElementById('importallwithps');
-	if(importer != 'users')
-    var selectedpsindex = pwdvalidation.options[pwdvalidation.selectedIndex].value;
+    if(importer != 'users')
+        var selectedpsindex = pwdvalidation.options[pwdvalidation.selectedIndex].value;
     var header_count = document.getElementById('h2').value;
     var array = new Array();
     var wparray = new Array();
     var val1, val2, val3, val4, val5, val6, val7, error_msg, chk_status_in_csv, post_status_msg;
     val1 = val2 = val3 = val4 = val5 = val6 = val7 = post_status_msg = post_type = 'Off';
-    if (importer == 'post' || importer == 'custompost')
-        total = 12;
-    if (importer == 'page' || importer == 'users')
-        total = 11;
-    if (importer == 'eshop')
-        total = 24;
     for (var i = 0; i < total; i++) {
         var value = document.getElementById("mapping" + i).value;
-        //var value = e.options[e.selectedIndex].value;
         array[i] = value;
-	var wpvalue = document.getElementById("fieldname"+ i).value;
-	wparray[i] = wpvalue;
+        var wpvalue = document.getElementById("fieldname"+ i).value;
+        wparray[i] = wpvalue;
     }
     if (importer == 'post' || importer == 'page' || importer == 'custompost' || importer == 'eshop') {
         if (importer == 'custompost') {
             var getSelectedIndex = document.getElementById('custompostlist');
             var SelectedIndex = getSelectedIndex.value;
-            //var t=getSelectedIndex.options[getSelectedIndex.selectedIndex];
             if (SelectedIndex != 'select')
                 post_type = 'On';
-            //alert(t+'---'+SelectedIndex);
         }
-
         chk_status_in_csv = document.getElementById('importallwithps').value;
         if (chk_status_in_csv != 0)
             post_status_msg = 'On';
-
-	if(selectedpsindex == 6) {
-		var checkpwd = document.getElementById('globalpassword_txt').value;
-		if(checkpwd != '')
-			val7 = 'On';
-	}
-
+        if(selectedpsindex == 6) {
+            var checkpwd = document.getElementById('globalpassword_txt').value;
+            if(checkpwd != '')
+                val7 = 'On';
+        }
         for (var j = 0; j < wparray.length; j++) {
             if (wparray[j] == 'post_title' && array[j] != '-- Select --') {
                 val1 = 'On';
             }
-            /*   if (array[j] == 'post_content') {
-             val2 = 'On';
-             } */
             if (post_status_msg == 'Off') {
                 if (wparray[j] == 'post_status' && array[j] != '-- Select --')
                     post_status_msg = 'On';
             }
         }
-	if (selectedpsindex == 6){
-                       if (importer != 'custompost' && val1 == 'On' && post_status_msg == 'On' && val7 == 'On') {
-                               return true;
-                        }
-                        else if (importer == 'custompost' && val1 == 'On'  && post_status_msg == 'On' && post_type=='On' && val7 == 'On') {
-                                return true;
-                        }
-                        else {
-                                error_msg = '';
-                                if (val7 == 'Off')
-                                       error_msg += "password";
-                                if (val1 == 'Off')
-                                       error_msg += " post_title";
-                                if(importer == 'custompost') {
-                                       if (SelectedIndex == 'select')
-                                                error_msg += " post_type";
-                                }
-                         if (post_status_msg == 'Off')
-                                error_msg += " post_status";
-                                showMapMessages('error', 'Error: ' + error_msg + translateAlertString(' - Mandatory fields. Please map the fields to proceed.'));
-                                return false;
-                         }
+        if (selectedpsindex == 6){
+            if (importer != 'custompost' && val1 == 'On' && post_status_msg == 'On' && val7 == 'On') {
+                return true;
+            }
+            else if (importer == 'custompost' && val1 == 'On'  && post_status_msg == 'On' && post_type=='On' && val7 == 'On') {
+                return true;
+            }
+            else {
+                error_msg = '';
+                if (val7 == 'Off')
+                    error_msg += "password";
+                if (val1 == 'Off')
+                    error_msg += " post_title";
+                if(importer == 'custompost') {
+                    if (SelectedIndex == 'select')
+                        error_msg += " post_type";
+                }
+                if (post_status_msg == 'Off')
+                    error_msg += " post_status";
+                showMapMessages('error', 'Error: ' + error_msg + wp_ultimate_translate_importer.mandatory_msg );
+                return false;
+            }
 
         }
-	else {
-        if (importer != 'custompost' && val1 == 'On' && post_status_msg == 'On') {
-            return true;
-        }
-        else if (importer == 'custompost' && val1 == 'On' && post_status_msg == 'On' && post_type == 'On') {
-            return true;
-        }
         else {
-            error_msg = '';
-            if (val1 == 'Off')
-                error_msg += " post_title";
-            /*  if (val2 == 'Off')
-             error_msg += " post_content,"; */
-            if (importer == 'custompost') {
-                if (SelectedIndex == 'select')
-                    error_msg += " post_type,";
+            if (importer != 'custompost' && val1 == 'On' && post_status_msg == 'On') {
+                return true;
             }
-            if (post_status_msg == 'Off')
-                error_msg += " post_status";
-            showMapMessages('error', 'Error: ' + error_msg + translateAlertString(' - Mandatory fields. Please map the fields to proceed.'));
-            return false;
+            else if (importer == 'custompost' && val1 == 'On' && post_status_msg == 'On' && post_type == 'On') {
+                return true;
+            }
+            else {
+                error_msg = '';
+                if (val1 == 'Off')
+                    error_msg += " post_title";
+                if (importer == 'custompost') {
+                    if (SelectedIndex == 'select')
+                        error_msg += " post_type,";
+                }
+                if (post_status_msg == 'Off')
+                    error_msg += " post_status";
+                showMapMessages('error', 'Error: ' + error_msg + wp_ultimate_translate_importer.mandatory_msg);
+                return false;
+            }
         }
     }
-   }
 // validation starts
-    else if (importer == 'comments') {
-        //var getSelectedIndex1 = document.getElementById('selectPosts');
-        //var SelectedIndex1 = getSelectedIndex1.options[getSelectedIndex1.selectedIndex].text;
-        for (var j = 0; j < array.length; j++) {
-            if (array[j] == 'comment_author') {
-                val1 = 'On';
-            }
-            if (array[j] == 'comment_author_email') {
-                val2 = 'On';
-            }
-            if (array[j] == 'comment_content') {
-                val3 = 'On';
-            }
-            if (array[j] == 'comment_post_ID') {
-                val4 = 'On';
-            }
-
-
-        }
-        if (val1 == 'On' && val2 == 'On' && val3 == 'On' && val4 == 'On') {
-            return true;
-        }
-        else {
-            showMapMessages('error', ' "Post Id", "Comment Author", "Comment Author Email" and "Comment Content"' + translateAlertString(' should be mapped.'));
-            return false;
-        }
-
-
-        showMapMessages('error', header_count);
-        return false;
-    }
     else if (importer == 'users') {
-        //var getSelectedIndex = document.getElementById('userrole');
-        //var SelectedIndex = getSelectedIndex.options[getSelectedIndex.selectedIndex].text;
+        var val1 = val2 = val3 = 'Off';
+        var errmsg = "";
         for (var j = 0; j < array.length; j++) {
-            if (array[j] == 'user_login') {
+            if (wparray[j] == 'user_login' && array[j] != '-- Select --')
                 val1 = 'On';
-            }
-            if (array[j] == 'user_email') {
+            if (wparray[j] == 'user_email' && array[j] != '-- Select --')
                 val2 = 'On';
-            }
-            if (array[j] == 'role') {
+            if (wparray[j] == 'role' && array[j] != '-- Select --')
                 val3 = 'On';
-            }
         }
         if (val1 == 'On' && val2 == 'On' && val3 == 'On') {
             return true;
         }
         else {
-            showMapMessages('error', '"role", "user_login" and "user_email"' + translateAlertString(' should be mapped.'));
+            if(val1 == 'Off')
+                errmsg += "user_login ,";
+            if(val2 == 'Off')
+                errmsg += "user_email ," ;
+            if(val3 == 'Off')
+                errmsg += "role";
+            showMapMessages('error', errmsg + wp_ultimate_translate_importer.generalmsg);
             return false;
         }
     }
 // validation ends
 }
-
 
 function showMapMessages(alerttype, msg) {
     jQuery.ajax({
@@ -568,7 +473,7 @@ function checkextension(filename) {
         return true;
     }
     else {
-        alert(translateAlertString("File must be .zip!"));
+        alert(wp_ultimate_translate_importer.validatefile);
         //will clear the file input box.
         location.reload();
         return false;
@@ -598,11 +503,7 @@ function importRecordsbySettings(siteurl) {
     var tot_no_of_records = document.getElementById('checktotal').value;
     var importas = document.getElementById('selectedImporter').value;
     var uploadedFile = document.getElementById('checkfile').value;
-    // var no_of_columns = document.getElementById('h2').value;
     var step = document.getElementById('stepstatus').value;
-    var mappingArr = document.getElementById('mappingArr').value;
-    //var dupContent = document.getElementById('duplicatecontent').checked;
-    //var dupTitle = document.getElementById('duplicatetitle').checked;
     var currentlimit = document.getElementById('currentlimit').value;
     var tmpCnt = document.getElementById('tmpcount').value;
     var no_of_tot_records = document.getElementById('tot_records').value;
@@ -622,7 +523,7 @@ function importRecordsbySettings(siteurl) {
         //return true;
     } else {
         document.getElementById('showMsg').style.display = "";
-        document.getElementById('showMsg').innerHTML = '<p id="warning-msg" class="alert alert-warning">' + translateAlertString("Fill all mandatory fields.") + '</p>';
+        document.getElementById('showMsg').innerHTML = '<p id="warning-msg" class="alert alert-warning">' + wp_ultimate_translate_importer.reqfdmsg + '</p>';
         jQuery("#showMsg").fadeOut(10000);
         return false;
     }
@@ -632,8 +533,8 @@ function importRecordsbySettings(siteurl) {
         document.getElementById('server_request_warning').style.display = '';
         return false;
     }
-    if (get_log == '<p style="margin:15px;color:red;">NO LOGS YET NOW.</p>') {
-        document.getElementById('log').innerHTML = '<p style="margin-left:10px;color:red;">' + translateAlertString("Your Import Is In Progress...") + '</p>';
+    if (get_log == '<p style="margin:15px;color:red;">' + wp_ultimate_translate_importer.dashboard_msg + '</p>') {
+        document.getElementById('log').innerHTML = '<p style="margin-left:10px;color:red;">' + wp_ultimate_translate_importer.import_progress + '</p>';
         document.getElementById('startbutton').disabled = true;
     }
     document.getElementById('ajaxloader').style.display = "";
@@ -697,7 +598,7 @@ function importRecordsbySettings(siteurl) {
                 } else {
                     document.getElementById('log').innerHTML += data + '<br/>';
                     if (parseInt(tmpCnt) < parseInt(tot_no_of_records) - 1)
-                        document.getElementById('log').innerHTML += "<p style='margin-left:10px;color:red;'>" + translateAlertString('Import process has been terminated.') + "</p>";
+                        document.getElementById('log').innerHTML += "<p style='margin-left:10px;color:red;'>" +wp_ultimate_translate_importer.terminateImport + "</p>";
                     document.getElementById('ajaxloader').style.display = "none";
                     document.getElementById('startbutton').style.display = "none";
                     document.getElementById('terminatenow').style.display = "none";
@@ -729,7 +630,6 @@ function continueprocess() {
     var tmpCnt = document.getElementById('tmpcount').value;
     var currentlimit = document.getElementById('currentlimit').value;
     var importlimit = document.getElementById('importlimit').value;
-    //  var get_requested_count = importlimit;
     var tot_no_of_records = document.getElementById('checktotal').value;
 
     if (parseInt(tmpCnt) > parseInt(tot_no_of_records)) {
@@ -738,25 +638,20 @@ function continueprocess() {
         document.getElementById('terminatenow').style.display = "";
     }
     if (parseInt(tmpCnt) < parseInt(tot_no_of_records))
-        document.getElementById('log').innerHTML += "<div style='margin-left:10px;color:green;'>" + translateAlertString(' Import process has been continued.') + "</div></br>";
+        document.getElementById('log').innerHTML += "<div style='margin-left:10px;color:green;'>" + wp_ultimate_translate_importer.continueImport + "</div></br>";
     document.getElementById('ajaxloader').style.display = "";
     document.getElementById('startbutton').style.display = "";
     document.getElementById('continuebutton').style.display = "none";
-    //document.getElementById('dwnld_log_link').style.display = "none";
     document.getElementById('terminateaction').value = 'continue';
-    //          document.getElementById('currentlimit').value = currentlimit;
-    //currentlimit = parseInt(currentlimit)+parseInt(importlimit);
-    //                                 console.log('impLmt: '+importlimit+'totRecds: '+tot_no_of_records);
-    //                               document.getElementById('tmpcount').value = parseInt(tmpCnt)+parseInt(importlimit);
-
+    
     setTimeout(function () {
         importRecordsbySettings()
     }, 0);
 }
 
-function saveSettings() { 
-	jQuery('#ShowMsg').css("display", "");
-        jQuery('#ShowMsg').delay(2000).fadeOut();
+function saveSettings() {
+    jQuery('#ShowMsg').css("display", "");
+    jQuery('#ShowMsg').delay(2000).fadeOut();
 }
 
 function Reload() {
@@ -791,25 +686,39 @@ function check_allnumeric(inputtxt) {
     }
     else {
         if (inputtxt == '')
-            alert(translateAlertString('Fill all mandatory fields.'));
+            alert(wp_ultimate_translate_importer.reqfdmsg);
         else
-            alert(translateAlertString('Please enter numeric characters only'));
+            alert(wp_ultimate_translate_importer.validate_recordnum);
         return false;
     }
 }
 
 function export_module() {
     var get_selected_module = document.getElementsByName('export');
+    var customlist = document.getElementById('export_post_type').value;
+    var customtaxonomy = document.getElementById('export_taxo_type').value;
     for (var i = 0, length = get_selected_module.length; i < length; i++) {
         if (get_selected_module[i].checked) {
             // do whatever you want with the checked radio
             //alert(get_selected_module[i].value);
             // only one radio can be logically checked, don't check the rest
             //break;
+	    if(get_selected_module[i].value == 'custompost'){
+		if(customlist == '--Select--'){
+			showMapMessages('error',wp_ultimate_translate_importer.customlist);
+			return false;
+		}
+	    }
+	   if(get_selected_module[i].value == 'customtaxonomy'){
+		if(customtaxonomy == '--Select--'){
+		       showMapMessages('error',wp_ultimate_translate_importer.customtaxonomy);
+                        return false;
+		}
+	   }
             return true;
         }
     }
-    showMapMessages('error', translateAlertString('Please choose one module to export the records!'));
+    showMapMessages('error', wp_ultimate_translate_importer.validate_exportmsg);
     return false;
 }
 function export_check(value) {
@@ -817,7 +726,7 @@ function export_check(value) {
         document.getElementById(value).checked = false;
         document.getElementById('ShowMsg').style.display = "";
         value = value.toUpperCase();
-        document.getElementById('warning-msg').innerHTML = value + translateAlertString(' Feature is available only for PRO!.');
+        document.getElementById('warning-msg').innerHTML = value + wp_ultimate_translate_importer.ultimatepromsg;
         jQuery('#ShowMsg').delay(7000).fadeOut();
     }
 }
@@ -887,5 +796,3 @@ function addexportfilter(id) {
         }
     }
 }
-
-

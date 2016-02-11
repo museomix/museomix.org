@@ -37,4 +37,4 @@
 if ( ! defined( 'ABSPATH' ) )
         exit; // Exit if accessed directly
 ?>
-<div align='center' style='width:100%;'> <?php echo $skinnyData['common_notice']; ?> <img src='<?php echo WP_CONST_ULTIMATE_CSV_IMP_DIR ?>images/templates.png' style='width:90%;'></div>
+<div align='center' style='width:100%;'> <?php echo $skinnyData['common_notice']; ?> <img src="<?php echo esc_url(WP_CONST_ULTIMATE_CSV_IMP_DIR.'images/templates.png');?>" style='width:90%;'></div>

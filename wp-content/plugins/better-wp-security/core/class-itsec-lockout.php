@@ -197,6 +197,10 @@ class ITSEC_Lockout {
 
 		global $wpdb, $itsec_globals;
 
+		if ( ! isset( $this->lockout_modules[$module] ) ) {
+			return;
+		}
+
 		$wpdb->hide_errors(); //Hide database errors in case the tables aren't there
 
 		$lock_host     = null;
@@ -333,7 +337,12 @@ class ITSEC_Lockout {
 
 		global $itsec_globals;
 
-		wp_logout();
+		$current_user = wp_get_current_user();
+
+		if ( is_object( $current_user ) && isset( $current_user->ID ) ) {
+			wp_logout();
+		}
+
 		@header( 'HTTP/1.0 403 Forbidden' );
 		@header( 'Cache-Control: no-cache, must-revalidate, max-age=0' );
 		@header( 'Expires: Thu, 22 Jun 1978 00:28:00 GMT' );

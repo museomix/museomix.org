@@ -62,7 +62,7 @@ class WYSIJA_control_front_confirm extends WYSIJA_control_front{
 
         $wysija_key = '';
         if(isset( $_GET['wysija-key'] )){
-            $wysija_key = $_GET['wysija-key'];
+            $wysija_key =  filter_var($_GET['wysija-key'], FILTER_SANITIZE_STRING);
         }
         $undo_paramsurl = array(
              'wysija-page' => 1,

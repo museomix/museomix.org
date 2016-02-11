@@ -159,10 +159,15 @@ class WJ_Analytics {
         'is_multisite' => array(
           'label' => 'Using Multisite',
           'value' => ''
-        )
+        ),
+        'bounce_enabled' => array(
+          'label' => 'Using bounce',
+          'value' => ''
+      )
     );
 
-    function __construct() {}
+    function __construct() {
+    }
 
     /**
      * Send data to Mixpanel by enqueuing the analytics JS file.
@@ -184,7 +189,7 @@ class WJ_Analytics {
 
       foreach ($this->analytics_data as $key => $data) {
         $method = $key;
-        $this->analytics_data[$key]['value'] = $this->$method();
+        $this->analytics_data[$key]['value'] = call_user_func(array($this, $method));
       }
 
     }
@@ -876,4 +881,19 @@ class WJ_Analytics {
 		return $php_version;
 	}
 
+
+    /**
+     * Check if bounce is enabled
+     * @return string
+     */
+    private function bounce_enabled() {
+      $multisite_prefix = '';
+      if ( is_multisite() ) {
+        $multisite_prefix = 'ms_';
+      }
+      $model_config = WYSIJA::get('config', 'model');
+      return ($model_config->getValue(
+          $multisite_prefix . 'bounce_process_auto')
+        ) ? "Yes" : "No";
+    }
 }

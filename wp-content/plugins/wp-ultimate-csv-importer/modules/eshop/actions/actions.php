@@ -94,7 +94,7 @@ class EshopActions extends SkinnyActions {
 	/**
 	 * Mapping fields
 	 */
-	public $defCols = array('post_title' => null, 'post_content' => null, 'post_excerpt' => null, 'post_date' => null, 'post_name' => null, 'post_status' => null, 'post_author' => null, 'post_parent' => 0, 'comment_status' => 'open', 'ping_status' => 'open', 'SKU' => null, 'products_option' => null, 'sale_price' => 0, 'regular_price' => 0, 'description' => null, 'shiprate' => 'no', 'optset' => null, 'featured_product' => 'no', 'product_in_sale' => 'no', 'stock_available' => 'no', 'cart_option' => 'null', 'category' => null, 'tags' => null, 'featured_image' => null,);
+	public $defCols = array('post_title' => null, 'post_content' => null, 'post_excerpt' => null, 'post_date' => null, 'post_name' => null, 'post_status' => null, 'post_author' => null, 'post_parent' => 0, 'comment_status' => 'open', 'ping_status' => 'open', 'SKU' => null, 'products_option' => null, 'sale_price' => 0, 'regular_price' => 0, 'description' => null, 'shiprate' => 'no', 'optset' => null, 'featured_product' => 'no', 'product_in_sale' => 'no', 'stock_available' => 'no', 'cart_option' => 'null', 'featured_image' => null,'tags'=>null,'category'=>null);
 
 	/**
 	 * Manage duplicates
@@ -109,9 +109,10 @@ class EshopActions extends SkinnyActions {
 			$htmlDecode = html_entity_decode($text);
 			$strippedText = strip_tags($htmlDecode);
 			$contentLength = strlen($strippedText);
-			$allPosts_count = $wpdb->get_results("SELECT COUNT(ID) as count FROM $wpdb->posts WHERE post_type = \"{$gettype}\" and post_status IN('publish','future','draft','pending','private')");
+			$allPosts_count = $wpdb->get_results($wpdb->prepare("SELECT COUNT(ID) as count FROM $wpdb->posts WHERE post_type = %s and post_status IN(%s,%s,%s,%s,%s)",$gettype,'publish','future','draft','pending','private'));
 			$allPosts_count = $allPosts_count[0]->count;
-			$allPosts = $wpdb->get_results("SELECT ID,post_title,post_date,post_content FROM $wpdb->posts WHERE post_type = \"{$gettype}\" and post_status IN('publish','future','draft','pending','private')");
+			$allPosts = $wpdb->get_results($wpdb->prepare("SELECT ID,post_title,post_date,post_content FROM $wpdb->posts WHERE post_type = %s and post_status IN(%s,%s,%s,%s,%s)",$gettype,'publish','future','draft','pending','private'));
+			if(!empty($allPosts)){
 			foreach ($allPosts as $allPost) {
 				$htmlDecodePCont = html_entity_decode($allPost->post_content);
 				$strippedTextPCont = strip_tags($htmlDecodePCont);
@@ -122,10 +123,11 @@ class EshopActions extends SkinnyActions {
 					return false;
 				}
 			}
+			}
 			return true;
 		} else {
 			if ($type == 'title') {
-				$post_exist = $wpdb->get_results("select ID from " . $wpdb->posts . " where post_title = \"{$text}\" and post_type = \"{$gettype}\" and post_status in('publish','future','draft','pending','private')");
+				$post_exist = $wpdb->get_results($wpdb->prepare("select ID from $wpdb->posts where post_title = %s and post_type = %s and post_status in(%s,%s,%s,%s,%s)",$text,$gettype,'publish','future','draft','pending','private'));
 				if (!(count($post_exist) == 0 && ($text != null || $text != ''))) {
 					$this->dupPostCount++;
 					$this->detailedLog[$currentLimit]['verify_here'] = "Post-title Already Exists. It can't be imported.";
@@ -134,7 +136,7 @@ class EshopActions extends SkinnyActions {
 				return true;
 			} else {
 				if ($type == 'title && content') {
-					$post_exist = $wpdb->get_results("select ID from " . $wpdb->posts . " where post_title = \"{$postTitle}\" and post_content = \"{$text}\"  and post_status IN('publish','future','draft','pending','private')");
+					$post_exist = $wpdb->get_results($wpdb->prepare("select ID from $wpdb->posts where post_title = %s and post_content = %s and post_status in(%s,%s,%s,%s,%s)",$postTitle,$text,'publish','future','draft','pending','private'));
 					if (!(count($post_exist) == 0 && ($text != null || $text != ''))) {
 						$this->dupPostCount++;
 						$this->detailedLog[$currentLimit]['verify_here'] = "Post-title and post-content Already Exists. It can't be imported.";
@@ -162,15 +164,18 @@ class EshopActions extends SkinnyActions {
 				HAVING meta_key NOT LIKE '\_%' and meta_key NOT LIKE 'field_%'
 				ORDER BY meta_key
 				LIMIT $limit");
-
+		if(!empty($this->keys)){
 		foreach ($this->keys as $val) {
 			$this->defCols ["CF: " . $val] = $val;
+		}
 		}
 		$wpcsvfreesettings = get_option('wpcsvfreesettings');
 				if (in_array('all-in-one-seo-pack/all_in_one_seo_pack.php', $active_plugins)) {
 					$seo_custoFields = array('SEO: keywords', 'SEO: description', 'SEO: title', 'SEO: noindex', 'SEO: nofollow', 'SEO: titleatr', 'SEO: menulabel', 'SEO: disable', 'SEO: disable_analytics', 'SEO: noodp', 'SEO: noydir');
+					if(!empty($seo_custoFields)){
 					foreach ($seo_custoFields as $val) {
 						$this->defCols[$val] = $val;
+					}
 					}
 				}
 	}
@@ -184,8 +189,10 @@ class EshopActions extends SkinnyActions {
 	public function eshopMetaData($new_post, $post_id, $currentLimit) {
 		global $wpdb;
 		$eshopoptions = get_option('eshop_plugin_settings');
+		if(is_array($new_post) && !empty($new_post)){
 		foreach ($new_post as $ckey => $cval) {
 			$taxo = get_taxonomies();
+			if(is_array($taxo) && !empty($taxo)){
 			foreach ($taxo as $taxokey => $taxovalue) {
 				if ($taxokey != 'category' && $taxokey != 'link_category' && $taxokey != 'post_tag' && $taxokey != 'nav_menu' && $taxokey != 'post_format') {
 					if ($taxokey == $ckey) {
@@ -193,6 +200,7 @@ class EshopActions extends SkinnyActions {
 					}
 
 				}
+			}
 			}
 			switch ($ckey) {
 				case 'featured_product' :
@@ -253,6 +261,7 @@ class EshopActions extends SkinnyActions {
 					break;
 			}
 		}
+		}
 		if (!empty($productOptions)) {
 			$get_product_option = explode(',', $productOptions);
 		}
@@ -295,7 +304,7 @@ class EshopActions extends SkinnyActions {
 		if (!empty($metaDatas)) {
 			update_post_meta($post_id, '_eshop_product', $metaDatas);
 		}
-		if (!empty($tags)) {
+		if (!empty($tags) && is_array($tags)) {
 			$this->detailedLog[$currentLimit]['tags'] = "";
 			foreach ($tags as $tag_key => $tag_value) {
 				$this->detailedLog[$currentLimit]['tags'] .= $tag_value . "|";
@@ -304,7 +313,7 @@ class EshopActions extends SkinnyActions {
 			}
 			$this->detailedLog[$currentLimit]['tags'] = "<b>Tags - </b>" . substr($this->detailedLog[$currentLimit]['tags'], 0, -1);
 		}
-		if (!empty($categories)) {
+		if (!empty($categories) && is_array($categories)) {
 			$this->detailedLog[$currentLimit]['category'] = "";
 			foreach ($categories as $cat_key => $cat_value) {
 				$this->detailedLog[$currentLimit]['category'] .= $cat_value . "|";
@@ -332,7 +341,6 @@ class EshopActions extends SkinnyActions {
 		$seo_custom_array = array();
 		$imported_feature_img = array();
 		$headr_count = $ret_array['h2'];
-		//for ($i = 0; $i < count($data_rows); $i++) {
 		for ($i = 0; $i <= $ret_array['basic_count']; $i++) {
 			if (array_key_exists('corefieldname' . $i, $ret_array)) {
 				if ($ret_array['coremapping' . $i] != '-- Select --' && $ret_array['coremapping' . $i] != '') {
@@ -347,7 +355,6 @@ class EshopActions extends SkinnyActions {
 					if ($ret_array['seomapping' . $i] != '-- Select --' && $ret_array['seomapping' . $i] != '') {
 						$mappedindex = str_replace('SEO: ', '', $ret_array['seofieldname' . $i]);
 						if (array_key_exists($ret_array['seomapping' . $i], $data_rows)) {
-							//$new_post[$mappedindex] = $data_rows[$ret_array['seomapping'.$i]];
 							$seo_custom_array[$mappedindex] = $data_rows[$ret_array['seomapping' . $i]];
 						}
 					}
@@ -366,22 +373,35 @@ class EshopActions extends SkinnyActions {
 									$new_post[$ret_array['fieldname' . $i]] = $data_rows[$ret_array['mapping' . $i]];
 								}
 							}
-						}
-					}
+					} else {
+                                        	if (array_key_exists('termfieldname' . $i, $ret_array)){
+                                                	if($ret_array['term_mapping' . $i] != '-- Select --' && $ret_array['term_mapping' . $i] != ''){
+                                                        	$mappedindex = str_replace('TERMS: ', '', $ret_array['termfieldname' . $i]);
+                                                                	if (array_key_exists($ret_array['term_mapping' . $i], $data_rows)) {
+	                                                                        $new_post[$mappedindex] = $data_rows[$ret_array['term_mapping' . $i]];
+        	                                                        }
+                	                                }
+                        	                }
+
+                                	}
+			         }
 				}
 			}
 		}
 		for ($inc = 0; $inc < count($data_rows); $inc++) {
+			if(is_array($this->keys) && !empty($this->keys)){
 			foreach ($this->keys as $k => $v) {
 				if (array_key_exists($v, $new_post)) {
 					$custom_array [$v] = $new_post [$v];
 				}
 			}
+			}
 		}
-		if (is_array($new_post)) {
+		if (is_array($new_post) && !empty($new_post)) {
 			foreach ($new_post as $ckey => $cval) {
 				$this->postFlag = true;
 				$taxo = get_taxonomies();
+				if(is_array($taxo) && !empty($taxo)){
 				foreach ($taxo as $taxokey => $taxovalue) {
 					if ($taxokey != 'category' && $taxokey != 'link_category' && $taxokey != 'post_tag' && $taxokey != 'nav_menu' && $taxokey != 'post_format') {
 						if ($taxokey == $ckey) {
@@ -389,7 +409,7 @@ class EshopActions extends SkinnyActions {
 						}
 					}
 				}
-
+				}
 				$taxo_check = 0;
 				if (!isset($smack_taxo[$ckey])) {
 					$smack_taxo [$ckey] = null;
@@ -458,8 +478,6 @@ class EshopActions extends SkinnyActions {
 							require_once(WP_CONST_ULTIMATE_CSV_IMP_DIRECTORY . '/includes/WPImporter_includes_helper.php');
 							$impCE = new WPImporter_includes_helper();
 							$path_parts['extension'] = isset($path_parts['extension']) ? $path_parts['extension'] : '';
-							//$fimg_name = wp_unique_filename($fimg_path, $fimg_name, $path_parts['extension']);
-							//$fimg_name = $fimg_name.'.'.$path_parts['extension'];
 							$impCE->get_fimg_from_URL($f_img, $fimg_path, $fimg_name, $post_slug_value, $currentLimit, $this);
 							$filepath = $fimg_path . "/" . $fimg_name;
 
@@ -480,9 +498,9 @@ class EshopActions extends SkinnyActions {
 
 
 		if ($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['selectedImporter'] != 'custompost') {
-			$data_array['post_type'] = $_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['selectedImporter'];
+			$data_array['post_type'] = sanitize_text_field($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['selectedImporter']);
 		} else {
-			$data_array['post_type'] = $_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['custompostlist'];
+			$data_array['post_type'] = sanitize_text_field($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['custompostlist']);
 		}
 		if ($this->titleDupCheck == 'true') {
 			$this->postFlag = $this->duplicateChecks('title', $data_array ['post_title'], $data_array ['post_type'], $currentLimit, $data_array ['post_title']);
@@ -504,7 +522,7 @@ class EshopActions extends SkinnyActions {
 			$data_array['post_type'] = "post";
 
 			if ($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['importallwithps'] != 0) {
-				$data_array['post_status'] = $_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['importallwithps'];
+				$data_array['post_status'] = sanitize_text_field($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['importallwithps']);
 			}
 
 			switch ($data_array ['post_status']) {
@@ -573,11 +591,7 @@ class EshopActions extends SkinnyActions {
 						$sticky = true;
 						$this->detailedLog[$currentLimit]['poststatus'] = "<b>" . __('Status', 'wp-ultimate-csv-importer') . " - </b>" . __('sticky', 'wp-ultimate-csv-importer');
 					}
-				/*      else {
-											   $this->detailedLog[$currentLimit]['poststatus'] = "<b>".__('Status','wp-ultimate-csv-importer')." - </b>" . $data_array['post_status'];
-									   }*/
 			}
-
 			// Author name/id update
 			if (isset($data_array ['post_author'])) {
 				$authorLen = strlen($data_array ['post_author']);
@@ -587,17 +601,17 @@ class EshopActions extends SkinnyActions {
 				$postauthor = array();
 
 				if ($authorLen == $postAuthorLen) {
-					$postauthor = $wpdb->get_results("select ID,user_login from $wpdb->users where ID = \"{$postuserid}\"");
+					$postauthor = $wpdb->get_results($wpdb->prepare("select ID,user_login from $wpdb->users where ID = %d",$postuserid));
 					if (empty($postauthor) || !$postauthor[0]->ID) { // If user name are numeric Ex: 1300001
-						$postauthor = $wpdb->get_results("select ID,user_login from $wpdb->users where user_login = \"{$postuserid}\"");
+						$postauthor = $wpdb->get_results($wpdb->prepare("select ID,user_login from $wpdb->users where user_login = %s",$postuserid));
 					}
 				} else {
-					$postauthor = $wpdb->get_results("select ID,user_login from $wpdb->users where user_login = \"{$postuserid}\"");
+					$postauthor = $wpdb->get_results($wpdb->prepare("select ID,user_login from $wpdb->users where user_login = %s",$postuserid));
 				}
 
 				if (empty($postauthor) || !$postauthor[0]->ID) {
 					$data_array ['post_author'] = 1;
-					$admindet = $wpdb->get_results("select ID,user_login from $wpdb->users where ID = 1");
+					$admindet = $wpdb->get_results($wpdb->prepare("select ID,user_login from $wpdb->users where ID = %d",1));
 					$this->detailedLog[$currentLimit]['assigned_author'] = "<b>Author - not found (assigned to </b>" . $admindet[0]->user_login . ")";
 					$this->noPostAuthCount++;
 				} else {
@@ -606,7 +620,7 @@ class EshopActions extends SkinnyActions {
 				}
 			} else {
 				$data_array ['post_author'] = 1;
-				$admindet = $wpdb->get_results("select ID,user_login from $wpdb->users where ID = 1");
+				$admindet = $wpdb->get_results($wpdb->prepare("select ID,user_login from $wpdb->users where ID = %d",1));
 				$this->detailedLog[$currentLimit]['assigned_author'] = "<b>Author - not found (assigned to </b>" . $admindet[0]->user_login . ")";
 				$this->noPostAuthCount++;
 			}
@@ -648,7 +662,7 @@ class EshopActions extends SkinnyActions {
 
 			unset($postauthor);
 			if ($post_id) {
-				if (!empty($corecustom_arr)) {
+				if (!empty($corecustom_arr) && is_array($corecustom_arr)) {
 					foreach ($corecustom_arr as $corecustom_key => $corecustom_value) {
 						update_post_meta($post_id, $corecustom_key, $corecustom_value);
 					}
@@ -675,21 +689,13 @@ class EshopActions extends SkinnyActions {
 				if (isset($sticky) && $sticky) {
 					stick_post($post_id);
 				}
-
-				if (!empty ($custom_array)) {
-					foreach ($custom_array as $custom_key => $custom_value) {
-						//update_post_meta($post_id, $custom_key, $custom_value);
-					}
-				}
-
-
 				//Import SEO Values
 				if (!empty($seo_custom_array)) {
 					$this->importSEOfields($seo_custom_array, $post_id);
 				}
 
 				// Create custom taxonomy to post
-				if (!empty ($smack_taxo)) {
+				if (!empty ($smack_taxo) && is_array($smack_taxo)) {
 					foreach ($smack_taxo as $taxo_key => $taxo_value) {
 						if (!empty($taxo_value)) {
 							$split_line = explode('|', $taxo_value);
@@ -699,7 +705,7 @@ class EshopActions extends SkinnyActions {
 				}
 
 				// Create/Add tags to post
-				if (!empty ($tags)) {
+				if (!empty ($tags) && is_array($tags)) {
 					$this->detailedLog[$currentLimit]['tags'] = "";
 					foreach ($tags as $tag_key => $tag_value) {
 						$this->detailedLog[$currentLimit]['tags'] .= $tag_value . "|";
@@ -713,6 +719,7 @@ class EshopActions extends SkinnyActions {
 					$this->detailedLog[$currentLimit]['category'] = "";
 					$assigned_categories = array();
 					$split_cate = explode('|', $categories ['post_category']);
+					if(!empty($split_cate) && is_array($split_cate)){ 
 					foreach ($split_cate as $key => $val) {
 						if (is_numeric($val)) {
 							$split_cate[$key] = 'uncategorized';
@@ -720,15 +727,17 @@ class EshopActions extends SkinnyActions {
 						}
 						$assigned_categories[$val] = $val;
 					}
+					}
+					if(!empty($assigned_categories) && is_array($assigned_categories)){ 
 					foreach ($assigned_categories as $cateKey => $cateVal) {
 						$this->detailedLog[$currentLimit]['category'] .= $cateKey . "|";
+					}
 					}
 					$this->detailedLog[$currentLimit]['category'] = "<b>Category - </b>" . substr($this->detailedLog[$currentLimit]['category'], 0, -1);
 					wp_set_object_terms($post_id, $split_cate, 'category');
 				}
 				// Add featured image
 				if (!empty ($file)) {
-					//$wp_filetype = wp_check_filetype(@basename($file ['guid']), null);
 					$wp_upload_dir = wp_upload_dir();
 					$attachment = array('guid' => $file ['guid'], 'post_mime_type' => 'image/jpeg', 'post_title' => preg_replace('/[^a-zA-Z0-9._\s]/', '', @basename($file ['guid'])), 'post_content' => '', 'post_status' => 'inherit');
 					if ($get_media_settings == 1) {
@@ -738,27 +747,31 @@ class EshopActions extends SkinnyActions {
 					}
 					$uploadedImage = $wp_upload_dir['path'] . '/' . $fimg_name;
 					$existing_attachment = array();
-					$query = $wpdb->get_results("select post_title from $wpdb->posts where post_type = 'attachment' and post_mime_type = 'image/jpeg'");
+					$query = $wpdb->get_results($wpdb->prepare("select post_title from $wpdb->posts where post_type = %s and post_mime_type = %s",'attachment','image/jpeg'));
+					if(!empty($query)){
 					foreach ($query as $key) {
 						$existing_attachment[] = $key->post_title;
+					}
 					}
 					if (!in_array($fimg_name, $existing_attachment)) {
 						$attach_id = wp_insert_attachment($attachment, $generate_attachment, $post_id);
 						$attach_data = wp_generate_attachment_metadata($attach_id, $uploadedImage);
 						wp_update_attachment_metadata($attach_id, $attach_data);
 					} else {
-						$query2 = $wpdb->get_results("select ID from $wpdb->posts where post_title = '$fimg_name' and post_type = 'attachment'");
+						$query2 = $wpdb->get_results($wpdb->prepare("select ID from $wpdb->posts where post_title = %s  and post_type = %s",$fimg_name,'attachment'));
+						if(!empty($query2)){
 						foreach ($query2 as $key2) {
 							$attach_id = $key2->ID;
+						}
 						}
 					}
 					set_post_thumbnail($post_id, $attach_id);
 				}
 			} else {
-				$skippedRecords[] = $_SESSION['SMACK_SKIPPED_RECORDS'];
+				$skippedRecords[] = sanitize_text_field($_SESSION['SMACK_SKIPPED_RECORDS']);
 			}
 
-			$this->detailedLog[$currentLimit]['verify_here'] = "<b>Verify Here -</b> <a href='" . get_permalink($post_id) . "' title='" . esc_attr(sprintf(__('View &#8220;%s&#8221;'), $data_array['post_title'])) . "' rel='permalink' target='_blank'>" . __('Web View') . "</a> | <a href='" . get_edit_post_link($post_id, true) . "' title='" . esc_attr(__('Edit this item')) . "' target='_blank'>" . __('Admin View') . "</a>";
+			$this->detailedLog[$currentLimit]['verify_here'] = "<b>Verify Here -</b> <a href='" . get_permalink($post_id) . "' title='" . esc_attr(sprintf(__('View &#8220;%s&#8221;'), $data_array['post_title'])) . "' rel='permalink' target='_blank'>" . __('Web View') . "</a> | <a href='" . get_edit_post_link($post_id) . "' title='" . esc_attr(__('Edit this item')) . "' target='_blank'>" . __('Admin View') . "</a>";
 		}
 		unset($data_array);
 	}
@@ -804,7 +817,7 @@ class EshopActions extends SkinnyActions {
 				$custom_array['_aioseop_noydir'] = $array['noydir'];
 			}
 		}
-		if (!empty ($custom_array)) {
+		if (!empty ($custom_array) && is_array($custom_array)) {
 			foreach ($custom_array as $custom_key => $custom_value) {
 				update_post_meta($postId, $custom_key, $custom_value);
 			}
@@ -815,7 +828,7 @@ class EshopActions extends SkinnyActions {
 	public function addPieChartEntry($imported_as, $count) {
 		//add total counts
 		global $wpdb;
-		$getTypeID = $wpdb->get_results("select * from smackcsv_pie_log where type = '$imported_as'");
+		$getTypeID = $wpdb->get_results($wpdb->prepare("select * from smackcsv_pie_log where type = %s",$imported_as));
 		if (count($getTypeID) == 0) {
 			$wpdb->insert('smackcsv_pie_log', array('type' => $imported_as, 'value' => $count));
 		} else {
@@ -834,8 +847,10 @@ class EshopActions extends SkinnyActions {
 	public function isplugin() {
 		$allplugins = get_plugins();
 		$allpluginskey = array();
+		if(!empty($allplugins) && is_array($allplugins)){
 		foreach ($allplugins as $key => $value) {
 			$allpluginskey[] = $key;
+		}
 		}
 
 		if ((!in_array('eshop/eshop.php', $allpluginskey))) {
@@ -845,8 +860,10 @@ class EshopActions extends SkinnyActions {
 		}
 		$allactiveplugins = get_option('active_plugins');
 		$allactiveplugins_value = array();
+		if(!empty($allactiveplugins) && is_array($allactiveplugins)){
 		foreach ($allactiveplugins as $key => $value) {
 			$allactiveplugins_value[] = $value;
+		}
 		}
 		if ((!in_array('eshop/eshop.php', $allactiveplugins_value))) {
 			$_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['isplugin_activ'] = 'not_activ';

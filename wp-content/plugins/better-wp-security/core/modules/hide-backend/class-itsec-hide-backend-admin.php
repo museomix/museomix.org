@@ -18,7 +18,6 @@ class ITSEC_Hide_Backend_Admin {
 		add_action( 'itsec_add_admin_meta_boxes', array( $this, 'add_admin_meta_boxes' ) ); //add meta boxes to admin page
 		add_action( 'itsec_admin_init', array( $this, 'initialize_admin' ) ); //initialize admin area
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_script' ) ); //enqueue scripts for admin page
-		add_filter( 'itsec_add_dashboard_status', array( $this, 'dashboard_status' ) ); //add information for plugin status
 		add_filter( 'itsec_tracking_vars', array( $this, 'tracking_vars' ) );
 
 		//manually save options on multisite
@@ -115,76 +114,44 @@ class ITSEC_Hide_Backend_Admin {
 
 	public function filter_apache_server_config_modification( $modification ) {
 		$input = get_site_option( 'itsec_hide_backend' );
-		
+
 		if ( true != $input['enabled'] ) {
 			return $modification;
 		}
-		
-		
+
+
 		$home_root = ITSEC_Lib::get_home_root();
-		
+
 		$modification .= "\n";
 		$modification .= "\t# " . __( 'Enable the hide backend feature - Security > Settings > Hide Login Area > Hide Backend', 'better-wp-security' ) . "\n";
 		$modification .= "\tRewriteRule ^($home_root)?{$input['slug']}/?$ {$home_root}wp-login.php [QSA,L]\n";
-		
+
 		if ( 'wp-register.php' != $input['register'] ) {
 			$modification .= "\tRewriteRule ^($home_root)?{$input['register']}/?$ /wplogin?action=register [QSA,L]\n";
 		}
-		
+
 		return $modification;
 	}
-	
+
 	public function filter_nginx_server_config_modification( $modification ) {
 		$input = get_site_option( 'itsec_hide_backend' );
-		
+
 		if ( true != $input['enabled'] ) {
 			return $modification;
 		}
-		
-		
+
+
 		$home_root = ITSEC_Lib::get_home_root();
-		
+
 		$modification .= "\n";
 		$modification .= "\t# " . __( 'Enable the hide backend feature - Security > Settings > Hide Login Area > Hide Backend', 'better-wp-security' ) . "\n";
 		$modification .= "\trewrite ^($home_root)?{$input['slug']}/?$ {$home_root}wp-login.php?\$query_string break;\n";
-		
+
 		if ( 'wp-register.php' != $input['register'] ) {
 			$modification .= "\trewrite ^($home_root)?{$input['register']}/?$ {$home_root}{$input['slug']}?action=register break;\n";
 		}
-		
+
 		return $modification;
-	}
-
-	/**
-	 * Sets the status in the plugin dashboard
-	 *
-	 * @since 4.0
-	 *
-	 * @return array array of statuses
-	 */
-	public function dashboard_status( $statuses ) {
-
-		if ( $this->settings['enabled'] === true ) {
-
-			$status_array = 'safe-medium';
-			$status       = array(
-				'text' => __( 'Your WordPress Dashboard is hidden.', 'better-wp-security' ), 'link' => '#itsec_hide_backend_enabled',
-			);
-
-		} else {
-
-			$status_array = 'medium';
-			$status       = array(
-				'text' => __( 'Your WordPress Dashboard is using the default addresses. This can make a brute force attack much easier.', 'better-wp-security' ),
-				'link' => '#itsec_hide_backend_enabled',
-			);
-
-		}
-
-		array_push( $statuses[$status_array], $status );
-
-		return $statuses;
-
 	}
 
 	/**

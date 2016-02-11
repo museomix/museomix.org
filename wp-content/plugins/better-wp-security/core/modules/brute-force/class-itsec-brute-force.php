@@ -9,6 +9,11 @@ class ITSEC_Brute_Force {
 	function run() {
 
 		$this->settings = get_site_option( 'itsec_brute_force' );
+		
+		if ( true !== $this->settings['enabled'] ) {
+			return;
+		}
+
 		$this->username = null;
 
 		add_action( 'wp_login', array( $this, 'wp_login' ), 10, 2 );
@@ -89,25 +94,21 @@ class ITSEC_Brute_Force {
 	 */
 	public function itsec_lockout_modules( $lockout_modules ) {
 
-		if ( $this->settings['enabled'] === true ) {
+		$lockout_modules['brute_force'] = array(
+			'type'   => 'brute_force',
+			'reason' => __( 'too many bad login attempts', 'better-wp-security' ),
+			'host'   => $this->settings['max_attempts_host'],
+			'user'   => $this->settings['max_attempts_user'],
+			'period' => $this->settings['check_period'],
+		);
 
-			$lockout_modules['brute_force'] = array(
-				'type'   => 'brute_force',
-				'reason' => __( 'too many bad login attempts', 'better-wp-security' ),
-				'host'   => $this->settings['max_attempts_host'],
-				'user'   => $this->settings['max_attempts_user'],
-				'period' => $this->settings['check_period'],
-			);
-
-			$lockout_modules['brute_force_admin_user'] = array(
-				'type'   => 'brute_force',
-				'reason' => __( 'user tried to login as "admin."', 'better-wp-security' ),
-				'host'   => 1,
-				'user'   => 1,
-				'period' => $this->settings['check_period']
-			);
-
-		}
+		$lockout_modules['brute_force_admin_user'] = array(
+			'type'   => 'brute_force',
+			'reason' => __( 'user tried to login as "admin."', 'better-wp-security' ),
+			'host'   => 1,
+			'user'   => 1,
+			'period' => $this->settings['check_period']
+		);
 
 		return $lockout_modules;
 
@@ -124,14 +125,10 @@ class ITSEC_Brute_Force {
 	 */
 	public function itsec_logger_modules( $logger_modules ) {
 
-		if ( $this->settings['enabled'] === true ) {
-
-			$logger_modules['brute_force'] = array(
-				'type'     => 'brute_force',
-				'function' => __( 'Invalid Login Attempt', 'better-wp-security' ),
-			);
-
-		}
+		$logger_modules['brute_force'] = array(
+			'type'     => 'brute_force',
+			'function' => __( 'Invalid Login Attempt', 'better-wp-security' ),
+		);
 
 		return $logger_modules;
 

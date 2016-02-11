@@ -65,26 +65,10 @@ class ITSEC_Global_Settings {
 	 */
 	public function add_module_advanced_intro() {
 
-		global $itsec_globals;
-
-		if ( array_key_exists( 'backup', $itsec_globals['free_modules'] ) ) {
-
-			$backup_link_open  = '<strong><a href="?page=toplevel_page_itsec_backups">';
-			$backup_link_close = '</a></strong>';
-
-		} else {
-
-			$backup_link_open  = '';
-			$backup_link_close = '';
-
-		}
-
 		printf(
-			'<p>%s %s%s%s %s</p>',
+			'<p>%s %s %s</p>',
 			__( 'The settings below are more advanced settings that should be done with caution on an existing site.', 'better-wp-security' ),
-			$backup_link_open,
-			__( 'Make sure you have a good backup before changing any setting on this page.', 'better-wp-security' ),
-			$backup_link_close,
+			apply_filters( 'itsec_advanced_intro_backup_text', __( 'Make sure you have a good backup before changing any setting on this page.', 'better-wp-security' ) ),
 			__( 'In addition, these settings will not be reversed if you remove this plugin. That said, all settings on this page use methods recommended by WordPress.org itself and will help in improving the security of your site.', 'better-wp-security' )
 		);
 

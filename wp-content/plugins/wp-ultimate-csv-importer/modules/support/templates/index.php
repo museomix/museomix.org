@@ -45,44 +45,42 @@ $impCE = new WPImporter_includes_helper();
 	<div style="width:99%;">
 
 		<div class="contactus" id="contactus" style="height:480px">
-				<div style='position:relative;left:10%;bottom:10px;width:45%;'>
-					<h3><?php echo __('Smackcoders Support', 'wp-ultimate-csv-importer'); ?> </h3><br />
+			<div style='position:relative;left:10%;bottom:10px;width:45%;'>
+				<h3><?php echo __('Smackcoders Support', 'wp-ultimate-csv-importer'); ?> </h3><br />
 
-						<a href="https://smackcoders.freshdesk.com/?utm_source=WpPlugin&utm_medium=Free&utm_campaign=SupportTraffic" target="_blank">
-                                                <img height= "120" width="220"src = 'https://www.wpultimatecsvimporter.com/wp-content/uploads/2015/07/support.png'>
-						</a>
+				<a href= <?php echo esc_url("https://smackcoders.freshdesk.com/?utm_source=WpPlugin&utm_medium=Free&utm_campaign=SupportTraffic");?> target="_blank">
+					<img height= "120" width="220" src = <?php echo esc_url(WP_CONST_ULTIMATE_CSV_IMP_DIR.'images/support.png');?>>
+				</a>
 
-					<p style="line-height:20px;padding-top:20px; padding-left:14px;"><?php echo __('Click', 'wp-ultimate-csv-importer');
-						echo ' ';
-						echo __('here', 'wp-ultimate-csv-importer'); ?> <a
-							href="https://www.smackcoders.com/blog/category/web-development-news/?utm_source=WpPlugin&utm_medium=Free&utm_campaign=SupportTraffic"
+				<p style="line-height:20px;padding-top:20px; padding-left:14px;"><?php echo __('Click', 'wp-ultimate-csv-importer');
+					echo ' ';
+					echo __('here', 'wp-ultimate-csv-importer'); ?> <a
+							href= <?php echo esc_url("https://www.smackcoders.com/blog/category/web-development-news/?utm_source=WpPlugin&utm_medium=Free&utm_campaign=SupportTraffic"); ?>
 							target="_blank"> <?php echo __('Recent News', 'wp-ultimate-csv-importer'); ?> </a>
-					</p>
+				</p>
 
-					<p style="line-height:20px; padding-left:14px;"><?php echo __('For', 'wp-ultimate-csv-importer'); ?> <a
-							href="http://www.youtube.com/user/smackcoders/channels"
+				<p style="line-height:20px; padding-left:14px;"><?php echo __('For', 'wp-ultimate-csv-importer'); ?> <a
+							href=<?php echo esc_url("http://www.youtube.com/user/smackcoders/channels");?>
 							target="_blank"> <?php echo __('Youtube Channel', 'wp-ultimate-csv-importer'); ?> </a></p>
 
-					<p style="line-height:20px; padding-left:14px;"><?php echo __('To Know the detail of', 'wp-ultimate-csv-importer'); ?>
-						<a href="https://www.smackcoders.com/store/products-46/wordpress.html?utm_source=WpPlugin&utm_medium=Free&utm_campaign=SupportTraffic"
-						   target="_blank"> <?php echo __('Other Plugins', 'wp-ultimate-csv-importer'); ?> </a></p>
-				</div>
-<!-- For Vedio -->
-                    <div style = "position:relative;left:70%;bottom:66%";>
-                                <h3 style='padding-left:22px'><?php echo __('Video Walk Through', 'wp-ultimate-csv-importer'); ?></h3>
-                        </div>
-
-				<div id = 'data' style = "position:relative;left:65%;bottom:63%";>
-				<div id="video">
-					<iframe width="560" height="315" src="https://www.youtube.com/embed/c-2wNw61d6s" frameborder="0" allowfullscreen></iframe>
-                                </div>
- 
+				<p style="line-height:20px; padding-left:14px;"><?php echo __('To Know the detail of', 'wp-ultimate-csv-importer'); ?>
+					<a href=<?php echo esc_url("https://www.smackcoders.com/store/products-46/wordpress.html?utm_source=WpPlugin&utm_medium=Free&utm_campaign=SupportTraffic");?>
+					   target="_blank"> <?php echo __('Other Plugins', 'wp-ultimate-csv-importer'); ?> </a></p>
 			</div>
-<!-- End -->
+			<!-- For Vedio -->
+			<div style = "position:relative;left:70%;bottom:66%";>
+				<h3 style='padding-left:22px'><?php echo __('Video Walk Through', 'wp-ultimate-csv-importer'); ?></h3>
+			</div>
 
+			<div id = 'data' style = "position:relative;left:65%;bottom:63%";>
+				<div id="video">
+					<iframe width="560" height="315" src=<?php echo esc_url("https://www.youtube.com/embed/c-2wNw61d6s");?> frameborder="0" allowfullscreen></iframe>
+				</div>
+
+			</div>
+			<!-- End -->
 		</div>
 	</div>
-
 	<!-- Promotion footer for other useful plugins -->
 	<div class="promobox" id="pluginpromo" style="width:99%;">
 		<div class="accordion-group">
@@ -92,6 +90,5 @@ $impCE = new WPImporter_includes_helper();
 				</div>
 			</div>
 		</div>
-		
 	</div>
 </div>

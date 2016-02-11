@@ -18,22 +18,6 @@ jQuery( document ).ready( function ( $ ) {
 	} ).change();
 
 	/**
-	 * Warns the user that they probably don't have enough RAM to perform a file scan
-	 */
-	if ( itsec_file_change.mem_limit <= 128 ) {
-
-		$( "#itsec_file_change_enabled" ).change( function () {
-
-			if ( this.checked ) {
-				alert( itsec_file_change.text );
-
-			}
-
-		} );
-
-	}
-
-	/**
 	 * Show the file tree in the settings.
 	 */
 	$( '.jquery_file_tree' ).fileTree(

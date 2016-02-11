@@ -61,9 +61,8 @@ class WJ_Bridge {
 
     $result = null;
     $result = wp_remote_post($url, $params);
-
     try {
-      if (!($result instanceof WP_Error) && in_array( (int)$result['response']['code'], array( 201, 400, 401) ) )
+      if (!is_wp_error($result) && in_array( (int)$result['response']['code'], array( 201, 400, 401) ) )
       {
         switch( $result['response']['code'] ){
         case 201:
@@ -76,7 +75,9 @@ class WJ_Bridge {
           $this->error = 'Not Authorized';
         break;
         }
-
+      }
+      else if (is_wp_error($result)) {
+        $this->error = $result->get_error_messages();
       }
     } catch(Exception $e) {
       $this->error = 'Unexpected error: '.$e->getMessage() . ' ['.var_export($result, true).']';// do nothing

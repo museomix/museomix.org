@@ -164,7 +164,7 @@ class ITSEC_File_Change {
 			$this->running = true;
 			$send_email    = true;
 
-			ITSEC_Lib::set_minimum_memory_limit( '128M' );
+			ITSEC_Lib::set_minimum_memory_limit( '256M' );
 
 			if ( $itsec_files->get_file_lock( 'file_change', 300 ) ) { //make sure it isn't already running
 
