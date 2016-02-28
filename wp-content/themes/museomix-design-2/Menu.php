@@ -77,9 +77,9 @@
 
 				echo home_url();  
 
-				echo '"><img src="'.get_template_directory_uri().'/images/logo-museomix-2.png" alt="Museomix 2013" class="logoHeader"/>';
+				echo '"><img src="'.get_template_directory_uri().'/images/logo-museomix-2.png" alt="Museomix 2016" class="logoHeader"/>';
 
-				_e(' 6-15 nov. 2015','museomix'); 
+				_e('11-13 nov. 2016','museomix'); 
 				
 				echo '</a>';
 
