@@ -177,14 +177,18 @@ class ITSEC_Ban_Users_Admin {
 		}
 
 		echo '<textarea id="itsec_ban_users_host_list" name="itsec_ban_users[host_list]" rows="10" cols="50">' . $host_list . PHP_EOL . '</textarea>';
-		echo '<p>' . __( 'Use the guidelines below to enter hosts that will not be allowed access to your site. Note you cannot ban yourself.', 'better-wp-security' ) . '</p>';
+		echo '<p>' . __( 'Use the guidelines below to enter hosts that will not be allowed access to your site.', 'better-wp-security' ) . '</p>';
 		echo '<ul>';
-		echo '<li>' . __( 'You may ban users by individual IP address or IP address range.', 'better-wp-security' ) . '</li>';
-		echo '<li>' . __( 'Individual IP addesses must be in IPV4 standard format (i.e. ###.###.###.### or ###.###.###.###/##). Wildcards (*) or a netmask is allowed to specify a range of ip addresses.', 'better-wp-security' ) . '</li>';
-		echo '<li>' . __( 'If using a wildcard (*) you must start with the right-most number in the ip field. For example ###.###.###.* and ###.###.*.* are permitted but ###.###.*.### is not.', 'better-wp-security' ) . '</li>';
-		echo '<li><a href="http://ip-lookup.net/domain-lookup.php" target="_blank">' . __( 'Lookup IP Address.', 'better-wp-security' ) . '</a></li>';
-		echo '<li>' . __( 'Enter only 1 IP address or 1 IP address range per line.', 'better-wp-security' ) . '</li>';
+		echo '<li>' . __( 'You may ban users by individual IP address or IP address range using wildcards or CIDR notation.', 'better-wp-security' ) . '</li>';
+		echo '<ul>';
+		echo '<li>' . __( 'Individual IP addresses must be in IPv4 or IPv6 standard format (###.###.###.### or ####:####:####:####:####:####:####:####).', 'better-wp-security' ) . '</li>';
+		echo '<li>' . __( 'CIDR notation is allowed to specify a range of IP addresses (###.###.###.###/## or ####:####:####:####:####:####:####:####/###).', 'better-wp-security' ) . '</li>';
+		echo '<li>' . __( 'Wildcards are also supported with some limitations. If using wildcards (*), you must start with the right-most chunk in the IP address. For example ###.###.###.* and ###.###.*.* are permitted but ###.###.*.### is not. Wildcards are only for convenient entering of IP addresses, and will be automatically converted to their appropriate CIDR notation format on save.', 'better-wp-security' ) . '</li>';
 		echo '</ul>';
+		echo '<li>' . __( 'Enter only 1 IP address or 1 IP address range per line.', 'better-wp-security' ) . '</li>';
+		echo '<li>' . __( 'Note: You cannot ban yourself.', 'better-wp-security' ) . '</li>';
+		echo '</ul>';
+		echo '<p><a href="http://ip-lookup.net/domain-lookup.php" target="_blank">' . __( 'Lookup IP Address.', 'better-wp-security' ) . '</a></p>';
 
 	}
 
@@ -240,6 +244,10 @@ class ITSEC_Ban_Users_Admin {
 	}
 
 	protected function get_server_config_ban_hosts_rules( $server_type ) {
+		if ( ! class_exists( 'ITSEC_Lib_IP_Tools' ) ) {
+			$itsec_core = ITSEC_Core::get_instance();
+			require_once( dirname( $itsec_core->get_plugin_file() ) . '/core/lib/class-itsec-lib-ip-tools.php' );
+		}
 		if ( true !== $this->settings['enabled']  ) {
 			return '';
 		}
@@ -261,14 +269,13 @@ class ITSEC_Ban_Users_Admin {
 
 		// process hosts list
 		foreach ( $this->settings['host_list'] as $host ) {
-			$host = ITSEC_Lib::ip_wild_to_mask( $host );
-			$host = trim( $host );
+			$host = ITSEC_Lib_IP_Tools::ip_wild_to_ip_cidr( trim( $host ) );
 
 			if ( empty( $host ) ) {
 				continue;
 			}
 
-			if ( ITSEC_Ban_Users::is_ip_whitelisted( $host ) ) {
+			if ( ITSEC_Lib::is_ip_whitelisted( $host ) ) {
 				/**
 				 * @todo warn the user the ip to be banned is whitelisted
 				 */
@@ -277,26 +284,19 @@ class ITSEC_Ban_Users_Admin {
 
 
 			if ( in_array( $server_type, array( 'apache', 'litespeed' ) ) ) {
-				$converted_host = ITSEC_Lib::ip_mask_to_range( $host );
-				$converted_host = trim( $converted_host );
+				$converted_host = ITSEC_Lib_IP_Tools::ip_cidr_to_ip_regex( $host );
 
 				if ( empty( $converted_host ) ) {
 					continue;
 				}
 
-
-				$set_env_host = str_replace( '.', '\\.', $converted_host );
-
-				$set_env_rules .= "\tSetEnvIF REMOTE_ADDR \"^$set_env_host$\" DenyAccess\n"; // Ban IP
-				$set_env_rules .= "\tSetEnvIF X-FORWARDED-FOR \"^$set_env_host$\" DenyAccess\n"; // Ban IP from a proxy
-				$set_env_rules .= "\tSetEnvIF X-CLUSTER-CLIENT-IP \"^$set_env_host$\" DenyAccess\n"; // Ban IP from a load balancer
+				$set_env_rules .= "\tSetEnvIF REMOTE_ADDR \"^$converted_host$\" DenyAccess\n"; // Ban IP
+				$set_env_rules .= "\tSetEnvIF X-FORWARDED-FOR \"^$converted_host$\" DenyAccess\n"; // Ban IP from a proxy
+				$set_env_rules .= "\tSetEnvIF X-CLUSTER-CLIENT-IP \"^$converted_host$\" DenyAccess\n"; // Ban IP from a load balancer
 				$set_env_rules .= "\n";
 
-
-				$require_host = str_replace( '.[0-9]+', '', $converted_host );
-
-				$require_rules .= "\t\t\tRequire not ip $require_host\n";
-				$deny_rules .= "\t\tDeny from $require_host\n";
+				$require_rules .= "\t\t\tRequire not ip $host\n";
+				$deny_rules .= "\t\tDeny from $host\n";
 			} else if ( 'nginx' === $server_type ) {
 				$host_rules .= "\tdeny $host;\n";
 			}
@@ -526,6 +526,10 @@ class ITSEC_Ban_Users_Admin {
 	 * @return Array         Sanitized array
 	 */
 	public function sanitize_module_input( $input ) {
+		if ( ! class_exists( 'ITSEC_Lib_IP_Tools' ) ) {
+			$itsec_core = ITSEC_Core::get_instance();
+			require_once( dirname( $itsec_core->get_plugin_file() ) . '/core/lib/class-itsec-lib-ip-tools.php' );
+		}
 
 		global $itsec_globals;
 
@@ -579,11 +583,18 @@ class ITSEC_Ban_Users_Admin {
 				continue;
 			}
 
-			if ( ! ITSEC_Lib::validates_ip_address( $address ) ) {
+			//Store the original user supplied IP for use in error messages or to fill back into the list if invalid
+			$original_address = $address;
+
+			// This checks validity and converts wildcard notation to standard CIDR notation
+			$address = ITSEC_Lib_IP_Tools::ip_wild_to_ip_cidr( $address );
+			if ( ! $address ) {
+				// Put the address back to the original so it's not removed from the list
+				$address = $original_address;
 				$bad_ips[] = trim( filter_var( $address, FILTER_SANITIZE_STRING ) );
 			}
 
-			if ( ITSEC_Ban_Users::is_ip_whitelisted( $address, null, true ) ) {
+			if ( ITSEC_Lib::is_ip_whitelisted( $address, null, true ) ) {
 				$white_ips[] = trim( filter_var( $address, FILTER_SANITIZE_STRING ) );
 			}
 

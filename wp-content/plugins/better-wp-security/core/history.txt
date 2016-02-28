@@ -326,3 +326,13 @@
 	Bug Fix: All data added to the options table by iThemes Security is removed on uninstall.
 	Bug Fix: Fixed the cause of the following warning: call_user_func_array() expects parameter 1 to be a valid callback, class 'ITSEC_SSL_Setup' does not have a method 'execute_deactivate'
 	Enhancement: Improved code that ensures that tables and options table entries created by iThemes Security are removed on uninstall only when no other iThemes Security plugin is active.
+2.2.0 - 2016-02-11 - Chris Jean & Aaron D. Campbell
+	New Feature: Added support for IPv6 addresses. This includes support for IPv6 in lockouts, ban hosts, and white lists.
+	Bug Fix: Fixed issue that could cause username-based lockouts to fail for long usernames.
+	Enhancement: Updated descriptions of valid IP and IP range formats for the Lockout White List and the Ban Hosts settings.
+2.2.1 - 2016-02-15 - Chris Jean & Aaron D. Campbell
+	Bug Fix: Fixed issue that prevented wildcard IP ranges from being blacklisted or whitelisted.
+	Bug Fix: Removed warnings generated when the Away Mode module is disabled and iThemes Sync contacts the site.
+	Enhancement: Updated host entries in log details to link to traceip.net rather than ip-adress.com. This is because ip-adress.com does not support IPv6 addresses.
+	Enhancement: Updated some translatable strings relating to blacklisting and whitelisting to allow for better translations.
+	Enhancement: Added details about how wildcard IP ranges are converted to CIDR format (this improves performance).

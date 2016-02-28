@@ -1,8 +1,0 @@
-
-       Put your plugins here.
-       The file name of a plugin must be formatted like this:
-            skinnyPlugin*.php
-
-       For example:
-           skinnyPluginCaptcha.php
-    

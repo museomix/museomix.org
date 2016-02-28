@@ -107,7 +107,7 @@ class WPImporter_inlineImages {
 					$full_path = $dir ['basedir'];
 					$baseurl = $dir ['baseurl'];
 				}
-				$eventKey = $_POST['postdata']['uploadedFile'];
+				$eventKey = sanitize_text_field($_POST['postdata']['uploadedFile']);
 
 				$inlineimageDirpath = $inlineimageDir . '/' . $eventKey;
 				$imagelist = scanDirectories($inlineimageDirpath);
@@ -266,7 +266,7 @@ class WPImporter_inlineImages {
 			}
 
 			$wp_media_path = $full_path;
-			$eventKey = $_POST['postdata']['uploadedFile'];
+			$eventKey = sanitize_text_field($_POST['postdata']['uploadedFile']);
 			$inlineimageDirpath = $inlineimageDir . '/' . $eventKey;
 			$imagelist = scanDirectories($inlineimageDirpath);
 			$currentLoc = '';

@@ -108,7 +108,7 @@ class ITSEC_IPCheck extends ITSEC_Lockout {
 
 		}
 
-		if ( $this->is_ip_whitelisted( $ip ) ) {
+		if ( ITSEC_Lib::is_ip_whitelisted( $ip ) ) {
 			return false;
 		}
 
@@ -121,7 +121,7 @@ class ITSEC_IPCheck extends ITSEC_Lockout {
 
 		$action = 'check-ip';
 
-		if ( ITSEC_Lib::validates_ip_address( $ip ) ) { //verify IP address is valid
+		if ( ITSEC_Lib_IP_Tools::validate( $ip ) ) { //verify IP address is valid
 
 			if ( ! isset( $this->settings['api_key'] ) || ! isset( $this->settings['api_s'] ) ) {
 				return false; //invalid key or secret
@@ -281,11 +281,11 @@ class ITSEC_IPCheck extends ITSEC_Lockout {
 
 		}
 
-		if ( $this->is_ip_whitelisted( $ip ) ) {
+		if ( ITSEC_Lib::is_ip_whitelisted( $ip ) ) {
 			return 0;
 		}
 
-		if ( ITSEC_Lib::validates_ip_address( $ip ) ) { //verify IP address is valid
+		if ( ITSEC_Lib_IP_Tools::validate( $ip ) ) { //verify IP address is valid
 
 			if ( ! isset( $this->settings['api_key'] ) || ! isset( $this->settings['api_s'] ) ) {
 				return -1; //invalid key or secret

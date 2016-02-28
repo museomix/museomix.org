@@ -44,13 +44,19 @@ final class ITSEC_Brute_Force_Log extends ITSEC_WP_List_Table {
 	 *
 	 **/
 	function column_host( $item ) {
+		if ( ! class_exists( 'ITSEC_Lib_IP_Tools' ) ) {
+			$itsec_core = ITSEC_Core::get_instance();
+			require_once( dirname( $itsec_core->get_plugin_file() ) . '/core/lib/class-itsec-lib-ip-tools.php' );
+		}
 
 		$r = array();
 		if ( ! is_array( $item['host'] ) ) {
 			$item['host'] = array( $item['host'] );
 		}
 		foreach ( $item['host'] as $host ) {
-			$r[] = '<a href="http://ip-adress.com/ip_tracer/' . filter_var( $host, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 ) . '" target="_blank">' . filter_var( $host, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 ) . '</a>';
+			if ( ITSEC_Lib_IP_Tools::validate( $host ) ) {
+				$r[] = '<a href="http://www.traceip.net/?query=' . urlencode( $host ) . '" target="_blank">' . esc_html( $host ) . '</a>';
+			}
 		}
 		$return = implode( '<br />', $r );
 

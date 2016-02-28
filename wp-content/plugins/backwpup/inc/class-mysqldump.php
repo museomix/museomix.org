@@ -102,7 +102,7 @@ class BackWPup_MySQLDump {
 
 
 		if ( ! $this->mysqli->options( MYSQLI_OPT_CONNECT_TIMEOUT, 5 ) ) {
-			throw new BackWPup_MySQLDump_Exception( __( 'Setting of MySQLi connection timeout failed', 'backwpup' ) );
+			trigger_error( __( 'Setting of MySQLi connection timeout failed', 'backwpup' ) );
 		}
 
 		//connect to Database
@@ -114,7 +114,7 @@ class BackWPup_MySQLDump {
 		if ( ! empty( $args[ 'dbcharset' ] ) && method_exists( $this->mysqli, 'set_charset' ) ) {
 			$res = $this->mysqli->set_charset( $args[ 'dbcharset' ] );
 			if ( ! $res ) {
-				throw new BackWPup_MySQLDump_Exception( sprintf( _x( 'Cannot set DB charset to %s error: %s','Database Charset', 'backwpup' ), $args[ 'dbcharset' ], $this->mysqli->error ) );
+				trigger_error( sprintf( _x( 'Cannot set DB charset to %s error: %s','Database Charset', 'backwpup' ), $args[ 'dbcharset' ], $this->mysqli->error ), E_USER_WARNING );
 			}
 		}
 
@@ -301,6 +301,30 @@ class BackWPup_MySQLDump {
 				$res2->close();
 				$create .= $create_procedure[ 'Create Procedure' ] . ";\n";
 				$create .= "/*!40101 SET character_set_client = @saved_cs_client */;\n";
+				$this->write( $create );
+			}
+			$res->close();
+		}
+
+		//dump Trigger
+		$res = $this->mysqli->query( "SHOW TRIGGERS FROM `" . $this->dbname . "`" );
+		$GLOBALS[ 'wpdb' ]->num_queries ++;
+		if ( $this->mysqli->error ) {
+			trigger_error( sprintf( __( 'Database error %1$s for query %2$s', 'backwpup' ), $this->mysqli->error, "SHOW TRIGGERS" ), E_USER_WARNING );
+		} else {
+			while ( $triggers = $res->fetch_assoc() ) {
+				$create = "\n--\n-- Trigger structure for " . $triggers[ 'Trigger' ] . "\n--\n\n";
+				$create .= "DROP TRIGGER IF EXISTS `" . $triggers[ 'Trigger' ] . "`;\n";
+				$create .= "DELIMITER //\n";
+				$res2 = $this->mysqli->query( "SHOW CREATE TRIGGER `" . $this->dbname . "`.`" . $triggers[ 'Trigger' ] . "`" );
+				$GLOBALS[ 'wpdb' ]->num_queries ++;
+				if ( $this->mysqli->error ) {
+					trigger_error( sprintf( __( 'Database error %1$s for query %2$s', 'backwpup' ), $this->mysqli->error, "SHOW CREATE TRIGGER `" . $this->dbname . "`.`" . $triggers[ 'Trigger' ] . "`" ), E_USER_WARNING );
+				}
+				$create_trigger = $res2->fetch_assoc();
+				$res2->close();
+				$create .= $create_trigger[ 'SQL Original Statement' ] . ";\n";
+				$create .= "//\nDELIMITER ;\n";
 				$this->write( $create );
 			}
 			$res->close();

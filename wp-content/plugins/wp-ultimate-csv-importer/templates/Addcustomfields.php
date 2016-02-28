@@ -39,7 +39,7 @@ if (!defined('ABSPATH')) {
 	exit;
 } // Exit if accessed directly
 $filename = isset($_POST['filename']) ? sanitize_text_field($_POST['filename']) : '';
-$count = isset($_POST['corecount']) ? sanitize_text_field($_POST['corecount']) : '';
+$count = isset($_POST['corecount']) ? intval($_POST['corecount']) : '';
 $impobj = new WPImporter_includes_helper();
 $getrec = $impobj->csv_file_data($filename);
 $csvheaders = $impobj->headers;

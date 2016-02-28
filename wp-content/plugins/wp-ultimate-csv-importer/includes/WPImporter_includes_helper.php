@@ -178,6 +178,7 @@ class WPImporter_includes_helper {
 			if (!isset($_REQUEST['__module'])) {
 				if (!isset($_REQUEST['__module'])) {
 					wp_redirect(get_admin_url() . 'admin.php?page=' . WP_CONST_ULTIMATE_CSV_IMP_SLUG . '/index.php&__module=dashboard');
+					exit();
 				}
 			}
 		}
@@ -820,6 +821,27 @@ class WPImporter_includes_helper {
 					$postid = wp_insert_post($data_array);
 					$post_id = $inlineImagesObj->importwithInlineImages($postid, $currentLimit, $data_array, $this, $importinlineimageoption, $extractedimagelocation, $sample_inlineimage_url);
 				} else {
+					/* Check post parent is exist or not */
+					if(isset($data_array['post_parent']) && isset($data_array['post_type']) && $data_array['post_type'] == 'page'){
+						global $wpdb;
+						$postparent = $data_array['post_parent'];
+						if(is_numeric($postparent)){
+							$get_data = $wpdb->get_results($wpdb->prepare("select post_title from $wpdb->posts where id = %d",$postparent));
+							if(empty($get_data)){
+								$data_array['post_parent'] = '';
+							}
+						}else{
+					
+							$post_tit_id = $wpdb->get_results($wpdb->prepare("select ID from $wpdb->posts where post_title = %s and post_type = %s order by ID DESC",$postparent,$data_array['post_type']));
+
+							$post_name_id = $wpdb->get_results($wpdb->prepare("select ID from $wpdb->posts where post_name = %s and post_type = %s order by ID DESC",$postparent,$data_array['post_type']));
+							if($post_tit_id){
+								$data_array['post_parent'] = $post_tit_id[0]->ID;
+							}elseif($post_name_id){
+								$data_array['post_parent'] = $post_name_id[0]->ID;
+							}
+						}
+					}
 					$post_id = wp_insert_post($data_array);
 					if($post_id != false) {
 						$this->detailedLog[$currentLimit]['post_id'] = "<b>" . __('Created Post_ID', 'wp-ultimate-csv-importer') . " - </b>" . $post_id . " - success";
@@ -2077,6 +2099,7 @@ class WPImpCSVParserLib {
 		if ($value !== null && $value != '') {
 			$delimiter = preg_quote($this->delimiter, '/');
 			$enclosure = preg_quote($this->enclosure, '/');
+			if($value[0]=='=') $value="'".$value;
 			if (preg_match("/" . $delimiter . "|" . $enclosure . "|\n|\r/i", $value) || ($value{0} == ' ' || substr($value, -1) == ' ')) {
 				$value = str_replace($this->enclosure, $this->enclosure . $this->enclosure, $value);
 				$value = $this->enclosure . $value . $this->enclosure;

@@ -231,6 +231,7 @@ class ITSEC_Setup {
 	private function upgrade_execute( $upgrade = false ) {
 
 		global $itsec_old_version, $itsec_globals, $wpdb, $itsec_setup_action;
+		$tables_updated = false;
 
 		$itsec_setup_action = 'upgrade';
 		$itsec_old_version  = $upgrade;
@@ -330,6 +331,7 @@ class ITSEC_Setup {
 		if ( $itsec_old_version < 4030 ) {
 
 			ITSEC_Lib::create_database_tables(); //adds username field to lockouts and temp
+			$tables_updated = true;
 			add_site_option( 'itsec_rewrites_changed', true );
 
 		}
@@ -368,6 +370,12 @@ class ITSEC_Setup {
 				add_site_option( 'itsec_api_nag', true, false );
 			}
 
+		}
+
+		//IPv6 support was added in 4039
+		if ( $itsec_old_version < 4039 && ! $tables_updated ) {
+			ITSEC_Lib::create_database_tables();
+			$tables_updated = true;
 		}
 
 	}

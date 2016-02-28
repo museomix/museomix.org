@@ -422,11 +422,12 @@ class BackWPup_Page_Editjob {
 		echo '</h2>';
 		//display messages
 		BackWPup_Admin::display_messages();
-		echo '<form name="editjob" id="editjob" method="post" action="' . admin_url( 'admin-post.php?action=backwpup' ) . '">';
+		echo '<form name="editjob" id="editjob" method="post" action="' . admin_url( 'admin-post.php' ) . '">';
 		echo '<input type="hidden" id="jobid" name="jobid" value="' . $jobid . '" />';
 		echo '<input type="hidden" name="tab" value="' . $_GET[ 'tab' ] . '" />';
 		echo '<input type="hidden" name="nexttab" value="' . $_GET[ 'tab' ] . '" />';
 		echo '<input type="hidden" name="page" value="backwpupeditjob" />';
+		echo '<input type="hidden" name="action" value="backwpup" />';
     	echo '<input type="hidden" name="anchor" value="" />';
 		wp_nonce_field( 'backwpupeditjob_page' );
 		wp_nonce_field( 'backwpup_ajax_nonce', 'backwpupajaxnonce', FALSE );
@@ -442,7 +443,7 @@ class BackWPup_Page_Editjob {
 						<th scope="row"><label for="name"><?php _e( 'Please name this job.', 'backwpup' ) ?></label></th>
 						<td>
 							<input name="name" type="text" id="name" data-empty="<?php _e( 'New Job', 'backwpup' ); ?>"
-								   value="<?php echo BackWPup_Option::get( $jobid, 'name' ); ?>" class="regular-text" />
+								   value="<?php echo esc_html( BackWPup_Option::get( $jobid, 'name' ) ); ?>" class="regular-text" />
 						</td>
 					</tr>
 				</table>
@@ -584,7 +585,7 @@ class BackWPup_Page_Editjob {
 						<th scope="row"><label for="mailaddresslog"><?php _e( 'Send log to email address', 'backwpup' ) ?></label></th>
 						<td>
 							<input name="mailaddresslog" type="text" id="mailaddresslog"
-								   value="<?php echo BackWPup_Option::get( $jobid, 'mailaddresslog' );?>"
+								   value="<?php echo esc_html( BackWPup_Option::get( $jobid, 'mailaddresslog' ) );?>"
 								   class="regular-text help-tip" title="<?php esc_attr_e( 'Leave empty to not have log sent. Or separate with , for more than one receiver.', 'backwpup' ); ?>" />
 						</td>
 					</tr>
@@ -592,7 +593,7 @@ class BackWPup_Page_Editjob {
 						<th scope="row"><label for="mailaddresssenderlog"><?php _e( 'Email FROM field', 'backwpup' ) ?></label></th>
 						<td>
 							<input name="mailaddresssenderlog" type="text" id="mailaddresssenderlog"
-								   value="<?php echo BackWPup_Option::get( $jobid, 'mailaddresssenderlog' );?>"
+								   value="<?php echo esc_html( BackWPup_Option::get( $jobid, 'mailaddresssenderlog' ) );?>"
 								   class="regular-text help-tip" title="<?php esc_attr_e( 'Email "From" field (Name &lt;&#160;you@your-email-address.tld&#160;&gt;)', 'backwpup' ); ?>" />
 						</td>
 					</tr>

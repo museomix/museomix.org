@@ -38,7 +38,7 @@ class ITSEC_Ban_Users {
 
 		}
 
-		if ( ! in_array( $host, $ban_list ) && ! ITSEC_Ban_Users::is_ip_whitelisted( $host, $white_list ) ) {
+		if ( ! in_array( $host, $ban_list ) && ! ITSEC_Lib::is_ip_whitelisted( $host, $white_list ) ) {
 
 			$ban_list[]            = $host;
 			$settings['host_list'] = $ban_list;
@@ -49,100 +49,4 @@ class ITSEC_Ban_Users {
 		}
 
 	}
-
-	/**
-	 * Determines whether a given IP address is whitelisted
-	 *
-	 * @param  string  $ip_to_check ip to check
-	 * @param  array   $white_ips   ip list to compare to if not yet saved to options
-	 * @param  boolean $current     whether to whitelist the current ip or not (due to saving, etc)
-	 *
-	 * @return boolean               true if whitelisted or false
-	 */
-	public static function is_ip_whitelisted( $ip_to_check, $white_ips = null, $current = false ) {
-
-		$ip_to_check = trim( $ip_to_check );
-
-		if ( $white_ips === null ) {
-
-			$global_settings = get_site_option( 'itsec_global' );
-
-			$white_ips = ( isset( $global_settings['lockout_white_list'] ) ? $global_settings['lockout_white_list'] : array() );
-
-		}
-
-		if ( $current === true ) {
-			$white_ips[] = ITSEC_Lib::get_ip(); //add current user ip to whitelist to check automatically
-		}
-
-		foreach ( $white_ips as $white_ip ) {
-
-			$converted_white_ip = ITSEC_Lib::ip_wild_to_mask( $white_ip );
-
-			$check_range = ITSEC_Lib::cidr_to_range( $converted_white_ip );
-			$ip_range    = ITSEC_Lib::cidr_to_range( $ip_to_check );
-
-			if ( sizeof( $check_range ) === 2 ) { //range to check
-
-				$check_min = ip2long( $check_range[0] );
-				$check_max = ip2long( $check_range[1] );
-
-				if ( sizeof( $ip_range ) === 2 ) {
-
-					$ip_min = ip2long( $ip_range[0] );
-					$ip_max = ip2long( $ip_range[1] );
-
-					/**
-					 * Checks cover the following scenarios:
-					 *  - min-a, min-b, max-a, max-b : min-b is in a range and min-a is in b range
-					 *  - min-b, min-a, max-b, max-a : max-b is in a range and max-a is in b range
-					 *  - min-a, min-b, max-b, max-a : range b is encapsulated by range a
-					 *  - min-b, min-a, max-a, max-b : range a is encapsulated by range b
-					 */
-					if ( ( $check_min <= $ip_min && $ip_min <= $check_max ) || ( $check_min <= $ip_max && $ip_max <= $check_max ) ||
-					     ( $ip_min <= $check_min && $check_min <= $ip_max ) || ( $ip_min <= $check_max && $check_max <= $ip_max ) ) {
-						return true;
-					}
-
-				} else {
-
-					$ip = ip2long( $ip_range[0] );
-
-					if ( $check_min <= $ip && $ip <= $check_max ) {
-						return true;
-					}
-
-				}
-
-			} else { //single ip to check
-
-				$check = ip2long( $check_range[0] );
-
-				if ( sizeof( $ip_range ) === 2 ) {
-
-					$ip_min = ip2long( $ip_range[0] );
-					$ip_max = ip2long( $ip_range[1] );
-
-					if ( $ip_min <= $check && $check <= $ip_max ) {
-						return true;
-					}
-
-				} else {
-
-					$ip = ip2long( $ip_range[0] );
-
-					if ( $check == $ip ) {
-						return true;
-					}
-
-				}
-
-			}
-
-		}
-
-		return false;
-
-	}
-
 }

@@ -400,8 +400,13 @@ final class ITSEC_Files {
 	 */
 	public static function quick_ban( $host ) {
 		$host = trim( $host );
-		
-		if ( ! ITSEC_Lib::validates_ip_address( $host ) ) {
+
+		if ( ! class_exists( 'ITSEC_Lib_IP_Tools' ) ) {
+			$itsec_core = ITSEC_Core::get_instance();
+			require_once( dirname( $itsec_core->get_plugin_file() ) . '/core/lib/class-itsec-lib-ip-tools.php' );
+		}
+
+		if ( ! ITSEC_Lib_IP_Tools::validate( $host ) ) {
 			return false;
 		}
 		

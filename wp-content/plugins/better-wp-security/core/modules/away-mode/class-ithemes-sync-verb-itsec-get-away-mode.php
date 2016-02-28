@@ -21,6 +21,9 @@ class Ithemes_Sync_Verb_ITSEC_Get_Away_Mode extends Ithemes_Sync_Verb {
 			$away_enabled = false;
 			$next         = absint( $away );
 
+		} else {
+			$away_enabled = null;
+			$next         = null;
 		}
 
 		return array(

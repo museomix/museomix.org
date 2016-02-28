@@ -38,7 +38,7 @@
 if (!defined('ABSPATH')) {
 	exit;
 } // Exit if accessed directly
-$noncevar = isset($_POST['postdata']['wpnonce']) ? $_POST['postdata']['wpnonce'] : '';
+$noncevar = isset($_POST['postdata']['wpnonce']) ? sanitize_text_field($_POST['postdata']['wpnonce']) : '';
 if (!wp_verify_nonce($noncevar, 'smack_nonce')) {
 	die('You are not allowed to do this operation.Please contact your admin.');
 }
@@ -68,11 +68,11 @@ if ($curr_action == 'post' || $curr_action == 'page' || $curr_action == 'customp
 	if ($curr_action == 'custompost') {
 		$importedAs = 'Custom Post';
 	}
-	$importObj->MultiImages = $_POST['postdata']['importinlineimage'];
+	$importObj->MultiImages = sanitize_text_field($_POST['postdata']['importinlineimage']);
 } elseif ($curr_action == 'eshop') {
 	$importObj = new EshopActions();
 	$importedAs = 'Eshop';
-	$importObj->MultiImages = $_POST['postdata']['importinlineimage'];
+	$importObj->MultiImages = sanitize_text_field($_POST['postdata']['importinlineimage']);
 } elseif ($curr_action == 'wpcommerce') {
 	$importObj = new WpcommerceActions();
 } elseif ($curr_action == 'woocommerce') {
@@ -94,12 +94,12 @@ if ($curr_action == 'post' || $curr_action == 'page' || $curr_action == 'customp
 }
 
 
-$limit = $_POST['postdata']['limit'];
-$totRecords = $_POST['postdata']['totRecords'];
-$_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['importlimit'] = $_POST['postdata']['importlimit'];
-$count = $_POST['postdata']['importlimit'];
-$requested_limit = $_POST['postdata']['importlimit'];
-$tmpCnt = $_POST['postdata']['tmpcount'];
+$limit = intval($_POST['postdata']['limit']);
+$totRecords = intval($_POST['postdata']['totRecords']);
+$_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['importlimit'] = intval($_POST['postdata']['importlimit']);
+$count = intval($_POST['postdata']['importlimit']);
+$requested_limit = intval($_POST['postdata']['importlimit']);
+$tmpCnt = intval($_POST['postdata']['tmpcount']);
 if ($count < $totRecords) {
 	$count = $tmpCnt + $count;
 	if ($count > $totRecords) {
@@ -115,11 +115,11 @@ $get_mapped_array = array();
 $mapping_value = '';
 $filename = $_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['uploadedFile'];
 $resultArr = $skinnyObj->csv_file_data($filename);
-if ($_POST['postdata']['dupTitle']) {
-	$importObj->titleDupCheck = $_POST['postdata']['dupTitle'];
+if (sanitize_text_field($_POST['postdata']['dupTitle'])) {
+	$importObj->titleDupCheck = sanitize_text_field($_POST['postdata']['dupTitle']);
 }
-if ($_POST['postdata']['dupContent']) {
-	$importObj->conDupCheck = $_POST['postdata']['dupContent'];
+if (sanitize_text_field($_POST['postdata']['dupContent'])) {
+	$importObj->conDupCheck = sanitize_text_field($_POST['postdata']['dupContent']);
 }
 $csv_rec_count = $_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['h2'];
 $available_groups = $skinnyObj->get_availgroups($curr_action);
@@ -158,12 +158,12 @@ for ($i = $limit; $i < $count; $i++) {
 	$importinlineimageoption = null;
 	if (isset($_POST['postdata']['inline_image_location'])) {
 		$importinlineimageoption = 'imagewithextension';
-		$extracted_image_location = $_POST['postdata']['inline_image_location'];
+		$extracted_image_location = sanitize_text_field($_POST['postdata']['inline_image_location']);
 	}
-	if ($_POST['postdata']['inlineimagehandling'] != 'imagewithextension') {
+	if (sanitize_text_field($_POST['postdata']['inlineimagehandling']) != 'imagewithextension') {
 		$importinlineimageoption = 'imagewithurl';
-		$extracted_image_location = $_POST['postdata']['inline_image_location'];
-		$sample_inlineimage_url = $_POST['postdata']['inlineimagehandling'];
+		$extracted_image_location = sanitize_text_field($_POST['postdata']['inline_image_location']);
+		$sample_inlineimage_url = sanitize_text_field($_POST['postdata']['inlineimagehandling']);
 	}
 	$importObj->processDataInWP($to_be_import_rec, $_SESSION['SMACK_MAPPING_SETTINGS_VALUES'], $_SESSION['SMACK_MAPPING_SETTINGS_VALUES'], $i, $extracted_image_location, $importinlineimageoption, $sample_inlineimage_url);
 	$logarr = array('post_id','Failed','assigned_author', 'category', 'tags', 'postdate', 'image', 'poststatus');
@@ -210,7 +210,7 @@ for ($i = $limit; $i < $count; $i++) {
 }
 
 if ($limit >= $totRecords) {
-	$advancemedia = $_POST['postdata']['advance_media'];
+	$advancemedia = sanitize_text_field($_POST['postdata']['advance_media']);
 	$dir = $skinnyObj->getUploadDirectory();
 	$get_inline_imageDir = explode('/', $extracted_image_location);
 	$explodedCount = count($get_inline_imageDir);

@@ -24,7 +24,12 @@ class Ithemes_Sync_Verb_ITSEC_Set_Temp_Whitelist extends Ithemes_Sync_Verb {
 
 			$ip = sanitize_text_field( $arguments['ip'] );
 
-			if ( ITSEC_Lib::validates_ip_address( $ip ) ) {
+			if ( ! class_exists( 'ITSEC_Lib_IP_Tools' ) ) {
+				$itsec_core = ITSEC_Core::get_instance();
+				require_once( dirname( $itsec_core->get_plugin_file() ) . '/core/lib/class-itsec-lib-ip-tools.php' );
+			}
+
+			if ( ITSEC_Lib_IP_Tools::validate( $ip ) ) {
 
 				$response = array(
 					'ip'  => $ip,

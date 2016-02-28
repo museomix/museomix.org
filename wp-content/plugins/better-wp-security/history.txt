@@ -461,3 +461,12 @@
 	Enhancement: Added "Use MySQLi" entry to the "System Information" section of Security > Dashboard to show whether the MySQLi driver is enabled.
 	Enhancement: Updated the "SQL Mode" entry in the "System Information" section of Security > Dashboard to show the full details if that value is set.
 	Enhancement: Improved code that ensures that tables and options table entries created by iThemes Security are removed on uninstall only when no other iThemes Security plugin is active.
+5.3.0 - 2016-02-17 - Chris Jean & Aaron D. Campbell
+	New Feature: Added support for IPv6 addresses. This includes support for IPv6 in lockouts, ban hosts, and white lists.
+	Bug Fix: Fixed issue that could cause username-based lockouts to fail for long usernames.
+	Bug Fix: Fixed issue that prevented wildcard IP ranges from being blacklisted or whitelisted.
+	Bug Fix: Removed warnings generated when the Away Mode module is disabled and iThemes Sync contacts the site.
+	Enhancement: Updated descriptions of valid IP and IP range formats for the Lockout White List and the Ban Hosts settings.
+	Enhancement: Updated host entries in log details to link to traceip.net rather than ip-adress.com. This is because ip-adress.com does not support IPv6 addresses.
+	Enhancement: Updated some translatable strings relating to blacklisting and whitelisting to allow for better translations.
+	Enhancement: Added details about how wildcard IP ranges are converted to CIDR format (this improves performance).

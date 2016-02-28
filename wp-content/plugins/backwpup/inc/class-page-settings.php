@@ -84,7 +84,7 @@ class BackWPup_Page_Settings {
 		update_site_option( 'backwpup_cfg_protectfolders', isset( $_POST[ 'protectfolders' ] ) ? 1 : 0 );
 		$_POST[ 'jobrunauthkey' ] = preg_replace( '/[^a-zA-Z0-9]/', '', trim( $_POST[ 'jobrunauthkey' ] ) );
 		update_site_option( 'backwpup_cfg_jobrunauthkey', $_POST[ 'jobrunauthkey' ] );
-		$_POST[ 'logfolder' ] = trailingslashit( str_replace( '\\', '/', trim( stripslashes( $_POST[ 'logfolder' ] ) ) ) );
+		$_POST[ 'logfolder' ] = trailingslashit( str_replace( '\\', '/', trim( stripslashes( esc_attr( $_POST[ 'logfolder' ] ) ) ) ) );
 		//set def. folders
 		if ( empty( $_POST[ 'logfolder' ] ) || $_POST[ 'logfolder' ] === '/' ) {
 			delete_site_option( 'backwpup_cfg_logfolder' );
@@ -127,9 +127,10 @@ class BackWPup_Page_Settings {
 		BackWPup_Admin::display_messages();
 		?>
 
-    <form id="settingsform" action="<?php echo admin_url( 'admin-post.php?action=backwpup' ); ?>" method="post">
+    <form id="settingsform" action="<?php echo admin_url( 'admin-post.php' ); ?>" method="post">
 		<?php wp_nonce_field( 'backwpupsettings_page' ); ?>
         <input type="hidden" name="page" value="backwpupsettings" />
+	    <input type="hidden" name="action" value="backwpup" />
     	<input type="hidden" name="anchor" value="#backwpup-tab-general" />
 
 		<div class="table ui-tabs-hide" id="backwpup-tab-general">
@@ -195,7 +196,7 @@ class BackWPup_Page_Settings {
                     <th scope="row"><label for="logfolder"><?php _e( 'Log file folder', 'backwpup' ); ?></label></th>
                     <td>
                         <input name="logfolder" type="text" id="logfolder" title="<?php esc_attr_e( 'You can use absolute or relative path! Relative path is relative to WP_CONTENT_DIR.', 'backwpup' ); ?>"
-                               value="<?php echo get_site_option( 'backwpup_cfg_logfolder' );?>"
+                               value="<?php echo esc_attr( get_site_option( 'backwpup_cfg_logfolder' ) );?>"
                                class="regular-text code help-tip"/>
                     </td>
                 </tr>
@@ -439,9 +440,15 @@ class BackWPup_Page_Settings {
 				$test_result .= sprintf( __( 'The HTTP response test get an error "%s"','backwpup' ), $raw_response->get_error_message() );
 			elseif ( 200 != wp_remote_retrieve_response_code( $raw_response ) && 204 != wp_remote_retrieve_response_code( $raw_response ) )
 				$test_result .= sprintf( __( 'The HTTP response test get a false http status (%s)','backwpup' ), wp_remote_retrieve_response_code( $raw_response ) );
-			$headers = wp_remote_retrieve_headers( $raw_response );
-			if ( isset( $headers['x-backwpup-ver'] ) && $headers['x-backwpup-ver'] != BackWPup::get_plugin_data( 'version' ) )
-				$test_result .= sprintf( __( 'The BackWPup HTTP response header returns a false value: "%s"','backwpup' ), $headers['x-backwpup-ver'] );
+			$header = wp_remote_retrieve_header( $raw_response, 'x-backwpup-version' );
+			if ( $header !== BackWPup::get_plugin_data( 'version' ) ) {
+				$headers = '<br>';
+				$response_headers = wp_remote_retrieve_headers( $raw_response );
+				foreach( $response_headers as $key => $value ) {
+					$headers .= esc_attr( $key ) . ': ' . esc_attr( $value ) . '<br>';
+				}
+				$test_result .= sprintf( __( '<strong>Missing or not expected HTTP response headers:</strong> %s','backwpup' ), $headers );
+			}
 
 			if ( empty( $test_result ) )
 				_e( 'Response Test O.K.', 'backwpup' );

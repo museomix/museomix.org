@@ -29,13 +29,13 @@ class SkinnyBaseControllerWPCsvFree {
 		// Get the Module and Action from the CGI parameters.
 		//
 		if (isset($_GET['__action']) && !empty($_GET['__action'])) {
-			$action = $_GET['__action'];
+			$action = sanitize_text_field($_GET['__action']);
 		} else {
 			$action = 'index';
 		}
 
 		if (isset($_GET['__module']) && !empty($_GET['__module'])) {
-			$module = $_GET['__module'];
+			$module = sanitize_text_field($_GET['__module']);
 		} else {
 			$module = 'dashboard';
 			$action = 'index';
@@ -65,7 +65,7 @@ class SkinnyBaseControllerWPCsvFree {
 		//
 
 		// Slash after the module missing?
-		$hasMissingSlash = '' == @$_GET['__action'] && '/' == substr($_SERVER['REQUEST_URI'], 0, 1) && 1 < strlen($_SERVER['REQUEST_URI']) && FALSE == strpos($_SERVER['REQUEST_URI'], '/', 1);
+		$hasMissingSlash = '' == @sanitize_text_field($_GET['__action']) && '/' == substr($_SERVER['REQUEST_URI'], 0, 1) && 1 < strlen($_SERVER['REQUEST_URI']) && FALSE == strpos($_SERVER['REQUEST_URI'], '/', 1);
 		if ($hasMissingSlash) {
 
 			if ($this->allowModulesAsFiles) {
@@ -75,7 +75,7 @@ class SkinnyBaseControllerWPCsvFree {
 			} else {
 				if ($this->fixMisspellings) {
 
-					if ('' != $this->module && '' == @$_GET['__action']) {
+					if ('' != $this->module && '' == @sanitize_text_field($_GET['__action'])) {
 						$href = '/' . $this->module . '/';
 						header('Location: ' . $href);
 						exit();
@@ -91,7 +91,7 @@ class SkinnyBaseControllerWPCsvFree {
 		}
 
 		// Slash after the action missing?
-		$hasMissingSlash = '' != @$_GET['__action'] && '/' == substr($_SERVER['REQUEST_URI'], 0, 1) && 1 < strlen($_SERVER['REQUEST_URI']) && FALSE !== strpos($_SERVER['REQUEST_URI'], '/', 1) && FALSE == strpos($_SERVER['REQUEST_URI'], '/', strpos($_SERVER['REQUEST_URI'], '/', 1));
+		$hasMissingSlash = '' != @sanitize_text_field($_GET['__action']) && '/' == substr($_SERVER['REQUEST_URI'], 0, 1) && 1 < strlen($_SERVER['REQUEST_URI']) && FALSE !== strpos($_SERVER['REQUEST_URI'], '/', 1) && FALSE == strpos($_SERVER['REQUEST_URI'], '/', strpos($_SERVER['REQUEST_URI'], '/', 1));
 		if ($hasMissingSlash) {
 
 			if ($this->allowActionsAsFiles) {
@@ -101,7 +101,7 @@ class SkinnyBaseControllerWPCsvFree {
 			} else {
 				if ($this->fixMisspellings) {
 
-					if ('' != $this->module && '' != @$_GET['__action']) {
+					if ('' != $this->module && '' != @sanitize_text_field($_GET['__action'])) {
 						$href = '/' . $this->module . '/' . $this->action . '/';
 						header('Location: ' . $href);
 						exit();

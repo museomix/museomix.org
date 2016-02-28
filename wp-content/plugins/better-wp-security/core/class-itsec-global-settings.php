@@ -626,13 +626,18 @@ class ITSEC_Global_Settings {
 		$bad_white_listed_ips = array();
 		$raw_white_listed_ips = array();
 
-		foreach ( $white_listed_addresses as $index => $address ) {
+		if ( ! class_exists( 'ITSEC_Lib_IP_Tools' ) ) {
+			$itsec_core = ITSEC_Core::get_instance();
+			require_once( dirname( $itsec_core->get_plugin_file() ) . '/core/lib/class-itsec-lib-ip-tools.php' );
+		}
 
-			$address = trim( $address );
+		foreach ( $white_listed_addresses as $index => $address ) {
+			// Convert wildcard IPs to CIDR notation
+			$address = ITSEC_Lib_IP_Tools::ip_wild_to_ip_cidr( trim( $address ) );
 
 			if ( strlen( trim( $address ) ) > 0 ) {
 
-				if ( ITSEC_Lib::validates_ip_address( $address ) === false ) {
+				if ( ITSEC_Lib_IP_Tools::validate( $address ) === false ) {
 
 					$bad_white_listed_ips[] = filter_var( $address, FILTER_SANITIZE_STRING );
 
@@ -653,20 +658,12 @@ class ITSEC_Global_Settings {
 		if ( sizeof( $bad_white_listed_ips ) > 0 ) {
 
 			$type    = 'error';
-			$message = '';
 
-			$message .= sprintf(
-				'%s<br /><br />',
-				__( 'There is a problem with an IP address in the white list:', 'better-wp-security' )
-			);
+			$message = __( 'There is a problem with an IP address in the white list:', 'better-wp-security' ) . '<br /><br />';
 
 			foreach ( $bad_white_listed_ips as $bad_ip ) {
 
-				$message .= sprintf(
-					'%s %s<br />',
-					$bad_ip,
-					__( 'is not a valid address in the white list users box.', 'better-wp-security' )
-				);
+				$message .= sprintf( __( '%s is not a valid address in the white list users box.', 'better-wp-security' ), $bad_ip ) . '<br />';
 
 			}
 
@@ -1097,13 +1094,16 @@ class ITSEC_Global_Settings {
 		echo '<p class="submit"><a href="' . PHP_EOL . ITSEC_Lib::get_ip() . '" class="itsec_add_ip_to_whitelist button-primary">' . __( 'Add my current IP to Whitelist', 'better-wp-security' ) . '</a></p>';
 		echo '<p class="description">' . __( 'Use the guidelines below to enter hosts that will not be locked out from your site. This will keep you from locking yourself out of any features if you should trigger a lockout. Please note this does not override away mode and will only prevent a temporary ban. Should a permanent ban be triggered you will still be added to the "Ban Users" list unless the IP address is also white listed in that section.', 'better-wp-security' ) . '</p>';
 		echo '<ul>';
-		echo '<li>' . __( 'You may white list users by individual IP address or IP address range.', 'better-wp-security' ) . '</li>';
-		echo '<li>' . __( 'Individual IP addesses must be in IPV4 standard format (i.e. ###.###.###.### or ###.###.###.###/##). Wildcards (*) or a netmask is allowed to specify a range of ip addresses.', 'better-wp-security' ) . '</li>';
-		echo '<li>' . __( 'If using a wildcard (*) you must start with the right-most number in the ip field. For example ###.###.###.* and ###.###.*.* are permitted but ###.###.*.### is not.', 'better-wp-security' ) . '</li>';
-		echo '<li><a href="http://ip-lookup.net/domain-lookup.php" target="_blank">' . __( 'Lookup IP Address.', 'better-wp-security' ) . '</a></li>';
+		echo '<li>' . __( 'You may white list users by individual IP address or IP address range using wildcards or CIDR notation.', 'better-wp-security' ) . '</li>';
+		echo '<ul>';
+		echo '<li>' . __( 'Individual IP addresses must be in IPv4 or IPv6 standard format (###.###.###.### or ####:####:####:####:####:####:####:####).', 'better-wp-security' ) . '</li>';
+		echo '<li>' . __( 'CIDR notation is allowed to specify a range of IP addresses (###.###.###.###/## or ####:####:####:####:####:####:####:####/###).', 'better-wp-security' ) . '</li>';
+		echo '<li>' . __( 'Wildcards are also supported with some limitations. If using wildcards (*), you must start with the right-most chunk in the IP address. For example ###.###.###.* and ###.###.*.* are permitted but ###.###.*.### is not. Wildcards are only for convenient entering of IP addresses, and will be automatically converted to their appropriate CIDR notation format on save.', 'better-wp-security' ) . '</li>';
+		echo '</ul>';
 		echo '<li>' . __( 'Enter only 1 IP address or 1 IP address range per line.', 'better-wp-security' ) . '</li>';
 		echo '</ul>';
-		echo '<p class="description"><strong>' . __( 'This white list will prevent any ip listed from triggering an automatic lockout. You can still block the IP address manually in the banned users settings.', 'better-wp-security' ) . '</strong></p>';
+		echo '<p><a href="http://ip-lookup.net/domain-lookup.php" target="_blank">' . __( 'Lookup IP Address.', 'better-wp-security' ) . '</a></p>';
+		echo '<p class="description"><strong>' . __( 'This white list will prevent any IP listed from triggering an automatic lockout. You can still block the IP address manually in the banned users settings.', 'better-wp-security' ) . '</strong></p>';
 
 	}
 

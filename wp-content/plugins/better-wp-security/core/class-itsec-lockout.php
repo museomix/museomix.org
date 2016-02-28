@@ -308,7 +308,7 @@ class ITSEC_Lockout {
 			ITSEC_Lib::create_database_tables();
 		}
 
-		if ( ! $this->is_ip_whitelisted( $host ) && ( $lock_host !== null || $lock_user !== null || $lock_username !== null ) ) {
+		if ( ! ITSEC_Lib::is_ip_whitelisted( $host ) && ( $lock_host !== null || $lock_user !== null || $lock_username !== null ) ) {
 
 			$this->lockout( $options['type'], $options['reason'], $lock_host, $lock_user, $lock_username );
 
@@ -331,7 +331,7 @@ class ITSEC_Lockout {
 	 */
 	protected function execute_lock( $user = false, $network = false ) {
 
-		if ( $this->is_ip_whitelisted( ITSEC_Lib::get_ip() ) ) {
+		if ( ITSEC_Lib::is_ip_whitelisted( ITSEC_Lib::get_ip() ) ) {
 			return;
 		}
 
@@ -418,7 +418,7 @@ class ITSEC_Lockout {
 			__( 'User lockout message', 'better-wp-security' ),
 			$settings['user_lockout_message'],
 			__( 'Is this computer white-listed', 'better-wp-security' ),
-			( $this->is_ip_whitelisted( ITSEC_Lib::get_ip() ) === true ? __( 'yes', 'better-wp-security' ) : __( 'no', 'better-wp-security' ) )
+			( ITSEC_Lib::is_ip_whitelisted( ITSEC_Lib::get_ip() ) === true ? __( 'yes', 'better-wp-security' ) : __( 'no', 'better-wp-security' ) )
 		);
 
 		return $description;
@@ -490,126 +490,6 @@ class ITSEC_Lockout {
 		}
 
 		return $wpdb->get_results( "SELECT * FROM `" . $wpdb->base_prefix . "itsec_lockouts`" . $where . $type_statement . $active . $limit . ";", ARRAY_A );
-
-	}
-
-	/**
-	 * Determines whether a given IP address is whitelisted.
-	 *
-	 * @since  4.0
-	 *
-	 * @access private
-	 *
-	 * @param  string $ip_to_check ip to check
-	 *
-	 * @return boolean               true if whitelisted or false
-	 */
-	protected function is_ip_whitelisted( $ip_to_check, $current = false ) {
-
-		global $itsec_globals;
-
-		$white_ips = isset( $itsec_globals['settings']['lockout_white_list'] ) ? $itsec_globals['settings']['lockout_white_list'] : array();
-
-		if ( ! is_array( $white_ips ) ) {
-			$white_ips = explode( PHP_EOL, $white_ips );
-		}
-
-		//Add the server IP address
-		if ( isset( $_SERVER['LOCAL_ADDR'] ) ) {
-
-			$white_ips[] = $_SERVER['LOCAL_ADDR'];
-
-		} elseif ( isset( $_SERVER['SERVER_ADDR'] ) ) {
-
-			$white_ips[] = $_SERVER['SERVER_ADDR'];
-
-		}
-
-		if ( $current === true ) {
-			$white_ips[] = ITSEC_Lib::get_ip(); //add current user ip to whitelist to check automatically
-		}
-
-		$temp = get_site_option( 'itsec_temp_whitelist_ip' );
-
-		if ( $temp !== false ) {
-
-			if ( $temp['exp'] < $itsec_globals['current_time'] ) {
-
-				delete_site_option( 'itsec_temp_whitelist_ip' );
-
-			} else {
-
-				$white_ips[] = filter_var( $temp['ip'],
-				                           FILTER_VALIDATE_IP,
-				                           FILTER_FLAG_IPV4 );
-
-			}
-
-		}
-
-		if ( is_array( $white_ips ) && sizeof( $white_ips > 0 ) ) {
-
-			foreach ( $white_ips as $white_ip ) {
-
-				$converted_white_ip = ITSEC_Lib::ip_wild_to_mask( $white_ip );
-
-				$check_range = ITSEC_Lib::cidr_to_range( $converted_white_ip );
-				$ip_range    = ITSEC_Lib::cidr_to_range( $ip_to_check );
-
-				if ( sizeof( $check_range ) === 2 ) { //range to check
-
-					$check_min = ip2long( $check_range[0] );
-					$check_max = ip2long( $check_range[1] );
-
-					if ( sizeof( $ip_range ) === 2 ) {
-
-						$ip_min = ip2long( $ip_range[0] );
-						$ip_max = ip2long( $ip_range[1] );
-
-						if ( ( $check_min < $ip_min && $ip_min < $check_max ) || ( $check_min < $ip_max && $ip_max < $check_max ) ) {
-							return true;
-						}
-
-					} else {
-
-						$ip = ip2long( $ip_range[0] );
-
-						if ( $check_min < $ip && $ip < $check_max ) {
-							return true;
-						}
-
-					}
-
-				} else { //single ip to check
-
-					$check = ip2long( $check_range[0] );
-
-					if ( sizeof( $ip_range ) === 2 ) {
-
-						$ip_min = ip2long( $ip_range[0] );
-						$ip_max = ip2long( $ip_range[1] );
-
-						if ( $ip_min < $check && $check < $ip_max ) {
-							return true;
-						}
-
-					} else {
-
-						$ip = ip2long( $ip_range[0] );
-
-						if ( $check == $ip ) {
-							return true;
-						}
-
-					}
-
-				}
-
-			}
-
-		}
-
-		return false;
 
 	}
 
@@ -711,7 +591,7 @@ class ITSEC_Lockout {
 		if ( $itsec_files->get_file_lock( 'lockout_' . $host . $user . $username ) ) {
 
 			//Do we have a good host to lock out or not
-			if ( $host != null && $this->is_ip_whitelisted( sanitize_text_field( $host ) ) === false && ITSEC_Lib::validates_ip_address( $host ) === true ) {
+			if ( ! is_null( $host ) && ITSEC_Lib::is_ip_whitelisted( sanitize_text_field( $host ) ) === false && ITSEC_Lib_IP_Tools::validate( $host ) ) {
 				$good_host = sanitize_text_field( $host );
 			} else {
 				$good_host = false;
@@ -769,7 +649,7 @@ class ITSEC_Lockout {
 			//We have temp bans to perform
 			if ( $good_host !== false || $good_user !== false || $good_username || $good_username !== false ) {
 
-				if ( $this->is_ip_whitelisted( sanitize_text_field( $host ) ) ) {
+				if ( ITSEC_Lib::is_ip_whitelisted( sanitize_text_field( $host ) ) ) {
 
 					$whitelisted    = true;
 					$expiration     = date( 'Y-m-d H:i:s', 1 );
@@ -926,7 +806,7 @@ class ITSEC_Lockout {
 									                                     id="lo_<?php echo $host['lockout_id']; ?>"
 									                                     value="<?php echo $host['lockout_id']; ?>"/>
 										<label
-											for="lo_<?php echo $host['lockout_id']; ?>"><strong><?php echo filter_var( $host['lockout_host'], FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 );; ?></strong>
+											for="lo_<?php echo $host['lockout_id']; ?>"><strong><?php echo esc_html( $host['lockout_host'] ); ?></strong>
 											- <?php _e( 'Expires in', 'better-wp-security' ); ?>
 											<em> <?php echo human_time_diff( $itsec_globals['current_time_gmt'], strtotime( $host['lockout_expire_gmt'] ) ); ?></em></label>
 									</li>
@@ -1216,7 +1096,7 @@ class ITSEC_Lockout {
 			//Tell which host was locked out
 			if ( $host !== false ) {
 
-				$host_text = sprintf( '%s, <a href="http://ip-adress.com/ip_tracer/%s"><strong>%s</strong></a>, ', __( 'host', 'better-wp-security' ), sanitize_text_field( $host ), sanitize_text_field( $host ) );
+				$host_text = sprintf( '%s, <a href="http://www.traceip.net/?query=%s"><strong>%s</strong></a>, ', __( 'host', 'better-wp-security' ), urlencode( $host ), sanitize_text_field( $host ) );
 
 				$host_expiration_text = __( 'The host has been locked out ', 'better-wp-security' );
 

@@ -1,3 +1,4 @@
+var jQuery = jQuery.noConflict();
 jQuery(document).ready(function () {
     jQuery('.dropdown-toggle').dropdown('toggle');
     var checkmodule = document.getElementById('checkmodule').value;

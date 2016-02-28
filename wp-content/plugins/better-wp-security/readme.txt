@@ -3,7 +3,7 @@ Contributors: ithemes, chrisjean, aaroncampbell, gerroald, mattdanner
 Tags: security, malware, secure, multi-site, network, mu, login, lockdown, htaccess, hack, header, cleanup, ban, restrict, access, protect, protection, disable, images, image, hotlink, admin, username, database, prefix, wp-content, rename, directory, directories, secure, SSL, iThemes, BackupBuddy, Exchange, iThemes Exchange
 Requires at least: 4.1
 Tested up to: 4.4.2
-Stable tag: 5.2.1
+Stable tag: 5.3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -99,7 +99,7 @@ For complete site backups and the ability to restore or move WordPress easily, c
 
 = Tutorials =
 
-Learn how to use iThemes Security with our series of <a href="http://ithemes.com/tutorial/category/ithemes-security/">in-depth tutorial videos</a> taught by lead developer Chris Wiegman:
+Learn how to use iThemes Security with our series of <a href="http://ithemes.com/tutorial/category/ithemes-security/">in-depth tutorial videos</a>:
 
 * <a href="http://ithemes.com/tutorials/getting-started-ithemes-security-part-1/">Getting Started</a>
 * <a href="http://ithemes.com/tutorials/getting-started-ithemes-security-part-2-global-settings/">Global Settings</a>
@@ -188,6 +188,16 @@ Free support may be available with the help of the community in the <a href="htt
 5. Easy-to-navigate Security dashboard
 
 == Changelog ==
+
+= 5.3.0 =
+* New Feature: Added support for IPv6 addresses. This includes support for IPv6 in lockouts, ban hosts, and white lists.
+* Bug Fix: Fixed issue that could cause username-based lockouts to fail for long usernames.
+* Bug Fix: Fixed issue that prevented wildcard IP ranges from being blacklisted or whitelisted.
+* Bug Fix: Removed warnings generated when the Away Mode module is disabled and iThemes Sync contacts the site.
+* Enhancement: Updated descriptions of valid IP and IP range formats for the Lockout White List and the Ban Hosts settings.
+* Enhancement: Updated host entries in log details to link to traceip.net rather than ip-adress.com. This is because ip-adress.com does not support IPv6 addresses.
+* Enhancement: Updated some translatable strings relating to blacklisting and whitelisting to allow for better translations.
+* Enhancement: Added details about how wildcard IP ranges are converted to CIDR format (this improves performance).
 
 = 5.2.1 =
 * Bug Fix: Comparisons of IPv4 addresses and ranges now include the IP's at the edge of the ranges.

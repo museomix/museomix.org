@@ -104,16 +104,10 @@ class UploadHandler {
 			case 'HEAD':
 				$this->head();
 				break;
-			case 'GET':
-				$this->get();
-				break;
 			case 'PATCH':
 			case 'PUT':
 			case 'POST':
 				$this->post();
-				break;
-			case 'DELETE':
-				$this->delete();
 				break;
 			default:
 				$this->header('HTTP/1.1 405 Method Not Allowed');
@@ -152,7 +146,7 @@ class UploadHandler {
 			$version_path = $version . '/';
 		}
 
-		$uploadpath = $_REQUEST['uploadPath'];
+		$uploadpath = sanitize_text_field($_REQUEST['uploadPath']);
 		$file_name = $HelperObj->convert_string2hash_key($file_name); // Code added by Fredrick Marks
 
 		return $uploadpath . '/' . $uploadDir . '/' . $this->get_user_path() . $version_path . $file_name;
@@ -387,7 +381,7 @@ class UploadHandler {
 		$version_zero = explode("(", $rem_csv[0]);
 		$file_name_arr = array();
 		$file_name_arr = explode('.csv', $name);
-		$current_action = $_REQUEST['curr_action'];
+		$current_action = sanitize_text_field($_REQUEST['curr_action']);
 		if (!is_array($version_zero)) {
 			return $file_name_arr[0] . '-' . $current_action . ' .csv';
 		} // Code modified by Fredrick Marks
@@ -943,7 +937,7 @@ class UploadHandler {
 	protected function generate_response($content, $print_response = true) {
 		if ($print_response) {
 			$json = json_encode($content);
-			$redirect = isset($_REQUEST['redirect']) ? stripslashes($_REQUEST['redirect']) : null;
+			$redirect = isset($_REQUEST['redirect']) ? sanitize_text_field($_REQUEST['redirect']) : null;
 			if ($redirect) {
 				$this->header('Location: ' . sprintf($redirect, rawurlencode($json)));
 				return;
@@ -960,27 +954,8 @@ class UploadHandler {
 		return $content;
 	}
 
-	protected function get_version_param() {
-		return isset($_GET['version']) ? basename(stripslashes($_GET['version'])) : null;
-	}
-
 	protected function get_singular_param_name() {
 		return substr($this->options['param_name'], 0, -1);
-	}
-
-	protected function get_file_name_param() {
-		$name = $this->get_singular_param_name();
-		return isset($_GET[$name]) ? basename(stripslashes($_GET[$name])) : null;
-	}
-
-	protected function get_file_names_params() {
-		$params = isset($_GET[$this->options['param_name']]) ? $_GET[$this->options['param_name']] : array();
-		if(!empty($params)){
-		foreach ($params as $key => $value) {
-			$params[$key] = basename(stripslashes($value));
-		}
-		}
-		return $params;
 	}
 
 	protected function get_file_type($file_path) {
@@ -997,41 +972,6 @@ class UploadHandler {
 		}
 	}
 
-	protected function download() {
-		switch ($this->options['download_via_php']) {
-			case 1:
-				$redirect_header = null;
-				break;
-			case 2:
-				$redirect_header = 'X-Sendfile';
-				break;
-			case 3:
-				$redirect_header = 'X-Accel-Redirect';
-				break;
-			default:
-				return $this->header('HTTP/1.1 403 Forbidden');
-		}
-		$file_name = $this->get_file_name_param();
-		if (!$this->is_valid_file_object($file_name)) {
-			return $this->header('HTTP/1.1 404 Not Found');
-		}
-		if ($redirect_header) {
-			return $this->header($redirect_header . ': ' . $this->get_download_url($file_name, $this->get_version_param(), true));
-		}
-		$file_path = $this->get_upload_path($file_name, $this->get_version_param());
-		// Prevent browsers from MIME-sniffing the content-type:
-		$this->header('X-Content-Type-Options: nosniff');
-		if (!preg_match($this->options['inline_file_types'], $file_name)) {
-			$this->header('Content-Type: application/octet-stream');
-			$this->header('Content-Disposition: attachment; filename="' . $file_name . '"');
-		} else {
-			$this->header('Content-Type: ' . $this->get_file_type($file_path));
-			$this->header('Content-Disposition: inline; filename="' . $file_name . '"');
-		}
-		$this->header('Content-Length: ' . $this->get_file_size($file_path));
-		$this->header('Last-Modified: ' . gmdate('D, d M Y H:i:s T', filemtime($file_path)));
-		$this->readfile($file_path);
-	}
 
 	protected function send_content_type_header() {
 		$this->header('Vary: Accept');
@@ -1061,19 +1001,6 @@ class UploadHandler {
 		$this->send_content_type_header();
 	}
 
-	public function get($print_response = true) {
-		if ($print_response && isset($_GET['download'])) {
-			return $this->download();
-		}
-		$file_name = $this->get_file_name_param();
-		if ($file_name) {
-			$response = array($this->get_singular_param_name() => $this->get_file_object($file_name));
-		} else {
-			$response = array($this->options['param_name'] => $this->get_file_objects());
-		}
-		return $this->generate_response($response, $print_response);
-	}
-
 	public function checkFileExists($fileName) {
 		$file_contents = array();
 		$file_contents = $_REQUEST;
@@ -1087,11 +1014,6 @@ class UploadHandler {
 	}
 
 	public function post($print_response = true) {
-		if (isset($_REQUEST['_method']) && $_REQUEST['_method'] === 'DELETE') {
-			return $this->delete($print_response);
-		}
-
-
 		$upload = isset($_FILES[$this->options['param_name']]) ? $_FILES[$this->options['param_name']] : null;
 		$file_name = $this->get_server_var('HTTP_CONTENT_DISPOSITION') ? rawurldecode(preg_replace('/(^[^"]+")|("$)/', '', $this->get_server_var('HTTP_CONTENT_DISPOSITION'))) : null;
 		$content_range = $this->get_server_var('HTTP_CONTENT_RANGE') ? preg_split('/[^0-9]+/', $this->get_server_var('HTTP_CONTENT_RANGE')) : null;
@@ -1107,32 +1029,6 @@ class UploadHandler {
 		# code added by goku to get the uploaded filename
 		$files[0]->uploadedname = $upload['name'];
 		return $this->generate_response(array($this->options['param_name'] => $files), $print_response);
-	}
-
-	public function delete($print_response = true) {
-		$file_names = $this->get_file_names_params();
-		if (empty($file_names)) {
-			$file_names = array($this->get_file_name_param());
-		}
-		$response = array();
-		if(!empty($file_names)){
-		foreach ($file_names as $file_name) {
-			$file_path = $this->get_upload_path($file_name);
-			$success = is_file($file_path) && $file_name[0] !== '.' && unlink($file_path);
-			if ($success) {
-				foreach ($this->options['image_versions'] as $version => $options) {
-					if (!empty($version)) {
-						$file = $this->get_upload_path($file_name, $version);
-						if (is_file($file)) {
-							unlink($file);
-						}
-					}
-				}
-			}
-			$response[$file_name] = $success;
-		}
-		}
-		return $this->generate_response($response, $print_response);
 	}
 
 }
