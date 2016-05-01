@@ -171,7 +171,7 @@ class ITSEC_Core_Admin {
 
 		<div id="mc_embed_signup">
 			<form
-				action="http://ithemes.us2.list-manage.com/subscribe/post?u=7acf83c7a47b32c740ad94a4e&amp;id=5176bfed9e"
+				action="https://ithemes.us2.list-manage.com/subscribe/post?u=7acf83c7a47b32c740ad94a4e&amp;id=5176bfed9e"
 				method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
 				target="_blank" novalidate>
 				<div style="text-align: center;">
@@ -251,7 +251,7 @@ class ITSEC_Core_Admin {
 					global $itsec_globals;
 
 					echo '<div class="updated" id="itsec_setup_notice"><span class="it-icon-itsec"></span>'
-					     . $itsec_globals['plugin_name'] . ' ' . __( 'is almost ready.', 'better-wp-security' ) . '<a href="#" class="itsec-notice-button" onclick="document.location.href=\'?itsec_setup=yes&_wpnonce=' . wp_create_nonce( 'itsec-nag' ) . '\';">' . __( 'Secure Your Site Now', 'better-wp-security' ) . '</a><a target="_blank" href="http://ithemes.com/ithemes-security-4-is-here" class="itsec-notice-button">' . __( "See what's new in 4.0", 'better-wp-security' ) . '</a><a href="#" class="itsec-notice-hide" onclick="document.location.href=\'?itsec_setup=no&_wpnonce=' . wp_create_nonce( 'itsec-nag' ) . '\';">&times;</a>
+					     . $itsec_globals['plugin_name'] . ' ' . __( 'is almost ready.', 'better-wp-security' ) . '<a href="#" class="itsec-notice-button" onclick="document.location.href=\'?itsec_setup=yes&_wpnonce=' . wp_create_nonce( 'itsec-nag' ) . '\';">' . __( 'Secure Your Site Now', 'better-wp-security' ) . '</a><a href="#" class="itsec-notice-hide" onclick="document.location.href=\'?itsec_setup=no&_wpnonce=' . wp_create_nonce( 'itsec-nag' ) . '\';">&times;</a>
 						</div>';
 
 				}

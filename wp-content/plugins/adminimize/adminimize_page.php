@@ -35,7 +35,6 @@ function _mw_adminimize_options() {
 			check_admin_referer( 'mw_adminimize_nonce' );
 
 			_mw_adminimize_update();
-
 		} else {
 			$myErrors = new _mw_adminimize_message_class();
 			$myErrors = '<div id="message" class="error"><p>' . $myErrors->get_error(
@@ -140,6 +139,7 @@ function _mw_adminimize_options() {
 	<div class="wrap">
 		<?php
 		do_action( 'mw_adminimize_before_settings_form' );
+
 		// Backend Options for all roles
 		require_once 'inc-options/minimenu.php';
 		?>
@@ -147,6 +147,9 @@ function _mw_adminimize_options() {
 			$_GET[ 'page' ]
 		); ?>">
 			<?php
+			// Adminimize Settings for the plugin.
+			require_once 'inc-options/self_settings.php';
+
 			// Admin Bar options
 			require_once 'inc-options/admin_bar.php';
 

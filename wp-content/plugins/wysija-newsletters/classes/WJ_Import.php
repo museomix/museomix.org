@@ -503,7 +503,7 @@ class WJ_Import extends WYSIJA_object {
 	 * @param type $value
 	 */
 	function _validate_value($column_name, $value) {
-		$value = trim($value);
+		$value = esc_attr(trim($value));
 
 		switch ($column_name) {
 			case 'email':

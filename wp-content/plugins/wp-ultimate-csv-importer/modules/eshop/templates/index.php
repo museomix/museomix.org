@@ -137,6 +137,7 @@ if ($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['isplugin_avail'] !== 'not_avail'
 	<h2><div class="secondformheader"><?php echo esc_html__('Import Data Configuration','wp-ultimate-csv-importer'); ?></div></h2>
 	<?php
         if(isset($_FILES['inlineimages'])) {
+		$uploadDir = wp_upload_dir();
                 if(isset($_POST['uploadfilename']) && sanitize_file_name($_POST['uploadfilename']) != ''){
                         $get_file_name = sanitize_file_name($_POST['uploadfilename']);
                         $filehashkey = $impCE->convert_string2hash_key($get_file_name);
@@ -203,8 +204,13 @@ if ($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['isplugin_avail'] !== 'not_avail'
                         if(isset($_POST['upload_csv_realname']) && $_POST['upload_csv_realname'] != '') {
                                 $uploaded_csv_name = sanitize_file_name($_POST['upload_csv_realname']);
                         }
-
-			$getrecords = $impCE->csv_file_data($filename); 
+			$total_row_count = '';
+			$parserObj = new SmackCSVParser();
+			$file = $impCE->getUploadDirectory() . '/' . $filename;
+			$parserObj->parseCSV($file, 0, -1);
+			$headers = $parserObj->get_CSVheaders();
+			$headers = $headers[0];
+			$total_row_count = $parserObj->total_row_count - 1; 
 			$getcustomposts = get_post_types();
 			if(!empty($getcustomposts) && is_array($getcustomposts)) {
 			foreach($getcustomposts as $keys => $value)
@@ -219,9 +225,9 @@ if ($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['isplugin_avail'] !== 'not_avail'
 			<tr>
 			<div align='center' style='float:right;'>
 			<?php $cnt = count($impCE->defCols) + 2;
-			$cnt1 = count($impCE->headers);
-                        $records = count($getrecords);
-			$imploaded_array = implode(',', $impCE->headers); ?>
+			$cnt1 = count($headers);
+                        $records = $total_row_count;
+			$imploaded_array = implode(',', $headers); ?>
 			<input type = 'hidden' id = 'imploded_header' name = 'imploded_array' value = '<?php if(isset($imploaded_array)) { echo $imploaded_array;  }  ?>'>
 			<input type='hidden' id='h1' name='h1' value="<?php if(isset($cnt)) { echo $cnt; } ?>"/>
 			<input type='hidden' id='h2' name='h2' value="<?php if(isset($cnt1)) { echo $cnt1;  } ?>"/>
@@ -276,8 +282,8 @@ if ($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['isplugin_avail'] !== 'not_avail'
                                                                                <?php } ?>
                                         <option>-- Select --</option>
                                         <?php 
-						if(is_array($impCE->headers) && !empty($impCE->headers)) {
-						foreach($impCE->headers as $key1 => $value1){?>
+						if(is_array($headers) && !empty($headers)) {
+						foreach($headers as $key1 => $value1){?>
                                                 <option><?php echo $value1; ?></option>
                                         <?php }
 					}?>
@@ -322,8 +328,8 @@ if ($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['isplugin_avail'] !== 'not_avail'
                                         <select name="coremapping<?php print($count); ?>" id="coremapping<?php print($count); ?>">
                                         <option>-- Select --</option>
                                         <?php 
-					if(is_array($impCE->headers) && !empty($impCE->headers)) {
-					foreach($impCE->headers as $key1 => $value1){?>
+					if(is_array($headers) && !empty($headers)) {
+					foreach($headers as $key1 => $value1){?>
                                                 <option><?php echo $value1; ?></option>
                                         <?php 
 					}
@@ -379,8 +385,8 @@ if ($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['isplugin_avail'] !== 'not_avail'
                                                                                 <select name="term_mapping<?php print($count); ?>" id="term_mapping<?php print($count); ?>">
                                                                                         <option>-- Select --</option>
                                                                                         <?php 
-											if(is_array($impCE->headers) && !empty($impCE->headers)) {
-											foreach ($impCE->headers as $key1 => $value1) { ?>
+											if(is_array($headers) && !empty($headers)) {
+											foreach ($headers as $key1 => $value1) { ?>
                                                                                                 <option><?php echo $value1; ?></option>
                                                                                         <?php } 
 											}?>
@@ -436,8 +442,8 @@ if ($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['isplugin_avail'] !== 'not_avail'
                                         <select name="seomapping<?php print($count); ?>" id="seomapping<?php print($count); ?>">
                                         <option>-- Select --</option>
                                         <?php 
-					if(is_array($impCE->headers) && !empty($impCE->headers)) {
-					foreach($impCE->headers as $key1 => $value1){?>
+					if(is_array($headers) && !empty($headers)) {
+					foreach($headers as $key1 => $value1){?>
                                                 <option><?php echo $value1; ?></option>
                                         <?php 
 					}
@@ -522,11 +528,16 @@ if ($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['isplugin_avail'] !== 'not_avail'
 		<input type='hidden' name='wpnoncekey' id='wpnoncekey' value='<?php echo $nonce_Key; ?>' />
 		<label id='importalign'><input name='duplicatetitle' id='duplicatetitle' type="checkbox" value="" > <?php echo esc_html__('Detect duplicate post title','wp-ultimate-csv-importer'); ?></label> <br>
 		 <label id='importalign'><?php echo esc_html__('No. of posts/rows per server request','wp-ultimate-csv-importer'); ?></label> <span class="mandatory" style="margin-left:-13px;margin-right:10px">*</span> <input name="importlimit" id="importlimit" type="text" value="1" placeholder="10" onblur="check_allnumeric(this.value);"></label> <?php echo $impCE->helpnotes(); ?><br>
-		<span class='msg' id='server_request_warning' style="display:none;color:red;margin-left:-10px;"><?php echo esc_html__('You can set upto','wp-ultimate-csv-importer'); ?> <?php echo sanitize_text_field($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['totRecords']); ?> <?php echo esc_html__('per request.','wp-ultimate-csv-importer'); ?></span>
-                <input type="hidden" id="currentlimit" name="currentlimit" value="0"/>
+		<div>
+		<span class='msg' id='server_request_warning' style="display:none;color:red;margin-left:-10px;"><?php echo esc_html__('You can set upto','wp-ultimate-csv-importer'); ?> <?php echo ' '.sanitize_text_field($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['totRecords']).' '; ?> <?php echo esc_html__('per request.','wp-ultimate-csv-importer'); ?></span>
+		</div>
+                <input type="hidden" id="currentlimit" name="currentlimit" value="1"/>
 		<input type="hidden" id="tmpcount" name="tmpcount" value="0" />
 		<input type="hidden" id="terminateaction" name="terminateaction" value="continue" />
-		<label id="innertitle"><?php echo esc_html__('Inline image options','wp-ultimate-csv-importer'); ?></label><br />
+		<label id="innertitle"><?php echo esc_html__('Media Options','wp-ultimate-csv-importer'); ?></label><br />
+			<label id='importalign'>
+				<input type='checkbox' id='useexistingimages' name='useexistingimages' value='' /> <?php echo esc_html__("Reuse image with same name in Media", 'wp-ultimate-csv-importer'); ?>
+			</label> <?php echo $impCE->helpnotes('skipDuplicate'); ?> <br>
                 <label id='importalign'> <input type ='checkbox' id='multiimage' name='multiimage' value = ''><?php echo esc_html__('Insert Inline Images','wp-ultimate-csv-importer'); ?> </label><br>
                 <input type='hidden' id='inlineimagevalue' name='inlineimagevalue' value='none' />
 		</li>

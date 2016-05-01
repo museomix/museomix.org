@@ -316,7 +316,7 @@ class ITSEC_Lockout {
 
 			global $itsec_logger;
 
-			$itsec_logger->log_event( __( 'lockout', 'better-wp-security' ), 10, array( __( 'A whitelisted host has triggered a lockout condition but was not locked out.', 'better-wp-security' ) ), sanitize_text_field( $host ) );
+			$itsec_logger->log_event( 'lockout', 10, array( __( 'A whitelisted host has triggered a lockout condition but was not locked out.', 'better-wp-security' ) ), sanitize_text_field( $host ) );
 
 		}
 
@@ -680,7 +680,7 @@ class ITSEC_Lockout {
 						)
 					);
 
-					$itsec_logger->log_event( __( 'lockout', 'better-wp-security' ), 10, array(
+					$itsec_logger->log_event( 'lockout', 10, array(
 						'expires' => $expiration, 'expires_gmt' => $expiration_gmt, 'type' => $type
 					), sanitize_text_field( $host ) );
 

@@ -14,37 +14,23 @@ final class ITSEC_Logger {
 		$logger_modules,
 		$module_path;
 
+	/**
+	 * @access private
+	 *
+	 * @var array Events that need to be logged to a file but couldn't
+	 */
+	private $_events_to_log_to_file = array();
+
 	function __construct() {
 
 		global $itsec_globals;
-
-		//make sure the log file info is there or generate it. This should only affect beta users.
-		if ( ! isset( $itsec_globals['settings']['log_info'] ) ) {
-
-			$itsec_globals['settings']['log_info'] = substr( sanitize_title( get_bloginfo( 'name' ) ), 0, 20 ) . '-' . ITSEC_Lib::get_random( mt_rand( 0, 10 ) );
-
-			update_site_option( 'itsec_global', $itsec_globals['settings'] );
-
-		}
-
-		//Make sure the logs directory was created
-		if ( ! is_dir( $itsec_globals['ithemes_log_dir'] ) ) {
-			@mkdir( trailingslashit( $itsec_globals['ithemes_dir'] ) . 'logs' );
-		}
-
-		//don't create a log file if we don't need it.
-		if ( isset( $itsec_globals['settings']['log_type'] ) && $itsec_globals['settings']['log_type'] !== 0 ) {
-
-			$this->log_file = $itsec_globals['ithemes_log_dir'] . '/event-log-' . $itsec_globals['settings']['log_info'] . '.log';
-			$this->start_log(); //create a log file if we don't have one
-
-		}
 
 		$this->logger_modules  = array(); //array to hold information on modules using this feature
 		$this->logger_displays = array(); //array to hold metabox information
 		$this->module_path     = ITSEC_Lib::get_module_path( __FILE__ );
 
 		add_action( 'plugins_loaded', array( $this, 'register_modules' ) );
+		add_action( 'plugins_loaded', array( $this, 'write_pending_events_to_file' ) );
 
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_script' ) ); //enqueue scripts for admin page
 
@@ -301,68 +287,98 @@ final class ITSEC_Logger {
 	 */
 	public function log_event( $module, $priority = 5, $data = array(), $host = '', $username = '', $user = '', $url = '', $referrer = '' ) {
 		global $wpdb, $itsec_globals;
-
+		
 		if ( isset( $this->logger_modules[ $module ] ) ) {
-			$options = $this->logger_modules[ $module ];
-
 			if ( ! isset( $itsec_globals['settings']['log_type'] ) || $itsec_globals['settings']['log_type'] === 0 || $itsec_globals['settings']['log_type'] == 2 ) {
-				$values = array(
-					'log_type'     => $options['type'],
-					'log_priority' => intval( $priority ),
-					'log_function' => $options['function'],
-					'log_date'     => date( 'Y-m-d H:i:s', $itsec_globals['current_time'] ),
-					'log_date_gmt' => date( 'Y-m-d H:i:s', $itsec_globals['current_time_gmt'] ),
-					'log_host'     => sanitize_text_field( $host ),
-					'log_username' => sanitize_text_field( $username ),
-					'log_user'     => intval( $user ),
-					'log_url'      => $url,
-					'log_referrer' => $referrer,
-					'log_data'     => serialize( $data ),
-				);
-				
-				$columns = '`' . implode( '`, `', array_keys( $values ) ) . '`';
-				$placeholders = '%s, %d, %s, %s, %s, %s, %s, %s, %s, %s, %s';
-				
-				$query_format = "INSERT INTO `{$wpdb->base_prefix}itsec_log` ($columns) VALUES ($placeholders)";
-				
-				$cached_show_errors_setting = $wpdb->hide_errors();
-				$result = $wpdb->query( $wpdb->prepare( $query_format, $values ) );
-				
-				if ( ! $result ) {
-					$wpdb->show_errors();
-					
-					ITSEC_Lib::create_database_tables();
-					
-					// Attempt the query again. Since errors will now be shown, a remaining issue will be display an error.
-					$result = $wpdb->query( $wpdb->prepare( $query_format, $values ) );
-				}
-				
-				// Set $wpdb->show_errors back to its original setting.
-				$wpdb->show_errors( $cached_show_errors_setting );
+				$this->_log_event_to_db( $module, $priority, $data, $host, $username, $user, $url, $referrer );
 			}
 
 			if ( isset( $itsec_globals['settings']['log_type'] ) && ( $itsec_globals['settings']['log_type'] === 1 || $itsec_globals['settings']['log_type'] == 2 ) ) {
-				$file_data = $this->sanitize_array( $data, true );
-
-				$message =
-					$options['type'] . ',' .
-					intval( $priority ) . ',' .
-					$options['function'] . ',' .
-					date( 'Y-m-d H:i:s', $itsec_globals['current_time'] ) . ',' .
-					date( 'Y-m-d H:i:s', $itsec_globals['current_time_gmt'] ) . ',' .
-					sanitize_text_field( $host ) . ',' .
-					sanitize_text_field( $username ) . ',' .
-					( intval( $user ) === 0 ? '' : intval( $user ) ) . ',' .
-					esc_sql( $url ) . ',' .
-					esc_sql( $referrer ) . ',' .
-					maybe_serialize( $file_data );
-
-				error_log( $message . PHP_EOL, 3, $this->log_file );
-
+				$this->_log_event_to_file( $module, $priority, $data, $host, $username, $user, $url, $referrer );
 			}
 
 		}
 
+		do_action( 'itsec_log_event', $module, $priority, $data, $host, $username, $user, $url, $referrer );
+
+	}
+
+	private function _log_event_to_db( $module, $priority = 5, $data = array(), $host = '', $username = '', $user = '', $url = '', $referrer = '' ) {
+		global $wpdb, $itsec_globals;
+
+		$options = $this->logger_modules[ $module ];
+
+		$values = array(
+			'log_type'     => $options['type'],
+			'log_priority' => intval( $priority ),
+			'log_function' => $options['function'],
+			'log_date'     => date( 'Y-m-d H:i:s', $itsec_globals['current_time'] ),
+			'log_date_gmt' => date( 'Y-m-d H:i:s', $itsec_globals['current_time_gmt'] ),
+			'log_host'     => sanitize_text_field( $host ),
+			'log_username' => sanitize_text_field( $username ),
+			'log_user'     => intval( $user ),
+			'log_url'      => $url,
+			'log_referrer' => $referrer,
+			'log_data'     => serialize( $data ),
+		);
+
+		$columns = '`' . implode( '`, `', array_keys( $values ) ) . '`';
+		$placeholders = '%s, %d, %s, %s, %s, %s, %s, %s, %s, %s, %s';
+
+		$query_format = "INSERT INTO `{$wpdb->base_prefix}itsec_log` ($columns) VALUES ($placeholders)";
+
+		$cached_show_errors_setting = $wpdb->hide_errors();
+		$result = $wpdb->query( $wpdb->prepare( $query_format, $values ) );
+
+		if ( ! $result ) {
+			$wpdb->show_errors();
+
+			ITSEC_Lib::create_database_tables();
+
+			// Attempt the query again. Since errors will now be shown, a remaining issue will be display an error.
+			$result = $wpdb->query( $wpdb->prepare( $query_format, $values ) );
+		}
+
+		// Set $wpdb->show_errors back to its original setting.
+		$wpdb->show_errors( $cached_show_errors_setting );
+	}
+
+	private function _log_event_to_file( $module, $priority = 5, $data = array(), $host = '', $username = '', $user = '', $url = '', $referrer = '' ) {
+		global $itsec_globals;
+
+		// If the file can't be prepared, store the events up to write later (at plugins_loaded)
+		if ( false === $this->_prepare_log_file() ) {
+			$this->_events_to_log_to_file[] = compact( 'module', 'priority', 'data', 'host', 'username', 'user', 'url', 'referrer' );
+			return;
+		}
+
+		$options = $this->logger_modules[ $module ];
+
+		$file_data = $this->sanitize_array( $data, true );
+
+		$message =
+			$options['type'] . ',' .
+			intval( $priority ) . ',' .
+			$options['function'] . ',' .
+			date( 'Y-m-d H:i:s', $itsec_globals['current_time'] ) . ',' .
+			date( 'Y-m-d H:i:s', $itsec_globals['current_time_gmt'] ) . ',' .
+			sanitize_text_field( $host ) . ',' .
+			sanitize_text_field( $username ) . ',' .
+			( intval( $user ) === 0 ? '' : intval( $user ) ) . ',' .
+			esc_sql( $url ) . ',' .
+			esc_sql( $referrer ) . ',' .
+			maybe_serialize( $file_data );
+
+		error_log( $message . PHP_EOL, 3, $this->log_file );
+
+	}
+
+	public function write_pending_events_to_file() {
+		if ( ! empty( $this->_events_to_log_to_file ) ) {
+			foreach ( $this->_events_to_log_to_file as $event ) {
+				call_user_func_array( array( $this, '_log_event_to_file' ), $event );
+			}
+		}
 	}
 
 	/**
@@ -532,6 +548,8 @@ final class ITSEC_Logger {
 
 			}
 
+			$this->get_log_file();
+
 			if ( ( @file_exists( $this->log_file ) && @filesize( $this->log_file ) >= 10485760 ) ) {
 				$this->rotate_log();
 			}
@@ -597,7 +615,7 @@ final class ITSEC_Logger {
 
 		}
 
-		$this->start_log();
+		$this->_prepare_log_file();
 
 	}
 
@@ -643,14 +661,46 @@ final class ITSEC_Logger {
 
 	}
 
+	private function get_log_file() {
+		global $itsec_globals;
+
+		//make sure the log file info is there or generate it. This should only affect beta users.
+		if ( ! isset( $itsec_globals['settings']['log_info'] ) ) {
+
+			// We need wp_generate_password() to create a cryptographically secure file name
+			if ( ! function_exists( 'wp_generate_password' ) ) {
+				return false;
+			}
+			$itsec_globals['settings']['log_info'] = substr( sanitize_title( get_bloginfo( 'name' ) ), 0, 20 ) . '-' . wp_generate_password( 30, false );
+
+			update_site_option( 'itsec_global', $itsec_globals['settings'] );
+
+		}
+		$this->log_file = $itsec_globals['ithemes_log_dir'] . '/event-log-' . $itsec_globals['settings']['log_info'] . '.log';
+		return $this->log_file;
+	}
+
 	/**
 	 * Creates a new log file and adds header information (if needed)
 	 *
 	 * @return void
 	 */
-	private function start_log() {
+	private function _prepare_log_file() {
+		// We can't prepare a file if we can't get the file name
+		if ( false === $this->get_log_file() ) {
+			return false;
+		}
 
 		if ( file_exists( $this->log_file ) !== true ) { //only if current log file doesn't exist
+			global $itsec_globals;
+
+			//Make sure the logs directory was created
+			if ( ! is_dir( $itsec_globals['ithemes_log_dir'] ) ) {
+				if ( wp_mkdir_p( $itsec_globals['ithemes_log_dir'] ) ) {
+					// Make sure we have an index file to block directory listing
+					file_put_contents( path_join( $itsec_globals['ithemes_log_dir'], 'index.php' ), "<?php\n// Silence is golden." );
+				}
+			}
 
 			$header = 'log_type,log_priority,log_function,log_date,log_date_gmt,log_host,log_username,log_user,log_url,log_referrer,log_data' . PHP_EOL;
 

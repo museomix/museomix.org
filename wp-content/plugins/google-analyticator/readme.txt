@@ -2,8 +2,8 @@
 Contributors: noahkagan
 Tags: google analytics plugin, stats, statistics, google, analytics, dashboard, google analytics, tracking, widget, marketing,pageviews,visits, web stats, javascript
 Requires at least: 3.2
-Tested up to: 4.2.2
-Stable tag: 6.4.9.6
+Tested up to: 4.5
+Stable tag: 6.4.9.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -73,6 +73,10 @@ For any support issues, please use the official WordPress support forums.
 
 
 == Changelog ==
+
+= 6.4.9.7 =
+* Minor code cleanup changes.
+
 = 6.4.9.6 =
 * Resolve XSS vuln
 

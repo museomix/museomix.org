@@ -499,6 +499,10 @@ function customimagelocation(val) {
 
 function importRecordsbySettings(siteurl) {
     var importlimit = document.getElementById('importlimit').value;
+    var check_limit = check_allnumeric(importlimit);
+	if(!check_limit){
+		return false;
+	}
     var noncekey = document.getElementById('wpnoncekey').value;
     var get_requested_count = importlimit;
     var tot_no_of_records = document.getElementById('checktotal').value;
@@ -511,11 +515,14 @@ function importRecordsbySettings(siteurl) {
     var importinlineimage = false;
     var imagehandling = false;
     var inline_image_location = false;
+    var useexistingimages = false;
     var currentModule = document.getElementById('current_module').value;
+    //alert('currentModule: ' + currentModule); alert('ImportAs: ' + importas);
     if (currentModule != 'users' && currentModule != 'comments') {
         importinlineimage = document.getElementById('multiimage').checked;
         imagehandling = document.getElementById('inlineimagevalue').value;
         inline_image_location = document.getElementById('inline_image_location').value;
+        useexistingimages = document.getElementById('useexistingimages').checked;
     }
     var get_log = document.getElementById('log').innerHTML;
     document.getElementById('reportLog').style.display = '';
@@ -561,6 +568,7 @@ function importRecordsbySettings(siteurl) {
         'dupContent': dupContent,
         'dupTitle': dupTitle,
         'importlimit': importlimit,
+        'get_requested_count': get_requested_count,
         'limit': currentlimit,
         'totRecords': tot_no_of_records,
         'selectedImporter': importas,
@@ -570,6 +578,7 @@ function importRecordsbySettings(siteurl) {
         'inlineimagehandling': imagehandling,
         'inline_image_location': inline_image_location,
         'advance_media': advancemedia,
+        'useexistingimages': useexistingimages,
         'wpnonce': noncekey
     }
 
@@ -586,7 +595,7 @@ function importRecordsbySettings(siteurl) {
             if (parseInt(tmpCnt) == parseInt(tot_no_of_records)) {
                 document.getElementById('terminatenow').style.display = "none";
             }
-            if (parseInt(tmpCnt) < parseInt(tot_no_of_records)) {
+            if (parseInt(tmpCnt) <= parseInt(tot_no_of_records)) {
                 var terminate_action = document.getElementById('terminateaction').value;
                 currentlimit = parseInt(currentlimit) + parseInt(importlimit);
                 document.getElementById('currentlimit').value = currentlimit;
@@ -683,6 +692,13 @@ function import_again() {
 function check_allnumeric(inputtxt) {
     var numbers = /^[0-9]+$/;
     if (inputtxt.match(numbers)) {
+        no_of_tot_records = document.getElementById('tot_records').value;
+    if (parseInt(inputtxt) <= parseInt(no_of_tot_records)) {
+        document.getElementById('server_request_warning').style.display = 'none';
+    } else {
+        document.getElementById('server_request_warning').style.display = '';
+        return false;
+    }
         return true;
     }
     else {

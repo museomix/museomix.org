@@ -36,6 +36,8 @@ class BackWPup_Install {
 			delete_site_option( 'backwpup_cfg_jobnotranslate' );
 		}
 
+		delete_site_option( 'backwpup_cfg_jobziparchivemethod' );
+
 		//create new options
 		if ( is_multisite() ) {
 			add_site_option( 'backwpup_jobs', array() );
@@ -153,6 +155,26 @@ class BackWPup_Install {
 			}
 		}
 
+		//remove roles
+		remove_role( 'backwpup_admin' );
+		remove_role( 'backwpup_helper' );
+		remove_role( 'backwpup_check' );
+
+		//remove capabilities to administrator role
+		$role = get_role( 'administrator' );
+		if ( is_object( $role ) && method_exists( $role, 'remove_cap' ) ) {
+			$role->remove_cap( 'backwpup' );
+			$role->remove_cap( 'backwpup_jobs' );
+			$role->remove_cap( 'backwpup_jobs_edit' );
+			$role->remove_cap( 'backwpup_jobs_start' );
+			$role->remove_cap( 'backwpup_backups' );
+			$role->remove_cap( 'backwpup_backups_download' );
+			$role->remove_cap( 'backwpup_backups_delete' );
+			$role->remove_cap( 'backwpup_logs' );
+			$role->remove_cap( 'backwpup_logs_delete' );
+			$role->remove_cap( 'backwpup_settings' );
+		}
+
 		//to reschedule on activation and so on
 		update_site_option( 'backwpup_version', get_site_option( 'backwpup_version' ) .'-inactive' );
 	}
@@ -228,7 +250,7 @@ class BackWPup_Install {
 				$jobvalue[ 'destinations' ][ ] = 'SUGARSYNC';
 			if ( ! empty( $jobvalue[ 'awsAccessKey' ] ) && ! empty( $jobvalue[ 'awsSecretKey' ] ) && ! empty( $jobvalue[ 'awsBucket' ] ) )
 				$jobvalue[ 'destinations' ][ ] = 'S3';
-			if ( ! empty( $jobvalue[ 'GStorageAccessKey' ] ) and ! empty( $jobvalue[ 'GStorageSecret' ] ) && ! empty( $jobvalue[ 'GStorageBucket' ] ) && !in_array( 'S3', $jobvalue[ 'destinations' ] ) )
+			if ( ! empty( $jobvalue[ 'GStorageAccessKey' ] ) and ! empty( $jobvalue[ 'GStorageSecret' ] ) && ! empty( $jobvalue[ 'GStorageBucket' ] ) && !in_array( 'S3', $jobvalue[ 'destinations' ], true ) )
 				$jobvalue[ 'destinations' ][ ] = 'S3';
 			if ( ! empty( $jobvalue[ 'rscUsername' ] ) && ! empty( $jobvalue[ 'rscAPIKey' ] ) && ! empty( $jobvalue[ 'rscContainer' ] ) )
 				$jobvalue[ 'destinations' ][ ] = 'RSC';
@@ -321,6 +343,6 @@ class BackWPup_Install {
 			foreach ( $jobvalue as $jobvaluename => $jobvaluevalue )
 				BackWPup_Option::update( $jobvalue[ 'jobid' ], $jobvaluename, $jobvaluevalue );
 		}
-		set_site_transient( 'backwpup_upgrade_from_version_two', TRUE, 3600*24*7);
+
 	}
 }

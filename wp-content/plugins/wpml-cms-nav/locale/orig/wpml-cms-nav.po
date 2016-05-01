@@ -5,11 +5,12 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Project-Id-Version: \n"
+"Project-Id-Version:WPML_EXPORT\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language:en\n"
 "MIME-Version: 1.0\n"
 
 msgid "News"
@@ -54,9 +55,6 @@ msgstr ""
 msgid "cancel"
 msgstr ""
 
-msgid "Sidebar Navigation"
-msgstr ""
-
 msgid "WPML provides advanced menus and navigation to go with your WordPress website, including drop-down menus, breadcrumbs and sidebar navigation."
 msgstr ""
 
@@ -67,6 +65,9 @@ msgid "Configure"
 msgstr ""
 
 msgid "Home"
+msgstr ""
+
+msgid "Sidebar Navigation"
 msgstr ""
 
 msgid "The cache has been cleared."

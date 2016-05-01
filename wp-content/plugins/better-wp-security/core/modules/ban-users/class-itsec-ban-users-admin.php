@@ -339,7 +339,7 @@ class ITSEC_Ban_Users_Admin {
 		} else if ( 'nginx' === $server_type ) {
 			if ( ! empty( $host_rules ) ) {
 				$rules .= "\n";
-				$rules .= "# " . __( 'Ban Hosts - Security > Settings > Banned Users', 'better-wp-security' ) . "\n";
+				$rules .= "\t# " . __( 'Ban Hosts - Security > Settings > Banned Users', 'better-wp-security' ) . "\n";
 				$rules .= $host_rules;
 			}
 		}
@@ -374,7 +374,7 @@ class ITSEC_Ban_Users_Admin {
 				$rewrite_rules .= "\t\tRewriteCond %{HTTP_USER_AGENT} ^$agent [NC,OR]\n";
 			} else if ( 'nginx' === $server_type ) {
 				$agent = str_replace( '"', '\\"', $agent );
-				$agent_rules .= "if (\$http_user_agent ~* \"^$agent\") { return 403; }\n";
+				$agent_rules .= "\tif (\$http_user_agent ~* \"^$agent\") { return 403; }\n";
 			}
 		}
 

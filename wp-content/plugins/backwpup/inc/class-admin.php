@@ -127,11 +127,11 @@ final class BackWPup_Admin {
 	public function plugin_links( $links, $file ) {
 
 		if ( $file == plugin_basename( BackWPup::get_plugin_data( 'MainFile' ) ) ) {
-			$links[ ] = '<a href="' . __( 'https://marketpress.com/documentation/backwpup-pro/', 'backwpup' ) . '">' . __( 'Documentation', 'backwpup' ) . '</a>';
+			$links[ ] = '<a href="' . esc_attr__( 'https://marketpress.com/documentation/backwpup-pro/', 'backwpup' ) . '">' . __( 'Documentation', 'backwpup' ) . '</a>';
 			if ( class_exists( 'BackWPup_Pro', FALSE ) )
-				$links[ ] = '<a href="' . __( 'https://marketpress.com/support/forum/plugins/backwpup-pro/', 'backwpup' ) . '">' . __( 'Pro Support', 'backwpup' ) . '</a>';
+				$links[ ] = '<a href="' . esc_attr__( 'https://marketpress.com/support/forum/plugins/backwpup-pro/', 'backwpup' ) . '">' . __( 'Pro Support', 'backwpup' ) . '</a>';
 			else
-				$links[ ] = '<a href="' . __( 'http://wordpress.org/support/plugin/backwpup/', 'backwpup' ) . '">' . __( 'Support', 'backwpup' ) . '</a>';
+				$links[ ] = '<a href="' . esc_attr__( 'http://wordpress.org/support/plugin/backwpup/', 'backwpup' ) . '">' . __( 'Support', 'backwpup' ) . '</a>';
 
 		}
 
@@ -252,11 +252,9 @@ final class BackWPup_Admin {
 
 		//register js and css for BackWPup
 		if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
-			wp_register_script( 'backwpuptiptip', BackWPup::get_plugin_data( 'URL' ) . '/assets/js/jquery.tipTip.js', array( 'jquery' ), '1.3.1', TRUE );
-			wp_register_script( 'backwpupgeneral', BackWPup::get_plugin_data( 'URL' ) . '/assets/js/general.js', array( 'jquery', 'backwpuptiptip' ), time(), TRUE );
+			wp_register_script( 'backwpupgeneral', BackWPup::get_plugin_data( 'URL' ) . '/assets/js/general.js', array( 'jquery' ), time(), false );
 		} else {
-			wp_register_script( 'backwpuptiptip', BackWPup::get_plugin_data( 'URL' ) . '/assets/js/jquery.tipTip.min.js', array( 'jquery' ), '1.3.1', TRUE );
-			wp_register_script( 'backwpupgeneral', BackWPup::get_plugin_data( 'URL' ) . '/assets/js/general.min.js', array( 'jquery', 'backwpuptiptip' ), BackWPup::get_plugin_data( 'Version' ), TRUE );
+			wp_register_script( 'backwpupgeneral', BackWPup::get_plugin_data( 'URL' ) . '/assets/js/general.min.js', array( 'jquery' ), BackWPup::get_plugin_data( 'Version' ), false );
 		}
 
 		//add Help
@@ -270,7 +268,7 @@ final class BackWPup_Admin {
 	public function save_post_form() {
 
 		//Allowed Pages
-		if ( ! in_array( $_POST[ 'page' ], array ( 'backwpupeditjob', 'backwpupinformation', 'backwpupsettings' ) ) )
+		if ( ! in_array( $_POST[ 'page' ], array ( 'backwpupeditjob', 'backwpupinformation', 'backwpupsettings' ), true ) )
 			wp_die( __( 'Cheating, huh?', 'backwpup' ) );
 
 		//nonce check
@@ -450,7 +448,7 @@ final class BackWPup_Admin {
 		}
 
 		//only if user has other than backwpup role
-		if ( ! empty( $user->roles[ 0 ] ) && in_array( $user->roles[ 0 ], array_keys( $backwpup_roles ) ) ) {
+		if ( ! empty( $user->roles[ 0 ] ) && in_array( $user->roles[ 0 ], array_keys( $backwpup_roles ), true ) ) {
 			return;
 		}
 
@@ -527,7 +525,7 @@ final class BackWPup_Admin {
 		}
 
 		//add new role to user if it not the actual
-		if ( $backwpup_role && in_array( $backwpup_role, $backwpup_roles ) ) {
+		if ( $backwpup_role && in_array( $backwpup_role, $backwpup_roles, true ) ) {
 			$user->add_role( $backwpup_role );
 		}
 

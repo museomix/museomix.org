@@ -125,6 +125,7 @@ $nonce_Key = $impCE->create_nonce_key();
 								</h2>
 								<?php
 								if (isset($_FILES['inlineimages'])) {
+									$uploadDir = wp_upload_dir();
 									if (isset($_POST['uploadfilename']) && sanitize_file_name($_POST['uploadfilename']) != '') {
 										$get_file_name = sanitize_file_name($_POST['uploadfilename']);
 										$filehashkey = $impCE->convert_string2hash_key($get_file_name);
@@ -194,7 +195,13 @@ $nonce_Key = $impCE->create_nonce_key();
 								if (isset($_POST['upload_csv_realname']) && sanitize_text_field($_POST['upload_csv_realname']) != '') {
 									$uploaded_csv_name = sanitize_file_name($_POST['upload_csv_realname']);
 								}
-								$getrecords = $impCE->csv_file_data($filename);
+								$total_row_count = '';
+								$parserObj = new SmackCSVParser();
+								$file = $impCE->getUploadDirectory() . '/' . $filename;
+								$parserObj->parseCSV($file, 0, -1);
+								$headers = $parserObj->get_CSVheaders();
+								$headers = $headers[0];
+								$total_row_count = $parserObj->total_row_count - 1;
 								$getcustomposts = get_post_types();
 								if(!empty($getcustomposts) && is_array($getcustomposts)) {
 									foreach ($getcustomposts as $keys => $value) {
@@ -208,9 +215,9 @@ $nonce_Key = $impCE->create_nonce_key();
 									<tr>
 										<div align='center' style='float:right;'>
 											<?php $cnt = count($impCE->defCols) + 2;
-											$cnt1 = count($impCE->headers);
-											$records = count($getrecords);
-											$imploaded_array = implode(',', $impCE->headers); ?>
+											$cnt1 = count($headers);
+											$records = $total_row_count;
+											$imploaded_array = implode(',', $headers); ?>
 											<input type='hidden' id='imploded_header' name='imploded_array' value='<?php if (isset($imploaded_array)) { echo $imploaded_array; } ?>' />
 											<input type='hidden' id='h1' name='h1' value="<?php if (isset($cnt)) { echo $cnt; } ?>" />
 											<input type='hidden' id='h2' name='h2' value="<?php if (isset($cnt1)) {	echo $cnt1;	} ?>" />
@@ -273,8 +280,8 @@ $nonce_Key = $impCE->create_nonce_key();
 																	id="mapping<?php print($count); ?>">
 																<?php } ?>
 																<option>-- Select --</option>
-																<?php if(is_array($impCE->headers) && !empty($impCE->headers)) {
-																	foreach ($impCE->headers as $key1 => $value1) { ?>
+																<?php if(is_array($headers) && !empty($headers)) {
+																	foreach ($headers as $key1 => $value1) { ?>
 																		<option><?php echo $value1; ?></option>
 																	<?php }
 																}?>
@@ -320,8 +327,8 @@ $nonce_Key = $impCE->create_nonce_key();
 														<select name="coremapping<?php print($count); ?>"
 																id="coremapping<?php print($count); ?>">
 															<option>-- Select --</option>
-															<?php if(!empty($impCE->headers) && is_array($impCE->headers)) {
-																foreach ($impCE->headers as $key1 => $value1) { ?>
+															<?php if(!empty($headers) && is_array($headers)) {
+																foreach ($headers as $key1 => $value1) { ?>
 																	<option><?php echo $value1; ?></option>
 																<?php }
 															}?>
@@ -377,8 +384,8 @@ $nonce_Key = $impCE->create_nonce_key();
 														<select name="term_mapping<?php print($count); ?>"
 																id="term_mapping<?php print($count); ?>">
 															<option>-- Select --</option>
-															<?php if(is_array($impCE->headers) && !empty($impCE->headers)) {
-																foreach ($impCE->headers as $key1 => $value1) { ?>
+															<?php if(is_array($headers) && !empty($headers)) {
+																foreach ($headers as $key1 => $value1) { ?>
 																	<option><?php echo $value1; ?></option>
 																<?php }
 															}?>
@@ -433,8 +440,8 @@ $nonce_Key = $impCE->create_nonce_key();
 															<select name="seomapping<?php print($count); ?>"
 																	id="seomapping<?php print($count); ?>">
 																<option>-- Select --</option>
-																<?php if(is_array($impCE->headers) && !empty($impCE->headers)) {
-																	foreach ($impCE->headers as $key1 => $value1) { ?>
+																<?php if(is_array($headers) && !empty($headers)) {
+																	foreach ($headers as $key1 => $value1) { ?>
 																		<option><?php echo $value1; ?></option>
 																	<?php }
 																}?>
@@ -542,11 +549,15 @@ $nonce_Key = $impCE->create_nonce_key();
 												</label>
 												<?php echo $impCE->helpnotes(); ?>
 												<br>
-												<span class='msg' id='server_request_warning' style="display:none;color:red;margin-left:-10px;"><?php echo esc_html__('You can set upto', 'wp-ultimate-csv-importer'); ?><?php echo sanitize_text_field($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['totRecords']); ?><?php echo __('per request.', 'wp-ultimate-csv-importer'); ?></span>
-												<input type="hidden" id="currentlimit" name="currentlimit" value="0"/>
+												<div>
+												<span class='msg' id='server_request_warning' style="display:none;color:red;margin-left:-10px;"><?php echo esc_html__('You can set upto', 'wp-ultimate-csv-importer'); ?><?php echo ' '.sanitize_text_field($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['totRecords']).' '; ?><?php echo __('per request.', 'wp-ultimate-csv-importer'); ?></span></div>
+												<input type="hidden" id="currentlimit" name="currentlimit" value="1"/>
 												<input type="hidden" id="tmpcount" name="tmpcount" value="0"/>
 												<input type="hidden" id="terminateaction" name="terminateaction" value="continue"/>
-												<label id="innertitle"><?php echo esc_html__('Inline image options', 'wp-ultimate-csv-importer'); ?></label><br/>
+												<label id="innertitle"><?php echo esc_html__('Media Options', 'wp-ultimate-csv-importer'); ?></label><br/>
+												<label id='importalign'>
+													<input type='checkbox' id='useexistingimages' name='useexistingimages' value='' /> <?php echo esc_html__("Reuse image with same name in Media", 'wp-ultimate-csv-importer'); ?>
+												</label> <?php echo $impCE->helpnotes('skipDuplicate'); ?> <br>
 												<label id='importalign'>
 													<input type='checkbox' id='multiimage' name='multiimage' value='' /> <?php echo esc_html__('Insert Inline Images', 'wp-ultimate-csv-importer'); ?>
 												</label><br>

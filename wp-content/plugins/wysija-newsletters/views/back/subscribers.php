@@ -1091,8 +1091,9 @@ class WYSIJA_view_back_subscribers extends WYSIJA_view_back
 
 		foreach ($columns as $key_col => $val)
 		{
+      $val = esc_html($val);
 		    if ($i == 0 && !isset($data['firstrowisdata']))
-			echo '<td><strong>'.esc_html($val).'</strong></td>';
+			echo '<td><strong>'.$val.'</strong></td>';
 		    else
 		    {
 			if (!empty($this->new_column_can_be_imported[$key_col]))
@@ -1106,7 +1107,7 @@ class WYSIJA_view_back_subscribers extends WYSIJA_view_back
 			    {
 				$val_converted = '<span class="converted-field-error row-'.$key_col.'" title="'.__('Do not match as a \'date field\' if most of the rows for that column return the same error.', WYSIJA).'">'.__('Error matching date.', WYSIJA).'</span>';
 			    }
-			    $val = ' <span class="imported-field">'.esc_html($val).'</span>'.$val_converted;
+			    $val = ' <span class="imported-field">'.$val.'</span>'.$val_converted;
 			}
 			echo '<td>'.$val.'</td>';
 		    }
@@ -1134,6 +1135,7 @@ class WYSIJA_view_back_subscribers extends WYSIJA_view_back
 	    <?php
 	    foreach ($data['lastrow'] as $key_col => $val)
 	    {
+        $val = esc_html($val);
 		if (!empty($this->new_column_can_be_imported[$key_col]))
 		{
 		    $timestamp = strtotime($val);

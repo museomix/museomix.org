@@ -92,11 +92,8 @@ class BackWPup_Create_Archive {
 			$this->filehandel = fopen( $this->file, 'ab');
 		}
 		elseif ( strtolower( substr( $this->file, -4 ) ) == '.zip' ) {
-			$this->method = get_site_option( 'backwpup_cfg_jobziparchivemethod');
+			$this->method = 'ZipArchive';
 			//check and set method
-			if ( empty( $this->method ) || ( $this->method != 'ZipArchive' && $this->method != 'PclZip' ) ) {
-				$this->method = 'ZipArchive';
-			}
 			if ( ! class_exists( 'ZipArchive' ) ) {
 				$this->method = 'PclZip';
 			}
@@ -183,12 +180,12 @@ class BackWPup_Create_Archive {
 	public function close() {
 
 		//write tar file end
-		if ( in_array( $this->get_method(), array( 'Tar', 'TarGz', 'TarBz2' ) ) ) {
+		if ( in_array( $this->get_method(), array( 'Tar', 'TarGz', 'TarBz2' ), true ) ) {
 			$footer = pack( "a1024", "" );
-			if ( $this->method == 'TarGz' ) {
+			if ( $this->method === 'TarGz' ) {
 				$footer = gzencode( $footer );
 			}
-			if ( $this->method == 'TarBz2' ) {
+			if ( $this->method === 'TarBz2' ) {
 				$footer = bzcompress( $footer );
 			}
 			fwrite( $this->filehandel, $footer );

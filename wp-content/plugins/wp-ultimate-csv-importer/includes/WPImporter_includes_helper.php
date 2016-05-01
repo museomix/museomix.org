@@ -43,20 +43,9 @@ class WPImporter_includes_helper {
 
 	public $baseUrl;
 
-	public $baseUrlParamNames = array('page', 'pagenum', 'order', 'order_by', 'type', 's', 'f', '__module', '__action', 'step');
-
 	public function __construct() {
 		$this->getKeyVals();
-		$remove = array_diff(array_keys($_GET), $this->baseUrlParamNames);
-
-		$p_url = parse_url( site_url() );
-
-		$url = $p_url['scheme'] . '://' . $p_url['host'];
-		if ($remove) {
-			$this->baseUrl = $url . remove_query_arg($remove);
-		} else {
-			$this->baseUrl = $url . $_SERVER['REQUEST_URI'];
-		}
+		$this->baseUrl = admin_url('admin.php');
 	}
 
 	// @var string CSV upload directory name
@@ -294,33 +283,52 @@ class WPImporter_includes_helper {
 	 * @param $delim delimiter for the CSV
 	 * @return array formatted CSV output as array
 	 */
-	function csv_file_data($file) {
+	function csv_file_data($file,$startlimit,$endlimit = null) {
 		$file = $this->getUploadDirectory() . '/' . $file;
-		require_once(WP_CONST_ULTIMATE_CSV_IMP_DIRECTORY . 'includes/Importer.php');
-		$csv = new ImporterLib();
-		$csv->delim($file);
-		foreach ($csv->data as $hkey => $hval) {
-			foreach ($hval as $hk => $hv) {
-				$this->headers[] = $hk;
+		require_once(WP_CONST_ULTIMATE_CSV_IMP_DIRECTORY . 'includes/SmackCSVParser.php');
+		if(file_exists($file)){
+			$csv = new SmackCSVParser();
+			$data = $csv->parseCSV($file,$startlimit,$endlimit);
+			foreach ($data as $hkey => $hval) {
+				foreach ($hval as $hk => $hv) {
+					$this->headers[] = $hk;
+				}
+				break;
 			}
-			break;
+			return $data;
+		}else{
+			return false;
 		}
-		return $csv->data;
 	}
-
-	function csv_file_readdata($file, $obj) {
-		$file = $obj->getUploadDirectory() . '/' . $file;
-		require_once(WP_CONST_ULTIMATE_CSV_IMP_DIRECTORY . 'includes/Importer.php');
-		$csv = new ImporterLib();
-		$csv->delim($file);
-		foreach ($csv->data as $hkey => $hval) {
-			foreach ($hval as $hk => $hv) {
-				$this->headers[] = $hk;
-			}
-			break;
-		}
-		return $csv->data;
-	}
+	function csv_file_readdata($file,$path,$delim) {
+                $data_rows = array();
+                $path = $this->getUploadDirectory() . '/' . $file;
+		require_once(WP_CONST_ULTIMATE_CSV_IMP_DIRECTORY . 'includes/SmackCSVParser.php');
+                $csv = new SmackCSVParser();
+                $csv->parseCSV($path,1,1);
+                $delim = $csv->delimiter;
+                # Check whether file is present in the given file location
+                $fileexists = file_exists($path);
+                if ($fileexists) {
+                        $resource = fopen($path, 'r');
+                        $init = 0;
+                        while ($keys = fgetcsv($resource, '', $delim, '"')) {
+                                if ($init == 0) {
+                                        $this->headers = $keys;
+                                } else {
+                                        if (!(($keys[0] == null) && (count($keys) == 1))) {
+                                                array_push($data_rows, $keys);
+                                        }
+                                }
+                                $init++;
+                        }
+                        fclose($resource);
+                        ini_set("auto_detect_line_endings", false);
+                } else {
+			return false;
+                }
+                return $data_rows;
+        }
 
 	function get_availgroups($module) {
 		$groups = array();
@@ -427,9 +435,18 @@ class WPImporter_includes_helper {
 	/**
 	 * function to map the csv file and process it
 	 *
+	 * @param $data_rows
+	 * @param $ret_array
+	 * @param $session_arr
+	 * @param $currentLimit
+	 * @param $extractedimagelocation
+	 * @param $importinlineimageoption
+	 * @param null $sample_inlineimage_url
+	 * @param bool $useexistingimages
+	 *
 	 * @return boolean
 	 */
-	function processDataInWP($data_rows, $ret_array, $session_arr, $currentLimit, $extractedimagelocation, $importinlineimageoption, $sample_inlineimage_url = null) {
+	function processDataInWP($data_rows, $ret_array, $session_arr, $currentLimit, $extractedimagelocation, $importinlineimageoption, $sample_inlineimage_url = null, $useexistingimages = false) {
 		global $wpdb;
 		$post_id = '';
 		$new_post = array();
@@ -550,9 +567,9 @@ class WPImporter_includes_helper {
 
 							$f_img = $new_post [$ckey];
 							$fimg_path = $full_path;
-							$fimg_name = @basename($f_img);
 
-							$fimg_name = str_replace(' ', '-', $fimg_name);
+							$fimg_name = @basename($f_img);
+							$fimg_name = str_replace(' ', '-', trim($fimg_name));
 							$fimg_name = preg_replace('/[^a-zA-Z0-9._\-\s]/', '', $fimg_name);
 							$fimg_name = urlencode($fimg_name);
 							$parseURL = parse_url($f_img);
@@ -561,16 +578,17 @@ class WPImporter_includes_helper {
 								$fimg_name = $fimg_name . '.jpg';
 							}
 							$f_img_slug = '';
-							$featured_image = $path_parts['filename'];
-							$f_img_slug = strtolower(str_replace('', '-', $f_img_slug));
+							#$featured_image = str_replace(' ', '-', trim($path_parts['filename']));
+							$featured_image = trim($path_parts['filename']);
+							$f_img_slug = strtolower(str_replace(' ', '-', trim($f_img_slug)));
 							$f_img_slug = preg_replace('/[^a-zA-Z0-9._\-\s]/', '', $f_img_slug);
 							$post_slug_value = strtolower($f_img_slug);
-							if (array_key_exists('extension', $path_parts)) {
-								//$fimg_name = wp_unique_filename($fimg_path, $fimg_name, $path_parts['extension']);
+							#if (array_key_exists('extension', $path_parts)) {
+							if ($useexistingimages == 'false') {
+								$fimg_name = wp_unique_filename($fimg_path, trim($fimg_name));
 							}
 							$this->get_fimg_from_URL($f_img, $fimg_path, $fimg_name, $post_slug_value, $currentLimit, $this);
 							$filepath = $fimg_path . "/" . $fimg_name;
-
 							if (@getimagesize($filepath)) {
 								$img = wp_get_image_editor($filepath);
 								$file ['guid'] = $baseurl . "/" . $fimg_name;
@@ -605,7 +623,7 @@ class WPImporter_includes_helper {
 
 		// Date format post
 		if (!isset($data_array ['post_date'])) {
-                       $data_array ['post_date'] = date('Y-m-d H:i:s');
+                       $data_array ['post_date'] = current_time('Y-m-d H:i:s');
                        $this->detailedLog[$currentLimit]['postdate'] = "<b>" . __('Date', 'wp-ultimate-csv-importer') . " - </b>" . $data_array ['post_date'];
                 } else {
                        if(strtotime($data_array ['post_date'])){
@@ -613,7 +631,7 @@ class WPImporter_includes_helper {
                                $this->detailedLog[$currentLimit]['postdate'] = "<b>" . __('Date', 'wp-ultimate-csv-importer') . " - </b>" . $data_array ['post_date'];
                        }
                        else {
-                               $data_array ['post_date'] = date('Y-m-d H:i:s');
+                               $data_array ['post_date'] = current_time('Y-m-d H:i:s');
                                $this->detailedLog[$currentLimit]['postdate'] = "<b>" . __('Date', 'wp-ultimate-csv-importer') . " - </b>" . $data_array ['post_date'] . ' . Unformatted date so current date was replaced.';
                        }
                }
@@ -819,7 +837,7 @@ class WPImporter_includes_helper {
 				if ($this->MultiImages == 'true') { // Inline image import feature by fredrick marks
 					$inlineImagesObj = new WPImporter_inlineImages();
 					$postid = wp_insert_post($data_array);
-					$post_id = $inlineImagesObj->importwithInlineImages($postid, $currentLimit, $data_array, $this, $importinlineimageoption, $extractedimagelocation, $sample_inlineimage_url);
+					$post_id = $inlineImagesObj->importwithInlineImages($postid, $currentLimit, $data_array, $this, $importinlineimageoption, $extractedimagelocation, $sample_inlineimage_url, $useexistingimages);
 				} else {
 					/* Check post parent is exist or not */
 					if(isset($data_array['post_parent']) && isset($data_array['post_type']) && $data_array['post_type'] == 'page'){
@@ -937,7 +955,7 @@ class WPImporter_includes_helper {
 				if (!empty ($file)) {
 					//$wp_filetype = wp_check_filetype(@basename($file ['guid']), null);
 					$wp_upload_dir = wp_upload_dir();
-					$attachment = array('guid' => $file ['guid'], 'post_mime_type' => 'image/jpeg', 'post_title' => preg_replace('/[^a-zA-Z0-9._\s]/', '', @basename($file ['post_title'])), 'post_content' => '', 'post_status' => 'inherit');
+					$attachment = array('guid' => $file ['guid'], 'post_mime_type' => 'image/jpeg', 'post_title' => preg_replace('/[^a-zA-Z0-9._\-\s]/', '', @basename($file ['post_title'])), 'post_content' => '', 'post_status' => 'inherit');
 					if ($get_media_settings == 1) {
 						$generate_attachment = $dirname . '/' . $fimg_name;
 					} else {
@@ -947,22 +965,28 @@ class WPImporter_includes_helper {
 					/*$attach_id = wp_insert_attachment($attachment, $generate_attachment, $post_id);
 					$attach_data = wp_generate_attachment_metadata($attach_id, $uploadedImage);
 					wp_update_attachment_metadata($attach_id, $attach_data);*/
-					$existing_attachment = array();
-					$query = $wpdb->get_results($wpdb->prepare("select post_title from $wpdb->posts where post_type = %s and post_mime_type = %s",'attachment','image/jpeg'));
-					if(!empty($query)) {
-						foreach ( $query as $key ) {
-							$existing_attachment[] = $key->post_title;
+					if($useexistingimages == 'true') {
+						$existing_attachment = array();
+						$query = $wpdb->get_results($wpdb->prepare("select post_title from $wpdb->posts where post_type = %s and post_mime_type = %s",'attachment','image/jpeg'));
+						if(!empty($query)) {
+							foreach ( $query as $key ) {
+								$existing_attachment[] = $key->post_title;
+							}
 						}
-					}
-					if (!in_array($attachment['post_title'], $existing_attachment)) {
-						$attach_id = wp_insert_attachment($attachment, $generate_attachment, $post_id);
-						$attach_data = wp_generate_attachment_metadata($attach_id, $uploadedImage);
-						wp_update_attachment_metadata($attach_id, $attach_data);
+						if ( ! in_array( $attachment['post_title'], $existing_attachment ) ) {
+							$attach_id   = wp_insert_attachment( $attachment, $generate_attachment, $post_id );
+							$attach_data = wp_generate_attachment_metadata( $attach_id, $uploadedImage );
+							wp_update_attachment_metadata( $attach_id, $attach_data );
+						} else {
+							$query2 = $wpdb->get_results( $wpdb->prepare( "select ID from $wpdb->posts where post_title = %s  and post_type = %s", $attachment['post_title'], 'attachment' ) );
+							foreach ( $query2 as $key2 ) {
+								$attach_id = $key2->ID;
+							}
+						}
 					} else {
-						$query2 = $wpdb->get_results($wpdb->prepare("select ID from $wpdb->posts where post_title = %s  and post_type = %s",$attachment['post_title'],'attachment'));
-						foreach ($query2 as $key2) {
-							$attach_id = $key2->ID;
-						}
+						$attach_id   = wp_insert_attachment( $attachment, $generate_attachment, $post_id );
+						$attach_data = wp_generate_attachment_metadata( $attach_id, $uploadedImage );
+						wp_update_attachment_metadata( $attach_id, $attach_data );
 					}
 					set_post_thumbnail($post_id, $attach_id);
 				}
@@ -1206,9 +1230,9 @@ class WPImporter_includes_helper {
 		return $smack_csv_import_method;
 	}
 
-	function helpnotes() {
+	function helpnotes($media_option = null) {
 		$smackhelpnotes = '<span style="position:absolute;margin-top:6px;margin-left:15px;">
-			<a href="" class="tooltip">
+			<a href="#" class="tooltip">
 			<img src="' . esc_url(WP_CONST_ULTIMATE_CSV_IMP_DIR . "images/help.png").'" />
 			<span class="tooltipPostStatus">
 			<img class="callout" src="' . esc_url(WP_CONST_ULTIMATE_CSV_IMP_DIR . "images/callout.gif").'" />
@@ -1217,6 +1241,19 @@ class WPImporter_includes_helper {
 			</span>
 			</a>
 			</span>';
+		if($media_option == 'skipDuplicate') {
+			$smackhelpnotes = '<span style="position:absolute;margin-top:6px;margin-left:15px;text-align: justify;">
+			<a href="#" class="tooltip">
+			<img src="' . esc_url(WP_CONST_ULTIMATE_CSV_IMP_DIR . "images/help.png").'" />
+			<span class="tooltipPostStatus">
+			<img class="callout" src="' . esc_url(WP_CONST_ULTIMATE_CSV_IMP_DIR . "images/callout.gif").'" />
+			1) If checked, skips image with same name and assigns the existing image to the new post. <br>
+			2) If unchecked, image name is renamed as imagename-number(logo-1.png) similar to the WordPress media handling.
+			<img src="' . esc_url(WP_CONST_ULTIMATE_CSV_IMP_DIR . "images/help.png").'" style="margin-top: 6px;float:right;" />
+			</span>
+			</a>
+			</span>';
+		}
 		return $smackhelpnotes;
 	}
 

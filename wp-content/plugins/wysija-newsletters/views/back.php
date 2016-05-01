@@ -227,7 +227,7 @@ class WYSIJA_view_back extends WYSIJA_view{
 
         $current_page = 1;
         if (isset($_REQUEST['pagi'])) {
-            $current_page = $_REQUEST['pagi'];
+            $current_page = (int)$_REQUEST['pagi'];
         }
 
         if ($number_of_pages > 1) {
@@ -246,9 +246,9 @@ class WYSIJA_view_back extends WYSIJA_view{
 
             // Pagination Previous Arrows.
             if ($current_page != 1) {
-                $pagi .= '<a class="prev page-numbers" href="admin.php?page='.$_REQUEST['page'].'&pagi=1'.$paramsurl.'" alt="1" title="'.sprintf(__('Page %1$s',WYSIJA),1).'">&laquo;</a>';
+                $pagi .= '<a class="prev page-numbers" href="admin.php?page='.esc_attr($_REQUEST['page']).'&pagi=1'.$paramsurl.'" alt="1" title="'.sprintf(__('Page %1$s',WYSIJA),1).'">&laquo;</a>';
                 if ($current_page>2) {
-                    $pagi .= '<a class="prev page-numbers" href="admin.php?page='.$_REQUEST['page'].'&pagi='.($current_page-1).$paramsurl.'" alt="'.($current_page-1).'" title="'.sprintf(__('Page %1$s',WYSIJA),($current_page-1)).'" >&lsaquo;</a>';
+                    $pagi .= '<a class="prev page-numbers" href="admin.php?page='.esc_attr($_REQUEST['page']).'&pagi='.($current_page-1).$paramsurl.'" alt="'.($current_page-1).'" title="'.sprintf(__('Page %1$s',WYSIJA),($current_page-1)).'" >&lsaquo;</a>';
                 }
             }
 
@@ -259,9 +259,9 @@ class WYSIJA_view_back extends WYSIJA_view{
             // Pagination Next arrows.
             if($number_of_pages > 1 && $current_page != $number_of_pages){
                 if (($number_of_pages - $current_page) >= 2) {
-                    $pagi .= '<a class="next page-numbers" href="admin.php?page='.$_REQUEST['page'].'&pagi='.($current_page+1).$paramsurl.'" alt="'.($current_page+1).'" title="'.sprintf(__('Page %1$s',WYSIJA),($current_page+1)).'">&rsaquo;</a>';
+                    $pagi .= '<a class="next page-numbers" href="admin.php?page='.esc_attr($_REQUEST['page']).'&pagi='.($current_page+1).$paramsurl.'" alt="'.($current_page+1).'" title="'.sprintf(__('Page %1$s',WYSIJA),($current_page+1)).'">&rsaquo;</a>';
                 }
-                $pagi .= '<a class="next page-numbers" href="admin.php?page='.$_REQUEST['page'].'&pagi='.$number_of_pages.$paramsurl.'" alt="'.$number_of_pages.'" title="'.sprintf(__('Page %1$s',WYSIJA),$number_of_pages).'" >&raquo;</a>';
+                $pagi .= '<a class="next page-numbers" href="admin.php?page='.esc_attr($_REQUEST['page']).'&pagi='.$number_of_pages.$paramsurl.'" alt="'.$number_of_pages.'" title="'.sprintf(__('Page %1$s',WYSIJA),$number_of_pages).'" >&raquo;</a>';
             }
 
             echo $pagi;

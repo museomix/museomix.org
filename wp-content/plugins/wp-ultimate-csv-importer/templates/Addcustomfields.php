@@ -40,9 +40,12 @@ if (!defined('ABSPATH')) {
 } // Exit if accessed directly
 $filename = isset($_POST['filename']) ? sanitize_text_field($_POST['filename']) : '';
 $count = isset($_POST['corecount']) ? intval($_POST['corecount']) : '';
-$impobj = new WPImporter_includes_helper();
-$getrec = $impobj->csv_file_data($filename);
-$csvheaders = $impobj->headers;
+$upload_dir = wp_upload_dir();
+$parserObj = new SmackCSVParser();
+$file = $upload_dir ['basedir'] . "/ultimate_importer/" . $filename;
+$parserObj->parseCSV($file, 0, -1);
+$csvheaders = $parserObj->get_CSVheaders();
+$csvheaders = $csvheaders[0];
 $returndata = "<tr><td class='left_align' style='width:54.5%; padding-left:150px;'><input type='text' name='addcorefieldname$count' id = 'addcorefieldname$count'/></td>";
 $returndata .= "<td class='left_align'> <select name='addcoremapping$count' id='addcoremapping$count' class='uiButton'>";
 $returndata .= "<option id = 'select'>-- Select --</option>";

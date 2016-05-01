@@ -2161,8 +2161,8 @@ class WYSIJA_view_back_config extends WYSIJA_view_back {
 				);
 				?>
 				<form id="field-settings-form" method="get" action="">
-					<input type="hidden" name="action" value="<?php echo $_REQUEST['action']; ?>" />
-					<input type="hidden" name="page" value="<?php echo $_REQUEST['page']; ?>" />
+					<input type="hidden" name="action" value="<?php echo esc_attr($_REQUEST['action']); ?>" />
+					<input type="hidden" name="page" value="<?php echo esc_attr($_REQUEST['page']); ?>" />
 					<input type="hidden" name="field_id" value="<?php echo (int)$data['field_id']; ?>" />
 
 					<p class="clearfix">

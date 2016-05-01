@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Admin Columns
-Version: 2.4.10
+Version: 2.5.6.2
 Description: Customize columns on the administration screens for post(types), pages, media, comments, links and users with an easy to use drag-and-drop interface.
 Author: AdminColumns.com
 Author URI: https://www.admincolumns.com
@@ -32,7 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Plugin information
-define( 'CPAC_VERSION', '2.4.10' ); // Current plugin version
+define( 'CPAC_VERSION', '2.5.6.2' ); // Current plugin version
 define( 'CPAC_UPGRADE_VERSION', '2.0.0' ); // Latest version which requires an upgrade
 define( 'CPAC_URL', plugin_dir_url( __FILE__ ) );
 define( 'CPAC_DIR', plugin_dir_path( __FILE__ ) );
@@ -50,7 +50,6 @@ if ( ! is_admin() ) {
 require_once CPAC_DIR . 'classes/utility.php';
 require_once CPAC_DIR . 'classes/third_party.php';
 require_once CPAC_DIR . 'includes/arrays.php';
-require_once CPAC_DIR . 'api.php';
 
 /**
  * The Admin Columns Class
@@ -58,15 +57,6 @@ require_once CPAC_DIR . 'api.php';
  * @since 1.0
  */
 class CPAC {
-
-	/**
-	 * Registered storage model class instances
-	 * Array of CPAC_Storage_Model instances, with the storage model keys (e.g. post, page, wp-users) as keys
-	 *
-	 * @since 2.0
-	 * @var array
-	 */
-	public $storage_models;
 
 	/**
 	 * Admin Columns add-ons class instance
@@ -96,17 +86,34 @@ class CPAC {
 	private $_upgrade;
 
 	/**
-	 * Column settings to import from a column PHP export
+	 * Registered storage model class instances
+	 * Array of CPAC_Storage_Model instances, with the storage model keys (e.g. post, page, wp-users) as keys
 	 *
-	 * @since 2.4.7
+	 * @since 2.0
 	 * @var array
 	 */
-	public $exported_columns;
+	private $storage_models;
 
 	/**
 	 * @since 2.4.9
 	 */
 	private $current_storage_model;
+
+	/**
+	 * @since 2.5
+	 */
+	protected static $_instance = null;
+
+	/**
+	 * @since 2.5
+	 */
+	public static function instance() {
+		if ( is_null( self::$_instance ) ) {
+			self::$_instance = new self();
+		}
+
+		return self::$_instance;
+	}
 
 	/**
 	 * @since 1.0
@@ -120,12 +127,10 @@ class CPAC {
 		add_action( 'wp_loaded', array( $this, 'after_setup' ) ); // Setup callback, important to load after set_storage_models
 		add_action( 'admin_enqueue_scripts', array( $this, 'scripts' ) );
 		add_filter( 'plugin_action_links', array( $this, 'add_settings_link' ), 1, 2 );
+		add_filter( 'list_table_primary_column', array( $this, 'set_primary_column' ), 20, 1 );
 
-		// Populating storage models
-		add_action( 'wp_loaded', array( $this, 'set_storage_models' ), 5 );
-		add_action( 'wp_loaded', array( $this, 'maybe_load_php_export' ) );
-		add_action( 'admin_init', array( $this, 'set_columns_on_current_screen' ) );
-		add_action( 'load-edit.php', array( $this, 'set_columns_on_current_screen' ), 1000 );
+		// Populating columns
+		add_action( 'admin_init', array( $this, 'set_columns' ) );
 
 		// Settings
 		include_once CPAC_DIR . 'classes/settings.php';
@@ -160,6 +165,11 @@ class CPAC {
 		 * @param CPAC $cpac_instance Main Admin Columns plugin class instance
 		 */
 		do_action( 'cac/loaded', $this );
+
+		// Current listings page storage model
+		if ( $storage_model = $this->get_current_storage_model() ) {
+			do_action( 'cac/current_storage_model', $storage_model );
+		}
 	}
 
 	/**
@@ -167,7 +177,6 @@ class CPAC {
 	 * @uses load_plugin_textdomain()
 	 */
 	public function localize() {
-
 		load_plugin_textdomain( 'codepress-admin-columns', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 	}
 
@@ -183,7 +192,7 @@ class CPAC {
 		wp_register_style( 'jquery-qtip2', CPAC_URL . "external/qtip2/jquery.qtip{$minified}.css", array(), CPAC_VERSION, 'all' );
 		wp_register_style( 'cpac-columns', CPAC_URL . "assets/css/column{$minified}.css", array(), CPAC_VERSION, 'all' );
 
-		if ( $this->is_columns_screen() ) {
+		if ( $this->get_current_storage_model() ) {
 			add_filter( 'admin_body_class', array( $this, 'admin_class' ) );
 			add_action( 'admin_head', array( $this, 'admin_scripts' ) );
 
@@ -206,104 +215,73 @@ class CPAC {
 	}
 
 	/**
-	 * Load the php exported settings
+	 * Set the primary columns for the Admin Columns columns
 	 *
-	 * @since 2.3.5
+	 * @since 2.5.5
 	 */
-	public function maybe_load_php_export() {
-		if ( ! empty( $this->exported_columns ) ) {
-			foreach ( $this->exported_columns as $model => $columns ) {
-				if ( $storage_model = $this->get_storage_model( $model ) ) {
-					$storage_model->set_stored_columns( $columns );
-					$storage_model->enable_php_export();
-				}
+	public function set_primary_column( $default ) {
+		if ( $storage_model = $this->get_current_storage_model() ) {
+			if ( ! $storage_model->get_column_by_name( $default ) ) {
+				$default = key( $storage_model->get_columns() );
 			}
 		}
+
+		return $default;
 	}
 
 	/**
-	 * Load the storage models, storing them in the storage_models property of this object
+	 * Get registered storage models
 	 *
-	 * @since 2.0
+	 * @since 2.5
 	 */
-	public function set_storage_models() {
+	public function get_storage_models() {
+		if ( empty( $this->storage_models ) ) {
 
-		if ( ! $this->is_cac_screen() ) {
-			return;
-		}
+			$storage_models = array();
 
-		$storage_models = array();
+			// Load storage model class files and column base class files
+			require_once CPAC_DIR . 'classes/storage_model.php';
+			require_once CPAC_DIR . 'classes/storage_model/post.php';
+			require_once CPAC_DIR . 'classes/storage_model/user.php';
+			require_once CPAC_DIR . 'classes/storage_model/media.php';
+			require_once CPAC_DIR . 'classes/storage_model/comment.php';
 
-		// Load storage model class files and column base class files
-		require_once CPAC_DIR . 'classes/column.php';
-		require_once CPAC_DIR . 'classes/column/default.php';
-		require_once CPAC_DIR . 'classes/column/actions.php';
-		require_once CPAC_DIR . 'classes/storage_model.php';
-		require_once CPAC_DIR . 'classes/storage_model/post.php';
-		require_once CPAC_DIR . 'classes/storage_model/user.php';
-		require_once CPAC_DIR . 'classes/storage_model/media.php';
-		require_once CPAC_DIR . 'classes/storage_model/comment.php';
-		require_once CPAC_DIR . 'classes/storage_model/link.php';
-
-		// Create a storage model per post type
-		foreach ( $this->get_post_types() as $post_type ) {
-			$storage_model = new CPAC_Storage_Model_Post( $post_type );
-			$storage_models[ $storage_model->key ] = $storage_model;
-		}
-
-		// Create other storage models
-		$storage_model = new CPAC_Storage_Model_User();
-		$storage_models[ $storage_model->key ] = $storage_model;
-
-		$storage_model = new CPAC_Storage_Model_Media();
-		$storage_models[ $storage_model->key ] = $storage_model;
-
-		$storage_model = new CPAC_Storage_Model_Comment();
-		$storage_models[ $storage_model->key ] = $storage_model;
-
-		if ( apply_filters( 'pre_option_link_manager_enabled', false ) ) { // as of 3.5 link manager is removed
-			$storage_model = new CPAC_Storage_Model_Link();
-			$storage_models[ $storage_model->key ] = $storage_model;
-		}
-
-		/**
-		 * Filter the available storage models
-		 * Used by external plugins to add additional storage models
-		 *
-		 * @since 2.0
-		 *
-		 * @param array $storage_models List of storage model class instances ( [key] => [CPAC_Storage_Model object], where [key] is the storage key, such as "user", "post" or "my_custom_post_type")
-		 * @param object $this CPAC
-		 */
-		$this->storage_models = apply_filters( 'cac/storage_models', $storage_models, $this );
-	}
-
-	/**
-	 * Only set columns on current screens
-	 *
-	 * @since 2.4.9
-	 */
-	public function set_columns_on_current_screen() {
-
-		if ( ! $this->is_cac_screen() ) {
-			return;
-		}
-
-		$is_ajax = $this->is_doing_ajax();
-		$is_settings = $this->is_settings_screen();
-
-		foreach ( $this->storage_models as $storage_model ) {
-			$current_screen = $storage_model->is_current_screen();
-
-			if ( $is_ajax || $is_settings || $current_screen ) {
-				$storage_model->set_columns();
+			// Create a storage model per post type
+			foreach ( $this->get_post_types() as $post_type ) {
+				$storage_model = new CPAC_Storage_Model_Post( $post_type );
+				$storage_models[ $storage_model->key ] = $storage_model;
 			}
 
-			// Load headings and values on overviews screen
-			if ( $is_ajax || $current_screen ) {
-				$storage_model->init_manage_columns();
+			// Create other storage models
+			$storage_model = new CPAC_Storage_Model_User();
+			$storage_models[ $storage_model->key ] = $storage_model;
+
+			$storage_model = new CPAC_Storage_Model_Media();
+			$storage_models[ $storage_model->key ] = $storage_model;
+
+			$storage_model = new CPAC_Storage_Model_Comment();
+			$storage_models[ $storage_model->key ] = $storage_model;
+
+			if ( apply_filters( 'pre_option_link_manager_enabled', false ) ) { // as of 3.5 link manager is removed
+				require_once CPAC_DIR . 'classes/storage_model/link.php';
+
+				$storage_model = new CPAC_Storage_Model_Link();
+				$storage_models[ $storage_model->key ] = $storage_model;
 			}
+
+			/**
+			 * Filter the available storage models
+			 * Used by external plugins to add additional storage models
+			 *
+			 * @since 2.0
+			 *
+			 * @param array $storage_models List of storage model class instances ( [key] => [CPAC_Storage_Model object], where [key] is the storage key, such as "user", "post" or "my_custom_post_type")
+			 * @param object $this CPAC
+			 */
+			$this->storage_models = apply_filters( 'cac/storage_models', $storage_models, $this );
 		}
+
+		return $this->storage_models;
 	}
 
 	/**
@@ -316,12 +294,50 @@ class CPAC {
 	 * @return bool|CPAC_Storage_Model Storage Model object (or false, on failure)
 	 */
 	public function get_storage_model( $key ) {
+		$models = $this->get_storage_models();
 
-		if ( isset( $this->storage_models[ $key ] ) ) {
-			return $this->storage_models[ $key ];
+		return isset( $models[ $key ] ) ? $models[ $key ] : false;
+	}
+
+	/**
+	 * Only set columns on current screens or on specific ajax calls
+	 *
+	 * @since 2.4.9
+	 */
+	public function set_columns() {
+
+		// Listings screen
+		$storage_model = $this->get_current_storage_model();
+
+		// WP Ajax calls (not AC)
+		if ( $model = cac_wp_is_doing_ajax() ) {
+			$storage_model = $this->get_storage_model( $model );
 		}
 
-		return false;
+		if ( $storage_model ) {
+			$storage_model->init_listings_layout();
+			$storage_model->init_manage_columns();
+		}
+	}
+
+	/**
+	 * Get column object
+	 *
+	 * @since 2.5.4
+	 * @param $storage_key CPAC_Storage_Model->key
+	 * @param $layout_id CPAC_Storage_Model->layout
+	 * @param $column_name CPAC_Column->name
+	 *
+	 * @return object CPAC_Column Column onject
+	 */
+	public function get_column( $storage_key, $layout_id, $column_name ) {
+		$column = false;
+		if ( $storage_model = $this->get_storage_model( $storage_key ) ) {
+			$storage_model->set_layout( $layout_id );
+			$column = $storage_model->get_column_by_name( $column_name );
+		}
+
+		return $column;
 	}
 
 	/**
@@ -333,8 +349,8 @@ class CPAC {
 	 * @return CPAC_Storage_Model
 	 */
 	public function get_current_storage_model() {
-		if ( ! $this->current_storage_model && $this->storage_models ) {
-			foreach ( $this->storage_models as $storage_model ) {
+		if ( ! $this->current_storage_model && $this->is_columns_screen() && $this->get_storage_models() ) {
+			foreach ( $this->get_storage_models() as $storage_model ) {
 				if ( $storage_model->is_current_screen() ) {
 					$this->current_storage_model = $storage_model;
 					break;
@@ -352,14 +368,12 @@ class CPAC {
 	 *
 	 * @return array List of post type keys (e.g. post, page)
 	 */
-	public function get_post_types() {
-
+	private function get_post_types() {
 		$post_types = array();
 
 		if ( post_type_exists( 'post' ) ) {
 			$post_types['post'] = 'post';
 		}
-
 		if ( post_type_exists( 'page' ) ) {
 			$post_types['page'] = 'page';
 		}
@@ -387,9 +401,7 @@ class CPAC {
 	 * @return array List of taxonomies
 	 */
 	public function get_taxonomies() {
-
 		$taxonomies = get_taxonomies( array( 'public' => true ) );
-
 		if ( isset( $taxonomies['post_format'] ) ) {
 			unset( $taxonomies['post_format'] );
 		}
@@ -431,7 +443,6 @@ class CPAC {
 	 * @return string
 	 */
 	public function admin_class( $classes ) {
-
 		if ( $storage_model = $this->get_current_storage_model() ) {
 			$classes .= " cp-{$storage_model->key}";
 		}
@@ -445,7 +456,6 @@ class CPAC {
 	 * @since 1.4.0
 	 */
 	public function admin_scripts() {
-
 		if ( ! ( $storage_model = $this->get_current_storage_model() ) ) {
 			return;
 		}
@@ -483,9 +493,9 @@ class CPAC {
 		<?php endif; ?>
 		<?php if ( $edit_link ) : ?>
 			<script type="text/javascript">
-				jQuery(document).ready(function () {
-					jQuery('.tablenav.top .actions:last').append('<a href="<?php echo $edit_link; ?>" class="cpac-edit add-new-h2"><?php _e( 'Edit columns', 'codepress-admin-columns' ); ?></a>');
-				});
+				jQuery( document ).ready( function() {
+					jQuery( '.tablenav.top .actions:last' ).append( '<a href="<?php echo $edit_link; ?>" class="cpac-edit add-new-h2"><?php _e( 'Edit columns', 'codepress-admin-columns' ); ?></a>' );
+				} );
 			</script>
 		<?php endif; ?>
 
@@ -500,14 +510,23 @@ class CPAC {
 		do_action( 'cac/admin_head', $storage_model, $this );
 	}
 
+	public function get_first_storage_model_key() {
+		$keys = array_keys( (array) $this->get_storage_models() );
+
+		return array_shift( $keys );
+	}
+
+	public function get_first_storage_model() {
+		$models = array_values( $this->get_storage_models() );
+
+		return isset( $models[0] ) ? $models[0] : false;
+	}
+
 	/**
-	 * Whether this request is an AJAX request and marked as admin-column-ajax or inline-save request.
-	 *
-	 * @since 2.2
-	 * @return bool Returns true if in an AJAX request, false otherwise
+	 * @since 2.5
 	 */
-	public function is_doing_ajax() {
-		return cac_is_doing_ajax();
+	public function use_delete_confirmation() {
+		return apply_filters( 'ac/delete_confirmation', true );
 	}
 
 	/**
@@ -546,7 +565,7 @@ class CPAC {
 
 	/**
 	 * Whether the current screen is a screen in which Admin Columns is used
-	 * Used to check whether storage models should be loaded
+	 * Used to quickly check whether storage models should be loaded
 	 *
 	 * @since 2.2
 	 * @return bool Whether the current screen is an Admin Columns screen
@@ -560,7 +579,7 @@ class CPAC {
 		 *
 		 * @param bool $is_cac_screen Whether the current screen is an Admin Columns screen
 		 */
-		return apply_filters( 'cac/is_cac_screen', $this->is_columns_screen() || $this->is_doing_ajax() || $this->is_settings_screen() );
+		return apply_filters( 'cac/is_cac_screen', $this->is_columns_screen() || cac_is_doing_ajax() || $this->is_settings_screen() );
 	}
 
 	/**
@@ -570,7 +589,6 @@ class CPAC {
 	 * @return CPAC_Settings Settings class instance
 	 */
 	public function settings() {
-
 		return $this->_settings;
 	}
 
@@ -581,7 +599,6 @@ class CPAC {
 	 * @return CPAC_Addons Add-ons class instance
 	 */
 	public function addons() {
-
 		return $this->_addons;
 	}
 
@@ -592,7 +609,6 @@ class CPAC {
 	 * @return CPAC_Upgrade Upgrade class instance
 	 */
 	public function upgrade() {
-
 		return $this->_upgrade;
 	}
 
@@ -604,7 +620,6 @@ class CPAC {
 	 * @return bool Whether the Advanced Custom Fields plugin is active
 	 */
 	public function is_plugin_acf_active() {
-
 		return class_exists( 'acf', false );
 	}
 
@@ -616,23 +631,13 @@ class CPAC {
 	 * @return bool Whether the WooCommerce plugin is active
 	 */
 	public function is_plugin_woocommerce_active() {
-
 		return class_exists( 'WooCommerce', false );
 	}
-
 }
 
-/**
- * Admin Columns class (global for backwards compatibility)
- *
- * @since 1.0
- * @deprecated 2.2.7 Use filter cac/loaded instead.
- */
-global $cpac;
+function cpac() {
+	return CPAC::instance();
+}
 
-/**
- * Initialize Admin Columns class
- *
- * @since 1.0
- */
-$cpac = new CPAC();
+// Global for backwards compatibility.
+$GLOBALS['cpac'] = cpac();

@@ -2,21 +2,13 @@
 # This file is distributed under the same license as the Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2015-12-07 07:46:33+0000\n"
+"PO-Revision-Date: 2016-03-31 14:37:41+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: GlotPress/1.0-alpha-1100\n"
+"X-Generator: GlotPress/1.1.0-alpha\n"
 "Project-Id-Version: Stable (latest release)\n"
-
-#: lib/W3/UI/Settings/General.php:14
-msgid "License"
-msgstr "Licence"
-
-#: lib/W3/UI/NewRelicNotes.php:32
-msgid "CDN"
-msgstr "CDN"
 
 #: lib/W3/Plugin/TotalCacheAdmin.php:532
 msgid "The add-in has been removed."
@@ -24,7 +16,7 @@ msgstr "Cet add-in a été enlevé."
 
 #: lib/W3/Plugin/TotalCacheAdmin.php:533
 msgid "Site has been subscribed."
-msgstr "Le sites a été inscrit."
+msgstr "Le site a été inscrit."
 
 #: lib/W3/Plugin/TotalCacheAdmin.php:534
 msgid "Edge mode has been enabled."
@@ -138,6 +130,10 @@ msgstr "Installer la page"
 #: lib/W3/UI/CdnNotes.php:118
 msgid "Encountered issue with CDN: %s."
 msgstr "Erreur rencontrée avec le CDN : %s"
+
+#: lib/W3/UI/NewRelicNotes.php:32
+msgid "CDN"
+msgstr "CDN"
 
 #: lib/W3/UI/NewRelicNotes.php:34
 msgid "Browser Cache and use compression"
@@ -592,6 +588,10 @@ msgstr "Chemin du fichier de configuration de serveur Nginx"
 #: lib/W3/UI/Settings/General.php:13
 msgid "Verify rewrite rules"
 msgstr "Vérifier les règles de réécriture"
+
+#: lib/W3/UI/Settings/General.php:14
+msgid "License"
+msgstr "Licence"
 
 #: lib/W3/UI/Settings/Minify.php:8
 msgid "Minify cache method:"
@@ -1154,51 +1154,6 @@ msgstr "Frederick Townes"
 msgid "http://www.linkedin.com/in/w3edge"
 msgstr "http://www.linkedin.com/in/w3edge"
 
-#: lib/NetDNA/NetDNAPresentation.php:65
-msgid "Active"
-msgstr "Actif"
-
-#: lib/NewRelic/NewRelicPresentation.php:20
-msgid "Database"
-msgstr "Base de données"
-
-#: lib/W3/Menus.php:109
-msgid "Support"
-msgstr "Support"
-
-#: inc/widget/new_relic.php:41 inc/widget/new_relic.php:60
-#: inc/widget/new_relic.php:78
-msgid "Not enough data"
-msgstr "Pas assez de données"
-
-#: lib/W3/Menus.php:104 lib/W3/Menus.php:105 lib/W3/Plugin/TotalCache.php:389
-msgid "FAQ"
-msgstr "FAQ"
-
-#: inc/widget/maxcdn.php:44 inc/widget/netdna.php:44
-msgid "Hits"
-msgstr "Hits"
-
-#: lib/NetDNA/NetDNAPresentation.php:73 lib/W3/Widget/NewRelic.php:89
-msgid "unknown"
-msgstr "inconnu"
-
-#: lib/W3/Plugin/DefaultSettings.php:140
-msgid "Replace"
-msgstr "Remplacer"
-
-#: lib/W3/Plugin/ExtensionsAdmin.php:69 lib/W3/Plugin/ExtensionsAdmin.php:70
-msgid "Extensions"
-msgstr "Extensions"
-
-#: inc/popup/pagespeed_results.php:42
-msgid "Resolution:"
-msgstr "Résolution :"
-
-#: inc/widget/maxcdn.php:43 inc/widget/netdna.php:43
-msgid "File"
-msgstr "Fichier"
-
 #: inc/popup/cdn_rename_domain.php:11
 msgid "This tool allows you to modify the URL of Media Library attachments. Use it if the \"WordPress address (<acronym title=\"Uniform Resource Indicator\">URL</acronym>)\" value has been changed in the past."
 msgstr "Cet outil vous permet de modifier l'URL des attachements de la bibliothèque multimédia. Utilisez-le si la valeur de \"l'adresse (<acronym title=\"Uniform Resource Indicator\"> URL</acronym>) de WordPress\" a été modifiée."
@@ -1226,6 +1181,10 @@ msgstr "Tout replier"
 #: inc/popup/pagespeed_results.php:11
 msgid "Refresh analysis"
 msgstr "Recharger l'analyse"
+
+#: inc/popup/pagespeed_results.php:42
+msgid "Resolution:"
+msgstr "Résolution :"
 
 #: inc/popup/pagespeed_results.php:50
 msgid "Unable to fetch Page Speed results."
@@ -1283,6 +1242,14 @@ msgstr "Requêtes"
 msgid "Content Breakdown"
 msgstr "Ventilation de contenu"
 
+#: inc/widget/maxcdn.php:43 inc/widget/netdna.php:43
+msgid "File"
+msgstr "Fichier"
+
+#: inc/widget/maxcdn.php:44 inc/widget/netdna.php:44
+msgid "Hits"
+msgstr "Hits"
+
 #: inc/widget/maxcdn_signup.php:4
 msgid "MaxCDN encountered an error trying to retrieve data, make sure your host support cURL and outgoing requests: %s"
 msgstr "MaxCDN a rencotré une erreur en essayant de retrouver les données, assurez vous que votre hôte supporte cURL et les requêtes sortantes : %s"
@@ -1338,6 +1305,11 @@ msgstr "Top 5 des temps les plus lents"
 #: inc/widget/new_relic.php:31
 msgid "Page load times"
 msgstr "Temps de chargement de page"
+
+#: inc/widget/new_relic.php:41 inc/widget/new_relic.php:60
+#: inc/widget/new_relic.php:78
+msgid "Not enough data"
+msgstr "Pas assez de données"
 
 #: inc/widget/new_relic.php:43 inc/widget/new_relic.php:62
 #: inc/widget/new_relic.php:80
@@ -1396,6 +1368,10 @@ msgstr "La zone pour %s a été créée par W3 Total Cache"
 msgid "Pending"
 msgstr "En attente"
 
+#: lib/NetDNA/NetDNAPresentation.php:65
+msgid "Active"
+msgstr "Actif"
+
 #: lib/NetDNA/NetDNAPresentation.php:67
 msgid "Cancelled"
 msgstr "Annulé"
@@ -1408,6 +1384,10 @@ msgstr "Suspendu"
 msgid "Fraud"
 msgstr "Fraude"
 
+#: lib/NetDNA/NetDNAPresentation.php:73 lib/W3/Widget/NewRelic.php:89
+msgid "unknown"
+msgstr "inconnu"
+
 #: lib/NewRelic/NewRelicAPI.php:41
 msgid "Invalid API key or Account ID"
 msgstr "Clé API ou ID de compte non valide"
@@ -1419,6 +1399,10 @@ msgstr "Temps de chargement de page"
 #: lib/NewRelic/NewRelicPresentation.php:17
 msgid "Web Transaction"
 msgstr "Transaction Web"
+
+#: lib/NewRelic/NewRelicPresentation.php:20
+msgid "Database"
+msgstr "Base de données"
 
 #: lib/W3/AdminActions/ActionHandler.php:45
 msgid "%s is not an correct action."
@@ -1607,7 +1591,7 @@ msgstr "Moteur non valide."
 
 #: lib/W3/AdminCompatibility.php:90
 msgid "The following plugins are not compatible with W3 Total Cache and will cause unintended results:"
-msgstr "Les extensions suivantes ne sont pas compatibles avec W3 Total Cache et va causer des résultats inattendus :"
+msgstr "Les extensions suivantes ne sont pas compatibles avec W3 Total Cache et vont causer des résultats inattendus&nbsp;:"
 
 #: lib/W3/AdminCompatibility.php:96 lib/W3/AdminCompatibility.php:98
 msgid "Deactivate this plugin"
@@ -1965,6 +1949,14 @@ msgstr "Groupes référrants"
 msgid "Content Delivery Network"
 msgstr "Content Delivery Network"
 
+#: lib/W3/Menus.php:104 lib/W3/Menus.php:105 lib/W3/Plugin/TotalCache.php:389
+msgid "FAQ"
+msgstr "FAQ"
+
+#: lib/W3/Menus.php:109
+msgid "Support"
+msgstr "Support"
+
 #: lib/W3/Menus.php:110
 msgid "<span style=\"color: red;\">Support</span>"
 msgstr "<span style=\"color: red;\">Support</span>"
@@ -2102,8 +2094,16 @@ msgid "Append"
 msgstr "Ajouter"
 
 #: lib/W3/Plugin/DefaultSettings.php:140
+msgid "Replace"
+msgstr "Remplacer"
+
+#: lib/W3/Plugin/DefaultSettings.php:140
 msgid "Remove"
 msgstr "Enlever"
+
+#: lib/W3/Plugin/ExtensionsAdmin.php:69 lib/W3/Plugin/ExtensionsAdmin.php:70
+msgid "Extensions"
+msgstr "Extensions"
 
 #: lib/W3/Plugin/MinifyAdmin.php:113
 msgid ""
@@ -2459,31 +2459,6 @@ msgstr "La page a bien été purgée."
 msgid "New relic settings have been updated."
 msgstr "Les paramètres de New Relic ont été mis à jour"
 
-#: inc/options/general.php:713
-msgid "Download"
-msgstr "Télécharger"
-
-#: inc/popup/cdn_queue.php:18 inc/popup/cdn_queue.php:51
-#: inc/popup/cdn_queue.php:81
-msgid "Date"
-msgstr "Date"
-
-#: inc/options/general.php:720
-msgid "Restore Default Settings"
-msgstr "Restaurer les paramètres par défaut"
-
-#: inc/options/minify/csstidy2.php:21
-msgid "None"
-msgstr "Aucun"
-
-#: inc/options/install.php:34
-msgid "Other"
-msgstr "Autre"
-
-#: inc/options/pro/fragmentcache.php:17 inc/widget/new_relic.php:11
-msgid "Overview"
-msgstr "Vue d'ensemble"
-
 #: inc/options/general.php:626
 msgid "Notify of server configuration errors, if this option is disabled, the server configuration for active settings can be found on the <a href=\"admin.php?page=w3tc_install\">install</a> tab."
 msgstr "Nofifier les erreur de configuration serveur, si cette option est désactivée, la confioguration serveur pour les paramètres actifs peut être trouvée sur l'onglet <a href=\"admin.php?page=w3tc_install\">installation</a> "
@@ -2544,6 +2519,10 @@ msgstr "Envoyer et remplacer le fichier de paramètres actuel."
 msgid "Export configuration:"
 msgstr "Export de configuration :"
 
+#: inc/options/general.php:713
+msgid "Download"
+msgstr "Télécharger"
+
 #: inc/options/general.php:714
 msgid "Download the active settings file."
 msgstr "Télécharger le fichier actif de paramètres."
@@ -2551,6 +2530,10 @@ msgstr "Télécharger le fichier actif de paramètres."
 #: inc/options/general.php:718
 msgid "Reset configuration:"
 msgstr "Réinitialiser la configuration :"
+
+#: inc/options/general.php:720
+msgid "Restore Default Settings"
+msgstr "Restaurer les paramètres par défaut"
 
 #: inc/options/general.php:721
 msgid "Revert all settings to the defaults. Any settings staged in preview mode will not be modified."
@@ -2599,6 +2582,10 @@ msgstr "Vérifiez notre <acronym title=\"Frequently Asked Questions\">FAQ</acron
 #: inc/options/install.php:26
 msgid "Rewrite rules"
 msgstr "Règles de réécriture"
+
+#: inc/options/install.php:34
+msgid "Other"
+msgstr "Autre"
 
 #: inc/options/install.php:43
 msgid "Software Installation for Dedicated / Virtual Dedicated / Multiple Servers (Optional)"
@@ -2852,6 +2839,10 @@ msgstr "Optimisations sécurisées"
 #: inc/options/minify/csstidy2.php:17
 msgid "All optimisations"
 msgstr "Toutes les optimisations"
+
+#: inc/options/minify/csstidy2.php:21
+msgid "None"
+msgstr "Aucun"
 
 #: inc/options/minify/csstidy2.php:22
 msgid "Lowercase"
@@ -3358,6 +3349,10 @@ msgstr "Vider le cache entier"
 msgid "if needed."
 msgstr "si besoin."
 
+#: inc/options/pro/fragmentcache.php:17 inc/widget/new_relic.php:11
+msgid "Overview"
+msgstr "Vue d'ensemble"
+
 #: inc/options/pro/fragmentcache.php:20
 msgid "Registered fragment groups:"
 msgstr "Groupes de fragment enregistrés :"
@@ -3774,6 +3769,11 @@ msgstr "Enlever le chemin"
 msgid "Last Error"
 msgstr "Dernière erreur"
 
+#: inc/popup/cdn_queue.php:18 inc/popup/cdn_queue.php:51
+#: inc/popup/cdn_queue.php:81
+msgid "Date"
+msgstr "Date"
+
 #: inc/popup/cdn_queue.php:34
 msgid "Empty upload queue"
 msgstr "File d'attente d'envoi vide"
@@ -3801,62 +3801,6 @@ msgstr "Vider la file d'attente de purge"
 #: inc/popup/cdn_queue.php:100
 msgid "Purge queue is empty"
 msgstr "La file d'attente de purge est vide"
-
-#: inc/options/extensions/list.php:37 inc/options/extensions/list.php:42
-msgid "Description"
-msgstr "Description"
-
-#: inc/options/cdn/common/cnames.php:41 inc/options/minify.php:281
-#: inc/options/minify.php:398 inc/popup/cdn_queue.php:19
-#: inc/popup/cdn_queue.php:28 inc/popup/cdn_queue.php:52
-#: inc/popup/cdn_queue.php:61 inc/popup/cdn_queue.php:82
-#: inc/popup/cdn_queue.php:91
-msgid "Delete"
-msgstr "Supprimer"
-
-#: inc/options/common/header.php:100
-msgid "Debug"
-msgstr "Debug"
-
-#: inc/options/general.php:33
-msgid "Disable"
-msgstr "Désactiver"
-
-#: inc/options/dashboard.php:39 lib/W3/Menus.php:38 lib/W3/Menus.php:39
-msgid "Dashboard"
-msgstr "Tableau de bord"
-
-#: inc/options/extensions/list.php:25 inc/options/extensions/list.php:73
-#: inc/options/extensions/list.php:124 lib/W3/AdminCompatibility.php:98
-msgid "Deactivate"
-msgstr "Désactiver"
-
-#: inc/options/extensions/list.php:23 inc/options/extensions/list.php:122
-msgid "Bulk Actions"
-msgstr "Actions groupées"
-
-#: inc/options/cdn.php:159 inc/options/common/header.php:123
-#: inc/options/common/header.php:141 inc/options/common/header.php:154
-#: inc/options/common/header.php:165 inc/options/common/header.php:214
-#: inc/options/dbcache.php:34 inc/options/minify.php:422
-#: inc/options/objectcache.php:23 inc/options/pgcache.php:232
-#: inc/options/pro/fragmentcache.php:60
-msgid "Advanced"
-msgstr "Avancé"
-
-#: inc/options/extensions/list.php:100
-msgid "Version %s"
-msgstr "Version %s"
-
-#: inc/options/cdn.php:144 inc/options/common/header.php:213
-msgid "Configuration"
-msgstr "Configuration"
-
-#: inc/options/dashboard.php:17 inc/options/dashboard.php:18
-#: inc/options/dashboard.php:20 inc/options/dashboard.php:22
-#: inc/options/dashboard.php:24 inc/options/dashboard.php:28
-msgid "or"
-msgstr "ou"
 
 #: inc/options/cdn/akamai.php:48 inc/options/cdn/att.php:21
 #: inc/options/cdn/azure.php:30 inc/options/cdn/cf.php:35
@@ -4005,6 +3949,14 @@ msgstr "(réservé pour JS après <body>)"
 #: inc/options/cdn/common/cnames.php:28
 msgid "(reserved for JS before </body>)"
 msgstr "(réservé pour JS avant </body>)"
+
+#: inc/options/cdn/common/cnames.php:41 inc/options/minify.php:281
+#: inc/options/minify.php:398 inc/popup/cdn_queue.php:19
+#: inc/popup/cdn_queue.php:28 inc/popup/cdn_queue.php:52
+#: inc/popup/cdn_queue.php:61 inc/popup/cdn_queue.php:82
+#: inc/popup/cdn_queue.php:91
+msgid "Delete"
+msgstr "Supprimer"
 
 #: inc/options/cdn/common/cnames.php:46
 msgid "Add CNAME"
@@ -4295,6 +4247,19 @@ msgstr "Activer cette option autorise le <acronym title=\"Content Delivery Netwo
 msgid "Adds canonical <acronym title=\"Hypertext Transfer Protocol\">HTTP</acronym> header to assets files."
 msgstr "Ajoute un en-tête <acronym title=\"Hypertext Transfer Protocol\">HTTP</acronym> pour les fichiers de composants."
 
+#: inc/options/cdn.php:144 inc/options/common/header.php:213
+msgid "Configuration"
+msgstr "Configuration"
+
+#: inc/options/cdn.php:159 inc/options/common/header.php:123
+#: inc/options/common/header.php:141 inc/options/common/header.php:154
+#: inc/options/common/header.php:165 inc/options/common/header.php:214
+#: inc/options/dbcache.php:34 inc/options/minify.php:422
+#: inc/options/objectcache.php:23 inc/options/pgcache.php:232
+#: inc/options/pro/fragmentcache.php:60
+msgid "Advanced"
+msgstr "Avancé"
+
 #: inc/options/cdn.php:170
 msgid "Select user roles that will use the origin server exclusively:"
 msgstr "Choix des rôles utilisateurs qui utiliseront exclusivement le serveur d'origine :"
@@ -4445,6 +4410,10 @@ msgstr "Licence"
 msgid "Miscellaneous"
 msgstr "Divers"
 
+#: inc/options/common/header.php:100
+msgid "Debug"
+msgstr "Debug"
+
 #: inc/options/common/header.php:101 inc/options/general.php:699
 msgid "Import / Export Settings"
 msgstr "Paramètres Import / Export"
@@ -4532,6 +4501,12 @@ msgstr "en même temps ou"
 msgid "empty only the memcached cache(s)"
 msgstr "vider seulement le(s) cache(s) memcache"
 
+#: inc/options/dashboard.php:17 inc/options/dashboard.php:18
+#: inc/options/dashboard.php:20 inc/options/dashboard.php:22
+#: inc/options/dashboard.php:24 inc/options/dashboard.php:28
+msgid "or"
+msgstr "ou"
+
 #: inc/options/dashboard.php:18
 msgid "empty only the opcode cache"
 msgstr "vider seulement le cache opcode"
@@ -4551,6 +4526,10 @@ msgstr "puger complètement le CDN"
 #: inc/options/dashboard.php:26
 msgid "update Media Query String"
 msgstr "mise à jour de chaîne de requête média"
+
+#: inc/options/dashboard.php:39 lib/W3/Menus.php:38 lib/W3/Menus.php:39
+msgid "Dashboard"
+msgstr "Tableau de bord"
 
 #: inc/options/dbcache.php:6
 msgid "Database caching via %s is currently %s."
@@ -4632,10 +4611,19 @@ msgstr "Note: Les changements prendront effet immediatement sur la configuration
 msgid "Save configuration file"
 msgstr "Sauvegarder le fichier de configuration"
 
+#: inc/options/extensions/list.php:23 inc/options/extensions/list.php:122
+msgid "Bulk Actions"
+msgstr "Actions groupées"
+
 #: inc/options/extensions/list.php:24 inc/options/extensions/list.php:80
 #: inc/options/extensions/list.php:123
 msgid "Activate"
 msgstr "Activation"
+
+#: inc/options/extensions/list.php:25 inc/options/extensions/list.php:73
+#: inc/options/extensions/list.php:124 lib/W3/AdminCompatibility.php:98
+msgid "Deactivate"
+msgstr "Désactiver"
 
 #: inc/options/extensions/list.php:27 inc/options/extensions/list.php:126
 msgid "Apply"
@@ -4654,6 +4642,10 @@ msgstr "Tout choisir"
 #: inc/options/extensions/list.php:37 inc/options/extensions/list.php:42
 msgid "Extension"
 msgstr "Extension"
+
+#: inc/options/extensions/list.php:37 inc/options/extensions/list.php:42
+msgid "Description"
+msgstr "Description"
 
 #: inc/options/extensions/list.php:55
 msgid "Select %s"
@@ -4674,6 +4666,10 @@ msgstr "Désactivé : Non supporté"
 #: inc/options/extensions/list.php:94
 msgid "Requirements: %s"
 msgstr "Exigences : %s"
+
+#: inc/options/extensions/list.php:100
+msgid "Version %s"
+msgstr "Version %s"
 
 #: inc/options/extensions/list.php:100
 msgid "By %s"
@@ -4710,6 +4706,10 @@ msgstr "Table des matières"
 #: inc/options/general.php:24
 msgid "Toggle all caching types on or off (at once)"
 msgstr "Permuter tous les types de cache sur on ou off (en une fois)"
+
+#: inc/options/general.php:33
+msgid "Disable"
+msgstr "Désactiver"
 
 #: inc/options/general.php:34
 msgid "Deploy"
@@ -5056,96 +5056,6 @@ msgstr "Empêcher les sites de gérer indépendamment leurs paramètres de perfo
 msgid "If empty the default path will be used.."
 msgstr "Si vide le chemin par défaut sera utilisé..."
 
-#: inc/functions/widgets.php:83
-msgid "Submit"
-msgstr "Envoyer"
-
-#: extensions/CloudFlareAdmin.php:64 inc/options/extensions/list.php:62
-msgid "Settings"
-msgstr "Réglages"
-
-#: inc/lightbox/self_test.php:311 inc/options/support/form/bug_report.php:87
-msgid "Yes"
-msgstr "Oui"
-
-#: inc/lightbox/self_test.php:313
-msgid "No"
-msgstr "Non"
-
-#: inc/lightbox/cdn_s3_bucket_location.php:18 inc/lightbox/self_test.php:320
-msgid "Close"
-msgstr "Fermer"
-
-#: inc/options/browsercache.php:20 inc/options/cdn.php:42
-#: inc/options/common/header.php:81 inc/options/common/header.php:122
-#: inc/options/common/header.php:137 inc/options/common/header.php:153
-#: inc/options/common/header.php:176 inc/options/common/header.php:212
-#: inc/options/dbcache.php:18 inc/options/general.php:18
-#: inc/options/minify.php:36 inc/options/pgcache.php:24
-msgid "General"
-msgstr "Général"
-
-#: inc/lightbox/self_test.php:246 inc/lightbox/self_test.php:263
-#: inc/lightbox/self_test.php:277 lib/W3/Cdn/Mirror/Akamai.php:112
-#: lib/W3/Cdn/Mirror/Cotendo.php:114 lib/W3/Cdn/Mirror/Edgecast.php:66
-#: lib/W3/Cdn/Mirror/Netdna.php:234
-msgid "OK"
-msgstr "OK"
-
-#: inc/functions/admin_ui.php:73 inc/functions/widgets.php:61
-#: inc/lightbox/edge.php:15 inc/options/support/form.php:26
-#: inc/options/support/payment.php:21
-msgid "Cancel"
-msgstr "Annuler"
-
-#: inc/define.php:284
-msgid "Preview"
-msgstr "Aperçu"
-
-#: inc/lightbox/self_test.php:286 inc/lightbox/self_test.php:304
-#: inc/options/minify.php:58
-msgid "Disabled"
-msgstr "Désactivé"
-
-#: extensions/CloudFlare/general-settings-box.php:14 inc/options/general.php:37
-#: inc/options/general.php:57 inc/options/general.php:105
-#: inc/options/general.php:192 inc/options/general.php:243
-#: inc/options/general.php:322 inc/options/general.php:489
-#: inc/options/pgcache.php:238 lib/W3/UI/Settings/Minify.php:20
-#: lib/W3/UI/Settings/Minify.php:25 lib/W3/UI/Settings/Minify.php:32
-msgid "Enable"
-msgstr "Activer"
-
-#: inc/options/cdn/akamai.php:3 inc/options/cdn/cotendo.php:3
-#: inc/options/cdn/rscf.php:3
-msgid "Username:"
-msgstr "Identifiant&nbsp;:"
-
-#: inc/options/cdn/akamai.php:10 inc/options/cdn/cotendo.php:10
-msgid "Password:"
-msgstr "Mot de passe&nbsp;:"
-
-#: inc/lightbox/self_test.php:302
-msgid "Enabled"
-msgstr "Activé"
-
-#: extensions/CloudFlare.php:108
-msgid "Account"
-msgstr "Compte"
-
-#: extensions/CloudFlare.php:102
-msgid "Analytics"
-msgstr "Analytics"
-
-#: extensions/GenesisAdmin.php:33 inc/options/browsercache.php:6
-#: inc/options/cdn.php:8 inc/options/dashboard.php:7 inc/options/dbcache.php:6
-#: inc/options/general.php:11 inc/options/minify.php:16
-#: inc/options/new_relic.php:4 inc/options/objectcache.php:9
-#: inc/options/pgcache.php:9 inc/options/pro/fragmentcache.php:6
-#: inc/widget/new_relic.php:89
-msgid "disabled"
-msgstr "désactivé"
-
 #: extensions/CloudFlare/CloudFlareAPI.php:66
 msgid "CloudFlare requires \"email\" to be set."
 msgstr "CloudFlare nécessite que « e-mail » soit défini."
@@ -5189,6 +5099,15 @@ msgstr "Performances réseau &amp; Sécurité propulsées par Cloudflare"
 #: extensions/CloudFlare/general-settings-box.php:3
 msgid "CloudFlare protects and accelerates websites."
 msgstr "Cloudflare protège et accélère les sites internet."
+
+#: extensions/CloudFlare/general-settings-box.php:14 inc/options/general.php:37
+#: inc/options/general.php:57 inc/options/general.php:105
+#: inc/options/general.php:192 inc/options/general.php:243
+#: inc/options/general.php:322 inc/options/general.php:489
+#: inc/options/pgcache.php:238 lib/W3/UI/Settings/Minify.php:20
+#: lib/W3/UI/Settings/Minify.php:25 lib/W3/UI/Settings/Minify.php:32
+msgid "Enable"
+msgstr "Activer"
 
 #: extensions/CloudFlare/general-settings-box.php:33
 msgid "find it here"
@@ -5264,6 +5183,18 @@ msgstr "CloudFlare"
 msgid "My Websites"
 msgstr "Mes sites web"
 
+#: extensions/CloudFlare.php:102
+msgid "Analytics"
+msgstr "Analytics"
+
+#: extensions/CloudFlare.php:108
+msgid "Account"
+msgstr "Compte"
+
+#: extensions/CloudFlareAdmin.php:64 inc/options/extensions/list.php:62
+msgid "Settings"
+msgstr "Réglages"
+
 #: extensions/CloudFlareAdmin.php:102
 msgid ""
 "CloudFlare protects and accelerates websites. <a href=\"%s\" target=\"_blank\">Sign up now for free</a> to get started,\n"
@@ -5333,6 +5264,15 @@ msgstr "Spécifier toute URL de flux additionnel pour un ping sur FeedBurner."
 #: extensions/GenesisAdmin.php:31
 msgid "The Genesis Framework extension is currently %s "
 msgstr "L'extension Genesis Framework est actuellement %s"
+
+#: extensions/GenesisAdmin.php:33 inc/options/browsercache.php:6
+#: inc/options/cdn.php:8 inc/options/dashboard.php:7 inc/options/dbcache.php:6
+#: inc/options/general.php:11 inc/options/minify.php:16
+#: inc/options/new_relic.php:4 inc/options/objectcache.php:9
+#: inc/options/pgcache.php:9 inc/options/pro/fragmentcache.php:6
+#: inc/widget/new_relic.php:89
+msgid "disabled"
+msgstr "désactivé"
 
 #: extensions/GenesisAdmin.php:35
 msgid "and caching via <strong>%s</strong>"
@@ -5486,6 +5426,10 @@ msgstr "Configure W3 Total Cache pour être conforme avec les exigences de WordP
 msgid "Stop Previewing"
 msgstr "Stopper la prévisualisation"
 
+#: inc/define.php:284
+msgid "Preview"
+msgstr "Aperçu"
+
 #: inc/define.php:1560
 msgid "%dh"
 msgstr "%dh"
@@ -5616,6 +5560,12 @@ msgstr "Voir les changements requis"
 msgid "Update via FTP"
 msgstr "Mise à jour via FTP"
 
+#: inc/functions/admin_ui.php:73 inc/functions/widgets.php:61
+#: inc/lightbox/edge.php:15 inc/options/support/form.php:26
+#: inc/options/support/payment.php:21
+msgid "Cancel"
+msgstr "Annuler"
+
 #: inc/functions/admin_ui.php:128
 msgid "Take a minute to update, here's why:"
 msgstr "Prenez une minute pour mettre à jour, et voici pourquoi&nbsp;:"
@@ -5664,6 +5614,10 @@ msgstr ""
 "Modifier le fichier <strong>%s</strong> et enlever toutes les lignes incluses et comprises entre <strong>%s</strong>\n"
 "            et <strong>%s</strong>."
 
+#: inc/functions/themes.php:28
+msgid "All Templates"
+msgstr "Tous les modèles"
+
 #: inc/functions/widgets.php:31
 msgid "View all"
 msgstr "Tout voir"
@@ -5672,9 +5626,17 @@ msgstr "Tout voir"
 msgid "Configure"
 msgstr "Configurer"
 
+#: inc/functions/widgets.php:83
+msgid "Submit"
+msgstr "Envoyer"
+
 #: inc/lightbox/cdn_s3_bucket_location.php:14 inc/options/cdn/s3.php:26
 msgid "Create bucket"
 msgstr "Créer le bucket"
+
+#: inc/lightbox/cdn_s3_bucket_location.php:18 inc/lightbox/self_test.php:320
+msgid "Close"
+msgstr "Fermer"
 
 #: inc/lightbox/create_netdna_maxcdn_pull_zone.php:2
 #: inc/lightbox/create_netdna_maxcdn_pull_zone.php:30
@@ -5989,6 +5951,13 @@ msgstr "Modules serveur additionnels"
 msgid "WordPress Resources"
 msgstr "Ressources WordPress"
 
+#: inc/lightbox/self_test.php:246 inc/lightbox/self_test.php:263
+#: inc/lightbox/self_test.php:277 lib/W3/Cdn/Mirror/Akamai.php:112
+#: lib/W3/Cdn/Mirror/Cotendo.php:114 lib/W3/Cdn/Mirror/Edgecast.php:66
+#: lib/W3/Cdn/Mirror/Netdna.php:234
+msgid "OK"
+msgstr "OK"
+
 #: inc/lightbox/self_test.php:248 inc/lightbox/self_test.php:254
 #: inc/lightbox/self_test.php:265 inc/lightbox/self_test.php:275
 msgid "Not write-able"
@@ -6006,6 +5975,11 @@ msgstr "Erreur&nbsp;:"
 msgid "Fancy permalinks:"
 msgstr "Jolis permaliens :"
 
+#: inc/lightbox/self_test.php:286 inc/lightbox/self_test.php:304
+#: inc/options/minify.php:58
+msgid "Disabled"
+msgstr "Désactivé"
+
 #: inc/lightbox/self_test.php:291
 msgid "WP_CACHE define:"
 msgstr "Définir WP_CACHE :"
@@ -6022,9 +5996,21 @@ msgstr "Non défini"
 msgid "URL rewrite:"
 msgstr "Réecriture d'URL :"
 
+#: inc/lightbox/self_test.php:302
+msgid "Enabled"
+msgstr "Activé"
+
 #: inc/lightbox/self_test.php:309
 msgid "Network mode:"
 msgstr "Mode réseau :"
+
+#: inc/lightbox/self_test.php:311 inc/options/support/form/bug_report.php:87
+msgid "Yes"
+msgstr "Oui"
+
+#: inc/lightbox/self_test.php:313
+msgid "No"
+msgstr "Non"
 
 #: inc/lightbox/support_us.php:34
 msgid "Support Us, It's Free!"
@@ -6153,6 +6139,15 @@ msgstr "Le cache du navigateur est actuellement %s"
 #: inc/options/browsercache.php:12
 msgid "%sUpdate media query string%s to make existing file modifications visible to visitors with a primed cache"
 msgstr "%sMise à jour de chaîne de requête média%s pour rendre les modifications de fichiers existants visibles pour les visiteurs avec un cache prêt"
+
+#: inc/options/browsercache.php:20 inc/options/cdn.php:42
+#: inc/options/common/header.php:81 inc/options/common/header.php:122
+#: inc/options/common/header.php:137 inc/options/common/header.php:153
+#: inc/options/common/header.php:176 inc/options/common/header.php:212
+#: inc/options/dbcache.php:18 inc/options/general.php:18
+#: inc/options/minify.php:36 inc/options/pgcache.php:24
+msgid "General"
+msgstr "Général"
 
 #: inc/options/browsercache.php:21
 msgid "Specify global browser cache policy."
@@ -6323,6 +6318,15 @@ msgstr "Média &amp; autres fichiers"
 msgid "cache (\"public\")"
 msgstr "cache (\"public\")"
 
+#: inc/options/cdn/akamai.php:3 inc/options/cdn/cotendo.php:3
+#: inc/options/cdn/rscf.php:3
+msgid "Username:"
+msgstr "Identifiant&nbsp;:"
+
+#: inc/options/cdn/akamai.php:10 inc/options/cdn/cotendo.php:10
+msgid "Password:"
+msgstr "Mot de passe&nbsp;:"
+
 #: inc/options/cdn/akamai.php:17
 msgid "Email notification:"
 msgstr "Notification par e-mail&nbsp;:"
@@ -6352,7 +6356,3 @@ msgstr "Support <acronym title=\"Secure Sockets Layer\">SSL</acronym> :</label>"
 #: inc/options/cdn/s3.php:33
 msgid "Auto (determine connection type automatically)"
 msgstr "Auto (détermine automatiquement le type de connexion)"
-
-#: inc/functions/themes.php:28
-msgid "All Templates"
-msgstr "Tous les modèles"

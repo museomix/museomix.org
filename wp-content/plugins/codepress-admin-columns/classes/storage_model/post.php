@@ -14,7 +14,8 @@ class CPAC_Storage_Model_Post extends CPAC_Storage_Model {
 		$this->type = 'post';
 		$this->meta_type = 'post';
 		$this->page = 'edit';
-		$this->menu_type = 'post';
+		$this->screen = $this->page . '-' . $this->post_type;
+		$this->menu_type = __( 'Post Type', 'codepress-admin-columns' );
 
 		$this->set_labels();
 
@@ -27,15 +28,8 @@ class CPAC_Storage_Model_Post extends CPAC_Storage_Model {
 	public function init_manage_columns() {
 
 		// Headings
-
-		// Since 3.1
-		add_filter( "manage_{$this->post_type}_posts_columns", array( $this, 'add_headings' ), 100 );
-
-		// Deprecated ( as of 3.1 ) Note: This one is still used by woocommerce.
-		// Priority set to 100 top make sure the WooCommerce headings are overwritten by CAC
-		// Filter is located in get_column_headers().
-		// @todo_minor check compatibility issues for this deprecated filter
-		add_filter( "manage_{$this->page}-{$this->post_type}_columns", array( $this, 'add_headings' ), 100 );
+		// Filter is located in get_column_headers()
+		add_filter( "manage_{$this->page}-{$this->post_type}_columns", array( $this, 'add_headings' ), 200 );
 
 		// values
 		add_action( "manage_{$this->post_type}_posts_custom_column", array( $this, 'manage_value_callback' ), 100, 2 );
@@ -53,11 +47,11 @@ class CPAC_Storage_Model_Post extends CPAC_Storage_Model {
 	 */
 	public function get_posts( $args = array() ) {
 		$defaults = array(
-			'numberposts'   => - 1,
-			'post_status'   => array( 'any', 'trash' ),
-			'post_type'     => $this->post_type,
-			'fields'        => 'ids',
-			'no_found_rows' => 1, // lowers our carbon footprint
+			'posts_per_page' => -1,
+			'post_status'    => apply_filters( 'cac/get_posts/post_status', array( 'any', 'trash' ), $this ),
+			'post_type'      => $this->get_post_type(),
+			'fields'         => 'ids',
+			'no_found_rows'  => 1,
 		);
 
 		return (array) get_posts( array_merge( $defaults, $args ) );
@@ -85,7 +79,7 @@ class CPAC_Storage_Model_Post extends CPAC_Storage_Model {
 		setup_postdata( $post );
 
 		// Remove Admin Columns action for this column's value
-		remove_action( "manage_{$this->post_type}_posts_custom_column", array( $this, 'manage_value_callback' ), 100, 2 );
+		remove_action( "manage_{$this->post_type}_posts_custom_column", array( $this, 'manage_value_callback' ), 100 );
 
 		ob_start();
 		// Run WordPress native actions to display column content
@@ -131,12 +125,23 @@ class CPAC_Storage_Model_Post extends CPAC_Storage_Model {
 			$defaults[] = 'cb';
 			$defaults[] = 'author';
 			$defaults[] = 'categories';
-			$defaults[] = 'comments';
 			$defaults[] = 'parent';
 			$defaults[] = 'tags';
 		}
 
 		return $defaults;
+	}
+
+	/**
+	 * @since 2.5
+	 */
+	public function get_default_column_widths() {
+		return array(
+			'author'     => array( 'width' => 10 ),
+			'categories' => array( 'width' => 15 ),
+			'tags'       => array( 'width' => 15 ),
+			'date'       => array( 'width' => 10 ),
+		);
 	}
 
 	/**

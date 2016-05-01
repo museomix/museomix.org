@@ -3,10 +3,10 @@
 /*
  * Plugin Name: iThemes Security
  * Plugin URI: https://ithemes.com/security
- * Description: Protect your WordPress site by hiding vital areas of your site, protecting access to important files, preventing brute-force login attempts, detecting attack attempts and more.
+ * Description: Take the guesswork out of WordPress security. iThemes Security offers 30+ ways to lock down WordPress in an easy-to-use WordPress security plugin.
  * Author: iThemes
  * Author URI: https://ithemes.com
- * Version: 5.3.0
+ * Version: 5.3.6
  * Text Domain: better-wp-security
  * Network: True
  * License: GPLv2

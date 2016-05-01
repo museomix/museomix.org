@@ -28,7 +28,7 @@ class ITSEC_Tweaks {
 			//Disable XML-RPC
 			if ( isset( $this->settings['disable_xmlrpc'] ) && $this->settings['disable_xmlrpc'] == 2 ) {
 
-				add_filter( 'xmlrpc_enabled', array( $this, 'empty_return_function' ) );
+				add_filter( 'xmlrpc_enabled', '__return_null' );
 				add_filter( 'bloginfo_url', array( $this, 'remove_pingback_url' ), 10, 2 );
 
 			}
@@ -56,17 +56,17 @@ class ITSEC_Tweaks {
 
 			//remove theme update notifications if turned on
 			if ( ( ! isset( $itsec_globals['is_iwp_call'] ) || $itsec_globals['is_iwp_call'] === false ) && isset( $this->settings['theme_updates'] ) && $this->settings['theme_updates'] == true ) {
-				add_action( 'plugins_loaded', array( $this, 'theme_updates' ) );
+				add_action( 'init', array( $this, 'theme_updates' ) );
 			}
 
 			//remove plugin update notifications if turned on
 			if ( ( ! isset( $itsec_globals['is_iwp_call'] ) || $itsec_globals['is_iwp_call'] === false ) && isset( $this->settings['plugin_updates'] ) && $this->settings['plugin_updates'] == true ) {
-				add_action( 'plugins_loaded', array( $this, 'public_updates' ) );
+				add_action( 'init', array( $this, 'public_updates' ) );
 			}
 
 			//remove core update notifications if turned on
 			if ( ( ! isset( $itsec_globals['is_iwp_call'] ) || $itsec_globals['is_iwp_call'] === false ) && isset( $this->settings['core_updates'] ) && $this->settings['core_updates'] == true ) {
-				add_action( 'plugins_loaded', array( $this, 'core_updates' ) );
+				add_action( 'init', array( $this, 'core_updates' ) );
 			}
 
 			//Execute jQuery check
@@ -78,7 +78,7 @@ class ITSEC_Tweaks {
 
 			//Process remove login errors
 			if ( isset( $this->settings['login_errors'] ) && $this->settings['login_errors'] === true ) {
-				add_filter( 'login_errors', array( $this, 'empty_return_function' ) );
+				add_filter( 'login_errors', '__return_null' );
 			}
 
 			//Process remove extra author archives
@@ -151,7 +151,7 @@ class ITSEC_Tweaks {
 		if ( ! current_user_can( 'manage_options' ) ) {
 
 			remove_action( 'admin_notices', 'update_nag', 3 );
-			add_filter( 'pre_site_transient_update_core', array( $this, 'empty_return_function' ) );
+			add_filter( 'pre_site_transient_update_core', '__return_null' );
 			wp_clear_scheduled_hook( 'wp_version_check' );
 
 		}
@@ -178,17 +178,6 @@ class ITSEC_Tweaks {
 	}
 
 	/**
-	 * Returns null
-	 *
-	 * @return null
-	 */
-	public function empty_return_function() {
-
-		return null;
-
-	}
-
-	/**
 	 * Requires a unique nicename on profile update or activate.
 	 *
 	 * @since 4.0
@@ -197,7 +186,7 @@ class ITSEC_Tweaks {
 	 */
 	public function force_unique_nicename( &$errors, $update, &$user ) {
 
-		$display_name = isset( $user->display_name ) ? $user->display_name : ITSEC_Lib::get_random( 14 );
+		$display_name = isset( $user->display_name ) ? $user->display_name : wp_generate_password( 14, false );
 
 		if ( ! empty( $user->nickname ) ) {
 
@@ -257,7 +246,7 @@ class ITSEC_Tweaks {
 		if ( ! current_user_can( 'manage_options' ) ) {
 
 			remove_action( 'load-update-core.php', 'wp_update_plugins' );
-			add_filter( 'pre_site_transient_update_plugins', array( $this, 'empty_return_function' ) );
+			add_filter( 'pre_site_transient_update_plugins', '__return_null' );
 			wp_clear_scheduled_hook( 'wp_update_plugins' );
 
 		}
@@ -308,7 +297,7 @@ class ITSEC_Tweaks {
 		if ( ! current_user_can( 'manage_options' ) ) {
 
 			remove_action( 'load-update-core.php', 'wp_update_themes' );
-			add_filter( 'pre_site_transient_update_themes', array( $this, 'empty_return_function' ) );
+			add_filter( 'pre_site_transient_update_themes', '__return_null' );
 			wp_clear_scheduled_hook( 'wp_update_themes' );
 
 		}

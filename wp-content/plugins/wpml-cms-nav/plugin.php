@@ -3,20 +3,23 @@
 Plugin Name: WPML CMS Nav
 Plugin URI: https://wpml.org/
 Description: Adds CMS navigation elements to sites built with WPML. <a href="https://wpml.org">Documentation</a>.
-Author: ICanLocalize
-Author URI: https://wpml.org
-Version: 1.4.3
+Author: OnTheGoSystems
+Author URI: http://www.onthegosystems.com/
+Version: 1.4.10
+Plugin Slug: wpml-cms-nav
 */
 
 if(defined('WPML_CMS_NAV_VERSION')) return;
 
-define('WPML_CMS_NAV_VERSION', '1.4.3');
+define('WPML_CMS_NAV_VERSION', '1.4.10');
 define('WPML_CMS_NAV_PLUGIN_PATH', dirname(__FILE__));
 
+require WPML_CMS_NAV_PLUGIN_PATH . '/inc/wpml-dependencies-check/wpml-bundle-check.class.php';
 require WPML_CMS_NAV_PLUGIN_PATH . '/inc/constants.php';
 require WPML_CMS_NAV_PLUGIN_PATH . '/inc/cms-navigation.class.php';
 require WPML_CMS_NAV_PLUGIN_PATH . '/inc/cache.class.php';
 require WPML_CMS_NAV_PLUGIN_PATH . '/inc/functions.php';
+require WPML_CMS_NAV_PLUGIN_PATH . '/inc/upgrade.php';
 
 $iclCMSNavigation = new WPML_CMS_Navigation();
     

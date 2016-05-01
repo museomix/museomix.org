@@ -3,8 +3,8 @@ Contributors: codepress, tschutter, davidmosterd, engelen, dungengronovius
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZDZRSYLQ4Z76J
 Tags: plugins, wordpress, admin, column, columns, custom columns, custom fields, image, dashboard, sortable, filters, posts, media, users, pages, posttypes, manage columns, wp-admin
 Requires at least: 3.5
-Tested up to: 4.4.2
-Stable tag: 2.4.10
+Tested up to: 4.5.1
+Stable tag: 2.5.6.2
 
 Customise columns on the administration screens for post(types), pages, media, comments, links and users with an easy to use drag-and-drop interface.
 
@@ -210,9 +210,90 @@ You can find a list of the available actions and filters (and examples on how to
 
 == Changelog ==
 
+= 2.5.6.2 =
+* [Fixed] Hotfix cleanup.
+
+= 2.5.6.1 =
+* [Fixed] Hotfix. Version 2.5.6 did not display the stored column settings, which has been hotfixed.
+
+= 2.5.6 =
+* [Fixed] Row actions are now only added to the first column when the primary column isn't available
+* [Fixed] The true/false field option for the Custom Field column will display a cross icon when the value is empty or zero
+
+= 2.5.5 =
+* [Improved] Columns with empty values will now display a dash symbol
+* [Fixed] Excerpt column: The label "Excerpt from content" will now only display when the post has content
+
+= 2.5.4.1 =
+* [Fixed] Columns can be marked as original, in case the default has been replaced by an ac-column
+
+= 2.5.4 =
+* [Fixed] Edit columns button will be positioned correctly on the Trash page
+* [Fixed] Obsolete images have been removed
+* [Fixed] Roles names column will display the available translation
+* [Fixed] Content type label (next to store settings) is displayed correctly when translations are loaded
+* [Fixed] After using quick edit the column values will be populated correctly again
+* [Fixed] WPML will correctly display it's "+" icons again. Make sure to add/remove the column.
+* [Improved Messages on the settings screen (when using restore columns) are now displayed directly above the columns
+* [Improved] Excerpt column will now display a label "excerpt from content" when the actual excerpt field is empty
+* [Added] New filter 'cac/get_posts/post_status' has been added to change post_status when using CPAC_Storage_model::get_posts()
+
+= 2.5.3 =
+* [Fixed] Fixes an issue with some 3rd party column not being visible
+
+= 2.5.2 =
+* [Fixed] Fixes an issue where some of the WordPress default columns did not display correctly
+
+= 2.5.1 =
+* [Fixed] Column settings are displayed correctly now
+
+= 2.5 =
+* [Updated] The main menu has been replaced with a single dropdown menu
+* [Updated] Support for 3rd party columns from other themes or plugins has been greatly improved
+* [Added] Added a new column: Comment status
+* [Added] The width of default columns are now displayed
+* [Improved] Improved JS loading
+* [Improved] Replaced FamFam icons with dashicons
+* [Improved] Column groups now uses full text strings
+* [Fixed] Media actions columns no longer throws an error when the list table is not found
+* [Fixed] Height and width columns for media will be appended with 'px'
+* [Fixed] Most zero values will now be displayed as a dash
+* [Fixed] Estimate time reading column will no longer display leading zero's on seconds
+* [Fixed] Shortcodes column now display each shortcode name used once, with a counter
+* [Fixed] Columns with an imagesize selection setting will have the a default option selected
+* [Removed] Removed loading columns through 'load-edit.php' filter
+* [Added] Column settings are now stored without the need to refresh the page (through ajax)
+* [Added] You can disable the columns delete confirmation through this filter 'ac/delete_confirmation'
+* [Improved] The width of default columns (e.g. date and author) are now displayed
+* [Improved] bbPress columns are loaded correctly
+* [Updated] All languages files have been updated from Transifex (https://www.transifex.com/codepress/admin-columns)
+*
+* [Developer notes]
+* [Refactor] CPAC now is a singleton class
+* [Refactor] Storage model has been refactored but should stay backwards compatible when extending
+* [Refactor] CPAC_Column $storage_model variable has become private. Use CAPC_Column::get_storage_model() method.
+* [Refactor] Storagemodel can now be extended to have column layouts/sets
+* [Refactor:added] CPAC_Column::is_default() method added
+* [Refactor:added] CPAC_Column::is_registered() method added
+* [Refactor:added] CPAC_Column::get_empty_char() method added
+* [Refactor:added] CPAC_Column_Storagemodel::get_column_types() method added
+* [Refactor:added] CPAC_Column_Storagemodel::get_default_colummn_types() method added
+* [Refactor:added] CPAC_Column_Storagemodel::get_column_type() method added
+* [Refactor:added] CPAC_Column_Storagemodel::create_column() method added
+* [Refactor:added] CPAC_Column_Storagemodel::flush_columns() method added
+* [Refactor:added] CPAC_Column_Storagemodel::get_restore_link() method added
+* [Refactor:changed] CPAC_Column_Storagemodel::get_columns()
+* [Refactor:removed] CPAC_Column_Storagemodel::get_default_registered_columns() method removed
+* [Refactor:removed] CPAC_Column_Storagemodel::get_custom_registered_columns() method removed
+* [Refactor:removed] CPAC_Column_Storagemodel::set_stored_columns() method removed
+* [Refactor:removed] CPAC_Column_Storagemodel::get_grouped_column_types() method removed
+* [Refactor:removed] CPAC_Column_Storagemodel::set_columns() method removed
+* [Refactor:removed] CPAC_Column_Storagemodel::set_stored_columns() method removed
+
 = 2.4.10 =
 * [Fixed] Data:image sources for images are supported in labels
 * [Fixed] Cloned columns no longer has the wrong options when stored
+* [Added] Added an extra update button to the bottom of the settings page
 * [Fixed] Created deprecated function for is_columns_screen()
 * [Fixed] The method get_current_storage_model returns the first occurrence instead of running the entire array of storage modals
 * [Fixed] The storage_model object should have the init_manage_columns method to properly load the columns heading and values

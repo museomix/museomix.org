@@ -1,0 +1,47 @@
+[
+ {
+  "product": "sitepress-multilingual-cms",
+  "version": "3.2.2",
+  "name": "sitepress-multilingual-cms"
+ },
+ {
+  "product": "wpml-translation-management",
+  "version": "2.0.2",
+  "name": "wpml-translation-management"
+ },
+ {
+  "product": "wpml-string-translation",
+  "version": "2.2.2",
+  "name": "wpml-string-translation"
+ },
+ {
+  "product": "wpml-xliff",
+  "version": "0.9.9",
+  "name": "wpml-xliff"
+ },
+ {
+  "product": "wpml-media-translation",
+  "version": "2.1.12",
+  "name": "wpml-media-translation"
+ },
+ {
+  "product": "wpml-translation-analytics",
+  "version": "1.0.8",
+  "name": "wpml-translation-analytics"
+ },
+ {
+  "product": "wpml-sticky-links",
+  "version": "1.3.12",
+  "name": "wpml-sticky-links"
+ },
+ {
+  "product": "wpml-cms-nav",
+  "version": "1.4.10",
+  "name": "wpml-cms-nav"
+ },
+ {
+  "product": "gravityforms-multilingual",
+  "version": "1.3.2",
+  "name": "gravityforms-multilingual"
+ }
+]

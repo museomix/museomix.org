@@ -1,7 +1,7 @@
 <?php
 /*
  * Plugin Name: Google Analyticator
- * Version: 6.4.9.6
+ * Version: 6.4.9.7
  * Plugin URI: http://www.videousermanuals.com/google-analyticator/?utm_campaign=analyticator&utm_medium=plugin&utm_source=readme-txt
  * Description: Adds the necessary JavaScript code to enable <a href="http://www.google.com/analytics/">Google's Analytics</a>. After enabling this plugin you need to authenticate with Google, then select your domain and you're set.
  * Author: SumoMe
@@ -125,9 +125,9 @@ function  ganalyticator_stats_init(){
 }
 // Initialize the options
 function ga_admin_init() {
-	
+
 	ga_get_active_addons();
-	
+
 	# Load the localization information
 	$plugin_dir = basename(dirname(__FILE__));
 	load_plugin_textdomain('google-analyticator', 'wp-content/plugins/' . $plugin_dir . '/localizations', $plugin_dir . '/localizations');
@@ -154,9 +154,10 @@ function add_ga_option_page() {
 		//$plugin_page = add_options_page(__('Google Analyticator Settings', 'google-analyticator'), 'Google Analytics', 'manage_options', basename(__FILE__), 'ga_settings_page');
 		//add_action('load-'.$plugin_page, 'ga_pre_load' );
 	}
-	   $activate_page = add_submenu_page( null, 'Activation', 'Google Analytics', 'manage_options', 'ga_activate' , 'ga_activate');
-	   $reset_page = add_submenu_page(null, 'Reset', 'Reset', 'activate_plugins', 'ga_reset', 'ga_reset' );
-        add_action('load-'.$reset_page, 'ga_do_reset' );
+
+	$activate_page = add_submenu_page( null, 'Activation', 'Google Analytics', 'manage_options', 'ga_activate' , 'ga_activate');
+	$reset_page = add_submenu_page(null, 'Reset', 'Reset', 'activate_plugins', 'ga_reset', 'ga_reset' );
+	add_action('load-'.$reset_page, 'ga_do_reset' );
 
 }
 
@@ -177,7 +178,6 @@ function ga_pre_load()
         // Update GA Token
         update_option('ga_google_token', $_POST['key_ga_google_token']);
 
-
     endif;
 
     if( get_option('ga_defaults') == 'yes' ):
@@ -186,8 +186,7 @@ function ga_pre_load()
         exit;
 
     endif;
-    
-    
+
     /** Action to trancate Analyticator db cache   **/
     if(isset($_GET['pageaction']) && $_GET['pageaction'] == 'ga_clear_cache'){
 	    global $wpdb;

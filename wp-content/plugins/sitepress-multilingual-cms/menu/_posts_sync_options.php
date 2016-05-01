@@ -38,6 +38,10 @@ global $sitepress, $sitepress_settings;
                     <?php _e('Synchronize sticky flag', 'sitepress') ?></label>
                 </p>
                 <p>
+                    <label><input type="checkbox" name="icl_sync_password" <?php if($sitepress_settings['sync_password']): ?>checked<?php endif; ?> value="1" />
+                    <?php _e('Synchronize password for password protected posts', 'sitepress') ?></label>
+                </p>
+                <p>
                     <label><input type="checkbox" name="icl_sync_private_flag" <?php if($sitepress_settings['sync_private_flag']): ?>checked<?php endif; ?> value="1" />
                     <?php _e('Synchronize private flag', 'sitepress') ?></label>
                 </p>
@@ -66,10 +70,6 @@ global $sitepress, $sitepress_settings;
                 <p>
                     <label><input type="checkbox" name="icl_sync_post_date" <?php if($sitepress_settings['sync_post_date']): ?>checked<?php endif; ?> value="1" />
                     <?php _e('Copy publishing date to translations', 'sitepress') ?></label>
-                </p>
-                <p>
-                    <label><input type="checkbox" name="icl_sync_taxonomy_parents" <?php if($sitepress_settings['sync_taxonomy_parents']): ?>checked<?php endif; ?> value="1" />
-                    <?php _e('Sync taxonomy (e.g. category) parents ', 'sitepress') ?></label>
                 </p>
             </div>
 

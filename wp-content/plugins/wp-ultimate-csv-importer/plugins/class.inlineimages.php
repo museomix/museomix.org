@@ -49,12 +49,13 @@ class WPImporter_inlineImages {
 	 * @param $import_image_method
 	 * @param $imgLoc
 	 * @param $sampleURL
+	 * @param $useexistingimages
 	 * @return int|WP_Error
 	 */
-	function importwithInlineImages($postID, $currentLimit, $data_array, $impObj, $import_image_method, $imgLoc, $sampleURL) {
+	function importwithInlineImages($postID, $currentLimit, $data_array, $impObj, $import_image_method, $imgLoc, $sampleURL, $useexistingimages = false) {
 		$helperObj = new WPImporter_includes_helper();
 		$updatearray = array();
-		$res_array = $this->capture_all_shortcodes($data_array['post_content'], $postID);
+		$res_array = $this->capture_all_shortcodes($data_array['post_content'], $postID, $useexistingimages);
 		if (isset($res_array['post_content'])) {
 			$updatearray['post_content'] = $res_array['post_content'];
 			$updatearray['ID'] = $postID;
@@ -158,7 +159,7 @@ class WPImporter_inlineImages {
 					$inline_file ['post_content'] = '';
 					$inline_file ['post_status'] = 'attachment';
 					$wp_upload_dir = wp_upload_dir();
-					$attachment = array('guid' => $inline_file ['guid'], 'post_mime_type' => 'image/jpg', 'post_title' => preg_replace('/\.[^.]*$/', '', @basename($inline_file ['guid'])), 'post_content' => '', 'post_status' => 'inherit');
+					$attachment = array('guid' => $inline_file ['guid'], 'post_mime_type' => 'image/jpg', 'post_title' => preg_replace('/\.[^.]*$/', '', @basename($inline_file ['post_title'])), 'post_content' => '', 'post_status' => 'inherit');
 					if ($get_media_settings == 1) {
 						$generate_attachment = $dirname . '/' . $inline;
 					} else {
@@ -230,9 +231,10 @@ class WPImporter_inlineImages {
 	/**
 	 * @param $post_content
 	 * @param $postID
+	 * @param $useexistingimages
 	 * @return array
 	 */
-	public function capture_all_shortcodes($post_content, $postID) {
+	public function capture_all_shortcodes($post_content, $postID, $useexistingimages = false) {
 		$result = array();
 		$pattern = "/([WPIMPINLINE:([\w]+)(.*?)(])/";
 		$shortcode_prefix = "[WPIMPINLINE:";
@@ -315,7 +317,7 @@ class WPImporter_inlineImages {
 					$inline_file ['post_content'] = '';
 					$inline_file ['post_status'] = 'attachment';
 					$wp_upload_dir = wp_upload_dir();
-					$attachment = array('guid' => $inline_file ['guid'], 'post_mime_type' => 'image/jpeg', 'post_title' => preg_replace('/\.[^.]+$/', '', @basename($inline_file ['guid'])), 'post_content' => '', 'post_status' => 'inherit');
+					$attachment = array('guid' => $inline_file ['guid'], 'post_mime_type' => 'image/jpeg', 'post_title' => preg_replace('/\.[^.]+$/', '', @basename($inline_file ['post_title'])), 'post_content' => '', 'post_status' => 'inherit');
 					if ($get_media_settings == 1) {
 						$generate_attachment = $dirname . '/' . $get_inline_guid;
 					} else {
@@ -324,23 +326,29 @@ class WPImporter_inlineImages {
 					$uploadedImage = $wp_upload_dir['path'] . '/' . $get_inlineimage_val;
 					//duplicate check
 					global $wpdb;
-					$existing_attachment = array();
-					//$query = $wpdb->get_results("select post_title from $wpdb->posts where post_type = 'attachment' and post_mime_type = 'image/jpeg'");
-					$query = $wpdb->get_results($wpdb->prepare("select post_title from $wpdb->posts where post_type = %s and post_mime_type = %s",'attachment','image/jpeg'));
-					if(!empty($query)){
-					foreach ($query as $key) {
+					if($useexistingimages == 'true') {
+						$existing_attachment = array();
+						//$query = $wpdb->get_results("select post_title from $wpdb->posts where post_type = 'attachment' and post_mime_type = 'image/jpeg'");
+						$query = $wpdb->get_results( $wpdb->prepare( "select post_title from $wpdb->posts where post_type = %s and post_mime_type = %s", 'attachment', 'image/jpeg' ) );
+						if ( ! empty( $query ) ) {
+							foreach ( $query as $key ) {
 
-						$existing_attachment[] = $key->post_title;
+								$existing_attachment[] = $key->post_title;
 
-					}
-					}
-					//duplicate check
-					if (!in_array($attachment['post_title'], $existing_attachment)) {
-						$attach_id = wp_insert_attachment($attachment, $generate_attachment, $postID);
+							}
+						}
+						//duplicate check
+						if ( ! in_array( $attachment['post_title'], $existing_attachment ) ) {
+							$attach_id = wp_insert_attachment( $attachment, $generate_attachment, $postID );
 
-						$attach_data = wp_generate_attachment_metadata($attach_id, $uploadedImage);
-						wp_update_attachment_metadata($attach_id, $attach_data);
-						//set_post_thumbnail($postID, $attach_id);
+							$attach_data = wp_generate_attachment_metadata( $attach_id, $uploadedImage );
+							wp_update_attachment_metadata( $attach_id, $attach_data );
+							//set_post_thumbnail($postID, $attach_id);
+						}
+					} else {
+						$attach_id   = wp_insert_attachment( $attachment, $generate_attachment, $postID );
+						$attach_data = wp_generate_attachment_metadata( $attach_id, $uploadedImage );
+						wp_update_attachment_metadata( $attach_id, $attach_data );
 					}
 
 					// if($shortcode_mode == 'Inline') {

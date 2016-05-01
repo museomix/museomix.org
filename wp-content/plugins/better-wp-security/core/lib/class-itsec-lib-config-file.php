@@ -678,6 +678,16 @@ class ITSEC_Lib_Config_File {
 	 * @return string Full path to the server config file or a blank string if modifications for the file are disabled.
 	 */
 	public static function get_server_config_file_path() {
+		global $itsec_globals;
+		
+		
+		$server = ITSEC_Lib_Utility::get_web_server();
+		
+		if ( 'nginx' === $server && ! empty( $itsec_globals['settings']['nginx_file'] ) ) {
+			return $itsec_globals['settings']['nginx_file'];
+		}
+		
+		
 		$file = self::get_default_server_config_file_name();
 		
 		if ( empty( $file ) ) {

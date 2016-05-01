@@ -1,3 +1,15 @@
+## 1.10.2 (2016-03-10)
+* Add possibility for custom menu slugs, especially for Plugins, Themes, there add different slug for different roles.
+* Add the possibility to use the WP object cache for settings, if the webspace support this, like Memcached, APC.
+* More clarity for the "own options" label.
+
+## 1.10.1 (2016-02-29)
+* Fix the Removing of Admin Color Scheme Select on the profile page.
+* Back-end options are also excluded on the settings page.
+* Add new settings area for options of the plugin self.
+* The support for multiple roles is now optional.
+* The support for bbPress is now active and optional.
+
 ## 1.10.0 (2016-02-21)
 * Rewrite the Admin Bar settings, simplify the source and new hook to get and render the Admin Bar.
 * Change settings screen for custom post type.

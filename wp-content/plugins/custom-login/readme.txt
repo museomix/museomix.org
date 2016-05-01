@@ -3,12 +3,12 @@ Contributors: austyfrosty, frostymedia
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7431290
 Tags: admin, branding, customization, custom login, login, logo, error, login error, custom login pro
 Requires at least: 4.0
-Tested up to: 4.3.1
+Tested up to: 4.5
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Custin Login allows you to easily customize your admin login page, works great for client sites!
+Custom Login allows you to easily customize your admin login page, works great for client sites!
 
 == Description ==
 
@@ -114,6 +114,11 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 4. Custom Login Extensions Installer (an active license key is required).
 
 == Changelog ==
+
+= Version 3.2.5 (04/13/16) =
+
+* WordPress 4.5 compatible update (moves Custom Login css after WordPress' login style sheet).
+* Fix issue where toggling the 'active' checkbox in the header doesn't activate or de-activate the plugin settings (updates via AJAX now).
 
 = Version 3.2.4 (09/16/15) =
 

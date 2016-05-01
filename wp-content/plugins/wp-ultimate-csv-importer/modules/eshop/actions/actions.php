@@ -94,7 +94,7 @@ class EshopActions extends SkinnyActions {
 	/**
 	 * Mapping fields
 	 */
-	public $defCols = array('post_title' => null, 'post_content' => null, 'post_excerpt' => null, 'post_date' => null, 'post_name' => null, 'post_status' => null, 'post_author' => null, 'post_parent' => 0, 'comment_status' => 'open', 'ping_status' => 'open', 'SKU' => null, 'products_option' => null, 'sale_price' => 0, 'regular_price' => 0, 'description' => null, 'shiprate' => 'no', 'optset' => null, 'featured_product' => 'no', 'product_in_sale' => 'no', 'stock_available' => 'no', 'cart_option' => 'null', 'featured_image' => null,'tags'=>null,'category'=>null);
+	public $defCols = array('post_title' => null, 'post_content' => null, 'post_excerpt' => null, 'post_date' => null, 'post_name' => null, 'post_status' => null, 'post_author' => null, 'post_parent' => 0, 'comment_status' => 'open', 'ping_status' => 'open', 'SKU' => null, 'products_option' => null, 'sale_price' => 0, 'regular_price' => 0, 'description' => null, 'shiprate' => 'no', 'optset' => null, 'featured_product' => 'no', 'product_in_sale' => 'no', 'stock_available' => 'no', 'cart_option' => 'null', 'featured_image' => null);
 
 	/**
 	 * Manage duplicates
@@ -329,9 +329,18 @@ class EshopActions extends SkinnyActions {
 	/**
 	 * function to map the csv file and process it
 	 *
+	 * @param $data_rows
+	 * @param $ret_array
+	 * @param $session_arr
+	 * @param $currentLimit
+	 * @param $extractedimagelocation
+	 * @param $importinlineimageoption
+	 * @param null $sample_inlineimage_url
+	 * @param bool $useexistingimages
+	 *
 	 * @return boolean
 	 */
-	function processDataInWP($data_rows, $ret_array, $session_arr, $currentLimit, $extractedimagelocation, $importinlineimageoption, $sample_inlineimage_url = null) {
+	function processDataInWP($data_rows, $ret_array, $session_arr, $currentLimit, $extractedimagelocation, $importinlineimageoption, $sample_inlineimage_url = null, $useexistingimages = false) {
 		global $wpdb;
 		$post_id = '';
 		$new_post = array();
@@ -458,33 +467,33 @@ class EshopActions extends SkinnyActions {
 							$fimg_path = $full_path;
 
 							$fimg_name = @basename($f_img);
-							$fimg_name = strtolower(str_replace(' ', '-', $fimg_name));
-							$fimg_name = preg_replace('/[^a-zA-Z0-9._\s]/', '', $fimg_name);
-
+							$fimg_name = str_replace(' ', '-', $fimg_name);
+							$fimg_name = preg_replace('/[^a-zA-Z0-9._\-\s]/', '', $fimg_name);
 							$fimg_name = urlencode($fimg_name);
-
 							$parseURL = parse_url($f_img);
 							$path_parts = pathinfo($f_img);
 							if (!isset($path_parts['extension'])) {
 								$fimg_name = $fimg_name . '.jpg';
 							}
-
 							$f_img_slug = '';
-							$f_img_slug = strtolower(str_replace('', '-', $f_img_slug));
-							$f_img_slug = preg_replace('/[^a-zA-Z0-9._\s]/', '', $f_img_slug);
-
-
+							$featured_image = trim($path_parts['filename']);
+							$f_img_slug = strtolower(str_replace(' ', '-', trim($f_img_slug)));
+							$f_img_slug = preg_replace('/[^a-zA-Z0-9._\-\s]/', '', $f_img_slug);
 							$post_slug_value = strtolower($f_img_slug);
 							require_once(WP_CONST_ULTIMATE_CSV_IMP_DIRECTORY . '/includes/WPImporter_includes_helper.php');
 							$impCE = new WPImporter_includes_helper();
-							$path_parts['extension'] = isset($path_parts['extension']) ? $path_parts['extension'] : '';
+							#$path_parts['extension'] = isset($path_parts['extension']) ? $path_parts['extension'] : '';
+							#if (array_key_exists('extension', $path_parts)) {
+							if ($useexistingimages == 'false') {
+								$fimg_name = wp_unique_filename($fimg_path, trim($fimg_name));
+							}
 							$impCE->get_fimg_from_URL($f_img, $fimg_path, $fimg_name, $post_slug_value, $currentLimit, $this);
 							$filepath = $fimg_path . "/" . $fimg_name;
 
 							if (@getimagesize($filepath)) {
 								$img = wp_get_image_editor($filepath);
 								$file ['guid'] = $baseurl . "/" . $fimg_name;
-								$file ['post_title'] = $fimg_name;
+								$file ['post_title'] = $featured_image;
 								$file ['post_content'] = '';
 								$file ['post_status'] = 'attachment';
 							} else {
@@ -653,7 +662,7 @@ class EshopActions extends SkinnyActions {
 				if ($this->MultiImages == 'true') {
 					$inlineImagesObj = new WPImporter_inlineImages();
 					$postid = wp_insert_post($data_array);
-					$post_id = $inlineImagesObj->importwithInlineImages($postid, $currentLimit, $data_array, $this, $importinlineimageoption, $extractedimagelocation, $sample_inlineimage_url);
+					$post_id = $inlineImagesObj->importwithInlineImages($postid, $currentLimit, $data_array, $this, $importinlineimageoption, $extractedimagelocation, $sample_inlineimage_url, $useexistingimages);
 				} else {
 					$post_id = wp_insert_post($data_array);
 					$this->detailedLog[$currentLimit]['post_id'] = "<b>Created Post_ID - </b>" . $post_id . " - success";
@@ -739,31 +748,37 @@ class EshopActions extends SkinnyActions {
 				// Add featured image
 				if (!empty ($file)) {
 					$wp_upload_dir = wp_upload_dir();
-					$attachment = array('guid' => $file ['guid'], 'post_mime_type' => 'image/jpeg', 'post_title' => preg_replace('/[^a-zA-Z0-9._\s]/', '', @basename($file ['guid'])), 'post_content' => '', 'post_status' => 'inherit');
+					$attachment = array('guid' => $file ['guid'], 'post_mime_type' => 'image/jpeg', 'post_title' => preg_replace('/[^a-zA-Z0-9._\-\s]/', '', @basename($file ['post_title'])), 'post_content' => '', 'post_status' => 'inherit');
 					if ($get_media_settings == 1) {
 						$generate_attachment = $dirname . '/' . $fimg_name;
 					} else {
 						$generate_attachment = $fimg_name;
 					}
 					$uploadedImage = $wp_upload_dir['path'] . '/' . $fimg_name;
-					$existing_attachment = array();
-					$query = $wpdb->get_results($wpdb->prepare("select post_title from $wpdb->posts where post_type = %s and post_mime_type = %s",'attachment','image/jpeg'));
-					if(!empty($query)){
-					foreach ($query as $key) {
-						$existing_attachment[] = $key->post_title;
-					}
-					}
-					if (!in_array($fimg_name, $existing_attachment)) {
-						$attach_id = wp_insert_attachment($attachment, $generate_attachment, $post_id);
-						$attach_data = wp_generate_attachment_metadata($attach_id, $uploadedImage);
-						wp_update_attachment_metadata($attach_id, $attach_data);
+					if($useexistingimages == 'true') {
+						$existing_attachment = array();
+						$query               = $wpdb->get_results( $wpdb->prepare( "select post_title from $wpdb->posts where post_type = %s and post_mime_type = %s", 'attachment', 'image/jpeg' ) );
+						if ( ! empty( $query ) ) {
+							foreach ( $query as $key ) {
+								$existing_attachment[] = $key->post_title;
+							}
+						}
+						if ( ! in_array( $attachment['post_title'], $existing_attachment ) ) {
+							$attach_id   = wp_insert_attachment( $attachment, $generate_attachment, $post_id );
+							$attach_data = wp_generate_attachment_metadata( $attach_id, $uploadedImage );
+							wp_update_attachment_metadata( $attach_id, $attach_data );
+						} else {
+							$query2 = $wpdb->get_results( $wpdb->prepare( "select ID from $wpdb->posts where post_title = %s  and post_type = %s", $fimg_name, 'attachment' ) );
+							if ( ! empty( $query2 ) ) {
+								foreach ( $query2 as $key2 ) {
+									$attach_id = $key2->ID;
+								}
+							}
+						}
 					} else {
-						$query2 = $wpdb->get_results($wpdb->prepare("select ID from $wpdb->posts where post_title = %s  and post_type = %s",$fimg_name,'attachment'));
-						if(!empty($query2)){
-						foreach ($query2 as $key2) {
-							$attach_id = $key2->ID;
-						}
-						}
+						$attach_id   = wp_insert_attachment( $attachment, $generate_attachment, $post_id );
+						$attach_data = wp_generate_attachment_metadata( $attach_id, $uploadedImage );
+						wp_update_attachment_metadata( $attach_id, $attach_data );
 					}
 					set_post_thumbnail($post_id, $attach_id);
 				}

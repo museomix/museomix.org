@@ -1,0 +1,38 @@
+= 1.5 =
+* 17 April, 2012 by Ipstenu
+* Readme cleanup, fixing URLs etc.
+
+= 1.4 =
+* 9 February 2012 by Ipstenu
+* Adding in German (translated by Robert @ TalkPress)
+
+= 1.3 =
+* 4 October 2011 by Ipstenu
+* Removing redundancy
+* Full 3.3 WordPress compatibility
+
+= 1.2 =
+* 15 July 2011 by Ipstenu
+* Dropping support for 3.0.x
+
+= 1.1 =
+* 3 Dec 2010  by Ipstenu
+* Critical fix to correct issue with 3.0.2!
+
+= 1.0  =
+* 24 Nov 2010 by Ipstenu
+* Forward and backward compatibility with WordPress 3.1! Yay!
+
+= 0.2.1 =
+* 08 Nov 2010 by Ipstenu
+* Critical Bugfix!  Typo 'wiped out' old IPs listed!
+
+= 0.2 =
+* 08 Nov 2010 by Ipstenu
+* Internationalization
+* Generated POT file so you could do what you want!
+
+= 0.1 =
+* Initial fork by Ipstenu
+* Change to work in MultiSite AND Single Site
+* BuddyPress Tested

@@ -1120,9 +1120,14 @@ class WYSIJA_help_user extends WYSIJA_object {
     function getUserLists($user_id, $list_ids = array()) {
         $model_user = WYSIJA::get('user', 'model');
         $list_id_in = '';
-        if (!empty($list_ids))
-            $list_id_in = "AND A.list_id IN(" . implode(",", $list_ids) . ")";
-        $query = 'SELECT A.* FROM [wysija]user_list as A LEFT JOIN [wysija]list as B on A.list_id=B.list_id WHERE A.user_id=' . $user_id . ' AND B.is_enabled=1 ' . $list_id_in;
+        $clean_ids = array();
+        foreach ($list_ids as $id) {
+          $clean_ids[] = (int)$id;
+        }
+        if (!empty($clean_ids)) {
+          $list_id_in = "AND A.list_id IN(" . implode(",", $clean_ids) . ")";
+        }
+        $query = 'SELECT A.* FROM [wysija]user_list as A LEFT JOIN [wysija]list as B on A.list_id=B.list_id WHERE A.user_id=' . (int)$user_id . ' AND B.is_enabled=1 ' . $list_id_in;
         return $model_user->getResults($query);
     }
 

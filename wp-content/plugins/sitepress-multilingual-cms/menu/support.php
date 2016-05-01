@@ -1,6 +1,5 @@
 
 <div class="wrap">    
-    <div id="icon-wpml" class="icon32" style="clear:both" ><br /></div>    
     <h2><?php _e('Support', 'sitepress') ?></h2>
     
     <p style="margin-top: 20px;">
@@ -8,11 +7,7 @@
     </p>
 
     <?php
-    
-    // Installer plugin active?
-
 	$wpml_plugins_list = SitePress::get_installed_plugins();
-	$installer_on = defined('WPRC_VERSION') && WPRC_VERSION;
 
     echo '
         <table class="widefat" style="width: auto;">
@@ -26,13 +21,6 @@
             </thead>    
             <tbody>
         ';
-    if($installer_on){
-        if(!defined('ICL_WPML_ORG_REPO_ID')){ //backward compatibility
-            $wpml_org_repo_id = $wpdb->get_var("
-                SELECT id FROM {$wpdb->prefix}".WPRC_DB_TABLE_REPOSITORIES." WHERE repository_endpoint_url='http://api.wpml.org/'");
-                define('ICL_WPML_ORG_REPO_ID', $wpml_org_repo_id);
-        }
-    }
 
 	foreach ( $wpml_plugins_list as $name => $plugin_data ) {
 
@@ -44,17 +32,9 @@
 		echo '<td><i class="icon18 '. $plugin_data['slug'] . '"></i>' . $plugin_name . '</td>';
 		echo '<td align="right">';
 		if ( empty( $plugin_data['plugin'] ) ) {
-			if ( !$installer_on ) {
-				echo __( 'Not installed' );
-			} else {
-				echo '<a href="' . admin_url( 'plugin-install.php?repos[]=' . ICL_WPML_ORG_REPO_ID . '&amp;tab=search&amp;s=' ) . urlencode( $plugin_name ) . '">' . __( 'Download', 'sitepress' ) . '</a>';
-			}
+            echo __( 'Not installed', 'sitepress' );
 		} else {
-			if ( !$installer_on ) {
-				echo __( 'Installed' );
-			} else {
-				echo '<a href="' . admin_url( 'plugin-install.php?repos[]=' . ICL_WPML_ORG_REPO_ID . '&amp;tab=search&amp;s=' ) . urlencode( $plugin_name ) . '">' . __( 'Installed', 'sitepress' ) . '</a>';
-			}
+            echo __( 'Installed', 'sitepress' );
 		}
 		echo '</td>';
 		echo '<td align="center">';
@@ -71,32 +51,17 @@
             </tbody>
         </table>
     ';
-        
-    if(!$installer_on){
-        echo '
-            <br />
-            <div class="icl_cyan_box">
-                <p>' . __('The recommended way to install WPML on new sites and upgrade WPML on this site is by using our Installer plugin.', 'sitepress') . '</p>
-                <br />
-                <p>
-                    <a class="button-primary" href="http://wp-compatibility.com/installer-plugin/">' . __('Download Installer', 'sitepress') . '</a>&nbsp;
-                    <a href="https://wpml.org/faq/install-wpml/#2">' . __('Instructions', 'sitepress') . '</a>
-                </p>
-            </div>
-        ';
-    }else{
-        echo '
-            <br />
-            <div class="icl_cyan_box">
-                <p>' . __("To check for new versions, please visit your site's plugins section.", 'sitepress') . '</p>
-            </div>
-        ';
-    }
+
     ?>
     
     <p style="margin-top: 20px;">
     <?php printf(__('For advanced access or to completely uninstall WPML and remove all language information, use the <a href="%s">troubleshooting</a> page.', 'sitepress'), admin_url('admin.php?page=' . ICL_PLUGIN_FOLDER . '/menu/troubleshooting.php')); ?> 
     </p>
     
+    <p style="margin-top: 20px;">
+    <?php printf(__('For retrieving debug information if asked by support person, use the <a href="%s">debug information</a> page.', 'sitepress'), admin_url('admin.php?page=' . ICL_PLUGIN_FOLDER . '/menu/debug-information.php')); ?> 
+    </p>
+	
+	<?php do_action( 'wpml_support_page_after' ); ?>
     
 </div>

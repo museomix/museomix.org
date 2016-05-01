@@ -46,7 +46,7 @@ class CPAC_Column_Used_By_Menu extends CPAC_Column {
 				$term = get_term_by( 'id', $menu_id, 'nav_menu' );
 
 				$title = $term->name;
-				if ( 'on' == $this->options->link_to_menu ) {
+				if ( 'on' == $this->get_option( 'link_to_menu' ) ) {
 					$title = '<a href="' . esc_url( add_query_arg( array( 'menu' => $menu_id ), admin_url('nav-menus.php') ) ) . '">' . $term->name .  '</a>';
 				}
 
@@ -64,11 +64,12 @@ class CPAC_Column_Used_By_Menu extends CPAC_Column {
 	 */
 	function get_meta_type() {
 		$object_type = false;
-		if ( isset( $this->storage_model->taxonomy ) ) {
-			$object_type = $this->storage_model->taxonomy;
+		$model = $this->get_storage_model();
+		if ( isset( $model->taxonomy ) ) {
+			$object_type = $model->taxonomy;
 		}
-		elseif ( isset( $this->storage_model->post_type ) ) {
-			$object_type = $this->storage_model->post_type;
+		elseif ( $post_type = $this->get_post_type() ) {
+			$object_type = $post_type;
 		}
 		return $object_type;
 	}
@@ -78,9 +79,7 @@ class CPAC_Column_Used_By_Menu extends CPAC_Column {
 	 * @since 2.2.5
 	 */
 	function get_raw_value( $object_id ) {
-
 		$object_type = $this->get_meta_type();
-
 
 		$menu_item_ids = get_posts( array(
 			'post_type' => 'nav_menu_item',
@@ -116,7 +115,6 @@ class CPAC_Column_Used_By_Menu extends CPAC_Column {
 	 * @since 2.2.5
 	 */
 	public function display_settings() {
-
 		$this->display_field_link_to_menu();
 	}
 
@@ -126,23 +124,21 @@ class CPAC_Column_Used_By_Menu extends CPAC_Column {
 	 * @since 2.2.5
 	 */
 	public function display_field_link_to_menu() {
-
 		$field_key = 'link_to_menu';
 		?>
 		<tr class="column_<?php echo $field_key; ?>">
 			<?php $this->label_view( __( 'Link to menu', 'codepress-admin-columns' ), __( 'This will make the title link to the menu.', 'codepress-admin-columns' ), $field_key ); ?>
 			<td class="input">
 				<label for="<?php $this->attr_id( $field_key ); ?>-on">
-					<input type="radio" value="on" name="<?php $this->attr_name( $field_key ); ?>" id="<?php $this->attr_id( $field_key ); ?>-on"<?php checked( $this->options->link_to_menu, 'on' ); ?> />
+					<input type="radio" value="on" name="<?php $this->attr_name( $field_key ); ?>" id="<?php $this->attr_id( $field_key ); ?>-on"<?php checked( $this->get_option( 'link_to_menu' ), 'on' ); ?> />
 					<?php _e( 'Yes'); ?>
 				</label>
 				<label for="<?php $this->attr_id( $field_key ); ?>-off">
-					<input type="radio" value="off" name="<?php $this->attr_name( $field_key ); ?>" id="<?php $this->attr_id( $field_key ); ?>-off"<?php checked( in_array( $this->options->link_to_menu, array( '', 'off' ) ) ); ?> />
+					<input type="radio" value="off" name="<?php $this->attr_name( $field_key ); ?>" id="<?php $this->attr_id( $field_key ); ?>-off"<?php checked( in_array( $this->get_option( 'link_to_menu' ), array( '', 'off' ) ) ); ?> />
 					<?php _e( 'No'); ?>
 				</label>
 			</td>
 		</tr>
 		<?php
 	}
-
 }

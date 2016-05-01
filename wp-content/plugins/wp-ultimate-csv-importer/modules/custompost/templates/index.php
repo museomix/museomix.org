@@ -135,6 +135,7 @@ $nonce_Key = $impCE->create_nonce_key();
 					</h2>
 					<?php
 					if (isset($_FILES['inlineimages'])) {
+						$uploadDir = wp_upload_dir();
 						if (isset($_POST['uploadfilename']) && sanitize_file_name($_POST['uploadfilename'] != '')) {
 							$get_file_name = sanitize_file_name($_POST['uploadfilename']);
 							$filehashkey = $impCE->convert_string2hash_key($get_file_name);
@@ -172,41 +173,41 @@ $nonce_Key = $impCE->create_nonce_key();
 									<option value='select'>---Select---</option>
 									<?php
 									$cust_post_list_count = 0;
-				if(is_array(get_post_types())){
-				foreach (get_post_types() as $key => $value) {
-                                $cctm_post_type = array();
-                                $cctm_post_type = get_option('cctm_data');
-                                if(!empty($cctm_post_type) && is_array($cctm_post_type)){
-                                        foreach($cctm_post_type['post_type_defs'] as $cctmptkey => $cctmptval) {
-                                                if($cctmptkey === $value){
-                                                        $value = 'createdByCCTM';
-                                                }
-                                        }
-                                }
-                                $types_post_types = array();
-                                $types_post_types = get_option('wpcf-custom-types');
-                                if(!empty($types_post_types) && is_array($types_post_types)) {
-                                        foreach($types_post_types as $tptKey => $tptVal){
-                                                if($tptKey === $value) {
-                                                        $value = 'createdByTypes';
-                                                }
-                                        }
-                                }
-				$pods_post_types = array();
-				$pods_post_types = get_option('_transient_pods_get_type_post_type');
-				if(!empty($pods_post_types) && is_array($pods_post_types)){
-                                	foreach($pods_post_types as $podskey => $podsvalue){
-                                        	if($podsvalue['name'] === $value){
-                                                        $value = 'createdByPODS';
-                                                }
-                                	}
-				}
-                                        if (($value !== 'featured_image') && ($value !== 'attachment') && ($value !== 'wpsc-product') && ($value !== 'wpsc-product-file') && ($value !== 'revision') && ($value !== 'nav_menu_item') && ($value !== 'post') && ($value !== 'page') && ($value !== 'wp-types-group') && ($value !== 'wp-types-user-group') && ($value !== 'product') && ($value !== 'product_variation') && ($value !== 'shop_order') && ($value !== 'shop_coupon') && ($value !== 'acf') && ($value !== 'acf-field-group') && ($value !== 'acf-field') && ($value !== '_pods_pod') && ($value !== '_pods_field') && ($value !== 'mp_order') && ($value !== 'createdByTypes') &&($value !== 'createdByCCTM') && ($value !== 'createdByPODS')) {?>
-                                                <option id="<?php echo($value); ?>"> <?php echo($value);?> </option>
-                                                        <?php
-                                                        $cust_post_list_count++;
-                                        }
-				}
+									if(is_array(get_post_types())){
+										foreach (get_post_types() as $key => $value) {
+											$cctm_post_type = array();
+											$cctm_post_type = get_option('cctm_data');
+											if(!empty($cctm_post_type) && is_array($cctm_post_type)){
+												foreach($cctm_post_type['post_type_defs'] as $cctmptkey => $cctmptval) {
+													if($cctmptkey === $value){
+														$value = 'createdByCCTM';
+													}
+												}
+											}
+											$types_post_types = array();
+											$types_post_types = get_option('wpcf-custom-types');
+											if(!empty($types_post_types) && is_array($types_post_types)) {
+												foreach($types_post_types as $tptKey => $tptVal){
+													if($tptKey === $value) {
+														$value = 'createdByTypes';
+													}
+												}
+											}
+											$pods_post_types = array();
+											$pods_post_types = get_option('_transient_pods_get_type_post_type');
+											if(!empty($pods_post_types) && is_array($pods_post_types)){
+												foreach($pods_post_types as $podskey => $podsvalue){
+													if($podsvalue['name'] === $value){
+														$value = 'createdByPODS';
+													}
+												}
+											}
+											if (($value !== 'featured_image') && ($value !== 'attachment') && ($value !== 'wpsc-product') && ($value !== 'wpsc-product-file') && ($value !== 'revision') && ($value !== 'nav_menu_item') && ($value !== 'post') && ($value !== 'page') && ($value !== 'wp-types-group') && ($value !== 'wp-types-user-group') && ($value !== 'product') && ($value !== 'product_variation') && ($value !== 'shop_order') && ($value !== 'shop_coupon') && ($value !== 'acf') && ($value !== 'acf-field-group') && ($value !== 'acf-field') && ($value !== '_pods_pod') && ($value !== '_pods_field') && ($value !== 'mp_order') && ($value !== 'createdByTypes') &&($value !== 'createdByCCTM') && ($value !== 'createdByPODS')) {?>
+												<option id="<?php echo($value); ?>"> <?php echo($value);?> </option>
+												<?php
+												$cust_post_list_count++;
+											}
+										}
 									} ?>
 								</select>
 	
@@ -241,7 +242,13 @@ $nonce_Key = $impCE->create_nonce_key();
 					if (isset($_POST['upload_csv_realname']) && sanitize_file_name($_POST['upload_csv_realname']) != '') {
 						$uploaded_csv_name = sanitize_file_name($_POST['upload_csv_realname']);
 					}
-					$getrecords = $impCE->csv_file_data($filename);
+					$total_row_count = '';
+					$parserObj = new SmackCSVParser();
+					$file = $impCE->getUploadDirectory() . '/' . $filename;
+					$parserObj->parseCSV($file, 0, -1);
+					$headers = $parserObj->get_CSVheaders();
+					$headers = $headers[0];
+					$total_row_count = $parserObj->total_row_count - 1;
 					$getcustomposts = get_post_types();
 					if(!empty($getcustomposts) && is_array($getcustomposts)) {
 					foreach ($getcustomposts as $keys => $value) {
@@ -255,9 +262,9 @@ $nonce_Key = $impCE->create_nonce_key();
 						<tr>
 								<div align='center' style='float:right;'>
 									<?php $cnt = count($impCE->defCols) + 2;
-									$cnt1 = count($impCE->headers);
-									$records = count($getrecords);
-									$imploaded_array = implode(',', $impCE->headers); ?>
+									$cnt1 = count($headers);
+									$records = $total_row_count;
+									$imploaded_array = implode(',', $headers); ?>
 									<input type='hidden' id='imploded_header' name='imploded_array'
 										   value='<?php if (isset($imploaded_array)) {
 											   echo $imploaded_array;
@@ -350,8 +357,8 @@ $nonce_Key = $impCE->create_nonce_key();
                                                                                                id="mapping<?php print($count); ?>">
                                                                                <?php } ?>
 											<option>-- Select --</option>
-											<?php if(is_array($impCE->headers) && !empty($impCE->headers)) {
-											foreach ($impCE->headers as $key1 => $value1) { ?>
+											<?php if(is_array($headers) && !empty($headers)) {
+											foreach ($headers as $key1 => $value1) { ?>
 
 												<option><?php echo $value1; ?></option>
 											<?php }
@@ -411,8 +418,8 @@ $nonce_Key = $impCE->create_nonce_key();
 										<select name="coremapping<?php print($count); ?>"
 												id="coremapping<?php print($count); ?>">
 											<option>-- Select --</option>
-											<?php if(is_array($impCE->headers) && !empty($impCE->headers)) {
-												foreach ($impCE->headers as $key1 => $value1) { ?>
+											<?php if(is_array($headers) && !empty($headers)) {
+												foreach ($headers as $key1 => $value1) { ?>
 												<option><?php echo $value1; ?></option>
 											<?php }
 											} ?>
@@ -473,8 +480,8 @@ $nonce_Key = $impCE->create_nonce_key();
                                                                                 <select name="term_mapping<?php print($count); ?>" id="term_mapping<?php print($count); ?>">
                                                                                         <option>-- Select --</option>
                                                                                         <?php 
-											if(is_array($impCE->headers) && !empty($impCE->headers)) {
-											foreach ($impCE->headers as $key1 => $value1) { ?>
+											if(is_array($headers) && !empty($headers)) {
+											foreach ($headers as $key1 => $value1) { ?>
                                                                                                 <option><?php echo $value1; ?></option>
                                                                                         <?php } 
 											}?>
@@ -532,8 +539,8 @@ $nonce_Key = $impCE->create_nonce_key();
 															id="seomapping<?php print($count); ?>">
 														<option>-- Select --</option>
 														<?php 
-															if(is_array($impCE->headers) && !empty($impCE->headers)) {
-															foreach ($impCE->headers as $key1 => $value1) { ?>
+															if(is_array($headers) && !empty($headers)) {
+															foreach ($headers as $key1 => $value1) { ?>
 															<option><?php echo $value1; ?></option>
 														<?php } 
 														}?>
@@ -663,12 +670,17 @@ $nonce_Key = $impCE->create_nonce_key();
 										name="importlimit" id="importlimit" type="text" value="1" placeholder="10"
 										onblur="check_allnumeric(this.value);"></label> <?php echo $impCE->helpnotes(); ?>
 									<br>
+									<div>
 									<span class='msg' id='server_request_warning'
-										  style="display:none;color:red;margin-left:-10px;"><?php echo esc_html__('You can set upto', 'wp-ultimate-csv-importer'); ?><?php echo sanitize_text_field($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['totRecords']); ?><?php echo esc_html__('per request.', 'wp-ultimate-csv-importer'); ?></span>
-									<input type="hidden" id="currentlimit" name="currentlimit" value="0"/>
+										  style="display:none;color:red;margin-left:-10px;"><?php echo esc_html__('You can set upto', 'wp-ultimate-csv-importer'); ?><?php echo ' '.sanitize_text_field($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['totRecords']).' '; ?><?php echo esc_html__('per request.', 'wp-ultimate-csv-importer'); ?></span>
+									</div>
+									<input type="hidden" id="currentlimit" name="currentlimit" value="1"/>
 									<input type="hidden" id="tmpcount" name="tmpcount" value="0"/>
 									<input type="hidden" id="terminateaction" name="terminateaction" value="continue"/>
-									<label id="innertitle">Inline image options</label><br/>
+									<label id="innertitle"><?php echo esc_html__('Media Options', 'wp-ultimate-csv-importer'); ?></label><br/>
+									<label id='importalign'>
+										<input type='checkbox' id='useexistingimages' name='useexistingimages' value='' /> <?php echo esc_html__("Reuse image with same name in Media", 'wp-ultimate-csv-importer'); ?>
+									</label> <?php echo $impCE->helpnotes('skipDuplicate'); ?> <br>
 									<label id='importalign'> <input type='checkbox' id='multiimage' name='multiimage'
 																	value=''> <?php echo esc_attr__('Insert Inline Images', 'wp-ultimate-csv-importer'); ?>
 									</label><br>

@@ -291,7 +291,12 @@ class ITSEC_Content_Directory_Admin {
 			
 			return;
 		}
-		
+
+		// Make sure ITSEC_Core knows it's in a different place
+		$itsec_core = ITSEC_Core::get_instance();
+		$itsec_core->plugin_file = str_replace( $old_name, $new_name, $itsec_core->get_plugin_file() );
+
+
 		$new_permissions = ITSEC_Lib_Directory::get_permissions( $new_dir );
 		
 		if ( is_int( $old_permissions) && is_int( $new_permissions ) && ( $old_permissions != $new_permissions ) ) {

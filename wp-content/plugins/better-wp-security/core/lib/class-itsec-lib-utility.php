@@ -63,9 +63,11 @@ class ITSEC_Lib_Utility {
 	 * @return string Returns apache, nginx, litespeed, or iis. Defaults to apache when the server cannot be identified.
 	 */
 	public static function get_web_server() {
+		// @codeCoverageIgnoreStart
 		if ( defined( 'ITSEC_SERVER_OVERRIDE' ) ) {
 			return ITSEC_SERVER_OVERRIDE;
 		}
+		// @codeCoverageIgnoreEnd
 		
 		
 		if ( isset( $_SERVER['SERVER_SOFTWARE'] ) ) {

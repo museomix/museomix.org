@@ -4,10 +4,14 @@ jQuery(document).ready(function ($) {
         return jQuery('<span>').text( string ).html();
     };
 
-    $('.help-tip').backwpup_tipTip({
-        'attribute':'title',
-        'activation': 'hover'
-    });
+    $.fn.backwpupDelayKeyup = function(callback){
+        var timer = 0;
+        $(this).keyup(function(){
+            clearTimeout (timer);
+            timer = setTimeout(callback, 200);
+        });
+        return $(this);
+    };
 
     /* change size of thickbox */
     backwpup_tb_position = function() {

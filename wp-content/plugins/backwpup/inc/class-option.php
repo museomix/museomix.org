@@ -26,7 +26,6 @@ final class BackWPup_Option {
 			$max_execution_time = (int) ini_get( 'max_execution_time' );
 		}
 		add_site_option( 'backwpup_cfg_jobmaxexecutiontime', $max_execution_time );
-		add_site_option( 'backwpup_cfg_jobziparchivemethod', '' );
 		add_site_option( 'backwpup_cfg_jobstepretry', 3 );
 		add_site_option( 'backwpup_cfg_jobrunauthkey', substr( md5( BackWPup::get_plugin_data( 'hash' ) ), 11, 8 ) );
 		add_site_option( 'backwpup_cfg_loglevel', 'normal_translated' );
@@ -118,7 +117,7 @@ final class BackWPup_Option {
 		$default['mailaddresssenderlog']  = 'BackWPup ' . get_bloginfo( 'name' ) . ' <' . sanitize_email( get_bloginfo( 'admin_email' ) ) . '>';
 		$default['mailerroronly']         = true;
 		$default['backuptype']            = 'archive';
-		$default['archiveformat']         = '.tar.gz';
+		$default['archiveformat']         = '.zip';
 		$default['archivename']           = 'backwpup_' . BackWPup::get_plugin_data( 'hash' ) . '_%Y-%m-%d_%H-%i-%s';
 		//defaults vor destinations
 		foreach ( BackWPup::get_registered_destinations() as $dest_key => $dest ) {
@@ -296,7 +295,7 @@ final class BackWPup_Option {
 		$new_option_job_ids = array();
 		foreach ( $jobs_options as $id => $option ) {
 			if ( isset( $option[ $key ] ) && $value == $option[ $key ] ) {
-				$new_option_job_ids[] = $id;
+				$new_option_job_ids[] = (int) $id;
 			}
 		}
 		sort( $new_option_job_ids );

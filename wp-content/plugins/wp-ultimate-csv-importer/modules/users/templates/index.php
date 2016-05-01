@@ -151,7 +151,13 @@ require_once(WP_CONST_ULTIMATE_CSV_IMP_DIRECTORY . '/includes/WPImporter_include
 									if (isset($_POST['upload_csv_realname']) && sanitize_file_name($_POST['upload_csv_realname']) != '') {
 										$uploaded_csv_name = sanitize_file_name($_POST['upload_csv_realname']);
 									}
-									$getrecords = $impCE->csv_file_data($filename);
+					                                $total_row_count = '';
+									$parserObj = new SmackCSVParser();
+									$file = $impCE->getUploadDirectory() . '/' . $filename;
+									$parserObj->parseCSV($file, 0, -1);
+									$headers = $parserObj->get_CSVheaders();
+									$headers = $headers[0];
+									$total_row_count = $parserObj->total_row_count - 1;
 									$getcustomposts = get_post_types();
 									$allcustomposts = '';
 									if(!empty($getcustomposts) && is_array($getcustomposts)) {
@@ -166,8 +172,8 @@ require_once(WP_CONST_ULTIMATE_CSV_IMP_DIRECTORY . '/includes/WPImporter_include
 										<tr>
 											<div align='center' style='float:right;'>
 												<?php $cnt = count($impCE->defCols) + 2;
-												$cnt1 = count($impCE->headers);
-												$records = count($getrecords); ?>
+												$cnt1 = count($headers);
+												$records = $total_row_count ?>
 												<input type='hidden' id='h1' name='h1' value="<?php if (isset($cnt)) {
 													echo $cnt;
 												} ?>"/>
@@ -238,8 +244,8 @@ require_once(WP_CONST_ULTIMATE_CSV_IMP_DIRECTORY . '/includes/WPImporter_include
 															id="mapping<?php print($count); ?>">
 														<option>-- Select --</option>
 														<?php 
-														if(!empty($impCE->headers) && is_array($impCE->headers)){
-														foreach ($impCE->headers as $key1 => $value1) { ?>
+														if(!empty($headers) && is_array($headers)){
+														foreach ($headers as $key1 => $value1) { ?>
 
 															<option><?php echo $value1; ?></option>
 														<?php } 
@@ -344,9 +350,11 @@ require_once(WP_CONST_ULTIMATE_CSV_IMP_DIRECTORY . '/includes/WPImporter_include
 														name="importlimit" id="importlimit" type="text" value="1" placeholder="10"
 														onblur="check_allnumeric(this.value);"></label> <?php echo $impCE->helpnotes(); ?>
 												<br>
+									<div>
 									<span class='msg' id='server_request_warning'
-										  style="display:none;color:red;margin-left:-10px;"><?php echo esc_html__('You can set upto', 'wp-ultimate-csv-importer'); ?><?php echo sanitize_text_field($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['totRecords']); ?><?php echo esc_html__('per request.', 'wp-ultimate-csv-importer'); ?></span>
-												<input type="hidden" id="currentlimit" name="currentlimit" value="0"/>
+										  style="display:none;color:red;margin-left:-10px;"><?php echo esc_html__('You can set upto', 'wp-ultimate-csv-importer'); ?><?php echo ' '.sanitize_text_field($_SESSION['SMACK_MAPPING_SETTINGS_VALUES']['totRecords']).' '; ?><?php echo esc_html__('per request.', 'wp-ultimate-csv-importer'); ?></span>
+									</div>
+												<input type="hidden" id="currentlimit" name="currentlimit" value="1"/>
 												<input type="hidden" id="tmpcount" name="tmpcount" value="0"/>
 												<input type="hidden" id="terminateaction" name="terminateaction" value="continue"/>
 											</li>

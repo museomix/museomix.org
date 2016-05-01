@@ -29,11 +29,11 @@ if ( ! class_exists( 'ITSEC_Core' ) ) {
 			$pages,
 			$pro_toc_items,
 			$tracking_vars,
-			$toc_items,
-			$_plugin_file;
+			$toc_items;
 
 		public
-			$available_pages;
+			$available_pages,
+			$plugin_file;
 
 		/**
 		 * Private constructor to make this a singleton
@@ -58,7 +58,7 @@ if ( ! class_exists( 'ITSEC_Core' ) ) {
 		 *
 		 */
 		public function init( $plugin_file, $plugin_name ) {
-			$this->_plugin_file = $plugin_file;
+			$this->plugin_file = $plugin_file;
 
 			global $itsec_globals, $itsec_files, $itsec_logger, $itsec_lockout, $itsec_notify, $itsec_sync;
 
@@ -91,7 +91,7 @@ if ( ! class_exists( 'ITSEC_Core' ) ) {
 
 			//Set plugin defaults
 			$itsec_globals = array(
-				'plugin_build'       => 4039, //plugin build number - used to trigger updates
+				'plugin_build'       => 4040, //plugin build number - used to trigger updates
 				'plugin_access_lvl'  => 'manage_options', //Access level required to access plugin options
 				'plugin_name'        => sanitize_text_field( $plugin_name ), //the name of the plugin
 				'plugin_base'        => str_replace( WP_PLUGIN_DIR . '/', '', $plugin_file ),
@@ -755,9 +755,10 @@ if ( ! class_exists( 'ITSEC_Core' ) ) {
 				wp_enqueue_script( 'jquery-ui-dialog' );
 				wp_enqueue_style( 'jquery-ui-tabs' );
 				wp_enqueue_style( 'wp-jquery-ui-dialog' );
-				wp_enqueue_script( 'itsec_dashboard_js', $itsec_globals['plugin_url'] . 'core/js/admin-dashboard.js', array( 'jquery' ) );
+				wp_enqueue_script( 'itsec_dashboard_js', $itsec_globals['plugin_url'] . 'core/js/admin-dashboard.js', array( 'jquery' ), '20160322' );
 				wp_localize_script( 'itsec_dashboard_js', 'itsec_dashboard', array(
 					'text' => __( 'Show Intro', 'better-wp-security' ),
+					'url'  => esc_url( add_query_arg( array( 'show_admin_modal' => 'true' ) ) ),
 				) );
 				wp_enqueue_script( 'itsec_footer', $itsec_globals['plugin_url'] . 'core/js/admin-dashboard-footer.js', array( 'jquery' ), $itsec_globals['plugin_build'], true );
 
@@ -1122,7 +1123,7 @@ if ( ! class_exists( 'ITSEC_Core' ) ) {
 
 			foreach ( $active_plugins as $active_plugin ) {
 				$file = basename( $active_plugin );
-				
+
 				if ( in_array( $file, array( 'better-wp-security.php', 'ithemes-security-pro.php' ) ) ) {
 					return;
 				}
@@ -1562,7 +1563,15 @@ if ( ! class_exists( 'ITSEC_Core' ) ) {
 		}
 
 		public function get_plugin_file() {
-			return $this->_plugin_file;
+			return $this->plugin_file;
+		}
+
+		public static function required_cap() {
+			return apply_filters( 'itsec_cap_required', is_multisite() ? 'manage_network_options' : 'manage_options' );
+		}
+
+		public static function current_user_can_manage() {
+			return current_user_can( self::required_cap() );
 		}
 
 	}

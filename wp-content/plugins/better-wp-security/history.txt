@@ -470,3 +470,30 @@
 	Enhancement: Updated host entries in log details to link to traceip.net rather than ip-adress.com. This is because ip-adress.com does not support IPv6 addresses.
 	Enhancement: Updated some translatable strings relating to blacklisting and whitelisting to allow for better translations.
 	Enhancement: Added details about how wildcard IP ranges are converted to CIDR format (this improves performance).
+5.3.1 - 2016-02-29 - Chris Jean & Aaron D. Campbell
+	Security Fix: Hardened the created backups and logs directories. Thanks to Nicolas Chatelain (SYSDREAM IT Security Services) for notifying us of this issue.
+	Security Fix: More secure backup and log file names. Thanks to Nicolas Chatelain (SYSDREAM IT Security Services) for notifying us of this issue.
+	Bug Fix: The "NGINX Conf File" setting is now properly respected, causing the generated NGINX configuration file to be stored in that location.
+	Enhancement: Generated database backup file names now contain a human-readable timestamp in the format of YYYYMMDD-HHMMSS.
+	Enhancement: Zipped database backup files no longer contain a deeply nested directory structure. Instead, they only contain the sql file.
+	Enhancement: When the "Force Unique Nickname" feature is enabled, the generated display name now uses an improved randomization function.
+	Enhancement: Improved tabbing of rules in generated nginx.conf files.
+	Enhancement: Removed the "See what's new button" as it has fulfilled its purpose.
+5.3.2 - 2016-03-01 - Chris Jean & Aaron D. Campbell
+	Bug Fix: Updated code that generates the backups and logs directories to ensure that it attempts to create the parent directory if it does not exist yet.
+	Bug Fix: Removed warnings that could be generated if the logs directory could not be created.
+	Bug Fix: Database backup files sent via email no longer have a name without an extension if zipping up the file fails.
+5.3.3 - 2016-03-03 - Chris Jean & Aaron D. Campbell
+	Bug Fix: Fixed temporary whitelisting by preventing a temporarily whitelisted IP from being locked out.
+5.3.4 - 2016-03-17 - Chris Jean & Aaron D. Campbell
+	Bug Fix: Fixed issue that could cause a fatal error after changing the content directory.
+	Bug Fix: Updated the link to sign up for security guide download to point to a https address. This is better security and prevents warnings when submitting from a http site in some browsers.
+	Bug Fix: If a cryptographically secure log file name can't be generated, queue up log file writes until we can.
+5.3.5 - 2016-03-29 - Chris Jean & Aaron D. Campbell
+	Security Fix: No longer using document.location to build 'Show Intro' link in admin - Thanks to David Lodge (Pen Test Partners) for notifying us of this issue.
+	Bug Fix: Fixed some notices when certain multisite options are used on BuddyPress
+	Enhancement: New itsec_white_ips filter to allow plugins that work with external services to whitelist service IPs
+5.3.6 - 2016-04-19 - Chris Jean & Aaron D. Campbell
+	Security Fix: Better caps checks for dismissal of changed file dialog - Thanks to Julio Potier for notifying us of this issue.
+	Bug Fix: Make file change warning dialog text properly translatable
+	Enhancement: Adding 'itsec_log_event' action for logged events

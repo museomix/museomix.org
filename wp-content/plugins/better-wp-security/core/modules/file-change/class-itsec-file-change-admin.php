@@ -86,16 +86,18 @@ class ITSEC_File_Change_Admin {
 
 		global $itsec_globals;
 
-		wp_register_script( 'itsec_file_change_warning_js', $this->module_path . 'js/admin-file-change-warning.js', array( 'jquery' ), $itsec_globals['plugin_build'] );
-		wp_enqueue_script( 'itsec_file_change_warning_js' );
-		wp_localize_script(
-			'itsec_file_change_warning_js',
-			'itsec_file_change_warning',
-			array(
-				'nonce' => wp_create_nonce( 'itsec_file_change_warning' ),
-				'url'   => admin_url() . 'admin.php?page=toplevel_page_itsec_logs&itsec_log_filter=file_change',
-			)
-		);
+		if ( ITSEC_Core::current_user_can_manage() ) {
+			wp_register_script( 'itsec_file_change_warning_js', $this->module_path . 'js/admin-file-change-warning.js', array( 'jquery' ), $itsec_globals['plugin_build'] );
+			wp_enqueue_script( 'itsec_file_change_warning_js' );
+			wp_localize_script(
+				'itsec_file_change_warning_js',
+				'itsec_file_change_warning',
+				array(
+					'nonce' => wp_create_nonce( 'itsec_file_change_warning' ),
+					'url'   => admin_url() . 'admin.php?page=toplevel_page_itsec_logs&itsec_log_filter=file_change',
+				)
+			);
+		}
 
 		if ( isset( get_current_screen()->id ) && ( false !== strpos( get_current_screen()->id, 'security_page_toplevel_page_itsec_settings' ) || false !== strpos( get_current_screen()->id, 'security_page_toplevel_page_itsec_logs' ) || false !== strpos( get_current_screen()->id, 'dashboard' ) ) ) {
 
@@ -149,7 +151,7 @@ class ITSEC_File_Change_Admin {
 
 		global $blog_id; //get the current blog id
 
-		if ( ( is_multisite() && ( 1 != $blog_id || ! current_user_can( 'manage_network_options' ) ) ) || ! current_user_can( 'activate_plugins' ) ) { //only display to network admin if in multisite
+		if ( ! ITSEC_Core::current_user_can_manage() ) {
 			return;
 		}
 
@@ -172,9 +174,12 @@ class ITSEC_File_Change_Admin {
 					global $itsec_globals;
 
 					printf(
-						'<div id="itsec_file_change_warning_dialog" class="error"><p>%s %s</p> <p><input type="button" id="itsec_go_to_logs" class="button-primary" value="%s">&nbsp;<input type="button" id="itsec_dismiss_file_change_warning" class="button-secondary" value="%s"></p></div>',
-						$itsec_globals['plugin_name'],
-						__( 'has noticed a change to some files in your WordPress site. Please review the logs to make sure your system has not been compromised.', 'better-wp-security' ),
+						'<div id="itsec_file_change_warning_dialog" class="error"><p>%s</p> <p><input type="button" id="itsec_go_to_logs" class="button-primary" value="%s">&nbsp;<input type="button" id="itsec_dismiss_file_change_warning" class="button-secondary" value="%s"></p></div>',
+						sprintf(
+							/* translators: 1: Plugin name */
+							__( '%1$s has noticed a change to some files in your WordPress site. Please review the logs to make sure your system has not been compromised.', 'better-wp-security' ),
+							$itsec_globals['plugin_name']
+						),
 						__( 'View Logs', 'better-wp-security' ),
 						__( 'Dismiss Warning', 'better-wp-security' )
 
@@ -863,6 +868,9 @@ class ITSEC_File_Change_Admin {
 	 * @return void
 	 */
 	public function wp_ajax_itsec_file_change_warning_ajax() {
+		if ( ! ITSEC_Core::current_user_can_manage() ) {
+			die( __( 'You do not have permissions to do this!', 'better-wp-security' ) );
+		}
 
 		if ( ! wp_verify_nonce( sanitize_text_field( $_POST['nonce'] ), 'itsec_file_change_warning' ) ) {
 			die( __( 'Security error!', 'better-wp-security' ) );
