@@ -154,9 +154,10 @@ class ITSEC_Hide_Backend {
 				wp_redirect( ITSEC_Lib::get_home_root() . sanitize_title( isset( $this->settings['theme_compat_slug'] ) ? $this->settings['theme_compat_slug'] : 'not_found' ), 302 );
 				exit;
 
-			} else { //just set the current page as a 404
+			} else {
 
-				add_action( 'wp_loaded', array( $this, 'set_404' ) );
+				// Throw a 403 forbidden
+				wp_die( __( 'This has been disabled.', 'better-wp-security' ), 403 );
 
 			}
 
@@ -337,19 +338,6 @@ class ITSEC_Hide_Backend {
 		return str_replace( 'wp-login.php', $this->settings['slug'], $message );
 
 		return $message;
-
-	}
-
-	/**
-	 * Sets 404 error at later time.
-	 *
-	 * @since 4.0.6
-	 *
-	 * @return void
-	 */
-	public function set_404() {
-
-		ITSEC_Lib::set_404();
 
 	}
 

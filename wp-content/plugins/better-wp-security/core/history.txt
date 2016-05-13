@@ -366,3 +366,5 @@
 	Security Fix: Better caps checks for dismissal of changed file dialog - Thanks to Julio Potier for notifying us of this issue.
 	Bug Fix: Make file change warning dialog text properly translatable
 	Enhancement: Adding 'itsec_log_event' action for logged events
+2.2.11 - 2016-05-02 - Chris Jean & Aaron D. Campbell
+	Bug Fix: Throw a real 403 instead of a faked 404 for hide backend - Fixes compatability with certain plugins including WordPress SEO. Hat tip to Joost de Valk (@jdevalk) and the @Yoast team for bringing this issue to our attention.

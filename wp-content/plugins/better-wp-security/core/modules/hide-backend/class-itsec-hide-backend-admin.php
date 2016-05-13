@@ -230,8 +230,8 @@ class ITSEC_Hide_Backend_Admin {
 			$slug = sanitize_title( isset( $this->settings['theme_compat_slug'] ) ? $this->settings['theme_compat_slug'] : 'not_found' );
 
 			$content = '<input name="itsec_hide_backend[theme_compat_slug]" id="itsec_hide_backend_strong_passwords_theme_compat_slug" value="' . $slug . '" type="text"><br />';
-			$content .= '<label for="itsec_hide_backend_strong_passwords_theme_compat_slug">' . __( '404 Slug:', 'better-wp-security' ) . trailingslashit( get_option( 'siteurl' ) ) . '<span style="color: #4AA02C">' . $slug . '</span></label>';
-			$content .= '<p class="description">' . __( 'The slug to redirect folks to when theme compatibility mode is enabled (just make sure it does not exist in your site).', 'better-wp-security' ) . '</p>';
+			$content .= '<label for="itsec_hide_backend_strong_passwords_theme_compat_slug">' . __( 'Redirect Location:', 'better-wp-security' ) . ' ' . trailingslashit( get_option( 'siteurl' ) ) . '<span style="color: #4AA02C">' . $slug . '</span></label>';
+			$content .= '<p class="description">' . __( 'The slug to redirect users to when they attempt to access wp-admin while not logged in.', 'better-wp-security' ) . '</p>';
 
 		}
 
@@ -290,7 +290,7 @@ class ITSEC_Hide_Backend_Admin {
 			}
 
 			$content = '<input type="checkbox" id="itsec_hide_backend_theme_compat" name="itsec_hide_backend[theme_compat]" value="1" ' . checked( 1, $enabled, false ) . '/>';
-			$content .= '<label for="itsec_hide_backend_theme_compat"> ' . __( 'Enable theme compatibility. If  you see errors in your theme when using hide backend, in particular when going to wp-admin while not logged in, turn this on to fix them.', 'better-wp-security' ) . '</label>';
+			$content .= '<label for="itsec_hide_backend_theme_compat"> ' . __( 'Redirect users to a custom location on your site, instead of throwing a 403 (forbidden) error.', 'better-wp-security' ) . '</label>';
 
 		}
 
@@ -375,7 +375,7 @@ class ITSEC_Hide_Backend_Admin {
 
 		add_settings_field(
 			'itsec_hide_backend[theme_compat]',
-			__( 'Enable Theme Compatibility', 'better-wp-security' ),
+			__( 'Enable Redirection', 'better-wp-security' ),
 			array( $this, 'hide_backend_theme_compat' ),
 			'security_page_toplevel_page_itsec_settings',
 			'hide_backend-settings'
@@ -383,7 +383,7 @@ class ITSEC_Hide_Backend_Admin {
 
 		add_settings_field(
 			'itsec_hide_backend[theme_compat_slug]',
-			__( 'Theme Compatibility Slug', 'better-wp-security' ),
+			__( 'Redirection Slug', 'better-wp-security' ),
 			array( $this, 'hide_backend_theme_compat_slug' ),
 			'security_page_toplevel_page_itsec_settings',
 			'hide_backend-settings'
