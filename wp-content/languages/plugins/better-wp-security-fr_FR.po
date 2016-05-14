@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2016-05-12 10:58:45+0000\n"
+"PO-Revision-Date: 2016-05-13 12:59:27+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -121,6 +121,10 @@ msgstr "Les services XML-RPC sont désactivés sur ce site."
 msgid "iThemes"
 msgstr "iThemes"
 
+#: core/modules/tweaks/class-itsec-tweaks-admin.php:404
+msgid "WordPress's XML-RPC feature allows external services to access and modify content on the site. Common example of services that make use of XML-RPC are <a href=\"%1$s\">the Jetpack plugin</a>, <a href=\"%2$s\">the WordPress mobile app</a>, and <a href=\"%3$s\">pingbacks</a>. If the site does not use a service that requires XML-RPC, select the \"Disable XML-RPC\" setting as disabling XML-RPC prevents attackers from using the feature to attack the site."
+msgstr "La fonctionnalité XML-RPC de WordPress autorise des services externes à accéder et à modifier le contenu du site. Les exemples communs de services qui utilisent XML-RPC sont <a href=\"%1$s\">l’extension Jetpack</a>, <a href=\"%2$s\">l’application mobile WordPress</a> et <a href=\"%3$s\"> les pings</a>. Si le site n'utilise pas de service qui requiert XML-RPC, choisissez le réglage &laquo;&nbsp;Désactiver XML-RPC&nbsp;&raquo; pour éviter les attaques utilisant cette fonctionnalité."
+
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:407
 msgid "Disable XML-RPC (recommended)"
 msgstr "Désactiver XML-RPC (recommandé)"
@@ -156,6 +160,10 @@ msgstr "<strong>Bloquer</strong> - Bloque les requêtes XML-RPC qui contiennent 
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:444
 msgid "<strong>Allow</strong> - Allows XML-RPC requests that contain multiple login attempts. Only use this setting if a service requires it."
 msgstr "<strong>Autoriser</strong> - Autorise les requêtes XML-RPC qui contiennent de multiples tentatives de connexion. N&rsquo;utilisez ce réglage que si un service le requiert."
+
+#: core/modules/malware/class-itsec-malware-scan-results-template.php:126
+msgid "Payload:<pre>%s</pre>"
+msgstr "Charge&nbsp;:<pre>%s</pre>"
 
 #. translators: Scan result listing. %1$s is the status. %2$s is the
 #. description.
@@ -193,7 +201,7 @@ msgstr "Une clé secrète rend votre site plus difficile à pirater et pour y en
 
 #: core/modules/salts/class-itsec-salts-admin.php:154
 msgid "In simple terms, a secret key is a password with elements that make it harder to generate enough options to break through your security barriers. A password like \"password\" or \"test\" is simple and easily broken. A random, unpredictable password such as \"88a7da62429ba6ad3cb3c76a09641fc\" takes years to come up with the right combination. A salt is used to further enhance the security of the generated result."
-msgstr "En des termes simples, une clé secrète est un mot de passe avec des éléments qui font qu'il est plus difficile de générer suffisamment d'options pour casser vos barrières de sécurité. Un mot de passe comme \"mot de passe\" ou \"test\" est simple et se casse facilement. Un mot de passe aléatoire, imprévisible tel que \"88a7da62429ba6ad3cb3c76a09641fc\" prend des années pour parvenir à trouver la bonne combinaison. Un salage est utilisé pour renforcer encore la sécurité du résultat généré."
+msgstr "En des termes simples, une clé secrète est un mot de passe avec des éléments qui font qu’il est plus difficile de générer suffisamment d’options pour casser vos barrières de sécurité. Un mot de passe comme \"mot de passe\" ou \"test\" est simple et se casse facilement. Un mot de passe aléatoire, imprévisible tel que \"88a7da62429ba6ad3cb3c76a09641fc\" prend des années pour parvenir à trouver la bonne combinaison. Un salage est utilisé pour renforcer encore la sécurité du résultat généré."
 
 #: core/modules/salts/class-itsec-salts-admin.php:155
 msgid "Note that enabling this feature will log you out of your WordPress site."
@@ -207,6 +215,10 @@ msgstr "Changer les salages WordPress"
 #: core/modules/salts/class-itsec-salts-admin.php:174
 msgid "Check this box to change your WordPress Salts."
 msgstr "Cochez cette case pour changer vos salages WordPress"
+
+#: core/modules/salts/class-itsec-salts-admin.php:238
+msgid "Unable to read the <code>wp-config.php</code> file in order to update the salts. Error details as follows: %1$s (%2$s)"
+msgstr "Impossible de lire le fichier <code>wp-config.php</code> pour mettre à jour les &laquo;&nbsp;salages&nbsp;&raquo;. Détails de l’erreur&nbsp;: %1$s (%2$s)"
 
 #: core/modules/salts/class-itsec-salts-admin.php:262
 msgid "Unable to update the <code>wp-config.php</code> file in order to update the salts. Error details as follows: %1$s (%2$s)"
@@ -231,7 +243,7 @@ msgstr "Mode SSL pour le front-office"
 
 #: core/modules/ssl/class-itsec-ssl-admin.php:180
 msgid "SSL for Dashboard"
-msgstr "SSL pour le tableau de bord"
+msgstr "SSL pour le Tableau de bord"
 
 #: core/modules/ssl/class-itsec-ssl-admin.php:212
 msgid "Per Content"
@@ -243,11 +255,11 @@ msgstr "Site entier"
 
 #: core/modules/ssl/class-itsec-ssl-admin.php:216
 msgid "Enables secure SSL connection for the front-end (public parts of your site). Turning this off will disable front-end SSL control, turning this on \"Per Content\" will place a checkbox on the edit page for all posts and pages (near the publish settings) allowing you to turn on SSL for selected pages or posts, and selecting \"Whole Site\" will force the whole site to use SSL (not recommended unless you have a really good reason to use it"
-msgstr "Activer les connexions sécurisées par SSL sur votre front-office (partie publique de votre site). Désactiver cette fonctionnalité, la désactivera aussi sur le front-office, l'activer en mode \"par contenu\" placera une case à cocher dans l'édition des pages pour tous les billets ou les pages. Sélection \"tout le site\" forcera l'ensemble du site à utiliser SSL (ce qui n'est pas recommandé à moins que vous ayez une bonne raison de le faire"
+msgstr "Activer les connexions sécurisées par SSL sur votre front-office (partie publique de votre site). Désactiver cette fonctionnalité, la désactivera aussi sur le front-office, l’activer en mode \"par contenu\" placera une case à cocher dans l’édition des pages pour tous les billets ou les pages. Sélection \"tout le site\" forcera l’ensemble du site à utiliser SSL (ce qui n’est pas recommandé à moins que vous ayez une bonne raison de le faire"
 
 #: core/modules/ssl/class-itsec-ssl-admin.php:235
 msgid "Force SSL for Dashboard"
-msgstr "Forcez l'utilisation du SSL pour votre tableau de bord"
+msgstr "Forcez l’utilisation du SSL pour le Tableau de bord"
 
 #: core/modules/ssl/class-itsec-ssl-admin.php:236
 msgid "Forces all dashboard access to be served only over an SSL connection."
@@ -255,7 +267,7 @@ msgstr "Forcer tous les accès au Tableau de bord d’utiliser uniquement une co
 
 #: core/modules/ssl/class-itsec-ssl-admin.php:249
 msgid "Secure Socket Layers (SSL) is a technology that is used to encrypt the data sent between your server or host and a visitor to your web page. When SSL is activated, it makes it almost impossible for an attacker to intercept data in transit, therefore making the transmission of form, password or other encrypted data much safer."
-msgstr "Secure Socket Layers (SSL) est une technologie qui est utilisée pour crypter les données envoyées entre votre serveur ou hôte et un visiteur de votre page web. Si le protocole SSL est activé, il est presque impossible pour un attaquant d'intercepter les données en transit, rendant ainsi la transmission des formulaires, mot de passe ou d'autres données chiffrées beaucoup plus sûrs."
+msgstr "Secure Socket Layers (SSL) est une technologie qui est utilisée pour crypter les données envoyées entre votre serveur ou hôte et un visiteur de votre page web. Si le protocole SSL est activé, il est presque impossible pour un attaquant d’intercepter les données en transit, rendant ainsi la transmission des formulaires, mot de passe ou d’autres données chiffrées beaucoup plus sûrs."
 
 #: core/modules/ssl/class-itsec-ssl-admin.php:250
 msgid "This plugin gives you the option of turning on SSL (if your server or host supports it) for all or part of your site. The options below allow you to automatically use SSL for major parts of your site such as the login page, the admin dashboard or the site as a whole. You can also turn on SSL for any post or page by editing the content and selecting \"Enable SSL\" in the publishing options of the content in question."
@@ -310,7 +322,7 @@ msgstr "Rôle minimum à partir duquel un utilisateur doit choisir un mot de pas
 
 #: core/modules/strong-passwords/class-itsec-strong-passwords-admin.php:237
 msgid "For more information on WordPress roles and capabilities please see"
-msgstr "Pour plus d'information sur les rôles WordPress et leurs capacité merci de voir"
+msgstr "Pour plus d’information sur les rôles WordPress et leurs capacité merci de voir"
 
 #: core/modules/strong-passwords/class-itsec-strong-passwords-admin.php:238
 msgid "Warning: If your site invites public registrations setting the role too low may annoy your members."
@@ -318,7 +330,7 @@ msgstr "Attention&nbsp;: Si votre site permet l’enregistrement publique, chois
 
 #: core/modules/strong-passwords/class-itsec-strong-passwords.php:117
 msgid "<strong>ERROR</strong>: You MUST Choose a password that rates at least <em>Strong</em> on the meter. Your setting have NOT been saved."
-msgstr "<strong>ERREUR</strong> : Vous DEVEZ chosir un mot de passe noter au minimum comme <em>Fort</em>. Vos paramètres n'ont PAS été sauvegardé."
+msgstr "<strong>ERREUR</strong> : Vous DEVEZ chosir un mot de passe noter au minimum comme <em>Fort</em>. Vos réglages n’ont PAS été enregistrés."
 
 #: core/modules/strong-passwords/class-itsec-strong-passwords.php:139
 msgid "Sorry, but you must enter a strong password."
@@ -343,19 +355,19 @@ msgstr "Modifications Multisites"
 
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:121
 msgid "Disable Directory Browsing"
-msgstr "Désactiver l'exploration des répertoires"
+msgstr "Désactiver l’exploration des répertoires"
 
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:122
 msgid "Prevents users from seeing a list of files in a directory when no index file is present."
-msgstr "Empêche les utilisateurs de voir une liste de fichiers dans un répertoire si aucun fichier d'index est présent."
+msgstr "Empêche les utilisateurs de voir une liste de fichiers dans un répertoire si aucun fichier d’index est présent."
 
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:144
 msgid "Filter Long URL Strings"
-msgstr "Filtrer les longues chaînes de caractères dans l'URL"
+msgstr "Filtrer les longues chaînes de caractères dans l’URL"
 
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:145
 msgid "Limits the number of characters that can be sent in the URL. Hackers often take advantage of long URLs to try to inject information into your database."
-msgstr "Limite le nombre de caractères pouvant être envoyés dans l'URL. Les pirates profitent souvent de longues URL pour tenter d'injecter des informations dans votre base de données."
+msgstr "Limite le nombre de caractères pouvant être envoyés dans l’URL. Les pirates profitent souvent de longues URL pour tenter d’injecter des informations dans votre base de données."
 
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:167
 msgid "Filter Non-English Characters"
@@ -363,7 +375,7 @@ msgstr "Filtrer les caractères non anglais"
 
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:168
 msgid "Filter out non-english characters from the query string. This should not be used on non-english sites and only works when \"Filter Suspicious Query String\" has been selected."
-msgstr "Filtrer les caractères non anglais des chaînes d'interrogation. Cela ne doit pas être utilisé sur les sites n'utilisant pas l'anglais et fonctionnera seulement si vous avez activé la fonction de filtre sur les chaînes d'interrogations suspicieuses."
+msgstr "Filtrer les caractères non anglais des chaînes d’interrogation. Cela ne doit pas être utilisé sur les sites n’utilisant pas l’anglais et fonctionnera seulement si vous avez activé la fonction de filtre sur les chaînes d’interrogations suspicieuses."
 
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:190
 msgid "Protect System Files"
@@ -371,7 +383,7 @@ msgstr "Protéger les fichiers système"
 
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:191
 msgid "Prevent public access to readme.html, readme.txt, wp-config.php, install.php, wp-includes, and .htaccess. These files can give away important information on your site and serve no purpose to the public once WordPress has been successfully installed."
-msgstr "Empêcher l'accès du public aux fichiers readme.html, readme.txt, wp-config.php, install.php, wp-includes et .htaccess. Ces fichiers peuvent donner des informations importantes sur votre site et n'ont aucune utilités pour le public une fois de WordPress a été installé avec succès."
+msgstr "Empêcher l’accès du public aux fichiers readme.html, readme.txt, wp-config.php, install.php, wp-includes et .htaccess. Ces fichiers peuvent donner des informations importantes sur votre site et n’ont aucune utilités pour le public une fois de WordPress a été installé avec succès."
 
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:213
 msgid "Filter Request Methods"
@@ -387,23 +399,23 @@ msgstr "Filtrer les requêtes avec des chaines de caractères suspectes dans l&r
 
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:237
 msgid "These are very often signs of someone trying to gain access to your site but some plugins and themes can also be blocked."
-msgstr "C'est souvent le signe que quelqu'un tente d'obtenir l'accès à votre site, mais certaines extensions ou thèmes peuvent aussi être bloqués."
+msgstr "C’est souvent le signe que quelqu’un tente d’obtenir l’accès à votre site, mais certaines extensions ou thèmes peuvent aussi être bloqués."
 
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:259
 msgid "Remove File Writing Permissions"
-msgstr "Retirer les permissions d'écritures sur les fichiers"
+msgstr "Retirer les permissions d’écritures sur les fichiers"
 
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:260
 msgid "Prevents scripts and users from being able to write to the wp-config.php file and .htaccess file. Note that in the case of this and many plugins this can be overcome however it still does make the files more secure. Turning this on will set the UNIX file permissions to 0444 on these files and turning it off will set the permissions to 0664."
-msgstr "Empêcher les scripts et utilisateur d'être en mesure d'écrire sur les fichiers wp-config.php et .htaccess. Notez que certains plugins pourront surmonter cette restrictions mais cela rend tout de même votre site plus sécurisé. Activer cette fonctionnalité va faire passer les permissions de fichiers à 444 sur ces fichiers et ne pas l'activer va faire passer les permissions à 664."
+msgstr "Empêcher les scripts et utilisateur d’être en mesure d’écrire sur les fichiers wp-config.php et .htaccess. Notez que certains plugins pourront surmonter cette restrictions mais cela rend tout de même votre site plus sécurisé. Activer cette fonctionnalité va faire passer les permissions de fichiers à 444 sur ces fichiers et ne pas l’activer va faire passer les permissions à 664."
 
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:282
 msgid "Disables a user's author page if their post count is 0."
-msgstr "Désactiver la page d'auteur d'un utilisateur si son nombre de billet est égal à 0."
+msgstr "Désactiver la page d’auteur d’un utilisateur si son nombre de billet est égal à 0."
 
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:283
 msgid "This makes it harder for bots to determine usernames by disabling post archives for users that don't post to your site."
-msgstr "Cela rend la tâche plus compliqué au robots qui tenteraient de déterminer les noms d'utilisation en désactivant les archives des billets des utilisateurs qui ne publies pas sur votre site."
+msgstr "Cela rend la tâche plus compliqué au robots qui tenteraient de déterminer les noms d’utilisation en désactivant les archives des billets des utilisateurs qui ne publies pas sur votre site."
 
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:305
 msgid "Force users to choose a unique nickname"
@@ -411,15 +423,15 @@ msgstr "Forcer les utilisateurs à choisir un surnom unique"
 
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:306
 msgid "This forces users to choose a unique nickname when updating their profile or creating a new account which prevents bots and attackers from easily harvesting user's login usernames from the code on author pages. Note this does not automatically update existing users as it will affect author feed urls if used."
-msgstr "Cela oblige les utilisateurs à choisir un surnom unique lors de la mise à jour de leur profil ou à la création d'un nouveau compte. Cela empêche les robots et les attaquants de récolter facilement l'identifiant de connexion de l'utilisateur à partir des pages de l'auteur. Remarque ce ne met pas à jour automatiquement les utilisateurs existants car cela affecte les URLs des auteurs lorsqu'il est utilisé."
+msgstr "Cela oblige les utilisateurs à choisir un surnom unique lors de la mise à jour de leur profil ou à la création d’un nouveau compte. Cela empêche les robots et les attaquants de récolter facilement l’identifiant de connexion de l’utilisateur à partir des pages de l’auteur. Remarque ce ne met pas à jour automatiquement les utilisateurs existants car cela affecte les URLs des auteurs lorsqu’il est utilisé."
 
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:328
 msgid "Disable login error messages"
-msgstr "Désactiver les message d'erreurs de connexion"
+msgstr "Désactiver les message d’erreurs de connexion"
 
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:329
 msgid "Prevents error messages from being displayed to a user upon a failed login attempt."
-msgstr "Prévenir l'affichage des messages d'erreurs aux utilisateurs ayant échoués lors d'une tentative de connexion."
+msgstr "Prévenir l’affichage des messages d’erreurs aux utilisateurs ayant échoués lors d’une tentative de connexion."
 
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:351
 msgid "Reduce Comment Spam"
@@ -445,19 +457,19 @@ msgstr "Activer XML-RPC"
 
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:464
 msgid "Remove the RSD (Really Simple Discovery) header. "
-msgstr "Retirer RSD (Really Simple Discovery) de l'entête. "
+msgstr "Retirer RSD (Really Simple Discovery) de l’entête. "
 
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:465
 msgid "Removes the RSD (Really Simple Discovery) header. If you don't integrate your blog with external XML-RPC services such as Flickr then the \"RSD\" function is pretty much useless to you."
-msgstr "Retirer l'en-te RSD (Really Simple Discovery). Si vous n'avez pas intégrer votre blog avec un système externe XML-RPC comme Flickr, alors la fonction RSD est pratiquement inutile."
+msgstr "Retirer l’en-tête RSD (Really Simple Discovery). Si vous n’avez pas intégrer votre blog avec un système externe XML-RPC comme Flickr, alors la fonction RSD est pratiquement inutile."
 
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:487
 msgid "Disable File Editor"
-msgstr "Désactiver l'éditeur de fichier"
+msgstr "Désactiver l’éditeur de fichier"
 
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:488
 msgid "Disables the file editor for plugins and themes requiring users to have access to the file system to modify files. Once activated you will need to manually edit theme and other files using a tool other than WordPress."
-msgstr "Désactiver l'éditeur d'extension et de thèmes vous obligera à avoir un accès direct aux fichiers pour les modifier.  Une fois activé, vous devrez le éditer manuellement avec un autre outil que WordPress."
+msgstr "Désactiver l’éditeur d’extension et de thèmes vous obligera à avoir un accès direct aux fichiers pour les modifier.  Une fois activé, vous devrez le éditer manuellement avec un autre outil que WordPress."
 
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:510
 msgid "Hide Plugin Update Notifications"
@@ -465,7 +477,7 @@ msgstr "Cacher les notifications de mise à jour des extensions"
 
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:511
 msgid "Hides plugin update notifications from users who cannot update plugins. Please note that this only makes a difference in multi-site installations."
-msgstr "Cachez les mises à jours d'extension aux utilisateurs qui ne peuvent pas mettre à jour les extensions. Merci de noter que cela fera seulement une différence sur les installation multisites."
+msgstr "Cachez les mises à jours d’extension aux utilisateurs qui ne peuvent pas mettre à jour les extensions. Merci de noter que cela fera seulement une différence sur les installation multisites."
 
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:536
 msgid "Your current jQuery version is %1$s"
@@ -485,7 +497,7 @@ msgstr "Supprimer la version existante de jQuery et la remplacer par une version
 
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:560
 msgid "Note that this only checks the homepage of your site and only for users who are logged in. This is done intentionally to save resources. If you think this is in error "
-msgstr "Notez que cela vérifie que la page d'accueil de votre site et uniquement pour les utilisateurs qui sont connectés. Cela est fait intentionnellement pour économiser les ressources. Si vous pensez que c'est une erreur"
+msgstr "Notez que cela vérifie que la page d’accueil de votre site et uniquement pour les utilisateurs qui sont connectés. Cela est fait intentionnellement pour économiser les ressources. Si vous pensez que c’est une erreur"
 
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:562
 msgid "click here to check again."
@@ -493,7 +505,7 @@ msgstr "Cliquez ici pour vérifier à nouveau."
 
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:563
 msgid "This will open your homepage in a new window allowing the plugin to determine the version of jQuery actually being used. You can then come back here and reload this page to see your version."
-msgstr "Cela ouvrira votre page d'accueil dans une nouvelle fenêtre permettant à l'extension de déterminer la version de jQuery qui est effectivement utilisée. Vous pouvez ensuite revenir ici et recharger cette page pour voir votre version."
+msgstr "Cela ouvrira votre page d’accueil dans une nouvelle fenêtre permettant à l’extension de déterminer la version de jQuery qui est effectivement utilisée. Vous pouvez ensuite revenir ici et recharger cette page pour voir votre version."
 
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:584
 msgid "Hide Theme Update Notifications"
@@ -509,15 +521,15 @@ msgstr "Désactivez PHP dans Uploads"
 
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:608
 msgid "Disable PHP execution in the uploads directory. This will prevent uploading of malicious scripts to uploads."
-msgstr "Désactiver l'exécution de PHP dans le répertoire upload. Cela permettra d'éviter le téléchargement des scripts malveillants."
+msgstr "Désactiver l’exécution de PHP dans le répertoire upload. Cela permettra d’éviter le téléchargement des scripts malveillants."
 
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:630
 msgid "Remove the Windows Live Writer header. "
-msgstr "Retirer l'en-tête Windows Live Writer."
+msgstr "Retirer l’en-tête Windows Live Writer."
 
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:631
 msgid "This is not needed if you do not use Windows Live Writer or other blogging clients that rely on this file."
-msgstr "Ce n'est pas nécessaire si vous n'utilisez pas Windows Live Writer ou d'autres clients de blogs qui utilisent sur ce fichier."
+msgstr "Ce n’est pas nécessaire si vous n’utilisez pas Windows Live Writer ou d’autres clients de blogs qui utilisent ce fichier."
 
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:654
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:712
@@ -543,6 +555,21 @@ msgstr "Désactivez PHP dans Uploads - Sécurité > Réglages > Modifications sy
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:855
 msgid "Filter Request Methods - Security > Settings > System Tweaks > Request Methods"
 msgstr "Filtrer les méthodes de requête - Sécurité > Réglages > Modifications système > Méthodes de requête"
+
+#: core/modules/tweaks/class-itsec-tweaks-admin.php:744
+#: core/modules/tweaks/class-itsec-tweaks-admin.php:862
+msgid "Filter Suspicious Query Strings in the URL - Security > Settings > System Tweaks > Suspicious Query Strings"
+msgstr "Filtrer les requêtes avec des chaînes de caractères suspectes dans l’URL - Sécurité > Réglages > Modifications système > Requêtes de chaînes de caractères suspectes"
+
+#: core/modules/tweaks/class-itsec-tweaks-admin.php:769
+#: core/modules/tweaks/class-itsec-tweaks-admin.php:889
+msgid "Filter Non-English Characters - Security > Settings > System Tweaks > Non-English Characters"
+msgstr "Filtrer les caractères non-anglais - Sécurité > Réglages > Modifications système > Caractères non-anglais"
+
+#: core/modules/tweaks/class-itsec-tweaks-admin.php:778
+#: core/modules/tweaks/class-itsec-tweaks-admin.php:898
+msgid "Reduce Comment Spam - Security > Settings > System Tweaks > Comment Spam"
+msgstr "Réduire les commentaires indésirables - Sécurité > Réglages > Modifications système > Commentaires indésirables"
 
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:899
 msgid "Help reduce spam"
@@ -586,11 +613,11 @@ msgstr "Caractères non-anglais"
 
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:1038
 msgid "Long URL Strings"
-msgstr "Chaîne longues d'URL"
+msgstr "Chaîne longues d’URL"
 
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:1046
 msgid "File Writing Permissions"
-msgstr "Permissions d'écriture sur les fichiers"
+msgstr "Permissions d’écriture sur les fichiers"
 
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:1054
 msgid "Uploads"
@@ -622,7 +649,7 @@ msgstr "Remplacer jQuery par une version sécurisée"
 
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:1118
 msgid "Login Error Messages"
-msgstr "Message d'erreur de connexion"
+msgstr "Message d’erreur de connexion"
 
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:1126
 msgid "Force Unique Nickname"
@@ -638,7 +665,7 @@ msgstr "Notifications de la mise à jour du thème"
 
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:1152
 msgid "Plugin Update Notifications"
-msgstr "Notifications de la mise à jour de l'extension"
+msgstr "Notifications de la mise à jour de l’extension"
 
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:1160
 msgid "Core Update Notifications"
@@ -648,19 +675,19 @@ msgstr "Notifications de la mise à jour du core"
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:1207
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:1230
 msgid "These are advanced settings that may be utilized to further strengthen the security of your WordPress site."
-msgstr "Ce sont des paramètres avancés qui peuvent être utilisés pour renforcer la sécurité de votre site WordPress."
+msgstr "Ce sont des réglages avancés qui peuvent être utilisés pour renforcer la sécurité de votre site WordPress."
 
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:1185
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:1208
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:1231
 msgid "Note: These settings are listed as advanced because they block common forms of attacks but they can also block legitimate plugins and themes that rely on the same techniques. When activating the settings below, we recommend enabling them one by one to test that everything on your site is still working as expected."
-msgstr "Note : Ces paramètres sont répertoriés comme avancée, car ils bloquent les formes courantes d'attaques, mais ils peuvent aussi bloquer les plugins et thèmes légitimes qui s'appuient sur les mêmes techniques. En activant les paramètres ci-dessous, nous vous recommandons de faire un par un pour vérifier que tout sur ​​votre site fonctionne toujours comme prévu."
+msgstr "Note : Ces réglages sont répertoriés comme avancée, car ils bloquent les formes courantes d’attaques, mais ils peuvent aussi bloquer les plugins et thèmes légitimes qui s’appuient sur les mêmes techniques. En activant les réglages ci-dessous, nous vous recommandons de faire un par un pour vérifier que tout sur ​​votre site fonctionne toujours comme prévu."
 
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:1186
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:1209
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:1232
 msgid "Remember, some of these settings might conflict with other plugins or themes, so test your site after enabling each setting."
-msgstr "Rappelez-vous que certains de ces paramètres peuvent entrer en conflit avec d'autres plugins ou thèmes. Il faut donc tester votre site après l'activation de chacun de ces paramètres."
+msgstr "Rappelez-vous que certains de ces réglages peuvent entrer en conflit avec d’autres plugins ou thèmes. Il faut donc tester votre site après l’activation de chacun de ces réglages."
 
 #: core/modules/tweaks/class-itsec-tweaks-admin.php:1388
 msgid "Server Tweaks"
@@ -695,7 +722,7 @@ msgstr "Erreur"
 
 #: core/modules/backup/class-itsec-backup.php:367
 msgid "saved locally but email to backup recipients could not be sent."
-msgstr "sauvegardé localement mais les emails ne peuvent pas être envoyés."
+msgstr "sauvegardé localement mais les e-mails ne peuvent pas être envoyés."
 
 #: core/modules/backup/class-itsec-backup.php:373
 #: core/modules/backup/class-itsec-backup.php:392
@@ -709,7 +736,7 @@ msgstr "envoyé par e-mail aux destinataires et sauvegardé localement."
 
 #: core/modules/backup/class-itsec-backup.php:386
 msgid "email to backup recipients could not be sent."
-msgstr "L'e-mail n'a pas pu être envoyé aux destinataires de la sauvegarde."
+msgstr "L’e-mail n’a pas pu être envoyé aux destinataires de la sauvegarde."
 
 #: core/modules/backup/class-itsec-backup.php:393
 msgid "emailed to backup recipients"
@@ -741,7 +768,7 @@ msgstr "Activer la fonctionnalité de liste noire de HackRepair.com"
 
 #: core/modules/ban-users/class-itsec-ban-users-admin.php:129
 msgid "As a getting-started point you can include the excellent blacklist developed by Jim Walker of <a href=\"http://hackrepair.com/blog/how-to-block-bots-from-seeing-your-website-bad-bots-and-drive-by-hacks-explained\" target=\"_blank\">HackRepair.com</a>."
-msgstr "Comme point de départ, vous pouvez inclure l'excellente liste noire développé par Jim Walker sur <a href=\"http://hackrepair.com/blog/how-to-block-bots-from-seeing-your-website-bad-bots-and-drive-by-hacks-explained\" target=\"_blank\">HackRepair.com</a>."
+msgstr "Comme point de départ, vous pouvez inclure l’excellente liste noire développé par Jim Walker sur <a href=\"http://hackrepair.com/blog/how-to-block-bots-from-seeing-your-website-bad-bots-and-drive-by-hacks-explained\" target=\"_blank\">HackRepair.com</a>."
 
 #: core/modules/ban-users/class-itsec-ban-users-admin.php:151
 msgid "Enable ban users"
@@ -790,15 +817,15 @@ msgstr "Cette fonction vous permet de bannir complètement les hôtes et les age
 #: core/modules/ban-users/class-itsec-ban-users-admin.php:613
 #: core/modules/ban-users/class-itsec-ban-users-admin.php:633
 msgid "Note that the ban users feature has been disabled until the following errors are corrected:"
-msgstr "Noter que la fonctionnalité de bannissement  des utilisateurs a été désactiver jusqu'à ce que les erreurs suivantes soient corrigées : "
+msgstr "Noter que la fonctionnalité de bannissement  des utilisateurs a été désactiver jusqu’à ce que les erreurs suivantes soient corrigées : "
 
 #: core/modules/ban-users/class-itsec-ban-users-admin.php:617
 msgid "is not a valid address in the ban users box."
-msgstr "n'est pas une adresse valide dans la partie des utilisateurs bannis."
+msgstr "n’est pas une adresse valide dans la partie des utilisateurs bannis."
 
 #: core/modules/ban-users/class-itsec-ban-users-admin.php:637
 msgid "is not a valid address as it has been white listed."
-msgstr "n'est pas une adresse valide car elle a été mise dans la liste blanche."
+msgstr "n’est pas une adresse valide car elle a été mise dans la liste blanche."
 
 #: core/modules/brute-force/class-itsec-brute-force-admin.php:55
 msgid "Brute Force Protection"
@@ -810,7 +837,7 @@ msgstr "Activer la protection brute force"
 
 #: core/modules/brute-force/class-itsec-brute-force-admin.php:92
 msgid "Brute Force Protection Settings"
-msgstr "Paramètres de Protection Brute Force"
+msgstr "Réglages de Protection Brute Force"
 
 #: core/modules/brute-force/class-itsec-brute-force-admin.php:100
 msgid "Enable local brute force protection"
@@ -830,7 +857,7 @@ msgstr "Temps pour se souvenir des mauvaises tentatives de connexion (temps de v
 
 #: core/modules/brute-force/class-itsec-brute-force-admin.php:132
 msgid "Automatically ban \"admin\" user"
-msgstr "Bannir automatiquement l'utilisateur \"admin\""
+msgstr "Bannir automatiquement l’utilisateur \"admin\""
 
 #: core/modules/brute-force/class-itsec-brute-force-admin.php:163
 msgid "Invalid Login Attempts"
@@ -838,7 +865,7 @@ msgstr "Tentatives de connexions invalides"
 
 #: core/modules/brute-force/class-itsec-brute-force-admin.php:224
 msgid "If one had unlimited time and wanted to try an unlimited number of password combinations to get into your site they eventually would, right? This method of attack, known as a brute force attack, is something that WordPress is acutely susceptible by default as the system doesn't care how many attempts a user makes to login. It will always let you try again. Enabling login limits will ban the host user from attempting to login again after the specified bad login threshold has been reached."
-msgstr "Si quelqu'un bénéficiait d'un temps illimité et souhaitait essayer un nombre illimité de combinaisons de mots de passe pour rentrer sur votre site, il finirait certainement par y arriver non ? Cette méthode d'attaque est appelée brute force. Par défaut, WordPress, est permissif sur ce type d'attaque car le système se moque du nombre de fois que vous tentez de vous connecter. Il vous laissera toujours recommencer. Activer la limite de connexion bannira les hôtes sur la page de connexion après qu'ils aient atteints le seuil de mauvaise tentative de connexion."
+msgstr "Si quelqu’un bénéficiait d’un temps illimité et souhaitait essayer un nombre illimité de combinaisons de mots de passe pour rentrer sur votre site, il finirait certainement par y arriver non ? Cette méthode d’attaque est appelée brute force. Par défaut, WordPress, est permissif sur ce type d’attaque car le système se moque du nombre de fois que vous tentez de vous connecter. Il vous laissera toujours recommencer. Activer la limite de connexion bannira les hôtes sur la page de connexion après qu’ils aient atteints le seuil de mauvaise tentative de connexion."
 
 #: core/modules/brute-force/class-itsec-brute-force-admin.php:226
 msgid "Network vs Local Brute Force Protection"
@@ -846,15 +873,15 @@ msgstr "Réseau vs protection de force brute locale"
 
 #: core/modules/brute-force/class-itsec-brute-force-admin.php:227
 msgid "Local brute force protection looks only at attempts to access your site and bans users per the lockout rules specified locally. Network brute force protection takes this a step further by banning users who have tried to break into other sites from breaking into yours. The network protection will automatically report the IP addresses of failed login attempts to iThemes and will block them for a length of time necessary to protect your site based on the number of other sites that have seen a similar attack."
-msgstr "La protection de force brute locale ne regarde que les tentatives d'accès à votre site et bannit les utilisateurs par les règles de blocage spécifiées localement. Le réseau de protection de force brute va un peu plus loin en bloquant les utilisateurs qui ont essayé de s'introduire dans d'autres sites avant de s'attaquer au vôtre. La protection du réseau rapportera automatiquement les adresses IP ayant fait des tentatives de connexion infructueuses à iThemes et les bloquera pour une durée nécessaire afin de protéger votre site basé sur le nombre d'autres sites qui ont vu une attaque similaire."
+msgstr "La protection de force brute locale ne regarde que les tentatives d’accès à votre site et bannit les utilisateurs par les règles de blocage spécifiées localement. Le réseau de protection de force brute va un peu plus loin en bloquant les utilisateurs qui ont essayé de s’introduire dans d’autres sites avant de s’attaquer au vôtre. La protection du réseau rapportera automatiquement les adresses IP ayant fait des tentatives de connexion infructueuses à iThemes et les bloquera pour une durée nécessaire afin de protéger votre site basé sur le nombre d’autres sites qui ont vu une attaque similaire."
 
 #: core/modules/brute-force/class-itsec-brute-force-admin.php:318
 msgid "Immediately ban a host that attempts to login using the \"admin\" username."
-msgstr "Bannir immédiatement un hôte qui tenterait de se connecter avec le nom d'utilisateur \"Admin\"."
+msgstr "Bannir immédiatement un hôte qui tenterait de se connecter avec le nom d’utilisateur \"Admin\"."
 
 #: core/modules/brute-force/class-itsec-brute-force-admin.php:322
 msgid "You are still using an account with the username \"admin.\" Please rename it before using this feature"
-msgstr "Vous utilisez encore un compte avec le nom d'utilisateur «admin». Merci de le renommer avant d'utiliser cette fonctionnalité"
+msgstr "Vous utilisez encore un compte avec le nom d’utilisateur «admin». Merci de le renommer avant d’utiliser cette fonctionnalité"
 
 #: core/modules/brute-force/class-itsec-brute-force-admin.php:349
 msgid "The number of minutes in which bad logins should be remembered."
@@ -871,15 +898,15 @@ msgstr "Tentatives"
 
 #: core/modules/brute-force/class-itsec-brute-force-admin.php:398
 msgid "The number of login attempts a user has before their host or computer is locked out of the system. Set to 0 to record bad login attempts without locking out the host."
-msgstr "Nombre de tentatives qu'un utilisateur peut faire avant que son hôte ou son ordinateur ne soit bloqué. Mettre à 0 pour enregistrer le nombre de mauvaises tentatives sans que cela ne conduise à un blocage."
+msgstr "Nombre de tentatives qu’un utilisateur peut faire avant que son hôte ou son ordinateur ne soit bloqué. Mettre à 0 pour enregistrer le nombre de mauvaises tentatives sans que cela ne conduise à un blocage."
 
 #: core/modules/brute-force/class-itsec-brute-force-admin.php:423
 msgid "The number of login attempts a user has before their username is locked out of the system. Note that this is different from hosts in case an attacker is using multiple computers. In addition, if they are using your login name you could be locked out yourself. Set to zero to log bad login attempts per user without ever locking the user out (this is not recommended)"
-msgstr "Nombre de tentatives dont bénéficient un utilisateur avant que son nom d'utilisateur ne soit bloqué. Notez que cela est différent de la méthode basée sur l'hôte en cas d'attaque distribuée. En outre, si l'attaquant utilise votre nom d'utilisateur, vous pourrez vous retrouver bloqué. Mettre à la valeur à 0 pour journaliser les mauvaises tentatives de connexion par utilisateur sans déclencher le blocage (ce n'est pas recommandé)"
+msgstr "Nombre de tentatives dont bénéficient un utilisateur avant que son nom d’utilisateur ne soit bloqué. Notez que cela est différent de la méthode basée sur l’hôte en cas d’attaque distribuée. En outre, si l’attaquant utilise votre nom d’utilisateur, vous pourrez vous retrouver bloqué. Mettre à la valeur à 0 pour journaliser les mauvaises tentatives de connexion par utilisateur sans déclencher le blocage (ce n’est pas recommandé)"
 
 #: core/modules/brute-force/class-itsec-brute-force-log.php:91
 msgid "Username"
-msgstr "Nom d'utilisateur"
+msgstr "Nom d’utilisateur"
 
 #: core/modules/brute-force/class-itsec-brute-force.php:99
 msgid "too many bad login attempts"
@@ -887,7 +914,7 @@ msgstr "trop de mauvaises tentatives de connexions"
 
 #: core/modules/brute-force/class-itsec-brute-force.php:107
 msgid "user tried to login as \"admin.\""
-msgstr "l'utilisateur a essayé de se connecter en temps qu'admin."
+msgstr "l’utilisateur a essayé de se connecter en temps qu’admin."
 
 #: core/modules/brute-force/class-itsec-brute-force.php:130
 msgid "Invalid Login Attempt"
@@ -901,6 +928,10 @@ msgstr "Ne pas retirer. Retirer cette ligne peut casser votre site. Ajouté par 
 #: core/modules/content-directory/class-itsec-content-directory-admin.php:195
 msgid "Change Content Directory"
 msgstr "Changer le répertoire de contenu"
+
+#: core/modules/content-directory/class-itsec-content-directory-admin.php:97
+msgid "Unable to undo the change to the content directory due to a failed nonce verification."
+msgstr "Impossible d’annuler le changement du répertoire de contenu en raison d’un échec de vérification de nonce."
 
 #: core/modules/content-directory/class-itsec-content-directory-admin.php:118
 msgid "The Content Directory change was successfully changed back to <code>wp-content</code>."
@@ -928,7 +959,7 @@ msgstr "Annuler la modification du répertoire des contenus."
 
 #: core/modules/content-directory/class-itsec-content-directory-admin.php:154
 msgid "No further actions are available on this page."
-msgstr "Aucun action supplémentaire n'est disponible sur cette page."
+msgstr "Aucun action supplémentaire n’est disponible sur cette page."
 
 #: core/modules/content-directory/class-itsec-content-directory-admin.php:158
 msgid "By default, WordPress stores files for plugins, themes, and uploads in a directory called <code>wp-content</code>. Some older and less intelligent bots hard coded this directory in order to look for vulnerable files. Modern bots are intelligent enough to locate this folder programmatically, thus changing the Content Directory is no longer a recommended security step."
@@ -964,11 +995,19 @@ msgstr "Nom de répertoire"
 
 #: core/modules/content-directory/class-itsec-content-directory-admin.php:190
 msgid "Enter a new directory name to replace \"wp-content.\" You may need to log in again after performing this operation."
-msgstr "Entrer un nouveau nom de répertoire pour remplacer \"wp-content'\". Vous devrez vous reconnecter une fois que cette action aura été effectuée."
+msgstr "Entrer un nouveau nom de répertoire pour remplacer \"wp-content’\". Vous devrez vous reconnecter une fois que cette action aura été effectuée."
 
 #: core/modules/content-directory/class-itsec-content-directory-admin.php:202
 msgid "You must allow this plugin to write to the wp-config.php file on the <a href=\"%s\">Settings</a> page to use this feature."
 msgstr "Vous devez autoriser cette extension à écrire dans le fichier wp-config.php dans la page <a href=\"%s\">Réglages</a> pour utiliser cette fonctionnalité."
+
+#: core/modules/content-directory/class-itsec-content-directory-admin.php:209
+msgid "Unable to change the Content Directory due to a failed nonce verification."
+msgstr "Impossible de changer le répertoire de contenu en raison d’un échec de vérification de nonce."
+
+#: core/modules/content-directory/class-itsec-content-directory-admin.php:216
+msgid "The <code>wp-content</code> directory has already been renamed. No Directory Name changes have been made."
+msgstr "Le répertoire <code>wp-content</code> a déjà été renommé. Aucun changement de nom de répertoire n’a été effectué."
 
 #: core/modules/content-directory/class-itsec-content-directory-admin.php:226
 msgid "The Directory Name cannot be empty."
@@ -990,9 +1029,17 @@ msgstr "Un fichier ou répertoire existe déjà à <code>%s</code>. Le changemen
 msgid "A file or directory already exists at <code>%s</code>. No Directory Name changes have been made. Please choose a new Directory Name or remove the existing file or directory and try again."
 msgstr "Un fichier ou répertoire existe déjà à <code>%s</code>. Aucun changement de nom de répertoire n’a été effectué. Veuillez choisir un nouveau nom de répertoire ou supprimer le fichier ou répertoire et essayer à nouveau."
 
+#: core/modules/content-directory/class-itsec-content-directory-admin.php:330
+msgid "Unable to update the <code>wp-config.php</code> file. No directory or config file changes have been made. %1$s (%2$s)"
+msgstr "Impossible de mettre à jour le fichier <code>wp-config.php</code>. Aucun changement du répertoire ou du fichier de configuration n’a été effectué. %1$s (%2$s)"
+
 #: core/modules/content-directory/class-itsec-content-directory-admin.php:332
 msgid "In order to change the content directory on your server, you will have to manually change the configuration and rename the directory. Details can be found <a href=\"%s\">here</a>."
 msgstr "Afin de changer le répertoire de contenu sur votre serveur, vous devrez changer manuellement la configuration et renommer le répertoire. Les détails peuvent être consultés <a href=\"%s\">ici</a>."
+
+#: core/modules/content-directory/class-itsec-content-directory-admin.php:334
+msgid "CRITICAL ERROR: The <code>%1$s</code> directory was successfully renamed to the new name (<code>%2$s</code>). However, an error occurred when updating the <code>wp-config.php</code> file to configure WordPress to use the new content directory. iThemes Security attempted to rename the directory back to its original name, but an unknown error prevented the rename from working as expected. In order for your site to function properly, you will either need to manually rename the <code>%2$s</code> directory back to <code>%1$s</code> or manually update the <code>wp-config.php</code> file with the necessary modifications. Instructions for making this modification can be found <a href=\"%3$s\">here</a>."
+msgstr "ERREUR CRITIQUE&nbsp;:Le répertoire<code>%1$s</code> a bien été renommé (<code>%2$s</code>). Cependant, une erreur s’est produite lors de la mise à jour du fichier <code>wp-config.php</code> en configurant WordPress pour utiliser le nouveau répertoire de contenu. iThemes Security a tenté de renommer le répertoire avec son nom d’origine, mais une erreur inconnue a empêché le renommage de fonctionner. Afin que votre site fonctionne correctement, vous devrez soit renommer manuellement le répertoire <code>%2$s</code> en <code>%1$s</code> ou mettre à jour manuellement le fichier <code>wp-config.php</code> avec les modifications nécessaires. Les instructions pour réaliser ces modifications sont disponibles <a href=\"%3$s\">ici</a>."
 
 #: core/modules/content-directory/class-itsec-content-directory-admin.php:336
 msgid "Details on the error that prevented the <code>wp-config.php</code> file from updating is as follows: %1$s (%2$s)"
@@ -1056,12 +1103,12 @@ msgstr "avec iThemes Security."
 
 #: core/modules/core/class-itsec-core-admin.php:136
 msgid "Website Security is a complicated subject, but we have experts that can help."
-msgstr "La sécurisation d'un site internet est un sujet compliqué, mais nous avons des experts qui peuvent vous aider."
+msgstr "La sécurisation d’un site internet est un sujet compliqué, mais nous avons des experts qui peuvent vous aider."
 
 #: core/modules/core/class-itsec-core-admin.php:137
 #: core/modules/help/class-itsec-help-admin.php:43
 msgid "Get added peace of mind with professional support from our expert team and pro features to take your site security to the next level with iThemes Security Pro."
-msgstr "Obtenez la tranquillité d'esprit avec le soutien professionnel de notre équipe d'experts et des caractéristiques professionnelles pour que la sécurité de votre site à l'autre au niveau avec iThemes Security Pro."
+msgstr "Obtenez la tranquillité d’esprit avec le soutien professionnel de notre équipe d’experts et des caractéristiques professionnelles pour que la sécurité de votre site à l’autre au niveau avec iThemes Security Pro."
 
 #: core/modules/core/class-itsec-core-admin.php:138
 msgid "Get Support and Pro Features"
@@ -1079,7 +1126,7 @@ msgstr "Obtenir un support gratuit"
 
 #: core/modules/core/class-itsec-core-admin.php:155
 msgid "Get added peace of mind with professional support from our expert team and pro features with iThemes Security Pro."
-msgstr "Obtenez la tranquillité d'esprit avec le soutien professionnel de notre équipe d'experts et des caractéristiques professionnelles avec iThemes Security Pro."
+msgstr "Obtenez la tranquillité d’esprit avec le soutien professionnel de notre équipe d’experts et des caractéristiques professionnelles avec iThemes Security Pro."
 
 #: core/modules/core/class-itsec-core-admin.php:156
 #: core/modules/help/class-itsec-help-admin.php:44
@@ -1088,7 +1135,7 @@ msgstr "Obtenir iThemes Security Pro"
 
 #: core/modules/core/class-itsec-core-admin.php:181
 msgid "Get tips for securing your site + the latest WordPress security updates, news and releases from iThemes."
-msgstr "Obtenir des astuces pour sécuriser son site + les dernières nouveautés mise à jours de sécurité WordPress, des actualités et les dernières version d'iThemes."
+msgstr "Obtenir des astuces pour sécuriser son site + les dernières nouveautés mise à jours de sécurité WordPress, des actualités et les dernières version d’iThemes."
 
 #: core/modules/core/class-itsec-core-admin.php:188
 msgid "Email Address"
@@ -1146,20 +1193,20 @@ msgstr "Modification du préfixe de la base de données"
 #: core/modules/database-prefix/class-itsec-database-prefix-admin.php:76
 msgid "By default, WordPress assigns the prefix \"wp\" to all tables in the database where your content, users, and objects exist. For potential attackers, this means it is easier to write scripts that can target WordPress databases as all the important table names for 95% of sites are already known. Changing the \"wp\" prefix makes it more difficult for tools that are trying to take advantage of vulnerabilities in other places to affect the database of your site."
 msgstr ""
-"Par défaut, WordPress assigne le préfixe \"wp\" à toutes les tables de la base de données que ce soit pour le contenu, les utilisateurs ou les objets. Pour un attaquant potentiel, cela veut dire qu'il est simple d'écrire un script qui ciblerait les bases de données WordPress car le nom des tables est déjà connu sur plus de 95% des sites.\n"
+"Par défaut, WordPress assigne le préfixe \"wp\" à toutes les tables de la base de données que ce soit pour le contenu, les utilisateurs ou les objets. Pour un attaquant potentiel, cela veut dire qu’il est simple d’écrire un script qui ciblerait les bases de données WordPress car le nom des tables est déjà connu sur plus de 95% des sites.\n"
 "Changer le préfixe \"wp\" rendra la tâche plus compliqué aux scripts tentant de tirer avantage de vulnérabilités connues pour prendre la main sur la base de données de votre site."
 
 #: core/modules/database-prefix/class-itsec-database-prefix-admin.php:76
 msgid "Before using this tool, we strongly recommend running a backup of your database."
-msgstr "Avant d'utiliser cet outil, nous vous recommandons vivement d'exécuter une sauvegarde de votre base de données."
+msgstr "Avant d’utiliser cet outil, nous vous recommandons vivement d’exécuter une sauvegarde de votre base de données."
 
 #: core/modules/database-prefix/class-itsec-database-prefix-admin.php:77
 msgid "Note: The use of this tool requires quite a bit of system memory which may be more than some hosts can handle. If you back your database up you can't do any permanent damage but without a proper backup you risk breaking your site and having to perform a rather difficult fix."
-msgstr "Note : L'utilisation de cette outil requière un peu de mémoire système, ce qui pourrait être plus que ce dont votre site dispose. Si vous avez fait une sauvegarde de votre base de donnée, vous ne ferez aucun dommage permanent. Mais sans sauvegarde de votre base de données, vous prenez le risque de casser votre site et d'être face à un problème plutôt difficile à régler."
+msgstr "Note : L’utilisation de cette outil requière un peu de mémoire système, ce qui pourrait être plus que ce dont votre site dispose. Si vous avez fait une sauvegarde de votre base de donnée, vous ne ferez aucun dommage permanent. Mais sans sauvegarde de votre base de données, vous prenez le risque de casser votre site et d’être face à un problème plutôt difficile à régler."
 
 #: core/modules/database-prefix/class-itsec-database-prefix-admin.php:78
 msgid "before using this tool."
-msgstr "avant d'utiliser cet outil."
+msgstr "avant d’utiliser cet outil."
 
 #: core/modules/database-prefix/class-itsec-database-prefix-admin.php:89
 msgid "Your database is using the default table prefix"
@@ -1193,7 +1240,7 @@ msgstr "page utilisant cette fonctionnalité."
 
 #: core/modules/database-prefix/class-itsec-database-prefix-admin.php:202
 msgid "Error: Could not rename table"
-msgstr "Erreur: Impossible de renommer la table"
+msgstr "Erreur : Impossible de renommer la table"
 
 #: core/modules/database-prefix/class-itsec-database-prefix-admin.php:202
 msgid "You may have to rename the table manually."
@@ -1201,7 +1248,7 @@ msgstr "Vous pourriez avoir à renommer les tables manuellement."
 
 #: core/modules/database-prefix/class-itsec-database-prefix-admin.php:232
 msgid "Could not update prefix references in options table."
-msgstr "Ne peut pas mettre à jour les préfixes dans la table d'option."
+msgstr "Ne peut pas mettre à jour les préfixes dans la table d’option."
 
 #: core/modules/database-prefix/class-itsec-database-prefix-admin.php:252
 msgid "Could not update prefix references in usermeta table."
@@ -1235,7 +1282,7 @@ msgstr "Scan en cours..."
 
 #: core/modules/file-change/class-itsec-file-change-admin.php:113
 msgid "No changes were detected."
-msgstr "Aucun changement n'a été détecté."
+msgstr "Aucun changement n’a été détecté."
 
 #: core/modules/file-change/class-itsec-file-change-admin.php:114
 msgid "Changes were detected. Please check the log page for details."
@@ -1243,12 +1290,12 @@ msgstr "Des modifications ont été détectés. Merci de vérifier la page de jo
 
 #: core/modules/file-change/class-itsec-file-change-admin.php:115
 msgid "An error occured. Please try again later"
-msgstr "Une erreur s'est produite. Merci de réessayer plus tard"
+msgstr "Une erreur s’est produite. Merci de réessayer plus tard"
 
 #. translators: 1: Plugin name
 #: core/modules/file-change/class-itsec-file-change-admin.php:180
 msgid "%1$s has noticed a change to some files in your WordPress site. Please review the logs to make sure your system has not been compromised."
-msgstr "%1$s a détecté un changement sur certains des fichiers de votre site WordPress. Merci de vérifier les journaux pour être sûr que votre site n'ait pas été compromis."
+msgstr "%1$s a détecté un changement sur certains des fichiers de votre site WordPress. Merci de vérifier les journaux pour être sûr que votre site n’ait pas été compromis."
 
 #: core/modules/file-change/class-itsec-file-change-admin.php:183
 msgid "View Logs"
@@ -1260,7 +1307,7 @@ msgstr "Rejeter les avertissements"
 
 #: core/modules/file-change/class-itsec-file-change-admin.php:263
 msgid "Press the button below to scan your site's files for changes. Note that if changes are found this will take you to the logs page for details."
-msgstr "Appuyez sur le bouton ci-dessous pour lancer l'analyse des changements sur les fichiers. Notez que si des changements sont détectés, vous serez redirigé vers la page des journaux pour plus de détails."
+msgstr "Appuyez sur le bouton ci-dessous pour lancer l’analyse des changements sur les fichiers. Notez que si des changements sont détectés, vous serez redirigé vers la page des journaux pour plus de détails."
 
 #: core/modules/file-change/class-itsec-file-change-admin.php:283
 #: core/modules/file-change/class-itsec-file-change-admin.php:320
@@ -1270,11 +1317,11 @@ msgstr "Détection de changement de fichiers"
 
 #: core/modules/file-change/class-itsec-file-change-admin.php:327
 msgid "File Change Detection Settings"
-msgstr "Paramètres de détection de changement des fichiers"
+msgstr "Réglages de détection de changement des fichiers"
 
 #: core/modules/file-change/class-itsec-file-change-admin.php:343
 msgid "Split File Scanning"
-msgstr "Découper les fichiers pour l'analyse"
+msgstr "Découper les fichiers pour l’analyse"
 
 #: core/modules/file-change/class-itsec-file-change-admin.php:351
 msgid "Include/Exclude Files and Folders"
@@ -1302,7 +1349,7 @@ msgstr "Historique des changements de fichiers"
 
 #: core/modules/file-change/class-itsec-file-change-admin.php:504
 msgid "Today"
-msgstr "Aujourd'hui"
+msgstr "Aujourd’hui"
 
 #: core/modules/file-change/class-itsec-file-change-admin.php:506
 msgid "Tomorrow"
@@ -1314,11 +1361,11 @@ msgstr "Prochaine analyse automatique à :"
 
 #: core/modules/file-change/class-itsec-file-change-admin.php:512
 msgid "Automatic file change scanning is triggered by a user visiting your page and may not happen exactly at the time listed."
-msgstr "L'analyse des changements sur les fichiers est déclenchée lorsqu'un visiteur visites un de vos page. Cela implique que la détection de ne se déclenchera peut-être pas exactement à l'heure indiquée."
+msgstr "L’analyse des changements sur les fichiers est déclenchée lorsqu’un visiteur visites un de vos page. Cela implique que la détection de ne se déclenchera peut-être pas exactement à l’heure indiquée."
 
 #: core/modules/file-change/class-itsec-file-change-admin.php:533
 msgid "Even the best security solutions can fail. How do you know if someone gets into your site? You will know because they will change something. File Change detection will tell you what files have changed in your WordPress installation alerting you to changes not made by yourself. Unlike other solutions this plugin will look only at your installation and compare files to the last check instead of comparing them with a remote installation thereby taking into account whether or not you modify the files yourself."
-msgstr "Même les meilleures solutions de sécurisation de site peuvent échouer. Comment savez-vous si quelqu'un pénètre dans votre site? Vous le saurez parce qu'ils vont changer quelque chose. La détection des changements de fichiers vous dira quels fichiers ont été changés dans votre installation de WordPress pour vous avertir des changements non effectués par vous-même. Contrairement aux autres solutions de cette extension ne regardera que les fichiers  votre installation et les comparera aux fichiers de la dernière vérification au lieu de les comparer avec une installation à distance de façon à tenir compte si oui ou non vous modifiez les fichiers vous-même."
+msgstr "Même les meilleures solutions de sécurisation de site peuvent échouer. Comment savez-vous si quelqu’un pénètre dans votre site? Vous le saurez parce qu’ils vont changer quelque chose. La détection des changements de fichiers vous dira quels fichiers ont été changés dans votre installation de WordPress pour vous avertir des changements non effectués par vous-même. Contrairement aux autres solutions de cette extension ne regardera que les fichiers  votre installation et les comparera aux fichiers de la dernière vérification au lieu de les comparer avec une installation à distance de façon à tenir compte si oui ou non vous modifiez les fichiers vous-même."
 
 #: core/modules/file-change/class-itsec-file-change-admin.php:677
 msgid "Email file change notifications"
@@ -1350,7 +1397,7 @@ msgstr "Inclure / Exclure des fichiers"
 
 #: core/modules/file-change/class-itsec-file-change-admin.php:766
 msgid "Select whether we should exclude files and folders selected or whether the scan should only include files and folders selected."
-msgstr "Choisir si nous devons exclure les fichiers et répertoire sélectionné ou si l'analyse doit inclure les fichiers et répertoires sélectionnés."
+msgstr "Choisir si nous devons exclure les fichiers et répertoire sélectionné ou si l’analyse doit inclure les fichiers et répertoires sélectionnés."
 
 #: core/modules/file-change/class-itsec-file-change-admin.php:793
 msgid "Display file change admin warning"
@@ -1364,15 +1411,15 @@ msgstr ""
 
 #: core/modules/file-change/class-itsec-file-change-admin.php:821
 msgid "Split file checking into chunks."
-msgstr "Éclater l'analyse des fichiers sur plusieurs morceaux."
+msgstr "Éclater l’analyse des fichiers sur plusieurs morceaux."
 
 #: core/modules/file-change/class-itsec-file-change-admin.php:822
 msgid "Splits file checking into 7 chunks (plugins, themes, wp-admin, wp-includes, uploads, the rest of wp-content and everything that is left over) and divides the checks evenly over the course of a day. This feature may result in more notifications but will allow for the scanning of bigger sites to continue even on a lower-end web host."
-msgstr "Éclater l'analyse des fichiers en 7 morceaux (extensions, thèmes, wp-admin, wp-includes, uploads, le reste du répertoire wp-content et tout ce qui reste) et diviser les contrôles de façon régulière au cours d'une journée. Cette fonctionnalité peut accroître le nombre de notifications, mais permettra aux gros sites de faire fonctionner l'analyse de fichiers, même sur des hébergements de faible qualité."
+msgstr "Éclater l’analyse des fichiers en 7 morceaux (extensions, thèmes, wp-admin, wp-includes, uploads, le reste du répertoire wp-content et tout ce qui reste) et diviser les contrôles de façon régulière au cours d’une journée. Cette fonctionnalité peut accroître le nombre de notifications, mais permettra aux gros sites de faire fonctionner l’analyse de fichiers, même sur des hébergements de faible qualité."
 
 #: core/modules/file-change/class-itsec-file-change-admin.php:856
 msgid "File types listed here will not be checked for changes. While it is possible to change files such as images it is quite rare and nearly all known WordPress attacks exploit php, js and other text files."
-msgstr "Les types de fichiers listés ici ne donneront pas lieux à une vérification de changement de ficher. Bien qu'il soit possible de changer des fichiers tel qu'une image, cela reste très rare et nous savons tous que les attaques sur WordPress exploitent les fichiers de types php, js et autres fichiers textes."
+msgstr "Les types de fichiers listés ici ne donneront pas lieux à une vérification de changement de ficher. Bien qu’il soit possible de changer des fichiers tel qu’une image, cela reste très rare et nous savons tous que les attaques sur WordPress exploitent les fichiers de types php, js et autres fichiers textes."
 
 #: core/modules/file-change/class-itsec-file-change-log.php:90
 msgid "MB"
@@ -1398,7 +1445,7 @@ msgstr "Date"
 
 #: core/modules/file-change/class-itsec-file-change-log.php:122
 msgid "There are no added files to report"
-msgstr "Il n'y a pas de fichiers ajouté à signaler"
+msgstr "Il n’y a pas de fichiers ajouté à signaler"
 
 #: core/modules/file-change/class-itsec-file-change-log.php:128
 msgid "Files Removed"
@@ -1406,7 +1453,7 @@ msgstr "Fichiers supprimés"
 
 #: core/modules/file-change/class-itsec-file-change-log.php:140
 msgid "There are no deleted files to report"
-msgstr "Il n'y a pas de fichier supprimé à signaler"
+msgstr "Il n’y a pas de fichier supprimé à signaler"
 
 #: core/modules/file-change/class-itsec-file-change-log.php:146
 #: core/modules/file-change/class-itsec-file-change-log.php:180
@@ -1415,7 +1462,7 @@ msgstr "Fichiers modifiés"
 
 #: core/modules/file-change/class-itsec-file-change-log.php:158
 msgid "There are no changed files to report"
-msgstr "Il n'y a pas de changement de fichier à signaler"
+msgstr "Il n’y a pas de changement de fichier à signaler"
 
 #: core/modules/file-change/class-itsec-file-change-log.php:177
 msgid "Check Time"
@@ -1444,11 +1491,11 @@ msgstr "Hash de fichier"
 
 #: core/modules/file-change/class-itsec-file-change.php:135
 msgid "No files were changed."
-msgstr "Aucun fichier n'a été changé."
+msgstr "Aucun fichier n’a été changé."
 
 #: core/modules/file-change/class-itsec-file-change.php:411
 msgid "Scan Time:"
-msgstr "Temps de l'analyse :"
+msgstr "Temps de l’analyse :"
 
 #: core/modules/file-change/class-itsec-file-change.php:412
 msgid "Files Added:"
@@ -1505,7 +1552,7 @@ msgstr "Détection 404"
 
 #: core/modules/four-oh-four/class-itsec-four-oh-four-admin.php:106
 msgid "The number of minutes in which 404 errors should be remembered and counted towards lockouts."
-msgstr "Nombres de minutes pendant lesquels les erreurs 404 doivent doivent être rappelées et comptés jusqu'au blocage. "
+msgstr "Nombres de minutes pendant lesquels les erreurs 404 doivent doivent être rappelées et comptés jusqu’au blocage. "
 
 #: core/modules/four-oh-four/class-itsec-four-oh-four-admin.php:127
 #: core/modules/four-oh-four/class-itsec-four-oh-four-admin.php:297
@@ -1538,11 +1585,11 @@ msgstr "Erreurs"
 
 #: core/modules/four-oh-four/class-itsec-four-oh-four-admin.php:166
 msgid "The numbers of errors (within the check period time frame) that will trigger a lockout. Set to zero (0) to record 404 errors without locking out users. This can be useful for troubleshooting content or other errors. The default is 20."
-msgstr "Nombres d'erreurs (dans la période de temps indiquée) qui déclencheront le blocage. Mettre à 0 conduira à l'enregistrement des erreurs 404 sans bloquer les utilisateurs. Cela peut être utilise pour cibler du contenu à problème ou tout autre erreur. La valeur par défaut est de 20."
+msgstr "Nombres d’erreurs (dans la période de temps indiquée) qui déclencheront le blocage. Mettre à 0 conduira à l’enregistrement des erreurs 404 sans bloquer les utilisateurs. Cela peut être utilise pour cibler du contenu à problème ou tout autre erreur. La valeur par défaut est de 20."
 
 #: core/modules/four-oh-four/class-itsec-four-oh-four-admin.php:207
 msgid "Use the white list above to prevent recording common 404 errors. If you know a common file on your site is missing and you do not want it to count towards a lockout record it here. You must list the full path beginning with the \"/\""
-msgstr "Utiliser la liste ci-dessous pour empêcher l'enregistrement d'erreurs 404 communes. Si vous savez qu'un fichier est manquant sur votre site, et que vous ne souhaitez pas qu'il soit comptabilisé  comme une erreur 404 et conduise à un blocage, indiquez le ici. Vous devez entrer le chemin absolue du fichier, avec le \"/\" à la fin"
+msgstr "Utiliser la liste ci-dessous pour empêcher l’enregistrement d’erreurs 404 communes. Si vous savez qu’un fichier est manquant sur votre site, et que vous ne souhaitez pas qu’il soit comptabilisé  comme une erreur 404 et conduise à un blocage, indiquez le ici. Vous devez entrer le chemin absolue du fichier, avec le \"/\" à la fin"
 
 #: core/modules/four-oh-four/class-itsec-four-oh-four-admin.php:223
 msgid "Enable 404 Detection"
@@ -1550,7 +1597,7 @@ msgstr "Activer la détection 404"
 
 #: core/modules/four-oh-four/class-itsec-four-oh-four-admin.php:230
 msgid "404 Detection Settings"
-msgstr "Paramètre de la détection 404"
+msgstr "Réglages de la détection 404"
 
 #: core/modules/four-oh-four/class-itsec-four-oh-four-admin.php:246
 msgid "Minutes to Remember 404 Error (Check Period)"
@@ -1558,7 +1605,7 @@ msgstr "Temps pour se souvenir des erreurs 404 (temps de vérification)"
 
 #: core/modules/four-oh-four/class-itsec-four-oh-four-admin.php:254
 msgid "Error Threshold"
-msgstr "Seuil d'erreur"
+msgstr "Seuil d’erreur"
 
 #: core/modules/four-oh-four/class-itsec-four-oh-four-admin.php:262
 msgid "404 File/Folder White List"
@@ -1602,7 +1649,7 @@ msgstr "Dernier enregistré"
 
 #: core/modules/four-oh-four/class-itsec-four-oh-four.php:80
 msgid "too many attempts to access a file that does not exist"
-msgstr "trop de tentative d'accès à un fichier qui n'existe pas"
+msgstr "trop de tentative d’accès à un fichier qui n’existe pas"
 
 #: core/modules/four-oh-four/class-itsec-four-oh-four.php:104
 msgid "404 Error"
@@ -1610,7 +1657,7 @@ msgstr "Erreur 404"
 
 #: core/modules/help/class-itsec-help-admin.php:35
 msgid "Website security is a complicated subject, but we have experts that can help."
-msgstr "La sécurité d'un site internet est un sujet compliqué, mais nous avons des experts qui peuvent vous aider."
+msgstr "La sécurité d’un site internet est un sujet compliqué, mais nous avons des experts qui peuvent vous aider."
 
 #: core/modules/help/class-itsec-help-admin.php:37
 msgid "Community Support from WordPress.org"
@@ -1630,11 +1677,11 @@ msgstr "Votre site a été piraté&nbsp;? Contactez Sucuri, notre partenaire, po
 
 #: core/modules/help/class-itsec-help-admin.php:49
 msgid "Get hack repair"
-msgstr "Obtenir la réparation d'un piratage"
+msgstr "Obtenir la réparation d’un piratage"
 
 #: core/modules/hide-backend/class-itsec-hide-backend-admin.php:42
 msgid "Hide Login Area"
-msgstr "Cacher l'interface de connexion"
+msgstr "Cacher l’interface de connexion"
 
 #: core/modules/hide-backend/class-itsec-hide-backend-admin.php:82
 #: core/modules/hide-backend/class-itsec-hide-backend-admin.php:97
@@ -1643,11 +1690,11 @@ msgstr "Attention&nbsp;: L’URL de votre page d’administration à changée. U
 
 #: core/modules/hide-backend/class-itsec-hide-backend-admin.php:86
 msgid "Please note this may be different than what you sent as the URL was sanitized to meet various requirements. A reminder has also been sent to the notification email(s) set in this plugins global settings."
-msgstr "Veuillez noter que cela peut être différent de ce que vous avez envoyé car l'URL a été épurée (nettoyée) pour répondre aux diverses exigences."
+msgstr "Veuillez noter que cela peut être différent de ce que vous avez envoyé car l’URL a été épurée (nettoyée) pour répondre aux diverses exigences."
 
 #: core/modules/hide-backend/class-itsec-hide-backend-admin.php:99
 msgid "Please note this may be different than what you sent as the URL was sanitized to meet various requirements."
-msgstr "Veuillez noter que cela peut être différent de ce que vous avez envoyé car l'URL a été épurée (nettoyée) pour répondre à diverses exigences."
+msgstr "Veuillez noter que cela peut être différent de ce que vous avez envoyé car l’URL a été épurée (nettoyée) pour répondre à diverses exigences."
 
 #: core/modules/hide-backend/class-itsec-hide-backend-admin.php:126
 #: core/modules/hide-backend/class-itsec-hide-backend-admin.php:147
@@ -1664,11 +1711,11 @@ msgstr "URL de connexion :"
 
 #: core/modules/hide-backend/class-itsec-hide-backend-admin.php:206
 msgid "The login url slug cannot be \"login,\" \"admin,\" \"dashboard,\" or \"wp-login.php\" as these are use by default in WordPress."
-msgstr "Les identifiants dans l'URL de connexion ne peuvent pas être \"login\", \"admin\", dashboard\" ou \"wp-login.php\" car WordPress les utilises déjà par défaut."
+msgstr "Les identifiants dans l’URL de connexion ne peuvent pas être \"login\", \"admin\", dashboard\" ou \"wp-login.php\" car WordPress les utilises déjà par défaut."
 
 #: core/modules/hide-backend/class-itsec-hide-backend-admin.php:207
 msgid "Note: The output is limited to alphanumeric characters, underscore (_) and dash (-). Special characters such as \".\" and \"/\" are not allowed and will be converted in the same manner as a post title. Please review your selection before logging out."
-msgstr "Note : La sortie est limitée aux caractères alphanumériques, underscore (_) et tiret (-). les caractères spéciaux comme \"/\" ne sont pas autorisés et seront convertis de la même manière que cela est fait sur les permaliens de vos URLs. Merci de vérifier vos paramètres avant de vous déconnecter."
+msgstr "Note : La sortie est limitée aux caractères alphanumériques, underscore (_) et tiret (-). les caractères spéciaux comme \"/\" ne sont pas autorisés et seront convertis de la même manière que cela est fait sur les permaliens de vos URLs. Merci de vérifier vos réglages avant de vous déconnecter."
 
 #: core/modules/hide-backend/class-itsec-hide-backend-admin.php:260
 msgid "Custom Action:"
@@ -1676,20 +1723,20 @@ msgstr "Action personnalisée :"
 
 #: core/modules/hide-backend/class-itsec-hide-backend-admin.php:261
 msgid "WordPress uses the \"action\" variable to handle many login and logout functions. By default this plugin can handle the normal ones but some plugins and themes may utilize a custom action (such as logging out of a private post). If you need a custom action please enter it here."
-msgstr "WordPress utilise la variable \"action\" pour gérer beaucoup de fonction propre à la connexion et à la déconnexion. Par défaut, cette extension peut gérer les variables normales, mais certaines extensions ou thèmes peuvent utiliser des variables personnalisées (comme la déconnexion sur un billet privé). Si vous avez besoin de gérer une action personnalisée, merci de l'écrire ici."
+msgstr "WordPress utilise la variable \"action\" pour gérer beaucoup de fonction propre à la connexion et à la déconnexion. Par défaut, cette extension peut gérer les variables normales, mais certaines extensions ou thèmes peuvent utiliser des variables personnalisées (comme la déconnexion sur un billet privé). Si vous avez besoin de gérer une action personnalisée, merci de l’écrire ici."
 
 #: core/modules/hide-backend/class-itsec-hide-backend-admin.php:317
 msgid "Registration URL:"
-msgstr "URL d'inscription : "
+msgstr "URL d’inscription : "
 
 #: core/modules/hide-backend/class-itsec-hide-backend-admin.php:335
 #: core/modules/hide-backend/class-itsec-hide-backend-admin.php:342
 msgid "Hide Login and Admin"
-msgstr "Cacher l'interface de connexion et d'administration"
+msgstr "Cacher l’interface de connexion et d’administration"
 
 #: core/modules/hide-backend/class-itsec-hide-backend-admin.php:350
 msgid "Hide Backend"
-msgstr "Cacher l'administration"
+msgstr "Cacher l’administration"
 
 #: core/modules/hide-backend/class-itsec-hide-backend-admin.php:358
 msgid "Login Slug"
@@ -1697,7 +1744,7 @@ msgstr "Identifiant de connexion "
 
 #: core/modules/hide-backend/class-itsec-hide-backend-admin.php:368
 msgid "Register Slug"
-msgstr "Identifiant d'enregistrement"
+msgstr "Identifiant d’enregistrement"
 
 #: core/modules/hide-backend/class-itsec-hide-backend-admin.php:394
 msgid "Custom Login Action"
@@ -1709,23 +1756,23 @@ msgstr "Masquer la page de connexion (wp-login.php, wp-admin, admin et connexion
 
 #: core/modules/hide-backend/class-itsec-hide-backend-admin.php:464
 msgid "Review Hide Backend Settings"
-msgstr "Examen des paramètres pour cacher l'interface d'administration"
+msgstr "Examen des réglages pour cacher l’interface d’administration"
 
 #: core/modules/hide-backend/class-itsec-hide-backend-admin.php:465
 msgid "The hide backend system has been rewritten. You must re-activate the feature to continue using the feature."
-msgstr "Le système pour cacher l'interface d'administration a été réécrit. Vous devez réactiver cette fonctionnalité pour continuer à l'utiliser."
+msgstr "Le système pour cacher l’interface d’administration a été réécrit. Vous devez réactiver cette fonctionnalité pour continuer à l’utiliser."
 
 #: core/modules/hide-backend/class-itsec-hide-backend-admin.php:466
 msgid "Review Settings"
-msgstr "Révision des paramètres"
+msgstr "Révision des réglages"
 
 #: core/modules/hide-backend/class-itsec-hide-backend-admin.php:537
 msgid "Invalid hide login slug used. The login url slug cannot be \\\"login,\\\" \\\"admin,\\\" \\\"dashboard,\\\" or \\\"wp-login.php\\\" or \\\"\\\" (blank) as these are use by default in WordPress."
-msgstr "Identifiant pour cacher l'interface de connexion invalide. L'identifiant de l'URL ne peut pas être \\\"login,\\\" \\\"admin,\\\" \\\"dashboard,\\\" \\\"wp-login.php\\\" ou \\\"\\\" (blank) car WordPress les utilises par défaut."
+msgstr "Identifiant pour cacher l’interface de connexion invalide. L’identifiant de l’URL ne peut pas être \\\"login,\\\" \\\"admin,\\\" \\\"dashboard,\\\" \\\"wp-login.php\\\" ou \\\"\\\" (blank) car WordPress les utilises par défaut."
 
 #: core/modules/hide-backend/class-itsec-hide-backend-admin.php:623
 msgid "This friendly email is just a reminder that you have changed the dashboard login address on"
-msgstr "Cet email est juste un rappel sur le fait que vous avez modifié l'adresse de connexion de votre tableau de bord avec l'adresse "
+msgstr "Cet e-mail est juste un rappel sur le fait que vous avez modifié l’adresse de connexion de votre tableau de bord avec l’adresse "
 
 #: core/modules/hide-backend/class-itsec-hide-backend-admin.php:626
 msgid "You must now use"
@@ -1737,11 +1784,11 @@ msgstr "pour vous connecter à votre site WordPress."
 
 #: core/modules/hide-backend/class-itsec-hide-backend-admin.php:634
 msgid "WordPress Login Address Changed"
-msgstr "L'adresse de connexion à WordPress à changée"
+msgstr "L’adresse de connexion à WordPress à changée"
 
 #: core/modules/ipcheck/class-itsec-ipcheck-admin.php:91
 msgid "Receive email updates from iThemes"
-msgstr "Recevoir un e-mail des mises à jour d'iThemes"
+msgstr "Recevoir un e-mail des mises à jour d’iThemes"
 
 #: core/modules/ipcheck/class-itsec-ipcheck-admin.php:92
 msgid "Leverage the power of the iThemes Brute Force Protection network to ban IPs hitting your site."
@@ -1750,7 +1797,7 @@ msgstr "Tirez parti de la puissance du réseau de protection de force brute iThe
 #: core/modules/ipcheck/class-itsec-ipcheck-admin.php:93
 #: core/modules/ipcheck/class-itsec-ipcheck-admin.php:396
 msgid "Enter email and click Save All Changes"
-msgstr "Entrez l'e-mail et cliquez sur Enregistrer toutes les modifications"
+msgstr "Entrez l’e-mail et cliquez sur Enregistrer toutes les modifications"
 
 #: core/modules/ipcheck/class-itsec-ipcheck-admin.php:156
 #: core/modules/ipcheck/class-itsec-ipcheck-admin.php:173
@@ -1763,19 +1810,19 @@ msgstr "Activez le réseau de protection de force brute iThemes"
 
 #: core/modules/ipcheck/class-itsec-ipcheck-admin.php:281
 msgid "The email address you used to get an iThemes API key appears to be invalid. Please enter a valid email address"
-msgstr "L'adresse e-mail que vous avez utilisée pour obtenir une une clé API iThemes ne semble pas valide. Merci d'entrer une adresse e-mail valide."
+msgstr "L’adresse e-mail que vous avez utilisée pour obtenir une une clé API iThemes ne semble pas valide. Merci d’entrer une adresse e-mail valide."
 
 #: core/modules/ipcheck/class-itsec-ipcheck-admin.php:318
 msgid "There was an error getting an API key from the IPCheck server. If the problem persists please contact support."
-msgstr "Il y a eu une erreur lors de l'obtention d'une clé API à partir du serveur IPCheck. Si le problème persiste veuillez contacter le support."
+msgstr "Il y a eu une erreur lors de l’obtention d’une clé API à partir du serveur IPCheck. Si le problème persiste veuillez contacter le support."
 
 #: core/modules/ipcheck/class-itsec-ipcheck-admin.php:362
 msgid "Use the iThemes IPCheck Service to ban IPs reported as a problem by other users in the community."
-msgstr "Utilisez le service IPCheck iThemes pour bannir les IPs signalées comme un problème par d'autres utilisateurs de la communauté."
+msgstr "Utilisez le service IPCheck iThemes pour bannir les IPs signalées comme un problème par d’autres utilisateurs de la communauté."
 
 #: core/modules/ipcheck/class-itsec-ipcheck-admin.php:398
 msgid "Receive email updates about WP Security from iThemes"
-msgstr "Recevoir un e-mail des mises à jour au sujet de WP Security d'iThemes"
+msgstr "Recevoir un e-mail des mises à jour au sujet de WP Security d’iThemes"
 
 #: core/modules/ipcheck/class-itsec-ipcheck-admin.php:400
 msgid "Leverage the power of the iThemes Brute Force Protection network to ban IPs hitting your site. "
@@ -1841,7 +1888,7 @@ msgstr "Les résultats des scans de programmes malveillants précédents se trou
 
 #: core/modules/malware/class-itsec-malware-admin.php:215
 msgid "Scan Homepage for Malware"
-msgstr "Rechercher les programmes malveillants sur la page d'accueil"
+msgstr "Rechercher les programmes malveillants sur la page d’accueil"
 
 #: core/modules/malware/class-itsec-malware-admin.php:216
 msgid "The malware scanner requires Javascript in order to function. If Javascript is disabled in your browser, please enable it. If Javascript is not disabled, a script from another plugin, the theme, or a broken WordPress file is preventing the malware scanner's script from executing properly. Please try disabling other plugins to see if that resolves the issue."
@@ -1861,7 +1908,7 @@ msgstr "Problèmes trouvés"
 
 #: core/modules/malware/class-itsec-malware-log.php:72
 msgid "Scan Details"
-msgstr "Détails de l'analyse"
+msgstr "Détails de l’analyse"
 
 #: core/modules/malware/class-itsec-malware-log.php:111
 #: core/modules/malware/class-itsec-malware-scan-results-template.php:165
@@ -1950,7 +1997,7 @@ msgstr "Expire dans"
 
 #: core/class-itsec-lockout.php:818
 msgid "Currently no hosts are locked out of this website."
-msgstr "Actuellement aucun hôte n'est bloqué sur votre site web."
+msgstr "Actuellement aucun hôte n’est bloqué sur votre site web."
 
 #: core/class-itsec-lockout.php:826
 msgid "Locked out users"
@@ -1958,15 +2005,15 @@ msgstr "Utilisateurs bloqués"
 
 #: core/class-itsec-lockout.php:847
 msgid "Currently no users are locked out of this website."
-msgstr "Actuellement aucun utilisateur n'est bloqué sur votre site web."
+msgstr "Actuellement aucun utilisateur n’est bloqué sur votre site web."
 
 #: core/class-itsec-lockout.php:855
 msgid "Locked out usernames (not real users)"
-msgstr "Noms d'utilisateurs bloqués (ce ne sont pas de vrais utilisateurs)"
+msgstr "Noms d’utilisateurs bloqués (ce ne sont pas de vrais utilisateurs)"
 
 #: core/class-itsec-lockout.php:875
 msgid "Currently no usernames are locked out of this website."
-msgstr "Actuellement aucun nom d'utilisateur n'est bloqué sur votre site web."
+msgstr "Actuellement aucun nom d’utilisateur n’est bloqué sur votre site web."
 
 #: core/class-itsec-lockout.php:883
 msgid "Release Lockout"
@@ -1982,7 +2029,7 @@ msgstr "Les blocages suivants ont été retirés."
 
 #: core/class-itsec-lockout.php:1053
 msgid "Security is a delicate item. It does not care who you are, if it sees that you are trying to do something strange it will lock you out. This can be troublesome on sites with existing errors, particularly missing assets such as images and others."
-msgstr "La sécurité est un élément délicat. Il se fiche de savoir qui vous êtes, s'il vous voit tenter de faire quelque chose de bizarre, il vous bloque. Cela peut être problématique sur des sites où il existe des erreurs, particulièrement quand il y a des éléments manquant comme des images ou d'autres choses."
+msgstr "La sécurité est un élément délicat. Il se fiche de savoir qui vous êtes, s’il vous voit tenter de faire quelque chose de bizarre, il vous bloque. Cela peut être problématique sur des sites où il existe des erreurs, particulièrement quand il y a des éléments manquant comme des images ou d’autres choses."
 
 #: core/class-itsec-lockout.php:1054
 msgid "Use the button below to temporarily white list your IP from lockouts for 24 hours. It will still notify you of the situation but it will not lock you out of your site allowing you a chance to fix the issue."
@@ -1990,7 +2037,7 @@ msgstr "Utilisez le bouton ci-dessous pour temporairement mettre votre adresse I
 
 #: core/class-itsec-lockout.php:1055
 msgid "Please note that if your IP address changes at any time during the period (such as you switch locations) you could still inadvertently lock yourself out."
-msgstr "Merci de noter que si votre adresse IP change à n'importe quel moment au cours de cette période (tels que si vous changez de lieux) vous pouvez toujours vous verrouiller par inadvertance."
+msgstr "Merci de noter que si votre adresse IP change à n’importe quel moment au cours de cette période (tels que si vous changez de lieux) vous pouvez toujours vous verrouiller par inadvertance."
 
 #: core/class-itsec-lockout.php:1094
 msgid "has"
@@ -2002,7 +2049,7 @@ msgstr "hôte"
 
 #: core/class-itsec-lockout.php:1101
 msgid "The host has been locked out "
-msgstr "L'hôte a été bloqué"
+msgstr "L’hôte a été bloqué"
 
 #: core/class-itsec-lockout.php:1105
 msgid "permanently"
@@ -2010,28 +2057,28 @@ msgstr "définitivement"
 
 #: core/class-itsec-lockout.php:1106
 msgid "To release the host lockout you can remove the host from the"
-msgstr "Pour libérer l'hôte du blocage, vous pouvez retirer l'hôte de la"
+msgstr "Pour libérer l’hôte du blocage, vous pouvez retirer l’hôte de la"
 
 #: core/class-itsec-lockout.php:1106
 msgid "host list"
-msgstr "liste d'hôte"
+msgstr "liste d’hôte"
 
 #: core/class-itsec-lockout.php:1110 core/class-itsec-lockout.php:1136
 #: core/class-itsec-lockout.php:1144
 msgid "until"
-msgstr "jusqu'à"
+msgstr "jusqu’à"
 
 #: core/class-itsec-lockout.php:1111 core/class-itsec-lockout.php:1140
 msgid "To release the lockout please visit"
-msgstr "Pour libérer l'hôte du blocage, merci de vous rendre dans"
+msgstr "Pour libérer l’hôte du blocage, merci de vous rendre dans"
 
 #: core/class-itsec-lockout.php:1111
 msgid "the admin area"
-msgstr "la zone d'administration"
+msgstr "la zone d’administration"
 
 #: core/class-itsec-lockout.php:1136
 msgid "The user has been locked out"
-msgstr "L'utilisateur à été bloqué"
+msgstr "L’utilisateur à été bloqué"
 
 #: core/class-itsec-lockout.php:1138
 msgid "user"
@@ -2044,7 +2091,7 @@ msgstr "la page des blocages"
 
 #: core/class-itsec-lockout.php:1144
 msgid "and the user has been locked out"
-msgstr "et l'utilisateur a été bloqué"
+msgstr "et l’utilisateur a été bloqué"
 
 #: core/class-itsec-lockout.php:1145
 msgid "have"
@@ -2085,11 +2132,11 @@ msgstr "Cet e-mail a été créé automatiquement par"
 
 #: core/class-itsec-lockout.php:1186 core/class-itsec-notify.php:165
 msgid "To change your email preferences please visit"
-msgstr "Pour modifier vos préférences de réception d'e-mail merci de vous rendre dans"
+msgstr "Pour modifier vos préférences de réception d’e-mail merci de vous rendre dans"
 
 #: core/class-itsec-lockout.php:1188 core/class-itsec-notify.php:167
 msgid "the plugin settings"
-msgstr "les paramètres de l'extension"
+msgstr "les réglages de l’extension"
 
 #: core/class-itsec-lockout.php:1191
 msgid "Site Lockout Notification"
@@ -2145,7 +2192,7 @@ msgstr "Données"
 
 #: core/class-itsec-logger.php:79 core/class-itsec-logger.php:99
 msgid "Security Log Information"
-msgstr "Journal d'information de sécurité"
+msgstr "Journal d’information de sécurité"
 
 #: core/class-itsec-logger.php:88
 msgid "Security Log Data"
@@ -2181,7 +2228,7 @@ msgstr "Cette information peut vous aider à obtenir une image de ce qui se pass
 
 #: core/class-itsec-logger.php:417
 msgid "To view logs within the plugin you must enable database logging in the plugin settings. File logging is not available for access within the plugin itself."
-msgstr "Pour afficher les journaux dans l'extension, vous devez activer la journalisation de base de données dans les réglages de l'extension. La journalisation de fichiers n'est pas disponible pour accéder à l'extension elle-même."
+msgstr "Pour afficher les journaux dans l’extension, vous devez activer la journalisation de base de données dans les réglages de l’extension. La journalisation de fichiers n’est pas disponible pour accéder à l’extension elle-même."
 
 #: core/class-itsec-logger.php:434
 msgid "To adjust logging options visit the global settings page."
@@ -2197,7 +2244,7 @@ msgstr "Toutes les données des journaux"
 
 #: core/class-itsec-notify.php:85
 msgid "There have been no lockouts since the last email check."
-msgstr "Il n'y a pas eu de blocages depuis la dernière vérification d'e-mail."
+msgstr "Il n’y a pas eu de blocages depuis la dernière vérification d’e-mail."
 
 #: core/class-itsec-notify.php:91 core/class-itsec-notify.php:118
 #: core/class-itsec-notify.php:127
@@ -2206,7 +2253,7 @@ msgstr "Il y a eu"
 
 #: core/class-itsec-notify.php:93
 msgid "users or usernames locked out for attempting to log in with incorrect credentials."
-msgstr "utilisateurs ou identifiants bloqués pour avoir tenté de se connecter avec des informations d'identification incorrectes."
+msgstr "utilisateurs ou identifiants bloqués pour avoir tenté de se connecter avec des informations d’identification incorrectes."
 
 #: core/class-itsec-notify.php:100 core/class-itsec-notify.php:109
 msgid "There has been"
@@ -2214,7 +2261,7 @@ msgstr "Il y a eu"
 
 #: core/class-itsec-notify.php:102
 msgid "user or username locked out for attempting to log in with incorrect credentials."
-msgstr "utilisateur ou identifiant bloqué pour avoir tenté de se connecter avec des informations d'identification incorrectes."
+msgstr "utilisateur ou identifiant bloqué pour avoir tenté de se connecter avec des informations d’identification incorrectes."
 
 #: core/class-itsec-notify.php:111
 msgid "host locked out."
@@ -2238,7 +2285,7 @@ msgstr "hôte(s) bloqué(s) sur votre site."
 
 #: core/class-itsec-notify.php:157
 msgid "The following is a summary of security related activity on your site. For details please visit"
-msgstr "Ce qui suit est un résumé de l'activité liée à la sécurité sur votre site. Pour plus de détails merci de visiter"
+msgstr "Ce qui suit est un résumé de l’activité liée à la sécurité sur votre site. Pour plus de détails merci de visiter"
 
 #: core/class-itsec-notify.php:159
 msgid "the security logs"
@@ -2250,7 +2297,7 @@ msgstr "Résumé de sécurité quotidien"
 
 #: core/class-itsec-setup.php:155
 msgid "<strong>ERROR</strong>: You must activate this plugin from the network dashboard."
-msgstr "<strong>ERREUR</strong> : Vous devez activer l'extension à partir de l'interface d'administration du réseau."
+msgstr "<strong>ERREUR</strong> : Vous devez activer l’extension à partir de l’interface d’administration du réseau."
 
 #: core/content/perms.php:213 core/content/perms.php:222
 msgid "Relative Path"
@@ -2278,7 +2325,7 @@ msgstr "Valeur"
 
 #: core/content/system.php:9
 msgid "User Information"
-msgstr "Information de l'utilisateur"
+msgstr "Information de l’utilisateur"
 
 #: core/content/system.php:11
 msgid "Public IP Address"
@@ -2286,7 +2333,7 @@ msgstr "Adresse IP publique "
 
 #: core/content/system.php:12 core/content/system.php:100
 msgid "Get more information on this address"
-msgstr "Obtenez plus d'information sur cette adresse"
+msgstr "Obtenez plus d’information sur cette adresse"
 
 #: core/content/system.php:15
 msgid "User Agent"
@@ -2348,7 +2395,7 @@ msgstr "Utilisateur de la base de donnée"
 
 #: core/content/system.php:81
 msgid "Not Set"
-msgstr "Non définie"
+msgstr "Non défini"
 
 #: core/content/system.php:183 core/content/system.php:191
 #: core/content/system.php:200 core/content/system.php:208
@@ -2376,7 +2423,7 @@ msgstr "Type de Serveur"
 
 #: core/content/system.php:106
 msgid "Operating System"
-msgstr "Système d'exploitation"
+msgstr "Système d’exploitation"
 
 #: core/content/system.php:107
 msgid "Browser Compression Supported"
@@ -2425,11 +2472,11 @@ msgstr "Limite de mémoire PHP"
 
 #: core/content/system.php:170
 msgid "PHP Max Upload Size"
-msgstr "Taille maximale d'envoi PHP"
+msgstr "Taille maximale d’envoi PHP"
 
 #: core/content/system.php:178
 msgid "PHP Max Post Size"
-msgstr "Taille maximale d'article PHP"
+msgstr "Taille maximale d’article PHP"
 
 #: core/content/system.php:181 core/content/system.php:189
 #: core/content/system.php:198 core/content/system.php:206
@@ -2445,11 +2492,11 @@ msgstr "PHP Safe Mode"
 
 #: core/content/system.php:194
 msgid "PHP Allow URL fopen"
-msgstr "PHP autorise les URLs fopen"
+msgstr "PHP autorise les URL fopen"
 
 #: core/content/system.php:203
 msgid "PHP Allow URL Include"
-msgstr "PHP autorise l'inclusion par URL"
+msgstr "PHP autorise l’inclusion par URL"
 
 #: core/content/system.php:211
 msgid "PHP Display Errors"
@@ -2469,7 +2516,7 @@ msgstr "PHP Register Globals"
 
 #: core/content/system.php:245
 msgid "PHP Max Script Execution Time"
-msgstr "Temps d'exécution maximal d'un script PHP"
+msgstr "Temps d’exécution maximal d’un script PHP"
 
 #: core/content/system.php:246
 msgid "Seconds"
@@ -2514,7 +2561,7 @@ msgstr "Multisite est activé"
 
 #: core/content/system.php:299
 msgid "Multisite is NOT enabled"
-msgstr "Multisite n'est PAS activé"
+msgstr "Multisite n’est PAS activé"
 
 #: core/content/system.php:302
 msgid "\tMultisite"
@@ -2550,7 +2597,7 @@ msgstr "Version de la build"
 
 #: core/content/system.php:326
 msgid "Note: this is NOT the same as the version number on the plugin page or WordPress.org page and is instead used for support."
-msgstr "Remarque : ce n'est pas le même que le numéro de version sur la page de l'extension ou sur la page page WordPress.org mais il est utilisé pour le support."
+msgstr "Remarque : ce n’est pas le même que le numéro de version sur la page de l’extension ou sur la page page WordPress.org mais il est utilisé pour le support."
 
 #: core/lib/class-itsec-lib-config-file.php:66
 #: core/lib/class-itsec-lib-config-file.php:182
@@ -2623,11 +2670,19 @@ msgstr "%s n’a pas pu pas être écrit. Les deux fonctions fopen/fwrite/flock 
 
 #: core/lib/class-itsec-lib-file.php:130
 msgid "%s could not be written as a file. The requested path already exists as a directory. The directory must be removed or a new file name must be chosen before the file can be written."
-msgstr "%s n’a pas pu pas être écrit. Le chemin d'accès demandé existe déjà en tant que répertoire. Le répertoire doit être retiré ou un nouveau nom de fichier doit être choisi avant que le fichier puisse être écrit."
+msgstr "%s n’a pas pu pas être écrit. Le chemin d’accès demandé existe déjà en tant que répertoire. Le répertoire doit être retiré ou un nouveau nom de fichier doit être choisi avant que le fichier puisse être écrit."
 
 #: core/lib/class-itsec-lib-file.php:256
 msgid "The file %s could not be removed as the unlink() function is disabled. This is a system configuration issue."
 msgstr "Le fichier %s n’a pas pu être supprimé car la fonction unlink() est désactivée. C’est un problème de configuration système."
+
+#: core/lib/class-itsec-lib-utility.php:140
+msgid "Unable to strip comments from the source code as the token_get_all() function is disabled. This is a system configuration issue."
+msgstr "Impossible d’éliminer les commentaires du code source car la fonction token_get_all() est désactivée. C’est un problème de configuration système."
+
+#: core/lib/class-itsec-lib-utility.php:147
+msgid "Unable to strip comments from the source code as the token_get_all() function returned an unrecognized value (type: %s)"
+msgstr "Impossible d’éliminer les commentaires du code source car la fonction token_get_all() a retourné une valeur inconnue (type : %s)"
 
 #: core/lib/class-itsec-wp-list-table.php:206
 msgid "No items found."
@@ -2710,15 +2765,15 @@ msgstr "Vérification de la sécurité"
 
 #: core/modules/admin-user/class-itsec-admin-user-admin.php:199
 msgid "The new admin username you entered is invalid or WordPress could not change the user id or username. Please check the name and try again."
-msgstr "Le nouveau nom pour l'administrateur que vous avez entré est invalide ou WordPress ne peut pas changer l'ID ou le nom d'utilisateur. Merci de vérifier votre nom et de recommencer."
+msgstr "Le nouveau nom pour l’administrateur que vous avez entré est invalide ou WordPress ne peut pas changer l’ID ou le nom d’utilisateur. Merci de vérifier votre nom et de recommencer."
 
 #: core/modules/admin-user/class-itsec-admin-user-admin.php:249
 msgid "It looks like you have already removed the admin user. No further action is necessary."
-msgstr "Il semblerait que vous ayez déjà supprimé l'utilisateur admin. Aucune action supplémentaire n'est nécessaire."
+msgstr "Il semblerait que vous ayez déjà supprimé l’utilisateur admin. Aucune action supplémentaire n’est nécessaire."
 
 #: core/modules/admin-user/class-itsec-admin-user-admin.php:253
 msgid "This feature will improve the security of your WordPress installation by removing common user attributes that can be used to target your site."
-msgstr "Cette fonctionnalité permettra d'améliorer la sécurité de votre installation WordPress en supprimant les attributs d'utilisateur communs qui peuvent être utilisés pour cibler votre site."
+msgstr "Cette fonctionnalité permettra d’améliorer la sécurité de votre installation WordPress en supprimant les attributs d’utilisateur communs qui peuvent être utilisés pour cibler votre site."
 
 #: core/modules/admin-user/class-itsec-admin-user-admin.php:254
 #: core/modules/database-prefix/class-itsec-database-prefix-admin.php:78
@@ -2734,7 +2789,7 @@ msgstr "Sauvegardez votre base de données"
 
 #: core/modules/admin-user/class-itsec-admin-user-admin.php:254
 msgid "before changing the admin user."
-msgstr "avant de changer l'utilisateur admin."
+msgstr "avant de changer l’utilisateur admin."
 
 #: core/modules/admin-user/class-itsec-admin-user-admin.php:255
 msgid "Notice"
@@ -2742,35 +2797,35 @@ msgstr "Avertissement"
 
 #: core/modules/admin-user/class-itsec-admin-user-admin.php:255
 msgid "Changing the admin username or id of user 1 will log you out of your site requiring you to log back in again."
-msgstr "Changer le nom d'utilisateur ou l'ID de l'utilisateur 1 vous déconnectera de votre site et vous devrez vous reconnecter."
+msgstr "Changer le nom d’utilisateur ou l’ID de l’utilisateur 1 vous déconnectera de votre site et vous devrez vous reconnecter."
 
 #: core/modules/admin-user/class-itsec-admin-user-admin.php:268
 msgid "Enable Change Admin User"
-msgstr "Activer le changement d'utilisateur administrateur"
+msgstr "Activer le changement d’utilisateur administrateur"
 
 #: core/modules/admin-user/class-itsec-admin-user-admin.php:275
 msgid "Check this box to enable admin user renaming."
-msgstr "Cocher cette case pour activer le changement de nom de l'utilisateur admin."
+msgstr "Cocher cette case pour activer le changement de nom de l’utilisateur admin."
 
 #: core/modules/admin-user/class-itsec-admin-user-admin.php:283
 msgid "New Admin Username"
-msgstr "Nouveau nom d'utilisateur pour l'administrateur"
+msgstr "Nouveau nom d’utilisateur pour l’administrateur"
 
 #: core/modules/admin-user/class-itsec-admin-user-admin.php:290
 msgid "Enter a new username to replace \"admin.\" Please note that if you are logged in as admin you will have to log in again."
-msgstr "Entrer un nouveau nom d'utilisateur pour remplacer \"admin\". Merci de noter que si vous êtes connecté avec l'utilisateur admin, vous devrez vous reconnecter."
+msgstr "Entrer un nouveau nom d’utilisateur pour remplacer \"admin\". Merci de noter que si vous êtes connecté avec l’utilisateur admin, vous devrez vous reconnecter."
 
 #: core/modules/admin-user/class-itsec-admin-user-admin.php:298
 msgid "Change User ID 1"
-msgstr "Changer l'utilisateur ID 1"
+msgstr "Changer l’utilisateur ID 1"
 
 #: core/modules/admin-user/class-itsec-admin-user-admin.php:304
 msgid "Change the ID of the user with ID 1."
-msgstr "Changer l'ID de l'utilisateur avec l'ID 1."
+msgstr "Changer l’ID de l’utilisateur avec l’ID 1."
 
 #: core/modules/admin-user/class-itsec-admin-user-admin.php:311
 msgid "Save Admin User"
-msgstr "Sauvegarder l'utilisateur Admin"
+msgstr "Sauvegarder l’utilisateur Admin"
 
 #: core/modules/away-mode/class-itsec-away-mode-admin.php:42
 #: core/modules/away-mode/class-itsec-away-mode-admin.php:281
@@ -2799,7 +2854,7 @@ msgstr " pm (après-midi)"
 
 #: core/modules/away-mode/class-itsec-away-mode-admin.php:172
 msgid "Set the time at which the admin dashboard should become available again."
-msgstr "Établir l'heure à laquelle le tableau de bord administrateur sera de nouveau accessible."
+msgstr "Établir l’heure à laquelle le tableau de bord administrateur sera de nouveau accessible."
 
 #: core/modules/away-mode/class-itsec-away-mode-admin.php:198
 msgid "Set the date at which the admin dashboard should become unavailable"
@@ -2807,7 +2862,7 @@ msgstr "Établir la date à laquelle le tableau de bord administrateur ne doit p
 
 #: core/modules/away-mode/class-itsec-away-mode-admin.php:246
 msgid "Set the time at which the admin dashboard should become unavailable."
-msgstr "Établir l'heure à laquelle le tableau de bord administrateur ne doit plus être accessible."
+msgstr "Établir l’heure à laquelle le tableau de bord administrateur ne doit plus être accessible."
 
 #: core/modules/away-mode/class-itsec-away-mode-admin.php:262
 msgid "Daily"
@@ -2843,11 +2898,11 @@ msgstr "Heure de fin"
 
 #: core/modules/away-mode/class-itsec-away-mode-admin.php:358
 msgid "As most sites are only updated at certain times of the day it is not always necessary to provide access to the WordPress dashboard 24 hours a day, 7 days a week. The options below will allow you to disable access to the WordPress Dashboard for the specified period. In addition to limiting exposure to attackers this could also be useful to disable site access based on a schedule for classroom or other reasons."
-msgstr "Comme la plupart des sites ne sont mis à jour à certains moments de la journée, il n'est pas toujours nécessaire de fournir un accès au tableau de bord de WordPress 24 heures sur 24 et 7 jours sur 7. Les options ci-dessous vous permettront de désactiver l'accès au tableau de bord de WordPress pour la période spécifiée. En plus de limiter l'exposition aux attaquants cela pourrait aussi être utile de désactiver l'accès au site en fonction d'un planning pour les classes ou d'autres raisons."
+msgstr "Comme la plupart des sites ne sont mis à jour à certains moments de la journée, il n’est pas toujours nécessaire de fournir un accès au tableau de bord de WordPress 24 heures sur 24 et 7 jours sur 7. Les options ci-dessous vous permettront de désactiver l’accès au tableau de bord de WordPress pour la période spécifiée. En plus de limiter l’exposition aux attaquants cela pourrait aussi être utile de désactiver l’accès au site en fonction d’un planning pour les classes ou d’autres raisons."
 
 #: core/modules/away-mode/class-itsec-away-mode-admin.php:366
 msgid "Please note that according to your %sWordPress timezone settings%s your current time is:"
-msgstr "Merci de noter qu'en accord avec vos %sréglages du fuseau horaire de WordPress%s votre heure actuelle est : "
+msgstr "Merci de noter qu’en accord avec vos %sréglages du fuseau horaire de WordPress%s votre heure actuelle est : "
 
 #: core/modules/away-mode/class-itsec-away-mode-admin.php:368
 msgid "If this is incorrect please correct it on the %sWordPress general settings page%s by setting the appropriate time zone. Failure to set the correct timezone may result in unintended lockouts."
@@ -2859,7 +2914,7 @@ msgstr "Le mode absent est actuellement activé."
 
 #: core/modules/away-mode/class-itsec-away-mode-admin.php:382
 msgid "The dashboard of this website will become unavailable %s%s%s from %s%s%s until %s%s%s."
-msgstr "L'interface d'administration de votre site va devenir inaccessible %s%s%s du %s%s%s au %s%s%s."
+msgstr "L’interface d’administration de votre site va devenir inaccessible %s%s%s du %s%s%s au %s%s%s."
 
 #: core/modules/away-mode/class-itsec-away-mode-admin.php:382
 msgid "every day"
@@ -2867,7 +2922,7 @@ msgstr "chaque jour"
 
 #: core/modules/away-mode/class-itsec-away-mode-admin.php:386
 msgid "The dashboard of this website will become unavailable from %s%s%s on %s%s%s until %s%s%s on %s%s%s."
-msgstr "L'interface d'administration de votre site va devenir inaccessible du %s%s%s à %s%s%s jusqu'au %s%s%s à %s%s%s."
+msgstr "L’interface d’administration de votre site va devenir inaccessible du %s%s%s à %s%s%s jusqu’au %s%s%s à %s%s%s."
 
 #: core/modules/away-mode/class-itsec-away-mode-admin.php:390
 msgid "You will not be able to log into this website when the site is unavailable."
@@ -2875,11 +2930,11 @@ msgstr "Vous ne pourrez pas vous connecter lorsque le site ne sera pas disponibl
 
 #: core/modules/away-mode/class-itsec-away-mode-admin.php:464
 msgid "Invalid  away mode time listed. The time entered would lock you out of your site now. Please try again."
-msgstr "Liste des heures invalides pour le mode absent. L'heure indiquée va vous bloquer maintenant. Merci d'essayer à nouveau."
+msgstr "Liste des heures invalides pour le mode absent. L’heure indiquée va vous bloquer maintenant. Merci d’essayer à nouveau."
 
 #: core/modules/away-mode/class-itsec-away-mode-admin.php:475
 msgid "Invalid  away mode time listed. The start time selected is after the end time selected."
-msgstr "Liste des heures invalides pour le mode absent. L'heure de début sélectionnée est postérieure à l'heure de fin sélectionnée."
+msgstr "Liste des heures invalides pour le mode absent. L’heure de début sélectionnée est postérieure à l’heure de fin sélectionnée."
 
 #: core/modules/away-mode/class-itsec-away-mode-admin.php:486
 msgid "Invalid away mode time listed. The period selected already ended."
@@ -2887,7 +2942,7 @@ msgstr "Liste des heures invalides pour le mode absent. La période sélectionn�
 
 #: core/modules/away-mode/class-itsec-away-mode.php:211
 msgid "A host was prevented from accessing the dashboard due to away-mode restrictions being in effect"
-msgstr "Un hôte a été empêché d'accéder au tableau de bord car des restrictions du mode absent sont appliquées actuellement."
+msgstr "Un hôte a été empêché d’accéder au tableau de bord car des restrictions du mode absent sont appliquées actuellement."
 
 #: core/modules/away-mode/class-itsec-away-mode.php:239
 msgid "Away Mode Triggered"
@@ -2896,7 +2951,7 @@ msgstr "Mode absent déclenché"
 #: core/modules/backup/class-itsec-backup-admin.php:99
 #: core/modules/backup/class-itsec-backup-admin.php:462
 msgid "One of the best ways to protect yourself from an attack is to have access to a database backup of your site. If something goes wrong, you can get your site back by restoring the database from a backup and replacing the files with fresh ones. Use the button below to create a backup of your database for this purpose. You can also schedule automated backups and download or delete previous backups."
-msgstr "Une des meilleures façons de vous protéger d'une attaque est d'avoir accès à une copie de la sauvegarde de la base de données de votre site. Si quelque chose se passe mal, vous pourrez restaurer votre site en restaurant la base de donnée à partir d'une sauvegarde et remplacer les fichiers en même temps. Utilisez le bouton ci-dessous pour créer une sauvegarde de votre base de données qui servira à cela. Vous pouvez également planifier des sauvegardes automatiques et télécharger ou supprimer les sauvegardes précédentes."
+msgstr "Une des meilleures façons de vous protéger d’une attaque est d’avoir accès à une copie de la sauvegarde de la base de données de votre site. Si quelque chose se passe mal, vous pourrez restaurer votre site en restaurant la base de donnée à partir d’une sauvegarde et remplacer les fichiers en même temps. Utilisez le bouton ci-dessous pour créer une sauvegarde de votre base de données qui servira à cela. Vous pouvez également planifier des sauvegardes automatiques et télécharger ou supprimer les sauvegardes précédentes."
 
 #: core/modules/backup/class-itsec-backup-admin.php:121
 msgid "Tables for Backup"
@@ -2920,7 +2975,7 @@ msgstr "Sauvegarde de la base de données"
 
 #: core/modules/backup/class-itsec-backup-admin.php:246
 msgid "Take the Next Steps in Security with BackupBuddy"
-msgstr "Passez à l'étape suivante de la sécurité avec BackupBuddy"
+msgstr "Passez à l’étape suivante de la sécurité avec BackupBuddy"
 
 #: core/modules/backup/class-itsec-backup-admin.php:278
 msgid "Configure Database Backups"
@@ -2932,7 +2987,7 @@ msgstr "Activer la sauvegarde de la base de données"
 
 #: core/modules/backup/class-itsec-backup-admin.php:292
 msgid "Backup Schedule Settings"
-msgstr "Paramètres de planification de sauvegarde"
+msgstr "Réglages de planification de sauvegarde"
 
 #: core/modules/backup/class-itsec-backup-admin.php:299
 msgid "Schedule Database Backups"
@@ -2944,7 +2999,7 @@ msgstr "Intervalle de sauvegarde"
 
 #: core/modules/backup/class-itsec-backup-admin.php:319
 msgid "Backup Full Database"
-msgstr "Sauvegarder l'ensemble de la base de données"
+msgstr "Sauvegarder l’ensemble de la base de données"
 
 #: core/modules/backup/class-itsec-backup-admin.php:327
 msgid "Backup Method"
@@ -2984,23 +3039,23 @@ msgstr "Sauvegarde terminée. Merci de vérifier vos e-mails ou le dossier uploa
 
 #: core/modules/backup/class-itsec-backup-admin.php:419
 msgid "Whoops. Something went wrong. Check the backup page or contact support."
-msgstr "Oups. Quelque chose s'est mal passé. Consultez la page de sauvegarde ou contactez votre support."
+msgstr "Aïe. Quelque chose s’est mal passé. Consultez la page de sauvegarde ou contactez votre support."
 
 #: core/modules/backup/class-itsec-backup-admin.php:489
 msgid "A database backup is just a simple start. BackupBuddy goes one step further to provide complete backups of all your site files (including image and media files, themes, plugins, widgets and settings) - which aren't included in a database backup. With BackupBuddy you can customize backup schedules, send your backup files  safely off-site to remote storage destinations, restore your site quickly & easily and even move your whole site to a new host or domain."
-msgstr "Une sauvegarde de la base de données est un simple début. BackupBuddy va encore plus loin en fournissant des sauvegardes complètes de tous les fichiers de votre site (y compris les images et les fichiers multimédias, des thèmes, extensions, widgets et les paramètres) qui ne sont pas inclus dans une sauvegarde de base de données. Avec BackupBuddy vous pouvez personnaliser les plannings de sauvegarde, envoyer vos fichiers de sauvegarde en toute sécurité hors de votre site vers des destinations de stockage à distance, de restaurer votre site rapidement et facilement, et même déplacer l'ensemble de votre site vers un nouvel hôte ou un autre domaine."
+msgstr "Une sauvegarde de la base de données est un simple début. BackupBuddy va encore plus loin en fournissant des sauvegardes complètes de tous les fichiers de votre site (y compris les images et les fichiers multimédias, des thèmes, extensions, widgets et les réglages) qui ne sont pas inclus dans une sauvegarde de base de données. Avec BackupBuddy vous pouvez personnaliser les plannings de sauvegarde, envoyer vos fichiers de sauvegarde en toute sécurité hors de votre site vers des destinations de stockage à distance, de restaurer votre site rapidement et facilement, et même déplacer l’ensemble de votre site vers un nouvel hôte ou un autre domaine."
 
 #: core/modules/backup/class-itsec-backup-admin.php:490
 msgid "5 Reasons You Need a Complete Backup Strategy"
-msgstr "5 raisons pour lesquels vous avez besoin d'une stratégie de sauvegarde complète "
+msgstr "5 raisons pour lesquels vous avez besoin d’une stratégie de sauvegarde complète "
 
 #: core/modules/backup/class-itsec-backup-admin.php:492
 msgid "Database backups aren't enough."
-msgstr "Sauvegarder la base de données, ce n'est pas suffisant."
+msgstr "Sauvegarder la base de données, ce n’est pas suffisant."
 
 #: core/modules/backup/class-itsec-backup-admin.php:492
 msgid "You need complete backups of your entire site (including images and media files, themes, plugins, widgets and settings)."
-msgstr "Vous avez besoin de sauvegardes complètes de l'ensemble de votre site (y compris les images et les fichiers multimédias, les thèmes, les extensions, les widgets et les paramètres)."
+msgstr "Vous avez besoin de sauvegardes complètes de l’ensemble de votre site (y compris les images et les fichiers multimédias, les thèmes, les extensions, les widgets et les réglages)."
 
 #: core/modules/backup/class-itsec-backup-admin.php:493
 msgid "Backup files should be protected."
@@ -3008,11 +3063,11 @@ msgstr "Les fichiers de sauvegarde doivent être protégés."
 
 #: core/modules/backup/class-itsec-backup-admin.php:493
 msgid "Send and store them safely off-site to a secure remote destination (like email, Dropbox, Amazon S3, etc.)"
-msgstr "Envoyer et stocker en toute sécurité sur une destination en dehors de votre site vers une destination comme votre boite emails, DropBox, Amazon S3..."
+msgstr "Envoyer et stocker en toute sécurité sur une destination en dehors de votre site vers une destination comme votre boite e-mails, DropBox, Amazon S3..."
 
 #: core/modules/backup/class-itsec-backup-admin.php:494
 msgid "Backups should be automated and scheduled so you don't forget."
-msgstr "Les sauvegardes doivent être automatisées et planifiées de sorte que vous ne l'oubliez pas."
+msgstr "Les sauvegardes doivent être automatisées et planifiées de sorte que vous ne l’oubliez pas."
 
 #: core/modules/backup/class-itsec-backup-admin.php:494
 msgid "Set daily, weekly or monthly backups that automatically send backups off-site."
@@ -3032,7 +3087,7 @@ msgstr "Vous devez posséder les fichiers de vos sauvegardes."
 
 #: core/modules/backup/class-itsec-backup-admin.php:496
 msgid "Don't just rely on a host or service. It's your site, so you should own everything on it."
-msgstr "Ne vous fiez pas seulement à votre hôte ou à un service. C'est votre site, vous devriez tout posséder."
+msgstr "Ne vous fiez pas seulement à votre hôte ou à un service. C’est votre site, vous devriez tout posséder."
 
 #: core/modules/backup/class-itsec-backup-admin.php:499
 msgid "Learn more about BackupBuddy"
@@ -3048,11 +3103,11 @@ msgstr "Créer une sauvegarde de la base de données"
 
 #: core/modules/backup/class-itsec-backup-admin.php:519
 msgid "Adjust Backup Settings"
-msgstr "Ajuster les paramètres de la sauvegarde"
+msgstr "Ajuster les réglages de la sauvegarde"
 
 #: core/modules/backup/class-itsec-backup-admin.php:670
 msgid "Checking this box will have the backup script backup all tables in your database, even if they are not part of this WordPress site."
-msgstr "Cochez cette case vous permettra de sauvegarder l'ensemble des tables de votre base de donnés, même si elles ne font pas parties de votre site WordPress."
+msgstr "Cochez cette case vous permettra de sauvegarder l’ensemble des tables de votre base de donnés, même si elles ne font pas parties de votre site WordPress."
 
 #: core/modules/backup/class-itsec-backup-admin.php:696
 msgid "Enable Scheduled Database Backups"
@@ -3060,11 +3115,11 @@ msgstr "Activer les sauvegardes de bases de données planifiées"
 
 #: core/modules/backup/class-itsec-backup-admin.php:738
 msgid "Tables with data that does not need to be backed up"
-msgstr "Tables avec des données qui n'ont pas besoin d'être sauvegardés"
+msgstr "Tables avec des données qui n’ont pas besoin d’être sauvegardés"
 
 #: core/modules/backup/class-itsec-backup-admin.php:760
 msgid "Some plugins can create log files in your database. While these logs might be handy for some functions, they can also take up a lot of space and, in some cases, even make backing up your database almost impossible. Select log tables above to exclude their data from the backup. Note: The table itself will be backed up, but not the data in the table."
-msgstr "Certaines extensions peuvent créer des fichiers journaux dans votre base de données. Bien que ces journaux peuvent être utiles pour certaines fonctions, ils peuvent aussi prendre beaucoup d'espace et, dans certains cas, rendre la sauvegarde de votre base de données presque impossible. Sélectionnez les tables des journaux ci-dessous pour exclure leurs données de la sauvegarde. Note : La table va être sauvegardée, mais pas les données dans la table."
+msgstr "Certaines extensions peuvent créer des fichiers journaux dans votre base de données. Bien que ces journaux peuvent être utiles pour certaines fonctions, ils peuvent aussi prendre beaucoup d’espace et, dans certains cas, rendre la sauvegarde de votre base de données presque impossible. Sélectionnez les tables des journaux ci-dessous pour exclure leurs données de la sauvegarde. Note : La table va être sauvegardée, mais pas les données dans la table."
 
 #: core/modules/backup/class-itsec-backup-admin.php:787
 msgid "The number of days between database backups."
@@ -3076,7 +3131,7 @@ msgstr "Le chemin sur votre machine où les fichiers de sauvegarde doivent être
 
 #: core/modules/backup/class-itsec-backup-admin.php:846
 msgid "Save Locally and Email"
-msgstr "Enregistrer localement et envoyer par email"
+msgstr "Enregistrer localement et envoyer par e-mail"
 
 #: core/modules/backup/class-itsec-backup-admin.php:847
 msgid "Email Only"
@@ -3092,7 +3147,7 @@ msgstr "Méthode de sauvegarde enregistrée"
 
 #: core/modules/backup/class-itsec-backup-admin.php:851
 msgid "Select what we should do with your backup file. You can have it emailed to you, saved locally or both."
-msgstr "Choisissez ce que nous devrions faire avec votre fichier de sauvegarde. Vous pouvez l'envoyer par email, l'enregistrer localement ou les deux."
+msgstr "Choisissez ce que nous devrions faire avec votre fichier de sauvegarde. Vous pouvez l’envoyer par e-mail, l’enregistrer localement ou les deux."
 
 #: core/modules/backup/class-itsec-backup-admin.php:878
 msgid "Limit the number of backups stored locally (on this server). Any older backups beyond this number will be removed. Setting to \"0\" will retain all backups."
@@ -3108,11 +3163,11 @@ msgstr "Vous devrez peut-être désactiver cette option si vous rencontrez des p
 
 #: core/modules/backup/class-itsec-backup.php:108
 msgid "emailed to backup recipients and saved locally."
-msgstr "envoyé par email aux destinataires et sauvegardé localement."
+msgstr "envoyé par e-mail aux destinataires et sauvegardé localement."
 
 #: core/modules/backup/class-itsec-backup.php:111
 msgid "emailed to backup recipients."
-msgstr "envoyé par email aux destinataires."
+msgstr "envoyé par e-mail aux destinataires."
 
 #: core/modules/backup/class-itsec-backup.php:114
 msgid "saved locally."
@@ -3120,11 +3175,11 @@ msgstr "Sauvegardé localement."
 
 #: core/modules/backup/class-itsec-backup.php:131
 msgid "Something went wrong with your backup. It looks like another process might already be trying to backup your database. Please try again in a few minutes. If the problem persists please contact support."
-msgstr "Quelque chose s'est mal passé avec votre sauvegarde. Il semble qu'un autre processus essaie déjà de sauvegarder votre base de données. merci d'essayer de nouveau dans quelques minutes. Si le problème persiste merci contactez le support."
+msgstr "Quelque chose s’est mal passé avec votre sauvegarde. Il semble qu’un autre processus essaie déjà de sauvegarder votre base de données. merci d’essayer de nouveau dans quelques minutes. Si le problème persiste merci contactez le support."
 
 #: core/modules/backup/class-itsec-backup.php:283
 msgid "Attached is the backup file for the database powering"
-msgstr "Ci-joint le fichier de sauvegarde pour l'alimentation de base de données"
+msgstr "Ci-joint le fichier de sauvegarde pour l’alimentation de base de données"
 
 #: core/modules/backup/class-itsec-backup.php:283
 msgid " taken"
@@ -3180,7 +3235,7 @@ msgstr "Tableau de bord"
 
 #: core/class-itsec-core.php:495 core/class-itsec-core.php:1377
 msgid "Security"
-msgstr "Sécurité"
+msgstr "Security"
 
 #: core/class-itsec-core.php:644
 msgid "Dismiss"
@@ -3196,7 +3251,7 @@ msgstr "fichier .htaccess"
 
 #: core/class-itsec-core.php:681 core/class-itsec-core.php:1470
 msgid "As you have not allowed this plugin to update system files you must update your"
-msgstr "Comme vous n'avez pas autorisé l'extension à mettre à jour les fichiers système vous devez mettre à jour votre"
+msgstr "Comme vous n’avez pas autorisé l’extension à mettre à jour les fichiers système vous devez mettre à jour votre"
 
 #: core/class-itsec-core.php:683 core/class-itsec-core.php:1472
 msgid "as well as your wp-config.php file manually. Rules to insert in both files can be found on the Dashboard page."
@@ -3208,7 +3263,7 @@ msgstr "Cliquez ici"
 
 #: core/class-itsec-core.php:686
 msgid "to allow this plugin to write to these files."
-msgstr "pour autoriser l'extension à écrire sur ces fichiers."
+msgstr "pour autoriser l’extension à écrire sur ces fichiers."
 
 #: core/class-itsec-core.php:693 core/class-itsec-core.php:1477
 #: core/class-itsec-files.php:161
@@ -3218,7 +3273,7 @@ msgstr "Réglages mis à jour"
 
 #: core/class-itsec-core.php:760
 msgid "Show Intro"
-msgstr "Montrer l'introduction"
+msgstr "Montrer l’introduction"
 
 #: core/class-itsec-core.php:771
 msgid "Important First Steps"
@@ -3238,7 +3293,7 @@ msgstr "Sécurisez votre site"
 
 #: core/class-itsec-core.php:1204
 msgid "Use the button below to enable default settings. This feature will enable all settings that cannot conflict with other plugins or themes."
-msgstr "Utiliser le bouton ci-dessous pour activer les paramètres par défauts. Cette fonctionnalité activera tous les paramètres n'entrant pas en conflits avec les autres extensions ou thèmes."
+msgstr "Utiliser le bouton ci-dessous pour activer les réglages par défauts. Cette fonctionnalité activera tous les réglages n’entrant pas en conflits avec les autres extensions ou thèmes."
 
 #: core/class-itsec-core.php:1205
 msgid "One-Click Secure"
@@ -3250,7 +3305,7 @@ msgstr "Site sécurisé. Consultez le tableau de bord pour de plus amples sugges
 
 #: core/class-itsec-core.php:1208
 msgid "Whoops. Something went wrong. Please contact support if the problem persists."
-msgstr "Oups. Quelque chose ne s'est pas bien passé. Merci de contacter le support si le problème persiste."
+msgstr "Aïe. Quelque chose ne s’est pas bien passé. Merci de contacter le support si le problème persiste."
 
 #: core/class-itsec-core.php:1289
 msgid "Return to top"
@@ -3282,7 +3337,7 @@ msgstr "Impossible de mettre à jour le fichier <code>%1$s</code>. Vous devrez r
 
 #: core/class-itsec-files.php:233 core/class-itsec-files.php:526
 msgid "There are no rules to write."
-msgstr "Il n'y a aucune règle à écrire."
+msgstr "Il n’y a aucune règle à écrire."
 
 #: core/class-itsec-files.php:414
 msgid "Quick ban IP. Will be updated on next formal rules save."
@@ -3290,19 +3345,19 @@ msgstr "Bannir rapidement une IP. Sera mis à jour lors du prochain enregistreme
 
 #: core/class-itsec-files.php:557
 msgid "You must restart your NGINX server for the settings to take effect"
-msgstr "Vous devez redémarrer votre serveur NGINX pour que les paramètres prennent effet."
+msgstr "Vous devez redémarrer votre serveur NGINX pour que les réglages prennent effet."
 
 #: core/class-itsec-global-settings.php:70
 msgid "The settings below are more advanced settings that should be done with caution on an existing site."
-msgstr "Les paramètres ci-dessous sont des réglages plus avancés qui devraient être réalisés avec prudence sur un site existant."
+msgstr "Les réglages ci-dessous sont des réglages plus avancés qui devraient être réalisés avec prudence sur un site existant."
 
 #: core/class-itsec-global-settings.php:71
 msgid "Make sure you have a good backup before changing any setting on this page."
-msgstr "Assurez-vous d'avoir une bonne sauvegarde avant de modifier n'importe quel paramètre de cette page."
+msgstr "Assurez-vous d’avoir une bonne sauvegarde avant de modifier n’importe quel paramètre de cette page."
 
 #: core/class-itsec-global-settings.php:72
 msgid "In addition, these settings will not be reversed if you remove this plugin. That said, all settings on this page use methods recommended by WordPress.org itself and will help in improving the security of your site."
-msgstr "En outre, ces paramètres ne seront pas inversés si vous supprimez l'extension. Cela dit, tous les paramètres de cette page utilisent des méthodes recommandées par WordPress.org et aident à améliorer la sécurité de votre site."
+msgstr "En outre, ces réglages ne seront pas inversés si vous supprimez l’extension. Cela dit, tous les réglages de cette page utilisent des méthodes recommandées par WordPress.org et aident à améliorer la sécurité de votre site."
 
 #: core/class-itsec-global-settings.php:88
 msgid "Go to"
@@ -3339,15 +3394,15 @@ msgstr "Envoyer un e-mail de résumé"
 
 #: core/class-itsec-global-settings.php:183
 msgid "Backup Delivery Email"
-msgstr "E-mail d'envoi de la sauvegarde"
+msgstr "E-mail d’envoi de la sauvegarde"
 
 #: core/class-itsec-global-settings.php:192
 msgid "Host Lockout Message"
-msgstr "Message de blocage d'hôte"
+msgstr "Message de blocage d’hôte"
 
 #: core/class-itsec-global-settings.php:201
 msgid "User Lockout Message"
-msgstr "Message du blocage d'utilisateur"
+msgstr "Message du blocage d’utilisateur"
 
 #: core/class-itsec-global-settings.php:210
 msgid "Community Lockout Message"
@@ -3412,7 +3467,7 @@ msgstr "Passer outre la détection de proxy"
 
 #: core/class-itsec-global-settings.php:340
 msgid "Hide Security Menu in Admin Bar"
-msgstr "Cacher le menu Sécurité dans la barre d'administration"
+msgstr "Cacher le menu Sécurité dans la barre d’administration"
 
 #: core/class-itsec-global-settings.php:367 core/class-itsec-lockout.php:998
 #: core/modules/away-mode/class-itsec-away-mode-admin.php:538
@@ -3445,19 +3500,19 @@ msgstr "Beaucoup de fonctions de cette extension nécessitent la modification de
 
 #: core/class-itsec-global-settings.php:398
 msgid "Setting Saved. File updates allowed."
-msgstr "Paramètres sauvegardés. Mise à jour de fichiers autorisée."
+msgstr "Réglages enregistrés. Mise à jour de fichiers autorisée."
 
 #: core/class-itsec-global-settings.php:399
 msgid "Whoops. Something went wrong. Check the \"Global Settings\" section on the settings page (it is the first setting) to make sure your option was saved or contact support."
-msgstr "Oups. Quelque chose s'est mal passé. Vérifiez la section \"Réglages principaux\" sur la page de paramétrage (c'est le premier onglet) pour être sur que vos options ont été sauvegardées ou alors contactez votre support."
+msgstr "Aïe. Quelque chose s’est mal passé. Vérifiez la section \"Réglages principaux\" sur la page de paramétrage (c’est le premier onglet) pour être sur que vos options ont été sauvegardées ou alors contactez votre support."
 
 #: core/class-itsec-global-settings.php:409
 msgid "Help Us Improve"
-msgstr "Aidez nous à l'amélioration"
+msgstr "Aidez nous à l’amélioration"
 
 #: core/class-itsec-global-settings.php:412
 msgid "would like to collect anonymous data about features you use to help improve this plugin. Absolutely no information that can identify you will be collected."
-msgstr "aimerait récolter des informations anonymes sur les fonctionnalités que vous utilisez, dans le but d'aider à améliorer cette extension. Absolument aucune information permettant de vous identifier ne seront recueillies."
+msgstr "aimerait récolter des informations anonymes sur les fonctionnalités que vous utilisez, dans le but d’aider à améliorer cette extension. Absolument aucune information permettant de vous identifier ne seront recueillies."
 
 #: core/class-itsec-global-settings.php:414
 msgid "Yes, I'd like to help"
@@ -3465,11 +3520,11 @@ msgstr "Oui, je veux bien aider"
 
 #: core/class-itsec-global-settings.php:416
 msgid "Setting Saved. Thanks for helping us make this plugin better."
-msgstr "Paramètre sauvegardé. Merci de nous aider à l'amélioration de cette extension."
+msgstr "Réglage sauvegardé. Merci de nous aider à l’amélioration de cette extension."
 
 #: core/class-itsec-global-settings.php:417
 msgid "Whoops. Something went wrong. Check the global settings page or contact support."
-msgstr "Oups. Quelque chose s'est mal passé. Vérifiez la page des réglages principaux ou contactez le support."
+msgstr "Aïe. Quelque chose s’est mal passé. Vérifiez la page des réglages principaux ou contactez le support."
 
 #: core/class-itsec-global-settings.php:468
 #: core/modules/away-mode/class-itsec-away-mode-admin.php:402
@@ -3489,11 +3544,11 @@ msgstr "Enregistrer toutes les modifications"
 
 #: core/class-itsec-global-settings.php:524
 msgid "The following backup email address(es) do not appear to be valid: "
-msgstr "Les adresses e-mails suivantes pour l'envoi de vos sauvegardes ne semblent pas valides : "
+msgstr "Les adresses e-mails suivantes pour l’envoi de vos sauvegardes ne semblent pas valides : "
 
 #: core/class-itsec-global-settings.php:568
 msgid "The following notification email address(es) do not appear to be valid: "
-msgstr "Les adresses e-mails suivantes pour l'envoi de vos notifications ne semblent pas valides : "
+msgstr "Les adresses e-mails suivantes pour l’envoi de vos notifications ne semblent pas valides : "
 
 #: core/class-itsec-global-settings.php:662
 msgid "There is a problem with an IP address in the white list:"
@@ -3505,11 +3560,11 @@ msgstr "%s n’est pas une adresse valide dans la partie des utilisateurs de la 
 
 #: core/class-itsec-global-settings.php:749
 msgid "Allow iThemes to track plugin usage via anonymous data. "
-msgstr "Autoriser iThemes à suivre votre utilisation de l'extension de manière anonyme."
+msgstr "Autoriser iThemes à suivre votre utilisation de l’extension de manière anonyme."
 
 #: core/class-itsec-global-settings.php:773
 msgid "The email address(es) all database backups will be sent to. One address per line."
-msgstr "L'adresse e-mail à laquelle toutes les sauvegardes seront envoyées. Une adresse par ligne."
+msgstr "L’adresse e-mail à laquelle toutes les sauvegardes seront envoyées. Une adresse par ligne."
 
 #: core/class-itsec-global-settings.php:797
 msgid "Enable Blacklist Repeat Offender"
@@ -3517,7 +3572,7 @@ msgstr "Activer la liste noire des offenseurs récidivistes "
 
 #: core/class-itsec-global-settings.php:798
 msgid "If this box is checked the IP address of the offending computer will be added to the \"Ban Users\" blacklist after reaching the number of lockouts listed below."
-msgstr "Si cette case est cochée, l'adresse IP de l'ordinateur incriminé sera ajoutée à la liste noire des \"Utilisateurs Bannis\" après avoir atteint le nombre de blocages ci-dessous."
+msgstr "Si cette case est cochée, l’adresse IP de l’ordinateur incriminé sera ajoutée à la liste noire des \"Utilisateurs Bannis\" après avoir atteint le nombre de blocages ci-dessous."
 
 #: core/class-itsec-global-settings.php:801
 msgid "Note that as you are on NGINX you will still need to manually restart the server even though the users will be added to the banned users list."
@@ -3529,7 +3584,7 @@ msgstr "Blocages"
 
 #: core/class-itsec-global-settings.php:827
 msgid "The number of lockouts per IP before the host is banned permanently from this site."
-msgstr "Nombre de blocages par adresse IP avant que l'hôte ne soit banni de façon permanente de ce site."
+msgstr "Nombre de blocages par adresse IP avant que l’hôte ne soit banni de façon permanente de ce site."
 
 #: core/class-itsec-global-settings.php:851
 #: core/class-itsec-global-settings.php:1158
@@ -3539,7 +3594,7 @@ msgstr "Jours"
 
 #: core/class-itsec-global-settings.php:852
 msgid "How many days should a lockout be remembered to meet the blacklist count above."
-msgstr "De combien de jours doit-on se souvenir d'un blocage pour qu'il puisse coïncider avec le nombre de la liste noire ci-dessus."
+msgstr "De combien de jours doit-on se souvenir d’un blocage pour qu’il puisse coïncider avec le nombre de la liste noire ci-dessus."
 
 #: core/class-itsec-global-settings.php:871 core/class-itsec-lockout.php:359
 #: core/class-itsec-setup.php:31
@@ -3548,7 +3603,7 @@ msgstr "Votre adresse IP a été marquée comme une menace par le réseau iTheme
 
 #: core/class-itsec-global-settings.php:876
 msgid "The message to display to a user when their IP has been flagged as bad by the iThemes network."
-msgstr "Le message à afficher à un utilisateur dont l'IP a été marquée comme malveillante par le réseau iThemes."
+msgstr "Le message à afficher à un utilisateur dont l’IP a été marquée comme malveillante par le réseau iThemes."
 
 #: core/class-itsec-global-settings.php:877
 #: core/class-itsec-global-settings.php:1046
@@ -3562,7 +3617,7 @@ msgstr "Envoyer un e-mail de résumé"
 
 #: core/class-itsec-global-settings.php:905
 msgid "During periods of heavy attack or other times a security plugin can generate a LOT of email just telling you that it is doing its job. Turning this on will reduce the emails from this plugin to no more than one per day for any notification."
-msgstr "Durant les périodes de forte attaque ou à d'autres moments, une extension de sécurité peut générer BEAUCOUP d'emails juste pour vous dire qu'elle fait son travail. Activer cette option permettra de réduire les e-mails de cette extension pour ne pas en envoyer plus d'un par jour pour chaque notification."
+msgstr "Durant les périodes de forte attaque ou à d’autres moments, une extension de sécurité peut générer BEAUCOUP d’e-mails juste pour vous dire qu’elle fait son travail. Activer cette option permettra de réduire les e-mails de cette extension pour ne pas en envoyer plus d’un par jour pour chaque notification."
 
 #: core/class-itsec-global-settings.php:930
 msgid "Enable Email Lockout Notifications"
@@ -3570,19 +3625,19 @@ msgstr "Activer la notification par e-mail des blocages"
 
 #: core/class-itsec-global-settings.php:934
 msgid "This feature will trigger an email to be sent to the "
-msgstr "Cette fonctionnalité déclenchera l'envoi d'un e-mail à "
+msgstr "Cette fonctionnalité déclenchera l’envoi d’un e-mail à "
 
 #: core/class-itsec-global-settings.php:935
 msgid "notifications email address"
-msgstr "l'adresse e-mail de notification"
+msgstr "l’adresse e-mail de notification"
 
 #: core/class-itsec-global-settings.php:936
 msgid " whenever a host or user is locked out of the system."
-msgstr "chaque fois qu'un hôte ou un utilisateur est verrouillé sur le système."
+msgstr "chaque fois qu’un hôte ou un utilisateur est verrouillé sur le système."
 
 #: core/class-itsec-global-settings.php:961
 msgid "Hide security menu in admin bar."
-msgstr "Cacher le menu sécurité dans la barre d'administration"
+msgstr "Cacher le menu sécurité dans la barre d’administration"
 
 #: core/class-itsec-global-settings.php:985
 msgid "Enable InfiniteWP Compatibility"
@@ -3598,11 +3653,11 @@ msgstr "InfiniteWP."
 
 #: core/class-itsec-global-settings.php:991
 msgid "Do not turn it on unless you use the InfiniteWP service."
-msgstr "Ne l'activez pas à moins que vous utilisiez le service InfiniteWP."
+msgstr "Ne l’activez pas à moins que vous utilisiez le service InfiniteWP."
 
 #: core/class-itsec-global-settings.php:1020
 msgid "Turning this option on will prevent errors related to file locking however might result in operations being executed twice. We do not recommend turning this off unless your host prevents the file locking feature from working correctly."
-msgstr "Activer cette fonction préviendra des erreurs relatifs aux blocages de fichiers. Cependant, cela peut donner lieu à la double exécution de l'opération. Nous ne recommandons pas de la désactiver à moins que votre hôte empêche la fonction de blocage de fichiers de fonctionner correctement."
+msgstr "Activer cette fonction préviendra des erreurs relatifs aux blocages de fichiers. Cependant, cela peut donner lieu à la double exécution de l’opération. Nous ne recommandons pas de la désactiver à moins que votre hôte empêche la fonction de blocage de fichiers de fonctionner correctement."
 
 #: core/class-itsec-global-settings.php:1040 core/class-itsec-lockout.php:383
 #: core/class-itsec-setup.php:29
@@ -3611,7 +3666,7 @@ msgstr "Erreur"
 
 #: core/class-itsec-global-settings.php:1045
 msgid "The message to display when a computer (host) has been locked out."
-msgstr "Message à afficher lorsqu'un ordinateur (hôte) a été bloqué."
+msgstr "Message à afficher lorsqu’un ordinateur (hôte) a été bloqué."
 
 #: core/class-itsec-global-settings.php:1066
 #: core/modules/brute-force/class-itsec-brute-force-admin.php:348
@@ -3634,12 +3689,12 @@ msgstr "Suivez les directives ci-dessous pour entrer les hôtes qui ne seront pa
 #: core/class-itsec-global-settings.php:1105
 #: core/modules/ban-users/class-itsec-ban-users-admin.php:191
 msgid "Lookup IP Address."
-msgstr "Recherche d'adresses IP."
+msgstr "Recherche d’adresses IP."
 
 #: core/class-itsec-global-settings.php:1103
 #: core/modules/ban-users/class-itsec-ban-users-admin.php:188
 msgid "Enter only 1 IP address or 1 IP address range per line."
-msgstr "Entrez seulement 1 adresse IP ou une plage d'adresses IP par ligne."
+msgstr "Entrez seulement 1 adresse IP ou une plage d’adresses IP par ligne."
 
 #: core/class-itsec-global-settings.php:1106
 msgid "This white list will prevent any IP listed from triggering an automatic lockout. You can still block the IP address manually in the banned users settings."
@@ -3653,12 +3708,12 @@ msgstr "Le chemin sur votre serveur où les fichiers journaux doivent être stoc
 #: core/class-itsec-global-settings.php:1216
 #: core/modules/backup/class-itsec-backup-admin.php:816
 msgid "This path must be writable by your website. For added security, it is recommended you do not include it in your website root folder."
-msgstr "Ce chemin doit être accessible en écriture par votre site. Pour plus de sécurité, il est recommandé de ne pas l'inclure dans le dossier racine de votre site."
+msgstr "Ce chemin doit être accessible en écriture par votre site. Pour plus de sécurité, il est recommandé de ne pas l’inclure dans le dossier racine de votre site."
 
 #: core/class-itsec-global-settings.php:1134
 #: core/modules/backup/class-itsec-backup-admin.php:817
 msgid "Restore Default Location"
-msgstr "Restaurer l'emplacement par défaut"
+msgstr "Restaurer l’emplacement par défaut"
 
 #: core/class-itsec-global-settings.php:1159
 msgid "The number of days database logs should be kept. File logs will be kept indefinitely but will be rotated once the file hits 10MB."
@@ -3682,7 +3737,7 @@ msgstr "Comment les journaux d’évènements doivent être conservés"
 
 #: core/class-itsec-global-settings.php:1191
 msgid " can log events in multiple ways, each with advantages and disadvantages. Database Only puts all events in the database with your posts and other WordPress data. This makes it easy to retrieve and process but can be slower if the database table gets very large. File Only is very fast but the plugin does not process the logs itself as that would take far more resources. For most users or smaller sites Database Only should be fine. If you have a very large site or a log processing software then File Only might be a better option."
-msgstr "peut consigner les évènements de plusieurs façons, chacune ayant ses avantages et ses inconvénients. Base de données seulement met tous les évènements dans la base de données avec vos messages et d'autres données de WordPress. Cela les rend plus facile à récupérer et traiter, mais peut être plus lent si la table de la base de données devient très grand. Fichier seulement est très rapide mais l'extension ne traitant pas les journaux elle-même cela entraîne une utilisation beaucoup plus importante de ressources. Pour la plupart des utilisateurs ou pour les petits sites la méthode base de données devraient être bien. Si vous avez un très grand site ou un logiciel de traitement de journal la fonction Fichier Seulement pourrait être une meilleure option."
+msgstr "peut consigner les évènements de plusieurs façons, chacune ayant ses avantages et ses inconvénients. Base de données seulement met tous les évènements dans la base de données avec vos messages et d’autres données de WordPress. Cela les rend plus facile à récupérer et traiter, mais peut être plus lent si la table de la base de données devient très grand. Fichier seulement est très rapide mais l’extension ne traitant pas les journaux elle-même cela entraîne une utilisation beaucoup plus importante de ressources. Pour la plupart des utilisateurs ou pour les petits sites la méthode base de données devraient être bien. Si vous avez un très grand site ou un logiciel de traitement de journal la fonction Fichier Seulement pourrait être une meilleure option."
 
 #: core/class-itsec-global-settings.php:1215
 msgid "The path on your server where backup files should be stored."
@@ -3694,11 +3749,11 @@ msgstr "Adresse(s) e-mail(s) à laquelle toutes les notifications de sécurités
 
 #: core/class-itsec-global-settings.php:1264
 msgid "Disable Proxy IP Detection"
-msgstr "Désactiver la détection d'IP de proxy"
+msgstr "Désactiver la détection d’IP de proxy"
 
 #: core/class-itsec-global-settings.php:1268
 msgid "If you're not using a proxy service such as Varnish, Cloudflare or others turning this on may result in more accurate IP detection."
-msgstr "Si vous n’utilisez pas un service de proxy comme le Varnish, Cloudflare ou d'autres, activer ceci peut entraîner une détection plus précise d'IP."
+msgstr "Si vous n’utilisez pas un service de proxy comme le Varnish, Cloudflare ou d’autres, activer ceci peut entraîner une détection plus précise d’IP."
 
 #: core/class-itsec-global-settings.php:1288
 msgid "You have been locked out due to too many login attempts."
@@ -3727,7 +3782,7 @@ msgstr "doit être autorisé à écrire le fichier dans le wp-config.php"
 
 #: core/class-itsec-global-settings.php:1345
 msgid " automatically. If disabled you will need to manually place configuration options in those files."
-msgstr "automatiquement. Si c'est désactivé, vous devrez placer manuellement les options de configuration dans ces fichiers."
+msgstr "automatiquement. Si c’est désactivé, vous devrez placer manuellement les options de configuration dans ces fichiers."
 
 #: core/class-itsec-lockout.php:68
 msgid "Active Lockouts"
@@ -3748,7 +3803,7 @@ msgstr "blocage"
 
 #: core/class-itsec-lockout.php:319
 msgid "A whitelisted host has triggered a lockout condition but was not locked out."
-msgstr "Un utilisateur en liste blanche a déclenché une condition de blocage mais n'a pas été bloqué."
+msgstr "Un utilisateur en liste blanche a déclenché une condition de blocage mais n’a pas été bloqué."
 
 #: core/class-itsec-lockout.php:371 core/class-itsec-setup.php:30
 msgid "You have been locked out due to too many invalid login attempts."
@@ -3760,11 +3815,11 @@ msgstr "À propos des blocages"
 
 #: core/class-itsec-lockout.php:407
 msgid "Your lockout settings can be configured in"
-msgstr "Vos paramètres de blocage peuvent être configuré dans "
+msgstr "Vos réglages de blocage peuvent être configuré dans "
 
 #: core/class-itsec-lockout.php:409
 msgid "Your current settings are configured as follows:"
-msgstr "Vos paramètres actuels sont configurés comme suit : "
+msgstr "Vos réglages actuels sont configurés comme suit : "
 
 #: core/class-itsec-lockout.php:410
 msgid "Permanently ban"
@@ -3788,11 +3843,11 @@ msgstr "Combien de temps un blocage doit-il se souvenir pour un bannissement "
 
 #: core/class-itsec-lockout.php:416
 msgid "Host lockout message"
-msgstr "Message de blocage de l'hôte"
+msgstr "Message de blocage de l’hôte"
 
 #: core/class-itsec-lockout.php:418
 msgid "User lockout message"
-msgstr "Message de blocage de l'utilisateur"
+msgstr "Message de blocage de l’utilisateur"
 
 #: core/class-itsec-lockout.php:420
 msgid "Is this computer white-listed"
@@ -3808,4 +3863,4 @@ msgstr "est mise sur la liste blanche pour"
 
 #: core/class-itsec-lockout.php:544 core/class-itsec-lockout.php:1063
 msgid "Remove IP from Whitelist"
-msgstr "Supprimer L'IP de la liste blanche"
+msgstr "Supprimer L’IP de la liste blanche"
