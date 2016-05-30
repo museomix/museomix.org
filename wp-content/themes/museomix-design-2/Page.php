@@ -112,7 +112,7 @@ if(!$ContenuPage){ $ContenuPage = apply_filters('the_content',get_the_content())
 					if (isset($ContenusSections[$id]) && !empty($ContenusSections[$id]['txt'])) {
 					?>
 					
-						<section class="section-1 sec1" id="<?php echo $id; ?>" style="min-height: 300px; position: relative;"> 
+						<section class="section-1 sec1" id="<?php echo $id; ?>" style="position: relative;"> 
 							
 							<?php #if('presentation'!=$id&&'participer'!=$id): ?>
 							

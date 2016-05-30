@@ -460,9 +460,14 @@ body.home .navbar {
     /*padding-top: 50px;*/
     padding-bottom: 25px;
     /*margin-bottom: -40px;*/
-    border-bottom: 1px solid #ccc;
+   
     /*min-height: 250px;*/
+	position:relative;
 }
+.section-1.sec1 {
+	border-bottom: 1px solid #ccc;
+}
+
 .section-1.first,.section-1:first-child{
     padding-top: 0;
 }
