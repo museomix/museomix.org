@@ -22,7 +22,6 @@ jQuery( document ).ready( function () {
 				jQuery.post( ajaxurl, data, function () {
 
 					var url = window.location.href;
-					console.log( url );
 					url = url.substring( 0, url.lastIndexOf( "&" ) );
 
 					window.location.replace( url );

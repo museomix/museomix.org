@@ -1,52 +1,118 @@
 <?php
 
 class ITSEC_Ban_Users {
-
-	function run() {
-
-		return null;
+	private static $instance = false;
+	
+	private $hooks_added = false;
+	
+	
+	private function __construct() {
+		$this->init();
 	}
-
-	/**
-	 * Inserts an IP address into the htaccess ban list.
-	 *
-	 * @since 4.0
-	 *
-	 * @param      $ip
-	 * @param null $ban_list
-	 * @param null $white_list
-	 *
-	 * @return void
-	 */
-	public static function insert_ip( $ip, $ban_list = null, $white_list = null ) {
-
-		$settings = get_site_option( 'itsec_ban_users' );
-
-		$host = sanitize_text_field( $ip );
-
-		if ( $ban_list === null ) {
-
-			$ban_list = isset( $settings['host_list'] ) ? $settings['host_list'] : array();
-
+	
+	public static function get_instance() {
+		if ( ! self::$instance ) {
+			self::$instance = new self;
 		}
-
-		if ( $white_list === null ) {
-
-			$global_settings = get_site_option( 'itsec_global' );
-
-			$white_list = isset( $global_settings['lockout_white_list'] ) ? $global_settings['lockout_white_list'] : array();
-
+		
+		return self::$instance;
+	}
+	
+	public static function activate() {
+		$self = self::get_instance();
+		
+		$self->add_hooks();
+		ITSEC_Response::regenerate_server_config();
+	}
+	
+	public static function deactivate() {
+		$self = self::get_instance();
+		
+		$self->remove_hooks();
+		ITSEC_Response::regenerate_server_config();
+	}
+	
+	public function add_hooks() {
+		if ( $this->hooks_added ) {
+			return;
 		}
-
-		if ( ! in_array( $host, $ban_list ) && ! ITSEC_Lib::is_ip_whitelisted( $host, $white_list ) ) {
-
-			$ban_list[]            = $host;
-			$settings['host_list'] = $ban_list;
-			ITSEC_Files::quick_ban( $host );
-			update_site_option( 'itsec_ban_users', $settings );
-			add_site_option( 'itsec_rewrites_changed', true );
-
+		
+		add_filter( 'itsec_filter_blacklisted_ips', array( $this, 'filter_blacklisted_ips' ) );
+		
+		add_filter( 'itsec_filter_apache_server_config_modification', array( $this, 'filter_apache_server_config_modification' ) );
+		add_filter( 'itsec_filter_nginx_server_config_modification', array( $this, 'filter_nginx_server_config_modification' ) );
+		add_filter( 'itsec_filter_litespeed_server_config_modification', array( $this, 'filter_litespeed_server_config_modification' ) );
+		
+		$this->hooks_added = true;
+	}
+	
+	public function remove_hooks() {
+		remove_filter( 'itsec_filter_blacklisted_ips', array( $this, 'filter_blacklisted_ips' ) );
+		
+		remove_filter( 'itsec_filter_apache_server_config_modification', array( $this, 'filter_apache_server_config_modification' ) );
+		remove_filter( 'itsec_filter_nginx_server_config_modification', array( $this, 'filter_nginx_server_config_modification' ) );
+		remove_filter( 'itsec_filter_litespeed_server_config_modification', array( $this, 'filter_litespeed_server_config_modification' ) );
+		
+		$this->hooks_added = false;
+	}
+	
+	public function init() {
+		$this->add_hooks();
+	}
+	
+	public function filter_blacklisted_ips( $blacklisted_ips ) {
+		if ( ITSEC_Modules::get_setting( 'ban-users', 'enable_ban_lists' ) ) {
+			$blacklisted_ips = array_merge( $blacklisted_ips, ITSEC_Modules::get_setting( 'ban-users', 'host_list', array() ) );
 		}
-
+		
+		return $blacklisted_ips;
+	}
+	
+	public function filter_apache_server_config_modification( $modification ) {
+		require_once( dirname( __FILE__ ) . '/config-generators.php' );
+		
+		if ( ITSEC_Modules::get_setting( 'ban-users', 'default' ) ) {
+			$modification .= ITSEC_Ban_Users_Config_Generators::get_server_config_default_blacklist_rules( 'apache' );
+		}
+		
+		if ( ITSEC_Modules::get_setting( 'ban-users', 'enable_ban_lists' ) ) {
+			$modification .= ITSEC_Ban_Users_Config_Generators::get_server_config_ban_hosts_rules( 'apache' );
+			$modification .= ITSEC_Ban_Users_Config_Generators::get_server_config_ban_user_agents_rules( 'apache' );
+		}
+		
+		return $modification;
+	}
+	
+	public function filter_nginx_server_config_modification( $modification ) {
+		require_once( dirname( __FILE__ ) . '/config-generators.php' );
+		
+		if ( ITSEC_Modules::get_setting( 'ban-users', 'default' ) ) {
+			$modification .= ITSEC_Ban_Users_Config_Generators::get_server_config_default_blacklist_rules( 'nginx' );
+		}
+		
+		if ( ITSEC_Modules::get_setting( 'ban-users', 'enable_ban_lists' ) ) {
+			$modification .= ITSEC_Ban_Users_Config_Generators::get_server_config_ban_hosts_rules( 'nginx' );
+			$modification .= ITSEC_Ban_Users_Config_Generators::get_server_config_ban_user_agents_rules( 'nginx' );
+		}
+		
+		return $modification;
+	}
+	
+	public function filter_litespeed_server_config_modification( $modification ) {
+		require_once( dirname( __FILE__ ) . '/config-generators.php' );
+		
+		if ( ITSEC_Modules::get_setting( 'ban-users', 'default' ) ) {
+			$modification .= ITSEC_Ban_Users_Config_Generators::get_server_config_default_blacklist_rules( 'litespeed' );
+		}
+		
+		if ( ITSEC_Modules::get_setting( 'ban-users', 'enable_ban_lists' ) ) {
+			$modification .= ITSEC_Ban_Users_Config_Generators::get_server_config_ban_hosts_rules( 'litespeed' );
+			$modification .= ITSEC_Ban_Users_Config_Generators::get_server_config_ban_user_agents_rules( 'litespeed' );
+		}
+		
+		return $modification;
 	}
 }
+
+
+ITSEC_Ban_Users::get_instance();

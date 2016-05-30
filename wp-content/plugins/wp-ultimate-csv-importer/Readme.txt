@@ -3,13 +3,14 @@ Contributors: smackcoders
 Donate link: http://www.smackcoders.com/donate.html
 Tags: csv importer, import csv, import woocommerce, import marketpress, import seo by yoast, import all in one seo, scheduled import, import remote file, export woocommerce, import types fields, import acf fields, import inline images
 Requires at least: 4.0 
-Tested up to: 4.5
-Stable tag: 3.9.4
-Version: 3.9.4
+Tested up to: 4.5.2
+Stable tag: 3.10.0
+Version: 3.10.0
 Author: smackcoders
 Author URI: http://profiles.wordpress.org/smackcoders/
 License: GPLv2 or later
 WP Ultimate CSV Importer is a WordPress extension to import and export CSV files.
+
 == Description ==
 WP Ultimate CSV Importer is an import and export tool that helps to a build WordPress site at the drop of a hat by importing Post, Page, Custom Post, Users, WordPress Custom Fields, Products of eShop and SEO fields of All in One SEO. The plugin supports export and import of Custom Post Type created with the CPT UI plugin and default WordPress functions. The import is for selective modules, but the export is for all the core modules along with few third party plugins.
 
@@ -19,11 +20,11 @@ Please show your support for WP Ultimate CSV Importer by giving it a [rating](ht
 * Core Modules - Post, Page, Custom Post and Users.
 * eCommerce Products - eShop.
 * Custom Post - CPT UI, CustomPress and default WordPress Custom Post.
-* Custom Field - CustomPress.
+* Custom Field - CustomPress & WordPress default fields.
 * SEO field - All in One SEO.
 = Modules supported in Export =
 * Core Modules - Category, Tag, Custom Taxonomy, Customer Reviews, Comments.
-* eCommerce Products - WooCommerce, MarketPress, WP e-Commerce.
+* eCommerce Products - WooCommerce, MarketPress, WP e-Commerce & eShop.
 * Custom fields and SEO fields imported along with these modules can be exported.
 = Highlighted Feature =
 * Imports inline images with shortcodes and images from an external URLs.
@@ -44,9 +45,9 @@ Please show your support for WP Ultimate CSV Importer by giving it a [rating](ht
 Ultimate CSV Importer PRO has all the features of WP Ultimate CSV Importer and it is extended with a lot of features that enables to [import](https://www.youtube.com/watch?v=S1P8KebpLaU&index=1&list=PL2k3Ck1bFtbTtSX3hEFoBvK_Ka0pfYwp_), schedule, [update](https://www.youtube.com/watch?v=VEumAqpJfSw&list=PL2k3Ck1bFtbTtSX3hEFoBvK_Ka0pfYwp_&index=2) and [export](https://www.youtube.com/watch?v=0YA0au4cXW0) both CSV and XML files. The import details over a year is mentioned in dashboard chart and the site updates can be tracked in a fraction of a second. Any changes like modifying existing content or appending new content can be done with the update. The update or import can be performed periodically with scheduler. The update or schedule is done with the templates which is created with mapped fields in the mapping section of the import. The export option enables to export the imported modules as CSV based on the filters.
 = Supported Modules To Import and Export =
 * Core Module - Post, Page, Custom Post, Category, Tags, Users, Customer Reviews.
-* eCommerce Products – WooCommerce, MarketPress, eShop, WP e-Commerce.
+* eCommerce Products – WooCommerce, MarketPress, WP e-Commerce & eShop.
 * SEO field - All in One SEO and Yoast SEO.
-* Custom fields – CustomPress, ACF, Types, Pods, CCTM.
+* Custom fields – CustomPress, ACF, Types, Pods, CCTM & WordPress default fields.
 * Custom Post – CustomPress, Types, Pods, CPT UI, CCTM.
 = Highlighted Feature of PRO =
 * [Import inline image with shortcode and featured images with shortcode or external URL.](https://www.youtube.com/watch?v=VvcVLERTEHo)
@@ -65,7 +66,7 @@ You can try the [live demo](http://demo.smackcoders.com/wordpressdemofour/wp-adm
 
 Read our [blog](https://www.smackcoders.com/blog/category/wordpress-products) to know more about the new [features](https://www.smackcoders.com/wp-ultimate-csv-importer-pro/features.html) of our WordPress plugins.
 
-[Troubleshooting tips](https://wordpress.org/support/topic/tips-to-trouble-shoot-wp-ultimate-csv-importer-issues-1)
+[FAQ](https://www.smackcoders.com/wordpress-products-faq.html) and Troubleshooting tips](https://wordpress.org/support/topic/tips-to-trouble-shoot-wp-ultimate-csv-importer-issues-1)
 
 == Installation ==
 1. Extract the wp-ultimate-csv-importer.zip in wordpress/wp-content/plugins using FTP or with plugin install in wp-admin.
@@ -79,6 +80,7 @@ Read our [blog](https://www.smackcoders.com/blog/category/wordpress-products) to
 5. Detailed real-time log.
 6. Settings with php.ini details.
 7. Export module with filters.
+
 == Frequently Asked Questions ==
 = Common Issues =
 How to solve auto_prepend_file and auto_append_file error?<br />
@@ -88,7 +90,13 @@ Create a .htaccess file in the root and set the following values.<br />
 php_value auto_prepend_file none<br />
 php_value auto_append_file none<br />
 This will solve your issue or get support from hosting if you didn’t have sufficient permission.
+
+For more FAQ, you can refer [here](https://www.smackcoders.com/wordpress-products-faq.html).
+
 == Changelog ==
+= 3.10.0 =
+* Improvements: Can export any number of records from WordPress site.
+* Fixed: Issue in ACF relationship field export.
 = 3.9.4 =
 * Improvements: Duplicate image handling. Option to skip or rename image as imagename-number if image name is same as existing media image name. 
 = 3.9.3 =
@@ -356,6 +364,8 @@ This will solve your issue or get support from hosting if you didn’t have suff
 * Initial release version. Tested and found works well without any issues.
 
 == Upgrade Notice ==
+= 3.10.0 =
+* Upgrade now to export ACF relationship field and improved export features.
 = 3.9.4 =
 * Upgrade now for duplicate image handling feature.
 = 3.9.3 =

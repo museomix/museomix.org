@@ -764,3 +764,21 @@ div#log {
 #noPlugin {
     margin: 5% 12%;
 }
+
+.grouptitlecontent {
+    border-left:1px solid #ddd;
+    border-right:1px solid #ddd;
+    border-bottom:1px solid #ddd;
+}
+.exclusion-list {
+    padding:5px;
+}
+#accordion > div.panel {
+    padding: 0;
+}
+.exclusion-list label {
+    width: 98%;
+}
+.exclusion-list input {
+    margin-bottom: 4px !important;
+}

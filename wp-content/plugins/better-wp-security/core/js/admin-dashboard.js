@@ -12,8 +12,6 @@ jQuery( document ).ready( function () {
 
 		var goto = jQuery( this ).attr( 'href' );
 
-		console.log( goto );
-
 		jQuery( 'html, body' ).animate(
 			{
 				scrollTop: jQuery( goto ).offset().top

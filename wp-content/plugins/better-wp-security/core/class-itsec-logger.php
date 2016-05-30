@@ -23,8 +23,6 @@ final class ITSEC_Logger {
 
 	function __construct() {
 
-		global $itsec_globals;
-
 		$this->logger_modules  = array(); //array to hold information on modules using this feature
 		$this->logger_displays = array(); //array to hold metabox information
 		$this->module_path     = ITSEC_Lib::get_module_path( __FILE__ );
@@ -32,144 +30,12 @@ final class ITSEC_Logger {
 		add_action( 'plugins_loaded', array( $this, 'register_modules' ) );
 		add_action( 'plugins_loaded', array( $this, 'write_pending_events_to_file' ) );
 
-		add_action( 'admin_enqueue_scripts', array( $this, 'admin_script' ) ); //enqueue scripts for admin page
-
 		//Run database cleanup daily with cron
 		if ( ! wp_next_scheduled( 'itsec_purge_logs' ) ) {
 			wp_schedule_event( time(), 'daily', 'itsec_purge_logs' );
 		}
 
 		add_action( 'itsec_purge_logs', array( $this, 'purge_logs' ) );
-
-		if ( is_admin() ) {
-
-			require( trailingslashit( $itsec_globals['plugin_dir'] ) . 'core/lib/class-itsec-wp-list-table.php' ); //used for generating log tables
-
-			add_action( 'itsec_add_admin_meta_boxes', array( $this, 'add_admin_meta_boxes' ) ); //add log meta boxes
-
-		}
-
-		if ( isset( $_POST['itsec_clear_logs'] ) && $_POST['itsec_clear_logs'] === 'clear_logs' ) {
-
-			global $itsec_clear_all_logs;
-
-			$itsec_clear_all_logs = true;
-
-			add_action( 'plugins_loaded', array( $this, 'purge_logs' ) );
-
-		}
-
-	}
-
-	/**
-	 * Adds a log meta box only if logging is active. Overrides WP Core add_meta_box
-	 *
-	 * @since 4.0
-	 *
-	 * @return void
-	 */
-	public function add_admin_meta_boxes() {
-
-		global $itsec_globals;
-
-		if ( isset( $itsec_globals['settings']['log_type'] ) && ( $itsec_globals['settings']['log_type'] === 0 || $itsec_globals['settings']['log_type'] === 2 ) ) {
-
-			add_meta_box(
-				'itsec_log_header',
-				__( 'Security Log Information', 'better-wp-security' ),
-				array( $this, 'metabox_logs_header' ),
-				'security_page_toplevel_page_itsec_logs',
-				'top',
-				'core'
-			);
-
-			add_meta_box(
-				'itsec_log_all',
-				__( 'Security Log Data', 'better-wp-security' ),
-				array( $this, 'metabox_all_logs' ),
-				'security_page_toplevel_page_itsec_logs',
-				'normal',
-				'core'
-			);
-
-		} else {
-
-			add_meta_box(
-				'itsec_log_header',
-				__( 'Security Log Information', 'better-wp-security' ),
-				array( $this, 'metabox_logs_header_no_logs' ),
-				'security_page_toplevel_page_itsec_logs',
-				'top',
-				'core'
-			);
-
-		}
-
-	}
-
-	/**
-	 * Add Logger Admin Javascript
-	 *
-	 * @since 4.3
-	 *
-	 * @return void
-	 */
-	public function admin_script() {
-
-		global $itsec_globals;
-
-		if ( isset( get_current_screen()->id ) && strpos( get_current_screen()->id, 'toplevel_page_itsec_logs' ) !== false ) {
-
-			wp_enqueue_script( 'itsec_logger', $itsec_globals['plugin_url'] . 'core/js/admin-logs.js', array( 'jquery' ), $itsec_globals['plugin_build'], true );
-			wp_enqueue_script( 'itsec_url_js', $itsec_globals['plugin_url'] . 'core/js/url.js', array(), $itsec_globals['plugin_build'], true );
-
-		}
-
-	}
-
-	/**
-	 * Displays all logs content
-	 *
-	 * @since 4.3
-	 *
-	 * @return void
-	 */
-	public function all_logs_content() {
-
-		global $wpdb;
-
-		require( dirname( __FILE__ ) . '/class-itsec-logger-all-logs.php' );
-
-		$log_display = new ITSEC_Logger_All_Logs();
-		$log_display->prepare_items();
-		$log_display->display();
-
-		$log_count = $wpdb->get_var( "SELECT COUNT(*) FROM `" . $wpdb->base_prefix . "itsec_log`;" );
-
-		?>
-		<form method="post" action="">
-			<?php wp_nonce_field( 'itsec_clear_logs', 'wp_nonce' ); ?>
-			<input type="hidden" name="itsec_clear_logs" value="clear_logs"/>
-			<table class="form-table">
-				<tr valign="top">
-					<th scope="row" class="settinglabel">
-						<?php _e( 'Log Summary', 'better-wp-security' ); ?>
-					</th>
-					<td class="settingfield">
-
-						<p><?php _e( 'Your database contains', 'better-wp-security' ); ?>
-							<strong><?php echo $log_count; ?></strong> <?php _e( 'log entries.', 'better-wp-security' ); ?>
-						</p>
-
-						<p><?php _e( 'Use the button below to purge the log table in your database. Please note this will purge all log entries in the database including 404s.', 'better-wp-security' ); ?></p>
-
-						<p class="submit"><input type="submit" class="button-primary"
-						                         value="<?php _e( 'Clear Logs', 'better-wp-security' ); ?>"/></p>
-					</td>
-				</tr>
-			</table>
-		</form>
-	<?php
 
 	}
 
@@ -286,14 +152,15 @@ final class ITSEC_Logger {
 	 * @return void
 	 */
 	public function log_event( $module, $priority = 5, $data = array(), $host = '', $username = '', $user = '', $url = '', $referrer = '' ) {
-		global $wpdb, $itsec_globals;
-		
+
 		if ( isset( $this->logger_modules[ $module ] ) ) {
-			if ( ! isset( $itsec_globals['settings']['log_type'] ) || $itsec_globals['settings']['log_type'] === 0 || $itsec_globals['settings']['log_type'] == 2 ) {
+			$type = ITSEC_Modules::get_setting( 'global', 'log_type' );
+			
+			if ( 'database' === $type || 'both' === $type ) {
 				$this->_log_event_to_db( $module, $priority, $data, $host, $username, $user, $url, $referrer );
 			}
 
-			if ( isset( $itsec_globals['settings']['log_type'] ) && ( $itsec_globals['settings']['log_type'] === 1 || $itsec_globals['settings']['log_type'] == 2 ) ) {
+			if ( 'file' === $type || 'both' === $type ) {
 				$this->_log_event_to_file( $module, $priority, $data, $host, $username, $user, $url, $referrer );
 			}
 
@@ -369,54 +236,14 @@ final class ITSEC_Logger {
 			esc_sql( $referrer ) . ',' .
 			maybe_serialize( $file_data );
 
-		error_log( $message . PHP_EOL, 3, $this->log_file );
+		$this->add_to_log_file( $message );
 
 	}
 
 	public function write_pending_events_to_file() {
-		if ( ! empty( $this->_events_to_log_to_file ) ) {
-			foreach ( $this->_events_to_log_to_file as $event ) {
-				call_user_func_array( array( $this, '_log_event_to_file' ), $event );
-			}
+		foreach ( $this->_events_to_log_to_file as $event ) {
+			call_user_func_array( array( $this, '_log_event_to_file' ), $event );
 		}
-	}
-
-	/**
-	 * Displays into box for logs page
-	 *
-	 * @since 4.0
-	 *
-	 * @return void
-	 */
-	public function metabox_logs_header() {
-
-		global $itsec_globals;
-
-		printf(
-			'<p>%s %s. %s</p>',
-			__( 'Below are various logs of information collected by', 'better-wp-security' ),
-			$itsec_globals['plugin_name'],
-			__( 'This information can help you get a picture of what is happening with your site and the level of success you have achieved in your security efforts.', 'better-wp-security' )
-		);
-
-	}
-
-	/**
-	 * Displays into box for logs page when only file logging is enabled
-	 *
-	 * @since 4.0
-	 *
-	 * @return void
-	 */
-	public function metabox_logs_header_no_logs() {
-
-		global $itsec_globals;
-
-		printf(
-			'<p>%s</p>',
-			__( 'To view logs within the plugin you must enable database logging in the plugin settings. File logging is not available for access within the plugin itself.', 'better-wp-security' )
-		);
-
 	}
 
 	/**
@@ -523,11 +350,11 @@ final class ITSEC_Logger {
 	 *
 	 * @return void
 	 */
-	public function purge_logs() {
+	public function purge_logs( $purge_all = false ) {
 
 		global $wpdb, $itsec_globals, $itsec_clear_all_logs;
 
-		if ( isset( $itsec_clear_all_logs ) && $itsec_clear_all_logs === true ) {
+		if ( true === $purge_all ) {
 
 			if ( ! wp_verify_nonce( $_POST['wp_nonce'], 'itsec_clear_logs' ) ) {
 				return;
@@ -538,9 +365,11 @@ final class ITSEC_Logger {
 		} else {
 
 			//Clean up the database log first
-			if ( $itsec_globals['settings']['log_type'] === 0 || $itsec_globals['settings']['log_type'] == 2 ) {
+			$type = ITSEC_Modules::get_setting( 'global', 'log_type' );
+			
+			if ( 'database' === $type || 'both' === $type ) {
 
-				$wpdb->query( "DELETE FROM `" . $wpdb->base_prefix . "itsec_log` WHERE `log_date_gmt` < '" . date( 'Y-m-d H:i:s', $itsec_globals['current_time_gmt'] - ( $itsec_globals['settings']['log_rotation'] * 24 * 60 * 60 ) ) . "';" );
+				$wpdb->query( "DELETE FROM `" . $wpdb->base_prefix . "itsec_log` WHERE `log_date_gmt` < '" . date( 'Y-m-d H:i:s', $itsec_globals['current_time_gmt'] - ( ITSEC_Modules::get_setting( 'global', 'log_rotation' ) * DAY_IN_SECONDS ) ) . "';" );
 
 			} else {
 
@@ -548,11 +377,7 @@ final class ITSEC_Logger {
 
 			}
 
-			$this->get_log_file();
-
-			if ( ( @file_exists( $this->log_file ) && @filesize( $this->log_file ) >= 10485760 ) ) {
-				$this->rotate_log();
-			}
+			$this->rotate_log();
 
 		}
 
@@ -578,9 +403,14 @@ final class ITSEC_Logger {
 	 * @return void
 	 */
 	private function rotate_log() {
+		$log_file = $this->get_log_file();
+		
+		if ( ! @file_exists( $log_file ) || @filesize( $log_file ) < 10485760 ) { // 10485760 is 1 mebibyte
+			return;
+		}
 
 		// rotate
-		$path_info      = pathinfo( $this->log_file );
+		$path_info      = pathinfo( $log_file );
 		$base_directory = $path_info['dirname'];
 		$base_name      = $path_info['basename'];
 		$num_map        = array();
@@ -611,7 +441,7 @@ final class ITSEC_Logger {
 		foreach ( $num_map as $num => $old_file ) {
 
 			$new_file = $num + 1;
-			@rename( $base_directory . DIRECTORY_SEPARATOR . $old_file, $this->log_file . '.' . $new_file );
+			@rename( $base_directory . DIRECTORY_SEPARATOR . $old_file, $log_file . '.' . $new_file );
 
 		}
 
@@ -662,21 +492,28 @@ final class ITSEC_Logger {
 	}
 
 	private function get_log_file() {
-		global $itsec_globals;
-
-		//make sure the log file info is there or generate it. This should only affect beta users.
-		if ( ! isset( $itsec_globals['settings']['log_info'] ) ) {
-
+		if ( isset( $this->log_file ) ) {
+			return $this->log_file;
+			$this->rotate_log();
+		}
+		
+		$log_location = ITSEC_Modules::get_setting( 'global', 'log_location' );
+		$log_info = ITSEC_Modules::get_setting( 'global', 'log_info' );
+		
+		if ( empty( $log_info ) ) {
 			// We need wp_generate_password() to create a cryptographically secure file name
 			if ( ! function_exists( 'wp_generate_password' ) ) {
+				$this->log_file = false;
 				return false;
 			}
-			$itsec_globals['settings']['log_info'] = substr( sanitize_title( get_bloginfo( 'name' ) ), 0, 20 ) . '-' . wp_generate_password( 30, false );
-
-			update_site_option( 'itsec_global', $itsec_globals['settings'] );
-
+			
+			$log_info = substr( sanitize_title( get_bloginfo( 'name' ) ), 0, 20 ) . '-' . wp_generate_password( 30, false );
+			
+			ITSEC_Modules::set_setting( 'global', 'log_info', $log_info );
 		}
-		$this->log_file = $itsec_globals['ithemes_log_dir'] . '/event-log-' . $itsec_globals['settings']['log_info'] . '.log';
+		
+		$this->log_file = "$log_location/event-log-$log_info.log";
+		
 		return $this->log_file;
 	}
 
@@ -686,28 +523,34 @@ final class ITSEC_Logger {
 	 * @return void
 	 */
 	private function _prepare_log_file() {
+		$log_file = $this->get_log_file();
+		
 		// We can't prepare a file if we can't get the file name
-		if ( false === $this->get_log_file() ) {
+		if ( false === $log_file ) {
 			return false;
 		}
 
-		if ( file_exists( $this->log_file ) !== true ) { //only if current log file doesn't exist
-			global $itsec_globals;
+		if ( ! file_exists( $log_file ) ) { //only if current log file doesn't exist
 
-			//Make sure the logs directory was created
-			if ( ! is_dir( $itsec_globals['ithemes_log_dir'] ) ) {
-				if ( wp_mkdir_p( $itsec_globals['ithemes_log_dir'] ) ) {
-					// Make sure we have an index file to block directory listing
-					file_put_contents( path_join( $itsec_globals['ithemes_log_dir'], 'index.php' ), "<?php\n// Silence is golden." );
-				}
-			}
+			$header = 'log_type,log_priority,log_function,log_date,log_date_gmt,log_host,log_username,log_user,log_url,log_referrer,log_data';
 
-			$header = 'log_type,log_priority,log_function,log_date,log_date_gmt,log_host,log_username,log_user,log_url,log_referrer,log_data' . PHP_EOL;
-
-			@error_log( $header, 3, $this->log_file );
+			$this->add_to_log_file( $header );
 
 		}
 
+		return true;
+
 	}
 
+	private function add_to_log_file( $details ) {
+		$log_file = $this->get_log_file();
+		
+		if ( false === $log_file ) {
+			return false;
+		}
+		
+		@error_log( $details . PHP_EOL, 3, $log_file );
+		
+		return true;
+	}
 }

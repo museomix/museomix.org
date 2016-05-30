@@ -2,8 +2,8 @@
 Contributors: ithemes, chrisjean, aaroncampbell, gerroald, mattdanner
 Tags: security, security plugin, malware, hack, secure, block, SSL, admin, htaccess, lockdown, login, protect, protection, anti virus, attack, injection, login security, maintenance, permissions, prevention, authentication, administration, password, brute force, ban, permissions, bots, user agents, xml rpc, security log
 Requires at least: 4.1
-Tested up to: 4.5.1
-Stable tag: 5.3.7
+Tested up to: 4.5.2
+Stable tag: 5.4.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -16,7 +16,7 @@ Released under the terms of the GNU General Public License.
 
 iThemes Security (formerly Better WP Security) gives you over 30+ ways to secure and protect your WordPress site. On average, 30,000 new websites are hacked each day. WordPress sites can be an easy target for attacks because of plugin vulnerabilities, weak passwords and obsolete software.
 
-Most WordPress admins don't know they're vulnerable, but iThemes Security works to lock down Wordpress, fix common holes, stop automated attacks and strengthen user credentials. With one-click activation for most features, as well as advanced features for experienced users, our WordPress security plugin can help harden WordPress.
+Most WordPress admins don't know they're vulnerable, but iThemes Security works to lock down Wordpress, fix common holes, stop automated attacks and strengthen user credentials. With advanced features for experienced users, our WordPress security plugin can help harden WordPress.
 
 = Maintained and Supported by iThemes =
 
@@ -148,9 +148,6 @@ DISCLAIMER: Under no circumstances do we release this plugin with any warranty, 
 = Will this plugin completely stop all attacks on my site? =
 * No. iThemes Security is designed to help improve the security of your WordPress installation from many common attack methods, but it cannot prevent every possible attack. Nothing replaces diligence and good practice. This plugin makes it a little easier for you to apply both.
 
-= Is "one-click" protection good enough? =
-* One-click protection will help reduce the risk of attack on your site, but we recommend fixing as many high, medium and low priority items in the Security Status section as possible. If you have a plugin or theme that conflicts with an iThemes Security feature, we recommend deactivating the offending feature.
-
 = Is this plugin only for new WordPress installs or can I use it on existing sites, too? =
 * Many of the changes made by this plugin are complex and can break existing sites. While iThemes Security can be installed on either a new or existing site, we strongly recommend making a <a href="http://ithemes.com/purchase/backupbuddy" target="_blank">complete backup</a> of your existing site before applying any features included in this plugin.
 
@@ -183,13 +180,43 @@ Free support may be available with the help of the community in the <a href="htt
 
 == Screenshots ==
 
-1. After activation, iThemes Security guides you through important first steps
-2. One-click secure button enables most security features
-3. Instantly scan your site and see where you can improve your security with high, medium and low priority items
-4. Simple, informative settings options show you what you need to know about each setting
-5. Easy-to-navigate Security dashboard
+1. WordPress security settings are organized into an easy-to-use dashboard.
+2. Settings can also be managed in a list view.
+3. Settings are easily configured and explained with descriptions.
+4. Advanced WordPress security settings let you make more complex modifications to your site.
+5. Free malware scan powered by Sucuri SiteCheck.
 
 == Changelog ==
+
+= 5.4.5 =
+ * Bug Fix: Fixed SQL query for Database Backups when "Backup Full Database" is enabled.
+
+= 5.4.4 =
+ * Bug Fix: Fixed bug that could cause some sites to lose settings when upgrading.
+
+= 5.4.3 =
+ * Bug Fix: Don't rely on externally loaded MailChimp JavaScript.
+
+= 5.4.2 =
+ * Bug Fix: Fixed links to Settings, Logs, and creating a backup on Multisite.
+ * Enhancement: The "Write to Files" setting is now enabled by default.
+
+= 5.4.1 =
+ * Bug Fix: Fixed error that would prevent nginx servers from being able to make use of the "Reduce Comment Spam" feature of the WordPress Tweaks module.
+ * Bug Fix: Restored missing log filter for 404 Detection log entries.
+
+= 5.4.0 =
+ * Enhancement: New user interface with both grid and list views for managing settings.
+ * Enhancement: New automatic temp whitelisting of IPs for users that manage iThemes Security settings.
+ * Enhancement: Better feedback on errors when modifying wp-config.php or server config files.
+ * Enhancement: Improved code efficiency of the Away Mode feature so that it takes less processing time when active.
+ * Enhancement: Rather than disabling features that have invalid user input, the user now can fix the issue before saving.
+ * Enhancement: Improved the efficiency of the plugin's loading code, reducing the amount of time taken to run the plugin.
+ * New Feature: Global settings now has a "Show Error Codes" setting that can provide an error message's specific error code when it is enabled.
+ * Bug Fix: More than one IP can now be temp whitelisted.
+ * Bug Fix: Fixed a bug where some modules would be enabled or disabled when they shouldn't be after upgrading to the latest version.
+ * Bug Fix: Will not send notification emails about the new login address when Hide Backend is enabled and doing an upgrade.
+ * Compatibility Fix: Updated handling of wp_remote_get() responses in preparation for changes coming in WordPress 4.6.
 
 = 5.3.7 =
 * Bug Fix: Throw a real 403 instead of a faked 404 for hide backend - Fixes compatability with certain plugins including WordPress SEO. Hat tip to Joost de Valk (@jdevalk) and the @Yoast team for bringing this issue to our attention.
@@ -1518,6 +1545,24 @@ This release is a complete rewrite from the ground up. Special thanks to Cory Mi
 * First alpha release including simple feature set.
 
 == Upgrade Notice ==
+
+= 5.4.5 =
+Version 5.4.5 contains a bug fix that fixes the listing of tables to exclude from database backups when "Backup Full Database" is enabled.
+
+= 5.4.4 =
+Version 5.4.4 contains a bug fix that addresses problems some users had when upgrading.
+
+= 5.4.3 =
+Version 5.4.3 contains a bug fix that can prevent script issues in some browsers.
+
+= 5.4.2 =
+Version 5.4.2 contains import bug fixes for Multisite.
+
+= 5.4.1 =
+Version 5.4.1 contains import bug fixes for sites on nginx servers and brings back display of 404 errors in the logs.
+
+= 5.4.0 =
+Version 5.4.0 provides an all new, easier to use interface as well as speed and performance improvements. Upgrade now!
 
 = 5.3.7 =
 Version 5.3.6 contains a bugfix that fixes compatability with WordPress SEO and is recommended for all users.

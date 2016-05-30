@@ -1,8 +1,17 @@
 <?php
 
-class ITSEC_Ban_Users_Module_Init extends ITSEC_Module_Init {
-	protected $_id   = 'ban-users';
-	protected $_name = 'Ban Users';
-	protected $_desc = 'Ban users.';
+ITSEC_Modules::register_module( 'ban-users', dirname( __FILE__ ), 'default-active' );
+
+
+function itsec_ban_users_handle_new_blacklisted_ip( $ip ) {
+	$host_list = ITSEC_Modules::get_setting( 'ban-users', 'host_list', array() );
+	
+	if ( ! is_array( $host_list ) ) {
+		$host_list = array();
+	}
+	
+	$host_list[] = $ip;
+	
+	ITSEC_Modules::set_setting( 'ban-users', 'host_list', $host_list );
 }
-new ITSEC_Ban_Users_Module_Init();
+add_action( 'itsec-new-blacklisted-ip', 'itsec_ban_users_handle_new_blacklisted_ip' );

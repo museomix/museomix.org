@@ -1,57 +1,42 @@
 <?php
 
 class Ithemes_Sync_Verb_ITSEC_Set_Temp_Whitelist extends Ithemes_Sync_Verb {
-
-	public static $name        = 'itsec-set-temp-whitelist';
+	public static $name = 'itsec-set-temp-whitelist';
 	public static $description = 'Set temporarily whitelisted IP.';
 
 	public $default_arguments = array(
-		'direction' => 'add', //whether to "add" or "remove" whitelist
-		'ip'        => '' //IP to add or remove
+		'direction' => 'add',
+		'ip'        => '',
 	);
 
-	public function run( $arguments ) {
 
-		global $itsec_globals;
+	public function run( $arguments ) {
+		global $itsec_lockout;
+
+
+		if ( ! isset( $arguments['ip'] ) ) {
+			return new WP_Error( 'missing-argument-ip', __( 'The ip argument is missing.', 'better-wp-security' ) );
+		}
+
+		$arguments = Ithemes_Sync_Functions::merge_defaults( $arguments, $this->default_arguments );
+		$ip = sanitize_text_field( $arguments['ip'] );
+
+		if ( empty( $ip ) ) {
+			return new WP_Error( 'empty-ip', __( 'An empty ip argument was submitted.', 'better-wp-security' ) );
+		}
 
 		$direction = isset( $arguments['direction'] ) ? $arguments['direction'] : 'add';
 
-		if ( $direction === 'add' ) {
-
-			if ( get_site_option( 'itsec_temp_whitelist_ip' ) !== false || ! isset( $arguments['ip'] ) ) {
-				return false;
-			}
-
-			$ip = sanitize_text_field( $arguments['ip'] );
-
-			if ( ! class_exists( 'ITSEC_Lib_IP_Tools' ) ) {
-				$itsec_core = ITSEC_Core::get_instance();
-				require_once( dirname( $itsec_core->get_plugin_file() ) . '/core/lib/class-itsec-lib-ip-tools.php' );
-			}
-
-			if ( ITSEC_Lib_IP_Tools::validate( $ip ) ) {
-
-				$response = array(
-					'ip'  => $ip,
-					'exp' => $itsec_globals['current_time'] + 86400,
-				);
-
-				add_site_option( 'itsec_temp_whitelist_ip', $response );
-
-				return true;
-
-			}
-
-		} elseif ( $direction === 'remove' ) {
-
-			delete_site_option( 'itsec_temp_whitelist_ip' );
-
-			return true;
-
+		if ( 'add' === $direction ) {
+			$itsec_lockout->add_to_temp_whitelist( $ip );
+		} else if ( 'remove' === $direction ) {
+			$itsec_lockout->remove_from_temp_whitelist( $ip );
+		} else if ( 'clear' === $direction ) {
+			$itsec_lockout->clear_temp_whitelist();
+		} else {
+			return new WP_Error( 'invalid-argument-value-for-direction', __( 'The direction argument must be either "add", "clear", or "remove".', 'better-wp-security' ) );
 		}
 
-		return false;
-
+		return true;
 	}
-
 }

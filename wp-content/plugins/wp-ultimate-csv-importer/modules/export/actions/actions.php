@@ -34,23 +34,51 @@
  * Notices must display the words
  * "Copyright Smackcoders. 2015. All rights reserved".
  ********************************************************************************/
+if ( ! defined( 'ABSPATH' ) )
+        exit; // Exit if accessed directly
 
-if (!defined('ABSPATH')) {
-	exit;
-} // Exit if accessed directly
 class ExportActions extends SkinnyActions {
 	public function __construct() {
 
 	}
+
 	/**
 	 * The actions index method
 	 * @param array $request
 	 * @return array
 	 */
 	public function executeIndex($request) {
+		// return an array of name value pairs to send data to the template
 		$data = array();
-		$nonce = wp_create_nonce('my-nonce');
-		$data['wp_nonce'] = $nonce;
+		if (!empty($request['POST'])) {
+			$type = sanitize_text_field($request['POST']['export']);
+			if(isset($request['POST']['export_filename'])) {
+				$filename = sanitize_file_name($request['POST']['export_filename']);
+				if (!empty($type) && !empty($filename)) {
+					$helper = new ultimatecsv_include_helper();
+					$helper->generateanddownloadcsv($type, $filename);
+				}
+			}
+		}
+		if(isset($request['POST']['export'])) {
+			$classifyFieldsObj = new WPClassifyFields();
+			if(sanitize_text_field($request['POST']['export']) == 'category' || sanitize_text_field($request['POST']['export']) == 'tags') {
+				$export_type = 'categories';
+			} else {
+				$export_type = sanitize_text_field($request['POST']['export']);
+			}
+			$get_avail_groups = $classifyFieldsObj->get_availgroups($export_type);
+			$data['available_groups'] = $get_avail_groups;
+			$data['export_type'] = $export_type;
+			if(sanitize_text_field($request['POST']['export_post_type']) != '--Select--') {
+				$data['export_cpt_type'] = sanitize_text_field($request['POST']['export_post_type']);
+			} else if($request['POST']['export_taxo_type'] != '--Select--') {
+				$data['export_custtaxo_type'] = sanitize_text_field($request['POST']['export_taxo_type']);
+			}
+		}
+                $nonce = '';
+                $nonce = wp_create_nonce('smack_nonce_key');
+                $data['wp_nonce'] = $nonce;
 		return $data;
 	}
 }

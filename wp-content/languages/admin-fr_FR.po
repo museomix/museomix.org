@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Administration package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2016-04-26 10:56:36+0000\n"
+"PO-Revision-Date: 2016-05-23 11:50:21+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -182,7 +182,7 @@ msgstr "Le mode visuel vous donne accès à un éditeur comparable à un traitem
 #. version number
 #: wp-admin/includes/update.php:351
 msgid "There is a new version of %1$s available. <a href=\"%2$s\" class=\"thickbox open-plugin-details-modal\" aria-label=\"%3$s\">View version %4$s details</a>. <em>Automatic update is unavailable for this plugin.</em>"
-msgstr "Il y a une nouvelle version de %1$s disponible.<a href=\"%2$s\" class=\"thickbox open-plugin-details-modal\" aria-label=\"%3$s\">Voir les détails de la version %4$s</a>. <em>La mise à jour automatique n’est pas disponible pour cette extension.</em> "
+msgstr "Une nouvelle version pour %1$s est disponible.<a href=\"%2$s\" class=\"thickbox open-plugin-details-modal\" aria-label=\"%3$s\">Voir les détails de la version %4$s</a>. <em>La mise à jour automatique n’est pas disponible pour cette extension.</em> "
 
 #. translators: 1: plugin name, 2: details URL, 3: accessibility text, 4:
 #. version number
@@ -190,7 +190,7 @@ msgstr "Il y a une nouvelle version de %1$s disponible.<a href=\"%2$s\" class=\"
 #. version number
 #: wp-admin/includes/update.php:342 wp-admin/includes/update.php:472
 msgid "There is a new version of %1$s available. <a href=\"%2$s\" class=\"thickbox open-plugin-details-modal\" aria-label=\"%3$s\">View version %4$s details</a>."
-msgstr "Il y a une nouvelle version de %1$s disponible. <a href=\"%2$s\" class=\"thickbox open-plugin-details-modal\" aria-label=\"%3$s\">Voir les détails de la version %4$s</a>. "
+msgstr "Une nouvelle version pour %1$s est disponible. <a href=\"%2$s\" class=\"thickbox open-plugin-details-modal\" aria-label=\"%3$s\">Voir les détails de la version %4$s</a>. "
 
 #. translators: %s: number of media files
 #: wp-admin/upload.php:291
@@ -270,7 +270,7 @@ msgstr "<strong>Publier</strong> - Vous pouvez définir la manière dont votre a
 
 #: wp-admin/user-edit.php:191
 msgid "Error while saving the new email address. Please try again."
-msgstr "Une erreur est survenue durant l'enregistrement de votre adresse de messagerie. Veuillez réessayer."
+msgstr "Une erreur est survenue durant l’enregistrement de votre adresse de messagerie. Veuillez réessayer."
 
 #. translators: %s: new email
 #: wp-admin/user-edit.php:403
@@ -332,7 +332,7 @@ msgstr "%1$s par %2$s"
 #. translators: %s: new admin email
 #: wp-admin/options-general.php:110
 msgid "There is a pending change of the admin email to %s."
-msgstr "Il y a un changement en attente de l'e-mail de l'administrateur vers %s."
+msgstr "Il y a un changement en attente de l’e-mail de l’administrateur vers %s."
 
 #. translators: 1: UTC abbreviation, 2: UTC time
 #: wp-admin/options-general.php:158
@@ -346,7 +346,7 @@ msgstr "Ignorer le panneau de bienvenue"
 #. translators: %s: wp-config.php
 #: wp-admin/install.php:253
 msgid "Your %s file has an empty database table prefix, which is not supported."
-msgstr "Votre fichier %s a un préfixe de base de donnée vide, ce qui n'est pas supporté."
+msgstr "Votre fichier %s a un préfixe de base de donnée vide, ce qui n’est pas supporté."
 
 #. translators: %s: DO_NOT_UPGRADE_GLOBAL_TABLES
 #: wp-admin/install.php:266
@@ -363,7 +363,7 @@ msgstr "<a href=\"https://codex.wordpress.org/Version_%1$s\">WordPress %1$s</a> 
 
 #: wp-admin/includes/plugin-install.php:340
 msgid "You are using a development version of WordPress. These feature plugins are also under development. <a href=\"%s\">Learn more</a>."
-msgstr "Vous utilisez une version en développement de WordPress. Ces fonctionnalités d'extensions sont aussi en développement. <a href=\"%s\">En savoir plus</a>."
+msgstr "Vous utilisez une version en développement de WordPress. Ces fonctionnalités d’extensions sont aussi en développement. <a href=\"%s\">En savoir plus</a>."
 
 #: wp-admin/includes/plugin-install.php:581
 msgid "Reviews"
@@ -1225,7 +1225,7 @@ msgstr "Prévisualiser la page"
 
 #: wp-admin/edit-comments.php:159
 msgid "In the <strong>Submitted On</strong> column, the date and time the comment was left on your site appears. Clicking on the date/time link will take you to that comment on your live site."
-msgstr "Dans la colonne <strong>Envoyé le</strong>, vous trouverez la date et l'heure de publication du commentaire sur votre site. En cliquant sur le lien, vous ouvrirez la page du lien sur votre site."
+msgstr "Dans la colonne <strong>Envoyé le</strong>, vous trouverez la date et l’heure de publication du commentaire sur votre site. En cliquant sur le lien, vous ouvrirez la page du lien sur votre site."
 
 #: wp-admin/edit-comments.php:157
 msgid "In the <strong>Comment</strong> column, hovering over any comment gives you options to approve, reply (and approve), quick edit, edit, spam mark, or trash that comment."
@@ -1942,11 +1942,11 @@ msgstr ""
 "certain(e) de ce que vous faites :\n"
 "###URL_DELETE###\n"
 "\n"
-"Si vous effacez votre site, n'hésitez pas à revenir créer un autre site à l'avenir ! \n"
+"Si vous effacez votre site, n’hésitez pas à revenir créer un autre site à l’avenir ! \n"
 "(mais souvenez-vous que votre site actuel et votre identifiant\n"
 "ne seront plus jamais disponibles)\n"
 "\n"
-"Merci d'avoir utilisé notre site,\n"
+"Merci d’avoir utilisé notre site,\n"
 "\n"
 "Le webmaster\n"
 "###SITE_NAME###"
@@ -1957,7 +1957,7 @@ msgstr ""
 #. version number, 5: update URL, 6: accessibility text
 #: wp-admin/includes/update.php:360 wp-admin/includes/update.php:490
 msgid "There is a new version of %1$s available. <a href=\"%2$s\" class=\"thickbox open-plugin-details-modal\" aria-label=\"%3$s\">View version %4$s details</a> or <a href=\"%5$s\" class=\"update-link\" aria-label=\"%6$s\">update now</a>."
-msgstr "Il y a une nouvelle version de %1$s disponible.<a href=\"%2$s\" class=\"thickbox open-plugin-details-modal\" aria-label=\"%3$s\">Voir les détails de la version %4$s</a> ou <a href=\"%5$s\" class=\"update-link\" aria-label=\"%6$s\">mettre à jour maintenant</a>."
+msgstr "Une nouvelle version pour %1$s est disponible.<a href=\"%2$s\" class=\"thickbox open-plugin-details-modal\" aria-label=\"%3$s\">Voir les détails de la version %4$s</a> ou <a href=\"%5$s\" class=\"update-link\" aria-label=\"%6$s\">mettre à jour maintenant</a>."
 
 #: wp-admin/includes/theme.php:613 wp-admin/themes.php:409
 msgid "Close details dialog"
@@ -1973,7 +1973,7 @@ msgstr "Page des articles"
 
 #: wp-admin/includes/class-wp-screen.php:1141
 msgid "Number of items per page:"
-msgstr "Nombre d'éléments par page&nbsp;:"
+msgstr "Nombre d’éléments par page :"
 
 #: wp-admin/includes/class-wp-press-this.php:106
 msgid "Missing post ID."
@@ -2009,9 +2009,9 @@ msgid ""
 msgstr ""
 "Cher/chère ###USERNAME###,\n"
 "\n"
-"Vous avez récemment demandé à modifier l'adresse de messagerie de l'administration de votre compte.\n"
+"Vous avez récemment demandé à modifier l’adresse de messagerie de l’administration de votre compte.\n"
 "\n"
-"Si c'est bien le cas, veuillez cliquer sur le lien suivant pour changer d'adresse de messagerie :\n"
+"Si c’est bien le cas, veuillez cliquer sur le lien suivant pour changer d’adresse de messagerie :\n"
 "###ADMIN_URL###\n"
 "\n"
 "Vous pouvez ignorer ce message et le supprimer si vous ne souhaitez pas lancer cette action.\n"
@@ -2020,7 +2020,7 @@ msgstr ""
 "\n"
 "Cordialement,\n"
 "\n"
-"L'équipe de ###SITENAME###\n"
+"L’équipe de ###SITENAME###\n"
 "###SITEURL###"
 
 #. translators: Do not translate USERNAME, ADMIN_URL, EMAIL, SITENAME, SITEURL:
@@ -2046,9 +2046,9 @@ msgid ""
 msgstr ""
 "Cher/chère ###USERNAME###,\n"
 "\n"
-"Vous avez récemment demandé à modifier l'adresse de messagerie de l'administration de votre compte.\n"
+"Vous avez récemment demandé à modifier l’adresse de messagerie de l’administration de votre compte.\n"
 "\n"
-"Si c'est bien le cas, veuillez cliquer sur le lien suivant pour changer d'adresse de messagerie :\n"
+"Si c’est bien le cas, veuillez cliquer sur le lien suivant pour changer d’adresse de messagerie :\n"
 "###ADMIN_URL###\n"
 "\n"
 "Vous pouvez ignorer ce message et le supprimer si vous ne souhaitez pas lancer cette action.\n"
@@ -2057,7 +2057,7 @@ msgstr ""
 "\n"
 "Cordialement,\n"
 "\n"
-"L'équipe de ###SITENAME###\n"
+"L’équipe de ###SITENAME###\n"
 "###SITEURL###"
 
 #: wp-admin/includes/class-wp-upgrader.php:3540
@@ -2090,7 +2090,7 @@ msgstr ""
 "* Ouvrez une discussion sur le forum de support en anglais : https://wordpress.org/support/forum/alphabeta\n"
 "* Ou, si rédiger un rapport de bogue ne vous fait pas peur : http://core.trac.wordpress.org/\n"
 "\n"
-"Merci ! -- L'équipe WordPress"
+"Merci ! -- L’équipe WordPress"
 
 #: wp-admin/includes/class-wp-press-this.php:1474
 #: wp-admin/includes/class-wp-press-this.php:1484
@@ -2192,11 +2192,11 @@ msgstr "Vous n’êtes connecté qu’à cet endroit."
 
 #: wp-admin/includes/plugin-install.php:336
 msgid "These suggestions are based on the plugins you and other users have installed."
-msgstr "Ces suggestions sont basées sur les extensions que vous et d'autres utilisateurs ont installées."
+msgstr "Ces suggestions sont basées sur les extensions que vous et d’autres utilisateurs ont installées."
 
 #: wp-admin/edit-form-advanced.php:369
 msgid "You can enable distraction-free writing mode using the icon to the right. This feature is not available for old browsers or devices with small screens, and requires that the full-height editor be enabled in Screen Options."
-msgstr "Vous pouvez activer le mode d'’écriture sans distraction en cliquant sur l’icône à droite. Cette fonctionnalité n’est pas disponible pour les anciens navigateurs ou les appareils à petits écrans, et requiert l’activation l'éditeur plein-écran dans les options de l’écran."
+msgstr "Vous pouvez activer le mode d’écriture sans distraction en cliquant sur l’icône à droite. Cette fonctionnalité n’est pas disponible pour les anciens navigateurs ou les appareils à petits écrans, et requiert l’activation de l'éditeur plein-écran dans les options de l’écran."
 
 #: wp-admin/user-edit.php:565
 msgid "Log Out Everywhere"
@@ -2224,11 +2224,11 @@ msgid ""
 "--The WordPress Team\n"
 "https://wordpress.org/\n"
 msgstr ""
-"Votre nouveau site WordPress a bien été installé à l'adresse :\n"
+"Votre nouveau site WordPress a bien été installé à l’adresse :\n"
 "\n"
 "%1$s\n"
 "\n"
-"Vous pouvez vous y connecter en tant qu'administrateur avec les informations suivantes :\n"
+"Vous pouvez vous y connecter en tant qu’administrateur avec les informations suivantes :\n"
 "\n"
 "Identifiant : %2$s\n"
 "Mot de passe : %3$s\n"
@@ -2236,12 +2236,12 @@ msgstr ""
 "\n"
 "Nous espérons que vous aimerez votre nouveau site ! Merci à vous !\n"
 "\n"
-"--L'équipe WordPress\n"
+"--L’équipe WordPress\n"
 "https://wordpress.org/\n"
 
 #: wp-admin/themes.php:172
 msgid "You cannot delete a theme while it has an active child theme."
-msgstr "Vous ne pouvez pas supprimer un thème qui est actuellement utilisé par l'un de ses thèmes-enfant."
+msgstr "Vous ne pouvez pas supprimer un thème qui est actuellement utilisé par l’un de ses thèmes-enfant."
 
 #: wp-admin/nav-menus.php:606 wp-admin/widgets.php:360
 msgid "Manage in Customizer"
@@ -2269,7 +2269,7 @@ msgstr "<strong>Nouvelles de WordPress</strong> - Dernières nouvelles en proven
 
 #: wp-admin/includes/class-wp-screen.php:925
 msgid "Enable full-height editor and distraction-free functionality."
-msgstr "Activer l'éditeur plein-écran et la fonctionnalité d'écriture sans distraction."
+msgstr "Activer l’éditeur plein-écran et la fonctionnalité d’écriture sans distraction."
 
 #: wp-admin/includes/dashboard.php:1117
 msgid "https://planet.wordpress.org/feed/"
@@ -2315,11 +2315,11 @@ msgstr "Impossible de déconnecter les sessions utilisateur. Veuillez réessayer
 
 #: wp-admin/includes/ajax-actions.php:2955
 msgid "This preview is unavailable in the editor."
-msgstr "Cette prévisualisation n'est pas disponible dans l'éditeur."
+msgstr "Cette prévisualisation n’est pas disponible dans l’éditeur."
 
 #: wp-admin/includes/ajax-actions.php:2018
 msgid "You don't have permission to attach files to this post."
-msgstr "Vous n&rsquo;avez pas l&rsquo;autorisation d'attacher des fichiers à cet article."
+msgstr "Vous n&rsquo;avez pas l&rsquo;autorisation d’attacher des fichiers à cet article."
 
 #: wp-admin/edit-tag-form.php:150 wp-admin/edit-tags.php:483
 msgctxt "term parent"
@@ -2328,7 +2328,7 @@ msgstr "Parent"
 
 #: wp-admin/edit-form-advanced.php:368
 msgid "You can insert media files by clicking the icons above the post editor and following the directions. You can align or edit images using the inline formatting toolbar available in Visual mode."
-msgstr "Vous pouvez insérer des fichiers média en cliquant sur les icônes situées au-dessus de l&rsquo;éditeur, puis en suivant les instructions. Vous pouvez aligner ou modifier les images à l'aide de la barre de mise en page disponible dans le mode Visuel."
+msgstr "Vous pouvez insérer des fichiers média en cliquant sur les icônes situées au-dessus de l’éditeur, puis en suivant les instructions. Vous pouvez aligner ou modifier les images à l’aide de la barre de mise en page disponible dans le mode Visuel."
 
 #: wp-admin/edit-form-advanced.php:365
 msgid "<strong>Post editor</strong> &mdash; Enter the text for your post. There are two modes of editing: Visual and Text. Choose the mode by clicking on the appropriate tab."
@@ -2637,7 +2637,7 @@ msgstr "Derniers en date"
 
 #: wp-admin/users.php:52
 msgid "Remove allows you to remove a user from your site. It does not delete their content. You can also remove multiple users at once by using Bulk Actions."
-msgstr "« Supprimer » vous permet de retirer un utilisateur de votre site. Cela ne supprime pas son contenu. Vous pouvez également supprimer plusieurs utilisateurs à la fois avec les Actions Groupées."
+msgstr "« Supprimer » vous permet de retirer un utilisateur de votre site. Cela ne supprime pas son contenu. Vous pouvez également supprimer plusieurs utilisateurs à la fois avec les Actions groupées."
 
 #: wp-admin/edit-tags.php:74
 msgid "You are not allowed to add this item."
@@ -2734,7 +2734,7 @@ msgstr "Gérer les menus"
 
 #: wp-admin/includes/meta-boxes.php:101
 msgid "Edit status"
-msgstr "Modifier l'état"
+msgstr "Modifier l’état"
 
 #: wp-admin/includes/meta-boxes.php:147
 msgid "Edit visibility"
@@ -2746,7 +2746,7 @@ msgstr "Parcourir les révisions"
 
 #: wp-admin/edit-form-comment.php:102 wp-admin/includes/meta-boxes.php:204
 msgid "Edit date and time"
-msgstr "Modifier la date et l'heure"
+msgstr "Modifier la date et l’heure"
 
 #: wp-admin/themes.php:140
 msgid "Search installed themes..."
@@ -2782,7 +2782,7 @@ msgstr "Bienvenue dans WordPress&nbsp;%s"
 
 #: wp-admin/themes.php:92
 msgid "If you would like to see more themes to choose from, click on the &#8220;Add New&#8221; button and you will be able to browse or search for additional themes from the <a href=\"%s\" target=\"_blank\">WordPress.org Theme Directory</a>. Themes in the WordPress.org Theme Directory are designed and developed by third parties, and are compatible with the license WordPress uses. Oh, and they&#8217;re free!"
-msgstr "Si vous souhaitez choisir parmi plus de thèmes, cliquez sur le bouton \"Ajouter\" et vous pourrez parcourir le <a href=\"%s\" target=\"_blank\">répertoire de thème de WordPress.org</a> et y chercher des thèmes supplémentaires. Les thèmes du répertoire de thèmes de WordPress.org sont conçus et développés par des tiers, et sont compatibles avec la licence de WordPress. Oh, et ils sont gratuits !"
+msgstr "Si vous souhaitez choisir parmi plus de thèmes, cliquez sur le bouton \"Ajouter\" et vous pourrez parcourir le <a href=\"%s\" target=\"_blank\">répertoire de thème de WordPress.org</a> et y chercher des thèmes supplémentaires. Les thèmes du répertoire de WordPress.org sont conçus et développés par des tiers, et sont compatibles avec la licence de WordPress. Et ils sont gratuits !"
 
 #: wp-admin/includes/theme.php:235
 msgid "Fixed Layout"
@@ -3085,7 +3085,7 @@ msgstr "WordPress %s est disponible."
 
 #: wp-admin/includes/class-wp-upgrader.php:3360
 msgid "Your site at %1$s experienced a critical failure while trying to update WordPress to version %2$s."
-msgstr "Votre site à l'adresse %1$s a fait face à un échec critique en essayant de faire une mise à jour de WordPress vers la version %2$s."
+msgstr "Votre site à l’adresse %1$s a fait face à un échec critique en essayant de faire une mise à jour de WordPress vers la version %2$s."
 
 #: wp-admin/includes/class-wp-upgrader.php:3400
 msgid "Your site was running version %s."
@@ -3122,23 +3122,23 @@ msgstr "[%1$s] URGENT : suite à une mise à jour échouée, votre site est peut
 
 #: wp-admin/includes/class-wp-upgrader.php:3325
 msgid "Howdy! Your site at %1$s has been updated automatically to WordPress %2$s."
-msgstr "Salutations ! Votre site à l'adresse %1$s a été automatiquement mis à jour vers WordPress %2$s."
+msgstr "Salutations ! Votre site à l’adresse %1$s a été automatiquement mis à jour vers WordPress %2$s."
 
 #: wp-admin/includes/class-wp-upgrader.php:3328
 msgid "No further action is needed on your part."
-msgstr "Vous n'avez rien de plus à faire."
+msgstr "Vous n’avez rien de plus à faire."
 
 #: wp-admin/includes/class-wp-upgrader.php:3332
 msgid "For more on version %s, see the About WordPress screen:"
-msgstr "Pour en savoir plus sur la version %s, lisez l'écran À Propos de WordPress : "
+msgstr "Pour en savoir plus sur la version %s, lisez l’écran À Propos de WordPress : "
 
 #: wp-admin/includes/class-wp-upgrader.php:3345
 msgid "Please update your site at %1$s to WordPress %2$s."
-msgstr "Veuillez mettre à jour votre site à l'adresse %1$s pour le passer à WordPress %2$s."
+msgstr "Veuillez mettre à jour votre site à l’adresse %1$s pour le passer à WordPress %2$s."
 
 #: wp-admin/includes/class-wp-upgrader.php:3352
 msgid "We tried but were unable to update your site automatically."
-msgstr "Malgré nos tentatives, nous n'avons pas pu mettre votre site à jour automatiquement."
+msgstr "Malgré nos tentatives, nous n’avons pas pu mettre votre site à jour automatiquement."
 
 #: wp-admin/includes/class-wp-upgrader.php:3337
 #: wp-admin/includes/class-wp-upgrader.php:3354
@@ -3147,7 +3147,7 @@ msgstr "La mise à jour est facile et ne requiert que quelques secondes :"
 
 #: wp-admin/includes/class-wp-upgrader.php:3362
 msgid "Your site at %1$s experienced a critical failure while trying to update to the latest version of WordPress, %2$s."
-msgstr "Votre site à l'adresse %1$s a fait face à un échec critique en essayant de faire une mise à jour vers la dernière version de WordPress, la %2$s."
+msgstr "Votre site à l’adresse %1$s a fait face à un échec critique en essayant de faire une mise à jour vers la dernière version de WordPress, la %2$s."
 
 #: wp-admin/includes/class-wp-upgrader.php:3364
 msgid "This means your site may be offline or broken. Don't panic; this can be fixed."
@@ -3155,7 +3155,7 @@ msgstr "Cela signifie que votre site est peut-être hors ligne ou cassé. Ne pan
 
 #: wp-admin/includes/class-wp-upgrader.php:3366
 msgid "Please check out your site now. It's possible that everything is working. If it says you need to update, you should do so:"
-msgstr "Veuillez vérifier votre site immédiatelement. Il se peut que tout fonctionne. S'il affiche que vous devez faire une mise à jour, vous devriez suivre son conseil :"
+msgstr "Veuillez vérifier votre site immédiatement. Il se peut que tout fonctionne. S’il affiche que vous devez faire une mise à jour, vous devriez suivre son conseil :"
 
 #: wp-admin/includes/class-wp-upgrader.php:3383 wp-admin/update-core.php:553
 msgid "Keeping your site updated is important for security. It also makes the internet a safer place for you and your readers."
@@ -3163,7 +3163,7 @@ msgstr "Pour des questions de sécurité, il est important de garder votre site 
 
 #: wp-admin/includes/class-wp-upgrader.php:3377
 msgid "If you experience any issues or need support, the volunteers in the WordPress.org support forums may be able to help."
-msgstr "Si vous rencontrez des problèmes ou avez besoin d'assistance, les volontaires du forum d'entraide de WordPress-fr.net devraient pouvoir vous aider."
+msgstr "Si vous rencontrez des problèmes ou avez besoin d’assistance, les volontaires du forum d’entraide de WordPress-fr.net devraient pouvoir vous aider."
 
 #: wp-admin/includes/class-wp-upgrader.php:3392
 msgid "You also have some plugins or themes with updates available. Update them now:"
@@ -3171,19 +3171,19 @@ msgstr "Certains de vos thèmes et extensions ont également des mises à jour d
 
 #: wp-admin/includes/class-wp-upgrader.php:3396
 msgid "The WordPress Team"
-msgstr "L'équipe WordPress"
+msgstr "L’équipe WordPress"
 
 #: wp-admin/includes/class-wp-upgrader.php:3401
 msgid "We have some data that describes the error your site encountered."
-msgstr "Nous avons quelques données qui décrivent l'erreur que votre site a rencontré."
+msgstr "Nous avons quelques données qui décrivent l’erreur que votre site a rencontré."
 
 #: wp-admin/includes/class-wp-upgrader.php:3402
 msgid "Your hosting company, support forum volunteers, or a friendly developer may be able to use this information to help you:"
-msgstr "Votre hébergeur, les volontaires du forum d'entraide ou un ami développeur devraient pouvoir vous aider à comprendre cette information pour vous aider :"
+msgstr "Votre hébergeur, les volontaires du forum d’entraide ou un ami développeur devraient pouvoir vous aider à comprendre cette information pour vous aider :"
 
 #: wp-admin/includes/class-wp-upgrader.php:3415
 msgid "Error code: %s"
-msgstr "Code d'erreur : %s"
+msgstr "Code d’erreur : %s"
 
 #: wp-admin/themes.php:179
 msgid "ERROR: %s"
@@ -4179,15 +4179,15 @@ msgid ""
 "\n"
 "As a new WordPress user, you should go to <a href=\"%s\">your dashboard</a> to delete this page and create new pages for your content. Have fun!"
 msgstr ""
-"Voici un exemple de page. Elle est différente d'un article de blog, en cela qu'elle restera à la même place, et s'affichera dans le menu de navigation de votre site (en fonction de votre thème). La plupart des gens commencent par écrire une page « À Propos » qui les présente aux visiteurs potentiels du site. Vous pourriez y écrire quelque chose de ce tenant :\n"
+"Voici un exemple de page. Elle est différente d’un article de blog, en cela qu’elle restera à la même place, et s’affichera dans le menu de navigation de votre site (en fonction de votre thème). La plupart des gens commencent par écrire une page « À Propos » qui les présente aux visiteurs potentiels du site. Vous pourriez y écrire quelque chose de ce tenant :\n"
 "\n"
-"<blockquote>Bonjour ! Je suis un mécanicien qui aspire à devenir un acteur, et voici mon blog. J'habite à Bordeaux, j'ai un super chien baptisé Russell, et j'aime la vodka-ananas (ainsi que regarder la pluie tomber).</blockquote>\n"
+"<blockquote>Bonjour ! Je suis un mécanicien qui aspire à devenir un acteur, et voici mon blog. J’habite à Bordeaux, j’ai un super chien baptisé Russell, et j’aime la vodka-ananas (ainsi que regarder la pluie tomber).</blockquote>\n"
 "\n"
 "...ou bien quelque chose comme ça :\n"
 "\n"
-"<blockquote>La société 123 Machin Truc a été créée en 1971, et n'a cessé de proposer au public des machins-trucs de qualité depuis lors. Située à Saint-Remy-en-Bouzemont-Saint-Genest-et-Isson, 123 Machin Truc emploie 2 000 personnes, et fabrique toutes sortes de bidules super pour la communauté bouzemontoise.</blockquote>\n"
+"<blockquote>La société 123 Machin Truc a été créée en 1971, et n’a cessé de proposer au public des machins-trucs de qualité depuis lors. Située à Saint-Remy-en-Bouzemont-Saint-Genest-et-Isson, 123 Machin Truc emploie 2 000 personnes, et fabrique toutes sortes de bidules super pour la communauté bouzemontoise.</blockquote>\n"
 "\n"
-"Étant donné que vous êtes un nouvel utilisateur de WordPress, vous devriez vous rendre sur votre <a href=\"%s\">tableau de bord</a> pour effacer la présente page, et créer de nouvelles pages avec votre propre contenu. Amusez-vous bien !"
+"Étant donné que vous êtes un nouvel utilisateur de WordPress, vous devriez vous rendre sur votre <a href=\"%s\">Tableau de bord</a> pour effacer la présente page, et créer de nouvelles pages avec votre propre contenu. Amusez-vous bien !"
 
 #: wp-admin/includes/upgrade.php:196
 msgid ""
@@ -4477,7 +4477,7 @@ msgstr "Valider"
 
 #: wp-admin/includes/meta-boxes.php:712
 msgid "No comments yet."
-msgstr "Aucun commentaire pour l'instant."
+msgstr "Aucun commentaire pour l’instant."
 
 #: wp-admin/includes/image-edit.php:70
 msgid "Scale"
@@ -4617,7 +4617,7 @@ msgstr "Afficher le texte d&rsquo;en-tête avec l&rsquo;image."
 #. version number, 5: update URL, 6: accessibility text
 #: wp-admin/includes/theme.php:188
 msgid "There is a new version of %1$s available. <a href=\"%2$s\" class=\"thickbox\" aria-label=\"%3$s\">View version %4$s details</a> or <a href=\"%5$s\" aria-label=\"%6$s\">update now</a>."
-msgstr "Il y a une nouvelle version de %1$s disponible. <a href=\"%2$s\" class=\"thickbox\" aria-label=\"%3$s\">Voir les détails de la version %4$s details</a> ou <a href=\"%5$s\" aria-label=\"%6$s\">mettre à jour maintenant</a>."
+msgstr "Une nouvelle version pour %1$s est disponible. <a href=\"%2$s\" class=\"thickbox\" aria-label=\"%3$s\">Voir les détails de la version %4$s details</a> ou <a href=\"%5$s\" aria-label=\"%6$s\">mettre à jour maintenant</a>."
 
 #: wp-admin/includes/plugin.php:171
 msgid "By %s."
@@ -4645,7 +4645,7 @@ msgstr "Hello Dolly"
 
 #. Description of the plugin/theme
 msgid "This is not just a plugin, it symbolizes the hope and enthusiasm of an entire generation summed up in two words sung most famously by Louis Armstrong: Hello, Dolly. When activated you will randomly see a lyric from <cite>Hello, Dolly</cite> in the upper right of your admin screen on every page."
-msgstr "Ce n’est pas qu'une extension. Elle symbolise l’espoir et l'enthousiasme de toute une génération, résumé en deux mots, qu’a notamment chanté Louis Armstrong : Hello, Dolly. Une fois activée, elle affichera une ligne aléatoirement des paroles de la chanson <cite>Hello, Dolly</cite>, en haut à droite de toutes les pages de l’administration."
+msgstr "Ce n’est pas qu’une extension. Elle symbolise l’espoir et l’enthousiasme de toute une génération, résumé en deux mots, qu’a notamment chanté Louis Armstrong&nbsp;: Hello, Dolly. Une fois activée, elle affichera une ligne aléatoirement des paroles de la chanson <cite>Hello, Dolly</cite>, en haut à droite de toutes les pages de l’administration."
 
 #. Author of the plugin/theme
 msgid "Matt Mullenweg"
@@ -4663,7 +4663,7 @@ msgstr "<strong>Bienvenue</strong> &mdash; Affiche des liens pour certaines des 
 #. version number
 #: wp-admin/includes/theme.php:179
 msgid "There is a new version of %1$s available. <a href=\"%2$s\" class=\"thickbox\" aria-label=\"%3$s\">View version %4$s details</a>. <em>Automatic update is unavailable for this theme.</em>"
-msgstr "Il y a une nouvelle version de %1$s disponible.  <a href=\"%2$s\" class=\"thickbox\" aria-label=\"%3$s\">Voir les détails de la version %4$s</a>. <em>La mise à jour automatique n'est pas disponible pour ce thème.</em>"
+msgstr "Une nouvelle version pour %1$s est disponible. <a href=\"%2$s\" class=\"thickbox\" aria-label=\"%3$s\">Voir les détails de la version %4$s</a>. <em>La mise à jour automatique n’est pas disponible pour ce thème.</em>"
 
 #. translators: 1: month number (01, 02, etc.), 2: month abbreviation
 #: wp-admin/includes/template.php:719
@@ -4721,7 +4721,7 @@ msgstr "Vous avez utilisé l&rsquo;intégralité de votre quota. Veuillez suppri
 
 #: wp-admin/includes/ms.php:317
 msgid "[%s] New Admin Email Address"
-msgstr "[%s] Nouvelle adresse e-mail d'administration"
+msgstr "[%s] Nouvelle adresse e-mail d’administration"
 
 #. translators: %s: New email address
 #: wp-admin/includes/ms.php:413
@@ -4744,7 +4744,7 @@ msgstr "[%s] Nouvelle adresse e-mail"
 
 #: wp-admin/includes/ms-deprecated.php:33
 msgid "Sorry, you must delete files before you can upload any more."
-msgstr "Désolé, vous devez effacer quelques fichiers avant de pouvoir en envoyer d&rsquo;autres."
+msgstr "Désolé, vous devez effacer quelques fichiers avant de pouvoir en envoyer d’autres."
 
 #: wp-admin/includes/ms.php:671
 msgid "Visit Dashboard"
@@ -4960,7 +4960,7 @@ msgstr "Les réglages de publication par e-mail vous permettant d&rsquo;envoyer 
 
 #: wp-admin/includes/image-edit.php:228
 msgid "There are unsaved changes that will be lost. 'OK' to continue, 'Cancel' to return to the Image Editor."
-msgstr "Les modifications qui n'ont pas été enregistrées seront perdues. « OK » pour continuer, « Annuler » pour revenir à l'éditeur d'images."
+msgstr "Les modifications qui n’ont pas été enregistrées seront perdues. « OK » pour continuer, « Annuler » pour revenir à l’éditeur d’images."
 
 #: wp-admin/import.php:23
 msgid "In previous versions of WordPress, all importers were built-in. They have been turned into plugins since most people only use them once or infrequently."
@@ -5408,7 +5408,7 @@ msgstr ""
 "\n"
 "Vous avez été invité(e) à rejoindre « %1$s » sur\n"
 "%2$s en tant que %3$s. \n"
-"Veuillez cliquer sur le lien suivant pour confirmer l'invitation :\n"
+"Veuillez cliquer sur le lien suivant pour confirmer l’invitation :\n"
 "%4$s"
 
 #: wp-admin/credits.php:123
@@ -5797,7 +5797,7 @@ msgstr ""
 "Vous avez été invité(e) à rejoindre « %1$s » sur\n"
 "%2$s en tant que %3$s. \n"
 "Si vous ne souhaitez pas rejoindre ce site, veuillez ignorer\n"
-"ce message. L'invitation expirera dans quelques jours.\n"
+"ce message. L’invitation expirera dans quelques jours.\n"
 "\n"
 "Veuillez cliquer sur le lien suivant pour activer votre compte utilisateur :\n"
 "%%s"
@@ -6189,7 +6189,7 @@ msgstr "Mettre à jour l&rsquo;extension"
 #. version number
 #: wp-admin/includes/update.php:481
 msgid "There is a new version of %1$s available. <a href=\"%2$s\" class=\"thickbox open-plugin-details-modal\" aria-label=\"%3$s\">View version %4$s details</a>. <em>Automatic update is unavailable for this theme.</em>"
-msgstr "Il y a une nouvelle version de %1$s disponible.<a href=\"%2$s\" class=\"thickbox open-plugin-details-modal\" aria-label=\"%3$s\">Voir les détails de la version %4$s</a>. <em>La mise à jour automatique n’est pas disponible pour ce thème.</em>"
+msgstr "Une nouvelle version pour %1$s est disponible.<a href=\"%2$s\" class=\"thickbox open-plugin-details-modal\" aria-label=\"%3$s\">Voir les détails de la version %4$s</a>. <em>La mise à jour automatique n’est pas disponible pour ce thème.</em>"
 
 #: wp-admin/includes/class-wp-upgrader.php:859
 #: wp-admin/includes/class-wp-upgrader.php:1325
@@ -6375,7 +6375,7 @@ msgstr "Les nouveaux utilisateurs reçoivent un message les informant qu&rsquo;i
 #. version number
 #: wp-admin/includes/theme.php:170
 msgid "There is a new version of %1$s available. <a href=\"%2$s\" class=\"thickbox\" aria-label=\"%3$s\">View version %4$s details</a>."
-msgstr "Il y a une nouvelle version de %1$s disponible. <a href=\"%2$s\" class=\"thickbox\" aria-label=\"%3$s\">Voir les détails de la version %4$s</a>."
+msgstr "Une nouvelle version pour %1$s est disponible. <a href=\"%2$s\" class=\"thickbox\" aria-label=\"%3$s\">Voir les détails de la version %4$s</a>."
 
 #: wp-admin/includes/nav-menu.php:920
 msgid "Click Save Menu to make pending menu items public."
@@ -7256,7 +7256,7 @@ msgstr "Vous n&rsquo;avez pas les droits suffisants pour gérer les extensions d
 
 #: wp-admin/options-general.php:66
 msgid "In a few words, explain what this site is about."
-msgstr "En quelques mots, décrivez la raison d&rsquo;être de ce site."
+msgstr "En quelques mots, décrivez la raison d’être de ce site."
 
 #: wp-admin/install.php:182 wp-admin/install.php:185
 #: wp-admin/options-reading.php:31 wp-admin/options-reading.php:111
@@ -7332,7 +7332,7 @@ msgstr "La mise à jour de %1$s a échoué."
 
 #: wp-admin/includes/upgrade.php:95
 msgid "The password you chose during the install."
-msgstr "Le mot de passe que vous avez choisi pendant l'installation."
+msgstr "Le mot de passe que vous avez choisi pendant l’installation."
 
 #: wp-admin/includes/upgrade.php:83
 msgid "User already exists. Password inherited."
@@ -7439,7 +7439,7 @@ msgstr "Message personnalisé pour l&rsquo;erreur de base de données."
 
 #: wp-admin/includes/file.php:320
 msgid "File is empty. Please upload something more substantial."
-msgstr "Le fichier est vide. Merci d&rsquo;envoyer quelque chose de plus consistant."
+msgstr "Le fichier est vide. Merci d’envoyer quelque chose de plus consistant."
 
 #. translators: %s: plugin name
 #: wp-admin/includes/class-wp-theme-install-list-table.php:286
@@ -8617,7 +8617,7 @@ msgstr "Modifier l&rsquo;utilisateur"
 
 #: wp-admin/media-upload.php:38
 msgid "Invalid item ID."
-msgstr "Identifiant d'élément invalide."
+msgstr "Identifiant d’élément invalide."
 
 #: wp-admin/includes/user.php:500
 msgid "Use https"
@@ -8714,7 +8714,7 @@ msgstr "Mettre à jour l&rsquo;utilisateur"
 
 #: wp-admin/user-new.php:98
 msgid "[%s] Joining confirmation"
-msgstr "[%s] Confirmation d'inscription"
+msgstr "[%s] Confirmation d’inscription"
 
 #: wp-admin/user-new.php:240
 msgid "Invitation email sent to new user. A confirmation link must be clicked before their account is created."
@@ -10729,7 +10729,7 @@ msgstr "Brouillon enregistré à %s."
 
 #: wp-admin/includes/ajax-actions.php:1616
 msgid "Someone"
-msgstr "Quelqu&rsquo;un"
+msgstr "Quelqu’un"
 
 #: wp-admin/includes/ajax-actions.php:1608 wp-admin/includes/post.php:206
 msgid "You are not allowed to edit this page."

@@ -1,8 +1,3 @@
 <?php
 
-class ITSEC_Content_Directory_Module_Init extends ITSEC_Module_Init {
-	protected $_id   = 'content-directory';
-	protected $_name = 'Content Directory';
-	protected $_desc = 'Content Directory.';
-}
-new ITSEC_Content_Directory_Module_Init();
+ITSEC_Modules::register_module( 'content-directory', dirname( __FILE__ ), 'always-active' );

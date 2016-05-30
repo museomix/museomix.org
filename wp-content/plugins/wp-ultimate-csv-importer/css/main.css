@@ -629,7 +629,7 @@ a.tooltip span {
 }
 
 .plugintags a:after {
-    background-color: #fff;
+ /*   background-color: #fff; */
     border-radius: 50%;
     content: "";
     height: 4px;

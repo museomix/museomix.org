@@ -14,24 +14,6 @@ if ( ! class_exists( 'ITSEC_File_Change_Setup' ) ) {
 			add_action( 'itsec_modules_do_plugin_uninstall',    array( $this, 'execute_uninstall'  )          );
 			add_action( 'itsec_modules_do_plugin_upgrade',      array( $this, 'execute_upgrade'    ), null, 2 );
 
-			$this->defaults = array(
-				'enabled'      => false,
-				'split'        => false,
-				'file_list'    => array(),
-				'method'       => true,
-				'types'        => array(
-					'.jpg',
-					'.jpeg',
-					'.png',
-					'.log',
-					'.mo',
-					'.po'
-				),
-				'email'        => true,
-				'last_run'     => 0,
-				'notify_admin' => true,
-			);
-
 		}
 
 		/**
@@ -42,15 +24,6 @@ if ( ! class_exists( 'ITSEC_File_Change_Setup' ) ) {
 		 * @return void
 		 */
 		public function execute_activate() {
-
-			$options = get_site_option( 'itsec_file_change' );
-
-			if ( $options === false ) {
-
-				add_site_option( 'itsec_file_change', $this->defaults );
-
-			}
-
 		}
 
 		/**
@@ -99,23 +72,23 @@ if ( ! class_exists( 'ITSEC_File_Change_Setup' ) ) {
 
 				$current_options = get_site_option( 'itsec_file_change' );
 
-				if ( $current_options === false ) {
-					$current_options = $this->defaults;
+				// Don't do anything if settings haven't already been set, defaults exist in the module system and we prefer to use those
+				if ( false !== $current_options ) {
+
+					$current_options['enabled']      = isset( $itsec_bwps_options['id_fileenabled'] ) && $itsec_bwps_options['id_fileenabled'] == 1 ? true : false;
+					$current_options['email']        = isset( $itsec_bwps_options['id_fileemailnotify'] ) && $itsec_bwps_options['id_fileemailnotify'] == 0 ? false : true;
+					$current_options['notify_admin'] = isset( $itsec_bwps_options['id_filedisplayerror'] ) && $itsec_bwps_options['id_filedisplayerror'] == 0 ? false : true;
+					$current_options['method']       = isset( $itsec_bwps_options['id_fileincex'] ) && $itsec_bwps_options['id_fileincex'] == 0 ? false : true;
+
+					if ( isset( $itsec_bwps_options['id_specialfile'] ) && ! is_array( $itsec_bwps_options['id_specialfile'] ) && strlen( $itsec_bwps_options['id_specialfile'] ) > 1 ) {
+
+						$current_options['file_list'] .= explode( PHP_EOL, $itsec_bwps_options['id_specialfile'] );
+
+					}
+
+					update_site_option( 'itsec_file_change', $current_options );
+
 				}
-
-				$current_options['enabled']      = isset( $itsec_bwps_options['id_fileenabled'] ) && $itsec_bwps_options['id_fileenabled'] == 1 ? true : false;
-				$current_options['email']        = isset( $itsec_bwps_options['id_fileemailnotify'] ) && $itsec_bwps_options['id_fileemailnotify'] == 0 ? false : true;
-				$current_options['notify_admin'] = isset( $itsec_bwps_options['id_filedisplayerror'] ) && $itsec_bwps_options['id_filedisplayerror'] == 0 ? false : true;
-				$current_options['method']       = isset( $itsec_bwps_options['id_fileincex'] ) && $itsec_bwps_options['id_fileincex'] == 0 ? false : true;
-
-				if ( isset( $itsec_bwps_options['id_specialfile'] ) && ! is_array( $itsec_bwps_options['id_specialfile'] ) && strlen( $itsec_bwps_options['id_specialfile'] ) > 1 ) {
-
-					$current_options['file_list'] .= explode( PHP_EOL, $itsec_bwps_options['id_specialfile'] );
-
-				}
-
-				update_site_option( 'itsec_file_change', $current_options );
-
 			}
 
 			if ( $itsec_old_version < 4028 ) {
@@ -148,6 +121,32 @@ if ( ! class_exists( 'ITSEC_File_Change_Setup' ) ) {
 
 				}
 
+			}
+
+			if ( $itsec_old_version < 4041 ) {
+				$current_options = get_site_option( 'itsec_file_change' );
+
+				// If there are no current options, go with the new defaults by not saving anything
+				if ( is_array( $current_options ) ) {
+					// Make sure the new module is properly activated or deactivated
+					if ( $current_options['enabled'] ) {
+						ITSEC_Modules::activate( 'file-change' );
+					} else {
+						ITSEC_Modules::deactivate( 'file-change' );
+					}
+
+					// remove 'enabled' which isn't use in the new module
+					unset( $current_options['enabled'] );
+
+					// This used to be boolean. Attempt to migrate to new string, falling back to default
+					if ( ! is_array( $current_options['method'] ) ) {
+						$current_options['method'] = ( $current_options['method'] )? 'exclude' : 'include';
+					} elseif ( ! in_array( $current_options['method'], array( 'include', 'exclude' ) ) ) {
+						$current_options['method'] = 'exclude';
+					}
+
+					ITSEC_Modules::set_settings( 'file-change', $current_options );
+				}
 			}
 
 		}

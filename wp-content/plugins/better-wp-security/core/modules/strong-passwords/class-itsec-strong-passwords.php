@@ -2,29 +2,32 @@
 
 class ITSEC_Strong_Passwords {
 
-	private
-		$settings,
-		$module_path;
-
 	function run() {
 
-		$this->settings    = get_site_option( 'itsec_strong_passwords' );
-		$this->module_path = ITSEC_Lib::get_module_path( __FILE__ );
+		add_action( 'user_profile_update_errors', array( $this, 'enforce_strong_password' ), 0, 3 );
+		add_action( 'validate_password_reset', array( $this, 'enforce_strong_password' ), 10, 2 );
 
-		//require strong passwords if turned on
-		if ( isset( $this->settings['enabled'] ) && $this->settings['enabled'] === true ) {
-
-			add_action( 'user_profile_update_errors', array( $this, 'enforce_strong_password' ), 0, 3 );
-			add_action( 'validate_password_reset', array( $this, 'enforce_strong_password' ), 10, 2 );
-
-			if ( isset( $_GET['action'] ) && ( $_GET['action'] == 'rp' || $_GET['action'] == 'resetpass' ) && isset( $_GET['login'] ) ) {
-				add_action( 'login_head', array( $this, 'enforce_strong_password' ) );
-			}
-
-			add_action( 'admin_enqueue_scripts', array( $this, 'login_script_js' ) );
-			add_action( 'login_enqueue_scripts', array( $this, 'login_script_js' ) );
-
+		if ( isset( $_GET['action'] ) && ( $_GET['action'] == 'rp' || $_GET['action'] == 'resetpass' ) && isset( $_GET['login'] ) ) {
+			add_action( 'login_head', array( $this, 'enforce_strong_password' ) );
 		}
+
+		add_action( 'admin_enqueue_scripts', array( $this, 'add_scripts' ) );
+		add_action( 'login_enqueue_scripts', array( $this, 'add_scripts' ) );
+
+	}
+
+	/**
+	 * Enqueue script to check password strength
+	 *
+	 * @return void
+	 */
+	public function add_scripts() {
+
+		global $itsec_globals;
+
+		$module_path = ITSEC_Lib::get_module_path( __FILE__ );
+
+		wp_enqueue_script( 'itsec_strong_passwords', $module_path . 'js/script.js', array( 'jquery' ), ITSEC_Core::get_plugin_build() );
 
 	}
 
@@ -39,9 +42,12 @@ class ITSEC_Strong_Passwords {
 	 *
 	 **/
 	function enforce_strong_password( $errors ) {
+		$args = func_get_args();
+
+		$settings = ITSEC_Modules::get_settings( 'strong-passwords' );
 
 		//determine the minimum role for enforcement
-		$min_role = isset( $this->settings['roll'] ) ? $this->settings['roll'] : 'administrator';
+		$min_role = isset( $settings['role'] ) ? $settings['role'] : 'administrator';
 
 		//all the standard roles and level equivalents
 		$available_roles = array(
@@ -53,7 +59,7 @@ class ITSEC_Strong_Passwords {
 		);
 
 		//roles and subroles
-		$rollists = array(
+		$subroles = array(
 			'administrator' => array( 'subscriber', 'author', 'contributor', 'editor' ),
 			'editor'        => array( 'subscriber', 'author', 'contributor' ),
 			'author'        => array( 'subscriber', 'contributor' ),
@@ -61,7 +67,7 @@ class ITSEC_Strong_Passwords {
 			'subscriber'    => array(),
 		);
 
-		$password_meets_requirements = false;
+		$requires_enforcement = false;
 		$args                        = func_get_args();
 		$user_id                     = isset( $args[2]->user_login ) ? $args[2]->user_login : false;
 
@@ -89,82 +95,31 @@ class ITSEC_Strong_Passwords {
 				foreach ( $user_info->roles as $capability ) {
 
 					if ( isset( $available_roles[ $capability ] ) && $available_roles[ $capability ] >= $available_roles[ $min_role ] ) {
-						$password_meets_requirements = true;
+						$requires_enforcement = true;
 					}
 
 				}
 
 			} else { //a new user
 
-				if ( ! empty( $_POST['role'] ) && ! in_array( $_POST["role"], $rollists[ $min_role ] ) ) {
-					$password_meets_requirements = true;
+				if ( ! empty( $_POST['role'] ) && ! in_array( $_POST["role"], $subroles[ $min_role ] ) ) {
+					$requires_enforcement = true;
 				}
 
 			}
 
 		}
 
-		if ( $password_meets_requirements === true ) {
-
-			add_action( 'shutdown', array( $this, 'shut_down_js' ) );
-
-		}
-
 		if ( ! isset( $_GET['action'] ) ) {
 
 			//add to error array if the password does not meet requirements
-			if ( $password_meets_requirements && ! $errors->get_error_data( 'pass' ) && isset( $_POST['pass1'] ) && trim( strlen( $_POST['pass1'] ) ) > 0 && isset( $_POST['password_strength'] ) && $_POST['password_strength'] != 'strong' ) {
+			if ( $requires_enforcement && ! $errors->get_error_data( 'pass' ) && isset( $_POST['pass1'] ) && trim( strlen( $_POST['pass1'] ) ) > 0 && isset( $_POST['password_strength'] ) && $_POST['password_strength'] != 'strong' ) {
 				$errors->add( 'pass', __( '<strong>ERROR</strong>: You MUST Choose a password that rates at least <em>Strong</em> on the meter. Your setting have NOT been saved.', 'better-wp-security' ) );
 			}
 
 		}
 
 		return $errors;
-	}
-
-	/**
-	 * Enqueue script to check password strength
-	 *
-	 * @return void
-	 */
-	public function login_script_js() {
-
-		global $itsec_globals;
-
-		if ( $this->settings['enabled'] === true ) {
-
-			wp_enqueue_script( 'itsec_strong_passwords', $this->module_path . 'js/strong-passwords.js', array( 'jquery' ), $itsec_globals['plugin_build'] );
-
-			//make sure the text of the warning is translatable
-			wp_localize_script( 'itsec_strong_passwords', 'strong_password_error_text', array( 'text' => __( 'Sorry, but you must enter a strong password.', 'better-wp-security' ) ) );
-
-		}
-
-	}
-
-	/**
-	 * Ad js for reset password page
-	 *
-	 * @since 4.0.10
-	 *
-	 * @return void
-	 */
-	public function shut_down_js() {
-
-		?>
-
-		<script type="text/javascript">
-			jQuery( document ).ready( function () {
-				jQuery( '#resetpassform' ).submit( function () {
-					if ( ! jQuery( '#pass-strength-result' ).hasClass( 'strong' ) ) {
-						alert( '<?php _e( "Sorry, but you must enter a strong password", "ithemes-security" ); ?>' );
-						return false;
-					}
-				} );
-			} );
-		</script>
-
-	<?php
 	}
 
 }

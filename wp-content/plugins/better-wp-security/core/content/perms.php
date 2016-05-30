@@ -2,7 +2,6 @@
 /**
  * WordPress Permissions check code from Serverbuddy by PluginBuddy written by Dustin Bolton of iThemes
  */
-global $itsec_globals;
 
 $tests = array();
 
@@ -101,12 +100,12 @@ if ( ! fileperms( get_theme_root() ) || 755 != substr( sprintf( '%o', fileperms(
 array_push( $tests, $this_test );
 
 $this_test = array(
-	'title'      => str_replace( ABSPATH, '', dirname( plugin_dir_path( $itsec_globals['plugin_file'] ) ) ),
+	'title'      => str_replace( ABSPATH, '', dirname( plugin_dir_path( ITSEC_Core::get_plugin_file() ) ) ),
 	'suggestion' => '= 755',
-	'value'      => substr( sprintf( '%o', fileperms( dirname( plugin_dir_path( $itsec_globals['plugin_file'] ) ) ) ), - 4 ),
+	'value'      => substr( sprintf( '%o', fileperms( dirname( plugin_dir_path( ITSEC_Core::get_plugin_file() ) ) ) ), - 4 ),
 );
 
-if ( ! dirname( plugin_dir_path( $itsec_globals['plugin_file'] ) ) || 755 != substr( sprintf( '%o', fileperms( dirname( plugin_dir_path( $itsec_globals['plugin_file'] ) ) ) ), - 4 ) ) {
+if ( ! dirname( plugin_dir_path( ITSEC_Core::get_plugin_file() ) ) || 755 != substr( sprintf( '%o', fileperms( dirname( plugin_dir_path( ITSEC_Core::get_plugin_file() ) ) ) ), - 4 ) ) {
 
 	$this_test['status'] = 'WARNING';
 

@@ -55,8 +55,15 @@ if ( ! class_exists( 'ITSEC_Salts_Setup' ) ) {
 		 *
 		 * @return void
 		 */
-		public function execute_upgrade() {
+		public function execute_upgrade( $itsec_old_version ) {
 
+			if ( $itsec_old_version < 4041 ) {
+				$last_generated = get_site_option( 'itsec_salts' );
+
+				if ( is_int( $last_generated ) && $last_generated >= 0 ) {
+					ITSEC_Modules::set_setting( 'wordpress-salts', 'last_generated', $last_generated );
+				}
+			}
 		}
 
 	}

@@ -43,6 +43,23 @@ class IWP_MMB_Activities_log {
 		}		
 	}
 	
+	// whenever iwp client plugin updated also, it will call the following function for creating options like iwp_client_all_plugins_history, iwp_client_all_themes_history and iwp_client_wp_version_old.
+	function iwp_mmb_save_options_for_activity_log($activity = '') {
+		global $wp_version;
+		
+		// The following three lines are used for Client Reporting (Beta) - activities log.
+		if(!get_option('iwp_client_all_plugins_history') || in_array($activity, array('update_client_plugin', 'install'))) {
+			$this->iwp_mmb_update_all_plugins_history();
+		}
+		if(!get_option('iwp_client_all_themes_history') || in_array($activity, array('update_client_plugin', 'install'))) {
+			$this->iwp_mmb_update_all_themes_history();
+		}
+		
+		if(!get_option('iwp_client_wp_version_old') || in_array($activity, array('update_client_plugin', 'install'))) {
+			update_option('iwp_client_wp_version_old',$wp_version); // It is mainly used when wp core auto updates happened.
+		}		
+	}
+	
 	function iwp_mmb_collect_backup_details($params) {
 		global $iwp_activities_log_post_type;
 		
@@ -86,6 +103,10 @@ class IWP_MMB_Activities_log {
 			'post_type'			=> $iwp_activities_log_post_type
 		);
 		
+		if(!empty($GLOBALS['activities_log_datetime'])) {
+			$iwp_activities['post_date'] = $iwp_activities['	post_date_gmt'] = $iwp_activities['	post_modified'] = $iwp_activities['post_modified_gmt'] = $GLOBALS['activities_log_datetime'];
+		}
+				
 		$post_id = wp_insert_post( $iwp_activities );
 		
 		unset($iwp_activities);
