@@ -46,12 +46,8 @@ class Ithemes_Sync_Verb_ITSEC_Perform_File_Scan extends Ithemes_Sync_Verb {
 	 * @return array response indicating result of the file scan
 	 */
 	public function run( $arguments ) {
-		//We need the ITSEC_File_Change object to access the execution method.
-		$module = new ITSEC_File_Change();
-		$module->run();
+		require_once( dirname( __FILE__ ) . '/scanner.php' );
 		
-		$response = $module->execute_file_check( false, true );
-		
-		return $response;
+		return ITSEC_File_Change_Scanner::run_scan( false, true );
 	}
 }

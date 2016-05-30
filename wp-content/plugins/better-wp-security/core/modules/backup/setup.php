@@ -4,33 +4,12 @@ if ( ! class_exists( 'ITSEC_Backup_Setup' ) ) {
 
 	class ITSEC_Backup_Setup {
 
-		private
-			$defaults;
-
 		public function __construct() {
 
 			add_action( 'itsec_modules_do_plugin_activation',   array( $this, 'execute_activate'   )          );
 			add_action( 'itsec_modules_do_plugin_deactivation', array( $this, 'execute_deactivate' )          );
 			add_action( 'itsec_modules_do_plugin_uninstall',    array( $this, 'execute_uninstall'  )          );
 			add_action( 'itsec_modules_do_plugin_upgrade',      array( $this, 'execute_upgrade'    ), null, 2 );
-
-			global $itsec_globals;
-
-			$this->defaults = array(
-				'enabled'   => false,
-				'interval'  => 3,
-				'all_sites' => false,
-				'method'    => 1,
-				'location'  => $itsec_globals['ithemes_backup_dir'],
-				'last_run'  => 0,
-				'zip'       => true,
-				'exclude'   => array(
-					'itsec_log',
-					'itsec_temp',
-					'itsec_lockouts',
-				),
-				'retain'    => 0,
-			);
 
 		}
 
@@ -42,15 +21,6 @@ if ( ! class_exists( 'ITSEC_Backup_Setup' ) ) {
 		 * @return void
 		 */
 		public function execute_activate() {
-
-			$options = get_site_option( 'itsec_backup' );
-
-			if ( $options === false ) {
-
-				add_site_option( 'itsec_backup', $this->defaults );
-
-			}
-
 		}
 
 		/**
@@ -87,15 +57,45 @@ if ( ! class_exists( 'ITSEC_Backup_Setup' ) ) {
 
 				$current_options = get_site_option( 'itsec_backup' );
 
-				if ( $current_options === false ) {
-					$current_options = $this->defaults;
+
+				// Don't do anything if settings haven't already been set, defaults exist in the module system and we prefer to use those
+				if ( false !== $current_options ) {
+
+					$current_options['enabled']  = isset( $itsec_bwps_options['backup_enabled'] ) && $itsec_bwps_options['backup_enabled'] == 1 ? true : false;
+					$current_options['interval'] = isset( $itsec_bwps_options['backup_interval'] ) ? intval( $itsec_bwps_options['backup_interval'] ) : 1;
+
+					update_site_option( 'itsec_backup', $current_options );
+
 				}
 
-				$current_options['enabled']  = isset( $itsec_bwps_options['backup_enabled'] ) && $itsec_bwps_options['backup_enabled'] == 1 ? true : false;
-				$current_options['interval'] = isset( $itsec_bwps_options['backup_interval'] ) ? intval( $itsec_bwps_options['backup_interval'] ) : 1;
+			}
 
-				update_site_option( 'itsec_backup', $current_options );
+			if ( $itsec_old_version < 4041 ) {
+				$current_options = get_site_option( 'itsec_backup' );
 
+				// If there are no current options, go with the new defaults by not saving anything
+				if ( is_array( $current_options ) ) {
+					// Make sure the new module is properly activated or deactivated
+					if ( $current_options['enabled'] ) {
+						ITSEC_Modules::activate( 'backup' );
+					} else {
+						ITSEC_Modules::deactivate( 'backup' );
+					}
+
+					if ( isset( $current_options['location'] ) && ! is_dir( $current_options['location'] ) ) {
+						unset( $current_options['location'] );
+					}
+
+					$options = ITSEC_Modules::get_defaults( 'backup' );
+
+					foreach ( $options as $name => $value ) {
+						if ( isset( $current_options[$name] ) ) {
+							$options[$name] = $current_options[$name];
+						}
+					}
+
+					ITSEC_Modules::set_settings( 'backup', $options );
+				}
 			}
 
 		}

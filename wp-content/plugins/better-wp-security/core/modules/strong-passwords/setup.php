@@ -4,20 +4,12 @@ if ( ! class_exists( 'ITSEC_Strong_Passwords_Setup' ) ) {
 
 	class ITSEC_Strong_Passwords_Setup {
 
-		private
-			$defaults;
-
 		public function __construct() {
 
 			add_action( 'itsec_modules_do_plugin_activation',   array( $this, 'execute_activate'   )          );
 			add_action( 'itsec_modules_do_plugin_deactivation', array( $this, 'execute_deactivate' )          );
 			add_action( 'itsec_modules_do_plugin_uninstall',    array( $this, 'execute_uninstall'  )          );
 			add_action( 'itsec_modules_do_plugin_upgrade',      array( $this, 'execute_upgrade'    ), null, 2 );
-
-			$this->defaults = array(
-				'enabled' => false,
-				'roll'    => 'administrator',
-			);
 
 		}
 
@@ -29,15 +21,6 @@ if ( ! class_exists( 'ITSEC_Strong_Passwords_Setup' ) ) {
 		 * @return void
 		 */
 		public function execute_activate() {
-
-			$options = get_site_option( 'itsec_strong_passwords' );
-
-			if ( $options === false ) {
-
-				add_site_option( 'itsec_strong_passwords', $this->defaults );
-
-			}
-
 		}
 
 		/**
@@ -74,15 +57,33 @@ if ( ! class_exists( 'ITSEC_Strong_Passwords_Setup' ) ) {
 
 				$current_options = get_site_option( 'itsec_strong_passwords' );
 
-				if ( $current_options === false ) {
-					$current_options = $this->defaults;
+				// Don't do anything if settings haven't already been set, defaults exist in the module system and we prefer to use those
+				if ( false !== $current_options ) {
+
+					$current_options['enabled'] = isset( $itsec_bwps_options['st_enablepassword'] ) && $itsec_bwps_options['st_enablepassword'] == 1 ? true : false;
+					$current_options['roll']    = isset( $itsec_bwps_options['st_passrole'] ) ? $itsec_bwps_options['st_passrole'] : 'administrator';
+
+					update_site_option( 'itsec_strong_passwords', $current_options );
 				}
 
-				$current_options['enabled'] = isset( $itsec_bwps_options['st_enablepassword'] ) && $itsec_bwps_options['st_enablepassword'] == 1 ? true : false;
-				$current_options['roll']    = isset( $itsec_bwps_options['st_passrole'] ) ? $itsec_bwps_options['st_passrole'] : 'administrator';
+			}
 
-				update_site_option( 'itsec_strong_passwords', $current_options );
+			if ( $itsec_old_version < 4041 ) {
+				$current_options = get_site_option( 'itsec_strong_passwords' );
 
+				// If there are no current options, go with the new defaults by not saving anything
+				if ( is_array( $current_options ) ) {
+					// Make sure the new module is properly activated or deactivated
+					if ( $current_options['enabled'] ) {
+						ITSEC_Modules::activate( 'strong-passwords' );
+					} else {
+						ITSEC_Modules::deactivate( 'strong-passwords' );
+					}
+
+					$settings = array( 'role' => $current_options['roll'] );
+
+					ITSEC_Modules::set_settings( 'strong-passwords', $settings );
+				}
 			}
 
 		}

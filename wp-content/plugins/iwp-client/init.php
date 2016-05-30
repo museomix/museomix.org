@@ -4,7 +4,7 @@ Plugin Name: InfiniteWP - Client
 Plugin URI: http://infinitewp.com/
 Description: This is the client plugin of InfiniteWP that communicates with the InfiniteWP Admin panel.
 Author: Revmakx
-Version: 1.6.0beta1
+Version: 1.6.0beta1.2
 Author URI: http://www.revmakx.com
 */
 /************************************************************
@@ -28,7 +28,7 @@ if(basename($_SERVER['SCRIPT_FILENAME']) == "init.php"):
     exit;
 endif;
 if(!defined('IWP_MMB_CLIENT_VERSION'))
-	define('IWP_MMB_CLIENT_VERSION', '1.6.0beta1');
+	define('IWP_MMB_CLIENT_VERSION', '1.6.0beta1.2');
 	
 
 
@@ -119,6 +119,7 @@ if( !function_exists ('iwp_mmb_parse_request')) {
 			if(isset($unserialized_data['is_save_activity_log'])) {
 				$is_save_activity_log	= $unserialized_data['is_save_activity_log'];
 			}
+			$GLOBALS['activities_log_datetime'] = $unserialized_data['activities_log_datetime'];
 		}
 		
 		if (isset($iwp_action)) {
@@ -214,6 +215,7 @@ if( !function_exists ('iwp_mmb_parse_request')) {
 					$_iwp_mmb_plugin_actions[$action] = $params;
 				}
 				$iwp_mmb_activities_log->iwp_mmb_update_is_save_activity_log($is_save_activity_log);
+				$iwp_mmb_activities_log->iwp_mmb_save_options_for_activity_log('parse_request');
 			} else {
 				iwp_mmb_response($auth, false);
 			}
@@ -327,6 +329,7 @@ if( !function_exists ( 'iwp_mmb_add_site' )) {
 						
 						iwp_mmb_response($iwp_mmb_core->stats_instance->get_initial_stats(), true);
 						$iwp_mmb_activities_log->iwp_mmb_update_is_save_activity_log($params['is_save_activity_log']);
+						$iwp_mmb_activities_log->iwp_mmb_save_options_for_activity_log('add_site');
 						delete_option('iwp_client_activate_key');//iwp
 					} else if ($verify == 0) {
 						iwp_mmb_response(array('error' => 'Invalid message signature. Please contact us if you see this message often.', 'error_code' => 'iwp_mmb_add_site_invalid_message_signature'), false);
@@ -351,6 +354,7 @@ if( !function_exists ( 'iwp_mmb_add_site' )) {
 							update_option('iwp_client_brand',$brand);
 						}
 						$iwp_mmb_activities_log->iwp_mmb_update_is_save_activity_log($params['is_save_activity_log']);
+						$iwp_mmb_activities_log->iwp_mmb_save_options_for_activity_log('add_site');
 						iwp_mmb_response($iwp_mmb_core->stats_instance->get_initial_stats(), true);
 						delete_option('iwp_client_activate_key');//IWP
 					} else
@@ -390,6 +394,7 @@ if( !function_exists ( 'iwp_mmb_readd_site' )) {
 							update_option('iwp_client_brand',$brand);
 						}
 						$iwp_mmb_activities_log->iwp_mmb_update_is_save_activity_log($params['is_save_activity_log']);
+						$iwp_mmb_activities_log->iwp_mmb_save_options_for_activity_log('readd_site');
 						iwp_mmb_response($iwp_mmb_core->stats_instance->get_initial_stats(), true);
 						delete_option('iwp_client_activate_key');//iwp
 					} else if ($verify == 0) {
@@ -415,6 +420,7 @@ if( !function_exists ( 'iwp_mmb_readd_site' )) {
 							update_option('iwp_client_brand',$brand);
 						}
 						$iwp_mmb_activities_log->iwp_mmb_update_is_save_activity_log($params['is_save_activity_log']);
+						$iwp_mmb_activities_log->iwp_mmb_save_options_for_activity_log('readd_site');
 						iwp_mmb_response($iwp_mmb_core->stats_instance->get_initial_stats(), true);
 						delete_option('iwp_client_activate_key');//IWP
 					} else
@@ -1703,14 +1709,14 @@ if(!function_exists('iwp_mmb_convert_data')){
 
 if (!function_exists('iwp_mmb_backup_db_changes')) {
 	function iwp_mmb_backup_db_changes(){
-		$IWP_MMB_BACKUP_TABLE_VERSION =	get_site_option('iwp_backup_table_version');
+		$IWP_MMB_BACKUP_TABLE_VERSION =	iwp_mmb_get_site_option('iwp_backup_table_version');
 		if (empty($IWP_MMB_BACKUP_TABLE_VERSION) || $IWP_MMB_BACKUP_TABLE_VERSION == false ) {
 			iwp_mmb_create_backup_status_table();
 		}
-		if(version_compare(get_site_option('iwp_backup_table_version'), '1.1.2', '<')){
+		if(version_compare(iwp_mmb_get_site_option('iwp_backup_table_version'), '1.1.2', '<')){
 			iwp_mmb_change_collation_backup_status_table();
 		}
-		if(version_compare(get_site_option('iwp_backup_table_version'), '1.1.3', '<')){
+		if(version_compare(iwp_mmb_get_site_option('iwp_backup_table_version'), '1.1.3', '<')){
 			iwp_mmb_add_lastUpdateTime_column_backup_status_table();
 		}
 	}
@@ -2109,6 +2115,20 @@ if (!function_exists('rename_old_backup_file_name')) {
 			return array('error' => 'Unable to rename old files', 'error_code' => 'unable_to_remane_old_backup_files');
 		}
 		return true;
+	}
+}
+
+if(!function_exists('iwp_mmb_get_site_option')) {
+
+	function iwp_mmb_get_site_option($option_name){
+		if(is_multisite()){
+			$blog_id = get_current_blog_id();
+			$option_value = get_blog_option($blog_id,$option_name);
+		}
+		else {
+			$option_value = get_site_option($option_name);
+		}
+		return $option_value;
 	}
 }
 

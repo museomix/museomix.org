@@ -629,7 +629,7 @@ class IWP_MMB_Core extends IWP_MMB_Helper
      */
     function install() {
 		
-        global $wpdb, $_wp_using_ext_object_cache, $current_user, $wp_version, $iwp_mmb_activities_log;
+        global $wpdb, $_wp_using_ext_object_cache, $current_user, $iwp_mmb_activities_log;
         $_wp_using_ext_object_cache = false;
 
         //delete plugin options, just in case
@@ -668,11 +668,7 @@ class IWP_MMB_Core extends IWP_MMB_Helper
 		
 		add_option('iwp_client_activate_key', sha1( rand(1, 99999). uniqid('', true) . get_option('siteurl') ) );
 		
-		// The following three lines are used for Client Reporting (Beta) - activities log.
-		$iwp_mmb_activities_log->iwp_mmb_update_all_plugins_history();
-		$iwp_mmb_activities_log->iwp_mmb_update_all_themes_history();
-		
-        add_option('iwp_client_wp_version_old',$wp_version); // It is mainly used when wp core auto updates happened.
+		$iwp_mmb_activities_log->iwp_mmb_save_options_for_activity_log('install');
     }
     
     /**
@@ -764,7 +760,7 @@ class IWP_MMB_Core extends IWP_MMB_Helper
      */
     function update_client_plugin($params)
     {
-		
+		global $iwp_mmb_activities_log;
         extract($params);
         if ($download_url) {
             @include_once ABSPATH . 'wp-admin/includes/file.php';
@@ -799,7 +795,10 @@ class IWP_MMB_Core extends IWP_MMB_Helper
                 return array(
                     'error' => 'InfiniteWP Client plugin could not be updated.', 'error_code' => 'client_plugin_could_not_be_updated'
                 );
-            } else {			
+            } else {
+				
+				$iwp_mmb_activities_log->iwp_mmb_save_options_for_activity_log('update_client_plugin');
+				
                 return array(
                     'success' => 'InfiniteWP Client plugin successfully updated.'
                 );

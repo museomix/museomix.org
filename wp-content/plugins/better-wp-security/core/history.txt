@@ -368,3 +368,32 @@
 	Enhancement: Adding 'itsec_log_event' action for logged events
 2.2.11 - 2016-05-02 - Chris Jean & Aaron D. Campbell
 	Bug Fix: Throw a real 403 instead of a faked 404 for hide backend - Fixes compatability with certain plugins including WordPress SEO. Hat tip to Joost de Valk (@jdevalk) and the @Yoast team for bringing this issue to our attention.
+2.3.0 - 2016-05-23 - Chris Jean & Aaron D. Campbell
+	Enhancement: New user interface with both grid and list views for managing settings.
+	Enhancement: New automatic temp whitelisting of IPs for users that manage iThemes Security settings.
+	Enhancement: Better feedback on errors when modifying wp-config.php or server config files.
+	Enhancement: Improved code efficiency of the Away Mode feature so that it takes less processing time when active.
+	Enhancement: Rather than disabling features that have invalid user input, the user now can fix the issue before saving.
+	New Feature: Global settings now has a "Show Error Codes" setting that can provide an error message's specific error code when it is enabled.
+	Bug Fix: More than one IP can now be temp whitelisted.
+2.3.1 - 2016-05-24 - Chris Jean & Aaron D. Campbell
+	Enhancement: Improved the efficiency of the plugin's loading code, reducing the amount of time taken to run the plugin.
+	Bug Fix: Fixed a bug where some modules would be enabled or disabled when they shouldn't be after upgrading to the latest version.
+	Bug Fix: Will not send notification emails about the new login address when Hide Backend is enabled and doing an upgrade.
+	Compatibility Fix: Updated handling of wp_remote_get() responses in preparation for changes coming in WordPress 4.6.
+2.3.2 - 2016-05-24 - Chris Jean & Aaron D. Campbell
+	Bug Fix: Fixed fatal error that could happen when registering for Network Brute Force Protection.
+2.3.3 - 2016-05-25 - Chris Jean & Aaron D. Campbell
+	Bug Fix: Fixed error that would prevent nginx servers from being able to make use of the "Reduce Comment Spam" feature of the WordPress Tweaks module.
+	Bug Fix: Restored missing log filter for 404 Detection log entries.
+2.3.4 - 2016-05-25 - Chris Jean & Aaron D. Campbell
+	Bug Fix: Fixed links to Settings, Logs, and creating a backup on Multisite.
+	Enhancement: The "Write to Files" setting is now enabled by default.
+2.3.5 - 2016-05-26 - Chris Jean & Aaron D. Campbell
+	Bug Fix: Don't rely on externally loaded MailChimp JavaScript.
+2.3.6 - 2016-05-26 - Chris Jean & Aaron D. Campbell
+	Bug Fix: Fixed bug that could cause some sites to lose settings when upgrading or importing settings.
+	Bug Fix: Fixed bug that could cause Security to look at old file and directory locations after importing settings from one site to a different site.
+	Bug Fix: Removed some status messages that would display after doing an import.
+2.3.7 - 2016-05-27 - Chris Jean & Aaron D. Campbell
+	Bug Fix: Fixed SQL query for Database Backups when "Backup Full Database" is enabled.

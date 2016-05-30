@@ -72,10 +72,7 @@ final class ITSEC_Logger_All_Logs extends ITSEC_WP_List_Table {
 	 *
 	 **/
 	function column_host( $item ) {
-		if ( ! class_exists( 'ITSEC_Lib_IP_Tools' ) ) {
-			$itsec_core = ITSEC_Core::get_instance();
-			require_once( dirname( $itsec_core->get_plugin_file() ) . '/core/lib/class-itsec-lib-ip-tools.php' );
-		}
+		require_once( ITSEC_Core::get_core_dir() . '/lib/class-itsec-lib-ip-tools.php' );
 
 		$r = array();
 		if ( ! is_array( $item['host'] ) ) {

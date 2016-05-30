@@ -14,10 +14,6 @@ if ( ! class_exists( 'ITSEC_IPCheck_Setup' ) ) {
 			add_action( 'itsec_modules_do_plugin_uninstall',    array( $this, 'execute_uninstall'  )          );
 			add_action( 'itsec_modules_do_plugin_upgrade',      array( $this, 'execute_upgrade'    ), null, 2 );
 
-			$this->defaults = array(
-				'api_ban' => true,
-			);
-
 		}
 
 		/**
@@ -28,15 +24,6 @@ if ( ! class_exists( 'ITSEC_IPCheck_Setup' ) ) {
 		 * @return void
 		 */
 		public function execute_activate() {
-
-			$options = get_site_option( 'itsec_ipcheck' );
-
-			if ( $options === false ) {
-
-				add_site_option( 'itsec_ipcheck', $this->defaults );
-
-			}
-
 		}
 
 		/**
@@ -70,7 +57,42 @@ if ( ! class_exists( 'ITSEC_IPCheck_Setup' ) ) {
 		 *
 		 * @return void
 		 */
-		public function execute_upgrade() {
+		public function execute_upgrade( $itsec_old_version ) {
+			if ( $itsec_old_version < 4041 ) {
+				$current_options = get_site_option( 'itsec_ipcheck' );
+
+				// If there are no current options, go with the new defaults by not saving anything
+				if ( is_array( $current_options ) ) {
+					$settings = ITSEC_Modules::get_defaults( 'network-brute-force' );
+
+					if ( isset( $current_options['api_ban'] ) ) {
+						$settings['enable_ban'] = $current_options['api_ban'];
+					}
+
+					// Make sure the new module is properly activated or deactivated
+					if ( $settings['enable_ban'] ) {
+						ITSEC_Modules::activate( 'network-brute-force' );
+					} else {
+						ITSEC_Modules::deactivate( 'network-brute-force' );
+					}
+
+					if ( ! empty( $current_options['api_key'] ) ) {
+						$settings['api_key'] = $current_options['api_key'];
+						// Don't ask users to sign up if they already have
+						$settings['api_nag'] = false;
+					}
+
+					if ( ! empty( $current_options['api_s'] ) ) {
+						$settings['api_secret'] = $current_options['api_s'];
+					}
+
+					if ( ! empty( $current_options['optin'] ) ) {
+						$settings['updates_optin'] = $current_options['optin'];
+					}
+
+					ITSEC_Modules::set_settings( 'network-brute-force', $settings );
+				}
+			}
 		}
 
 	}

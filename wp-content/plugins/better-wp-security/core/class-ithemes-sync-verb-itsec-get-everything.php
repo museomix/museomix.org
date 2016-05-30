@@ -9,7 +9,7 @@ class Ithemes_Sync_Verb_ITSEC_Get_Everything extends Ithemes_Sync_Verb {
 
 	public function run( $arguments ) {
 
-		global $itsec_sync;
+		$itsec_sync = ITSEC_Core::get_itsec_sync();
 
 		$modules        = $itsec_sync->get_modules();
 		$module_results = array();

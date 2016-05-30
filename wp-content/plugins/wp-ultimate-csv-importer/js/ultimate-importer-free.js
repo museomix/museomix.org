@@ -720,24 +720,25 @@ function export_module() {
             //alert(get_selected_module[i].value);
             // only one radio can be logically checked, don't check the rest
             //break;
-	    if(get_selected_module[i].value == 'custompost'){
-		if(customlist == '--Select--'){
-			showMapMessages('error',wp_ultimate_translate_importer.customlist);
-			return false;
-		}
-	    }
-	   if(get_selected_module[i].value == 'customtaxonomy'){
-		if(customtaxonomy == '--Select--'){
-		       showMapMessages('error',wp_ultimate_translate_importer.customtaxonomy);
-                        return false;
-		}
-	   }
+            if(get_selected_module[i].value == 'custompost'){
+                if(customlist == '--Select--'){
+                    showMapMessages('error',wp_ultimate_translate_importer.customlist);
+                    return false;
+                }
+            }
+            if(get_selected_module[i].value == 'customtaxonomy'){
+                if(customtaxonomy == '--Select--'){
+                    showMapMessages('error',wp_ultimate_translate_importer.customtaxonomy);
+                    return false;
+                }
+            }
             return true;
         }
     }
     showMapMessages('error', wp_ultimate_translate_importer.validate_exportmsg);
     return false;
 }
+
 function export_check(value) {
     if (value == 'woocommerce' || value == 'wpcommerce' || value == 'marketpress' || value == 'users' || value == 'category' || value == 'tags' || value == 'customtaxonomy' || value == 'customerreviews') {
         document.getElementById(value).checked = false;
@@ -768,6 +769,86 @@ function choose_import_mode(id) {
     }
 }
 
+function exportexclusion(name, id) {
+    var selected_node = document.getElementById(id).checked;
+    var export_module_type = document.getElementById('moduletobeexport').value;
+    var customposts_type = document.getElementById('export_cust_type').value;
+    var taxonomies = document.getElementById('export_taxo_type').value;
+    if(selected_node == true)
+        var exclusion_status = 'enable';
+    else
+        var exclusion_status = 'disable';
+    var doaction = new Array({'exclusion_status': exclusion_status, 'exclusion_node': name,'export_module':export_module_type,'customposts_type':customposts_type,'taxonomies':taxonomies});
+    jQuery.ajax({
+        url: ajaxurl,
+        data: {
+            'action': 'UpdateExportExclusion',
+            'postdata': doaction,
+        },
+        type: 'post',
+        success: function (response) {
+        }
+    });
+}
+
+//Export check All
+function exportselectall(param, group)
+{
+    var res = new Array();
+    var export_module_type = document.getElementById('moduletobeexport').value;
+    var result = document.getElementsByClassName(group+'_class');
+    var customposts_type = document.getElementById('export_cust_type').value;
+    var taxonomies = document.getElementById('export_taxo_type').value;
+    var result = document.getElementsByClassName(group+'_class');
+    for(var j=0;j<result.length;j++) {
+        var name1 = result[j].name;
+        res[j] = name1;
+    }
+    for(var i=0;i<result.length;i++) {
+        var ans = result[i].id;
+        var check = document.getElementById(ans).checked;
+        if(check == true) {
+            if(param == 'uncheck')
+                document.getElementById(ans).checked = false;
+            jQuery.ajax({
+                url: ajaxurl,
+                type: 'post',
+                data: {
+                    'action': 'UpdateExportExclusion',
+                    'eventdoneby': param,
+                    'export_module':export_module_type,
+                    'cust_posts_type':customposts_type,
+                    'taxo_type':taxonomies,
+                    'result':res,
+                },
+                success: function (response) {
+//                        alert(response); return false;
+                }
+            });
+
+        }
+        else {
+            if(param == 'check')
+                document.getElementById(ans).checked = true;
+            jQuery.ajax({
+                url: ajaxurl,
+                type: 'post',
+                data: {
+                    'action': 'UpdateExportExclusion',
+                    'eventdoneby': param,
+                    'export_module':export_module_type,
+                    'cust_posts_type':customposts_type,
+                    'taxo_type':taxonomies,
+                    'result':res,
+                },
+                success: function (response) {
+//                        alert(response); return false;
+                }
+            });
+        }
+    }
+}
+
 function addexportfilter(id) {
     if (document.getElementById(id).checked == true) {
         if (id == 'getdataforspecificperiod') {
@@ -780,15 +861,18 @@ function addexportfilter(id) {
         else if (id == 'getdatawithspecificstatus') {
             document.getElementById('specificstatusexport').style.display = '';
             document.getElementById('status').style.display = '';
-            document.getElementById('postwithstatus').style.display = '';
+            document.getElementById('specific_status').style.display = '';
         }
         else if (id == 'getdatabyspecificauthors') {
             document.getElementById('specificauthorexport').style.display = '';
             document.getElementById('authors').style.display = '';
-            document.getElementById('postauthor').style.display = '';
+            document.getElementById('specific_authors').style.display = '';
         }
         else if (id == 'getdatawithdelimiter') {
-            document.getElementById('delimeter').style.display = '';
+            document.getElementById('delimiterstatus').style.display = '';
+        }
+        else if(id == 'getdatabasedonexclusions') {
+            document.getElementById('exclusiongrouplist').style.display = '';
         }
     } else if (document.getElementById(id).checked == false) {
         if (id == 'getdataforspecificperiod') {
@@ -801,15 +885,134 @@ function addexportfilter(id) {
         else if (id == 'getdatawithspecificstatus') {
             document.getElementById('specificstatusexport').style.display = 'none';
             document.getElementById('status').style.display = 'none';
-            document.getElementById('postwithstatus').style.display = 'none';
+            document.getElementById('specific_status').style.display = 'none';
         }
         else if (id == 'getdatabyspecificauthors') {
             document.getElementById('specificauthorexport').style.display = 'none';
             document.getElementById('authors').style.display = 'none';
-            document.getElementById('postauthor').style.display = 'none';
+            document.getElementById('specific_authors').style.display = 'none';
         }
         else if (id == 'getdatawithdelimiter') {
-            document.getElementById('delimeter').style.display = 'none';
+            document.getElementById('delimiterstatus').style.display = 'none';
+        }
+        else if(id == 'getdatabasedonexclusions') {
+            document.getElementById('exclusiongrouplist').style.display = 'none';
         }
     }
+}
+
+function igniteExport() {
+    var exclusion_header_list = JSON.parse( "" || "{}");
+    var filterOptions = new Array('getdatawithdelimiter', 'getdataforspecificperiod', 'getdatawithspecificstatus', 'getdatabyspecificauthors', 'getdatabasedonexclusions');
+    var items = jQuery("form :input").map(function(index, elm) {
+        return {id: elm.id, name: elm.name, type:elm.type, value: jQuery(elm).val()};
+    });
+    jQuery.each(items, function(i, d){
+        if(d.name != '' && d.name != null && d.name != '_token' && d.type == 'checkbox') {
+            if(jQuery.inArray(d.name, filterOptions) == -1) {
+                if (jQuery('#' + d.id).prop( "checked" )) {
+                    exclusion_header_list[d.name] = true; //d.type;
+                }
+            }
+        }
+    });
+    console.log(exclusion_header_list);
+    var module = jQuery('#moduletobeexport').val();
+    var is_custom_delimiter = false;
+    if(jQuery('#getdatawithdelimiter').prop( "checked" )) {
+        is_custom_delimiter = true;
+    }
+    var smack_nonce_key = jQuery('#smack_nonce_key').val();
+    var delimiter = jQuery('#postwithdelimiter').val();
+    var optional_delimiter = jQuery('#other_delimiter').val();
+    var optionalType = jQuery('#optional_type').val();
+    var offset = jQuery('#offset').val();
+    var limit = jQuery('#limit').val();
+    var total_row_count = jQuery('#total_row_count').val();
+    //alert(optionalType);
+    var is_data_for_specific_period = false;
+    if(jQuery('#getdataforspecificperiod').prop( "checked" )) {
+        is_data_for_specific_period = true;
+    }
+    var from_date = jQuery('#postdatefrom').val();
+    var to_date = jQuery('#postdateto').val();
+    var is_data_for_specific_status = false;
+    if(jQuery('#getdatawithspecificstatus').prop( "checked" )) {
+        is_data_for_specific_status = true;
+    }
+    var specific_status = jQuery('#specific_status').val();
+    var is_data_for_specific_authors = false;
+    if(jQuery('#getdatabyspecificauthors').prop( "checked" )) {
+        is_data_for_specific_authors = true;
+    }
+    var specific_authors = jQuery('#specific_authors').val();
+    var is_data_with_specific_exclusions = false;
+    if(jQuery('#getdatabasedonexclusions').prop( "checked" )) {
+        is_data_with_specific_exclusions = true;
+    }
+    var conditions = {
+        'delimiter': {
+            'is_check': is_custom_delimiter,
+            'delimiter': delimiter,
+            'optional_delimiter': optional_delimiter,
+        },
+        'specific_period': {
+            'is_check': is_data_for_specific_period,
+            'from': from_date,
+            'to': to_date,
+        },
+        'specific_status': {
+            'is_check': is_data_for_specific_status,
+            'status': specific_status,
+        },
+        'specific_authors': {
+            'is_check': is_data_for_specific_authors,
+            'author': specific_authors,
+        },
+    };
+    var eventExclusions = {
+        'is_check': is_data_with_specific_exclusions,
+        'exclusion_headers': exclusion_header_list,
+    };
+    var fileName = jQuery('#export_filename').val();
+    jQuery.ajax({
+        type: 'POST',
+        url: ajaxurl,
+        dataType: "json",
+        //async: false,
+        data: {
+            'action': 'parseDataToExport',
+            'nonceKey': smack_nonce_key,
+            'module': module,
+            'optionalType': optionalType,
+            'conditions': conditions,
+            'eventExclusions': eventExclusions,
+            'fileName': fileName,
+            'offset': offset,
+            'limit': limit,
+        },
+        success: function (response) {
+            //alert(response.new_offset); return false;
+            //var new_offset = parseInt(data.offset) + parseInt(data.limit);
+            //jQuery('#proceed_to_export').disabled = true;
+            //$("#rbutton'+i+'").attr("disabled","disabled");
+            if(response != null) {
+                jQuery('input[type="button"]').prop('disabled', true);
+                jQuery("a#download_file_link").css('display', '');
+                jQuery("#download_file").css('display', '');
+                jQuery('#download_file').prop('disabled', false);
+                jQuery("a#download_file_link").attr("href", response.exported_file);
+                jQuery('#offset').val(response.new_offset);
+                if (parseInt(response.new_offset) >= parseInt(response.total_row_count)) {
+                    jQuery('#wpwrap').waitMe('hide');
+                    return false;
+                }
+                igniteExport();
+            }
+            console.log (response);
+        },
+        error: function (errorThrown) {
+            console.log(errorThrown);
+        }
+    });
 }

@@ -4,21 +4,12 @@ if ( ! class_exists( 'ITSEC_SSL_Setup' ) ) {
 
 	class ITSEC_SSL_Setup {
 
-		private
-			$defaults;
-
 		public function __construct() {
 
 			add_action( 'itsec_modules_do_plugin_activation',   array( $this, 'execute_activate'   )          );
 			add_action( 'itsec_modules_do_plugin_deactivation', array( $this, 'execute_deactivate' )          );
 			add_action( 'itsec_modules_do_plugin_uninstall',    array( $this, 'execute_uninstall'  )          );
 			add_action( 'itsec_modules_do_plugin_upgrade',      array( $this, 'execute_upgrade'    ), null, 2 );
-
-			$this->defaults = array(
-				'frontend' => 0,
-				'admin'    => false,
-				'login'    => false,
-			);
 
 		}
 
@@ -30,39 +21,6 @@ if ( ! class_exists( 'ITSEC_SSL_Setup' ) ) {
 		 * @return void
 		 */
 		public function execute_activate() {
-
-			$options  = get_site_option( 'itsec_ssl' );
-			$initials = get_site_option( 'itsec_initials' );
-
-			if ( defined( 'FORCE_SSL_LOGIN' ) && FORCE_SSL_LOGIN === true ) {
-				$initials['login'] = true;
-			} else {
-				$initials['login'] = false;
-			}
-
-			if ( defined( 'FORCE_SSL_ADMIN' ) && FORCE_SSL_ADMIN === true ) {
-				$initials['admin'] = true;
-			} else {
-				$initials['admin'] = false;
-			}
-
-			update_site_option( 'itsec_initials', $initials );
-
-			if ( $options === false ) {
-
-				if ( defined( 'FORCE_SSL_LOGIN' ) && FORCE_SSL_LOGIN === true ) {
-					$this->defaults['login'] = true;
-				}
-
-				if ( defined( 'FORCE_SSL_ADMIN' ) && FORCE_SSL_ADMIN === true ) {
-					$this->defaults['admin'] = true;
-				}
-
-				add_site_option( 'itsec_ssl', $this->defaults );
-				add_site_option( 'itsec_config_changed', true );
-
-			}
-
 		}
 
 		/**
@@ -99,15 +57,41 @@ if ( ! class_exists( 'ITSEC_SSL_Setup' ) ) {
 
 				$current_options = get_site_option( 'itsec_ssl' );
 
-				if ( $current_options === false ) {
-					$current_options = $this->defaults;
+				// Don't do anything if settings haven't already been set, defaults exist in the module system and we prefer to use those
+				if ( false !== $current_options ) {
+
+					$current_options['frontend'] = isset( $itsec_bwps_options['ssl_frontend'] ) ? intval( $itsec_bwps_options['ssl_frontend'] ) : 0;
+
+					update_site_option( 'itsec_ssl', $current_options );
+					ITSEC_Response::regenerate_wp_config();
+
 				}
+			}
 
-				$current_options['frontend'] = isset( $itsec_bwps_options['ssl_frontend'] ) ? intval( $itsec_bwps_options['ssl_frontend'] ) : 0;
+			if ( $itsec_old_version < 4041 ) {
+				$current_options = get_site_option( 'itsec_ssl' );
 
-				update_site_option( 'itsec_ssl', $current_options );
-				add_site_option( 'itsec_config_changed', true );
+				// If there are no current options, go with the new defaults by not saving anything
+				if ( is_array( $current_options ) ) {
+					// If anything in this module is being used activate it, otherwise deactivate it
+					$activate = false;
+					foreach ( $current_options as $on ) {
+						if ( $on ) {
+							$activate = true;
+							break;
+						}
+					}
+					if ( $activate ) {
+						ITSEC_Modules::activate( 'ssl' );
+					} else {
+						ITSEC_Modules::deactivate( 'ssl' );
+					}
 
+					// remove 'enabled' which isn't used in the new module
+					unset( $current_options['enabled'] );
+
+					ITSEC_Modules::set_settings( 'ssl', $current_options );
+				}
 			}
 
 		}

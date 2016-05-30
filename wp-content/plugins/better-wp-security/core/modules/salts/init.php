@@ -1,8 +1,3 @@
 <?php
 
-class ITSEC_Salts_Module_Init extends ITSEC_Module_Init {
-	protected $_id   = 'salts';
-	protected $_name = 'Salts';
-	protected $_desc = 'Change your salts.';
-}
-new ITSEC_Salts_Module_Init();
+ITSEC_Modules::register_module( 'wordpress-salts', dirname( __FILE__ ), 'always-active' );

@@ -10,12 +10,10 @@
  * @since   4.5
  *
  */
-class ITSEC_IPCheck extends ITSEC_Lockout {
+class ITSEC_IPCheck {
 
-	private static $endpoint = 'http://ipcheck-api.ithemes.com/?action=';
-
-	private
-		$settings;
+	private $endpoint = 'http://ipcheck-api.ithemes.com/?action=';
+	private $settings;
 
 	function run() {
 
@@ -47,7 +45,7 @@ class ITSEC_IPCheck extends ITSEC_Lockout {
 	 */
 	public function authenticate( $user, $username = '', $password = '' ) {
 
-		global $itsec_logger;
+		global $itsec_logger, $itsec_lockout;
 
 		//Execute brute force if username or password are empty
 		if ( isset( $_POST['wp-submit'] ) && ( empty( $username ) || empty( $password ) ) ) {
@@ -56,7 +54,7 @@ class ITSEC_IPCheck extends ITSEC_Lockout {
 
 				$itsec_logger->log_event( 'ipcheck', 10, array(), ITSEC_Lib::get_ip() );
 
-				$this->execute_lock( false, true );
+				$itsec_lockout->execute_lock( false, true );
 
 			}
 
@@ -123,7 +121,7 @@ class ITSEC_IPCheck extends ITSEC_Lockout {
 
 		if ( ITSEC_Lib_IP_Tools::validate( $ip ) ) { //verify IP address is valid
 
-			if ( ! isset( $this->settings['api_key'] ) || ! isset( $this->settings['api_s'] ) ) {
+			if ( ! isset( $this->settings['api_key'] ) || ! isset( $this->settings['api_secret'] ) ) {
 				return false; //invalid key or secret
 			}
 
@@ -141,14 +139,14 @@ class ITSEC_IPCheck extends ITSEC_Lockout {
 			$request = array(
 				'body' => array(
 					'request'   => $args,
-					'signature' => self::hmac_sha1( $this->settings['api_s'], $action . $args ),
+					'signature' => $this->hmac_sha1( $this->settings['api_secret'], $action . $args ),
 				),
 			);
 
-			$response = wp_remote_post( self::$endpoint . $action, $request );
+			$response = wp_remote_post( $this->endpoint . $action, $request );
 
 			//Make sure the request was valid and has a valid body
-			if ( is_array( $response ) && isset( $response['body'] ) ) {
+			if ( ! is_wp_error( $response ) && isset( $response['body'] ) ) {
 
 				$response = json_decode( $response['body'], true );
 
@@ -165,13 +163,13 @@ class ITSEC_IPCheck extends ITSEC_Lockout {
 							'expires' => $expiration, 'expires_gmt' => $expiration_gmt, 'type' => 'host'
 						), $ip );
 
-						self::cache_ip( $ip, array( 'status' => true ), $cache );
+						$this->cache_ip( $ip, array( 'status' => true ), $cache );
 
 						return true; //API reports IP is blocked
 
 					} else {
 
-						self::cache_ip( $ip, array( 'status' => false ), $cache );
+						$this->cache_ip( $ip, array( 'status' => false ), $cache );
 
 						return false; //API reports IP is not blocked or no report (default to no block)
 
@@ -287,7 +285,7 @@ class ITSEC_IPCheck extends ITSEC_Lockout {
 
 		if ( ITSEC_Lib_IP_Tools::validate( $ip ) ) { //verify IP address is valid
 
-			if ( ! isset( $this->settings['api_key'] ) || ! isset( $this->settings['api_s'] ) ) {
+			if ( ! isset( $this->settings['api_key'] ) || ! isset( $this->settings['api_secret'] ) ) {
 				return -1; //invalid key or secret
 			}
 
@@ -305,14 +303,14 @@ class ITSEC_IPCheck extends ITSEC_Lockout {
 			$request = array(
 				'body' => array(
 					'request'   => $args,
-					'signature' => self::hmac_SHA1( $this->settings['api_s'], $action . $args ),
+					'signature' => $this->hmac_SHA1( $this->settings['api_secret'], $action . $args ),
 				),
 			);
 
-			$response = wp_remote_post( self::$endpoint . $action, $request );
+			$response = wp_remote_post( $this->endpoint . $action, $request );
 
 			//Make sure the request was valid and has a valid body
-			if ( is_array( $response ) && isset( $response['body'] ) ) {
+			if ( ! is_wp_error( $response ) && isset( $response['body'] ) ) {
 
 				$response = json_decode( $response['body'], true );
 
@@ -329,7 +327,7 @@ class ITSEC_IPCheck extends ITSEC_Lockout {
 							'expires' => $expiration, 'expires_gmt' => $expiration_gmt, 'type' => 'host'
 						), $ip );
 
-						self::cache_ip( $ip, array( 'status' => true ), $cache );
+						$this->cache_ip( $ip, array( 'status' => true ), $cache );
 
 						return 1; //ip report success. Just return true for now
 
@@ -358,13 +356,13 @@ class ITSEC_IPCheck extends ITSEC_Lockout {
 	 */
 	public function wp_login() {
 
-		global $itsec_logger;
+		global $itsec_logger, $itsec_lockout;
 
 		if ( $this->check_ip() === true ) {
 
 			$itsec_logger->log_event( 'ipcheck', 10, array(), ITSEC_Lib::get_ip() );
 
-			$this->execute_lock( false, true );
+			$itsec_lockout->execute_lock( false, true );
 
 		}
 
@@ -379,13 +377,13 @@ class ITSEC_IPCheck extends ITSEC_Lockout {
 	 */
 	public function wp_login_failed() {
 
-		global $itsec_logger;
+		global $itsec_logger, $itsec_lockout;
 
 		if ( $this->report_ip() === 1 ) {
 
 			$itsec_logger->log_event( 'ipcheck', 10, array(), ITSEC_Lib::get_ip() );
 
-			$this->execute_lock( false, true );
+			$itsec_lockout->execute_lock( false, true );
 
 		}
 

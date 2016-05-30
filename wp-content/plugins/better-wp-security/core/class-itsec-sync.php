@@ -17,7 +17,7 @@ final class ITSEC_Sync {
 	 * @access private
 	 * @var array
 	 */
-	private $sync_modules;
+	private $sync_modules = false;
 
 	/**
 	 * Loads sync modules
@@ -28,14 +28,7 @@ final class ITSEC_Sync {
 	 *
 	 * @return ITSEC_Sync
 	 */
-	public function __construct() {
-
-		$this->sync_modules = array(); //array to hold information on modules using this feature
-
-		add_action( 'plugins_loaded', array( $this, 'register_modules' ), 20 );
-		add_action( 'ithemes_sync_register_verbs', array( $this, 'ithemes_sync_register_verbs' ) );
-
-	}
+	public function __construct() {}
 
 	/**
 	 * Returns all modules registered with Sync.
@@ -47,7 +40,16 @@ final class ITSEC_Sync {
 	 * @return array sync module registrations
 	 */
 	public function get_modules() {
-
+		if ( is_array( $this->sync_modules ) ) {
+			return $this->sync_modules;
+		}
+		
+		$this->sync_modules = apply_filters( 'itsec_sync_modules', array() );
+		
+		if ( ! is_array( $this->sync_modules ) ) {
+			$this->sync_modules = array();
+		}
+		
 		return $this->sync_modules;
 
 	}
@@ -63,9 +65,10 @@ final class ITSEC_Sync {
 	 *
 	 * @return void
 	 */
-	public function ithemes_sync_register_verbs( $api ) {
+	public function register_verbs( $api ) {
+		$modules = $this->get_modules();
 
-		foreach ( $this->sync_modules as $module ) {
+		foreach ( $modules as $module ) {
 
 			if ( isset( $module['verbs'] ) && isset( $module['path'] ) ) {
 
@@ -80,21 +83,6 @@ final class ITSEC_Sync {
 		}
 
 		$api->register( 'itsec-get-everything', 'Ithemes_Sync_Verb_ITSEC_Get_Everything', dirname( __FILE__ ) . '/class-ithemes-sync-verb-itsec-get-everything.php' );
-
-	}
-
-	/**
-	 * Register modules that will use the sync service.
-	 *
-	 * Executes a filter that allows modules to register themselves for iThemes Sync integration.
-	 *
-	 * @since 4.1.0
-	 *
-	 * @return void
-	 */
-	public function register_modules() {
-
-		$this->sync_modules = apply_filters( 'itsec_sync_modules', $this->sync_modules );
 
 	}
 

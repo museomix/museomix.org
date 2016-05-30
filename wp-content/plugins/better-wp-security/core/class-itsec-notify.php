@@ -17,7 +17,7 @@ class ITSEC_Notify {
 
 		$this->queue = get_site_option( 'itsec_message_queue' );
 
-		if ( isset( $itsec_globals['settings']['digest_email'] ) && $itsec_globals['settings']['digest_email'] === true ) {
+		if ( ITSEC_Modules::get_setting( 'global', 'digest_email' ) ) {
 
 			if ( defined( 'ITSEC_NOTIFY_USE_CRON' ) && true === ITSEC_NOTIFY_USE_CRON ) {
 
@@ -155,7 +155,7 @@ class ITSEC_Notify {
 				'<p>%s,</p><p>%s <a href="%s">%s</a></p><p><strong>%s: </strong>%s</p>%s<p>%s %s</p><p>%s <a href="%s">%s</a>.</p>',
 				__( 'Dear Site Admin', 'better-wp-security' ),
 				__( 'The following is a summary of security related activity on your site. For details please visit', 'better-wp-security' ),
-				wp_login_url( get_admin_url( '', 'admin.php?page=toplevel_page_itsec_logs' ) ),
+				wp_login_url( ITSEC_Core::get_logs_page_url() ),
 				__( 'the security logs', 'better-wp-security' ),
 				__( 'Lockouts', 'better-wp-security' ),
 				$lockout_message,
@@ -163,7 +163,7 @@ class ITSEC_Notify {
 				__( 'This email was generated automatically by' ),
 				$itsec_globals['plugin_name'],
 				__( 'To change your email preferences please visit', 'better-wp-security' ),
-				wp_login_url( get_admin_url( '', 'admin.php?page=toplevel_page_itsec_settings' ) ),
+				wp_login_url( ITSEC_Core::get_settings_page_url() ),
 				__( 'the plugin settings', 'better-wp-security' )
 			);
 
@@ -219,7 +219,7 @@ class ITSEC_Notify {
 			'h4'     => array(),
 		);
 
-		if ( isset( $itsec_globals['settings']['digest_email'] ) && $itsec_globals['settings']['digest_email'] === true ) {
+		if ( ITSEC_Modules::get_setting( 'global', 'digest_email' ) ) {
 
 			if ( ! in_array( wp_kses( $body, $allowed_tags ), $this->queue['messages'] ) ) {
 
@@ -231,7 +231,7 @@ class ITSEC_Notify {
 
 			return true;
 
-		} elseif ( isset( $itsec_globals['settings']['email_notifications'] ) && $itsec_globals['settings']['email_notifications'] === true ) {
+		} else if ( ITSEC_Modules::get_setting( 'global', 'email_notifications', true ) ) {
 
 			$subject = trim( sanitize_text_field( $body['subject'] ) );
 			$message = wp_kses( $body['message'], $allowed_tags );
@@ -272,7 +272,7 @@ class ITSEC_Notify {
 
 		global $itsec_globals;
 
-		$recipients  = $itsec_globals['settings']['notification_email'];
+		$recipients  = ITSEC_Modules::get_setting( 'global', 'notification_email' );
 		$all_success = true;
 
 		add_filter( 'wp_mail_content_type', array( $this, 'wp_mail_content_type' ) );

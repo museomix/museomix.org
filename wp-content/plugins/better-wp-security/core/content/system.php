@@ -322,7 +322,7 @@ $htaccess = ITSEC_Lib::get_htaccess();
 <li>
 	<h4><?php echo $itsec_globals['plugin_name'] . __( ' variables', 'better-wp-security' ); ?></h4>
 	<ul>
-		<li><?php _e( 'Build Version', 'better-wp-security' ); ?>: <strong><?php echo $itsec_globals['plugin_build']; ?></strong><br/>
+		<li><?php _e( 'Build Version', 'better-wp-security' ); ?>: <strong><?php echo ITSEC_Core::get_plugin_build(); ?></strong><br/>
 			<em><?php _e( 'Note: this is NOT the same as the version number on the plugin page or WordPress.org page and is instead used for support.', 'better-wp-security' ); ?></em>
 		</li>
 	</ul>

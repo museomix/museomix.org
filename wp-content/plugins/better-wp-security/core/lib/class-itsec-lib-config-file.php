@@ -23,8 +23,8 @@ class ITSEC_Lib_Config_File {
 	 * @var int
 	 */
 	const FORMAT_VERSION = 2;
-	
-	
+
+
 	/**
 	 * Get the server config to be written to the config file.
 	 *
@@ -40,10 +40,10 @@ class ITSEC_Lib_Config_File {
 		$modification = apply_filters( "itsec_filter_{$server}_server_config_modification", '' );
 		$comment_delimiter = self::get_comment_delimiter( $server );
 		$modification = self::get_prepared_modification( $modification, $comment_delimiter );
-		
+
 		return $modification;
 	}
-	
+
 	/**
 	 * Get the minimal server config to be written to the config file.
 	 *
@@ -57,18 +57,18 @@ class ITSEC_Lib_Config_File {
 	public static function get_minimal_server_config() {
 		$server = ITSEC_Lib_Utility::get_web_server();
 		$modification = apply_filters( "itsec_filter_{$server}_minimal_server_config_modification", '' );
-		
+
 		if ( empty( $modification ) ) {
 			return '';
 		}
-		
+
 		$comment_delimiter = self::get_comment_delimiter( $server );
 		$modification = "$comment_delimiter " . __( 'iThemes Security preserved the following settings as removing them could prevent the site from functioning correctly.', 'better-wp-security' ) . "\n$modification";
 		$modification = self::get_prepared_modification( $modification, $comment_delimiter );
-		
+
 		return $modification;
 	}
-	
+
 	/**
 	 * Update the server config file.
 	 *
@@ -79,10 +79,10 @@ class ITSEC_Lib_Config_File {
 	public static function update_server_config() {
 		$server = ITSEC_Lib_Utility::get_web_server();
 		$modification = self::get_server_config();
-		
+
 		return self::write_server_config( $server, $modification );
 	}
-	
+
 	/**
 	 * Remove all removable settings from the server config file.
 	 *
@@ -93,10 +93,10 @@ class ITSEC_Lib_Config_File {
 	public static function reset_server_config() {
 		$server = ITSEC_Lib_Utility::get_web_server();
 		$modification = self::get_minimal_server_config();
-		
+
 		return self::write_server_config( $server, $modification );
 	}
-	
+
 	/**
 	 * Add a modification to the server config file without having to rebuild all iThemes Security modifications.
 	 *
@@ -113,15 +113,15 @@ class ITSEC_Lib_Config_File {
 	 */
 	public static function append_server_config( $modification, $permanent = false ) {
 		$server = ITSEC_Lib_Utility::get_web_server();
-		
+
 		if ( true !== $permanent ) {
 			$comment_delimiter = self::get_comment_delimiter( $server );
 			$modification = self::get_prepared_modification( $modification, $comment_delimiter );
 		}
-		
+
 		return self::write_server_config( $server, $modification, false );
 	}
-	
+
 	/**
 	 * Write the supplied modification to the appropriate server config file.
 	 *
@@ -136,15 +136,15 @@ class ITSEC_Lib_Config_File {
 	 */
 	protected static function write_server_config( $server, $modification, $clear_existing_modifications = true ) {
 		$file_path = self::get_server_config_file_path();
-		
+
 		if ( empty( $file_path ) ) {
 			return true;
 //			return new WP_Error( 'itsec-lib-config-file-server-config-file-updates-disabled', __( 'Updates to the server config file are disabled via a filter.', 'better-wp-security' ) );
 		}
-		
+
 		return self::update( $file_path, $server, $modification, $clear_existing_modifications );
 	}
-	
+
 	/**
 	 * Get the config to be written to the wp-config.php file.
 	 *
@@ -158,10 +158,10 @@ class ITSEC_Lib_Config_File {
 		$modification = apply_filters( 'itsec_filter_wp_config_modification', '' );
 		$comment_delimiter = self::get_comment_delimiter( 'wp-config' );
 		$modification = self::get_prepared_modification( $modification, $comment_delimiter );
-		
+
 		return $modification;
 	}
-	
+
 	/**
 	 * Get the minimal config to be written to the wp-config.php file.
 	 *
@@ -173,18 +173,18 @@ class ITSEC_Lib_Config_File {
 	 */
 	public static function get_minimal_wp_config() {
 		$modification = apply_filters( 'itsec_filter_minimal_wp_config_modification', '' );
-		
+
 		if ( empty( $modification ) ) {
 			return '';
 		}
-		
+
 		$comment_delimiter = self::get_comment_delimiter( 'wp-config' );
 		$modification = "$comment_delimiter " . __( 'iThemes Security preserved the following settings as removing them could prevent the site from functioning correctly.', 'better-wp-security' ) . "\n$modification";
 		$modification = self::get_prepared_modification( $modification, $comment_delimiter );
-		
+
 		return $modification;
 	}
-	
+
 	/**
 	 * Update the wp-config.php file.
 	 *
@@ -196,10 +196,10 @@ class ITSEC_Lib_Config_File {
 	 */
 	public static function update_wp_config() {
 		$modification = self::get_wp_config();
-		
+
 		return self::write_wp_config( $modification );
 	}
-	
+
 	/**
 	 * Remove all removable settings from the wp-config.php file.
 	 *
@@ -213,10 +213,10 @@ class ITSEC_Lib_Config_File {
 	 */
 	public static function reset_wp_config() {
 		$modification = self::get_minimal_wp_config();
-		
+
 		return self::write_wp_config( $modification );
 	}
-	
+
 	/**
 	 * Add a modification to the wp-config.php file without having to rebuild all iThemes Security modifications.
 	 *
@@ -238,10 +238,10 @@ class ITSEC_Lib_Config_File {
 			$comment_delimiter = self::get_comment_delimiter( 'wp-config' );
 			$modification = self::get_prepared_modification( $modification, $comment_delimiter );
 		}
-		
+
 		return self::write_wp_config( $modification, false );
 	}
-	
+
 	/**
 	 * Remove matched content from the wp-config.php file.
 	 *
@@ -253,14 +253,14 @@ class ITSEC_Lib_Config_File {
 	 */
 	public static function remove_from_wp_config( $patterns ) {
 		$file_path = self::get_wp_config_file_path();
-		
+
 		if ( empty( $file_path ) ) {
 			return new WP_Error( 'itsec-lib-config-file-wp-config-file-updates-disabled', __( 'Updates to <code>wp-config.php</code> are disabled via a filter.', 'better-wp-security' ) );
 		}
-		
+
 		return self::remove( $file_path, $patterns );
 	}
-	
+
 	/**
 	 * Write the supplied modification to the wp-config.php file.
 	 *
@@ -274,14 +274,14 @@ class ITSEC_Lib_Config_File {
 	 */
 	protected static function write_wp_config( $modification, $clear_existing_modifications = true ) {
 		$file_path = self::get_wp_config_file_path();
-		
+
 		if ( empty( $file_path ) ) {
 			return new WP_Error( 'itsec-lib-config-file-wp-config-file-updates-disabled', __( 'Updates to <code>wp-config.php</code> are disabled via a filter.', 'better-wp-security' ) );
 		}
-		
+
 		return self::update( $file_path, 'wp-config', $modification, $clear_existing_modifications );
 	}
-	
+
 	/**
 	 * Returns the contents of the file.
 	 *
@@ -295,16 +295,16 @@ class ITSEC_Lib_Config_File {
 		if ( ! ITSEC_Lib_File::exists( $file ) ) {
 			return '';
 		}
-		
+
 		$contents = ITSEC_Lib_File::read( $file );
-		
+
 		if ( is_wp_error( $contents ) ) {
 			return new WP_Error( 'itsec-lib-config-file-cannot-read-file', sprintf( __( 'Unable to read %1$s due to the following error: %2$s', 'better-wp-security' ), $file, $contents->get_error_message() ) );
 		}
-		
+
 		return $contents;
 	}
-	
+
 	/**
 	 * Returns the contents of the file with the iThemes Security modifications removed.
 	 *
@@ -317,70 +317,70 @@ class ITSEC_Lib_Config_File {
 	 */
 	protected static function get_file_contents_without_modification( $file, $type ) {
 		$contents = self::get_file_contents( $file );
-		
+
 		if ( is_wp_error( $contents ) ) {
 			return $contents;
 		}
-		
-		
+
+
 		// Contents of just whitespace are treated as empty.
 		if ( preg_match( '/^\s+$/', $contents ) ) {
 			return '';
 		}
-		
-		
+
+
 		$format_version = 0;
-		
+
 		// Attempt to retrieve config file details from the contents.
 		if ( preg_match( '/iThemes\s+Security\s+Config\s+Details:\s+([^\s]+)/', $contents, $match ) ) {
 			$details = explode( ':', $match[1] );
-			
+
 			if ( isset( $details[0] ) && ( (string) intval( $details[0] ) === $details[0] ) ) {
 				$format_version = intval( $details[0] );
 			}
 		}
-		
-		
+
+
 		$placeholder = self::get_placeholder();
-		
+
 		// Ensure that the generated placeholder can be uniquely identified in the contents.
 		while ( false !== strpos( $contents, $placeholder ) ) {
 			$placeholder = self::get_placeholder();
 		}
-		
-		
+
+
 		// Create a set of regex patterns to identify existing iThemes Security modifications.
 		$comment_delimiter = self::get_comment_delimiter( $type );
 		$quoted_comment_delimiter = preg_quote( $comment_delimiter, '/' );
 		$line_ending = self::get_line_ending( $contents );
-		
+
 		$patterns = array(
 			"$quoted_comment_delimiter+\s*BEGIN\s+iThemes\s+Security.*?$quoted_comment_delimiter+\s*END\s+iThemes\s+Security",
 			"$quoted_comment_delimiter+\s*BEGIN\s+Better\s+WP\s+Security.*?$quoted_comment_delimiter+\s*END\s+Better\s+WP\s+Security",
 		);
-		
+
 		// Remove matched content.
 		foreach ( $patterns as $pattern ) {
 			$contents = preg_replace( "/\s*{$pattern}[^\r\n]*\s*/is", "$line_ending$placeholder", $contents );
 		}
-		
-		
+
+
 		if ( 'wp-config' === $type ) {
 			// Special treatment for wp-config.php config data.
-			
+
 			// If the format is old or could not be detected, assume that cleanup of old modifications is required.
 			if ( version_compare( $format_version, self::FORMAT_VERSION, '<' ) ) {
 				// This code is clumsy, but it's the only way to remove the modifications given that the start and end
 				// were not indicated in older versions.
-				
+
 				$contents = preg_replace( '/(<\?(?:php)?)?.+BWPS_FILECHECK.+/', "$1$line_ending$placeholder", $contents );
 				$contents = preg_replace( '/(<\?(?:php)?)?.+BWPS_AWAY_MODE.+/', "$1$line_ending$placeholder", $contents );
-				
+
 				if ( preg_match( '|//\s*The entry below were created by iThemes Security to disable the file editor|', $contents ) ) {
 					$contents = preg_replace( '%(<\?(?:php)?)?.*//\s*The entry below were created by iThemes Security to disable the file editor.*(?:\r\n|\r|\n)%', "$1$line_ending$placeholder", $contents );
 					$contents = preg_replace( '/(<\?(?:php)?)?.+DISALLOW_FILE_EDIT.+(?:\r\r\n|\r\n|\r|\n)/', "$1$line_ending$placeholder", $contents );
 				}
-				
+
 				if ( preg_match( '|//\s*The entries below were created by iThemes Security to enforce SSL|', $contents ) ) {
 					$contents = preg_replace( '%(<\?(?:php)?)?.*//\s*The entries below were created by iThemes Security to enforce SSL.*(?:\r\n|\r|\n)%', "$1$line_ending$placeholder", $contents );
 					$contents = preg_replace( '/(<\?(?:php)?)?.+FORCE_SSL_LOGIN.+(?:\r\r\n|\r\n|\r|\n)/', "$1$line_ending$placeholder", $contents );
@@ -388,24 +388,24 @@ class ITSEC_Lib_Config_File {
 				}
 			}
 		}
-		
-		
+
+
 		// Remove adjacent placeholders.
 		$contents = preg_replace( "/$placeholder(?:\s*$placeholder)+/", $placeholder, $contents );
-		
+
 		// Remove whitespace from around the placeholders.
 		$contents = preg_replace( "/\s*$placeholder\s*/", $placeholder, $contents );
-		
+
 		// Placeholders at the beginning or end of the contents do not need to have newlines added.
 		$contents = preg_replace( "/^$placeholder|$placeholder$/", '', $contents );
-		
+
 		// Remaining placeholders are replaced with two newlines to leave a gap between sections of remaining contents.
 		$contents = preg_replace( "/$placeholder/", "$line_ending$line_ending", $contents );
-		
-		
+
+
 		return $contents;
 	}
-	
+
 	/**
 	 * Update modifications in the supplied configuration file.
 	 *
@@ -425,57 +425,57 @@ class ITSEC_Lib_Config_File {
 	 */
 	protected static function update( $file, $type, $modification, $clear_existing_modifications = true ) {
 		// Check to make sure that the settings give permission to write files.
-		if ( false === apply_filters( 'itsec_filter_can_write_to_files', false ) ) {
+		if ( ! ITSEC_Files::can_write_to_files() ) {
 			$display_file = str_replace( '\\', '/', $file );
 			$abspath = str_replace( '\\', '/', ABSPATH );
 			$display_file = preg_replace( '/^' . preg_quote( $abspath, '/' ) . '/', '', $display_file );
 			$display_file = ltrim( $display_file, '/' );
-			
-			return new WP_Error( 'itsec-file-writes-are-disabled', sprintf( __( 'The "Write to Files" setting is disabled. Manual configuration for the <code>%s</code> file can be found on the Security > Dashboard page.', 'better-wp-security' ), $display_file ) );
+
+			return new WP_Error( 'itsec-config-file-update-writes-files-disabled', sprintf( __( 'The "Write to Files" setting is disabled. Manual configuration for the <code>%s</code> file can be found on the Security > Settings page in the Advanced section.', 'better-wp-security' ), $display_file ) );
 		}
-		
-		
+
+
 		if ( $clear_existing_modifications ) {
 			$contents = self::get_file_contents_without_modification( $file, $type );
 		} else {
 			$contents = self::get_file_contents( $file );
 		}
-		
+
 		if ( is_wp_error( $contents ) ) {
 			return $contents;
 		}
-		
-		
+
+
 		$modification = ltrim( $modification, "\x0B\r\n\0" );
 		$modification = rtrim( $modification, " \t\x0B\r\n\0" );
-		
+
 		if ( empty( $modification ) ) {
 			// If there isn't a new modification, write the content without any modification and return the result.
-			
+
 			if ( empty( $contents ) ) {
 				$contents = PHP_EOL;
 			}
-			
+
 			return ITSEC_Lib_File::write( $file, $contents );
 		}
-		
-		
+
+
 		$placeholder = self::get_placeholder();
-		
+
 		// Ensure that the generated placeholder can be uniquely identified in the contents.
 		while ( false !== strpos( $contents, $placeholder ) ) {
 			$placeholder = self::get_placeholder();
 		}
-		
-		
+
+
 		if ( 'wp-config' === $type ) {
 			// Put the placeholder at the beginning of the file, after the <?php tag.
 			$contents = preg_replace( '/^(.*?<\?(?:php)?)\s*(?:\r\r\n|\r\n|\r|\n)/', "\${1}$placeholder", $contents, 1 );
-			
+
 			if ( false === strpos( $contents, $placeholder ) ) {
 				$contents = preg_replace( '/^(.*?<\?(?:php)?)\s*(.+(?:\r\r\n|\r\n|\r|\n))/', "\${1}$placeholder$2", $contents, 1 );
 			}
-			
+
 			if ( false === strpos( $contents, $placeholder ) ) {
 				$contents = "<?php$placeholder?" . ">$contents";
 			}
@@ -483,34 +483,34 @@ class ITSEC_Lib_Config_File {
 			// Apache and nginx server config files.
 			$contents = "$placeholder$contents";
 		}
-		
-		
+
+
 		// Pad away from existing sections when adding iThemes Security modifications.
 		$line_ending = self::get_line_ending( $contents );
-		
+
 		while ( ! preg_match( "/(?:^|(?:(?<!\r)\n|\r(?!\n)|(?<!\r)\r\n|\r\r\n)(?:(?<!\r)\n|\r(?!\n)|(?<!\r)\r\n|\r\r\n))$placeholder/", $contents ) ) {
 			$contents = preg_replace( "/$placeholder/", "$line_ending$placeholder", $contents );
 		}
 		while ( ! preg_match( "/$placeholder(?:$|(?:(?<!\r)\n|\r(?!\n)|(?<!\r)\r\n|\r\r\n)(?:(?<!\r)\n|\r(?!\n)|(?<!\r)\r\n|\r\r\n))/", $contents ) ) {
 			$contents = preg_replace( "/$placeholder/", "$placeholder$line_ending", $contents );
 		}
-		
-		
+
+
 		// Ensure that the file ends in a newline if the placeholder is at the end.
 		$contents = preg_replace( "/$placeholder$/", "$placeholder$line_ending", $contents );
-		
+
 		if ( ! empty( $modification ) ) {
 			// Normalize line endings of the modification to match the file's line endings.
 			$modification = ITSEC_Lib_Utility::normalize_line_endings( $modification, $line_ending );
-			
+
 			// Exchange the placeholder with the modification.
 			$contents = preg_replace( "/$placeholder/", $modification, $contents );
 		}
-		
+
 		// Write the new contents to the file and return the results.
 		return ITSEC_Lib_File::write( $file, $contents );
 	}
-	
+
 	/**
 	 * Add the identifying comments to the modification to identify them as coming from iThemes Security.
 	 *
@@ -527,13 +527,13 @@ class ITSEC_Lib_Config_File {
 		// Trim off unwanted whitespace around modification.
 		$modification = ltrim( $modification, "\x0B\r\n\0" );
 		$modification = rtrim( $modification, " \t\x0B\r\n\0" );
-		
+
 		if ( empty( $modification ) ) {
 			// Do not wrap an empty modification.
 			return '';
 		}
-		
-		
+
+
 		// Update the modification to have the beginning and ending comments in order to identify the section as being
 		// added by iThemes Security.
 		$supplied_modification = $modification;
@@ -541,10 +541,10 @@ class ITSEC_Lib_Config_File {
 		$modification .= "$comment_delimiter iThemes Security Config Details: " . self::FORMAT_VERSION . "\n";
 		$modification .= "$supplied_modification\n";
 		$modification .= "$comment_delimiter END iThemes Security - " . __( 'Do not modify or remove this line', 'better-wp-security' );
-		
+
 		return $modification;
 	}
-	
+
 	/**
 	 * Remove matched content from the supplied file.
 	 *
@@ -557,15 +557,15 @@ class ITSEC_Lib_Config_File {
 	 */
 	protected static function remove( $file, $patterns ) {
 		$replacements = array();
-		
+
 		foreach ( (array) $patterns as $pattern ) {
 			$replacements[$pattern] = '';
 		}
-		
-		
+
+
 		return self::replace( $file, $replacements );
 	}
-	
+
 	/**
 	 * Replace matched content in a file.
 	 *
@@ -577,23 +577,23 @@ class ITSEC_Lib_Config_File {
 	 */
 	protected static function replace( $file, $replacements ) {
 		$contents = self::get_file_contents( $file );
-		
+
 		if ( is_wp_error( $contents ) ) {
 			return $contents;
 		}
-		
-		
+
+
 		$total = 0;
-		
+
 		foreach ( (array) $replacements as $pattern => $replacement ) {
 			$contents = preg_replace( $pattern, $replacement, $contents, -1, $count );
 			$total += $count;
 		}
-		
+
 		// Write the new contents to the file and return the results.
 		return ITSEC_Lib_File::write( $file, $contents );
 	}
-	
+
 	/**
 	 * Get the appropriate comment delimiter for a specific type of config.
 	 *
@@ -609,12 +609,12 @@ class ITSEC_Lib_Config_File {
 		} else {
 			$delimiter = '#';
 		}
-		
+
 		$delimiter = apply_filters( 'itsec_filter_server_config_file_comment_delimiter', $delimiter, $type );
-		
+
 		return $delimiter;
 	}
-	
+
 	/**
 	 * Internal class function to get the primary line ending found in the contents.
 	 *
@@ -628,25 +628,25 @@ class ITSEC_Lib_Config_File {
 		if ( empty( $contents ) ) {
 			return PHP_EOL;
 		}
-		
+
 		$count["\n"]     = preg_match_all( "/(?<!\r)\n/", $contents, $matches );
 		$count["\r"]     = preg_match_all( "/\r(?!\n)/", $contents, $matches );
 		$count["\r\n"]   = preg_match_all( "/(?<!\r)\r\n/", $contents, $matches );
 		$count["\r\r\n"] = preg_match_all( "/\r\r\n/", $contents, $matches );
-		
+
 		if ( 0 == array_sum( $count ) ) {
 			return PHP_EOL;
 		}
-		
+
 		$maxes = array_keys( $count, max( $count ) );
-		
+
 		if ( in_array( "\r\r\n", $maxes ) ) {
 			return "\r\r\n";
 		}
-		
+
 		return $maxes[0];
 	}
-	
+
 	/**
 	 * Internal class function to get a random string to use as a placeholder.
 	 *
@@ -657,16 +657,16 @@ class ITSEC_Lib_Config_File {
 	 */
 	protected static function get_placeholder() {
 		$characters = str_split( 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789' );
-		
+
 		$string = '';
-		
+
 		for ( $x = 0; $x < 100; $x++ ) {
 			$string .= array_rand( $characters );
 		}
-		
+
 		return $string;
 	}
-	
+
 	/**
 	 * Get full file path to the server's config file for the site.
 	 *
@@ -679,30 +679,40 @@ class ITSEC_Lib_Config_File {
 	 */
 	public static function get_server_config_file_path() {
 		global $itsec_globals;
-		
-		
+
 		$server = ITSEC_Lib_Utility::get_web_server();
-		
-		if ( 'nginx' === $server && ! empty( $itsec_globals['settings']['nginx_file'] ) ) {
-			return $itsec_globals['settings']['nginx_file'];
+
+
+		if ( 'nginx' === $server ) {
+			$file = ITSEC_Modules::get_setting( 'global', 'nginx_file' );
+			$file_path = apply_filters( 'itsec_filter_server_config_file_path', $file, basename( $file ) );
+
+			if ( ! empty( $file_path ) ) {
+				return $file_path;
+			}
 		}
-		
-		
+
+
 		$file = self::get_default_server_config_file_name();
-		
+
 		if ( empty( $file ) ) {
 			return '';
 		}
-		
+
+
 		require_once( ABSPATH . 'wp-admin/includes/file.php' );
-		
+
 		$home_path = get_home_path();
 		$file_path = $home_path . $file;
 		$file_path = apply_filters( 'itsec_filter_server_config_file_path', $file_path, $file );
-		
+
+		if ( $file_path === $home_path ) {
+			return '';
+		}
+
 		return $file_path;
 	}
-	
+
 	/**
 	 * Get the default name for server config files based upon the web server.
 	 *
@@ -719,22 +729,22 @@ class ITSEC_Lib_Config_File {
 	 */
 	protected static function get_default_server_config_file_name() {
 		$server = ITSEC_Lib_Utility::get_web_server();
-		
+
 		$defaults = array(
 			'apache'    => '.htaccess',
 			'litespeed' => '.htaccess',
 			'nginx'     => 'nginx.conf',
 		);
-		
+
 		if ( isset( $defaults[$server] ) ) {
 			$name = $defaults[$server];
 		} else {
 			$name = false;
 		}
-		
+
 		return apply_filters( 'itsec_filter_default_server_config_file_name', $name, $server );
 	}
-	
+
 	/**
 	 * Get full file path to the site's wp-config.php file.
 	 *
@@ -753,7 +763,7 @@ class ITSEC_Lib_Config_File {
 		} else {
 			$path = ABSPATH . 'wp-config.php';
 		}
-		
+
 		return apply_filters( 'itsec_filter_wp_config_file_path', $path );
 	}
 }

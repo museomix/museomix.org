@@ -1162,8 +1162,8 @@ class WPImporter_includes_helper {
 		$get_pluginData = get_plugin_data(WP_CONST_ULTIMATE_CSV_IMP_DIRECTORY . 'index.php');
 		$footer = '';
 		$footer .= '<div style="padding:10px;">';
-		$footer .= '<label class="plugintags"><a href='.esc_url("http://www.wpultimatecsvimporter.com").' target="_blank">' . __("Home", 'wp-ultimate-csv-importer') . '</a></label>
-			<label class="plugintags"><a href='.esc_url("https://www.wpultimatecsvimporter.com/documentation/all-import/wordpress-ultimate-csv-importer/?utm_source=WpOrg&utm_medium=Readme&utm_campaign=ListingTraffic").' target="_blank">' . __('Tutorials', 'wp-ultimate-csv-importer') . '</a></label><label class="plugintags"><a href='.esc_url("https://www.youtube.com/watch?v=S1P8KebpLaU&list=PL2k3Ck1bFtbTtSX3hEFoBvK_Ka0pfYwp_?utm_source=WpPlugin&utm_medium=Free&utm_campaign=SupportTraffic").' target="_blank">' . __("Videos", 'wp-ultimate-csv-importer') . '</a></label>
+		$footer .= '<label class="plugintags"><a href='.esc_url("http://www.smackcoders.com").' target="_blank">' . __("Home", 'wp-ultimate-csv-importer') . '</a></label>
+			<label class="plugintags"><a href='.esc_url("https://www.smackcoders.com/documentation/ultimate-csv-importer-pro/how-to-import-csv?utm_source=WpOrg&utm_medium=Readme&utm_campaign=ListingTraffic").' target="_blank">' . __('Tutorials', 'wp-ultimate-csv-importer') . '</a></label><label class="plugintags"><a href='.esc_url("https://www.youtube.com/watch?v=S1P8KebpLaU&list=PL2k3Ck1bFtbTtSX3hEFoBvK_Ka0pfYwp_?utm_source=WpPlugin&utm_medium=Free&utm_campaign=SupportTraffic").' target="_blank">' . __("Videos", 'wp-ultimate-csv-importer') . '</a></label>
 			<label class="plugintags"><a href='.esc_url("https://www.smackcoders.com/blog/wordpress-ultimate-csv-importer-csv-sample-files-and-updates.html?utm_source=WpOrg&utm_medium=Readme&utm_campaign=ListingTraffic").' target="_blank">' . __("Sample Files", 'wp-ultimate-csv-importer') . '</a></label>';
 		$footer .= '</div>';
 		$footer .= '<div style="padding:10px;margin-bottom:20px;">';
