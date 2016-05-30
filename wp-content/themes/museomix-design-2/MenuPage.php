@@ -6,7 +6,7 @@ global $SectionsPage, $ContenusSections;
 	InitGabaritPage(ICL_LANGUAGE_CODE);
 	
 	function InitGabaritPage($langage){
-		global $post, $SectionsPage;
+		global $post, $SectionsPage, $ContenusSections;
 		if('museomix'==$post->post_type){
 			if(ICL_LANGUAGE_CODE=="en") {
 				$menu_default_items = array(
@@ -29,13 +29,17 @@ global $SectionsPage, $ContenusSections;
 					/*'participer'=> 'Participez',*/
 					'partenaires'=> 'Partenaires',
 					'equipe'=> 'Equipe',
+					'community' => __('Community', 'museomix'),
 					'galerie'=> 'Galerie'
 				);
 			}
 			foreach($menu_default_items as $t => $v):
-				$length = mb_strlen(strip_tags(ContenuSection($t, false)));
-				if ($length > 0):
+				$content = ContenuSection($t, false);
+				$length = mb_strlen(strip_tags($content));
+				if ($length > 0): {
+					$ContenusSections[$t]['txt'] = $content;
 					$SectionsPage[$t] = $v;
+				}
 				endif;
 			endforeach;
 		}
@@ -108,12 +112,13 @@ if (!is_front_page())
 				$menuItemTest = 1;
 			else
 			{
-				$tmpContent = ContenuSection($id, false);
-				$ContenusSections[$id]['txt'] = $tmpContent;
+				if (!isset($ContenusSections[$id]['txt'])) {
+					$ContenusSections[$id]['txt'] = ContenuSection($id, false);
+				}
 				$ContenusSections[$id]['title'] = strip_tags(trim(TitreSection($id,ICL_LANGUAGE_CODE, false)));
 				if (empty($ContenusSections[$id]['title']))
 					$ContenusSections[$id]['title'] = $titre;
-				$menuItemTest = mb_strlen($tmpContent);
+				$menuItemTest = mb_strlen($ContenusSections[$id]['txt']);
 			}
 			if ($menuItemTest>0){
 			?>
