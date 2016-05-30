@@ -481,9 +481,9 @@ function mytheme_comment($comment, $args, $depth) {
 <?php
         }
 function ContenuSection($id, $echo = true){
-	global $post, $SectionsPage;
-	if (isset($SectionsPage[$id]) && $SectionsPage[$id]) {
-		return $SectionsPage[$id];
+	global $post, $ContenusSections;
+	if (isset($ContenusSections[$id]['txt']) && $ContenusSections[$id]['txt']) {
+		return $ContenusSections[$id]['txt'];
 	}
 	$contenu = '';
 	switch($id) {
@@ -666,52 +666,26 @@ function ContenuSection($id, $echo = true){
 			break;
 		case 'community':
 			$contenu .= '<div class="row-fluid">';
-			if($coord=get_field('coordinator_local')){
-				foreach($coord as $coorg){
-					if (empty($coorg['email']))
-						$elm = '<td colspan="2"><strong>'.$coorg['prenom'].' '.$coorg['nom_de_famille'].'</strong>';
-					else
-						$elm = '<td><strong>'.$coorg['prenom'].' '.$coorg['nom_de_famille'].'</strong>';
-					if(!empty($coorg['compte_twitter'])) $elm .=  '     <a href=http://twitter.com/@'.$coorg['compte_twitter'].'>@'.$coorg['compte_twitter'].'</a>';
-					
-					//.' <a href=http://twitter.com/@'.$coorg['compte_twitter'].'>@'.$coorg['compte_twitter'].'</a>';
-					
-						
-					if (!empty($coorg['email']))
-						$elm .=  '</td><td>'.$coorg['email'].'</td>';
-					$elm .=  '<tr><td>'.$coorg['descriptif'].'</td></tr>';
-					
-					$principal[] = $elm;
-				}	
-				$contenu .= '<div class="span5 rond-5" style="float: left; background: #fff; padding: 10px; border: 1px solid #ccc; margin-bottom: 20px;">';
-				ICL_LANGUAGE_CODE == 'en' ? $coordinator = 'Local coordinators' : $coordinator = 'Coordinateurs locaux';
-				$contenu .= '<h4 style="color: #666; padding-bottom: 10px; ">'.$coordinator.'</h4>';
-				$contenu .= '<table class="table table-striped"><tr>'.implode('</tr><tr>',$principal).'</tr></table>';
-				$contenu .= '</div>'; 
+			/* Community linked to this element */
+			$linked_community = get_field('community');
+			if (!isset($linked_community[0])) {
+				break;
 			}
-			if($coorgs=get_field('co-organisateurs')){
-				foreach($coorgs as $coorg){ 
-					$elm = '<td><strong>'.$coorg['prenom'].' '.$coorg['nom_de_famille'].'</strong></td><td>';
-					if(!empty($coorg['compte_twitter'])) $elm .=  '<a href=http://twitter.com/@'.$coorg['compte_twitter'].'>@'.$coorg['compte_twitter'].'</a>';
-					$elm .=  '</td><td>'.$coorg['email'].'</td>';
-					$elm .=  '</td><td>'.$coorg['descriptif'].'</td>';
-					$liste[] = $elm;
-
-				}		
-				$contenu .= '<div class="span7 rond-5" style="float: left; background: #fff; padding: 10px; border: 1px solid #ccc; margin-bottom: 20px;">';
-				ICL_LANGUAGE_CODE == 'en' ? $organizer = 'Co-organizers' : $organizer = 'Co-organisateurs';
-				$contenu .= '<h4 style="color: #666; padding-bottom: 10px; ">'.$organizer.'</h4>';
-				$contenu .= '<table class="table table-striped"><tr>'.implode('</tr><tr>',$liste).'</tr></table>';
-
-				//$contenu .= '<ul class="lst-coorg"><li class="li-coorg">'.implode('</li><li class="li-coorg">',$liste).'</li></ul>';
-				$contenu .= '</div>'; 
+			$community = get_post($linked_community[0]);
+			$linked_community = null;
+			
+			$details = get_fields($community->ID);
+			
+			$contenu .= '<p><strong>'.$community->post_title.'</strong></p>';
+			
+			/* Social networks retrieval */
+			if (isset($details['social_networks'])) {
+				$contenu .= '<ul>';
+				foreach($details['social_networks'] as $network) {
+					$contenu .= '<li>'.$network['network'].' : <a href="'.$network['url'].'">'.$network['url'].'</a></li>';
+				}
+				$contenu .= '</ul>';				
 			}
-			if(!$coord&&!$coorg){
-				$contenu = '<span style="margin-left: 25px;color: #999;">pas d\équipe (champs: coordinateur local, co-organisateurs)</span>';		
-			}else{
-				$contenu .= '<div class="clear"></div>';
-			}
-			$contenu .='</div>';
 			break;
 	}
 	
