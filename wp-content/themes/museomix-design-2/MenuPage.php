@@ -7,70 +7,38 @@ global $SectionsPage, $ContenusSections;
 	
 	function InitGabaritPage($langage){
 		global $post, $SectionsPage, $ContenusSections;
-		if('museomix'==$post->post_type){
-			if(ICL_LANGUAGE_CODE=="en") {
+		switch ($post->post_type) {
+			case 'museomix':
 				$menu_default_items = array(
-					'presentation'=> 'Presentation',
-					'prototypes'=> 'Prototypes',
-					'actualites'=> 'News',
-					/*'participer'=> 'Participate',*/
-					'partenaires'=> 'Partners',
-					'equipe'=> 'Team',
-					'galerie'=> 'Gallery'
-				);
-
-
-			} else {
-				$menu_default_items = array(
-					'prototypes'=> 'Prototypes',
-					'presentation'=> 'Présentation',
-					
-					'actualites'=> 'Actualités',
+					'prototypes'=> __('Prototypes', 'museomix'),
+					'presentation'=> __('Museum', 'museomix'),
+					'actualites'=> __('News', 'museomix'),
 					/*'participer'=> 'Participez',*/
-					'partenaires'=> 'Partenaires',
-					'equipe'=> 'Equipe',
+					'partenaires'=> __('Partners', 'museomix'),
+					'equipe'=> __('Team', 'museomix'),
 					'community' => __('Community', 'museomix'),
-					'galerie'=> 'Galerie'
+					'galerie'=> __('Gallery', 'museomix')
 				);
-			}
-			foreach($menu_default_items as $t => $v):
-				$content = ContenuSection($t, false);
-				$length = mb_strlen(strip_tags($content));
-				if ($length > 0): {
-					$ContenusSections[$t]['txt'] = $content;
-					$SectionsPage[$t] = $v;
-				}
-				endif;
-			endforeach;
-		}
-
-		if(('prototype')==$post->post_type){
-			if($langage=="en") {
-				$menu_default_items = array(
-					'scenario'=> 'User case',
-					'intentions'=> 'Goals',
-					'materiel'=> 'Tools & techs',
-					'experience'=> 'Things learned...',
-					'faq'=> 'FAQ',
-					'equipe'=> 'Team',
-				);
+				
 				foreach($menu_default_items as $t => $v):
-					if ($t === "equipe"):
-						if (get_field("descriptif_equipe", $post->ID) || get_field("photo_equipe", $post->ID)):
-							$SectionsPage[$t] = $v;
-						endif;
-					elseif (get_field($t, $post->ID) !== '' && get_field($t, $post->ID) !== false):
+					$content = ContenuSection($t, false);
+					$length = mb_strlen(strip_tags($content));
+					if ($length > 0): {
+						$ContenusSections[$t]['txt'] = $content;
 						$SectionsPage[$t] = $v;
+					}
 					endif;
 				endforeach;
-			} else {
+			break;
+			
+			case 'prototype':
 				$menu_default_items = array(
-					'scenario'=> 'Scénario utilisateur',
-					'intentions'=> 'Objectifs',
-					'materiel'=> 'Outils & techniques',
-					'experience'=> 'Retour d\'expérience',
-					'faq'=> 'FAQ',
-					'equipe'=> 'Equipe',
+					'scenario'=> __('User case', 'museomix'),
+					'intentions'=> __('Goals', 'museomix'),
+					'materiel'=> __('Tools & techs', 'museomix'),
+					'experience'=> __('Things learned...', 'museomix'),
+					'faq'=> __('FAQ', 'museomix'),
+					'equipe'=> __('Team', 'museomix'),
 				);
 				foreach($menu_default_items as $t => $v):
 					if ($t === "equipe"):
@@ -82,7 +50,7 @@ global $SectionsPage, $ContenusSections;
 						$SectionsPage[$t] = $v;
 					endif;
 				endforeach;
-			}
+			break;
 		}
 	}
 	 
