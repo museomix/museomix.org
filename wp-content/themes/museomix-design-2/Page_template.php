@@ -110,7 +110,7 @@ if(!$ContenuPage)
 					if (isset($ContenusSections[$id]) && !empty($ContenusSections[$id]['txt'])) {
 					?>
 					
-						<section class="section-1 sec1" id="<?php echo $id; ?>" style="min-height: 300px; position: relative;"> 
+						<section class="section-1 sec1" id="<?php echo $id; ?>"> 
 							
 							<?php #if('presentation'!=$id&&'participer'!=$id): ?>
 							
@@ -125,8 +125,8 @@ if(!$ContenuPage)
 							<?php echo $ContenusSections[$id]['txt']; ?>
 		
 						</section>
-						<?php if ($id == 'prototypes') { ?>
-							<section class="section-1 sec1" style="min-height: 300px; position: relative;"> 
+						<?php if (($id == 'prototypes') && get_the_content()) { ?>
+							<section class="section-1 sec1"> 
 								<?php the_content(); ?>
 							</section>
 						<?php } ?>
