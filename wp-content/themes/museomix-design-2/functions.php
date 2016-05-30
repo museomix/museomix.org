@@ -3,7 +3,9 @@ if (!isset($SectionsPage) || !is_array($SectionsPage))
 	$SectionsPage = array();
 if (!isset($ContenusSections) || !is_array($ContenusSections))
 	$ContenusSections = array();
-	
+
+/* Cache array */
+$page_details = array();
 	
 add_action('init', 'my_custom_init');
 function my_custom_init() {
@@ -481,7 +483,16 @@ function mytheme_comment($comment, $args, $depth) {
 <?php
         }
 function ContenuSection($id, $echo = true){
-	global $post, $ContenusSections;
+	global $post, $ContenusSections, $page_details;
+
+	/* We use a global array to cache get_fields calls */
+	if (!isset($page_details[$post->ID])) {
+		$details = get_fields($post->ID);
+		$page_details[$post->ID] = $details;
+	} else {
+		$details = $page_details[$post->ID];
+	}
+	
 	if (isset($ContenusSections[$id]['txt']) && $ContenusSections[$id]['txt']) {
 		return $ContenusSections[$id]['txt'];
 	}
@@ -489,18 +500,19 @@ function ContenuSection($id, $echo = true){
 	switch($id) {
 		case 'presentation':
 			if('presentation'==$id){
-				if($contenu=get_field('contexte')){
-					$contenu = '<blockquote>'.$contenu.'</blockquote>';
+				$contexte = get_details('context', $details);
+				if($contexte) {
+					$contenu = '<blockquote>'.$contexte.'</blockquote>';
 				}else{
 					//$contenu = '<span style="margin-left: 25px;color: #999;">pas de présentation (champ: contexte)</span>';		
 				}
 
 				$contenu .= DescriptionMusee();
 
-				$other = get_field("other_content");
-				if(!empty($other)) $contenu .= '<div class="bloc-contenu"><section class="section-1">'.$other.'</section></div>';
-
-
+				$other_content = get_details('other_content', $details);
+				if ($other_content) {
+					$contenu = '<div class="bloc-contenu"><section class="section-1">'.$other_content.'</section></div>';
+				}
 			}
 			break;
 		case 'actualites':
@@ -604,21 +616,21 @@ function ContenuSection($id, $echo = true){
 		case 'equipe':
 			
 			$contenu .= '<div class="row-fluid">';
-			if($coord=get_field('coordinator_local')){
+			
+			/* Local coordinators */
+			$coord = get_details('coordinator_local', $details);
+			if($coord){
 				foreach($coord as $coorg){
 					if (empty($coorg['email']))
 						$elm = '<td colspan="2"><strong>'.$coorg['prenom'].' '.$coorg['nom_de_famille'].'</strong>';
 					else
 						$elm = '<td><strong>'.$coorg['prenom'].' '.$coorg['nom_de_famille'].'</strong>';
-					if(!empty($coorg['compte_twitter'])) $elm .=  '     <a href=http://twitter.com/@'.$coorg['compte_twitter'].'>@'.$coorg['compte_twitter'].'</a>';
-					
-					//.' <a href=http://twitter.com/@'.$coorg['compte_twitter'].'>@'.$coorg['compte_twitter'].'</a>';
-					
-						
+					if(!empty($coorg['compte_twitter'])) {
+						$elm .=  '<a href=http://twitter.com/@'.$coorg['compte_twitter'].'>@'.$coorg['compte_twitter'].'</a>';
+					}
 					if (!empty($coorg['email']))
 						$elm .=  '</td><td>'.$coorg['email'].'</td>';
 					$elm .=  '<tr><td>'.$coorg['descriptif'].'</td></tr>';
-					
 					$principal[] = $elm;
 				}	
 				$contenu .= '<div class="span5 rond-5" style="float: left; background: #fff; padding: 10px; border: 1px solid #ccc; margin-bottom: 20px;">';
@@ -627,24 +639,24 @@ function ContenuSection($id, $echo = true){
 				$contenu .= '<table class="table table-striped"><tr>'.implode('</tr><tr>',$principal).'</tr></table>';
 				$contenu .= '</div>'; 
 			}
-			if($coorgs=get_field('co-organisateurs')){
+			
+			/* Co-organizers */
+			$coorgs = get_details('co-organisateurs', $details);
+			if($coorgs){
 				foreach($coorgs as $coorg){ 
 					$elm = '<td><strong>'.$coorg['prenom'].' '.$coorg['nom_de_famille'].'</strong></td><td>';
 					if(!empty($coorg['compte_twitter'])) $elm .=  '<a href=http://twitter.com/@'.$coorg['compte_twitter'].'>@'.$coorg['compte_twitter'].'</a>';
 					$elm .=  '</td><td>'.$coorg['email'].'</td>';
 					$elm .=  '</td><td>'.$coorg['descriptif'].'</td>';
 					$liste[] = $elm;
-
 				}		
 				$contenu .= '<div class="span7 rond-5" style="float: left; background: #fff; padding: 10px; border: 1px solid #ccc; margin-bottom: 20px;">';
 				$organizer = __('Co-organizers', 'museomix');
 				$contenu .= '<h4 style="color: #666; padding-bottom: 10px; ">'.$organizer.'</h4>';
 				$contenu .= '<table class="table table-striped"><tr>'.implode('</tr><tr>',$liste).'</tr></table>';
-
-				//$contenu .= '<ul class="lst-coorg"><li class="li-coorg">'.implode('</li><li class="li-coorg">',$liste).'</li></ul>';
 				$contenu .= '</div>'; 
 			}
-			if(!$coord&&!$coorg){
+			if(!$coord && !$coorg){
 				$contenu = '<span style="margin-left: 25px;color: #999;">pas d\équipe (champs: coordinateur local, co-organisateurs)</span>';		
 			}else{
 				$contenu .= '<div class="clear"></div>';
@@ -667,25 +679,25 @@ function ContenuSection($id, $echo = true){
 		case 'community':
 			$contenu .= '<div class="row-fluid">';
 			/* Community linked to this element */
-			$linked_community = get_field('community');
+			$linked_community = get_details('community', $details);
 			if (!isset($linked_community[0])) {
 				break;
 			}
 			$community = get_post($linked_community[0]);
 			$linked_community = null;
 			
-			$details = get_fields($community->ID);
+			$community_details = get_fields($community->ID);
 			
 			$contenu .= '<p><strong>'.$community->post_title.'</strong></p>';
 			
 			/* Social networks retrieval */
-			if (isset($details['social_networks'])) {
+			if (isset($community_details['social_networks'])) {
 				$contenu .= '<ul>';
-				foreach($details['social_networks'] as $network) {
+				foreach($community_details['social_networks'] as $network) {
 					$contenu .= '<li>'.$network['network'].' : <a href="'.$network['url'].'">'.$network['url'].'</a></li>';
 				}
-				if (isset($details['website'])) {
-					$contenu .= '<li>'.__('Website','museomix').' : <a href="'.$details['website'].'">'.$details['website'].'</a></li>';
+				if (isset($community_details['website'])) {
+					$contenu .= '<li>'.__('Website','museomix').' : <a href="'.$community_details['website'].'">'.$community_details['website'].'</a></li>';
 				}
 				$contenu .= '</ul>';				
 			}
@@ -881,5 +893,13 @@ function sorting_posts( $q ) {
       $q->set( 'orderby', 'title' );
       $q->set( 'order', 'DESC' );
    }
+}
+
+/* Custom function to enhance get_fields */
+function get_details($field, $array) {
+	if (isset($array[$field])) {
+		return $array[$field];
+	}
+	return false;
 }
 		?>
