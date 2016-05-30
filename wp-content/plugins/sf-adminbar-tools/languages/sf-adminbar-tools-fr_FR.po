@@ -1,0 +1,158 @@
+# LANGUAGE French translation for SF Admin bar tools plugin for WordPress.
+# by Grégory Viguier.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: sf-adminbar-tools 3.0\n"
+"Report-Msgid-Bugs-To: Grégory Viguier <i18n@screenfeed.fr>\n"
+"POT-Creation-Date: 2012-06-09 15:33+0100\n"
+"PO-Revision-Date: 2015-03-22 22:52+0100\n"
+"Last-Translator: Grégory Viguier <i18n@screenfeed.fr>\n"
+"Language-Team: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n>1);\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"Language: fr_FR\n"
+"X-Generator: Poedit 1.7.4\n"
+
+#: sf-adminbar-tools.php
+# --------------------------------------------------------
+msgid  "Adds some small interesting tools to the admin bar for developers."
+msgstr "Ajoute à la barre d'administration quelques petits outils intéressants pour les développeurs."
+
+#: inc/admin.php
+# --------------------------------------------------------
+msgid  "Autosave and post lock disabled. As long as you don't save your modifications, you can mess with this post!"
+msgstr "Sauvegarde automatique et blocage d&rsquo;article désactivés. Tant que vous ne sauvegardez pas vos modifications, vous pouvez mettre la pagaille dans cet article&#160;!"
+
+msgid  "%s is currently editing this post."
+msgstr "%s est en train d&rsquo;éditer cet article."
+
+#: inc/adminbar-items-admin.php
+# --------------------------------------------------------
+msgid  "Current screen"
+msgstr "Écran actuel"
+
+msgid  "Hooks before headers"
+msgstr "Hooks avant les en-têtes"
+
+msgid  "Hooks after headers"
+msgstr "Hooks après les en-têtes"
+
+msgid  "Hooks in footer"
+msgstr "Hooks du pied de page"
+
+msgid  "%1$s: %2$s"
+msgstr "%1$s&#160;: %2$s"
+
+msgid  "%1$s (%2$s)"
+msgstr "%1$s (%2$s)"
+
+msgid  "Parameter: %s"
+msgid_plural "Parameters: %s"
+msgstr[0] "Paramètre&#160;: %s"
+msgstr[1] "Paramètres&#160;: %s"
+
+#: inc/adminbar-items-frontend.php
+# --------------------------------------------------------
+msgid  "Loading..."
+msgstr "Chargement..."
+
+msgid  "Display %s's value"
+msgstr "Afficher la valeur de %s"
+
+msgid  "Template part"
+msgstr "Partie de modèle"
+
+msgid  "Variable not found"
+msgstr "Variable non trouvée"
+
+msgctxt "theme"
+msgid  "%s, symlinked"
+msgstr "%s, symlinké"
+
+msgctxt "plugin"
+msgid  "%s, symlinked"
+msgstr "%s, symlinkée"
+
+msgid  "child theme"
+msgstr "thème enfant"
+
+msgid  "parent theme"
+msgstr "thème parent"
+
+msgid  "theme"
+msgstr "thème"
+
+msgid  "theme compat"
+msgstr "thème compat&rsquo;"
+
+msgid  "plugin"
+msgstr "extension"
+
+msgid  "Must-Use plugin"
+msgstr "extension Must-Use"
+
+#: inc/adminbar-items.php
+# --------------------------------------------------------
+msgid  "%1$s q. - %2$s s"
+msgstr "%1$d r. - %2$s s."
+
+msgid  "%1$s / %2$s MB (%3$s)"
+msgstr "%1$s / %2$s MB (%3$s)"
+
+msgid  "Memory used / Memory max (php version)"
+msgstr "Mémoire utilisée / Mémoire max (version php)"
+
+msgid  "WP_DEBUG is enabled"
+msgstr "WP_DEBUG est activé"
+
+msgid  "WP_DEBUG is disabled"
+msgstr "WP_DEBUG est désactivé"
+
+msgid  "Error reporting level is %s"
+msgstr "Le niveau de rapport d&rsquo;erreur est à %s"
+
+msgid  "Close this modal window"
+msgstr "Fermer cette fenêtre modale"
+
+msgid  "Click to reload the value"
+msgstr "Cliquer pour recharger la valeur"
+
+#: inc/profile.php
+# --------------------------------------------------------
+msgid  "Who's gonna use this plugin?"
+msgstr "Qui va utiliser cette extension&#160;?"
+
+msgid  "Disable posts autosave, post lock, authentication check, and everything related to Heartbeat (for you only)."
+msgstr "Désactiver la sauvegarde automatique, le blocage d&rsquo;article, la vérification d&rsquo;authentification, et tout ce qui est lié à Heartbeat (seulement pour vous)."
+
+msgid  "Stop posts autosave (for you only)."
+msgstr "Désactiver la sauvegarde automatique (seulement pour vous)."
+
+msgid  "When you're on a post edit screen, WordPress keeps a track of your current status very frequently with ajax calls. This can be boring if you're working in your JavaScript console, so you can disable it here."
+msgstr "Lorsque vous êtes sur la page d&rsquo;édition d&rsquo;un article, WordPress garde une trace de votre statut très fréquemment avec des appels ajax. Cela peut être pénible si vous travaillez dans votre console JavaScript, vous pouvez donc tout désactiver ici."
+
+msgid  "Console spamming"
+msgstr "Spam de la console"
+
+msgid  "Remove WP SEO from the landscape (for you only)."
+msgstr "Supprimer WP SEO du paysage (seulement pour vous)."
+
+msgid  "Will remove all WP SEO columns, meta boxes, and adminbar items. I'm seriously getting sick of hiding all this stuff everywhere."
+msgstr "Supprimera toutes les colonnes, meta boxes, et items de l&rsquo;adminbar de WP SEO. J&rsquo;en ai assez de devoir masquer tout ça à chaque fois."
+
+msgid  "Screen spamming"
+msgstr "Spam d&rsquo;écran"
+
+msgid  "ERROR: I could not find roles with the capability \"%s\""
+msgstr "ERREUR&#160;: je n&rsquo;ai pu trouver de rôles avec la capacité &laquo;&#160;%s&#160;&raquo;"
+
+msgid  "Me"
+msgstr "Moi"
+
+msgid  "ERROR: I could not find users with the capability \"%s\""
+msgstr "ERREUR&#160;: je n&rsquo;ai pu trouver d&rsquo;utilisateurs avec la capacité &laquo;&#160;%s&#160;&raquo;"

@@ -158,7 +158,6 @@
     </IfModule>
 </FilesMatch>
 # END W3TC Browser Cache
-
 # BEGIN W3TC Page Cache core
 <IfModule mod_rewrite.c>
     RewriteEngine On
