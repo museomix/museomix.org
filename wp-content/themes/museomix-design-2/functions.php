@@ -622,7 +622,7 @@ function ContenuSection($id, $echo = true){
 					$principal[] = $elm;
 				}	
 				$contenu .= '<div class="span5 rond-5" style="float: left; background: #fff; padding: 10px; border: 1px solid #ccc; margin-bottom: 20px;">';
-				ICL_LANGUAGE_CODE == 'en' ? $coordinator = 'Local coordinators' : $coordinator = 'Coordinateurs locaux';
+				$coordinator = __('Local coordinators', 'museomix');
 				$contenu .= '<h4 style="color: #666; padding-bottom: 10px; ">'.$coordinator.'</h4>';
 				$contenu .= '<table class="table table-striped"><tr>'.implode('</tr><tr>',$principal).'</tr></table>';
 				$contenu .= '</div>'; 
@@ -637,7 +637,7 @@ function ContenuSection($id, $echo = true){
 
 				}		
 				$contenu .= '<div class="span7 rond-5" style="float: left; background: #fff; padding: 10px; border: 1px solid #ccc; margin-bottom: 20px;">';
-				ICL_LANGUAGE_CODE == 'en' ? $organizer = 'Co-organizers' : $organizer = 'Co-organisateurs';
+				$organizer = __('Co-organizers', 'museomix');
 				$contenu .= '<h4 style="color: #666; padding-bottom: 10px; ">'.$organizer.'</h4>';
 				$contenu .= '<table class="table table-striped"><tr>'.implode('</tr><tr>',$liste).'</tr></table>';
 
@@ -684,8 +684,12 @@ function ContenuSection($id, $echo = true){
 				foreach($details['social_networks'] as $network) {
 					$contenu .= '<li>'.$network['network'].' : <a href="'.$network['url'].'">'.$network['url'].'</a></li>';
 				}
+				if (isset($details['website'])) {
+					$contenu .= '<li>'.__('Website','museomix').' : <a href="'.$details['website'].'">'.$details['website'].'</a></li>';
+				}
 				$contenu .= '</ul>';				
 			}
+			$contenu .= $community->post_content;
 			break;
 	}
 	

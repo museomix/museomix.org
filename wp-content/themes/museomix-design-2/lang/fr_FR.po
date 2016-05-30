@@ -1,28 +1,32 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Museomix\n"
-"POT-Creation-Date: 2015-06-28 22:38+0100\n"
-"PO-Revision-Date: 2015-06-28 22:38+0100\n"
+"POT-Creation-Date: 2016-05-31 00:43+0200\n"
+"PO-Revision-Date: 2016-05-31 00:43+0200\n"
 "Last-Translator: Samy Rabih <contact@lahaut.info>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.1\n"
-"X-Poedit-Basepath: ..\\\n"
+"X-Generator: Poedit 1.8.4\n"
+"X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-KeywordsList: _e;__\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: Actualites.php:100 functions.php:519
+#: Actualites.php:100 functions.php:527
 msgid "En savoir plus"
 msgstr ""
 
 #: Menu.php:82
-msgid " 6-15 nov. 2015"
+msgid "11-13 nov. 2016"
 msgstr ""
+
+#: MenuPage.php:32
+msgid "Community"
+msgstr "Communauté"
 
 #: TitrePage.php:17
 msgid "News"
@@ -44,47 +48,58 @@ msgstr ""
 msgid "Comments are closed."
 msgstr ""
 
-#: functions.php:400
+#: functions.php:401
 msgid "il y a"
 msgstr ""
 
-#: functions.php:402
+#: functions.php:403
 msgid "le"
 msgstr ""
 
-#: functions.php:457
+#: functions.php:458
 #, php-format
 msgid "<cite class=\"fn\">%s</cite>"
 msgstr ""
 
-#: functions.php:457
+#: functions.php:458
 #, php-format
 msgid "[%1$s]"
 msgstr ""
 
-#: functions.php:457
+#: functions.php:458
 msgid "(Edit)"
 msgstr ""
 
-#: functions.php:461
+#: functions.php:462
 msgid "Your comment is awaiting moderation."
 msgstr ""
 
-#: functions.php:532
+#: functions.php:540
 msgid "Tous les articles"
 msgstr ""
 
-#: single-community.php:26
+#: functions.php:625
+msgid "Local coordinators"
+msgstr "Coordinateurs locaux"
+
+#: functions.php:640
+msgid "Co-organizers"
+msgstr "Co-organisateurs"
+
+#: functions.php:688 single-community.php:27
 msgid "Website"
 msgstr "Site web"
 
-#: single-community.php:31
+#: single-community.php:32
 msgid "Find them on:"
 msgstr "Comment nous suivre :"
 
-#: single-community.php:42
+#: single-community.php:44
 msgid "Locations:"
 msgstr "Musées remixés :"
+
+#~ msgid "Museomix contacts"
+#~ msgstr "Contacts Museomix"
 
 #~ msgid "7-8-9+ nov. 2014"
 #~ msgstr "7-8-9+ nov. 2014"
