@@ -91,7 +91,7 @@ function SectionDePage($atts){
 /* Liste des m¨¦dias-sociaux associ¨¦s ¨¤ une page
    ====================== */
 add_shortcode( 'social', 'DisplaySocialMedia' );
-function DisplaySocialMedia() {
+function DisplaySocialMedia() {	$r = '';
 	$rows = get_field('medias_sociaux');
 	//if(!$rows) $rows = get_field('medias_sociaux',782);
 	if(!$rows) return '';
@@ -186,7 +186,7 @@ add_filter('excerpt_more', 'change_excerpt_more');
 /* Raccourci 'liste prototypes'
    ====================== */
 add_shortcode( 'protos', 'ListePrototypes' );
-function ListePrototypes($atts){
+function ListePrototypes($atts){	$r = '';
 	global $post;
 	extract(shortcode_atts(array(
 		'lieu' => ''
@@ -478,7 +478,7 @@ function mytheme_comment($comment, $args, $depth) {
 <?php
         }
 function ContenuSection($id, $echo = true){
-	global $post;
+	global $post;	$contenu = '';
 	if('presentation'==$id){
 		if($contenu=get_field('contexte')){
 			$contenu = '<blockquote>'.$contenu.'</blockquote>';
