@@ -677,12 +677,12 @@ function ContenuSection($id, $echo = true){
 
 			break;
 		case 'community':
-			$contenu .= '<div class="row-fluid">';
 			/* Community linked to this element */
 			$linked_community = get_details('community', $details);
 			if (!isset($linked_community[0])) {
 				break;
 			}
+			$contenu .= '<div class="row-fluid">';
 			$community = get_post($linked_community[0]);
 			$linked_community = null;
 			
@@ -702,6 +702,7 @@ function ContenuSection($id, $echo = true){
 				$contenu .= '</ul>';				
 			}
 			$contenu .= $community->post_content;
+			$contenu .= '</div>';
 			break;
 	}
 	
