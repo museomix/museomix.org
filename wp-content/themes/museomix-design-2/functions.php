@@ -632,44 +632,48 @@ function ContenuSection($id, $echo = true){
 			$contenu .= '<div class="row-fluid">';
 			
 			/* Local coordinators */
-			$coord = get_details('coordinator_local', $details);
-			if($coord){
-				foreach($coord as $coorg){
-					if (empty($coorg['email']))
-						$elm = '<td colspan="2"><strong>'.$coorg['prenom'].' '.$coorg['nom_de_famille'].'</strong>';
-					else
-						$elm = '<td><strong>'.$coorg['prenom'].' '.$coorg['nom_de_famille'].'</strong>';
-					if(!empty($coorg['compte_twitter'])) {
-						$elm .=  '<a href=http://twitter.com/@'.$coorg['compte_twitter'].'>@'.$coorg['compte_twitter'].'</a>';
-					}
-					if (!empty($coorg['email']))
-						$elm .=  '</td><td>'.$coorg['email'].'</td>';
-					$elm .=  '<tr><td>'.$coorg['descriptif'].'</td></tr>';
-					$principal[] = $elm;
-				}	
-				$contenu .= '<div class="span5 rond-5" style="float: left; background: #fff; padding: 10px; border: 1px solid #ccc; margin-bottom: 20px;">';
+			$coords = get_details('coordinator_local', $details);
+			if($coords){
+				foreach($coords as $coord){ 
+					$elm = '<tr><td><strong>'.$coord['prenom'].' '.$coord['nom_de_famille'].'</strong></td>';
+					$elm .=  '<td>'.($coord['email'] ? '<a href="mailto:'.$coord['email'].'">'.$coord['email'].'</a>' : '').'</td></tr>';
+					$elm .=  '<tr><td colspan="2">'.$coord['descriptif'].
+						(!empty($coord['compte_twitter'])
+							? ' (<a href=http://twitter.com/@'.$coord['compte_twitter'].'>@'.$coord['compte_twitter'].'</a>)'
+							: ''
+						).
+					'</td></tr>';
+					$liste[] = $elm;
+				}
+				$contenu .= '<div class="span6 rond-5" style="float: left; background: #fff; padding: 10px; border: 1px solid #ccc; margin-bottom: 20px;">';
 				$coordinator = __('Local coordinators', 'museomix');
 				$contenu .= '<h4 style="color: #666; padding-bottom: 10px; ">'.$coordinator.'</h4>';
-				$contenu .= '<table class="table table-striped"><tr>'.implode('</tr><tr>',$principal).'</tr></table>';
+				$contenu .= '<table class="table table-striped">'.implode('',$liste).'</table>';
 				$contenu .= '</div>'; 
 			}
+			$liste = null;
 			
 			/* Co-organizers */
 			$coorgs = get_details('co-organisateurs', $details);
 			if($coorgs){
 				foreach($coorgs as $coorg){ 
-					$elm = '<td><strong>'.$coorg['prenom'].' '.$coorg['nom_de_famille'].'</strong></td><td>';
-					if(!empty($coorg['compte_twitter'])) $elm .=  '<a href=http://twitter.com/@'.$coorg['compte_twitter'].'>@'.$coorg['compte_twitter'].'</a>';
-					$elm .=  '</td><td>'.$coorg['email'].'</td>';
-					$elm .=  '</td><td>'.$coorg['descriptif'].'</td>';
+					$elm = '<tr><td><strong>'.$coorg['prenom'].' '.$coorg['nom_de_famille'].'</strong></td>';
+					$elm .=  '<td>'.($coorg['email'] ? '<a href="mailto:'.$coorg['email'].'">'.$coorg['email'].'</a>' : '').'</td></tr>';
+					$elm .=  '<tr><td colspan="2">'.$coorg['descriptif'].
+						(!empty($coorg['compte_twitter'])
+							? ' (<a href=http://twitter.com/@'.$coorg['compte_twitter'].'>@'.$coorg['compte_twitter'].'</a>)'
+							: ''
+						).
+					'</td></tr>';
 					$liste[] = $elm;
 				}		
-				$contenu .= '<div class="span7 rond-5" style="float: left; background: #fff; padding: 10px; border: 1px solid #ccc; margin-bottom: 20px;">';
+				$contenu .= '<div class="span6 rond-5" style="float: left; background: #fff; padding: 10px; border: 1px solid #ccc; margin-bottom: 20px;">';
 				$organizer = __('Co-organizers', 'museomix');
 				$contenu .= '<h4 style="color: #666; padding-bottom: 10px; ">'.$organizer.'</h4>';
-				$contenu .= '<table class="table table-striped"><tr>'.implode('</tr><tr>',$liste).'</tr></table>';
+				$contenu .= '<table class="table table-striped">'.implode('',$liste).'</table>';
 				$contenu .= '</div>'; 
 			}
+			$liste = null;
 			if(!$coord && !$coorg){
 				$contenu = '<span style="margin-left: 25px;color: #999;">pas d\équipe (champs: coordinateur local, co-organisateurs)</span>';		
 			}else{
@@ -710,7 +714,7 @@ function ContenuSection($id, $echo = true){
 				foreach($community_details['social_networks'] as $network) {
 					$contenu .= '<li>'.$network['network'].' : <a href="'.$network['url'].'">'.$network['url'].'</a></li>';
 				}
-				if (isset($community_details['website'])) {
+				if (isset($community_details['website']) && !empty($community_details['website'])) {
 					$contenu .= '<li>'.__('Website','museomix').' : <a href="'.$community_details['website'].'">'.$community_details['website'].'</a></li>';
 				}
 				$contenu .= '</ul>';				
