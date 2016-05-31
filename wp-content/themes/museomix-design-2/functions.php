@@ -202,6 +202,7 @@ function ListePrototypes($atts){
 		$musId = intval($atts['lieu']);
 	}
 	$protos = get_posts(array('post_type'=>'prototype','posts_per_page' => -1));
+	$i = 1;
 	foreach($protos as $proto){
 		$id = $proto->ID;
 	
@@ -219,9 +220,22 @@ function ListePrototypes($atts){
 			$r[] = '<a class="ln-bloc-lieu btn btn-large" style="background: #ffffff url('.$imag[0].') no-repeat center center;" href="'.get_permalink($id).'"><span class="titre-bloc-lieu" ><span class="tx-bloc-lieu">'.$titre.'</span></span></a>';
 
 		}
+		$i++;
 	}
 	if(!$r) return '';
-	return '<ul class="lst lst-bloc-lieux clearfix"><li class="elm-bloc-lieu">'.implode($r,'</li><li class="elm-bloc-lieu">').'</li></ul>';
+	
+	$out = '';
+	
+	/* We cut prototypes in groups of 4 elements */
+	$prototypes_groups = array_chunk($r, 4);
+	foreach($prototypes_groups as $group) {
+		$out .= '<ul class="lst lst-bloc-lieux clearfix">';
+		foreach($group as $prototype) {
+			$out .= '<li class="elm-bloc-lieu span3 ">'.$prototype.'</li>';
+		}
+		$out .= '</ul>';
+	}
+	return $out;
 }
 
 
