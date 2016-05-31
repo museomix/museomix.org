@@ -12,6 +12,7 @@ global $SectionsPage, $ContenusSections;
 				$menu_default_items = array(
 					'prototypes'=> __('Prototypes', 'museomix'),
 					'presentation'=> __('Museum', 'museomix'),
+					'playground' => __('Playground', 'museomix'),
 					'actualites'=> __('News', 'museomix'),
 					/*'participer'=> 'Participez',*/
 					'partenaires'=> __('Partners', 'museomix'),
