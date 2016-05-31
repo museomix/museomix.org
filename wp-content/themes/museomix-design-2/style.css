@@ -1447,3 +1447,9 @@ background:white;
 @-moz-keyframes pulse {0% {box-shadow:0 0 0 0px rgb(232, 76, 61)} 100% {box-shadow: 0 0 0 45px rgba(232, 76, 61,0);}}
 @-ms-keyframes pulse {0% {box-shadow:0 0 0 0px rgb(232, 76, 61)} 100% {box-shadow: 0 0 0 45px rgba(232, 76, 61,0);}}
 @keyframes pulse {0% {box-shadow:0 0 0 0px rgb(232, 76, 61)} 100% {box-shadow: 0 0 0 45px rgba(232, 76, 61,0);}}
+dl {
+	margin:0;
+}
+dd {
+	padding-bottom:5px;
+}

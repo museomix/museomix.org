@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Museomix\n"
-"POT-Creation-Date: 2016-05-31 01:48+0200\n"
-"PO-Revision-Date: 2016-05-31 01:49+0200\n"
+"POT-Creation-Date: 2016-05-31 23:03+0200\n"
+"PO-Revision-Date: 2016-05-31 23:03+0200\n"
 "Last-Translator: Samy Rabih <contact@lahaut.info>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -16,7 +16,7 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: Actualites.php:100 functions.php:539
+#: Actualites.php:100 functions.php:553
 msgid "En savoir plus"
 msgstr ""
 
@@ -32,43 +32,47 @@ msgstr "Prototypes"
 msgid "Museum"
 msgstr "Musée"
 
-#: MenuPage.php:15 TitrePage.php:17
+#: MenuPage.php:15
+msgid "Playground"
+msgstr "Terrains de jeux"
+
+#: MenuPage.php:16 TitrePage.php:17
 msgid "News"
 msgstr "Actualités"
 
-#: MenuPage.php:17
+#: MenuPage.php:18
 msgid "Partners"
 msgstr "Partenaires"
 
-#: MenuPage.php:18 MenuPage.php:41
+#: MenuPage.php:19 MenuPage.php:42
 msgid "Team"
 msgstr "Equipe"
 
-#: MenuPage.php:19
+#: MenuPage.php:20
 msgid "Community"
 msgstr "Communauté"
 
-#: MenuPage.php:20
+#: MenuPage.php:21
 msgid "Gallery"
 msgstr "Galerie"
 
-#: MenuPage.php:36
+#: MenuPage.php:37
 msgid "User case"
 msgstr "Scénario utilisateur"
 
-#: MenuPage.php:37
+#: MenuPage.php:38
 msgid "Goals"
 msgstr "Objectifs"
 
-#: MenuPage.php:38
+#: MenuPage.php:39
 msgid "Tools & techs"
 msgstr "Outils & techniques"
 
-#: MenuPage.php:39
+#: MenuPage.php:40
 msgid "Things learned..."
 msgstr "Retour d'expérience"
 
-#: MenuPage.php:40
+#: MenuPage.php:41
 msgid "FAQ"
 msgstr "FAQ"
 
@@ -88,45 +92,45 @@ msgstr ""
 msgid "Comments are closed."
 msgstr ""
 
-#: functions.php:403
+#: functions.php:417
 msgid "il y a"
 msgstr ""
 
-#: functions.php:405
+#: functions.php:419
 msgid "le"
 msgstr ""
 
-#: functions.php:460
+#: functions.php:474
 #, php-format
 msgid "<cite class=\"fn\">%s</cite>"
 msgstr ""
 
-#: functions.php:460
+#: functions.php:474
 #, php-format
 msgid "[%1$s]"
 msgstr ""
 
-#: functions.php:460
+#: functions.php:474
 msgid "(Edit)"
 msgstr ""
 
-#: functions.php:464
+#: functions.php:478
 msgid "Your comment is awaiting moderation."
 msgstr ""
 
-#: functions.php:552
+#: functions.php:566
 msgid "Tous les articles"
 msgstr ""
 
-#: functions.php:637
+#: functions.php:649
 msgid "Local coordinators"
 msgstr "Coordinateurs locaux"
 
-#: functions.php:654
+#: functions.php:671
 msgid "Co-organizers"
 msgstr "Co-organisateurs"
 
-#: functions.php:700 single-community.php:27
+#: functions.php:718 single-community.php:27
 msgid "Website"
 msgstr "Site web"
 

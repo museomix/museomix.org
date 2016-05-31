@@ -15,7 +15,7 @@ add_action('after_setup_theme', 'my_theme_setup');
 function my_theme_setup(){
     load_theme_textdomain('museomix', get_template_directory().'/lang');
 }
-/* initiation des menus personnalis¨¦s 
+/* initiation des menus personnalisés 
    ================================== */
 register_nav_menus( array(
         'Menu_principal' => 'Navigation principale',
@@ -41,7 +41,7 @@ function OrdonnerListes($query){
     }
 }
 
-/* plugins ACF (inop¨¦rant)
+/* plugins ACF (inopérant)
    ======================= */
 add_action('acf/register_fields', 'my_register_fields');
 function my_register_fields()
@@ -91,7 +91,7 @@ function SectionDePage($atts){
 	return $r;
 }
 
-/* Liste des m¨¦dias-sociaux associ¨¦s ¨¤ une page
+/* Liste des médias-sociaux associés ¨¤ une page
    ====================== */
 add_shortcode( 'social', 'DisplaySocialMedia' );
 function DisplaySocialMedia() {
@@ -720,6 +720,23 @@ function ContenuSection($id, $echo = true){
 				$contenu .= '</ul>';				
 			}
 			$contenu .= $community->post_content;
+			$contenu .= '</div>';
+			break;
+		case 'playground':
+		
+			/* playground linked to this element */
+			$playgrounds = get_details('playground', $details);
+
+			if (!isset($playgrounds[0])) {
+				break;
+			}
+			$contenu .= '<div class="row-fluid">';
+			$contenu .= '<dl>';
+			foreach($playgrounds as $playground) {
+				$contenu .= '<dt>'.$playground['title'].'</dt>';
+				$contenu .= '<dd>'.$playground['description'].'</dd>';
+			}			
+			$contenu .= '</dl>';
 			$contenu .= '</div>';
 			break;
 	}
