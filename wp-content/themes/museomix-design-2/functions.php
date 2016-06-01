@@ -646,7 +646,7 @@ function ContenuSection($id, $echo = true){
 					$liste[] = $elm;
 				}
 				$contenu .= '<div class="span6 rond-5" style="float: left; background: #fff; padding: 10px; border: 1px solid #ccc; margin-bottom: 20px;">';
-				$coordinator = __('Local coordinators', 'museomix');
+				$coordinator = __('Museum side', 'museomix');
 				$contenu .= '<h4 style="color: #666; padding-bottom: 10px; ">'.$coordinator.'</h4>';
 				$contenu .= '<table class="table table-striped">'.implode('',$liste).'</table>';
 				$contenu .= '</div>'; 
@@ -668,7 +668,7 @@ function ContenuSection($id, $echo = true){
 					$liste[] = $elm;
 				}		
 				$contenu .= '<div class="span6 rond-5" style="float: left; background: #fff; padding: 10px; border: 1px solid #ccc; margin-bottom: 20px;">';
-				$organizer = __('Co-organizers', 'museomix');
+				$organizer = __('Community side', 'museomix');
 				$contenu .= '<h4 style="color: #666; padding-bottom: 10px; ">'.$organizer.'</h4>';
 				$contenu .= '<table class="table table-striped">'.implode('',$liste).'</table>';
 				$contenu .= '</div>'; 

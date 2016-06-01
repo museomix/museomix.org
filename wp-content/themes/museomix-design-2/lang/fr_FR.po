@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Museomix\n"
-"POT-Creation-Date: 2016-05-31 23:03+0200\n"
-"PO-Revision-Date: 2016-05-31 23:03+0200\n"
+"POT-Creation-Date: 2016-06-01 08:30+0200\n"
+"PO-Revision-Date: 2016-06-01 08:30+0200\n"
 "Last-Translator: Samy Rabih <contact@lahaut.info>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -123,12 +123,12 @@ msgid "Tous les articles"
 msgstr ""
 
 #: functions.php:649
-msgid "Local coordinators"
-msgstr "Coordinateurs locaux"
+msgid "Museum side"
+msgstr "Côté musée"
 
 #: functions.php:671
-msgid "Co-organizers"
-msgstr "Co-organisateurs"
+msgid "Community side"
+msgstr "Côté communauté"
 
 #: functions.php:718 single-community.php:27
 msgid "Website"
@@ -141,6 +141,12 @@ msgstr "Comment nous suivre :"
 #: single-community.php:44
 msgid "Locations:"
 msgstr "Musées remixés :"
+
+#~ msgid "Local coordinators"
+#~ msgstr "Coordinateurs locaux"
+
+#~ msgid "Co-organizers"
+#~ msgstr "Co-organisateurs"
 
 #~ msgid "Museomix contacts"
 #~ msgstr "Contacts Museomix"
