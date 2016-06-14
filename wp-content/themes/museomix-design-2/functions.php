@@ -719,7 +719,7 @@ function ContenuSection($id, $echo = true){
 				}
 				$contenu .= '</ul>';				
 			}
-			$contenu .= $community->post_content;
+			$contenu .= apply_filters( 'the_content', $community->post_content);
 			$contenu .= '</div>';
 			break;
 		case 'playground':

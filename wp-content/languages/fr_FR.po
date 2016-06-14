@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the 4.5.x package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2016-05-20 21:53:56+0000\n"
+"PO-Revision-Date: 2016-06-10 09:47:28+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -116,7 +116,7 @@ msgstr "<strong>ERREUR</strong>&nbsp;: Le champ e-mail est vide."
 
 #: wp-includes/user.php:218
 msgid "<strong>ERROR</strong>: Invalid email address."
-msgstr "<strong>ERREUR</strong>&nbsp;: Adresse e-mail invalide"
+msgstr "<strong>ERREUR</strong>&nbsp;: Adresse e-mail non valide"
 
 #. translators: %s: email address
 #: wp-includes/user.php:236
@@ -131,7 +131,7 @@ msgstr "%1$s (%2$s)"
 
 #: wp-login.php:848
 msgid "Your session has expired. Please log in to continue where you left off."
-msgstr "Votre session a expiré. Veuillez vous reconnecter pour reprendre là vous vous étiez arrêté."
+msgstr "Votre session a expiré. Veuillez vous reconnecter pour reprendre à la dernière page visitée."
 
 #: wp-includes/taxonomy.php:515
 msgid "Unregistering a built-in taxonomy is not allowed"
@@ -170,7 +170,7 @@ msgstr "Flux pour %1$s %2$s %3$s %4$s"
 
 #: wp-includes/pluggable.php:534
 msgid "<strong>ERROR</strong>: Invalid username, email address or incorrect password."
-msgstr "<strong>ERREUR</strong> : Nom d’utilisateur, e-mail ou mot de passe invalide."
+msgstr "<strong>ERREUR</strong> : Nom d’utilisateur, e-mail ou mot de passe non valide."
 
 #: wp-includes/post-template.php:1536
 msgctxt "post password form"
@@ -284,7 +284,7 @@ msgstr "Collez ou saisissez l’URL à rechercher"
 #: wp-includes/class-wp-metadata-lazyloader.php:81
 #: wp-includes/class-wp-metadata-lazyloader.php:122
 msgid "Invalid object type"
-msgstr "Type d&rsquo;objet invalide"
+msgstr "Type d&rsquo;objet non valide"
 
 #. translators: 1: index.php, 2: Codex URL, 3: style.css
 #: wp-includes/class-wp-theme.php:273
@@ -684,13 +684,13 @@ msgstr "Permalien enregistré"
 
 #: wp-includes/shortcodes.php:93
 msgid "Invalid shortcode name: Empty name given."
-msgstr "Nom de code court invalide&nbsp;: pas de nom donné."
+msgstr "Nom de code court non valide&nbsp;: aucun nom donné."
 
 #. translators: 1: shortcode name, 2: space separated list of reserved
 #. characters
 #: wp-includes/shortcodes.php:100
 msgid "Invalid shortcode name: %1$s. Do not use spaces or reserved characters: %2$s"
-msgstr "Nom de code court invalide&nbsp;: %1$s. N&rsquo;utilisez pas d&rsquo;espace ou de caractères réservés&nbsp;: %2$s"
+msgstr "Nom de code court non valide&nbsp;: %1$s. N&rsquo;utilisez pas d&rsquo;espace ou de caractères réservés&nbsp;: %2$s"
 
 #: wp-includes/rest-api/class-wp-rest-server.php:1012
 msgid "The specified namespace could not be found."
@@ -738,7 +738,7 @@ msgstr "La fonction de rappel JSONP n&rsquo;est pas valide."
 
 #: wp-includes/rest-api/class-wp-rest-server.php:846
 msgid "The handler for the route is invalid"
-msgstr "Le gestionnaire de route est invalide"
+msgstr "Le gestionnaire de route n’est pas valide"
 
 #: wp-includes/post.php:1467
 msgid "Pages list navigation"
@@ -1184,7 +1184,7 @@ msgstr "Erreur de la base de données WordPress&nbsp;:"
 
 #: wp-login.php:501
 msgid "Your password reset link appears to be invalid. Please request a new link below."
-msgstr "Votre lien de réinitialisation de mot de passe semble être invalide. Veuillez demander un nouveau lien ci-dessous."
+msgstr "Votre lien de réinitialisation de mot de passe semble ne pas être valide. Veuillez demander un nouveau lien ci-dessous."
 
 #: wp-login.php:503
 msgid "Your password reset link has expired. Please request a new link below."
@@ -3157,7 +3157,7 @@ msgstr "Ajouter à la liste de lecture vidéo"
 
 #: wp-includes/nav-menu.php:374
 msgid "Invalid menu ID."
-msgstr "Menu ID invalide."
+msgstr "Menu ID non valide."
 
 #: wp-includes/wp-db.php:1252
 msgid "The query argument of %s must have a placeholder."
@@ -4130,7 +4130,7 @@ msgstr "Voir la page du fichier joint"
 
 #: wp-includes/post.php:3176
 msgid "Whoops, the provided date is invalid."
-msgstr "Oups, la date fournie n&rsquo;est pas valable."
+msgstr "Oups, la date fournie n&rsquo;est pas valide."
 
 #: wp-includes/media.php:3359
 msgid "Insert Media"
@@ -4354,7 +4354,7 @@ msgstr "Image d’arrière-plan"
 
 #: wp-includes/customize/class-wp-customize-image-control.php:36
 msgid "Change Image"
-msgstr "Changer l&rsquo;image"
+msgstr "Changer l’image"
 
 #: wp-includes/customize/class-wp-customize-header-image-control.php:106
 msgid "Remove image"
@@ -4576,7 +4576,7 @@ msgstr "Désolé, vous n&rsquo;avez pas l&rsquo;autorisation de modifier les ent
 #: wp-includes/class-wp-xmlrpc-server.php:1348
 #: wp-includes/class-wp-xmlrpc-server.php:4920
 msgid "Invalid author ID."
-msgstr "Identifiant utilisateur non valable."
+msgstr "Identifiant utilisateur non valide."
 
 #: wp-includes/class-wp-xmlrpc-server.php:1464
 msgid "Ambiguous term name used in a hierarchical taxonomy. Please use term ID instead."
@@ -4602,7 +4602,7 @@ msgstr "Le type de contenu spécifié n&rsquo;est pas valable"
 #: wp-includes/class-wp-xmlrpc-server.php:5194
 #: wp-includes/class-wp-xmlrpc-server.php:5258 wp-includes/post.php:1212
 msgid "Invalid post type"
-msgstr "Type d&rsquo;article invalide"
+msgstr "Type d’article non valide"
 
 #: wp-includes/class-wp-xmlrpc-server.php:1338
 msgid "Sorry, you are not allowed to create password protected posts in this post type"
@@ -5023,7 +5023,7 @@ msgstr "Son"
 #: wp-includes/class-wp-xmlrpc-server.php:4880
 #: wp-includes/class-wp-xmlrpc-server.php:5204
 msgid "Invalid post format"
-msgstr "Format d&rsquo;article invalide"
+msgstr "Format d’article non valide"
 
 #: wp-includes/class-wp-editor.php:1446
 msgid "No search term specified. Showing recent items."
@@ -5098,7 +5098,7 @@ msgstr "Lien court"
 #: wp-includes/class-wp-xmlrpc-server.php:5064
 #: wp-includes/class-wp-xmlrpc-server.php:5429
 msgid "Invalid attachment ID."
-msgstr "Identifiant du fichier invalide."
+msgstr "Identifiant du fichier non valide."
 
 #: wp-includes/registration-functions.php:7 wp-includes/registration.php:7
 msgid "This file no longer needs to be included."
@@ -5586,7 +5586,7 @@ msgstr "Votre adresse de messagerie ne sera pas publiée."
 
 #: wp-includes/class-http.php:260 wp-includes/class-wp-xmlrpc-server.php:6227
 msgid "A valid URL was not provided."
-msgstr "L&rsquo;URL fournie est invalide."
+msgstr "L’URL fournie n’est pas valide."
 
 #: wp-includes/class-wp-image-editor-gd.php:193
 #: wp-includes/class-wp-image-editor-imagick.php:253
@@ -5595,7 +5595,7 @@ msgstr "Impossible de lire la taille de l&rsquo;image redimensionnée"
 
 #: wp-signup.php:120
 msgid "Must be at least 4 characters, letters and numbers only. It cannot be changed, so choose carefully!"
-msgstr "Doit contenir au moins 4 caractères, avec uniquement des lettres et  des chiffres. Vous ne pourrez pas en changer, donc choisissez bien&nbsp;!"
+msgstr "Doit contenir au moins 4 caractères, avec uniquement des lettres et  des chiffres. Vous ne pourrez pas en changer, donc choisissez bien !"
 
 #: wp-signup.php:811
 msgid "You must first <a href=\"%s\">log in</a>, and then you can create a new site."
@@ -5864,7 +5864,7 @@ msgstr "Désolé, vous n&rsquo;avez pas les droits pour supprimer une catégorie
 #: wp-includes/class-wp-xmlrpc-server.php:3358
 #: wp-includes/class-wp-xmlrpc-server.php:3425
 msgid "Invalid comment ID."
-msgstr "Identifiant commentaire invalide."
+msgstr "Identifiant de commentaire non valide."
 
 #: wp-includes/class-wp-xmlrpc-server.php:3282
 #: wp-includes/class-wp-xmlrpc-server.php:3440
@@ -5945,7 +5945,7 @@ msgstr "Désolé, vous n&rsquo;avez pas l&rsquo;autorisation de publier cet arti
 
 #: wp-includes/class-wp-xmlrpc-server.php:3294
 msgid "Invalid post type."
-msgstr "Type d&rsquo;article invalide."
+msgstr "Type d’article non valide."
 
 #: wp-includes/class-wp-xmlrpc-server.php:5249
 msgid "You are not allowed to change the post author as this user."
@@ -6890,7 +6890,7 @@ msgstr "Cette adresse de messagerie a déjà été utilisée. Veuillez vérifier
 
 #: wp-includes/ms-functions.php:958
 msgid "Invalid activation key."
-msgstr "clé d&#8217;activation invalide."
+msgstr "clé d’activation non valide."
 
 #: wp-includes/ms-functions.php:978
 msgid "Could not create user"
@@ -7068,7 +7068,7 @@ msgstr "Impossible d&rsquo;insérer l&rsquo;article dans la base de données"
 
 #: wp-includes/post.php:3435
 msgid "The page template is invalid."
-msgstr "Le modèle de page est invalide."
+msgstr "Le modèle de page n’est pas valide."
 
 #: wp-includes/revision.php:295
 msgid "Cannot create a revision of a revision"
@@ -7261,7 +7261,7 @@ msgstr "Pas de terme"
 #: wp-includes/class-wp-xmlrpc-server.php:2069
 #: wp-includes/class-wp-xmlrpc-server.php:2140 wp-includes/taxonomy.php:2751
 msgid "Invalid term ID"
-msgstr "l&rsquo;ID du terme est invalide"
+msgstr "ID de terme non valide"
 
 #: wp-includes/taxonomy.php:2754 wp-includes/taxonomy.php:3354
 msgid "A name is required for this term"
@@ -7344,7 +7344,7 @@ msgstr "Le message n&rsquo;a pas pu être envoyé."
 #: wp-includes/user.php:2146 wp-includes/user.php:2150
 #: wp-includes/user.php:2167
 msgid "Invalid key"
-msgstr "Clé invalide"
+msgstr "Clé non valide"
 
 #: wp-includes/user.php:2244
 msgid "<strong>ERROR</strong>: Please type your email address."
@@ -7557,7 +7557,7 @@ msgstr "Titre du site"
 
 #: wp-includes/comment-template.php:2130 wp-login.php:723
 msgid "Email"
-msgstr "Adresse de contact"
+msgstr "Adresse de messagerie"
 
 #: wp-includes/class-wp-xmlrpc-server.php:553
 msgid "Allow people to post comments on new articles"
@@ -7921,7 +7921,7 @@ msgstr "Aucun"
 #: wp-includes/taxonomy.php:2984 wp-includes/taxonomy.php:3121
 #: wp-includes/taxonomy.php:3317
 msgid "Invalid taxonomy"
-msgstr "La taxinomie est invalide"
+msgstr "Taxinomie non valide"
 
 #: wp-includes/taxonomy.php:602
 msgid "Edit Tag"
