@@ -142,17 +142,9 @@ final class ITSEC_Lib {
 	 * @return string path to wp-config.php
 	 * */
 	public static function get_config() {
+		require_once( ITSEC_Core::get_core_dir() . '/lib/class-itsec-lib-config-file.php' );
 
-		if ( file_exists( trailingslashit( ABSPATH ) . 'wp-config.php' ) ) {
-
-			return trailingslashit( ABSPATH ) . 'wp-config.php';
-
-		} else {
-
-			return trailingslashit( dirname( ABSPATH ) ) . 'wp-config.php';
-
-		}
-
+		return ITSEC_Lib_Config_File::get_wp_config_file_path();
 	}
 
 	/**
@@ -206,23 +198,23 @@ final class ITSEC_Lib {
 		if ( is_multisite() && function_exists( 'domain_mapping_warning' ) ) {
 			return '*';
 		}
-		
-		
+
+
 		$host = parse_url( $url, PHP_URL_HOST );
-		
+
 		if ( false === $host ) {
 			return '*';
 		}
 		if ( 'www.' == substr( $host, 0, 4 ) ) {
 			return substr( $host, 4 );
 		}
-		
+
 		$host_parts = explode( '.', $host );
-		
+
 		if ( count( $host_parts ) > 2 ) {
 			$host_parts = array_slice( $host_parts, -2, 2 );
 		}
-		
+
 		return implode( '.', $host_parts );
 	}
 
@@ -303,17 +295,9 @@ final class ITSEC_Lib {
 	 * @return string path to .htaccess
 	 */
 	public static function get_htaccess() {
+		require_once( ITSEC_Core::get_core_dir() . '/lib/class-itsec-lib-config-file.php' );
 
-		if ( 'nginx' === ITSEC_Lib::get_server() ) {
-
-			return ITSEC_Modules::get_setting( 'global', 'nginx_file' );
-
-		} else {
-
-			return ITSEC_Lib::get_home_path() . '.htaccess';
-
-		}
-
+		return ITSEC_Lib_Config_File::get_server_config_file_path();
 	}
 
 	/**
@@ -408,7 +392,7 @@ final class ITSEC_Lib {
 	 */
 	public static function get_server() {
 		require_once( ITSEC_Core::get_core_dir() . '/lib/class-itsec-lib-utility.php' );
-		
+
 		return ITSEC_Lib_Utility::get_web_server();
 	}
 
@@ -472,7 +456,7 @@ final class ITSEC_Lib {
 	public static function get_whitelisted_ips() {
 		return apply_filters( 'itsec_white_ips', array() );
 	}
-	
+
 	/**
 	 * Determines whether a given IP address is whiteliste
 	 *
@@ -516,7 +500,7 @@ final class ITSEC_Lib {
 	public static function get_blacklisted_ips() {
 		return apply_filters( 'itsec_filter_blacklisted_ips', array() );
 	}
-	
+
 	/**
 	 * Determines whether a given IP address is blacklisted
 	 *
@@ -527,25 +511,25 @@ final class ITSEC_Lib {
 	 */
 	public static function is_ip_blacklisted( $ip = null, $blacklisted_ips = null ) {
 		$ip = sanitize_text_field( $ip );
-		
+
 		if ( empty( $ip ) ) {
 			$ip = ITSEC_Lib::get_ip();
 		}
-		
+
 		if ( ! class_exists( 'ITSEC_Lib_IP_Tools' ) ) {
 			require_once( ITSEC_Core::get_core_dir() . '/lib/class-itsec-lib-ip-tools.php' );
 		}
-		
+
 		if ( is_null( $blacklisted_ips ) ) {
 			$blacklisted_ips = self::get_blacklisted_ips();
 		}
-		
+
 		foreach ( $blacklisted_ips as $blacklisted_ip ) {
 			if ( ITSEC_Lib_IP_Tools::intersect( $ip, ITSEC_Lib_IP_Tools::ip_wild_to_ip_cidr( $blacklisted_ip ) ) ) {
 				return true;
 			}
 		}
-		
+
 		return false;
 	}
 

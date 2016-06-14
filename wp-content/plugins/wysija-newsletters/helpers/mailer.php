@@ -109,6 +109,9 @@ class WYSIJA_help_mailer extends acymailingPHPMailer {
 					$this->sendGrid->Username = trim($this->config->getValue('smtp_login'));
 					$this->sendGrid->Password = trim($this->config->getValue('smtp_password'));
 					$this->isSendGridRest=true;
+				}elseif(in_array(trim($this->Host), array('sparkpost.com'))) {
+					$this->Mailer = 'sparkpost';
+					$this->sparkpost = new WJ_Sparkpost( $this->config->getValue('smtp_password') );
 				}else{
 				if(in_array(trim($this->Host), array('mailpoet.com'))){
 				  $this->Mailer = 'mailpoet';
@@ -166,7 +169,7 @@ class WYSIJA_help_mailer extends acymailingPHPMailer {
 		//$this->Hostname = '';
 		$this->WordWrap = 150;
 
-	  	if($this->config->getValue('dkim_active') && $this->config->getValue('dkim_pubk') && !$this->isElasticRest && !$this->isSendGridRest && $this->Mailer !='mailpoet'){
+	  	if($this->config->getValue('dkim_active') && $this->config->getValue('dkim_pubk') && !$this->isElasticRest && !$this->isSendGridRest && $this->Mailer !='mailpoet' || $this->Mailer !='sparkpost'){
 		   // check that server can sign emails
 		   if(!function_exists('openssl_sign')){
 			   $this->error(__('You cannot use the DKIM signature option...',WYSIJA).' '.__('The PHP Extension openssl is not enabled on your server. Ask your host to enable it if you want to use an SSL connection.',WYSIJA));
@@ -869,6 +872,7 @@ class WYSIJA_help_mailer extends acymailingPHPMailer {
 
 		$email->body=str_replace($arrayfind,$arrayreplace,$email->body);
 		$email->subject=str_replace($arrayfind,$arrayreplace,$email->subject);
+		$email->subject = ($email->subject) ? $email->subject : " ";
 	}
 
 	/**

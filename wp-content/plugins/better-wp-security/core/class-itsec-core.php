@@ -221,6 +221,7 @@ if ( ! class_exists( 'ITSEC_Core' ) ) {
 			include( "$path/modules/core/init.php" );
 			include( "$path/modules/backup/init.php" );
 			include( "$path/modules/file-change/init.php" );
+			include( "$path/modules/file-permissions/init.php" );
 			include( "$path/modules/hide-backend/init.php" );
 			include( "$path/modules/ipcheck/init.php" );
 			include( "$path/modules/malware/init.php" );

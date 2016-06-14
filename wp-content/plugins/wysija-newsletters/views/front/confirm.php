@@ -59,7 +59,6 @@ class WYSIJA_view_front_confirm extends WYSIJA_view_front {
 			'</tr>';
 		}
 
-
 		$content.='<tr>
 			<th scope="row">
 				<label for="fname">'.__('First name',WYSIJA).'</label>

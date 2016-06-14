@@ -812,12 +812,14 @@ class WYSIJA_help_render_engine extends WYSIJA_object {
 
                 case 'ratio':
                     $image = $value;
-                    $ratio = 1;
+                    $ratio = 1.0;
                     if(isset($image['width']) && isset($image['height'])) {
-                        if((int)$image['height']<=0)$image['height']=1;
+                        if((int)$image['height'] <= 0) {
+                            $image['height'] = 1;
+                        }
                         $ratio = round(($image['width'] / $image['height']) * 1000) / 1000;
                     }
-                    $value = $ratio;
+                    $value = number_format($ratio, 3, '.', '');
                 break;
                 case 'format_line_height':
                     $value = $this->_css_format_line_height($value);

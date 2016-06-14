@@ -19,11 +19,9 @@ class WYSIJA_object{
 	 * Static variable holding core MailPoet's version
 	 * @var array
 	 */
-	static $version = '2.7.1';
+	static $version = '2.7.2';
 
 	function __construct(){}
-
-  	function WYSIJA_object(){} // TODO: remove in next version
 
   /**
 	 * Order an array by param name string compare
@@ -69,11 +67,11 @@ class WYSIJA_object{
 		//WordPress globals be careful there
 		global $current_user;
 		if ( $field ) {
-			if ( function_exists( 'get_currentuserinfo' ) ) {
+			if ( function_exists( 'wp_get_current_user' ) ) {
 				// Here is an exception because of one of the weirdest bug
-				// the idea is to make sure we don't call get_currentuserinfo on the wysija_subscribers page when on a multisite
+				// the idea is to make sure we don't call wp_get_current_user() on the wysija_subscribers page when on a multisite
 				if ( ! ( isset( $_GET['page'] ) && $_GET['page'] === 'wysija_subscribers' && is_multisite() ) ){
-					get_currentuserinfo();
+					wp_get_current_user();
 				}
 			}
 			if ( isset( $current_user->{$field} ) ){
@@ -281,7 +279,6 @@ class WYSIJA_help extends WYSIJA_object{
 		if ( WYSIJA_ITF ){
 			wp_enqueue_script( 'mailpoet-global' );
 		}
-		wp_enqueue_style( 'mailpoet-dashicons' );
 	}
 
 	public function admin_body_class( $body_class_str ){
@@ -344,6 +341,7 @@ class WYSIJA_help extends WYSIJA_object{
 			'ru',
 			'sv',
 			'tr',
+			'uk',
 			'vi',
 			'zh_CN',
 			'zh_TW',
@@ -357,8 +355,6 @@ class WYSIJA_help extends WYSIJA_object{
 		}
 		wp_register_script('wysija-validator',WYSIJA_URL.'js/validate/jquery.validationEngine.js', array( 'jquery' ),WYSIJA::get_version(),true );
 		wp_register_script('wysija-front-subscribers', WYSIJA_URL.'js/front-subscribers.js', array( 'jquery' ),WYSIJA::get_version(),true);
-
-		wp_register_style( 'mailpoet-dashicons', WYSIJA_URL . 'css/admin-dashicons.css', array(), WYSIJA::get_version() );
 
 		wp_register_script('wysija-form', WYSIJA_URL.'js/forms.js', array( 'jquery' ),WYSIJA::get_version());
 		wp_register_style('validate-engine-css',WYSIJA_URL.'css/validationEngine.jquery.css',array(),WYSIJA::get_version());
@@ -1222,7 +1218,7 @@ class WYSIJA extends WYSIJA_object{
 	public static function update_user_caps(){
 		global $current_user;
 
-		if(empty($current_user) && function_exists('get_currentuserinfo')) get_currentuserinfo();
+		if(empty($current_user) && function_exists('wp_get_current_user')) wp_get_current_user();
 		if(empty($current_user)) return false;
 		$current_user->get_role_caps();
 

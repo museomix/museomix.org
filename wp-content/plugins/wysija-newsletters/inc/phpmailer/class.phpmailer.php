@@ -454,6 +454,10 @@ class acymailingPHPMailer extends WYSIJA_OBJECT{
 				$result = $this->sendGrid->sendMail($this);
 				if (!$result) $this->SetError($this->sendGrid->error);
 				break;
+			case 'sparkpost' :
+				$result = $this->sparkpost->send_mail($this);
+				if ( $result !== true ) $this->error($this->sparkpost->error);
+				break;
 			case 'mailpoet' :
 				$result = $this->mailpoet->send_mail($this);
 				if ( $result !== true ) $this->error($this->mailpoet->error);

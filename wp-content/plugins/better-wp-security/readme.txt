@@ -3,7 +3,7 @@ Contributors: ithemes, chrisjean, aaroncampbell, gerroald, mattdanner
 Tags: security, security plugin, malware, hack, secure, block, SSL, admin, htaccess, lockdown, login, protect, protection, anti virus, attack, injection, login security, maintenance, permissions, prevention, authentication, administration, password, brute force, ban, permissions, bots, user agents, xml rpc, security log
 Requires at least: 4.1
 Tested up to: 4.5.2
-Stable tag: 5.4.5
+Stable tag: 5.5.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -187,6 +187,14 @@ Free support may be available with the help of the community in the <a href="htt
 5. Free malware scan powered by Sucuri SiteCheck.
 
 == Changelog ==
+
+= 5.5.0 =
+ * New Feature: Added a new File Permissions section on the settings page to bring back the directory and file permissions listing feature found on the Security > Dashboard page of older plugin versions.
+ * Bug Fix: Fixed a situation where adding a very large list of IP's in the Ban Hosts list would generate an invalid .htaccess file on some servers.
+ * Enhancement: The Database Backups, Local Brute Force Protection, Network Brute Force Protection, Strong Password Enforcement, and WordPress Tweaks features are now active by default on new installations.
+ * Enhancement: The WordPress Tweaks feature now uses the "Disable File Editor" setting by default on new installations.
+ * Enhancement: The WordPress Tweaks feature now sets the "Multiple Authentication Attempts per XML-RPC Request" setting to "Block" by default on new installations.
+ * Enhancement: Improved the styling of notices.
 
 = 5.4.5 =
  * Bug Fix: Fixed SQL query for Database Backups when "Backup Full Database" is enabled.
@@ -1545,6 +1553,9 @@ This release is a complete rewrite from the ground up. Special thanks to Cory Mi
 * First alpha release including simple feature set.
 
 == Upgrade Notice ==
+
+= 5.5.0 =
+Version 5.5.0 contains important bug fixes, a new File Permissions feature, and numerous enhancements. It is recommended for all users.
 
 = 5.4.5 =
 Version 5.4.5 contains a bug fix that fixes the listing of tables to exclude from database backups when "Backup Full Database" is enabled.

@@ -8,7 +8,6 @@ final class ITSEC_Core_Server_Config_Rules_Settings_Page extends ITSEC_Module_Se
 		$this->type = 'advanced';
 		$this->information_only = true;
 		$this->can_save = false;
-		$this->always_active = true;
 
 		parent::__construct();
 	}
@@ -37,7 +36,6 @@ final class ITSEC_Core_WPConfig_File_Settings_Page extends ITSEC_Module_Settings
 		$this->type = 'advanced';
 		$this->information_only = true;
 		$this->can_save = false;
-		$this->always_active = true;
 
 		parent::__construct();
 	}

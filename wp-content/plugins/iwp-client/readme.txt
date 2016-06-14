@@ -48,6 +48,13 @@ Credits: [Vladimir Prelovac](http://prelovac.com/vladimir) for his worker plugin
 
 == Changelog ==
 
+= 1.5.1.3 - May 24th 2016 =
+* Fix: “Unable to update File list table : Can’t DROP ‘thisFileName’; check that column/key exists” error would be thrown while taking Multi-call backups in the Multi-site WordPress environment.
+
+= 1.5.1.2 - May 18th 2016 =
+* Fix: If the file path is 192 characters or higher, it would throw a Zip error: unable to update the file list while performing multicall backup.
+* Fix: For the first WP core update alone, the From Version was missing in the WP updates section of the Client Reports.
+
 = 1.5.1.1 - Mar 18th 2016 =
 * Improvement: Verifying backup uploaded to Amazon S3 utilized higher bandwidth.
 

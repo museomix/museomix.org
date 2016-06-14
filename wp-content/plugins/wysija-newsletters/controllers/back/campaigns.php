@@ -2349,6 +2349,11 @@ class WYSIJA_control_back_campaigns extends WYSIJA_control_back {
 			return false;
 		}
 
+		if (!$_FILES['my-theme']['tmp_name'] || !is_file($_FILES['my-theme']['tmp_name']))  {
+			$this->error(__('This file is empty. Please try another.', WYSIJA));
+			$this->redirect('admin.php?page=wysija_campaigns&action=themes');
+			return false;
+		}
 
 		$ZipfileResult = trim(file_get_contents($_FILES['my-theme']['tmp_name']));
 

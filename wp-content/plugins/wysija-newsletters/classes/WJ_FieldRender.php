@@ -69,7 +69,7 @@ class WJ_FieldRender {
 			case 'input':
 				$input =
 					'<input type="text" size="40" id="'. $this->identifier . '"' .
-					'value="' . $this->value .
+					' value="' . $this->value .
 					'" name="wysija[field][' . $this->identifier . ']" ' .
 					$this->validation() .
 					' />';

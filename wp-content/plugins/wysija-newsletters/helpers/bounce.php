@@ -636,6 +636,8 @@ class WYSIJA_help_bounce extends WYSIJA_help {
                 $data[] = 'HTML_VERSION::' . htmlentities($this->_message->html);
             if (!empty($this->_message->text))
                 $data[] = 'TEXT_VERSION::' . nl2br(htmlentities($this->_message->text));
+            $this->_message->header->reply_to_name = (property_exists($this->_message->header, 'reply_to_name')) ? $this->_message->header->reply_to_name : '';
+            $this->_message->header->from_name = (property_exists($this->_message->header, 'from_name')) ? $this->_message->header->from_name : '';
             $data[] = 'REPLYTO_ADDRESS::' . $this->_message->header->reply_to_name . ' ( ' . $this->_message->header->reply_to_email . ' )';
             $data[] = 'FROM_ADDRESS::' . $this->_message->header->from_name . ' ( ' . $this->_message->header->from_email . ' )';
             $data[] = print_r($this->_message->headerinfo, true);
@@ -662,6 +664,8 @@ class WYSIJA_help_bounce extends WYSIJA_help {
                 //We add all other extra information just in case of we could use them...
                 //original-rcpt-to ?   http://tools.ietf.org/html/rfc5965
                 $this->mailer->Body .= print_r($this->_message->headerinfo, true);
+                $this->_message->header->reply_to_name = (property_exists($this->_message->header, 'reply_to_name')) ? $this->_message->header->reply_to_name : '';
+                $this->_message->header->from_name = (property_exists($this->_message->header, 'from_name')) ? $this->_message->header->from_name : '';
                 $this->mailer->AddReplyTo($this->_message->header->reply_to_email, $this->_message->header->reply_to_name);
                 $this->mailer->setFrom($this->_message->header->from_email, $this->_message->header->from_name);
                 if ($this->mailer->send()) {
@@ -1028,6 +1032,8 @@ class WYSIJA_help_bounce extends WYSIJA_help {
                 $email_saved_as_array[] = 'HTML_VERSION::' . htmlentities($this->_message->html);
             if (!empty($this->_message->text))
                 $email_saved_as_array[] = 'TEXT_VERSION::' . nl2br(htmlentities($this->_message->text));
+            $this->_message->header->reply_to_name = (property_exists($this->_message->header, 'reply_to_name')) ? $this->_message->header->reply_to_name : '';
+            $this->_message->header->from_name = (property_exists($this->_message->header, 'from_name')) ? $this->_message->header->from_name : '';		
             $email_saved_as_array[] = 'REPLYTO_ADDRESS::' . $this->_message->header->reply_to_name . ' ( ' . $this->_message->header->reply_to_email . ' )';
             $email_saved_as_array[] = 'FROM_ADDRESS::' . $this->_message->header->from_name . ' ( ' . $this->_message->header->from_email . ' )';
             $email_saved_as_array[] = print_r($this->_message->headerinfo, true);
@@ -1056,6 +1062,8 @@ class WYSIJA_help_bounce extends WYSIJA_help {
                 //We add all other extra information just in case of we could use them...
                 //original-rcpt-to ?   http://tools.ietf.org/html/rfc5965
                 $this->mailer->Body .= print_r($this->_message->headerinfo, true);
+                $this->_message->header->reply_to_name = (property_exists($this->_message->header, 'reply_to_name')) ? $this->_message->header->reply_to_name : '';
+                $this->_message->header->from_name = (property_exists($this->_message->header, 'from_name')) ? $this->_message->header->from_name : '';		
                 $this->mailer->AddReplyTo($this->_message->header->reply_to_email, $this->_message->header->reply_to_name);
                 $this->mailer->setFrom($this->_message->header->from_email, $this->_message->header->from_name);
                 if ($this->mailer->send()) {

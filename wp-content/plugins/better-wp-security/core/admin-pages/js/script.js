@@ -46,6 +46,7 @@ var itsecSettingsPage = {
 		$container.on( 'keyup', this.closeGridSettingsModal );
 		$container.on( 'click', '.itsec-toggle-activation', this.toggleModuleActivation );
 		$container.on( 'click', '.itsec-module-settings-save', this.saveSettings );
+		$container.on( 'click', '.itsec-reload-module', this.reloadModule );
 
 		$container.on( 'change', '#itsec-filter', this.logPageChangeFilter );
 
@@ -491,6 +492,12 @@ var itsecSettingsPage = {
 	},
 
 	reloadModule: function( module ) {
+		if ( module.preventDefault ) {
+			module.preventDefault();
+
+			module = jQuery(this).parents( '.itsec-module-card' ).attr( 'id' ).replace( 'itsec-module-card-', '' );
+		}
+
 		var method = 'get_refreshed_module_settings';
 		var data = {};
 

@@ -397,3 +397,10 @@
 	Bug Fix: Removed some status messages that would display after doing an import.
 2.3.7 - 2016-05-27 - Chris Jean & Aaron D. Campbell
 	Bug Fix: Fixed SQL query for Database Backups when "Backup Full Database" is enabled.
+2.4.0 - 2016-06-07 - Chris Jean & Aaron D. Campbell
+	New Feature: Added a new File Permissions section on the settings page to bring back the directory and file permissions listing feature found on the Security > Dashboard page of older plugin versions.
+	Bug Fix: Fixed a situation where adding a very large list of IP's in the Ban Hosts list would generate an invalid .htaccess file on some servers.
+	Enhancement: The Database Backups, Local Brute Force Protection, Network Brute Force Protection, Strong Password Enforcement, and WordPress Tweaks features are now active by default on new installations.
+	Enhancement: The WordPress Tweaks feature now uses the "Disable File Editor" setting by default on new installations.
+	Enhancement: The WordPress Tweaks feature now sets the "Multiple Authentication Attempts per XML-RPC Request" setting to "Block" by default on new installations.
+	Enhancement: Improved the styling of notices.

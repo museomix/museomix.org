@@ -12,6 +12,7 @@ class WYSIJA_help_bookmarks extends WYSIJA_object {
      * @return array
      */
     function getAll($size = 'medium', $theme = 'default') {
+        $theme = basename($theme);
         $fileHelper = WYSIJA::get('file', 'helper');
         $dirHandle = $fileHelper->exists('bookmarks'.DS.$size);
 
@@ -56,6 +57,7 @@ class WYSIJA_help_bookmarks extends WYSIJA_object {
      */
     function getAllByIconset($size = 'medium', $iconset)
     {
+        $iconset = basename($iconset);
         $fileHelper = WYSIJA::get('file', 'helper');
         $dirHandle = $fileHelper->exists('bookmarks'.DS.$size.DS.$iconset);
 
@@ -82,6 +84,7 @@ class WYSIJA_help_bookmarks extends WYSIJA_object {
 
     function getAllByTheme($theme, $type = 'all')
     {
+        $theme = basename($theme);
         $fileHelper = WYSIJA::get('file', 'helper');
         $dirHandle = $fileHelper->exists('themes'.DS.$theme.DS.'bookmarks');
 

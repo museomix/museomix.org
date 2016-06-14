@@ -2,8 +2,8 @@
 Contributors: wysija
 Tags: newsletter, newsletters, email newsletter, email subscription, newsletter signup, post notification, autoresponder, newsletter alert, auto newsletter, automatic post notification, email newsletters, email signup, auto post notifications, newsletter widget, newsletter builder, subscribe widget, signup widget, email subscription, newsletter plugin, widget, subscription, emailing, mailpoet, wysija, mandrill, sendgrid
 Requires at least: 3.3
-Tested up to: 4.4.1
-Stable tag: 2.7.1
+Tested up to: 4.5.2
+Stable tag: 2.7.2
 Send newsletters post notifications or autoresponders from WordPress easily, and beautifully. Start to capture subscribers with our widget now.
 
 == Description ==
@@ -11,6 +11,8 @@ Send newsletters post notifications or autoresponders from WordPress easily, and
 Create newsletters, automated emails, post notifications and autoresponders. Capture subscribers with our signup widget. Drop your posts, images, social icons in your newsletter. Change fonts and colors on the fly. A simple newsletter solution for WordPress. Finally!
 
 We built it with the idea that newsletters in WordPress should be easy. Not hard. Forget MailChimp, Aweber, etc. We're the good guys inside your WordPress.
+
+[Try the demo.](http://demo.mailpoet.com/launch/)
 
 = Check out this 2 minute video. =
 
@@ -130,8 +132,23 @@ Our [support site](http://support.mailpoet.com/) has plenty of articles and a ti
 
 == Changelog ==
 
+= 2.7.2 - 2016-06-01 =
+* Fixed broken CSS for Premium page
+* Fixed Custom Fields not saving on front-end
+* Fixed image ratio for specific locations
+* Fixed issue with missing rule (onlyNumberSp) in Italian & German translations
+* Fixed broken email validation in Dutch language with long extensions
+* Fixed undefined property notice on Bounce pages
+* Added SparkPost API support
+* Fixed security issues. Thanks again to Falk Huber (T-Systems) for reporting them
+* Added new menu icon (New MailPoet Branding)
+* Fixed sending preview of an email with an empty subject
+* Added Ukrainian JS validation language
+* Replaced deprecated get_currentuserinfo() with wp_get_current_user()
+* Fixed PHP notices that migh appear during sending process
+
 = 2.7.1 - 2016-03-15 =
-* Fixed security issues. Thanks to Falke Huber for letting us now.
+* Fixed security issues. Thanks to Falk Huber for letting us now.
 
 = 2.7 - 2016-01-29 =
 * Enabled PHP7 compatibility

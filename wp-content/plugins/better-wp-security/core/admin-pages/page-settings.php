@@ -482,7 +482,7 @@ final class ITSEC_Settings_Page {
 									<li id="itsec-module-card-<?php echo $id; ?>" class="itsec-module-card <?php echo implode( ' ', $classes ); ?>" data-module-id="<?php echo $id; ?>">
 										<div class="itsec-module-card-content">
 											<?php if ( $module->upsell ) : ?>
-											<a href="<?php echo esc_url( $module->upsell_url ); ?>" target="_blank" class="itsec-pro-upsell">&nbsp;</a>
+												<a href="<?php echo esc_url( $module->upsell_url ); ?>" target="_blank" class="itsec-pro-upsell">&nbsp;</a>
 											<?php endif; ?>
 											<h2><?php echo esc_html( $module->title ); ?></h2>
 											<?php if ( $module->pro ) : ?>
@@ -490,59 +490,59 @@ final class ITSEC_Settings_Page {
 											<?php endif; ?>
 											<p class="module-description"><?php echo $module->description; ?></p>
 											<?php if ( ! $module->upsell ) : ?>
-											<div class="module-actions hide-if-no-js">
-												<?php if ( $module->information_only ) : ?>
-													<button class="button button-secondary itsec-toggle-settings information-only"><?php echo $this->translations['show_information']; ?></button>
-												<?php elseif ( $module->enabled || $module->always_active ) : ?>
-													<button class="button button-secondary itsec-toggle-settings"><?php echo $this->translations['show_settings']; ?></button>
-													<?php if ( ! $module->always_active ) : ?>
-														<button class="button button-secondary itsec-toggle-activation"><?php echo $this->translations['deactivate']; ?></button>
+												<div class="module-actions hide-if-no-js">
+													<?php if ( $module->information_only ) : ?>
+														<button class="button button-secondary itsec-toggle-settings information-only"><?php echo $this->translations['show_information']; ?></button>
+													<?php elseif ( $module->enabled || $module->always_active ) : ?>
+														<button class="button button-secondary itsec-toggle-settings"><?php echo $this->translations['show_settings']; ?></button>
+														<?php if ( ! $module->always_active ) : ?>
+															<button class="button button-secondary itsec-toggle-activation"><?php echo $this->translations['deactivate']; ?></button>
+														<?php endif; ?>
+													<?php else : ?>
+														<button class="button button-secondary itsec-toggle-settings"><?php echo $this->translations['show_description']; ?></button>
+														<button class="button button-primary itsec-toggle-activation"><?php echo $this->translations['activate']; ?></button>
 													<?php endif; ?>
-												<?php else : ?>
-													<button class="button button-secondary itsec-toggle-settings"><?php echo $this->translations['show_description']; ?></button>
-													<button class="button button-primary itsec-toggle-activation"><?php echo $this->translations['activate']; ?></button>
-												<?php endif; ?>
-											</div>
+												</div>
 											<?php endif; ?>
 										</div>
 										<?php if ( ! $module->upsell ) : ?>
-										<div class="itsec-module-settings-container">
-											<div class="itsec-modal-navigation">
-												<button class="dashicons itsec-close-modal"></button>
-												<button class="itsec-right dashicons hidden"><span class="screen-reader-text"><?php _e( 'Configure next iThemes Security setting', 'better-wp-security' ); ?></span></button>
-												<button class="itsec-left dashicons hidden"><span class="screen-reader-text"><?php _e( 'Configure previous iThemes Security setting', 'better-wp-security' ); ?></span></button>
-											</div>
-											<div class="itsec-module-settings-content-container">
-												<div class="itsec-module-settings-content">
-													<h3 class="itsec-modal-header"><?php echo esc_html( $module->title ); ?></h3>
-													<div class="itsec-module-messages-container"></div>
-													<div class="itsec-module-settings-content-main">
-														<?php $this->get_module_settings( $id, $form, true ); ?>
+											<div class="itsec-module-settings-container">
+												<div class="itsec-modal-navigation">
+													<button class="dashicons itsec-close-modal"></button>
+													<button class="itsec-right dashicons hidden"><span class="screen-reader-text"><?php _e( 'Configure next iThemes Security setting', 'better-wp-security' ); ?></span></button>
+													<button class="itsec-left dashicons hidden"><span class="screen-reader-text"><?php _e( 'Configure previous iThemes Security setting', 'better-wp-security' ); ?></span></button>
+												</div>
+												<div class="itsec-module-settings-content-container">
+													<div class="itsec-module-settings-content">
+														<h3 class="itsec-modal-header"><?php echo esc_html( $module->title ); ?></h3>
+														<div class="itsec-module-messages-container"></div>
+														<div class="itsec-module-settings-content-main">
+															<?php $this->get_module_settings( $id, $form, true ); ?>
+														</div>
 													</div>
 												</div>
-											</div>
-											<div class="itsec-list-content-footer hide-if-no-js">
-												<?php if ( $module->can_save ) : ?>
-													<button class="button button-primary align-left itsec-module-settings-save"><?php echo $this->translations['save_settings']; ?></button>
-												<?php endif; ?>
-												<button class="button button-secondary align-left itsec-module-settings-cancel"><?php _e( 'Cancel', 'better-wp-security' ); ?></button>
-											</div>
-											<div class="itsec-modal-content-footer">
-												<?php if ( $module->enabled || $module->always_active || $module->information_only ) : ?>
-													<?php if ( ! $module->always_active && ! $module->information_only ) : ?>
-														<button class="button button-secondary align-right itsec-toggle-activation"><?php echo $this->translations['deactivate']; ?></button>
+												<div class="itsec-list-content-footer hide-if-no-js">
+													<?php if ( $module->can_save ) : ?>
+														<button class="button button-primary align-left itsec-module-settings-save"><?php echo $this->translations['save_settings']; ?></button>
 													<?php endif; ?>
-												<?php else : ?>
-													<button class="button button-primary align-right itsec-toggle-activation"><?php echo $this->translations['activate']; ?></button>
-												<?php endif; ?>
+													<button class="button button-secondary align-left itsec-module-settings-cancel"><?php _e( 'Cancel', 'better-wp-security' ); ?></button>
+												</div>
+												<div class="itsec-modal-content-footer">
+													<?php if ( $module->enabled || $module->always_active || $module->information_only ) : ?>
+														<?php if ( ! $module->always_active && ! $module->information_only ) : ?>
+															<button class="button button-secondary align-right itsec-toggle-activation"><?php echo $this->translations['deactivate']; ?></button>
+														<?php endif; ?>
+													<?php else : ?>
+														<button class="button button-primary align-right itsec-toggle-activation"><?php echo $this->translations['activate']; ?></button>
+													<?php endif; ?>
 
-												<?php if ( $module->can_save ) : ?>
-													<button class="button button-primary align-left itsec-module-settings-save"><?php echo $this->translations['save_settings']; ?></button>
-												<?php else : ?>
-													<button class="button button-primary align-left itsec-close-modal"><?php echo $this->translations['close_settings']; ?></button>
-												<?php endif; ?>
+													<?php if ( $module->can_save ) : ?>
+														<button class="button button-primary align-left itsec-module-settings-save"><?php echo $this->translations['save_settings']; ?></button>
+													<?php else : ?>
+														<button class="button button-primary align-left itsec-close-modal"><?php echo $this->translations['close_settings']; ?></button>
+													<?php endif; ?>
+												</div>
 											</div>
-										</div>
 										<?php endif; ?>
 									</li>
 								<?php endforeach; ?>
