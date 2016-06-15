@@ -119,7 +119,7 @@ function ListeLieux($atts){
 		'edition' => '',
 		'show_local_website' => ''
 	),$atts));
-	$lieux = get_pages(array('post_type'=>'museomix'));
+	$lieux = get_pages(array('post_type'=>'museomix', 'order' => 'asc', 'orderby' => 'title'));
 	if(!count($lieux)){ return ''; }
 	foreach($lieux as $lieu){
 		$id = $lieu->ID;
