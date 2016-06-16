@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the 4.5.x package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2016-06-10 09:47:28+0000\n"
+"PO-Revision-Date: 2016-06-15 09:40:08+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1016,7 +1016,7 @@ msgstr "%1$s est obsolète. Utilisez %2$s à la place."
 #: wp-includes/capabilities.php:73 wp-includes/capabilities.php:134
 #: wp-includes/capabilities.php:193 wp-includes/capabilities.php:230
 msgid "The post type %1$s is not registered, so it may not be reliable to check the capability \"%2$s\" against a post of that type."
-msgstr "Le type de contenu %1$s n&rsquo;est pas enregistré. Il n&rsquo;est donc pas vérifier de manière fiable que la capacité &laquo;&nbsp;%2$s&nbsp;&raquo; correspond à ce type de contenu."
+msgstr "Le type de contenu %1$s n&rsquo;est pas enregistré. Il n&rsquo;est donc pas possible de vérifier de manière fiable que la capacité &laquo;&nbsp;%2$s&nbsp;&raquo; correspond à ce type de contenu."
 
 #: wp-includes/class-wp-customize-manager.php:404
 msgid "You are not allowed to edit theme options on this site."
