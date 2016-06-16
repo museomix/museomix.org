@@ -82,7 +82,7 @@ function SectionDePage($atts){
 	$cl = '';
 	if(trim($atts['titre'])=='') $cl = ' section-2';
 	elseif('sanstitre'==$atts['type']) $cl = ' section-3';
-	$r .= '<section class="section-1'.$cl.(isset($atts['first']) ? ' first ' : '').'" id="'.$id.'">';
+	$r .= '<section class="row-fluid section-1'.$cl.(isset($atts['first']) ? ' first ' : '').'" id="'.$id.'">';
 	if(trim($atts['titre'])>''){
 		$titre2 = preg_replace('/^(\\d+\\.)/',"<span class=\"num-compt\">$1</span>",$atts['titre']);
 		$r .= '<div class="page-header"><h1 class="titre-section">'.$titre2.'</h1></div>';
