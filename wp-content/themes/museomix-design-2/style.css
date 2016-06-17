@@ -1453,3 +1453,6 @@ dl {
 dd {
 	padding-bottom:5px;
 }
+.community_block {
+	background-size:65% auto;background-position:top center;
+}

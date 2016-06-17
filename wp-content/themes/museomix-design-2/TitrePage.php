@@ -83,7 +83,7 @@
 
 			$cat = get_the_category($post->ID);
 			$lieu_id = substr(category_description($cat[0]->term_id),3,2);
-			echo 'lieu='.$lieu_id;
+			//echo 'lieu='.$lieu_id;
 			if(!empty($lieu_id)) {
 				$id = get_field('visuel_page',$lieu_id);
 				$img = wp_get_attachment_image_src($id,"location_thumbnail");
