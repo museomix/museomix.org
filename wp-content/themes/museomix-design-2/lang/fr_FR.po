@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Museomix\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-01 08:30+0200\n"
-"PO-Revision-Date: Fri Jun 17 2016 16:22:09 GMT+0200 (Paris, Madrid (heure "
+"PO-Revision-Date: Fri Jun 17 2016 16:30:46 GMT+0200 (Paris, Madrid (heure "
 "d’été))\n"
 "Last-Translator: samy <fetard@gmail.com>\n"
 "Language-Team: \n"
@@ -23,128 +23,161 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Loco-Target-Locale: fr_FR"
 
-#: Actualites.php:100 functions.php:553
-msgid "En savoir plus"
-msgstr ""
-
-#: Menu.php:82
-msgid "11-13 nov. 2016"
-msgstr ""
-
-#: comments.php:42
-msgid "Comment navigation"
-msgstr ""
-
-#: comments.php:43
-msgid "&larr; Older Comments"
-msgstr ""
-
-#: comments.php:44
-msgid "Newer Comments &rarr;"
-msgstr ""
-
-#: comments.php:49
-msgid "Comments are closed."
-msgstr ""
-
-#: functions.php:417
+#: ../functions.php:95
 msgid "il y a"
 msgstr ""
 
-#: functions.php:419
+#: ../functions.php:97
 msgid "le"
 msgstr ""
 
-#: functions.php:474
+#: ../functions.php:152
 #, php-format
 msgid "<cite class=\"fn\">%s</cite>"
 msgstr ""
 
-#: functions.php:474
+#: ../functions.php:152
 #, php-format
 msgid "[%1$s]"
 msgstr ""
 
-#: functions.php:474
+#: ../functions.php:152
 msgid "(Edit)"
 msgstr ""
 
-#: functions.php:478
+#: ../functions.php:156
 msgid "Your comment is awaiting moderation."
 msgstr ""
 
-#: functions.php:566
+#: ../functions.php:231 ../Actualites.php:100
+msgid "En savoir plus"
+msgstr ""
+
+#: ../functions.php:244
 msgid "Tous les articles"
 msgstr ""
 
-#: MenuPage.php:13
-msgid "Prototypes"
-msgstr "Prototypes"
+#: ../functions.php:566
+msgid "Presentation"
+msgstr ""
 
-#: MenuPage.php:14
-msgid "Museum"
-msgstr "Musée"
+#: ../comments.php:25
+#, php-format
+msgctxt "comments title"
+msgid "The comment (1) ;"
+msgid_plural "The comments (%1$s)"
+msgstr[0] ""
+msgstr[1] ""
 
-#: MenuPage.php:15
-msgid "Playground"
-msgstr "Terrains de jeux"
+#: ../comments.php:26
+#, php-format
+msgctxt "comments title"
+msgid "Les commentaire (1) ;"
+msgid_plural "Les commentaires (%1$s)"
+msgstr[0] ""
+msgstr[1] ""
 
-#: MenuPage.php:16 TitrePage.php:17
-msgid "News"
-msgstr "Actualités"
+#: ../comments.php:42
+msgid "Comment navigation"
+msgstr ""
 
-#: MenuPage.php:18
-msgid "Partners"
-msgstr "Partenaires"
+#: ../comments.php:43
+msgid "&larr; Older Comments"
+msgstr ""
 
-#: MenuPage.php:19 MenuPage.php:42
-msgid "Team"
-msgstr "Equipe"
+#: ../comments.php:44
+msgid "Newer Comments &rarr;"
+msgstr ""
 
-#: MenuPage.php:20
-msgid "Community"
-msgstr "Communauté"
+#: ../comments.php:49
+msgid "Comments are closed."
+msgstr ""
 
-#: MenuPage.php:21
-msgid "Gallery"
-msgstr "Galerie"
+#: ../Menu.php:82
+msgid "11-13 nov. 2016"
+msgstr ""
 
-#: MenuPage.php:37
-msgid "User case"
-msgstr "Scénario utilisateur"
+#. Name of the template
+msgid "Full width page"
+msgstr "Page pleine largeur"
 
-#: MenuPage.php:38
-msgid "Goals"
-msgstr "Objectifs"
+#. Name of the template
+msgid "Lieux/Location page"
+msgstr "Page Lieux"
 
-#: MenuPage.php:39
-msgid "Tools & techs"
-msgstr "Outils & techniques"
+#. Name of the theme
+msgid "Museomix OLD"
+msgstr ""
 
-#: MenuPage.php:40
-msgid "Things learned..."
-msgstr "Retour d'expérience"
-
-#: MenuPage.php:41
-msgid "FAQ"
-msgstr "FAQ"
-
-#: functions.php:649
+#: ../functions.php:327
 msgid "Museum side"
 msgstr "Côté musée"
 
-#: functions.php:671
+#: ../functions.php:349
 msgid "Community side"
 msgstr "Côté communauté"
 
-#: functions.php:718 single-community.php:27
+#: ../functions.php:396 ../single-community.php:27
 msgid "Website"
 msgstr "Site web"
 
-#: single-community.php:32
+#: ../functions.php:545 ../MenuPage.php:37
+msgid "User case"
+msgstr "Scénario utilisateur"
+
+#: ../functions.php:546 ../MenuPage.php:38
+msgid "Goals"
+msgstr "Objectifs"
+
+#: ../functions.php:547 ../MenuPage.php:39
+msgid "Tools & techs"
+msgstr "Outils & techniques"
+
+#: ../functions.php:548 ../MenuPage.php:40
+msgid "Things learned..."
+msgstr "Retour d'expérience"
+
+#: ../functions.php:549 ../MenuPage.php:41
+msgid "FAQ"
+msgstr "FAQ"
+
+#: ../functions.php:550 ../functions.php:569 ../functions.php:570 ../MenuPage.php:
+#: 19 ../MenuPage.php:42
+msgid "Team"
+msgstr "Equipe"
+
+#: ../functions.php:565 ../MenuPage.php:16 ../TitrePage.php:17
+msgid "News"
+msgstr "Actualités"
+
+#: ../functions.php:567 ../MenuPage.php:18
+msgid "Partners"
+msgstr "Partenaires"
+
+#: ../functions.php:568 ../MenuPage.php:13
+msgid "Prototypes"
+msgstr "Prototypes"
+
+#: ../MenuPage.php:14
+msgid "Museum"
+msgstr "Musée"
+
+#: ../MenuPage.php:15
+msgid "Playground"
+msgstr "Terrains de jeux"
+
+#: ../MenuPage.php:20
+msgid "Community"
+msgstr "Communauté"
+
+#: ../MenuPage.php:21
+msgid "Gallery"
+msgstr "Galerie"
+
+#: ../single-community.php:32
 msgid "Find them on:"
 msgstr "Comment nous suivre :"
 
-#: single-community.php:44
+#: ../single-community.php:44
 msgid "Locations:"
 msgstr "Musées remixés :"

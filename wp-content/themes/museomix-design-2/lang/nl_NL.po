@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Museomix\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-01 08:30+0200\n"
-"PO-Revision-Date: Fri Jun 17 2016 16:24:23 GMT+0200 (Paris, Madrid (heure "
+"PO-Revision-Date: Fri Jun 17 2016 16:30:09 GMT+0200 (Paris, Madrid (heure "
 "d’été))\n"
 "Last-Translator: samy <fetard@gmail.com>\n"
 "Language-Team: \n"
@@ -162,10 +162,6 @@ msgstr ""
 msgid "Museum"
 msgstr ""
 
-#: ../MenuPage.php:15
-msgid "Playground"
-msgstr "Speelvelden"
-
 #: ../MenuPage.php:20
 msgid "Community"
 msgstr ""
@@ -181,3 +177,7 @@ msgstr ""
 #: ../single-community.php:44
 msgid "Locations:"
 msgstr ""
+
+#: ../MenuPage.php:15
+msgid "Playground"
+msgstr "Speelvelden"
