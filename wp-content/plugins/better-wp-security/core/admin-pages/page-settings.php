@@ -2,7 +2,7 @@
 
 
 final class ITSEC_Settings_Page {
-	private $version = 1.2;
+	private $version = 1.3;
 
 	private $self_url = '';
 	private $modules = array();
@@ -69,10 +69,19 @@ final class ITSEC_Settings_Page {
 		}
 
 		$vars = array(
-			'ajax_action'  => 'itsec_settings_page',
-			'ajax_nonce'   => wp_create_nonce( 'itsec-settings-nonce' ),
-			'translations' => $this->translations,
+			'ajax_action'         => 'itsec_settings_page',
+			'ajax_nonce'          => wp_create_nonce( 'itsec-settings-nonce' ),
+			'show_security_check' => ITSEC_Modules::get_setting( 'global', 'show_security_check' ),
+			'translations'        => $this->translations,
 		);
+
+		if ( $vars['show_security_check'] ) {
+			ITSEC_Modules::set_setting( 'global', 'show_security_check', false );
+
+			if ( ! empty( $_GET['module'] ) && 'security-check' === $_GET['module'] ) {
+				$vars['show_security_check'] = false;
+			}
+		}
 
 		wp_enqueue_script( 'itsec-settings-page-script', plugins_url( 'js/script.js', __FILE__ ), array(), $this->version, true );
 		wp_localize_script( 'itsec-settings-page-script', 'itsec_page', $vars );

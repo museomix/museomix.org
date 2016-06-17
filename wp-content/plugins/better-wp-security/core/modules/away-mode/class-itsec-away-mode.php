@@ -13,7 +13,7 @@ final class ITSEC_Away_Mode {
 		add_filter( 'itsec_sync_modules', array( $this, 'register_sync' ) );
 
 	}
-	
+
 	/**
 	 * Check if away mode is active
 	 *
@@ -26,42 +26,47 @@ final class ITSEC_Away_Mode {
 	 */
 	public static function is_active( $get_details = false ) {
 		require_once( dirname( __FILE__ ) . '/utilities.php' );
-		
+
 		$settings = ITSEC_Modules::get_settings( 'away-mode' );
-		
+
 		if ( 'daily' === $settings['type'] ) {
 			$details = ITSEC_Away_Mode_Utilities::is_current_time_active( $settings['start_time'], $settings['end_time'], true );
 		} else {
 			$details = ITSEC_Away_Mode_Utilities::is_current_timestamp_active( $settings['start'], $settings['end'], true );
 		}
-		
-		
+
+		$details['has_active_file'] = ITSEC_Away_Mode_Utilities::has_active_file();
 		$details['override_type'] = $settings['override_type'];
 		$details['override_end'] = $settings['override_end'];
-		
+
 		if ( empty( $settings['override_type'] ) || ( ITSEC_Core::get_current_time() > $settings['override_end'] ) ) {
 			$details['override_active'] = false;
 		} else {
 			$details['override_active'] = true;
-			
+
 			if ( 'activate' === $details['override_type'] ) {
 				$details['active'] = true;
 			} else {
 				$details['active'] = false;
 			}
 		}
-		
-		
+
+		if ( ! $details['has_active_file'] ) {
+			$details['active'] = false;
+			$details['remaining'] = false;
+			$details['next'] = false;
+			$details['length'] = false;
+		}
+
 		if ( ! isset( $details['error'] ) ) {
 			$details['error'] = false;
 		}
-		
-		
-		
+
+
 		if ( $get_details ) {
 			return $details;
 		}
-		
+
 		return $details['active'];
 	}
 

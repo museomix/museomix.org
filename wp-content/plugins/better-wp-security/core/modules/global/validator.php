@@ -27,7 +27,7 @@ class ITSEC_Global_Validator extends ITSEC_Validator {
 		}
 
 
-		$this->set_previous_if_empty( array( 'did_upgrade', 'log_info', 'show_new_dashboard_notice' ) );
+		$this->set_previous_if_empty( array( 'did_upgrade', 'log_info', 'show_new_dashboard_notice', 'show_security_check' ) );
 		$this->set_default_if_empty( array( 'log_location', 'nginx_file' ) );
 
 

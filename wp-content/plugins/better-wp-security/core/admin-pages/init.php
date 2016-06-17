@@ -28,6 +28,7 @@ final class ITSEC_Admin_Page_Loader {
 
 		add_menu_page( __( 'Settings', 'better-wp-security' ), __( 'Security', 'better-wp-security' ), $capability, 'itsec', array( $this, 'show_page' ) );
 		$page_refs[] = add_submenu_page( 'itsec', __( 'iThemes Security Settings', 'better-wp-security' ), __( 'Settings', 'better-wp-security' ), $capability, 'itsec', array( $this, 'show_page' ) );
+		$page_refs[] = add_submenu_page( 'itsec', '', __( 'Security Check', 'better-wp-security' ), $capability, 'itsec-security-check', array( $this, 'show_page' ) );
 		$page_refs[] = add_submenu_page( 'itsec', __( 'iThemes Security Logs', 'better-wp-security' ), __( 'Logs', 'better-wp-security' ), $capability, 'itsec-logs', array( $this, 'show_page' ) );
 
 		if ( ! ITSEC_Core::is_pro() ) {

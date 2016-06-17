@@ -415,6 +415,26 @@ var itsecSettingsPage = {
 		itsecSettingsPage.sendAJAXRequest( module, method, {}, itsecSettingsPage.toggleModuleActivationCallback );
 	},
 
+	setModuleToActive: function( module ) {
+		var args = {
+			'module': module,
+			'method': 'activate',
+			'errors': []
+		};
+
+		itsecSettingsPage.toggleModuleActivationCallback( args );
+	},
+
+	setModuleToInactive: function( module ) {
+		var args = {
+			'module': module,
+			'method': 'deactivate',
+			'errors': []
+		};
+
+		itsecSettingsPage.toggleModuleActivationCallback( args );
+	},
+
 	toggleModuleActivationCallback: function( results ) {
 		var module = results.module;
 		var method = results.method;
@@ -659,6 +679,12 @@ var itsecSettingsPage = {
 
 jQuery(document).ready(function() {
 	itsecSettingsPage.init();
+
+	if ( itsec_page.show_security_check ) {
+		jQuery( '.itsec-settings-view-toggle a.itsec-grid' ).trigger( 'click' );
+		jQuery( '#itsec-module-card-security-check .itsec-toggle-settings' ).trigger( 'click' );
+	}
+
 
 
 	jQuery( '.dialog' ).click( function ( event ) {

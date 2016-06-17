@@ -39,7 +39,7 @@ function itsec_network_brute_force_add_notice() {
 add_action( 'admin_init', 'itsec_network_brute_force_add_notice' );
 
 function itsec_network_brute_force_show_notice() {
-	echo '<div class="updated itsec-notice"><span class="it-icon-itsec"></span>'
+	echo '<div id="itsec-notice-network-brute-force" class="updated itsec-notice"><span class="it-icon-itsec"></span>'
 		 . __( 'New! Take your site security to the next level by activating iThemes Brute Force Network Protection.', 'better-wp-security' )
 		 . '<a class="itsec-notice-button" href="' . esc_url( wp_nonce_url( add_query_arg( array( 'module' => 'network-brute-force', 'enable' => 'network-brute-force' ), ITSEC_Core::get_settings_page_url() ), 'itsec-enable-network-brute-force', 'itsec-enable-nonce' ) ) . '" onclick="document.location.href=\'?itsec_no_api_nag=off&_wpnonce=' . wp_create_nonce( 'itsec-nag' ) . '\';">' . __( 'Get Free API Key', 'better-wp-security' ) . '</a>'
 		 . '<button class="itsec-notice-hide" data-nonce="' . wp_create_nonce( 'dismiss-brute-force-network-notice' ) . '" data-source="brute_force_network">&times;</button>'

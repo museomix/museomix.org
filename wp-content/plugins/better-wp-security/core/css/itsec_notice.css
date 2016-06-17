@@ -44,16 +44,12 @@
 	color: #0071bc;
 	font-weight: bold;
 	text-decoration: none;
+	position: inherit;
 }
 
 .itsec_notice_text {
 	display: block;
 	margin: 10px 0 10px 0;
-}
-
-.itsec-notice .itsec-notice-button:hover {
-	background: #eff7fd;
-	cursor: pointer;
 }
 
 .itsec-notice .itsec-notice-hide {
@@ -77,6 +73,12 @@
 	border: 1px solid #79afd3;
 	border-bottom-width: 2px;
 	border-radius: 3px;
+	cursor: pointer;
+}
+
+/* Specified after '.itsec-notice .itsec-notice-hide:hover' for preference on buttons with both .itsec-notice-hide and .itsec-notice-button */
+.itsec-notice .itsec-notice-button:hover {
+	background: #eff7fd;
 	cursor: pointer;
 }
 

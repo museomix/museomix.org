@@ -3,7 +3,7 @@ Contributors: ithemes, chrisjean, aaroncampbell, gerroald, mattdanner
 Tags: security, security plugin, malware, hack, secure, block, SSL, admin, htaccess, lockdown, login, protect, protection, anti virus, attack, injection, login security, maintenance, permissions, prevention, authentication, administration, password, brute force, ban, permissions, bots, user agents, xml rpc, security log
 Requires at least: 4.1
 Tested up to: 4.5.2
-Stable tag: 5.5.0
+Stable tag: 5.6.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -187,6 +187,11 @@ Free support may be available with the help of the community in the <a href="htt
 5. Free malware scan powered by Sucuri SiteCheck.
 
 == Changelog ==
+
+= 5.6.0 =
+ * New Feature: Added a new Security Check section on the settings page. This new feature adds a tool to quickly ensure that the recommended features are enabled and the recommended settings are used.
+ * Bug Fix: Fixed the ability to remove the itsec_away.confg file in order to disable Away Mode.
+ * Enhancement: The "Ban Lists" setting of Banned Users is now enabled by default.
 
 = 5.5.0 =
  * New Feature: Added a new File Permissions section on the settings page to bring back the directory and file permissions listing feature found on the Security > Dashboard page of older plugin versions.
@@ -1554,6 +1559,9 @@ This release is a complete rewrite from the ground up. Special thanks to Cory Mi
 
 == Upgrade Notice ==
 
+= 5.6.0 =
+Version 5.6.0 contains a new feature to quickly apply recommended settings. It is recommended for all users.
+
 = 5.5.0 =
 Version 5.5.0 contains important bug fixes, a new File Permissions feature, and numerous enhancements. It is recommended for all users.
 
@@ -1586,78 +1594,3 @@ Version 5.3.5 contains minor bugfixes and enhancements and is recommended for al
 
 = 5.3.4 =
 Version 5.3.4 contains minor bugfixes and enhancements and is recommended for all users.
-
-= 4.6.8 =
-Version 4.6.8 contains minor bugfixes and enhancements and is recommended for all users.
-
-= 4.6.6 =
-Version 4.6.6 contains minor bugfixes and is recommended for all users.
-
-= 4.6.2 =
-Version 4.6.2 contains new features and enhancements and is recommended for all users.
-
-= 4.5.10 =
-Version 4.5.10 contains minor bugfixes and is recommended for all users.
-
-= 4.5.8 =
-Version 4.5.8 contains minor bugfixes and enhancements and is recommended for all users.
-
-= 4.5.6 =
-Version 4.5.6 contains a minor bugfix and is recommended for all users.
-
-= 4.5.2 =
-Version 4.5.2 is a feature and bug-fix release addressing numerous minor bugs affecting some users. It is recommended for all users.
-
-= 4.4.23 =
-Version 4.4.23 contains a security update and is recommended for all users.
-
-= 4.4.21 =
-Version 4.4.21 contains a fix to an issue that affects daylight savings time as well as other minor bug fixes. It is recommended for all users.
-
-= 4.4.20 =
-Version 4.4.20 contains a minor bugfix and is recommended for all users.
-
-= 4.4.18 =
-Version 4.4.18 contains a minor bugfix and is recommended for all users.
-
-= 4.4.16 =
-Version 4.4.16 is a bug-fix release addressing numerous minor bugs affecting some users. It is recommended for all users.
-
-= 4.4.15 =
-Version 4.4.15 is a bug-fix release addressing numerous minor bugs affecting some users. It is recommended for all users.
-
-= 4.4.13 =
-Version 4.4.13 is a bug-fix release addressing numerous minor bugs affecting some users. It is recommended for all users.
-
-= 4.4.11 =
-Version 4.4.11 is a bug-fix release addressing numerous minor bugs affecting some users. It is recommended for all users.
-
-= 4.4.9 =
-Version 4.4.9 is a bugfix release for the free version and contains new features for pro users. It is a recommended update for all users.
-
-= 4.4.6 =
-Version 4.4.6 adds new features, enhancements, bug fixes and more. It is recommended for all users.
-
-= 4.3.11 =
-Version 4.3.11 contains a security fix and should be installed by all users.
-
-= 4.3.9 =
-Version 4.3.9 is a bug-fix release addressing numerous minor bugs affecting some users. It is recommended for all users.
-
-= 4.3.7 =
-Version 4.3.7 adds malware scheduling and other features as well as numerous minor bugfixes and enhancements. It is recommended for all users.
-
-= 4.3.3 =
-Version 4.3.3 adds malware scheduling and other features as well as numerous minor bugfixes and enhancements. It is recommended for all users.
-
-= 4.2.15 =
-Version 4.2.15 delivers fixes for minor bugs experienced by some users.
-
-= 4.2.13 =
-Version 4.2.13 delivers fixes for minor bugs experienced by some users.
-
-= 4.2.8 =
-Version 4.2.8 delivers fixes for minor bugs and some enhancements including the ability to whitelist file types in 404 detection.
-
-= 4.2.6 =
-Better WP Security is now iThemes Security with new features and a greatly improved code base. We recommend disabling Better WP Security before upgrading to 4.2.6 if you are not already on 4.0 or greater.

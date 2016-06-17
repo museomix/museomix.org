@@ -381,13 +381,13 @@ body.itsec-modal-open {
  * List View
  */
 .list .itsec-module-card {
-	cursor: pointer;
 	max-width: 100%;
 	padding: 0;
 	float: none;
 	margin-bottom: 1px;
 }
 .list .itsec-module-card-content {
+	cursor: pointer;
 	padding: .5em .5em .5em .75em;
 }
 .list .itsec-module-card-content:after {
@@ -561,4 +561,61 @@ body.itsec-modal-open {
 	border-left: 4px solid #ca8383;
 	background: #ffd4d4;
 	color: #9c3e3e;
+}
+
+/*
+ * Security Check
+ */
+
+.itsec-security-check-list {
+	font-size: 13px;
+	margin: 0 0 2em 1em;
+}
+
+.itsec-security-check-list p {
+	margin: 0;
+}
+
+.itsec-security-check-container {
+	padding: 0 10px 0 50px;
+	border: 1px solid #ddd;
+	border-left-width: 4px;
+	margin: 0 0 8px;
+	position: relative;
+}
+
+.itsec-security-check-container:before {
+	font-family: 'Dashicons';
+	font-size: 1.75em;
+	position: absolute;
+	left: 7px;
+	top: 50%;
+	margin: -9px 0 0 0;
+}
+
+.itsec-security-check-container-complete:before {
+	content: "\f147";
+	color: #46b450;
+}
+
+.itsec-security-check-container-incomplete:before {
+	content: "\f534";
+	color: #f2dd28;
+}
+
+.itsec-security-check-container-error:before {
+	content: "\f534";
+	color: #dc3232;
+}
+
+.itsec-security-check-container-complete {
+	border-left-color: #46b450;
+}
+
+.itsec-security-check-container-incomplete {
+	border-left-color: #f2dd28;
+}
+
+.itsec-security-check-container-error {
+	border-left-color: #dc3232;
 }

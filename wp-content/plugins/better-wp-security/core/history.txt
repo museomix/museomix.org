@@ -404,3 +404,7 @@
 	Enhancement: The WordPress Tweaks feature now uses the "Disable File Editor" setting by default on new installations.
 	Enhancement: The WordPress Tweaks feature now sets the "Multiple Authentication Attempts per XML-RPC Request" setting to "Block" by default on new installations.
 	Enhancement: Improved the styling of notices.
+2.5.0 - 2016-06-15 - Chris Jean & Aaron D. Campbell
+	New Feature: Added a new Security Check section on the settings page. This new feature adds a tool to quickly ensure that the recommended features are enabled and the recommended settings are used.
+	Bug Fix: Fixed the ability to remove the itsec_away.confg file in order to disable Away Mode.
+	Enhancement: The "Ban Lists" setting of Banned Users is now enabled by default.

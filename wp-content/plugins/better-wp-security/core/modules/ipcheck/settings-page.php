@@ -1,38 +1,38 @@
 <?php
 
 final class ITSEC_Network_Brute_Force_Settings_Page extends ITSEC_Module_Settings_Page {
-	protected $script_version = 1;
-	
-	
+	protected $script_version = 2;
+
+
 	public function __construct() {
 		$this->id = 'network-brute-force';
 		$this->title = __( 'Network Brute Force Protection', 'better-wp-security' );
 		$this->description = __( 'Join a network of sites that reports and protects against bad actors on the internet.', 'better-wp-security' );
 		$this->type = 'recommended';
-		
+
 		parent::__construct();
 	}
-	
+
 	public function enqueue_scripts_and_styles() {
 		$settings = ITSEC_Modules::get_settings( $this->id );
-		
+
 		$vars = array(
 			'resetting_button_text' => __( 'Resetting...', 'better-wp-security' ),
 		);
-		
+
 		wp_enqueue_script( 'itsec-network-brute-force-settings-page-script', plugins_url( 'js/settings-page.js', __FILE__ ), array( 'jquery' ), $this->script_version, true );
 		wp_localize_script( 'itsec-network-brute-force-settings-page-script', 'itsec_network_brute_force', $vars );
 	}
-	
+
 	public function handle_ajax_request( $data ) {
 		if ( 'reset-api-key' === $data['method'] ) {
 			$defaults = ITSEC_Modules::get_defaults( $this->id );
 			$results = ITSEC_Modules::set_settings( $this->id, $defaults );
-			
+
 			ITSEC_Response::set_response( $results['saved'] );
 			ITSEC_Response::add_errors( $results['errors'] );
 			ITSEC_Response::add_messages( $results['messages'] );
-			
+
 			if ( $results['saved'] ) {
 				ITSEC_Response::reload_module( $this->id );
 			} else if ( empty( $results['errors'] ) ) {
@@ -40,18 +40,18 @@ final class ITSEC_Network_Brute_Force_Settings_Page extends ITSEC_Module_Setting
 			}
 		}
 	}
-	
+
 	protected function render_description( $form ) {
-		
+
 ?>
 	<p><?php _e( 'If one had unlimited time and wanted to try an unlimited number of password combinations to get into your site they eventually would, right? This method of attack, known as a brute force attack, is something that WordPress is acutely susceptible to as, by default, the system doesn\'t care how many attempts a user makes to login. It will always let you try again. Enabling login limits will ban the host user from attempting to login again after the specified bad login threshold has been reached.', 'better-wp-security' ); ?></p>
 <?php
-		
+
 	}
-	
+
 	protected function render_settings( $form ) {
 		$settings = $form->get_options();
-		
+
 ?>
 	<p>
 		<strong><?php _e( 'Network vs Local Brute Force Protection', 'better-wp-security' ); ?></strong>
@@ -96,7 +96,7 @@ final class ITSEC_Network_Brute_Force_Settings_Page extends ITSEC_Module_Setting
 		</table>
 	<?php endif; ?>
 <?php
-		
+
 	}
 }
 

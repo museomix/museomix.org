@@ -213,6 +213,7 @@ if ( ! class_exists( 'ITSEC_Core' ) ) {
 		public function register_modules() {
 			$path = dirname( __FILE__ );
 
+			include( "$path/modules/security-check/init.php" );
 			include( "$path/modules/global/init.php" );
 			include( "$path/modules/404-detection/init.php" );
 			include( "$path/modules/away-mode/init.php" );
@@ -325,6 +326,15 @@ if ( ! class_exists( 'ITSEC_Core' ) ) {
 					'id'     => 'itsec_admin_bar_settings',
 					'title'  => __( 'Settings', 'better-wp-security' ),
 					'href'   => self::get_settings_page_url(),
+					'parent' => 'itsec_admin_bar_menu',
+				)
+			);
+
+			$wp_admin_bar->add_menu(
+				array(
+					'id'     => 'itsec_admin_bar_security_check',
+					'title'  => __( 'Security Check', 'better-wp-security' ),
+					'href'   => self::get_security_check_page_url(),
 					'parent' => 'itsec_admin_bar_menu',
 				)
 			);
@@ -517,7 +527,7 @@ if ( ! class_exists( 'ITSEC_Core' ) ) {
 			$self = self::get_instance();
 
 			if ( ! $self->notices_loaded ) {
-				wp_enqueue_style( 'itsec-notice', plugins_url( 'core/css/itsec_notice.css', ITSEC_Core::get_core_dir() ), array(), '20160512' );
+				wp_enqueue_style( 'itsec-notice', plugins_url( 'core/css/itsec_notice.css', ITSEC_Core::get_core_dir() ), array(), '20160609' );
 				wp_enqueue_script( 'itsec-notice', plugins_url( 'core/js/itsec-notice.js', ITSEC_Core::get_core_dir() ), array(), '20160512' );
 
 				$self->notices_loaded = true;
@@ -604,6 +614,10 @@ if ( ! class_exists( 'ITSEC_Core' ) ) {
 			$url = apply_filters( 'itsec-filter-backup-creation-page-url', $url );
 
 			return $url;
+		}
+
+		public static function get_security_check_page_url() {
+			return admin_url( 'admin.php?page=itsec&module=security-check' );
 		}
 
 		public static function set_interactive( $interactive ) {

@@ -98,9 +98,13 @@ final class ITSEC_Response {
 		$self = self::get_instance();
 
 		if ( is_null( $args ) ) {
-			$self->js_function_calls[] = array( $js_function );
+			$call = array( $js_function );
 		} else {
-			$self->js_function_calls[] = array( $js_function, $args );
+			$call = array( $js_function, $args );
+		}
+
+		if ( ! in_array( $call, $self->js_function_calls ) ) {
+			$self->js_function_calls[] = $call;
 		}
 	}
 

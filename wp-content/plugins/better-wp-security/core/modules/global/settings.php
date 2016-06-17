@@ -37,6 +37,7 @@ final class ITSEC_Global_Settings_New extends ITSEC_Settings {
 			'hide_admin_bar'            => false,
 			'show_error_codes'          => false,
 			'show_new_dashboard_notice' => true,
+			'show_security_check'       => true,
 		);
 	}
 
