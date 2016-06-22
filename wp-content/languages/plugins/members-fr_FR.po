@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2016-05-09 16:09:22+0000\n"
+"PO-Revision-Date: 2016-06-21 00:38:30+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -12,11 +12,11 @@ msgstr ""
 
 #: inc/class-widget-users.php:192
 msgid "Post Count"
-msgstr "Nombre d&rsquo;article"
+msgstr "Nombre d&rsquo;articles"
 
 #: inc/class-widget-users.php:193
 msgid "Registered"
-msgstr "Inscription"
+msgstr "Enregistré"
 
 #: inc/class-widget-users.php:194
 msgid "URL"
@@ -24,7 +24,7 @@ msgstr "URL"
 
 #: inc/class-widget-users.php:195
 msgid "Login"
-msgstr "Connexion"
+msgstr "Se connecter"
 
 #: inc/class-widget-users.php:211
 msgid "Order By:"
@@ -32,7 +32,7 @@ msgstr "Trier par&nbsp;:"
 
 #: inc/class-widget-users.php:219
 msgid "Order:"
-msgstr "Ordre&nbsp;:"
+msgstr "Ordre :"
 
 #: inc/class-widget-users.php:235
 msgid "Limit:"
@@ -64,7 +64,7 @@ msgstr "Valeur méta&nbsp;:"
 
 #: inc/functions-options.php:116
 msgid "Sorry, but you do not have permission to view this content."
-msgstr "Vous n&rsquo;avez pas l&rsquo;autorisation d&rsquo;afficher ce contenu.."
+msgstr "Désolé, vous n'êtes pas autorisé à voir ce contenu."
 
 #: inc/functions-options.php:117
 msgid "You must be logged into the site to view this content."
@@ -112,7 +112,7 @@ msgstr "Modifier les capacités&nbsp;: %s"
 msgid "Roles"
 msgstr "Rôles"
 
-#: admin/class-manage-roles.php:87 admin/class-role-edit.php:257
+#: admin/class-manage-roles.php:87 admin/class-role-edit.php:284
 msgid "Edit Role"
 msgstr "Modifier le rôle"
 
@@ -139,12 +139,12 @@ msgstr "Message affiché aux utilisateurs qui n’ont pas l’autorisation de vo
 
 #: admin/class-meta-box-custom-cap.php:71 admin/functions-help.php:94
 msgid "Custom Capability"
-msgstr "Capacités personnalisées"
+msgstr "Capacité personnalisée"
 
-#: admin/class-meta-box-custom-cap.php:88 admin/class-role-edit.php:260
+#: admin/class-meta-box-custom-cap.php:88 admin/class-role-edit.php:287
 #: admin/class-roles.php:171
 msgid "Add New"
-msgstr "Ajouter"
+msgstr "Ajouter Nouveau"
 
 #: admin/class-meta-box-publish-role.php:65 admin/class-roles.php:66
 #: inc/functions-admin-bar.php:35
@@ -170,7 +170,7 @@ msgstr "Supprimer"
 
 #: admin/class-meta-box-publish-role.php:128
 msgid "Update"
-msgstr "Mettre à jour"
+msgstr "Mise à jour"
 
 #: admin/class-meta-box-publish-role.php:128
 msgid "Add Role"
@@ -184,31 +184,31 @@ msgstr "Oui, mon ami&nbsp;!"
 msgid "The requested role to edit does not exist."
 msgstr "Le rôle que vous voulez modifier n'existe pas."
 
-#: admin/class-role-edit.php:189
+#: admin/class-role-edit.php:216
 msgid "%s role updated."
 msgstr "Rôle %s mis à jour."
 
-#: admin/class-role-edit.php:193
+#: admin/class-role-edit.php:220
 msgid "The %s role is not editable. This means that it is most likely added via another plugin for a special use or that you do not have permission to edit it."
 msgstr "Le rôle %s n'est pas modifiable. Cela signifie qu'il a sans doute été ajouté par une autre extension ou que vous n&rsquo;avez pas l'autorisation de le modifier."
 
-#: admin/class-role-edit.php:197 admin/class-role-new.php:224
+#: admin/class-role-edit.php:224 admin/class-role-new.php:224
 msgid "The %s role has been created."
 msgstr "Le rôle %s a été créé."
 
-#: admin/class-role-edit.php:279 admin/class-role-new.php:325
+#: admin/class-role-edit.php:306 admin/class-role-new.php:325
 #: admin/class-roles.php:65 admin/functions-help.php:62
 msgid "Role Name"
 msgstr "Nom du rôle"
 
-#: admin/class-role-edit.php:285 admin/class-role-new.php:331
+#: admin/class-role-edit.php:312 admin/class-role-new.php:331
 #: inc/class-widget-users.php:227
 msgid "Role:"
 msgstr "Rôle&nbsp;:"
 
 #: admin/class-role-list-table.php:229
 msgid "Default Role"
-msgstr " Rôle par défaut"
+msgstr "Rôle par défaut"
 
 #: admin/class-role-list-table.php:233
 msgid "Your Role"
@@ -373,7 +373,7 @@ msgstr "Gestionnaire de rôles"
 
 #: admin/class-settings.php:133
 msgid "Capabilities"
-msgstr "Permissions"
+msgstr "Capacités"
 
 #: admin/class-settings.php:134
 msgid "Multiple User Roles"
@@ -437,7 +437,7 @@ msgstr "Activer le widget utilisateurs."
 
 #: admin/class-settings.php:313
 msgid "Redirect all logged-out users to the login page before allowing them to view the site."
-msgstr "Rediriger tous les utilisateurs déconnectés vers la page de connexion avant de leur permettre de visualiser le site."
+msgstr "Rediriger tous les utilisateurs déconnectés vers la page de connexion avant de leur permettre d'accéder au site."
 
 #: admin/class-settings.php:328
 msgid "Show error message for feed items."
@@ -445,7 +445,7 @@ msgstr "Afficher le message d’erreur pour les éléments du flux."
 
 #: admin/class-settings.php:367
 msgid "Update Settings"
-msgstr "Mise à jour des réglages"
+msgstr "Mettre à jour les réglages."
 
 #: admin/class-settings.php:389
 msgid "Role and Capabilities"
@@ -457,11 +457,11 @@ msgstr "Documentation"
 
 #: admin/class-settings.php:423 admin/functions-help.php:24
 msgid "Support Forums"
-msgstr "Forums d&rsquo;entraide"
+msgstr "Forums de support"
 
 #: admin/class-settings.php:424
 msgid "Users, Roles, and Capabilities"
-msgstr "Utilisateurs, Rôles et Capacités"
+msgstr "Utilisateurs, rôles et capacités"
 
 #: admin/class-settings.php:440
 msgid "The role manager allows you to manage roles on your site by giving you the ability to create, edit, and delete any role. Note that changes to roles do not change settings for the Members plugin. You are literally changing data in your WordPress database. This plugin feature merely provides an interface for you to make these changes."
@@ -469,7 +469,7 @@ msgstr "Le gestionnaire de rôles vous permet de créer, modifier et effacer n'i
 
 #: admin/class-settings.php:444
 msgid "Tick the checkbox for denied capabilities to always take precedence over granted capabilities when there is a conflict. This is only relevant when using multiple roles per user."
-msgstr "Cocher la case afin que les capacités refusées soient toujours prioritaires sur les capacités autorisées en cas de conflit. Ceci n&rsquo;est valable que dans le cas où l&rsquo;utilisateur a des rôles multiples."
+msgstr "Cocher la case afin que les capacités refusées soient toujours prioritaires sur les capacités autorisées en cas de conflit. Ceci n'est valable que dans le cas où l'utilisateur a des rôles multiples."
 
 #: admin/class-settings.php:448
 msgid "The multiple user roles feature allows you to assign more than one role to each user from the edit user screen."
@@ -509,7 +509,7 @@ msgstr "Tous"
 
 #: admin/functions-cap-groups.php:116
 msgid "General"
-msgstr "Réglages généraux"
+msgstr "Général"
 
 #: admin/functions-cap-groups.php:165
 msgid "Taxonomies"
@@ -541,7 +541,7 @@ msgstr "Cet écran vous permet de modifier un rôle et ses capacités."
 
 #: admin/functions-help.php:123
 msgid "The role name field allows you to enter a human-readable name for your role."
-msgstr "Le champs Nom vous permet de saisir un nom lisible par l&rsquo;utilisateur pour votre rôle."
+msgstr "Le champs Nom vous permet de saisir un nom lisible par l'utilisateur pour votre rôle."
 
 #: admin/functions-help.php:127
 msgid "The machine-readable version of the role appears below the name field, which you can edit. This can only have lowercase letters, numbers, or underscores."
@@ -665,15 +665,15 @@ msgstr "Se souvenir de moi"
 
 #: inc/class-widget-login.php:71
 msgid "Please log into the site."
-msgstr "Merci de se connecter au site."
+msgstr "Merci de vous connecter."
 
 #: inc/class-widget-login.php:72
 msgid "You are currently logged in."
-msgstr "Vous êtes actuelement connecté(e)."
+msgstr "Vous êtes actuellement connecté(e)."
 
 #: inc/class-widget-login.php:207 inc/class-widget-users.php:207
 msgid "Title:"
-msgstr "Titre&nbsp;:"
+msgstr "Titre :"
 
 #: inc/class-widget-login.php:211
 msgid "Username Label:"
@@ -697,7 +697,7 @@ msgstr "Valeur pour l'identifiant&nbsp;:"
 
 #: inc/class-widget-login.php:235
 msgid "Username Field ID:"
-msgstr "ID pour l&rsquo;identifiant&nbsp;:"
+msgstr "ID du champ Identifiant&nbsp;:"
 
 #: inc/class-widget-login.php:239
 msgid "Remember Me Field ID:"
@@ -729,7 +729,7 @@ msgstr "Texte de déconnexion :"
 
 #: inc/class-widget-login.php:279
 msgid "Logged in text:"
-msgstr "Texte de connexion :"
+msgstr "Texte de connexion&nbsp;:"
 
 #: inc/class-widget-users.php:42
 msgid "Provides the ability to list the users of the site."
@@ -753,7 +753,7 @@ msgstr "Nom affiché"
 
 #: inc/class-widget-users.php:189
 msgid "Email"
-msgstr "E-mail "
+msgstr "E-mail"
 
 #: inc/class-widget-users.php:190
 msgid "ID"

@@ -2,13 +2,151 @@
 # This file is distributed under the same license as the Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2016-05-11 18:38:07+0000\n"
+"PO-Revision-Date: 2016-06-17 06:49:25+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
 "X-Generator: GlotPress/2.1.0-alpha\n"
 "Project-Id-Version: Stable (latest release)\n"
+
+#: inc/class-admin.php:69
+msgid "https://www.surveymonkey.com/r/BQJZSG2"
+msgstr "https://www.surveymonkey.com/r/BQJZSG2"
+
+#: inc/class-admin.php:69
+msgid "BackWPup Restore function is coming! Participate in our survey and with a little bit of luck you win a BackWPup Pro licence!"
+msgstr "La fonction de restauration arrive! Particcipez à notre sondage et avec un peu de chance vous gagnerez une licence Pro de BackWPup !"
+
+#: inc/class-message-box.php:89
+msgid "Dismiss"
+msgstr "Ecarter"
+
+#: inc/class-page-about.php:531
+msgid "Backup to S3 services (Amazon, Google Storage, Hosteurope and more)"
+msgstr "Sauvegarde vers des services S3 (Amazon, Google Storage, Hosteurope et plus)"
+
+#: inc/class-page-about.php:636
+msgid "<strong>Automatic updates</strong>"
+msgstr "<strong>Mises à jour automatique</strong>"
+
+#: inc/class-page-backwpup.php:127
+msgctxt "BackWPup News RSS Feed URL"
+msgid "https://backwpup.com/feed/"
+msgstr "https://backwpup.com/feed/"
+
+#: inc/class-job.php:1174
+msgctxt "SIGSYS: Please see http://man7.org/linux/man-pages/man7/signal.7.html for details"
+msgid "Bad argument to routine"
+msgstr "Mauvais argument à la fonction"
+
+#: inc/class-job.php:1181
+msgid "Signal \"%1$s\" (%2$s) is sent to script!"
+msgstr "Le signal \"%1$s\" (%2$s) a été envoyé au script !"
+
+#: inc/class-page-jobs.php:454
+msgid "Job \"%s\" has started, but not responded for 10 seconds. Please check <a href=\"%s\">information</a>."
+msgstr "L'opération \"%s\" a démarrée, mais pas de réponse depuis 10 seondes. Merci de vérifier les <a href=\"%s\">informations</a>."
+
+#: inc/class-job.php:1162
+msgctxt "SIGXCPU: Please see http://man7.org/linux/man-pages/man7/signal.7.html for details"
+msgid "CPU time limit exceeded"
+msgstr "Dépassement de la limite d'utilisation du CPU"
+
+#: inc/class-job.php:1166
+msgctxt "SIGXFSZ: Please see http://man7.org/linux/man-pages/man7/signal.7.html for details"
+msgid "File size limit exceeded"
+msgstr "Taille limite du fichier atteinte"
+
+#: inc/class-job.php:1170
+msgctxt "SIGPWR: Please see http://man7.org/linux/man-pages/man7/signal.7.html for details"
+msgid "Power failure"
+msgstr "Erreur d'alimentation"
+
+#: inc/class-job.php:1154
+msgctxt "SIGUSR2: Please see http://man7.org/linux/man-pages/man7/signal.7.html for details"
+msgid "User-defined signal 2"
+msgstr "Signal défini par l'utilisateur 2"
+
+#: inc/class-job.php:1158
+msgctxt "SIGURG: Please see http://man7.org/linux/man-pages/man7/signal.7.html for details"
+msgid "Urgent condition on socket"
+msgstr "Condition urgente sur la socket"
+
+#: inc/class-job.php:1138
+msgctxt "SIGSEGV: Please see http://man7.org/linux/man-pages/man7/signal.7.html for details"
+msgid "Invalid memory reference"
+msgstr "Référence invalide à la mémoire"
+
+#: inc/class-job.php:1142
+msgctxt "SIGTERM: Please see http://man7.org/linux/man-pages/man7/signal.7.html for details"
+msgid "Termination signal"
+msgstr "Signal de fin"
+
+#: inc/class-job.php:1146
+msgctxt "SIGSTKFLT: Please see http://man7.org/linux/man-pages/man7/signal.7.html for details"
+msgid "Stack fault on coprocessor"
+msgstr "Erreur de pile sur le coprocesseur"
+
+#: inc/class-job.php:1150
+msgctxt "SIGUSR1: Please see http://man7.org/linux/man-pages/man7/signal.7.html for details"
+msgid "User-defined signal 1"
+msgstr "Signal défini par l'utilisateur 1"
+
+#: inc/class-job.php:1122
+msgctxt "SIGILL: Please see http://man7.org/linux/man-pages/man7/signal.7.html for details"
+msgid "Illegal Instruction"
+msgstr "Instruction incorrecte"
+
+#: inc/class-job.php:1126
+msgctxt "SIGABRT: Please see http://man7.org/linux/man-pages/man7/signal.7.html for details"
+msgid "Abort signal from abort(3)"
+msgstr "Signal d'interruption de type abort(3)"
+
+#: inc/class-job.php:1130
+msgctxt "SIGBUS: Please see http://man7.org/linux/man-pages/man7/signal.7.html for details"
+msgid "Bus error (bad memory access)"
+msgstr "Erreur de bus (Mauvais accès à la mémoire)"
+
+#: inc/class-job.php:1134
+msgctxt "SIGFPE: Please see http://man7.org/linux/man-pages/man7/signal.7.html for details"
+msgid "Floating point exception"
+msgstr "Erreur de virgule flottante"
+
+#: inc/class-job.php:1110
+msgctxt "SIGHUP: Please see http://man7.org/linux/man-pages/man7/signal.7.html for details"
+msgid "Hangup detected on controlling terminal or death of controlling process"
+msgstr "Interruption détectée depuis le terminal ou bien fin du process père"
+
+#: inc/class-job.php:1114
+msgctxt "SIGINT: Please see http://man7.org/linux/man-pages/man7/signal.7.html for details"
+msgid "Interrupt from keyboard"
+msgstr "Interruption depuis le clavier"
+
+#: inc/class-job.php:1118
+msgctxt "SIGQUIT: Please see http://man7.org/linux/man-pages/man7/signal.7.html for details"
+msgid "Quit from keyboard"
+msgstr "Terminer à partir du clavier"
+
+#: inc/class-admin.php:230 inc/class-help.php:24
+msgid "http://docs.backwpup.com"
+msgstr "http://docs.backwpup.com"
+
+#. #-#-#-#-#  tmp-backwpup.pot (BackWPup 3.3.2)  #-#-#-#-#
+#. Plugin URI of the plugin/theme
+#: inc/class-admin.php:61 inc/class-admin.php:396 inc/class-admin.php:416
+#: inc/class-help.php:17 inc/class-help.php:22 inc/class-job.php:311
+#: inc/class-jobtype-dbcheck.php:15 inc/class-jobtype-dbdump.php:15
+#: inc/class-jobtype-file.php:15 inc/class-jobtype-wpexp.php:15
+#: inc/class-jobtype-wpplugin.php:15 inc/class-page-about.php:643
+#: inc/class-page-backwpup.php:260 inc/class-page-backwpup.php:262
+#: inc/class-page-settings.php:376
+msgid "http://backwpup.com"
+msgstr "http://backwpup.com"
+
+#: inc/class-job.php:944
+msgid "Restart after getting signal."
+msgstr "Redémarrage après la réception d'un signal."
 
 #: inc/class-page-settings.php:250
 msgid "Job will restart before hitting maximum execution time. Restarts will be disabled on CLI usage. If <code>ALTERNATE_WP_CRON</code> has been defined, WordPress Cron will be used for restarts, so it can take a while. 0 means no maximum."
@@ -30,11 +168,11 @@ msgstr "Fonction désactivée"
 msgid "seconds."
 msgstr "secondes."
 
-#: inc/class-job.php:321
+#: inc/class-job.php:319
 msgid "(translated)"
 msgstr "(traduit)"
 
-#: inc/class-job.php:323
+#: inc/class-job.php:321
 msgid "[INFO] Log Level: %1$s %2$s"
 msgstr "[INFO] niveau de trace: %1$s %2$s"
 
@@ -102,7 +240,7 @@ msgstr "Nombre maximum de fichiers de traces"
 msgid "Maximum log files in folder."
 msgstr "Nombre maximum de fichiers de traces dans le dossier."
 
-#: inc/class-job.php:318
+#: inc/class-job.php:316
 msgid "Debug"
 msgstr "Déboguage"
 
@@ -122,7 +260,7 @@ msgstr "Nom de l'emetteur"
 msgid "Use WordPress settings"
 msgstr "Utiliser les paramètres de WordPress"
 
-#: inc/class-job.php:315
+#: inc/class-job.php:313
 msgid "Normal"
 msgstr "Moyen"
 
@@ -175,19 +313,19 @@ msgstr "Vidéo&nbsp;: Créer une sauvegarde complète"
 msgid "Video: Restoring Backups"
 msgstr "Vidéo&nbsp;: Restaurer une sauvegarde"
 
-#: inc/class-job.php:1224 inc/class-job.php:1237
+#: inc/class-job.php:1215 inc/class-job.php:1228
 msgid "System: %s"
 msgstr "Système&nbsp;: %s"
 
-#: inc/class-job.php:2133
+#: inc/class-job.php:2122
 msgid "Adding Extra files to Archive"
 msgstr "Ajouter d&rsquo;autres fichiers aux archives"
 
-#: inc/class-job.php:2161
+#: inc/class-job.php:2150
 msgid "Archiving Folder: %s"
 msgstr "Dossier d&rsquo;archive&nbsp;: %s"
 
-#: inc/class-job.php:2229
+#: inc/class-job.php:2218
 msgid "The Backup archive will be too large for file operations with this PHP Version. You might want to consider splitting the backup job in multiple jobs with less files each."
 msgstr "L&rsquo;archive de sauvegarde est trop volumineuse pour cette version de PHP. Vous devriez séparer votre opération en plusieurs opérations avec moins de fichiers à chaque fois."
 
@@ -311,11 +449,11 @@ msgstr "Choisir l&rsquo;utilisateur WordPress"
 msgid "Query arg key=value:"
 msgstr "Argument de la requête sous la forme key=value&nbsp;:"
 
-#: inc/class-admin.php:452
+#: inc/class-admin.php:460
 msgid "Add BackWPup Role"
 msgstr "Ajouter le rôle BackWPup"
 
-#: inc/class-admin.php:456
+#: inc/class-admin.php:464
 msgid "&mdash; No additional role for BackWPup &mdash;"
 msgstr "&mdash; Pas de  rôle supplémentaire pour BackWPup &mdash;"
 
@@ -374,28 +512,28 @@ msgctxt "Plugin name; Plugin Version; plugin url"
 msgid "[INFO] %1$s %2$s; A project of Inpsyde GmbH"
 msgstr "[INFO] %1$s %2$s; Un projet de Inpsyde GmbH"
 
-#: inc/class-job.php:313
+#: inc/class-job.php:312
 msgctxt "WordPress Version; Blog url"
 msgid "[INFO] WordPress %1$s on %2$s"
 msgstr "[INFO] WordPress %1$s sur %2$s"
 
-#: inc/class-job.php:328
+#: inc/class-job.php:326
 msgid "[INFO] BackWPup job: %1$s"
 msgstr "[INFO]: BackWPup opération: %1$s"
 
-#: inc/class-job.php:331
+#: inc/class-job.php:329
 msgid "[INFO] Runs with user: %1$s (%2$d) "
 msgstr "[INFO] Exécuter avec l’utilisateur : %1$s (%2$d) "
 
-#: inc/class-job.php:349 inc/class-job.php:359
+#: inc/class-job.php:347 inc/class-job.php:357
 msgid "[INFO] Cron: %s; Next: %s "
 msgstr "[INFO] Cron: %s; Suivant: %s "
 
-#: inc/class-job.php:354
+#: inc/class-job.php:352
 msgid "[INFO] BackWPup job start with EasyCron.com"
 msgstr "[INFO] L&rsquo;opération BackWPup commence avec EasyCron.com"
 
-#: inc/class-job.php:421
+#: inc/class-job.php:419
 msgid "Could not write log file"
 msgstr "Impossible d&rsquo;écrire le fichier de log"
 
@@ -479,11 +617,11 @@ msgstr "Fermer l'écran de travail"
 msgid "Close"
 msgstr "Fermer"
 
-#: inc/class-page-jobs.php:778
+#: inc/class-page-jobs.php:782
 msgid "Job completed"
 msgstr "Fin de l'opération"
 
-#: inc/class-page-jobs.php:782
+#: inc/class-page-jobs.php:786
 msgid "Job has done with warnings in %s seconds. Please resolve them for correct execution."
 msgstr "L'opération s'est terminée avec des avertissements en %s seconds. Merci de les corriger pour une exécution correcte."
 
@@ -865,7 +1003,7 @@ msgstr "Extension de sauvegarde pour WordPress"
 msgid "Inpsyde GmbH"
 msgstr "Inpsyde GmbH"
 
-#. #-#-#-#-#  tmp-backwpup.pot (BackWPup 3.3.1)  #-#-#-#-#
+#. #-#-#-#-#  tmp-backwpup.pot (BackWPup 3.3.2)  #-#-#-#-#
 #. Author URI of the plugin/theme
 #: inc/class-jobtype-dbcheck.php:17 inc/class-jobtype-dbdump.php:17
 #: inc/class-jobtype-file.php:17 inc/class-jobtype-wpexp.php:17
@@ -964,7 +1102,7 @@ msgstr "Le répertoire \"%s\" n'est pas accessible! "
 msgid "XML export"
 msgstr "Export XML"
 
-#: inc/class-jobtype-wpexp.php:14 inc/class-page-about.php:478
+#: inc/class-jobtype-wpexp.php:14 inc/class-page-about.php:491
 msgid "WordPress XML export"
 msgstr "Export XML WordPress"
 
@@ -1129,228 +1267,220 @@ msgstr "La taille pour la sauvegarde des tables n'est pas correcte&nbsp;: %1$s"
 msgid "Error while writing file!"
 msgstr "Erreur d'ecriture du fichier!"
 
-#: inc/class-option.php:106 inc/class-page-editjob.php:97
+#: inc/class-option.php:160 inc/class-page-editjob.php:97
 #: inc/class-page-editjob.php:471
 msgid "New Job"
 msgstr "Nouvelle opération"
 
-#: inc/class-page-about.php:364
+#: inc/class-page-about.php:369
 msgid "Welcome to BackWPup Pro"
 msgstr "Bienvenue sur BackWPup Pro"
 
-#: inc/class-page-about.php:365 inc/class-page-backwpup.php:75
+#: inc/class-page-about.php:370 inc/class-page-backwpup.php:75
 msgid "BackWPup’s job wizards make planning and scheduling your backup jobs a breeze."
 msgstr "Les assistants d'opération de BackWPup's permettent de définir les planifications et les "
 
-#: inc/class-page-about.php:366 inc/class-page-about.php:376
+#: inc/class-page-about.php:371 inc/class-page-about.php:384
 msgid "Use your backup archives to save your entire WordPress installation including <code>/wp-content/</code>. Push them to an external storage service if you don’t want to save the backups on the same server. With a single backup archive you are able to restore an installation. Use a tool like phpMyAdmin or a plugin like <a href=\"http://wordpress.org/plugins/adminer/\" target=\"_blank\">Adminer</a> to restore your database backup files."
 msgstr "La sauvegarde peut être utilisée pour sauvegarder toute votre installation en incluant <code>/wp-content/</code>. Envoyer la vers un service externe, si vous désirez que votre sauvegarde ne reste pas sur le même serveur. Avec un seul fichier de sauvegarde vous pouvez restaurer toute votre installation. Utiliser un outil comme phpMyAdmin ou une extension comme <a href=\"http://wordpress.org/plugins/adminer/\" target=\"_blank\">Adminer</a> pour restaurer la sauvegarde de votre base."
 
-#: inc/class-page-about.php:367
+#: inc/class-page-about.php:372
 msgid "Ready to <a href=\"%1$s\">set up a backup job</a>? You can <a href=\"%2$s\">use the wizards</a> or plan your backup in expert mode."
 msgstr "Prêt à <a href=\"%1$s\"> définir une opération</a>? Vous pouvez <a href=\"%2$s\">utilisez l'assistant</a>  ou le mode expert."
 
-#: inc/class-page-about.php:374
+#: inc/class-page-about.php:382
 msgid "Welcome to BackWPup"
 msgstr "Bienvenue à BackWPup"
 
-#: inc/class-page-about.php:377
+#: inc/class-page-about.php:385
 msgid "Ready to set up a backup job? Use one of the wizards to plan what you want to save."
 msgstr "Prêt à définir une opération de sauvegarde? Utilisez l'un des assistants pour définir ce que vous voulez sauvegarder."
 
-#: inc/class-page-about.php:394
+#: inc/class-page-about.php:407
 msgid "Please activate your license"
 msgstr "Merci d'activer votre licence"
 
-#: inc/class-page-about.php:395
+#: inc/class-page-about.php:408
 msgid "Please go to your plugin page and active the license to have the autoupdates enabled."
 msgstr "Merci d'aller sur la page de l'extension et d'activer votre licence pour que la mise à jour automatique soit possible."
 
-#: inc/class-page-about.php:404
+#: inc/class-page-about.php:417
 msgid "Save your database"
 msgstr "Sauvegarder votre base de données"
 
-#: inc/class-page-about.php:407
+#: inc/class-page-about.php:420
 msgid "Save your database regularly"
 msgstr "Sauvegarder votre base de données régulièrement"
 
-#: inc/class-page-about.php:408
+#: inc/class-page-about.php:421
 msgid "With BackWPup you can schedule the database backup to run automatically. With a single backup file you can restore your database. You should <a href=\"%s\">set up a backup job</a>, so you will never forget it. There is also an option to repair and optimize the database after each backup."
 msgstr "Avec BackWPup vous pouvez définir une automatisation de la sauvegarde de vos bases de données. Avec un seul fichier de sauvegarde, vous pouvez restaurer votre base de données. Vous devez <a href=\"%s\">définir une opération de sauvegarde</a>, ainsi vous n'oublierez jamais . Il y a aussi une option pour réparer et optimiser la base de données après chaque sauvegarde."
 
-#: inc/class-page-about.php:413 inc/class-page-about.php:417
+#: inc/class-page-about.php:426 inc/class-page-about.php:430
 msgid "WordPress XML Export"
 msgstr "Export WordPress XML"
 
-#: inc/class-page-about.php:414
+#: inc/class-page-about.php:427
 msgid "You can choose the built-in WordPress export format in addition or exclusive to save your data. This works in automated backups too of course. The advantage is: you can import these files into a blog with the regular WordPress importer."
 msgstr "Vous pouvez choisir le format interne d'export WordPress en plus ou seulement pour sauvegarder vos données. Cela fonctionne aussi dans les sauvegardes programmées. L'avantage en est : vous pouvez restaurer ces fichiers dans votre installation avec l'importateur WordPress."
 
-#: inc/class-page-about.php:422
+#: inc/class-page-about.php:435
 msgid "Save all data from the webserver"
 msgstr "Sauvegarder toutes les données depuis le serveur web"
 
-#: inc/class-page-about.php:425
+#: inc/class-page-about.php:438
 msgid "Save all files"
 msgstr "Sauvegarder tous les fichiers"
 
-#: inc/class-page-about.php:426
+#: inc/class-page-about.php:439
 msgid "You can backup all your attachments, also all system files, plugins and themes in a single file. You can <a href=\"%s\">create a job</a> to update a backup copy of your file system only when files are changed."
 msgstr "Vous pouvez sauvegarder tous vos fichiers joints, ainsi que tous les fichiers systèmes, les extensions et les thémes dans un seul fichier. Vous pouvez <a href=\"%s\">créer une opération</a> pour mettre à jour votre sauvegarde avec uniquement les fichiers qui ont été modifiés (différentiel)"
 
-#: inc/class-page-about.php:431 inc/class-page-about.php:435
+#: inc/class-page-about.php:444 inc/class-page-about.php:448
 msgid "Security!"
 msgstr "Sécurité!"
 
-#: inc/class-page-about.php:432
+#: inc/class-page-about.php:445
 msgid "By default everything is encrypted: connections to external services, local files and access to directories."
 msgstr "Par défaut tout est chiffré:connexions aux services externes, fichiers locaux et accès au répertoires."
 
-#: inc/class-page-about.php:440 inc/class-page-about.php:443
+#: inc/class-page-about.php:453 inc/class-page-about.php:456
 msgid "Cloud Support"
 msgstr "Support du cloud"
 
-#: inc/class-page-about.php:444
+#: inc/class-page-about.php:457
 msgid "BackWPup supports multiple cloud services in parallel. This ensures backups are redundant."
 msgstr "BackWPup supporte plusieurs services cloud en paralèlle. Cela permet d'avoir des sauvegardes redondantes."
 
-#: inc/class-page-about.php:450
+#: inc/class-page-about.php:463
 msgid "Features / differences between Free and Pro"
 msgstr "Fonctionnalités / différences entre la version gratuite et la version payante"
 
-#: inc/class-page-about.php:453
+#: inc/class-page-about.php:466
 msgid "Features"
 msgstr "Fonctionnalités"
 
-#: inc/class-page-about.php:454
+#: inc/class-page-about.php:467
 msgid "FREE"
 msgstr "GRATUIT"
 
-#: inc/class-page-about.php:455
+#: inc/class-page-about.php:468
 msgid "PRO"
 msgstr "PRO"
 
-#: inc/class-page-about.php:458
+#: inc/class-page-about.php:471
 msgid "Complete database backup"
 msgstr "Sauvegarde complète de la base de données"
 
-#: inc/class-page-about.php:463
+#: inc/class-page-about.php:476
 msgid "Complete file backup"
 msgstr "Sauvegarde complète des fichiers"
 
-#: inc/class-page-about.php:468
+#: inc/class-page-about.php:481
 msgid "Database check"
 msgstr "Vérification de la base de données"
 
-#: inc/class-page-about.php:473
+#: inc/class-page-about.php:486
 msgid "Data compression"
 msgstr "Compression des données"
 
-#: inc/class-page-about.php:483
+#: inc/class-page-about.php:496
 msgid "List of installed plugins"
 msgstr "Liste des extensions installées"
 
-#: inc/class-page-about.php:488
+#: inc/class-page-about.php:501
 msgid "Backup archives management"
 msgstr "Gestion des archives de sauvegarde"
 
-#: inc/class-page-about.php:493
+#: inc/class-page-about.php:506
 msgid "Log file management"
 msgstr "Gestion des fichiers journaux"
 
-#: inc/class-page-about.php:498
+#: inc/class-page-about.php:511
 msgid "Start jobs per WP-Cron, URL, system, backend or WP-CLI"
 msgstr "Démarer les opérations par WP-Cron, URL, système, administration ou WP-CLI"
 
-#: inc/class-page-about.php:503
+#: inc/class-page-about.php:516
 msgid "Log report via email"
 msgstr "Raport par courriel des fichiers journaux"
 
-#: inc/class-page-about.php:508
+#: inc/class-page-about.php:521
 msgid "Backup to Microsoft Azure"
 msgstr "Sauvegarder vers Microsoft Azure"
 
-#: inc/class-page-about.php:513
+#: inc/class-page-about.php:526
 msgid "Backup as email"
 msgstr "Sauvegarder vers E-mail"
 
-#: inc/class-page-about.php:518
-msgid "Backup to S3 services <small>(Amazon, Google Storage, Hosteurope and more)</small>"
-msgstr "Sauvegarde vers le service S3 <small>(Amazon, Google Storage, Hosteurope et plus)</small>"
-
-#: inc/class-page-about.php:533
+#: inc/class-page-about.php:546
 msgid "Backup to FTP server"
 msgstr "Sauvegarder vers serveur FTP"
 
-#: inc/class-page-about.php:538
+#: inc/class-page-about.php:551
 msgid "Backup to your web space"
 msgstr "Sauvegarder vers votre espace Web"
 
-#: inc/class-page-about.php:548
+#: inc/class-page-about.php:561
 msgid "Backup to Google Drive"
 msgstr "Sauvegarde vers Google Drive"
 
-#: inc/class-page-about.php:553
+#: inc/class-page-about.php:566
 msgid "Backup to Amazon Glacier"
 msgstr "Sauvegarde vers Amazon Glacier"
 
-#: inc/class-page-about.php:558
+#: inc/class-page-about.php:571
 msgid "Custom API keys for DropBox and SugarSync"
 msgstr "Clé d'API pour DropBox et SygarSync"
 
-#: inc/class-page-about.php:563
+#: inc/class-page-about.php:576
 msgid "XML database backup as PHPMyAdmin schema"
 msgstr "Sauvegarde de la base de données en XML comme un schéma pour PHPMyAdmin"
 
-#: inc/class-page-about.php:568
+#: inc/class-page-about.php:581
 msgid "Database backup as mysqldump per command line"
 msgstr "Sauvegarde de la base de données au format mysqldump  en ligne de commande"
 
-#: inc/class-page-about.php:573
+#: inc/class-page-about.php:586
 msgid "Database backup for additional MySQL databases"
 msgstr "Sauvegarde pour des bases de données supplémentaire de type MySQL"
 
-#: inc/class-page-about.php:578
+#: inc/class-page-about.php:591
 msgid "Import and export job settings as XML"
 msgstr "Enregistrer et charger les paramètres des opérations au format XML"
 
-#: inc/class-page-about.php:583
+#: inc/class-page-about.php:596
 msgid "Wizard for system tests"
 msgstr "Assistant pour les tests systèmes"
 
-#: inc/class-page-about.php:588
+#: inc/class-page-about.php:601
 msgid "Wizard for scheduled backup jobs"
 msgstr "Assistant pour la programation des opérations de sauvegarde"
 
-#: inc/class-page-about.php:593
+#: inc/class-page-about.php:606
 msgid "Wizard to import settings and backup jobs"
 msgstr "Assistant pour le chargement des paramètres et des définitions des opérations"
 
-#: inc/class-page-about.php:598
+#: inc/class-page-about.php:611
 msgid "Differential backup of changed directories to Dropbox"
 msgstr "Sauvegarde différentielle des répertoires modifiés vers Dropbox"
 
-#: inc/class-page-about.php:603
+#: inc/class-page-about.php:616
 msgid "Differential backup of changed directories to Rackspace Cloud Files"
 msgstr "Sauvegarde différentielle des répertoires modifiés vers Rackspace Cloud"
 
-#: inc/class-page-about.php:608
+#: inc/class-page-about.php:621
 msgid "Differential backup of changed directories to S3"
 msgstr "Sauvegarde différentielle des répertoires modifiés vers le service S3"
 
-#: inc/class-page-about.php:613
+#: inc/class-page-about.php:626
 msgid "Differential backup of changed directories to MS Azure"
 msgstr "Sauvegarde différentielle des répertoires modifiés vers MS Azure"
 
-#: inc/class-page-about.php:618
+#: inc/class-page-about.php:631
 msgid "<strong>Premium support</strong>"
 msgstr "<strong>Premium support</strong>"
 
-#: inc/class-page-about.php:623
-msgid "<strong>Automatic update from MarketPress</strong>"
-msgstr "<strong>Mise à jour automatique depuis le MarketPress</strong>"
-
-#: inc/class-page-about.php:630
+#: inc/class-page-about.php:643
 msgid "GET PRO"
 msgstr "Passer à la version PRO"
 
@@ -1368,8 +1498,8 @@ msgstr "Effacer"
 msgid "Change destination"
 msgstr "Modifier la destination"
 
-#: inc/class-page-backups.php:269 inc/class-page-backwpup.php:282
-#: inc/class-page-backwpup.php:350 inc/class-page-logs.php:136
+#: inc/class-page-backups.php:269 inc/class-page-backwpup.php:283
+#: inc/class-page-backwpup.php:347 inc/class-page-logs.php:136
 msgid "Time"
 msgstr "Heure"
 
@@ -1398,8 +1528,8 @@ msgstr "Télécharger"
 msgid "?"
 msgstr "?"
 
-#: inc/class-page-backups.php:361 inc/class-page-backwpup.php:311
-#: inc/class-page-backwpup.php:388 inc/class-page-jobs.php:318
+#: inc/class-page-backups.php:361 inc/class-page-backwpup.php:321
+#: inc/class-page-backwpup.php:376 inc/class-page-jobs.php:318
 #: inc/class-page-logs.php:164
 msgid "%1$s at %2$s"
 msgstr "%1$s à %2$s"
@@ -1548,48 +1678,48 @@ msgctxt "Pro teaser box, link text"
 msgid "Get BackWPup Pro now"
 msgstr "Obtenir la version pro de BackWPup"
 
-#: inc/class-page-backwpup.php:280
+#: inc/class-page-backwpup.php:345
 msgid "Last logs"
 msgstr "Derniers journaux"
 
-#: inc/class-page-backwpup.php:282 inc/class-page-backwpup.php:351
+#: inc/class-page-backwpup.php:284 inc/class-page-backwpup.php:347
 #: inc/class-page-logs.php:137
 msgid "Job"
 msgstr "Opération"
 
-#: inc/class-page-backwpup.php:282
+#: inc/class-page-backwpup.php:347
 msgid "Result"
 msgstr "Résultats"
 
-#: inc/class-page-backwpup.php:316
+#: inc/class-page-backwpup.php:381
 msgid "%d ERROR"
 msgid_plural "%d ERRORS"
 msgstr[0] "%d ERREUR"
 msgstr[1] "%d ERREURS"
 
-#: inc/class-page-backwpup.php:319
+#: inc/class-page-backwpup.php:384
 msgid "%d WARNING"
 msgid_plural "%d WARNINGS"
 msgstr[0] "%d AVERTISSEMENT"
 msgstr[1] "%d AVERTISSEMENTS"
 
-#: inc/class-page-backwpup.php:322
+#: inc/class-page-backwpup.php:387
 msgid "OK"
 msgstr "OK"
 
-#: inc/class-page-backwpup.php:347
+#: inc/class-page-backwpup.php:280
 msgid "Next scheduled jobs"
 msgstr "Prochaines opérations"
 
-#: inc/class-page-backwpup.php:374
+#: inc/class-page-backwpup.php:307
 msgid "working since %d seconds"
 msgstr "en cours depuis %d secondes."
 
-#: inc/class-page-backwpup.php:376 inc/class-page-jobs.php:608
+#: inc/class-page-backwpup.php:309 inc/class-page-jobs.php:608
 msgid "Abort"
 msgstr "Abandonner"
 
-#: inc/class-page-backwpup.php:392
+#: inc/class-page-backwpup.php:325
 msgid "Edit Job"
 msgstr "Modifier l'opération"
 
@@ -2133,7 +2263,7 @@ msgstr "Connexion sécurisée SMTP"
 
 #: inc/class-destination-email.php:106 inc/class-jobtype-dbdump.php:67
 #: inc/class-jobtype-dbdump.php:103 inc/class-jobtype-wpexp.php:73
-#: inc/class-jobtype-wpplugin.php:57 inc/class-page-backwpup.php:331
+#: inc/class-jobtype-wpplugin.php:57 inc/class-page-backwpup.php:329
 #: inc/class-page-backwpup.php:396 inc/class-page-settings.php:313
 msgid "none"
 msgstr "aucune"
@@ -2809,15 +2939,15 @@ msgstr "Extension sur wordpress.org"
 msgid "Manual"
 msgstr "Manuel"
 
-#: inc/class-install.php:85
+#: inc/class-install.php:84
 msgid "BackWPup Admin"
 msgstr "Administration BackWPup"
 
-#: inc/class-install.php:99
+#: inc/class-install.php:98
 msgid "BackWPup jobs checker"
 msgstr "Vérification des opérations BackWPup"
 
-#: inc/class-install.php:113
+#: inc/class-install.php:112
 msgid "BackWPup jobs helper"
 msgstr "Aide sur les opérations BackWPup"
 
@@ -2845,96 +2975,96 @@ msgstr "Fin de l'opération"
 msgid "BackWPup log for %1$s from %2$s at %3$s"
 msgstr "Fichier journal BackWPup pour %1$s de %2$s à %3$s"
 
-#: inc/class-job.php:345 inc/class-page-backwpup.php:390
+#: inc/class-job.php:343 inc/class-page-backwpup.php:323
 #: inc/class-page-jobs.php:282 inc/class-page-jobs.php:291
 msgid "Not scheduled!"
 msgstr "Pas de programmation !"
 
-#: inc/class-job.php:352
+#: inc/class-job.php:350
 msgid "[INFO] BackWPup job start with link is active"
 msgstr "[INFO] Opération BackWPup démarrée par URL"
 
-#: inc/class-job.php:362
+#: inc/class-job.php:360
 msgid "[INFO] BackWPup no automatic job start configured"
 msgstr "[INFO] Pas d'opération BackWPup automatique de configurée"
 
-#: inc/class-job.php:366
+#: inc/class-job.php:364
 msgid "[INFO] BackWPup job started from wp-cron"
 msgstr "[INFO] Opération BackWPup démarrée par wp-cron"
 
-#: inc/class-job.php:368
+#: inc/class-job.php:366
 msgid "[INFO] BackWPup job started manually"
 msgstr "[INFO] Opération BackWPup démarrée manuellement"
 
-#: inc/class-job.php:370
+#: inc/class-job.php:368
 msgid "[INFO] BackWPup job started from external url"
 msgstr "[INFO] Opération BackWPup démarrée par une URL externe"
 
-#: inc/class-job.php:372
+#: inc/class-job.php:370
 msgid "[INFO] BackWPup job started form commandline interface"
 msgstr "[INFO] Opération BackWPup démarrée par l'interface en ligne de commande"
 
-#: inc/class-job.php:381
+#: inc/class-job.php:379
 msgid "[INFO] PHP ver.:"
 msgstr "[INFO] version PHP:"
 
-#: inc/class-job.php:382
+#: inc/class-job.php:380
 msgid "[INFO] Maximum PHP script execution time is %1$d seconds"
 msgstr "[INFO] Le temps d’exécution maximum d'un script est %1$d secondes"
 
-#: inc/class-job.php:386
+#: inc/class-job.php:384
 msgid "[INFO] Script restart time is configured to %1$d seconds"
 msgstr "[INFO] Le temps de reprise du script est configuré à %1$d secondes"
 
-#: inc/class-job.php:389
+#: inc/class-job.php:387
 msgid "[INFO] MySQL ver.: %s"
 msgstr "[INFO] Version MySQL: %s"
 
-#: inc/class-job.php:391
+#: inc/class-job.php:389
 msgid "[INFO] Web Server: %s"
 msgstr "[INFO] Serveur Web : %s"
 
-#: inc/class-job.php:395
+#: inc/class-job.php:393
 msgid "[INFO] curl ver.: %1$s; %2$s"
 msgstr "[INFO] Version curl :  %1$s; %2$s"
 
-#: inc/class-job.php:397
+#: inc/class-job.php:395
 msgid "[INFO] Temp folder is: %s"
 msgstr "[INFO] Répertoire temporaire : %s"
 
-#: inc/class-job.php:404
+#: inc/class-job.php:402
 msgid "[INFO] Logfile is: %s"
 msgstr "[INFO] Le fichier journal est : %s"
 
-#: inc/class-job.php:413
+#: inc/class-job.php:411
 msgid "[INFO] Backup type is: %s"
 msgstr "[INFO] Type de sauvegarde : %s"
 
-#: inc/class-job.php:411
+#: inc/class-job.php:409
 msgid "[INFO] Backup file is: %s"
 msgstr "[INFO] Fichier sauvegarde : %s"
 
-#: inc/class-job.php:433
+#: inc/class-job.php:431
 msgid "No destination correctly defined for backup! Please correct job settings."
 msgstr "Pas de cible définie pour la sauvegarde! Veuillez corriger les paramètres de l'opération."
 
-#: inc/class-job.php:671
+#: inc/class-job.php:675
 msgid "Wrong BackWPup JobID"
 msgstr "Erreur d'identification d'opération BackWPup"
 
-#: inc/class-job.php:684
+#: inc/class-job.php:688
 msgid "A BackWPup job is already running"
 msgstr "Une opération BackWPup est déjà en cours"
 
-#: inc/class-job.php:740
+#: inc/class-job.php:744
 msgid "Job restarts due to inactivity for more than 5 minutes."
 msgstr "Job restarts due to inactivity for more than 5 minutes."
 
-#: inc/class-job.php:855
+#: inc/class-job.php:852
 msgid "Step aborted: too many attempts!"
 msgstr "Étape abandonnée : trop de tentatives !"
 
-#: inc/class-job.php:945
+#: inc/class-job.php:942
 msgid "Restart after %1$d seconds."
 msgstr "Relancer après %1$d secondes."
 
@@ -2954,136 +3084,136 @@ msgstr "Le répertoire \"%1$s\" n'est pas accessible en écriture"
 msgid "BackWPup will not backup folders and its sub folders when this file is inside."
 msgstr "BackWPup n'effectuera pas de sauvegarde des répertoires et sous-répertoires quand se fichier se trouve présent."
 
-#: inc/class-job.php:1252
+#: inc/class-job.php:1243
 msgid "Exception caught in %1$s: %2$s"
 msgstr "Exception trouvée dans %1$s: %2$s"
 
-#: inc/class-job.php:1323 inc/class-page-jobs.php:782
+#: inc/class-job.php:1314 inc/class-page-jobs.php:786
 msgid "WARNING:"
 msgstr "AVERTISSEMENT :"
 
-#: inc/class-job.php:1332 inc/class-page-jobs.php:780
+#: inc/class-job.php:1323 inc/class-page-jobs.php:784
 msgid "ERROR:"
 msgstr "ERREUR:"
 
-#: inc/class-job.php:1336
+#: inc/class-job.php:1327
 msgid "DEPRECATED:"
 msgstr "DÉPRÉCIÉE :"
 
-#: inc/class-job.php:1339
+#: inc/class-job.php:1330
 msgid "STRICT NOTICE:"
 msgstr "SIMPLE NOTE :"
 
-#: inc/class-job.php:1344
+#: inc/class-job.php:1335
 msgid "RECOVERABLE ERROR:"
 msgstr "ERREUR RÉCUPÉRABLE :"
 
-#: inc/class-job.php:1494
+#: inc/class-job.php:1483
 msgid "Cannot write progress to working file. Job will be aborted."
 msgstr "Impossible d'écrire l'avancement dans le fichier de travail. L'opération va être arrêtée."
 
-#: inc/class-job.php:1509
+#: inc/class-job.php:1498
 msgid "Aborted by user!"
 msgstr "Arrêté par l'utilisateur!"
 
-#: inc/class-job.php:1537
+#: inc/class-job.php:1526
 msgid "One old log deleted"
 msgid_plural "%d old logs deleted"
 msgstr[0] "Un ancien fichier de trace supprimé"
 msgstr[1] "%d anciens fichiers de traces supprimés"
 
-#: inc/class-job.php:1544 inc/class-page-jobs.php:780
+#: inc/class-job.php:1533 inc/class-page-jobs.php:784
 msgid "Job has ended with errors in %s seconds. You must resolve the errors for correct execution."
 msgstr "L'opération s'est terminée avec des erreurs en %ssecondes. Vous devez corriger les erreurs pour une exécution correcte."
 
-#: inc/class-job.php:1546
+#: inc/class-job.php:1535
 msgid "Job finished with warnings in %s seconds. Please resolve them for correct execution."
 msgstr "L'opération s'est terminée avec des avertissements en %s seconds. Merci de les corriger pour une exécution correcte."
 
-#: inc/class-job.php:1548 inc/class-page-jobs.php:784
+#: inc/class-job.php:1537 inc/class-page-jobs.php:788
 msgid "Job done in %s seconds."
 msgstr "Opération effectuée en %s secondes."
 
-#: inc/class-job.php:1592
+#: inc/class-job.php:1581
 msgid "SUCCESSFUL"
 msgstr "SUCCES"
 
-#: inc/class-job.php:1594
+#: inc/class-job.php:1583
 msgid "WARNING"
 msgstr "AVERTISSEMENT"
 
-#: inc/class-job.php:1597
+#: inc/class-job.php:1586
 msgid "ERROR"
 msgstr "ERREUR"
 
-#: inc/class-job.php:1600
+#: inc/class-job.php:1589
 msgid "[%3$s] BackWPup log %1$s: %2$s"
 msgstr "[%3$s] trace BackWPup%1$s: %2$s"
 
-#: inc/class-job.php:1968
+#: inc/class-job.php:1957
 msgctxt "Folder name"
 msgid "Folder %s not exists"
 msgstr "Le répertoire %s n'existe pas"
 
-#: inc/class-job.php:1974
+#: inc/class-job.php:1963
 msgctxt "Folder name"
 msgid "Folder %s not readable"
 msgstr "Le répertoire %s ne peut être lu"
 
-#: inc/class-job.php:1994
+#: inc/class-job.php:1983
 msgid "Link \"%s\" not following."
 msgstr "Le lien \"%s\" n'a pas été suivi."
 
-#: inc/class-job.php:1996
+#: inc/class-job.php:1985
 msgid "File \"%s\" is not readable!"
 msgstr "Le fichier \"%s\" ne peut être lu!"
 
-#: inc/class-job.php:2000
+#: inc/class-job.php:1989
 msgid "File size of “%s” cannot be retrieved. File might be too large and will not be added to queue."
 msgstr "La taille du fichier \"%s\" ne peut pas être lue. Le fichier est peut-être trop grand et il ne sera pas ajouté à la sauvegarde."
 
-#: inc/class-job.php:2020
+#: inc/class-job.php:2009
 msgid "%d. Trying to generate a manifest file&#160;&hellip;"
 msgstr "%d. Tentative de créer un fichier manifeste&#160;&hellip;"
 
-#: inc/class-job.php:2076
+#: inc/class-job.php:2065
 msgid "You may have noticed the manifest.json file in this archive."
 msgstr "Vous avez noté la présence du manifeste .json dans la sauvegarde."
 
-#: inc/class-job.php:2077
+#: inc/class-job.php:2066
 msgid "manifest.json might be needed for later restoring a backup from this archive."
 msgstr "le manifeste .json peut être nécessaire pour une restauration ultérieure de cette sauvegarde."
 
-#: inc/class-job.php:2078
+#: inc/class-job.php:2067
 msgid "Please leave manifest.json untouched and in place. Otherwise it is safe to be ignored."
 msgstr "Merci de laisser le manifeste .json non modifié et à la même place. En d'autres termes, vous pouvez l'ignorer."
 
-#: inc/class-job.php:2088
+#: inc/class-job.php:2077
 msgid "Added manifest.json file with %1$s to backup file list."
 msgstr "Ajout du fichier manifeste .json avec %1$s à la liste des fichiers de la sauvegarde."
 
-#: inc/class-job.php:2118
+#: inc/class-job.php:2107
 msgid "%d. Trying to create backup archive &hellip;"
 msgstr "%d. Tentative de création de l'archive..."
 
-#: inc/class-job.php:2126
+#: inc/class-job.php:2115
 msgctxt "Archive compression method"
 msgid "Compressing files as %s. Please be patient, this may take a moment."
 msgstr "Compression des fichiers en %s. Merci d'être patient, cela peut prendre un certain temps."
 
-#: inc/class-job.php:2145 inc/class-job.php:2205
+#: inc/class-job.php:2134 inc/class-job.php:2194
 msgid "Cannot create backup archive correctly. Aborting creation."
 msgstr "Impossible de créer la sauvegarde. L'opération est abandonnée."
 
-#: inc/class-job.php:2215
+#: inc/class-job.php:2204
 msgid "Backup archive created."
 msgstr "Archive de sauvegarde créée."
 
-#: inc/class-job.php:2232
+#: inc/class-job.php:2221
 msgid "Archive size is %s."
 msgstr "La taille de l'archive est de %s."
 
-#: inc/class-job.php:2235
+#: inc/class-job.php:2224
 msgid "%1$d Files with %2$s in Archive."
 msgstr "%1$d fichiers avec %2$s à sauvegarder"
 
@@ -3225,149 +3355,149 @@ msgstr "Répertoires du site à sauvegarder"
 msgid "Path as set by user (symlink?): %s"
 msgstr "Chemin défini par l'utlisateur (lien symbolique ?) : %s"
 
-#: backwpup.php:281 inc/class-page-backups.php:271
+#: backwpup.php:277 inc/class-page-backups.php:271
 msgid "Folder"
 msgstr "Répertoire"
 
-#: backwpup.php:282
+#: backwpup.php:278
 msgid "Backup to Folder"
 msgstr "Sauvegarder dans le répertoire"
 
-#: backwpup.php:297
+#: backwpup.php:293
 msgid "Email"
 msgstr "E-Mail"
 
-#: backwpup.php:298
+#: backwpup.php:294
 msgid "Backup sent via email"
 msgstr "Sauvegarder envoyée par E-mail"
 
-#: backwpup.php:313
+#: backwpup.php:309
 msgid "FTP"
 msgstr "FTP"
 
-#: backwpup.php:314
+#: backwpup.php:310
 msgid "Backup to FTP"
 msgstr "Sauvegarder vers le serveur FTP"
 
-#: backwpup.php:329 inc/class-destination-dropbox.php:307
+#: backwpup.php:325 inc/class-destination-dropbox.php:307
 msgid "Dropbox"
 msgstr "DropBox"
 
-#: backwpup.php:330 inc/class-page-about.php:523
+#: backwpup.php:326 inc/class-page-about.php:536
 msgid "Backup to Dropbox"
 msgstr "Sauvegarder vers DropBox"
 
-#: backwpup.php:345 inc/class-destination-s3.php:76
+#: backwpup.php:341 inc/class-destination-s3.php:76
 msgid "S3 Service"
 msgstr "S3 Service"
 
-#: backwpup.php:346
+#: backwpup.php:342
 msgid "Backup to an S3 Service"
 msgstr "Sauvegarder vers le service S3"
 
-#: backwpup.php:364
+#: backwpup.php:360
 msgid "MS Azure"
 msgstr "MS Azure"
 
-#: backwpup.php:365
+#: backwpup.php:361
 msgid "Backup to Microsoft Azure (Blob)"
 msgstr "Sauvegarder vers Microsoft Azure (blob)"
 
-#: backwpup.php:380
+#: backwpup.php:376
 msgid "RSC"
 msgstr "RackSpace"
 
-#: backwpup.php:381 inc/class-page-about.php:528
+#: backwpup.php:377 inc/class-page-about.php:541
 msgid "Backup to Rackspace Cloud Files"
 msgstr "Sauvegarder vers RackSpace Cloud"
 
-#: backwpup.php:398
+#: backwpup.php:394
 msgid "SugarSync"
 msgstr "SugarSync"
 
-#: backwpup.php:399 inc/class-page-about.php:543
+#: backwpup.php:395 inc/class-page-about.php:556
 msgid "Backup to SugarSync"
 msgstr "Sauvegarder vers SugarSync"
 
-#: backwpup.php:418
+#: backwpup.php:414
 msgid "PHP Version %1$s is to low, you need Version %2$s or above."
 msgstr "La version de PHP %1$s est trop ancienne, vous devez avoir la version %2$s ou supérieure."
 
-#: backwpup.php:425
+#: backwpup.php:421
 msgid "Missing function \"%s\"."
 msgstr "Il manque la fonction \"%s\"."
 
-#: backwpup.php:434
+#: backwpup.php:430
 msgid "Missing class \"%s\"."
 msgstr "Il manque la classe \"%s\"."
 
-#: inc/class-admin.php:127
+#: inc/class-admin.php:230
 msgid "Documentation"
 msgstr "Documentation"
 
-#: inc/class-admin.php:139
+#: inc/class-admin.php:242
 msgid "BackWPup Dashboard"
 msgstr "Tableau de bord de BackWPup"
 
-#: inc/class-admin.php:139
+#: inc/class-admin.php:242
 msgid "Dashboard"
 msgstr "Tableau de bord"
 
-#: inc/class-admin.php:156 inc/class-adminbar.php:86
+#: inc/class-admin.php:258 inc/class-adminbar.php:82
 #: inc/class-page-settings.php:115
 msgid "Jobs"
 msgstr "Opérations"
 
-#: inc/class-admin.php:171
+#: inc/class-admin.php:273
 msgid "Add new job"
 msgstr "Ajouter une nouvelle opération"
 
-#: inc/class-admin.php:186 inc/class-adminbar.php:102
+#: inc/class-admin.php:288 inc/class-adminbar.php:98
 #: inc/class-page-logs.php:328 inc/class-page-settings.php:115
 msgid "Logs"
 msgstr "Fichiers journaux"
 
-#: inc/class-admin.php:201 inc/class-adminbar.php:110
+#: inc/class-admin.php:303 inc/class-adminbar.php:106
 msgid "Backups"
 msgstr "Sauvegardes"
 
-#: inc/class-admin.php:216
+#: inc/class-admin.php:318
 msgid "Settings"
 msgstr "Paramètres"
 
-#: inc/class-admin.php:229
+#: inc/class-admin.php:331
 msgid "About"
 msgstr "A propos"
 
-#: inc/class-admin.php:264 inc/class-admin.php:270
+#: inc/class-admin.php:346 inc/class-admin.php:352
 msgid "Cheating, huh?"
 msgstr "Vous trichez ?"
 
-#: inc/class-admin.php:387
+#: inc/class-admin.php:396
 msgid "<a class=\"backwpup-get-pro\" href=\"%s\">Get BackWPup Pro now.</a>"
 msgstr "<a class=\"backwpup-get-pro\" href=\"%s\">Obtenir BackWPup Pro maintenant.</a>"
 
-#: inc/class-admin.php:407
+#: inc/class-admin.php:416
 msgid "version %s"
 msgstr "version %s"
 
-#: inc/class-adminbar.php:55
+#: inc/class-adminbar.php:51
 msgid "running"
 msgstr "en cours"
 
-#: inc/class-adminbar.php:71
+#: inc/class-adminbar.php:67
 msgid "Now Running"
 msgstr "En cours"
 
-#: inc/class-adminbar.php:77
+#: inc/class-adminbar.php:73
 msgid "Abort!"
 msgstr "Abandonner!"
 
-#: inc/class-adminbar.php:94 inc/class-page-jobs.php:584
+#: inc/class-adminbar.php:90 inc/class-page-jobs.php:584
 msgid "Add new"
 msgstr "Ajouter"
 
-#: inc/class-adminbar.php:132
+#: inc/class-adminbar.php:128
 msgid "Run Now"
 msgstr "Lancer maintenant"
 
