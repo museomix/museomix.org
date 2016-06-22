@@ -1,5 +1,4 @@
-<?php
-include_once('includes/shortcodes.php');
+<?phpinclude_once('includes/shortcodes.php');
 
 if (!isset($SectionsPage) || !is_array($SectionsPage))
 	$SectionsPage = array();
@@ -17,7 +16,7 @@ add_action('after_setup_theme', 'my_theme_setup');
 function my_theme_setup(){
     load_theme_textdomain('museomix', get_template_directory().'/lang');
 }
-/* initiation des menus personnalisÃ©s 
+/* initiation des menus personnalis¨¦s 
    ================================== */
 register_nav_menus( array(
         'Menu_principal' => 'Navigation principale',
@@ -43,7 +42,7 @@ function OrdonnerListes($query){
     }
 }
 
-/* plugins ACF (inopÃ©rant)
+/* plugins ACF (inop¨¦rant)
    ======================= */
 add_action('acf/register_fields', 'my_register_fields');
 function my_register_fields()
@@ -80,7 +79,7 @@ add_image_size('edition_thumbnail',200,200);
 add_image_size('edition_banner',790);
 add_image_size('location_thumbnail',2000);
 
-/* types de pages Â¨Â¤ trier selon le menu
+/* types de pages ¡§¡è trier selon le menu
    ==================================== */
 $OrdreMenuTypesPages = array('edition','page','museomix');
 
@@ -92,7 +91,7 @@ function DateBillet($temps){
 			$nbH = (int)floor((date_i18n('U')-$temps)/3600);
 			if ($nbH===-1)
 				$nbH = 0;
-			$date = ($nbH ===0 ? 'Â¨Â¤ l\'instant' : __('il y a','museomix').' '.$nbH.' h');
+			$date = ($nbH ===0 ? '¡§¡è l\'instant' : __('il y a','museomix').' '.$nbH.' h');
 		}else{
 			$date = __('le','museomix').' '.date_i18n('d M',$temps);
 		}
@@ -128,7 +127,7 @@ function mix_pagination() {
 	) )."</div>";
 }
 
-/* Ajout support fonction "en-tÂ¨Âºte" de WordPress */
+/* Ajout support fonction "en-t¡§ote" de WordPress */
 add_theme_support('custom-header');
 
 /* Lister les commentaires */
@@ -196,14 +195,14 @@ function ContenuSection($id, $echo = true){
 				if($contexte) {
 					$contenu = '<blockquote>'.$contexte.'</blockquote>';
 				}else{
-					//$contenu = '<span style="margin-left: 25px;color: #999;">pas de prÃ©sentation (champ: contexte)</span>';		
+					//$contenu = '<span style="margin-left: 25px;color: #999;">pas de pr¨¦sentation (champ: contexte)</span>';		
 				}
 
 				$contenu .= DescriptionMusee();
 
 				$other_content = get_details('other_content', $details);
 				if ($other_content) {
-					$contenu = '<div class="bloc-contenu"><section class="section-1">'.$other_content.'</section></div>';
+					$contenu .= '<div class="bloc-contenu"><section class="section-1">'.$other_content.'</section></div>';
 				}
 			}
 			break;
@@ -353,7 +352,7 @@ function ContenuSection($id, $echo = true){
 			}
 			$liste = null;
 			if(!$coord && !$coorg){
-				$contenu = '<span style="margin-left: 25px;color: #999;">pas d\Ã©quipe (champs: coordinateur local, co-organisateurs)</span>';		
+				$contenu = '<span style="margin-left: 25px;color: #999;">pas d\¨¦quipe (champs: coordinateur local, co-organisateurs)</span>';		
 			}else{
 				$contenu .= '<div class="clear"></div>';
 			}
