@@ -1,5 +1,5 @@
 <?php
-
+include_once('includes/shortcodes.php');
 	function MenuPrincipal($langage){
 		//$menus = get_nav_menu_locations();
 

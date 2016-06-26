@@ -50,6 +50,7 @@ function DisplaySocialMedia() {
 	if(!$rows) return '';
 	//$lang = (get_field('langage') == "fr") ? "Suivez-nous !" : "Follow us !";
 	//$r = ''.$lang.' ';
+
 	foreach ($rows as $row) {
 		$r .= '<a title="'.$row["link_title"].'" href="'.$row["url"].'""><img class="social_bouton" src="'.get_template_directory_uri().'/icons/icon-'.$row["reseau"].'.png" width="24" height="24"></a> ';
 	}

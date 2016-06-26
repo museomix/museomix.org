@@ -1,5 +1,4 @@
-<?phpinclude_once('includes/shortcodes.php');
-
+<?php
 if (!isset($SectionsPage) || !is_array($SectionsPage))
 	$SectionsPage = array();
 if (!isset($ContenusSections) || !is_array($ContenusSections))
