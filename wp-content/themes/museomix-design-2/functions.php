@@ -567,6 +567,9 @@ function TitreSection($id,$langage, $echo = true){
 		'equipe' => __('Team', 'museomix'),
 		'galerie' => __('Team', 'museomix'),
 	);
+	if (!isset($titles[$id])) {
+		return;
+	}
 	$titre .= '<h1>'.$titles[$id].'</h1>';
 	
 	if ($echo)
