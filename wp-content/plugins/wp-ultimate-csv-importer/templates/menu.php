@@ -159,8 +159,8 @@ $menuHTML .= "</li>";
 $menuHTML .= "<li class = '".sanitize_html_class($support)."'>";
 $menuHTML .= "<a href='" . esc_url(add_query_arg(array('page' => WP_CONST_ULTIMATE_CSV_IMP_SLUG.'/index.php', '__module' => 'support'), $impObj->baseUrl)) . "'> " . esc_html__('Support', 'wp-ultimate-csv-importer') . "</a>";
 $menuHTML .= "</li>";
-$menuHTML .= "<li><a href=".esc_url('https://www.wpultimatecsvimporter.com?utm_source=WpPlugin&utm_medium=Free&utm_campaign=SupportTraffic')." target='_blank'>" . esc_html__('Go Pro Now', 'wp-ultimate-csv-importer') . "</a></li>
-         <li ><a href=".esc_url('http://demo.smackcoders.com/wordpressdemofour/wp-admin/admin.php?page=wp-ultimate-csv-importer-pro%2Findex.php&__module=dashboard')." target='_blank'>" . esc_html__('Try Live Demo Now', 'wp-ultimate-csv-importer') . "</a></li>
+$menuHTML .= "<li><a href=".esc_url('https://www.smackcoders.com/wp-ultimate-csv-importer-pro.html?utm_source=WpPlugin&utm_medium=Free&utm_campaign=SupportTraffic')." target='_blank'>" . esc_html__('Go Pro Now', 'wp-ultimate-csv-importer') . "</a></li>
+         <li ><a href=".esc_url('http://demo.smackcoders.com/wp-ultimate-csv-importer/wp-admin/admin.php?page=wp-ultimate-csv-importer-pro/index.php&__module=dashboard')." target='_blank'>" . esc_html__('Try Live Demo Now', 'wp-ultimate-csv-importer') . "</a></li>
       </ul>";
 $plugin_version = get_option('ULTIMATE_CSV_IMP_VERSION');
 $menuHTML .= "</div>";

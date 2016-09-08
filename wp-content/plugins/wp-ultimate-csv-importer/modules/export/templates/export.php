@@ -788,12 +788,11 @@ class WPCSVProExportData {
 		if(!empty($recordsToBeExport)) :
 			foreach($recordsToBeExport as $postId) {
 				$this->data[$postId] = $this->getPostsDataBasedOnRecordId($postId);
-				$this->getPostsMetaDataBasedOnRecordId($postId, $this->module, $this->optionalType);
 				$this->getTermsAndTaxonomies($postId, $this->module, $this->optionalType);
+				$this->getPostsMetaDataBasedOnRecordId($postId, $this->module, $this->optionalType);
 				#$this->getTypesFields();
 			}
 		endif;
-		#print_r($this->data);
 		$result = $this->finalDataToExport($this->data);
 		$this->proceedExport($result);
 	}
@@ -856,7 +855,8 @@ class WPCSVProExportData {
 					$value->meta_key                       = 'featured_image';
 					$this->data[ $id ][ $value->meta_key ] = $attachment_file;
 				} else {
-					$metaValue = maybe_unserialize( $value->meta_value );
+					if( $value->meta_key != '_product_attributes' )
+						$metaValue = maybe_unserialize( $value->meta_value );
 					if ( is_array( $metaValue ) && count( $metaValue ) >= 1 ) {
 						$metaData = '';
 						foreach ( $metaValue as $item ) {
@@ -882,105 +882,101 @@ class WPCSVProExportData {
 	 * @param $optionalType
 	 */
 	public function getTermsAndTaxonomies ($id, $type, $optionalType) {
-		$TermsData = array();
-		if($type == 'WooCommerce' || $type == 'MarketPress') {
+		if($type == 'woocommerce' || $type == 'marketpress') {
 			$type = 'product';
+			if(!in_array('product_tag', $this->headers))
+				$this->headers[] = 'product_tag';
+			if(!in_array('product_category', $this->headers))
+				$this->headers[] = 'product_category';
 			$postTags = $postCategory = '';
-			$taxonomies = get_object_taxonomies($type);
+			// Fetch all Tags to the specific record
 			$get_tags = get_the_terms( $id, 'product_tag' );
-			if($get_tags){
+			if(is_array( $get_tags )){
 				foreach($get_tags as $tags){
 					$postTags .= $tags->name . ',';
 				}
 			}
 			$postTags = substr($postTags, 0, -1);
-			$this->data[$id]['product_tag'] = $postTags;
+			// Fetch all Categories to the specific record
+			$taxonomies = get_object_taxonomies($type);
 			foreach ($taxonomies as $taxonomy) {
 				if($taxonomy == 'product_cat' || $taxonomy == 'product_category'){
 					$get_categories = wp_get_post_terms( $id, $taxonomy );
-					if($get_categories){
+					if(is_array( $get_categories )){
 						foreach($get_categories as $category){
 							$postCategory .= $category->name . '|';
 						}
 					}
 					$postCategory = substr($postCategory, 0 , -1);
-					$this->data[$id]['product_category'] = $postCategory;
 				}
 			}
-		} else if($type == 'WPeCommerce') {
+			$this->data[$id]['product_tag'] = $postTags;
+			$this->data[$id]['product_category'] = $postCategory;
+		} else if($type == 'wpecommerce') {
+			if(!in_array('product_tag', $this->headers))
+				$this->headers[] = 'product_tag';
+			if(!in_array('product_category', $this->headers))
+				$this->headers[] = 'product_category';
 			$type = 'wpsc-product';
-			$postTags = $postCategory = '';
-			$taxonomies = get_object_taxonomies($type);
+			$postTags = $postCategory = $postTaxonomy = '';
+			// Fetch all Tags to the specific record
 			$get_tags = get_the_terms( $id, 'product_tag' );
-			if($get_tags){
+			if(is_array( $get_tags )){
 				foreach($get_tags as $tags){
-					$postTags .= $tags->name.',';
+					$postTags .= $tags->name . ',';
 				}
 			}
 			$postTags = substr($postTags,0,-1);
-			$this->data[$id]['product_tag'] = $postTags;
-			foreach ($taxonomies as $taxonomy) {
-				if($taxonomy == 'wpsc_product_category'){
-					$get_categories = wp_get_post_terms( $id, $taxonomy );
-					if($get_categories){
-						foreach($get_categories as $category){
-							$postCategory .= $category->name.'|';
-						}
-					}
-					$postCategory = substr($postCategory, 0 , -1);
-					$this->data[$id]['product_category'] = $postCategory;
+			// Fetch all Categories to the specific record
+			$get_categories = wp_get_post_terms( $id, 'wpsc_product_category' );
+			if(is_array( $get_categories )){
+				foreach($get_categories as $category){
+					$postCategory .= $category->name . '|';
 				}
 			}
+			$postCategory = substr($postCategory, 0 , -1);
+			// Fetch all Taxonomies to the specific record
+			$this->data[$id]['product_tag'] = $postTags;
+			$this->data[$id]['product_category'] = $postCategory;
 		} else {
 			global $wpdb;
+			if(!in_array('post_tag', $this->headers))
+				$this->headers[] = 'post_tag';
+			if(!in_array('post_category', $this->headers))
+				$this->headers[] = 'post_category';
 			$postTags = $postCategory = '';
-			$taxonomyId = $wpdb->get_col($wpdb->prepare("select term_taxonomy_id from $wpdb->term_relationships where object_id = %d", $id));
-			if(!empty($taxonomyId)) {
-				foreach($taxonomyId as $taxonomy) {
-					$taxonomyType = $wpdb->get_col($wpdb->prepare("select taxonomy from $wpdb->term_taxonomy where term_taxonomy_id = %d",$taxonomy));
-					if(!empty($taxonomyType)) {
-						foreach($taxonomyType as $termName) {
-							if($termName == 'category')
-								$termName = 'post_category';
-							if(in_array($termName, $this->headers)) {
-								if($termName != 'post_tag') {
-									$taxonomyData = $wpdb->get_col($wpdb->prepare("select name from $wpdb->terms where term_id = %d",$taxonomy));
-									if(!empty($taxonomyData)) {
-										if(isset($TermsData[$termName]))
-											$this->data[$id][$termName] = $TermsData[$termName] . ',' . $taxonomyData[0];
-										else
-											$this->data[$id][$termName] = $taxonomyData[0];
-									}
-								}
-								else {
-									if(!isset($TermsData['post_tag'])) {
-										$get_tags = wp_get_post_tags($id, array('fields' => 'names'));
-										foreach ($get_tags as $tags) {
-											$postTags .= $tags . ',';
-										}
-										$postTags = substr($postTags, 0, -1);
-										$this->data[$id][$termName] = $postTags;
-									}
-								}
-								if(!isset($TermsData['category'])){
-									$get_categories = wp_get_post_categories($id, array('fields' => 'names'));
-									foreach ($get_categories as $category) {
-										$postCategory .= $category . '|';
-									}
-									$postCategory = substr($postCategory, 0, -1);
-									$this->data[$id]['category'] = $postCategory;
-								}
-
-							}
-							else{
-								$this->data[$id][$termName] = '';
-							}
-						}
+			// Fetch all Tags to the specific record
+			$get_tags = wp_get_post_tags($id, array('fields' => 'names'));
+			foreach ($get_tags as $tags) {
+				$postTags .= $tags . ',';
+			}
+			$postTags = substr($postTags, 0, -1);
+			// Fetch all Tags to the specific record
+			$get_categories = wp_get_post_categories($id, array('fields' => 'names'));
+			foreach ($get_categories as $category) {
+				$postCategory .= $category . '|';
+			}
+			$postCategory = substr($postCategory, 0, -1);
+			$this->data[$id]['post_category'] = $postCategory;
+			$this->data[$id]['post_tag'] = $postTags;
+		}
+		// Fetch all Tags to the specific record
+		$taxonomies = get_object_taxonomies($type);
+		foreach ($taxonomies as $taxonomy) {
+			$postTaxonomy = '';
+			if( $taxonomy != 'category' || $taxonomy != 'post_tag' || $taxonomy != 'product_cat' || $taxonomy != 'product_category' || $taxonomy != 'wpsc_product_category' || $taxonomy != 'product_tag' ) {
+				if(!in_array($taxonomy, $this->headers))
+					$this->headers[] = $taxonomy;
+				$get_terms = wp_get_post_terms( $id, $taxonomy );
+				if(is_array( $get_terms )) {
+					foreach($get_terms as $term){
+						$postTaxonomy .= $term->name . '|';
 					}
 				}
+				$postTaxonomy = substr($postTaxonomy, 0 , -1);
+				$this->data[$id][$taxonomy] = $postTaxonomy;
 			}
 		}
-		#print_r($TermsData); die;
 		#return $TermsData;
 	}
 

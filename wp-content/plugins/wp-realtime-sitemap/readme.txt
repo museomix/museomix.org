@@ -1,12 +1,12 @@
 === WP Realtime Sitemap ===
 Contributors: Rincewind
-Donate link: http://goo.gl/ddoa5
-Tags: seo, navigation, site, map, sitemap, sitemaps, posts, pages, custom, post, types, wpmu, wordpress, multisite, multiuser, bilingual, i18n, l10n, language, multilanguage, multilingual, translation, qtranslate
+Donate link: http://goo.gl/mmUuGj
+Tags: seo, navigation, site, map, sitemap, sitemaps, posts, pages, custom, post, types, wpmu, wpml, wordpress, multisite, multiuser, bilingual, i18n, l10n, language, multilanguage, multilingual, translation, qtranslate
 Requires at least: 3.0
-Tested up to: 3.2
-Stable tag: trunk
+Tested up to: 4.5.3
+Stable tag: 1.5.6
 
-A sitemap plugin to make it easier for your site to show all your pages, posts, archives, categories and tags in an easy to read format without any need for template modification or html/php knowledge in a page, my plugin does not create a .xml for any search engines this is outside of what this plugin was designed to do.
+A sitemap plugin to make it easier for your site to show all your pages, posts, archives, categories and tags in an easy to read format.
 
 == Description ==
 
@@ -26,7 +26,7 @@ A sitemap plugin to make it easier for your site to show all your pages, posts, 
 1. Supports I18n for translation.
 1. Supports use of the wordpress shortcode for including the sitemap in pages and posts.
 1. Supports menus created with the inbuilt WordPress Menu Editor.
-1. Works on WordPress Multisite (WPMU) blogs.
+1. Works on WordPress Multisite (WPMU, WPML) blogs.
 1. Comes with an uninstaller, if you dont want it anymore just deactivate the plugin and delete it from within wordpress and it will delete all of its settings itself.
 
 I cant think of anything else that I personally would need this plugin to do for my own use, if anyone feels it doesn't meet what they need, or has any suggestions as to how to make it better then do please get in touch with me and I will see what I can do to accomodate your requests.
@@ -42,7 +42,7 @@ WP Realtime Sitemap is available in:-
 * Russian by [ssvictors](http://wordpress.org/support/profile/ssvictors) and [Igor Dubilej](http://www.itransition.com).
 * Spanish by Francois-Xavier Gonzalez. **needs updating**
 
-Please rate this plugin and/or make a [donation](http://goo.gl/ddoa5 "PayPal donation") if you find it useful, thank you.
+Please rate this plugin and/or make a [donation](http://goo.gl/mmUuGj "PayPal donation") if you find it useful, thank you.
 
 == Installation ==
 
@@ -77,7 +77,7 @@ Please see the [FAQ](http://goo.gl/QNiRH "FAQ") and [Other Notes](http://goo.gl/
 
 = I would like to make a donation how can I do this? =
 
-You can make a Pay Pal donation by clicking [here](http://goo.gl/ddoa5 "PayPal donation"), or click on "Donate to this plugin" in the right hand side box where it says FYI, your donation will be very gratefully received thank you!
+You can make a Pay Pal donation by clicking [here](http://goo.gl/mmUuGj "PayPal donation"), or click on "Donate to this plugin" in the right hand side box where it says FYI, your donation will be very gratefully received thank you!
 
 = What should I call the page that I add the sitemap to? =
 
@@ -150,6 +150,17 @@ All translators will have a link to their website placed on the plugin homepage 
 Full details of producing a translation can be found in this [guide to translating WordPress plugins](http://goo.gl/Q5LhT "guide to translating WordPress plugins").
 
 == Changelog ==
+
+= 1.5.6 =
+* Escaped some strings to address security issues.
+* Added "suppress_filters => false" to make the plugin WPML compatible.
+* Fixed uninstall hook as was incorrectly used.
+
+= 1.5.5 =
+* Fixed reported issue of not being able to change "Header Settings".
+* Fixed broken donation link.
+* Removed themefuse buttons.
+* Changed hook so settings are only removed on uninstall and not on deactivation.
 
 = 1.5.4 =
 * Fixed issue with the custom post types.

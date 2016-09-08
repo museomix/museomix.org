@@ -1,9 +1,9 @@
 === MailPoet Newsletters ===
 Contributors: wysija
 Tags: newsletter, newsletters, email newsletter, email subscription, newsletter signup, post notification, autoresponder, newsletter alert, auto newsletter, automatic post notification, email newsletters, email signup, auto post notifications, newsletter widget, newsletter builder, subscribe widget, signup widget, email subscription, newsletter plugin, widget, subscription, emailing, mailpoet, wysija, mandrill, sendgrid
-Requires at least: 3.3
-Tested up to: 4.5.2
-Stable tag: 2.7.2
+Requires at least: 3.5
+Tested up to: 4.5.3
+Stable tag: 2.7.5
 Send newsletters post notifications or autoresponders from WordPress easily, and beautifully. Start to capture subscribers with our widget now.
 
 == Description ==
@@ -132,6 +132,22 @@ Our [support site](http://support.mailpoet.com/) has plenty of articles and a ti
 
 == Changelog ==
 
+= 2.7.5 - 2016-08-18 =
+* Fixed subscription form widget
+
+= 2.7.4 - 2016-08-09 =
+* Fixed error appearing during newsletter creation
+
+= 2.7.3 - 2016-08-08 =
+* Fixed issue with emoji when saving newsletters
+* Prevent encoding of "tel:" URLs
+* Fixed SQL injection vulnerability (Thanks to Force Interactive)
+* Fixed XSS vulnerability (Thanks to Sipke Mellema from Securify B.V.)
+* Fixed PHP warnings on Bounce management
+* Escape commma and quote marks during export
+* Fixed some editor issues
+* Fixed double signed DKIM emails
+
 = 2.7.2 - 2016-06-01 =
 * Fixed broken CSS for Premium page
 * Fixed Custom Fields not saving on front-end
@@ -145,7 +161,7 @@ Our [support site](http://support.mailpoet.com/) has plenty of articles and a ti
 * Fixed sending preview of an email with an empty subject
 * Added Ukrainian JS validation language
 * Replaced deprecated get_currentuserinfo() with wp_get_current_user()
-* Fixed PHP notices that migh appear during sending process
+* Fixed PHP notices that may have appeared during the sending process
 
 = 2.7.1 - 2016-03-15 =
 * Fixed security issues. Thanks to Falk Huber for letting us now.

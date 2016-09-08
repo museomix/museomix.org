@@ -212,7 +212,8 @@ class WYSIJA_view_front_widget_nl extends WYSIJA_view_front {
 				$list_fields_hidden='<input type="hidden" name="wysija[user_list][list_ids]" value="'.$list_exploded.'" />';
 			}
 
-			$submitbutton=$list_fields.'<input type="submit" '.$disabled_submit.' class="wysija-submit wysija-submit-field" name="submit" value="'.esc_attr($params['submit']).'"/>';
+			$submit_value = (!empty($params['submit'])) ? $params['submit'] : __('Submit', WYSIJA);
+			$submitbutton=$list_fields.'<input type="submit" '.$disabled_submit.' class="wysija-submit wysija-submit-field" name="submit" value="'.esc_attr($submit_value).'"/>';
 			$dataCf=$this->customFields($params,$form_id_real,$submitbutton);
 
 			if($dataCf){
@@ -231,11 +232,12 @@ class WYSIJA_view_front_widget_nl extends WYSIJA_view_front {
 				$data.=$submitbutton.'</p>';
 			}
 
+                $success_value = (!empty($params['success'])) ? $params['success'] : __('Success', WYSIJA);
 				// few hiddn field
 				$data.='<input type="hidden" name="formid" value="'.esc_attr($form_id_real).'" />
 					<input type="hidden" name="action" value="save" />
 				'.$list_fields_hidden.'
-				<input type="hidden" name="message_success" value="'.esc_attr($params["success"]).'" />
+				<input type="hidden" name="message_success" value="'.esc_attr($success_value).'" />
 				<input type="hidden" name="controller" value="subscribers" />';
 				$data.='<input type="hidden" value="1" name="wysija-page" />';
 

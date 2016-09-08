@@ -11,22 +11,21 @@
  */
 final class ITSEC_Files {
 	static $instance = false;
-	
+
 	private function __construct() {
 
-		add_action( 'itsec_add_admin_meta_boxes', array( $this, 'add_admin_meta_boxes' ) );
 		add_action( 'itsec-new-blacklisted-ip', array( $this, 'quick_ban' ) );
 
 	}
-	
+
 	public static function get_instance() {
 		if ( ! self::$instance ) {
 			self::$instance = new self;
 		}
-		
+
 		return self::$instance;
 	}
-	
+
 	/**
 	 * Check the setting that allows writing files.
 	 *
@@ -37,40 +36,40 @@ final class ITSEC_Files {
 	public static function can_write_to_files() {
 		$can_write = (bool) ITSEC_Modules::get_setting( 'global', 'write_files' );
 		$can_write = apply_filters( 'itsec_filter_can_write_to_files', $can_write );
-		
+
 		return $can_write;
 	}
 
 	public static function regenerate_wp_config( $add_responses = true ) {
 		require_once( ITSEC_Core::get_core_dir() . '/lib/class-itsec-lib-config-file.php' );
-		
+
 		$result = ITSEC_Lib_Config_File::update_wp_config();
 		$success = ! is_wp_error( $result );
-		
+
 		if ( $add_responses && is_wp_error( $result ) ) {
 			ITSEC_Response::add_error( $result );
 		}
-		
+
 		return $success;
 	}
-	
+
 	public static function regenerate_server_config( $add_responses = true ) {
 		require_once( ITSEC_Core::get_core_dir() . '/lib/class-itsec-lib-config-file.php' );
-		
+
 		$result = ITSEC_Lib_Config_File::update_server_config();
 		$success = ! is_wp_error( $result );
 		$server = ITSEC_Lib_Utility::get_web_server();
-		
+
 		if ( $add_responses ) {
 			if ( is_wp_error( $result ) ) {
 				ITSEC_Response::add_error( $result );
-				
+
 				$file = ITSEC_Lib_Config_File::get_server_config_file_path();
 			} else if ( 'nginx' === $server ) {
 				ITSEC_Response::add_message( __( 'You must restart your NGINX server for the changes to take effect.', 'better-wp-security' ) );
 			}
 		}
-		
+
 		return $success;
 	}
 
@@ -99,7 +98,7 @@ final class ITSEC_Files {
 	 */
 	public function do_deactivate() {
 		require_once( ITSEC_Core::get_core_dir() . '/lib/class-itsec-lib-config-file.php' );
-		
+
 		ITSEC_Lib_Config_File::reset_wp_config();
 		ITSEC_Lib_Config_File::reset_server_config();
 	}
@@ -123,15 +122,15 @@ final class ITSEC_Files {
 		if ( ! ITSEC_Lib_IP_Tools::validate( $host ) ) {
 			return false;
 		}
-		
-		
+
+
 		$host_rule = '# ' . __( 'Quick ban IP. Will be updated on next formal rules save.', 'better-wp-security' ) . "\n";
-		
+
 		if ( 'nginx' === ITSEC_Lib::get_server() ) {
 			$host_rule .= "\tdeny $host;\n";
 		} else if ( 'apache' === ITSEC_Lib::get_server() ) {
 			$dhost = str_replace( '.', '\\.', $host ); //re-define $dhost to match required output for SetEnvIf-RegEX
-			
+
 			$host_rule .= "SetEnvIF REMOTE_ADDR \"^$dhost$\" DenyAccess\n"; //Ban IP
 			$host_rule .= "SetEnvIF X-FORWARDED-FOR \"^$dhost$\" DenyAccess\n"; //Ban IP from Proxy-User
 			$host_rule .= "SetEnvIF X-CLUSTER-CLIENT-IP \"^$dhost$\" DenyAccess\n"; //Ban IP for Cluster/Cloud-hosted WP-Installs
@@ -149,14 +148,14 @@ final class ITSEC_Files {
 			$host_rule .= "\tAllow from all\n";
 			$host_rule .= "</IfModule>\n";
 		}
-		
+
 		require_once( ITSEC_Core::get_core_dir() . '/lib/class-itsec-lib-config-file.php' );
 		$result = ITSEC_Lib_Config_File::append_server_config( $host_rule );
-		
+
 		if ( is_wp_error( $result ) ) {
 			return false;
 		}
-		
+
 		return true;
 	}
 
@@ -226,123 +225,17 @@ final class ITSEC_Files {
 		if ( ITSEC_Modules::get_setting( 'global', 'lock_file' ) ) {
 			return true;
 		}
-		
+
 		require_once( ITSEC_Core::get_core_dir() . '/lib/class-itsec-lib-directory.php' );
-		
+
 		$lock_file = ITSEC_Core::get_storage_dir() . '/' . sanitize_text_field( $lock_file ) . '.lock';
-		
+
 		$result = ITSEC_Lib_Directory::remove( $lock_file );
-		
+
 		if ( is_wp_error( $result ) ) {
 			return false;
 		}
-		
+
 		return true;
-	}
-	
-	/**
-	 * Add meta boxes to primary options pages.
-	 *
-	 * Adds the meta boxes containing rewrite rules that appears on the iThemes Security
-	 * Dashboard.
-	 *
-	 * @since 4.0.0
-	 *
-	 * @return void
-	 */
-	public function add_admin_meta_boxes() {
-
-		add_meta_box(
-			'itsec_rewrite',
-			__( 'Rewrite Rules', 'better-wp-security' ),
-			array( $this, 'rewrite_metabox' ),
-			'toplevel_page_itsec',
-			'bottom',
-			'core'
-		);
-
-		add_meta_box(
-			'itsec_wpconfig',
-			__( 'wp-config.php Rules', 'better-wp-security' ),
-			array( $this, 'config_metabox' ),
-			'toplevel_page_itsec',
-			'bottom',
-			'core'
-		);
-
-	}
-
-	/**
-	 * Calls config metabox action.
-	 *
-	 * Allows a hook to add to the metabox containing the wp-config.php rules.
-	 *
-	 * @since 4.0.0
-	 *
-	 * @return void
-	 */
-	public function config_metabox() {
-
-		add_action( 'itsec_wpconfig_metabox', array( $this, 'config_metabox_contents' ) );
-		do_action( 'itsec_wpconfig_metabox' );
-
-	}
-
-	/**
-	 * Echos content metabox contents.
-	 *
-	 * Echos the contents of the wp-config.php metabox
-	 *
-	 * @since 4.0.0
-	 *
-	 * @return void
-	 */
-	public function config_metabox_contents() {
-		require_once( ITSEC_Core::get_core_dir() . '/lib/class-itsec-lib-config-file.php' );
-		
-		$config = ITSEC_Lib_Config_File::get_wp_config();
-		
-		if ( empty( $config ) ) {
-			_e( 'There are no rules to write.', 'better-wp-security' );
-		} else {
-			echo '<div class="itsec_rewrite_rules">' . highlight_string( $config, true ) . '</div>';
-		}
-	}
-
-	/**
-	 * Calls rewrite metabox action.
-	 *
-	 * Executes the action to draw the htaccess rewrite rules metabox
-	 *
-	 * @since 4.0.0
-	 *
-	 * @return void
-	 */
-	public function rewrite_metabox() {
-
-		add_action( 'itsec_rewrite_metabox', array( $this, 'rewrite_metabox_contents' ) );
-		do_action( 'itsec_rewrite_metabox' );
-
-	}
-
-	/**
-	 * Echos rewrite metabox content.
-	 *
-	 * Echos the rewrite rules in the dashboard.
-	 *
-	 * @since 4.0.0
-	 *
-	 * @return void
-	 */
-	public function rewrite_metabox_contents() {
-		require_once( ITSEC_Core::get_core_dir() . '/lib/class-itsec-lib-config-file.php' );
-		
-		$config = ITSEC_Lib_Config_File::get_server_config();
-		
-		if ( empty( $config ) ) {
-			_e( 'There are no rules to write.', 'better-wp-security' );
-		} else {
-			echo '<div class="itsec_rewrite_rules">' . highlight_string( $config, true ) . '</div>';
-		}
 	}
 }

@@ -159,7 +159,7 @@ class ITSEC_IPCheck {
 						$expiration     = date( 'Y-m-d H:i:s', $itsec_globals['current_time'] + $cache );
 						$expiration_gmt = date( 'Y-m-d H:i:s', $itsec_globals['current_time_gmt'] + $cache );
 
-						$itsec_logger->log_event( __( 'lockout', 'better-wp-security' ), 10, array(
+						$itsec_logger->log_event( 'lockout', 10, array(
 							'expires' => $expiration, 'expires_gmt' => $expiration_gmt, 'type' => 'host'
 						), $ip );
 
@@ -323,7 +323,7 @@ class ITSEC_IPCheck {
 						$expiration     = date( 'Y-m-d H:i:s', $itsec_globals['current_time'] + $cache );
 						$expiration_gmt = date( 'Y-m-d H:i:s', $itsec_globals['current_time_gmt'] + $cache );
 
-						$itsec_logger->log_event( __( 'lockout', 'better-wp-security' ), 10, array(
+						$itsec_logger->log_event( 'lockout', 10, array(
 							'expires' => $expiration, 'expires_gmt' => $expiration_gmt, 'type' => 'host'
 						), $ip );
 

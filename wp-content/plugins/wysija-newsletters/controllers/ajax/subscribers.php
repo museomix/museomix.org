@@ -9,7 +9,7 @@ class WYSIJA_control_back_subscribers extends WYSIJA_control_front{
         parent::__construct();
         $data=array();
         foreach($_REQUEST['data'] as $vals){
-            $data[$vals['name']]=$vals['value'];
+            $data[esc_sql($vals['name'])]=esc_sql($vals['value']);
         }
         if(isset($data['message_success'])){
             $this->messages['insert'][true]=$data['message_success'];
@@ -27,9 +27,9 @@ class WYSIJA_control_back_subscribers extends WYSIJA_control_front{
         $i=0;
         foreach($_REQUEST['data'] as $vals){
             if($vals['name']=='wysija[user_list][list_id][]'){
-                $datarequested[str_replace('wysija[user_list][list_id][]', 'wysija[user_list][list_id]['.$i.']', $vals['name'])]=$vals['value'];
+                $datarequested[str_replace('wysija[user_list][list_id][]', 'wysija[user_list][list_id]['.$i.']', esc_sql($vals['name']))]=esc_sql($vals['value']);
                 $i++;
-            }else   $datarequested[$vals['name']]=$vals['value'];
+            }else   $datarequested[esc_sql($vals['name'])]=esc_sql($vals['value']);
         }
 
         $data=$this->convertUserData($datarequested);

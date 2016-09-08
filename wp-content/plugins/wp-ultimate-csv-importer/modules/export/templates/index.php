@@ -1034,7 +1034,7 @@ $impCE = new WPImporter_includes_helper();
 	<div class='col-sm-6'>
 	<input class='form-control' type='text' name='export_filename' id='export_filename' value='' placeholder="export_as_<?php echo(date("Y-m-d")); ?>" size="18" style="margin-left:-67px;margin-top:-8px;">
 	</div>
-	<a id="download_file_link" href="" target="_blank" class="col-sm-4" style="margin-top: -10px; display: none;"> <input type="button" name="download_file" id="download_file" class="btn btn-primary" style="display: none;" value="Download"></a>
+	<a id="download_file_link" href="" target="_blank" class="col-sm-2" style="margin-top: -10px; display: none;"> <input type="button" name="download_file" id="download_file" class="btn btn-primary" style="display: none;" value="Download"></a>
 	</div>
 	<div style="padding:15px;width:100% !important;" class='col-sm-3'>
 	<input type='hidden' name='export' id='export' value='<?php if(isset($_POST['export'])){ echo sanitize_text_field($_POST['export']);} ?>' />

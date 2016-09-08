@@ -15,12 +15,7 @@ $formActionUrl = add_query_arg('noheader', 1, $settings_page_url);
 $isProVersion = apply_filters('admin_menu_editor_is_pro', false);
 ?>
 
-<div class="wrap">
-	<<?php echo WPMenuEditor::$admin_heading_tag; ?> id="ws_ame_editor_heading">
-		<?php echo apply_filters('admin_menu_editor-self_page_title', 'Menu Editor'); ?>
-	</<?php echo WPMenuEditor::$admin_heading_tag; ?>>
-
-	<?php do_action('admin_menu_editor-display_tabs'); ?>
+<?php do_action('admin_menu_editor-display_header'); ?>
 
 	<form method="post" action="<?php echo esc_attr($formActionUrl); ?>" id="ws_plugin_settings_form">
 
@@ -256,6 +251,51 @@ $isProVersion = apply_filters('admin_menu_editor_is_pro', false);
 			</tr>
 
 			<tr>
+				<th scope="row">Error verbosity level</th>
+				<td>
+					<fieldset id="ame-submenu-icons-settings">
+						<p>
+							<label>
+								<input type="radio" name="error_verbosity" value="<?php echo WPMenuEditor::VERBOSITY_LOW ?>>"
+									<?php checked(WPMenuEditor::VERBOSITY_LOW, $settings['error_verbosity']); ?>>
+								Low
+
+								<br><span class="description">
+									Shows a generic error message without any details.
+								</span>
+							</label>
+						</p>
+
+						<p>
+							<label>
+								<input type="radio" name="error_verbosity" value="<?php echo WPMenuEditor::VERBOSITY_NORMAL; ?>>"
+									<?php checked(WPMenuEditor::VERBOSITY_NORMAL, $settings['error_verbosity']); ?>>
+								Normal
+
+								<br><span class="description">
+									Shows a one or two sentence explanation. For example: "The current user doesn't have
+									the "manage_options" capability that is required to access the "Settings" menu item."
+								</span>
+							</label>
+						</p>
+
+						<p>
+							<label>
+								<input type="radio" name="error_verbosity" value="<?php echo WPMenuEditor::VERBOSITY_VERBOSE; ?>>"
+									<?php checked(WPMenuEditor::VERBOSITY_VERBOSE, $settings['error_verbosity']); ?>>
+								Verbose
+
+								<br><span class="description">
+									Like "normal", but also includes a log of menu settings and permissions that
+									caused the current menu to be hidden. Useful for debugging.
+								</span>
+							</label>
+						</p>
+					</fieldset>
+				</td>
+			</tr>
+
+			<tr>
 				<th scope="row">Debugging</th>
 				<td>
 					<label>
@@ -282,7 +322,7 @@ $isProVersion = apply_filters('admin_menu_editor_is_pro', false);
 		?>
 	</form>
 
-</div>
+<?php do_action('admin_menu_editor-display_footer'); ?>
 
 <script type="text/javascript">
 	jQuery(function($) {

@@ -92,6 +92,9 @@ class WYSIJA_control_front_subscribers extends WYSIJA_control_front{
             //fill the widget data array based on the parameters found earlier
             if($encoded_form){
                 foreach($encoded_form as $key =>$val) {
+                    if (in_array($key, array('before_widget', 'after_widget', 'before_title', 'title', 'after_title'))) {
+                      $val = sanitize_text_field($val);
+                    }
                     $widget_data[$key]=$val;
 
                     //if the value is an object we need to loop through and make an array of it

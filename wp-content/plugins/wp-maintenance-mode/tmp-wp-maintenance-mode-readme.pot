@@ -1,0 +1,1009 @@
+msgid ""
+msgstr "MIME-Version: 1.0\n"
+
+#. Name.
+msgid "WP Maintenance Mode"
+msgstr ""
+
+#. Short description.
+msgid "Adds a splash page to your site that lets visitors know your site is down for maintenance. It&#039;s perfect for a coming soon page."
+msgstr ""
+
+#. Screenshot description.
+msgid "Maintenance Mode example"
+msgstr ""
+
+#. Screenshot description.
+msgid "Maintenance Mode example #2"
+msgstr ""
+
+#. Screenshot description.
+msgid "Contact form"
+msgstr ""
+
+#. Screenshot description.
+msgid "Dashboard General settings"
+msgstr ""
+
+#. Screenshot description.
+msgid "Dashboard Design settings"
+msgstr ""
+
+#. Screenshot description.
+msgid "Dashboard Modules settings"
+msgstr ""
+
+#. Found in description header.
+msgid "Features"
+msgstr ""
+
+#. Found in description header.
+msgid "Bugs, technical hints or contribute"
+msgstr ""
+
+#. Found in description header.
+msgid "Credits"
+msgstr ""
+
+#. Found in description list item.
+msgid "Fully customizable (change colors, texts and backgrounds);"
+msgstr ""
+
+#. Found in description list item.
+msgid "Subscription form (export emails to .csv file);"
+msgstr ""
+
+#. Found in description list item.
+msgid "Countdown timer (remaining time);"
+msgstr ""
+
+#. Found in description list item.
+msgid "Contact form (receive emails from visitors);"
+msgstr ""
+
+#. Found in description list item.
+msgid "Coming soon page;"
+msgstr ""
+
+#. Found in description list item.
+msgid "Landing page templates;"
+msgstr ""
+
+#. Found in description list item.
+msgid "WordPress multisite;"
+msgstr ""
+
+#. Found in description list item.
+msgid "Responsive design;"
+msgstr ""
+
+#. Found in description list item.
+msgid "Social media icons;"
+msgstr ""
+
+#. Found in description list item.
+msgid "Works with any WordPress theme;"
+msgstr ""
+
+#. Found in description list item.
+msgid "SEO options;"
+msgstr ""
+
+#. Found in description list item.
+msgid "Exclude URLs from maintenance."
+msgstr ""
+
+#. Found in description paragraph.
+msgid "Add a maintenance page to your blog that lets visitors know your blog is down for maintenance, or add a coming soon page for a new website. User with admin rights gets full access to the blog including the front end."
+msgstr ""
+
+#. Found in description paragraph.
+msgid ""
+"Activate the plugin and your blog is in maintenance-mode, works and only registered users with enough rights can see the front end. You can use a date with a countdown timer for visitor information or set a value and unit for information. \n"
+"Also works with WordPress Multisite installs (each blog from the network has it's own maintenance settings)."
+msgstr ""
+
+#. Found in description paragraph.
+msgid "Please give us feedback, contribute and file technical bugs on <a href=\"https://github.com/Designmodocom/WP-Maintenance-Mode\">GitHub Repo</a>."
+msgstr ""
+
+#. Found in description paragraph.
+msgid "Developed by <a href=\"http://designmodo.com\">Designmodo</a>"
+msgstr ""
+
+#. Found in installation list item.
+msgid "Unpack the download package"
+msgstr ""
+
+#. Found in installation list item.
+msgid "Upload all files to the <code>/wp-content/plugins/</code> directory, include folders"
+msgstr ""
+
+#. Found in installation list item.
+msgid "Activate the plugin through the 'Plugins' menu in WordPress"
+msgstr ""
+
+#. Found in installation list item.
+msgid "Go to <code>Settings</code> page, where you can change what settings you need (pay attention to <strong>Exclude</strong> option!)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "reset_settings _wpnonce check (thanks # Wordfence)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "modules &gt; google analytics code sanitization (thanks @ Wordfence)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "move sidebar banners from our servers to plugin folder... as WordPress staff requested"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Subscribe button error on Mobile version (thanks @ Hostílio Thumbo)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "replace $wp_scripts global with wp_scripts() function"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "de_DE language file update (thanks @ tt22tt)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "notifications update"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "languages update"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "roles (array) fix"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed issue: responsive subscribe form"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed issue: jQuery was loaded from a different folder on some WP installations"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed issue: errors after update (strstr on empty strings because of saving empty lines on exclude list)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed issue: if \"Redirection\" from \"General\" tab is active, also redirects ajax calls"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed issue: settings page title was wrong placed"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "\"contact\" feature update - nice email template + reply-to email header"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "refactoring for some methods"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "all assets are now minified"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "rewrite count db records function (used on subscribers count)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "compatible with https://github.com/afragen/github-updater"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "compatible with wp-cli http://wp-cli.org/"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improved responsivity"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improved roles access; now you can set multiple roles (editor, author, subscriber, contributor) and administrator will always have access to backend and frontend"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "it_IT translation by benedettogit (https://github.com/benedettogit)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "updated all language files (need help for 100% translation)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "WP_Super_Cache issue was fixed"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed \"Subscribe\" button issue on Safari mobile"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed color of subscribe-success message (same color as subscribe_text)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "\"Social networks\" module edits: settings for links target + a new social network: linkedin"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "new module \"Google Analytics\""
+msgstr ""
+
+#. Found in changelog list item.
+msgid "loginform shortcode reintroduced"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "dashboard link on maintenance page reintroduced"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "the content editor accepts new css inline properties: min-height, max-height, min-width, max-width. Use them wisely! :)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Settings &amp; sidebar view + old translation files edited"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Update from old version 1.x to 2.x issue was fixed"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Translate on activation issue was fixed"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "de_DE translation by Frank Bültge (http://bueltge.github.io/)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "pt_PT translation (100% translated) by Pedro Mendonça (http://www.pedromendonca.pt)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "ru_RU translation (100% translated) by affectiosus (https://github.com/affectiosus)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "nl_NL translation by dhunink (https://github.com/dhunink)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "es_ES translation (100% translated) by Erick Ruiz de Chavez (http://erickruizdechavez.com/)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fr_FR translation by Florian TIAR (https://github.com/Mahjouba91)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "pt_BR translation by Jonatas Araújo (http://www.designworld.com.br/)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "sv_SE translation by Andréas Lundgren (http://adevade.com/)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Removed \"Author Link\" option from General"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Countdown - save details fix"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Reintroduced some deprecated actions from old version (but still available in next 4 releases, after that will be removed) and replaced with new ones:"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "<code>wm_head</code> -&gt; <code>wpmm_head</code>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "<code>wm_footer</code> -&gt; <code>wpmm_footer</code>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Multisite settings link fix"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "WP_Maintenance_Mode: init (array checking for custom_css arrays, move delete cache part into a helper, etc.), add_subscriber, send_contact, redirect fixes &amp; optimizations "
+msgstr ""
+
+#. Found in changelog list item.
+msgid "WP_Maintenance_Mode_Admin: save_plugin_settings fixes, delete_cache (new method)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Settings &amp; Maintenance views fixes"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Readme.txt changes"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Changed design and functionality, new features"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Changed multisite behaviour: now you can activate maintenance individually (each blog from the network has it's own maintenance settings) "
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Removed actions: <code>wm_header</code>, <code>wm_footer</code>, <code>wm_content</code>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Removed filters: <code>wm_header</code> "
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Removed [loginform] shortcode"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Some filters are deprecated (but still available in next 4 releases, after that will be removed) and replaced with new ones:"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "<code>wm_heading</code> -&gt; <code>wpmm_heading</code>, "
+msgstr ""
+
+#. Found in changelog list item.
+msgid "<code>wp_maintenance_mode_status_code</code> -&gt; <code>wpmm_status_code</code>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "<code>wm_title</code> -&gt; <code>wpmm_meta_title</code>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "<code>wm_meta_author</code> -&gt; <code>wpmm_meta_author</code>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "<code>wm_meta_description</code> -&gt; <code>wpmm_meta_description</code>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "<code>wm_meta_keywords</code> -&gt; <code>wpmm_meta_keywords</code>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added new filters:"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "<code>wpmm_backtime</code> - can be used to change the backtime from page header"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "<code>wpmm_meta_robots</code> - can be used to change <code>Robots Meta Tag</code> option (from General)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "<code>wpmm_text</code> - can be used to change <code>Text</code> option (from Design &gt; Content)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "<code>wpmm_scripts</code> - can be used to embed new javascripts files"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "<code>wpmm_styles</code> - can be used to embed new css files"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "<code>wpmm_search_bots</code> - if you have <code>Bypass for Search Bots</code> option (from General) activated, it can be used to add new bots (useragents)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Removed themes and now we have a \"Design\" &amp; \"Modules\" tabs, where the look and functionality of the maintenance page can be changed as you need"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Switch to new owner, contributor"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixes for php notices in scrict mode"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Alternative for check url, if curl is not installed"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add check for urls, Performance topics"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Change default setting of 'Support Link' to false"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix network settings php notices"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Allow empty header, title, heading string"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Small code changes"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add Support function"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Remove preview, will include later in a new release with extra settings page"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix path to localized flash content"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix preview function"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add ukrainian translation"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add czech translation"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix exclude function for IP"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Security fix for save status via Ajax"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add RTL support for splash page"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add Filter Hook <code>wp_maintenance_mode_status_code</code> Status Code; default is 503"
+msgstr ""
+
+#. Found in changelog list item.
+msgid ""
+"Add support for custom splash page; leave a file with this name <code>wp-maintenance-mode.php</code>  in the wp-content; the plugin use this file\n"
+"The plugin checks in <code>WP_CONTENT_DIR . '/wp-maintenance-mode.php'</code>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Small minor changes"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add filter for more date on splash page"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Remove log inside console for JS"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add support for time inside the countdown"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add filter hook <code>wm_meta_author</code>for the meta data author"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add filter hook <code>wm_meta_description</code> for custom description"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add filter hook <code>wm_meta_keywords</code>for custom meta keys"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added new settings for hide, view notices about the active maintenance mode"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Changes on source, codex"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix PHP Notices <a href=\"http://wordpress.org/support/topic/error-message-in-settings-1\">Support Thread</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Change default settings, added ajax"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix Preview function"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix uninstall in WPMU"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Small updates on styles for login form"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix for include JS in frontend to use countdown"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Small mini fix for a php notice"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add charset on spalsh page for strange databases"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Enhanced default exclude adresses"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add shortcode <code>[loginform]</code> for easy use a login form in splash page"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Test with WordPress 3.5"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix for the forgotten update of JS-files; slow SVN :("
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Minor Fixes"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add different access for Frontend and Backend"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add Rewrite after Login for Frontend Access"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Different small changes"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Test for WP 3.5"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add option for value of robots meta tag"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add option for optional admin login"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Include all scripts in backend via function"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Update datepicker and countdown js"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Supportet IP as exclude for see the frontend"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add support for flish cache od WP Super Cache and W3 Total Cache plugins"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix for changes in WP 3.3 Multisite"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fix for WP smaller 3.2* on Network"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "add functionalities to use in WP Multisite"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "remove message in header, current is not fixed the ticked in core and the message on Admin Bar an Notice is enough"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "check on WP 3.3RC1"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "add hint in Admin Bar, if active"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "small changes for WP Codex"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Small fix for empty string on custom design"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Small changes on check for datepicker"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix for Design monster"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Bugfix: new check for files for different themes; hope this fix the server errors"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Bugfix: fix add default settings"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Maintenance: different changes on the syntax"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Feature: add check for Super Admin on WP Multisite; has allways the rights for access"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Feature: now it is possible to exclude feed from maintenance mode"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Maintenance: check with 3.0.4 and 3.1-RC2"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Maintenance: update language file: .pot, de_DE"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Bugfix: JavaScript error on Bulk Actions on plugins fixed"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Maintenance: fix all notice, if set no values"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Maintenance: many changes on the code; $locale and hook in side frontend"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Maintenance: change attribute_escaped to esc_attr with custom method for WP smaller 2.8"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Maintenance: Update german language files"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Feature: Shortcodes is now possible in the \"Text\" option"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Feature: no cache header rewrite"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "add new design \"Chemistry\" by <a href=\"http://www.elmastudio.de/\" title=\"elmastudio.de\">elmastudio.de</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "changes for include methods od class for preview"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "changes the possibility for include of language specific flash files"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "add preview functions"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "bugfix for list in wp-admin/plugins.php"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "remove datepicker.regional - dont work fine"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "different small changes"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "new language file .pot"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "add flash file and change on plugin for style \"Animate\" for spanish language"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "bugfix to include stylesheet on maintenance mode message"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "add functions for hint in the new UI of WP 3.0"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "add more WP Codex standard source"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fix strings in the language and languages files"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "add datetimepicker-de"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fix a problem with https://; see <a href=\"http://core.trac.wordpress.org/ticket/13941\">Ticket #13941</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "bugfix for exclude sites"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "change different points"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "add possibility to wotk with MySQLDumper"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "block admin-area via role"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "add message for registered users with not enough rights"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "add message on login-page"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "different changes"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "changes on css, site.php and different syntax on the plugin"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "SORRY, small bug for the url to jQuery"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "add time for countdown"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "changes for WP 3.0"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "changees on rights to see frontend"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix for JavaScript with WordPress 2.9"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add new custom fields for fronted: title, header, heading"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix for setting userrole to see frontend"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Change laguage files"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "add user-role setting"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "correctly the de_DE language file"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "add small fix"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "add language files (en_ES, ro_RO)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "add countdown"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "change options"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "change default options"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "add field for own adress to excerpt of the maintenance mode"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "etc."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "also ready for WordPress 2.6"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "add romanian language files"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "add italian language file by <a href=\"http://gidibao.net/\" title=\"Gianni Diurno\">Gianni Diurno</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "add design \"Damask\" by <a href=\"http://fabianletscher.de/\" title=\"Fabian Letscher\">Fabian Letscher</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "add design \"Lego\" by <a href=\"http://www.afrison.com/\" title=\"Alex Frison\">Alex Frison</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "change doc-type to utf-8 without BOM"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "add design \"Animate (Flash)\" by <a href=\"http://www.cayou-media.de/\" title=\"Sebastian Schmiedel\">Sebastian Schmiedel</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "add new hook for add content <code>wm_content</code> to include flash on content"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "add frensh language files"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fix html string in text on frontend"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "add design \"Paint\" by <a href=\"http://bugeyes.de/\" title=\"Marvin Labod\">Marvin Labod</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "add turkey language files"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "add design \"Chastely\" by <a href=\"http://fv-web.de/\" title=\"Florian Andreas Vogelmaier\">Florian Andreas Vogelmaier</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "add design \"Only Typo\" by <a href=\"http://krautsuppe.de/\" title=\"Robert Pfotenhauer\">Robert Pfotenhauer</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "add option for the Text"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "add option for active maintenance mode"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "add design \"The FF Error\" by <a href=\"http://www.lokalnetz.com/\" title=\"Thomas Meschke\">Thomas Meschke</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "add design \"Monster\" by <a href=\"http://www.backseatsurfer.de\" title=\"Sebastian Sebald\">Sebastian Sebald</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "add design \"The Sun\" by <a href=\"http://mynicki.net/\" title=\"Nicki Steiger\">Nicki Steiger</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "now it is possible to add own css and add in settings the url to the css-file"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "small html-fix"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "complety new code"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "options menu"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "new designs by <a href=\"http://www.davidhellmann.com/\" title=\"David Hellmann\">David Hellmann</a>"
+msgstr ""
+
+#. Found in changelog paragraph.
+msgid ""
+"= 1.5.8 (21/03/2010)=\n"
+"* fix exclude error\n"
+"* add textareas for heading and header fields"
+msgstr ""
+
+#. Found in faq header.
+msgid "How to use plugin filters"
+msgstr ""
+
+#. Found in faq header.
+msgid "Cache Plugin Support"
+msgstr ""
+
+#. Found in faq header.
+msgid "Exclude list"
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "See [GitHub Repo] (https://github.com/Designmodocom/WP-Maintenance-Mode) FAQ."
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "WP Maintenance Mode can be unstable due the cache plugins, we recommend to deactivate any cache plugin when maintenance mode is active."
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "If you change your login url, please add the new slug (url: http://domain.com/newlogin, then you should add: newlogin) to Exclude list from plugin settings -&gt; General Tab."
+msgstr ""

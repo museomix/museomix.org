@@ -13,7 +13,7 @@ progress[value="100"]::-webkit-progress-value {
 }
 
 progress[value] {
-width: 63.3em;
+width: 83%;
 height: 20px;
 margin-top:15px;
 -webkit-appearance: progress-bar;
@@ -33,12 +33,13 @@ progress[value]::-webkit-progress-bar {
 }
 
 .fileinput {
-height:35px;
-width:85px;
-margin-left:25px;
-margin-top:-45px;
-  position: relative;
-  overflow: hidden;
+    height: 35px;
+    float: left;
+    width: 85px;
+  /*  margin-left: -87%;*/
+    margin-top: -2.2%;
+    position: relative;
+    overflow: hidden;
 }
 .fileinput input {
   position: absolute;

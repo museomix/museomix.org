@@ -173,6 +173,12 @@ class WJ_Export extends WYSIJA_object {
 
 			// append content to the file
 			foreach ( $data as $k => $row ) {
+				$row = array_map(function($value) {
+					$value = str_replace('"', '""', $value);
+					return (preg_match('/,/', $value)) ?
+						'"' . $value . '"' :
+						$value;
+				}, $row);
 				$row_string     = implode( $this->_fields_separator, $row );
 				$encoded_string = iconv( $this->_base_encode, $this->_output_encode, $row_string );
 				fwrite( $this->_file_handle, $encoded_string . ( $rows_count !== $k ? $this->_lines_separator : '' ) );

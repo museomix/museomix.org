@@ -104,7 +104,7 @@ class IWP_MMB_Activities_log {
 		);
 		
 		if(!empty($GLOBALS['activities_log_datetime'])) {
-			$iwp_activities['post_date'] = $iwp_activities['	post_date_gmt'] = $iwp_activities['	post_modified'] = $iwp_activities['post_modified_gmt'] = $GLOBALS['activities_log_datetime'];
+			$iwp_activities['post_date'] = $iwp_activities['post_date_gmt'] = $iwp_activities['post_modified'] = $iwp_activities['post_modified_gmt'] = $GLOBALS['activities_log_datetime'];
 		}
 				
 		$post_id = wp_insert_post( $iwp_activities );

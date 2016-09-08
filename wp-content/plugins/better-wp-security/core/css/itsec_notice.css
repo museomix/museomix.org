@@ -47,6 +47,12 @@
 	position: inherit;
 }
 
+.itsec-two-factor-notice .itsec-notice-button.itsec-notice-hide {
+	background-color: #C9DEEC;
+	color: #7F9DB1;
+	border-color: #9FBCD0;
+}
+
 .itsec_notice_text {
 	display: block;
 	margin: 10px 0 10px 0;

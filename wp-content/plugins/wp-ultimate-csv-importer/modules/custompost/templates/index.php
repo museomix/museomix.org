@@ -149,7 +149,14 @@ $nonce_Key = $impCE->create_nonce_key();
 							$zip = new ZipArchive;
 							if (!empty($uploaded_compressedFile)) {
 								if ($zip->open($uploaded_compressedFile) === TRUE) {
-									$zip->extractTo($location_to_extract);
+									for($i = 0; $i < $zip->numFiles; $i++)
+									 {
+										$filterfiles = $zip->getNameIndex($i);
+										if (!preg_match('#\.(html|php|js|zip|xml)$#i', $filterfiles))
+										{
+										    $zip->extractTo($location_to_extract,$filterfiles);
+										}
+									}
 									$zip->close();
 									$extracted_status = 1;
 								} else {
@@ -315,7 +322,7 @@ $nonce_Key = $impCE->create_nonce_key();
 							unset($impCE->defCols['post_format']);
 						}
 						if (isset($_REQUEST['__module']) && sanitize_text_field($_REQUEST['__module']) !== 'page') {
-							unset($impCE->defCols['menu_order']);
+							//unset($impCE->defCols['menu_order']);
 							unset($impCE->defCols['wp_page_template']);
 						}
 						?>

@@ -7,7 +7,7 @@ add_action( 'itsec_white_ips', 'itsec_global_filter_whitelisted_ips', 0 );
 
 
 function itsec_global_add_notice() {
-	if ( ITSEC_Modules::get_setting( 'global', 'show_new_dashboard_notice' ) ) {
+	if ( ITSEC_Modules::get_setting( 'global', 'show_new_dashboard_notice' ) && current_user_can( ITSEC_Core::get_required_cap() ) ) {
 		ITSEC_Core::add_notice( 'itsec_global_show_new_dashboard_notice' );
 	}
 }
@@ -32,7 +32,7 @@ add_action( 'wp_ajax_itsec-dismiss-notice-new_dashboard', 'itsec_global_dismiss_
 
 
 function itsec_network_brute_force_add_notice() {
-	if ( ITSEC_Modules::get_setting( 'network-brute-force', 'api_nag' ) ) {
+	if ( ITSEC_Modules::get_setting( 'network-brute-force', 'api_nag' ) && current_user_can( ITSEC_Core::get_required_cap() ) ) {
 		ITSEC_Core::add_notice( 'itsec_network_brute_force_show_notice' );
 	}
 }

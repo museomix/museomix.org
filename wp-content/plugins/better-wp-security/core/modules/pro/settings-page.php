@@ -68,6 +68,25 @@ final class ITSEC_Recaptcha_Settings_Page extends ITSEC_Module_Settings_Page {
 new ITSEC_Recaptcha_Settings_Page();
 
 
+final class ITSEC_Import_Export_Settings_Page extends ITSEC_Module_Settings_Page {
+	private $version = 1;
+
+
+	public function __construct() {
+		$this->id = 'import-export';
+		$this->title = __( 'Settings Import and Export', 'better-wp-security' );
+		$this->description = __( 'Export your settings as a backup or to import on other sites for quicker setup.', 'better-wp-security' );
+		$this->type = 'recommended';
+		$this->pro = true;
+		$this->upsell = true;
+		$this->upsell_url = 'https://ithemes.com/security/import-export-settings/?utm_source=wordpressadmin&utm_medium=widget&utm_campaign=itsecfreecta';
+
+		parent::__construct();
+	}
+}
+new ITSEC_Import_Export_Settings_Page();
+
+
 final class ITSEC_Two_Factor_Settings_Page extends ITSEC_Module_Settings_Page {
 	public function __construct() {
 		$this->id = 'two-factor';
@@ -100,20 +119,17 @@ final class ITSEC_User_Logging_Settings_Page extends ITSEC_Module_Settings_Page 
 new ITSEC_User_Logging_Settings_Page();
 
 
-final class ITSEC_Import_Export_Settings_Page extends ITSEC_Module_Settings_Page {
-	private $version = 1;
-
-
+final class ITSEC_User_Security_Check_Settings_Page extends ITSEC_Module_Settings_Page {
 	public function __construct() {
-		$this->id = 'import-export';
-		$this->title = __( 'Settings Import and Export', 'better-wp-security' );
-		$this->description = __( 'Export your settings as a backup or to import on other sites for quicker setup.', 'better-wp-security' );
+		$this->id = 'user-security-check';
+		$this->title = __( 'User Security Check', 'better-wp-security' );
+		$this->description = __( 'Every user on your site affects overall security. See how your users might be affecting your security and take action when needed.', 'better-wp-security' );
 		$this->type = 'recommended';
 		$this->pro = true;
 		$this->upsell = true;
-		$this->upsell_url = 'https://ithemes.com/security/import-export-settings/?utm_source=wordpressadmin&utm_medium=widget&utm_campaign=itsecfreecta';
+		$this->upsell_url = 'https://ithemes.com/security/wordpress-user-security-check/?utm_source=wordpressadmin&utm_medium=widget&utm_campaign=itsecfreecta';
 
 		parent::__construct();
 	}
 }
-new ITSEC_Import_Export_Settings_Page();
+new ITSEC_User_Security_Check_Settings_Page();

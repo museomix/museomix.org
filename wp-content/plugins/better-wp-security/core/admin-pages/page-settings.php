@@ -2,7 +2,7 @@
 
 
 final class ITSEC_Settings_Page {
-	private $version = 1.3;
+	private $version = 1.4;
 
 	private $self_url = '';
 	private $modules = array();
@@ -140,6 +140,10 @@ final class ITSEC_Settings_Page {
 
 		$method = ( isset( $_POST['method'] ) && is_string( $_POST['method'] ) ) ? $_POST['method'] : '';
 		$module = ( isset( $_POST['module'] ) && is_string( $_POST['module'] ) ) ? $_POST['module'] : '';
+
+		if ( empty( $GLOBALS['hook_suffix'] ) ) {
+			$GLOBALS['hook_suffix'] = 'toplevel_page_itsec';
+		}
 
 
 		if ( false === check_ajax_referer( 'itsec-settings-nonce', 'nonce', false ) ) {

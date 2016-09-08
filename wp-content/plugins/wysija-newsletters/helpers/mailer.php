@@ -169,7 +169,7 @@ class WYSIJA_help_mailer extends acymailingPHPMailer {
 		//$this->Hostname = '';
 		$this->WordWrap = 150;
 
-	  	if($this->config->getValue('dkim_active') && $this->config->getValue('dkim_pubk') && !$this->isElasticRest && !$this->isSendGridRest && $this->Mailer !='mailpoet' || $this->Mailer !='sparkpost'){
+	  	if($this->config->getValue('dkim_active') && $this->config->getValue('dkim_pubk') && !$this->isElasticRest && !$this->isSendGridRest && $this->Mailer !== 'mailpoet' && $this->Mailer !== 'sparkpost'){
 		   // check that server can sign emails
 		   if(!function_exists('openssl_sign')){
 			   $this->error(__('You cannot use the DKIM signature option...',WYSIJA).' '.__('The PHP Extension openssl is not enabled on your server. Ask your host to enable it if you want to use an SSL connection.',WYSIJA));
@@ -939,7 +939,7 @@ class WYSIJA_help_mailer extends acymailingPHPMailer {
 	function tracker_replaceusertags($email,$user){
 		$urls = array();
 	$results = array();// collect all links in email
-		if(!preg_match_all('#href[ ]*=[ ]*"(?!mailto:|\#|ymsgr:|callto:|file:|ftp:|webcal:|skype:)([^"]+)"#Ui',$email->body,$results)) return;
+		if(!preg_match_all('#href[ ]*=[ ]*"(?!mailto:|tel:|\#|ymsgr:|callto:|file:|ftp:|webcal:|skype:)([^"]+)"#Ui',$email->body,$results)) return;
 
 		$modelConf=WYSIJA::get('config','model');
 

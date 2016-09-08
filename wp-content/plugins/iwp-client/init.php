@@ -4,7 +4,7 @@ Plugin Name: InfiniteWP - Client
 Plugin URI: http://infinitewp.com/
 Description: This is the client plugin of InfiniteWP that communicates with the InfiniteWP Admin panel.
 Author: Revmakx
-Version: 1.6.0
+Version: 1.6.2beta1
 Author URI: http://www.revmakx.com
 */
 /************************************************************
@@ -28,7 +28,7 @@ if(basename($_SERVER['SCRIPT_FILENAME']) == "init.php"):
     exit;
 endif;
 if(!defined('IWP_MMB_CLIENT_VERSION'))
-	define('IWP_MMB_CLIENT_VERSION', '1.6.0');
+	define('IWP_MMB_CLIENT_VERSION', '1.6.2beta1');
 	
 
 
@@ -104,22 +104,40 @@ if( !function_exists ('iwp_mmb_parse_request')) {
 		ob_start();
 		
 		global $current_user, $iwp_mmb_core, $new_actions, $wp_db_version, $wpmu_version, $_wp_using_ext_object_cache;
-		$data = base64_decode($HTTP_RAW_POST_DATA_LOCAL);
+		if (strrpos($HTTP_RAW_POST_DATA_LOCAL, '_IWP_JSON_PREFIX_') !== false) {
+			$GLOBALS['IWP_JSON_COMMUNICATION'] = 1;
+			$request_data_array = explode('_IWP_JSON_PREFIX_', $HTTP_RAW_POST_DATA_LOCAL);
+			$request_raw_data = $request_data_array[1];
+		} else{
+			$request_raw_data = $HTTP_RAW_POST_DATA_LOCAL;
+		}
+		$data = trim(base64_decode($request_raw_data));
 		if ($data){
-			//$num = @extract(unserialize($data));
-			$unserialized_data = @unserialize($data);
-			if(isset($unserialized_data['params'])){ 
-				$unserialized_data['params'] = iwp_mmb_filter_params($unserialized_data['params']);
+			@preg_match_all('/(^|;|{|})O:+?[0-9]+:(?!"stdClass")/', $data, $objectCheck);
+			if(empty($objectCheck[0])){
+				//$num = @extract(unserialize($data));
+				if ($GLOBALS['IWP_JSON_COMMUNICATION']) {
+					$request_data = json_decode($data, true);
+				} else{
+					$request_data = @unserialize($data);
+				}
+				if(isset($request_data['params'])){ 
+					$request_data['params'] = iwp_mmb_filter_params($request_data['params']);
+				}
+				if ($GLOBALS['IWP_JSON_COMMUNICATION']) {
+					$signature  = base64_decode($request_data['signature']);
+				} else{
+					$signature 	= $request_data['signature'];
+				}
+
+				$iwp_action 					= $request_data['iwp_action'];
+				$params 						= $request_data['params'];
+				$id 							= $request_data['id'];
+				if(isset($request_data['is_save_activity_log'])) {
+					$is_save_activity_log	= $request_data['is_save_activity_log'];
+				}
+				$GLOBALS['activities_log_datetime'] = $request_data['activities_log_datetime'];
 			}
-			
-			$iwp_action 					= $unserialized_data['iwp_action'];
-			$params 						= $unserialized_data['params'];
-			$id 							= $unserialized_data['id'];
-			$signature 						= $unserialized_data['signature'];
-			if(isset($unserialized_data['is_save_activity_log'])) {
-				$is_save_activity_log	= $unserialized_data['is_save_activity_log'];
-			}
-			$GLOBALS['activities_log_datetime'] = $unserialized_data['activities_log_datetime'];
 		}
 		
 		if (isset($iwp_action)) {
@@ -243,7 +261,7 @@ if( !function_exists('iwp_mmb_convert_wperror_obj_to_arr')){
 			return $obj;
 		}
 		if($state == 'initial' ){
-			if(is_wp_error($obj['error'])){
+			if(isset($obj['error']) && is_wp_error($obj['error'])){
 				$errMsgTemp = $result['error']['errors'];
 				$errCodesTemp = $result['error']['error_codes'];
 				if(!empty($result['error']['error_data']) ){
@@ -292,7 +310,12 @@ if( !function_exists ( 'iwp_mmb_response' )) {
 			header('Content-Type: text/plain');
 		}
 		$GLOBALS['IWP_RESPONSE_SENT'] = true;
-		exit("<IWPHEADER>" . base64_encode(serialize($return))."<ENDIWPHEADER>");
+		if ($GLOBALS['IWP_JSON_COMMUNICATION']) {
+			$response_data = '_IWP_JSON_PREFIX_'.base64_encode(iwp_mmb_json_encode($return));
+		}else{
+			$response_data = base64_encode(serialize($return));
+		}
+		exit("<IWPHEADER>" .$response_data."<ENDIWPHEADER>");
 	}
 }
 
@@ -2134,5 +2157,193 @@ if(!function_exists('iwp_mmb_get_site_option')) {
 
 if ( !get_option('iwp_client_public_key')  && function_exists('add_action')){
 	add_action('admin_enqueue_scripts', 'iwp_mmb_add_zero_clipboard_scripts');
+}
+
+if (!function_exists('iwp_mmb_json_encode')) {
+	function iwp_mmb_json_encode($data, $options = 0, $depth = 512){
+		if ( version_compare( PHP_VERSION, '5.5', '>=' ) ) {
+			$args = array( $data, $options, $depth );
+		} elseif ( version_compare( PHP_VERSION, '5.3', '>=' ) ) {
+			$args = array( $data, $options );
+		} else {
+			$args = array( $data );
+		}
+		$json = @call_user_func_array( 'json_encode', $args );
+		
+		if ( false !== $json && ( version_compare( PHP_VERSION, '5.5', '>=' ) || false === strpos( $json, 'null' ) ) )  {
+			return $json;
+		}
+
+		$args[0] = iwp_mmb_json_compatible_check( $data, $depth );
+		return @call_user_func_array( 'json_encode', $args );
+		}
+}
+
+if (!function_exists('json_encode'))
+{
+  function json_encode($a=false)
+  {
+    if (is_null($a)) return 'null';
+    if ($a === false) return 'false';
+    if ($a === true) return 'true';
+    if (is_scalar($a))
+    {
+      if (is_float($a))
+      {
+        // Always use "." for floats.
+        return floatval(str_replace(",", ".", strval($a)));
+      }
+
+      if (is_string($a))
+      {
+        static $jsonReplaces = array(array("\\", "/", "\n", "\t", "\r", "\b", "\f", '"'), array('\\\\', '\\/', '\\n', '\\t', '\\r', '\\b', '\\f', '\"'));
+        return '"' . str_replace($jsonReplaces[0], $jsonReplaces[1], $a) . '"';
+      }
+      else
+        return $a;
+    }
+    $isList = true;
+    for ($i = 0, reset($a); $i < count($a); $i++, next($a))
+    {
+      if (key($a) !== $i)
+      {
+        $isList = false;
+        break;
+      }
+    }
+    $result = array();
+    if ($isList)
+    {
+      foreach ($a as $v) $result[] = iwp_mmb_json_encode($v);
+      return '[' . join(',', $result) . ']';
+    }
+    else
+    {
+      foreach ($a as $k => $v) $result[] = iwp_mmb_json_encode($k).':'.iwp_mmb_json_encode($v);
+      return '{' . join(',', $result) . '}';
+    }
+  }
+}
+if (!function_exists('iwp_mmb_json_compatible_check')) {
+	function iwp_mmb_json_compatible_check( $data, $depth ) {
+		if ( $depth < 0 ) {
+			return false;
+		}
+
+		if ( is_array( $data ) ) {
+			$output = array();
+			foreach ( $data as $key => $value ) {
+				if ( is_string( $key ) ) {
+					$id = iwp_mmb_json_convert_string( $key );
+				} else {
+					$id = $key;
+				}
+				if ( is_array( $value ) || is_object( $value ) ) {
+					$output[ $id ] = iwp_mmb_json_compatible_check( $value, $depth - 1 );
+				} elseif ( is_string( $value ) ) {
+					$output[ $id ] = iwp_mmb_json_convert_string( $value );
+				} else {
+					$output[ $id ] = $value;
+				}
+			}
+		} elseif ( is_object( $data ) ) {
+			$output = new stdClass;
+			foreach ( $data as $key => $value ) {
+				if ( is_string( $key ) ) {
+					$id = iwp_mmb_json_convert_string( $key );
+				} else {
+					$id = $key;
+				}
+
+				if ( is_array( $value ) || is_object( $value ) ) {
+					$output->$id = iwp_mmb_json_compatible_check( $value, $depth - 1 );
+				} elseif ( is_string( $value ) ) {
+					$output->$id = iwp_mmb_json_convert_string( $value );
+				} else {
+					$output->$id = $value;
+				}
+			}
+		} elseif ( is_string( $data ) ) {
+			return iwp_mmb_json_convert_string( $data );
+		} else {
+			return $data;
+		}
+
+		return $output;
+	}
+}
+if (!function_exists('iwp_mmb_json_convert_string')) {
+	function iwp_mmb_json_convert_string( $string ) {
+		if ( function_exists( 'mb_convert_encoding' ) ) {
+			$encoding = mb_detect_encoding( $string, mb_detect_order(), true );
+			if ( $encoding ) {
+				return mb_convert_encoding( $string, 'UTF-8', $encoding );
+			} else {
+				return mb_convert_encoding( $string, 'UTF-8', 'UTF-8' );
+			}
+		} else {
+			return check_invalid_UTF8( $string, $true);
+		}
+	}
+}
+
+if ( !function_exists('mb_detect_encoding') ) { 
+	function mb_detect_encoding ($string, $enc=null, $ret=null) { 
+
+		static $enclist = array( 
+		'UTF-8',
+		// 'ASCII', 
+		// 'ISO-8859-1', 'ISO-8859-2', 'ISO-8859-3', 'ISO-8859-4', 'ISO-8859-5', 
+		// 'ISO-8859-6', 'ISO-8859-7', 'ISO-8859-8', 'ISO-8859-9', 'ISO-8859-10', 
+		// 'ISO-8859-13', 'ISO-8859-14', 'ISO-8859-15', 'ISO-8859-16', 
+		// 'Windows-1251', 'Windows-1252', 'Windows-1254', 
+		);
+
+		$result = false; 
+
+		foreach ($enclist as $item) { 
+			$sample = $string;
+			if(function_exists('iconv'))
+				$sample = iconv($item, $item, $string); 
+			if (md5($sample) == md5($string)) { 
+				if ($ret === NULL) { $result = $item; } else { $result = true; } 
+				break; 
+			}
+		}
+
+		return $result; 
+	}
+}
+
+if (!function_exists('check_invalid_UTF8')) {
+	function check_invalid_UTF8( $string, $strip = false ) {
+		$string = (string) $string;
+
+		if ( 0 === strlen( $string ) ) {
+			return '';
+		}
+
+		// Check for support for utf8 in the installed PCRE library once and store the result in a static
+		static $utf8_pcre = null;
+		if ( ! isset( $utf8_pcre ) ) {
+			$utf8_pcre = @preg_match( '/^./u', 'a' );
+		}
+		// We can't demand utf8 in the PCRE installation, so just return the string in those cases
+		if ( !$utf8_pcre ) {
+			return $string;
+		}
+
+		// preg_match fails when it encounters invalid UTF8 in $string
+		if ( 1 === @preg_match( '/^./us', $string ) ) {
+			return $string;
+		}
+
+		// Attempt to strip the bad chars if requested (not recommended)
+		if ( $strip && function_exists( 'iconv' ) ) {
+			return iconv( 'utf-8', 'utf-8', $string );
+		}
+
+		return '';
+	}
 }
 ?>

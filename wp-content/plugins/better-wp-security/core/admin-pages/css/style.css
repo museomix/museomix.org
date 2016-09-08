@@ -158,6 +158,24 @@ ul {
 	min-height: 14em;
 }
 
+/* Override max width for user security check */
+#itsec-module-card-user-security-check .itsec-module-settings-content {
+	max-width: 100%;
+	position: relative;
+}
+@media screen and (max-width: 782px) {
+	#itsec-module-card-user-security-check  p.search-box {
+		width: 100%;
+	}
+	#itsec-user-table {
+		padding-bottom: 100px;
+	}
+}
+
+/* Correct font size of user table nav in user security check */
+#itsec-module-card-user-security-check .tablenav {
+	font-size: 12px;
+}
 .itsec-module-pro-upsell {
 	opacity: .5;
 }
@@ -313,9 +331,6 @@ body.itsec-modal-open {
 }
 .itsec-module-cards-container {
 	clear: both;
-	box-sizing: border-box;
-}
-.itsec-module-cards-container * {
 	box-sizing: border-box;
 }
 .itsec-module-cards {
@@ -618,4 +633,14 @@ body.itsec-modal-open {
 
 .itsec-security-check-container-error {
 	border-left-color: #dc3232;
+}
+
+/**
+ * User Security Check
+ */
+.itsec-two-factor .dashicons {
+	cursor: default;
+}
+.itsec-two-factor .dashicons.dashicons-unlock {
+	color: #dc3232;
 }

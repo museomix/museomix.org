@@ -4,7 +4,7 @@
 Plugin Name: WP Realtime Sitemap
 Plugin URI: http://goo.gl/ri9xU
 Description: Adds a sitemap to your Wordpress blog that is always up-to-date. Add `[wp-realtime-sitemap]` to any page or post and the site map will be added there. Use Settings->WP Realtime Sitemap to set options.
-Version: 1.5.4
+Version: 1.5.6
 Author: Daniel Tweedy
 Author URI: http://goo.gl/jdOfL
 License: GPL2
@@ -26,7 +26,7 @@ License: GPL2
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-define('WPRealtimeSitemap_Version', '1.5.4');
+define('WPRealtimeSitemap_Version', '1.5.6');
 
 if (!class_exists('WPRealtimeSitemap')) {
 	class WPRealtimeSitemap {
@@ -68,8 +68,11 @@ if (!class_exists('WPRealtimeSitemap')) {
 			// Install Settings - Doesn't fire on Updates!!
 			register_activation_hook(__FILE__, array(&$this, 'installSettings'));
 
-			// Uninstall Settings
-			register_deactivation_hook(__FILE__, array(&$this, 'uninstallSettings'));
+			// Uninstall Settings - Doesn't fire on Uninstall!!
+			//register_deactivation_hook(__FILE__, array(&$this, 'UninstallSettings'));
+
+			// Uninstall Settings - Doesn't fire on Deactivations!!
+			register_uninstall_hook(__FILE__, 'WPRealtimeSitemapUninstallSettings');
 		}
 
 		function addInit() {
@@ -87,7 +90,7 @@ if (!class_exists('WPRealtimeSitemap')) {
 				array_unshift($links, $faq_link);
 				$support_link = '<a href="http://goo.gl/kosme">' . __('Support', 'wp-realtime-sitemap') . '</a>';
 				array_unshift($links, $support_link);
-				$donate_link = '<a href="http://goo.gl/ddoa5">' . __('Donate with PayPal', 'wp-realtime-sitemap') . '</a>';
+				$donate_link = '<a href="http://goo.gl/mmUuGj">' . __('Donate with PayPal', 'wp-realtime-sitemap') . '</a>';
 				array_unshift($links, $donate_link);
 				$amazon_link = '<a href="http://goo.gl/yrM92">' . __('Amazon Wishlist', 'wp-realtime-sitemap') . '</a>';
 				array_unshift($links, $amazon_link);
@@ -110,10 +113,10 @@ if (!class_exists('WPRealtimeSitemap')) {
 			if ( $screen == 'settings_page_wp-realtime-sitemap' ) {
 				$help .= '<h5>' . __('WP Realtime Sitemap Help', 'wp-realtime-sitemap') . '</h5><div class="metabox-prefs"><p>';
 				$help .= '<a href="http://goo.gl/yrM92">' . __('Amazon Wishlist', 'wp-realtime-sitemap') . '</a><br />';
-				$help .= '<a href="http://goo.gl/ddoa5">' . __('Donate with PayPal', 'wp-realtime-sitemap').'</a><br />';
+				$help .= '<a href="http://goo.gl/mmUuGj">' . __('Donate with PayPal', 'wp-realtime-sitemap').'</a><br />';
 				$help .= '<a href="http://goo.gl/kosme">' . __('Support', 'wp-realtime-sitemap').'</a><br />';
 				$help .= '<a href="http://goo.gl/QNiRH">' . __('FAQ', 'wp-realtime-sitemap').'</a><br />';
-				$help .= '<a href="http://goo.gl/bRO8F">' . __('Home Page', 'wp-realtime-sitemap').'</a><br />';
+				$help .= '<a href="http://goo.gl/spLNI9">' . __('Home Page', 'wp-realtime-sitemap').'</a><br />';
 				$help .= '<a href="http://goo.gl/Jqrg6">' . __('Contact Me', 'wp-realtime-sitemap') . '</a><br />';
 				$help .= __('Please read the plugin information and FAQ, before asking a question.', 'wp-realtime-sitemap') . '</p></div>';
 			}
@@ -184,7 +187,7 @@ if (!class_exists('WPRealtimeSitemap')) {
 			add_settings_field('page_exclude', __('Exclude IDs', 'wp-realtime-sitemap'), array($this, '_formTextInput'), __FILE__, 'page_settings', array('dbfield' => 'page_exclude', 'section' => 'page'));
 			add_settings_field('page_depth', __('Hierarchy Depth', 'wp-realtime-sitemap'), array($this, '_formSelectInput'), __FILE__, 'page_settings', array('dbfield' => 'page_depth', 'section' => 'page'));
 			add_settings_field('page_show_date', __('Display Date', 'wp-realtime-sitemap'), array($this, '_formSelectInput'), __FILE__, 'page_settings', array('dbfield' => 'page_show_date', 'section' => 'page'));
-// NOTE: this is currently not working, see http://core.trac.wordpress.org/ticket/10745
+// NOTE: this is currently not working, see https://core.trac.wordpress.org/ticket/10745 and https://core.trac.wordpress.org/ticket/10230
 //			add_settings_field('page_number', __('Limit', 'wp-realtime-sitemap'), array($this, '_formTextInput'), __FILE__, 'page_settings', array('dbfield' => 'page_number', 'section' => 'page'));
 
 			add_settings_section('post_settings', __('Post & Custom Post Type Settings', 'wp-realtime-sitemap'), array($this, 'post_section_text'), __FILE__);
@@ -856,7 +859,7 @@ if (!class_exists('WPRealtimeSitemap')) {
 			if (isset($values) && is_array($values)) {
 				$optionFormat = '<option value="%s"%s>%s</option>';
 
-				$output = '<select name="plugin_wp_realtime_sitemap_settings[' . $args['dbfield'] . ']">';
+				$output = '<select name="plugin_wp_realtime_sitemap_settings[' . esc_attr( $args['dbfield'] ) . ']">';
 
 				foreach ($values as $key => $label) {
 					$output .= sprintf($optionFormat, $key, selected($$args['dbfield'], $key, false), $label);
@@ -875,7 +878,7 @@ if (!class_exists('WPRealtimeSitemap')) {
 			$infotext	= $this->_formInfoText($args);
 
 			if (array_key_exists('dbfield', $args) && isset($infotext)) {
-				echo '<input name="plugin_wp_realtime_sitemap_settings[' . $args['dbfield'] . ']" size="30" type="text" value="' . $$args['dbfield'] . '" /><br />' . $infotext;
+				echo '<input name="plugin_wp_realtime_sitemap_settings[' . esc_attr( $args['dbfield'] ) . ']" size="30" type="text" value="' . esc_attr( $$args['dbfield'] ) . '" /><br />' . $infotext;
 			}
 		}
 
@@ -1355,12 +1358,12 @@ if (!class_exists('WPRealtimeSitemap')) {
 			}
 
 			// HEADER SETTINGS
-			$plugin_wp_realtime_sitemap_settings['menu_header']		= mysql_real_escape_string($inputs['menu_header']);
-			$plugin_wp_realtime_sitemap_settings['pages_header']		= mysql_real_escape_string($inputs['pages_header']);
-			$plugin_wp_realtime_sitemap_settings['posts_header']		= mysql_real_escape_string($inputs['posts_header']);
-			$plugin_wp_realtime_sitemap_settings['archives_header']		= mysql_real_escape_string($inputs['archives_header']);
-			$plugin_wp_realtime_sitemap_settings['categories_header']	= mysql_real_escape_string($inputs['categories_header']);
-			$plugin_wp_realtime_sitemap_settings['tags_header']		= mysql_real_escape_string($inputs['tags_header']);
+			$plugin_wp_realtime_sitemap_settings['menu_header']		= $inputs['menu_header'];
+			$plugin_wp_realtime_sitemap_settings['pages_header']		= $inputs['pages_header'];
+			$plugin_wp_realtime_sitemap_settings['posts_header']		= $inputs['posts_header'];
+			$plugin_wp_realtime_sitemap_settings['archives_header']		= $inputs['archives_header'];
+			$plugin_wp_realtime_sitemap_settings['categories_header']	= $inputs['categories_header'];
+			$plugin_wp_realtime_sitemap_settings['tags_header']		= $inputs['tags_header'];
 
 			// DISPLAY SETTINGS
 			if(!in_array($inputs['show_menu'], $validInputs['show_menu']['valid'])) {
@@ -1516,12 +1519,6 @@ if (!class_exists('WPRealtimeSitemap')) {
 			<img border="1" src="<?php echo $this->plugin_base_url; ?>/images/donate.jpg" usemap="#donatemap" />
 		</div>
 
-		<div style="width:450px; border:1px solid #dddddd; background:#fff; padding:20px 20px; float: left; margin-left: 20px;">
-			<h3 style="margin:0; padding:0;"><?php _e('ThemeFuse Original WP Themes', 'wp-realtime-sitemap'); ?></h3>
-			<p><?php echo sprintf(esc_attr__('If you are interested in buying an original wp theme I would recommend %s. They make some amazing wp themes, that have a cool 1 click auto install feature and excellent after care support services. Check out some of their themes!', 'wp-realtime-sitemap'), '<a href="http://goo.gl/zhJTn" title="' . __('ThemeFuse', 'wp-realtime-sitemap') . '">' . __('ThemeFuse', 'wp-realtime-sitemap') . '</a>'); ?></p>
-			<a style="border:none;" href="http://goo.gl/zhJTn"><img style="border:none;" src="<?php echo $this->plugin_base_url; ?>/images/themefuse.jpg" /></a>
-		</div>
-
 		<br style="clear: both;" />
 
 		<p><?php _e('This plugin can easily be styled by using the following ids below should you need to, if you require more flexibility than this please feel free to suggest something', 'wp-realtime-sitemap'); ?></p>
@@ -1570,7 +1567,7 @@ if (!class_exists('WPRealtimeSitemap')) {
  				if (($all_options['show_menu'] != 'No' && $all_options['show_menu'] != 'Off') && ($show == 'menu' || $show == 'all')) {
  					$menu_header = (empty($menu_header)) ? __('Menu', 'wp-realtime-sitemap') : $menu_header;
 
-					$menu = '<div id="wp-realtime-sitemap-menu"><h3>' . $menu_header . '</h3>';
+					$menu = '<div id="wp-realtime-sitemap-menu"><h3>' . esc_html( $menu_header ) . '</h3>';
 					$menu .= '<ul>' . wp_nav_menu(array('menu' => $menu_id, 'container' => false, 'items_wrap' => '%3$s', 'echo' => '0')) . '</ul>';
 					$menu .= '</div>';
 				}
@@ -1579,7 +1576,7 @@ if (!class_exists('WPRealtimeSitemap')) {
 				if (($all_options['show_pages'] != 'No' && $all_options['show_pages'] != 'Off') && ($show == 'pages' || $show == 'all')) {
 					$pages_header = (empty($pages_header)) ? __('Pages', 'wp-realtime-sitemap') : $pages_header;
 
-					$pages = '<div id="wp-realtime-sitemap-pages"><h3>' . $pages_header . '</h3>';
+					$pages = '<div id="wp-realtime-sitemap-pages"><h3>' . esc_html( $pages_header ) . '</h3>';
 					$pages .= '<ul>' . wp_list_pages(array('sort_column' => $page_sort_column, 'sort_order' => $page_sort_order, 'exclude' => $page_exclude, 'depth' => $page_depth, 'show_date' => $page_show_date, 'title_li' => '', 'echo' => '0')) . '</ul></div>';
 				}
 
@@ -1594,16 +1591,17 @@ if (!class_exists('WPRealtimeSitemap')) {
 						if (count($thecategories) > 0) {
 							foreach($thecategories as $category) {
 
-								$posts .= '<li><a href="' . get_category_link($category->term_id) . '" title="' . $category->category_description . '">' . $category->name . '</a><ul>';
+								$posts .= '<li><a href="' . get_category_link($category->term_id) . '" title="' . esc_attr( $category->category_description ) . '">' . esc_html( $category->name ) . '</a><ul>';
 
 								// Set options for post query
 								$theposts = get_posts(array(
-									'numberposts'	=> $post_numberposts,
-									'category'	=> $category->cat_ID,
-									'orderby'	=> $post_orderby,
-									'order'		=> $post_order,
-									'exclude'	=> $post_exclude,
-									'post_type'	=> 'post',
+									'numberposts'		=> $post_numberposts,
+									'category'		=> $category->cat_ID,
+									'orderby'		=> $post_orderby,
+									'order'			=> $post_order,
+									'exclude'		=> $post_exclude,
+									'post_type'		=> 'post',
+									'suppress_filters'	=> false
 								));
 
 								if (count($theposts) > 0) {
@@ -1626,17 +1624,18 @@ if (!class_exists('WPRealtimeSitemap')) {
 
 							$posts_header = (empty($posts_header)) ? __('Posts', 'wp-realtime-sitemap') : $posts_header;
 
-							$posts = '<div id="wp-realtime-sitemap-posts"><h3>' . $posts_header . '</h3><ul>' . $posts . '</ul></div>';
+							$posts = '<div id="wp-realtime-sitemap-posts"><h3>' . esc_html( $posts_header ) . '</h3><ul>' . $posts . '</ul></div>';
 						}
 
 					} else {
 						// Set options for post query
 						$theposts = get_posts(array(
-							'numberposts'	=> $post_numberposts,
-							'orderby'	=> $post_orderby,
-							'order'		=> $post_order,
-							'exclude'	=> $post_exclude,
-							'post_type'	=> 'post',
+							'numberposts'		=> $post_numberposts,
+							'orderby'		=> $post_orderby,
+							'order'			=> $post_order,
+							'exclude'		=> $post_exclude,
+							'post_type'		=> 'post',
+							'suppress_filters'	=> false
 						));
 
 						if (count($theposts) > 0) {
@@ -1655,7 +1654,7 @@ if (!class_exists('WPRealtimeSitemap')) {
 
 							$posts_header = (empty($posts_header)) ? __('Posts', 'wp-realtime-sitemap') : $posts_header;
 
-							$posts = '<div id="wp-realtime-sitemap-posts"><h3>' . $posts_header . '</h3><ul>' . $posts . '</ul></div>';
+							$posts = '<div id="wp-realtime-sitemap-posts"><h3>' . esc_html( $posts_header ) . '</h3><ul>' . $posts . '</ul></div>';
 						}
 					}
 				}
@@ -1669,11 +1668,12 @@ if (!class_exists('WPRealtimeSitemap')) {
 
 						// Set options for post query
 						$theposts = get_posts(array(
-							'numberposts'	=> $post_numberposts,
-							'orderby'	=> $post_orderby,
-							'order'		=> $post_order,
-							'exclude'	=> $post_exclude,
-							'post_type'	=> $post_type->name,
+							'numberposts'		=> $post_numberposts,
+							'orderby'		=> $post_orderby,
+							'order'			=> $post_order,
+							'exclude'		=> $post_exclude,
+							'post_type'		=> $post_type->name,
+							'suppress_filters'	=> false
 						));
 
 						if (count($theposts) > 0) {
@@ -1700,7 +1700,7 @@ if (!class_exists('WPRealtimeSitemap')) {
 				if (($all_options['show_archives'] != 'No' && $all_options['show_archives'] != 'Off') && ($show == 'archives' || $show == 'all')) {
 					$archives_header = (empty($archives_header)) ? __('Archives', 'wp-realtime-sitemap') : $archives_header;
 
-					$archives = '<div id="wp-realtime-sitemap-archives"><h3>' . $archives_header . '</h3>';
+					$archives = '<div id="wp-realtime-sitemap-archives"><h3>' . esc_html( $archives_header ) . '</h3>';
 					$archives .= '<ul>' . wp_get_archives(array('type' => $archive_type, 'limit' => $archive_limit, 'show_post_count' => $archive_show_post_count, 'echo' => 0)) . '</ul></div>';
 				}
 
@@ -1708,7 +1708,7 @@ if (!class_exists('WPRealtimeSitemap')) {
 				if (($all_options['show_categories'] != 'No' && $all_options['show_categories'] != 'Off') && ($show == 'categories' || $show == 'all')) {
 					$categories_header = (empty($categories_header)) ? __('Categories', 'wp-realtime-sitemap') : $categories_header;
 
-					$categories = '<div id="wp-realtime-sitemap-categories"><h3>' . $categories_header . '</h3>';
+					$categories = '<div id="wp-realtime-sitemap-categories"><h3>' . esc_html( $categories_header ) . '</h3>';
 
 					// Tag Cloud: Yes/No?
 					if ($all_options['category_tagcloud'] != 'No' && $all_options['category_tagcloud'] != 'Off') {
@@ -1724,7 +1724,7 @@ if (!class_exists('WPRealtimeSitemap')) {
 				if (($all_options['show_tags'] != 'No' && $all_options['show_tags'] != 'Off') && ($show == 'tags' || $show == 'all')) {
 					$tags_header = (empty($tags_header)) ? __('Tags', 'wp-realtime-sitemap') : $tags_header;
 
-					$tags = '<div id="wp-realtime-sitemap-tags"><h3>' . $tags_header . '</h3>';
+					$tags = '<div id="wp-realtime-sitemap-tags"><h3>' . esc_html( $tags_header ) . '</h3>';
 
 					// Tag Cloud: Yes/No?
 					if ($all_options['tags_tagcloud'] != 'No' && $all_options['tags_tagcloud'] != 'Off') {
@@ -1869,7 +1869,7 @@ if (!class_exists('WPRealtimeSitemap')) {
 			echo '<div class="wprs-update-nag">' . sprintf(__('WP Realtime Sitemap was just updated... Please visit the %sPlugin Options Page%s and re-save your preferences.', 'wp-realtime-sitemap'), '<a href="options-general.php?page=wp-realtime-sitemap.php" style="color: #ca0c01">', '</a>') . '</div>';
 		}
 
-		function uninstallSettings() {
+		function WPRealtimeSitemapUninstallSettings() {
 		   	global $wpdb, $wp_roles, $wp_version;
 
 			delete_option('plugin_wp_realtime_sitemap_settings');
@@ -1904,5 +1904,3 @@ if (!class_exists('WPRealtimeSitemap')) {
 
 if( class_exists('WPRealtimeSitemap') )
 	$wpRealtimeSitemap = new WPRealtimeSitemap();
-
-?>

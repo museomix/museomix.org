@@ -36,9 +36,6 @@ final class ITSEC_Lockout {
 		//Set an error message on improper logout
 		add_action( 'login_head', array( $this, 'set_lockout_error' ) );
 
-		//Add the metabox
-		add_action( 'itsec_add_admin_meta_boxes', array( $this, 'add_admin_meta_boxes' ) );
-
 		//Process clear lockout form
 		add_action( 'itsec_admin_init', array( $this, 'release_lockout' ) );
 
@@ -54,26 +51,6 @@ final class ITSEC_Lockout {
 
 	public function init_settings_page() {
 		require_once( dirname( __FILE__ ) . '/sidebar-widget-active-lockouts.php' );
-	}
-
-	/**
-	 * Add meta boxes to primary options pages.
-	 *
-	 * @since 4.0
-	 *
-	 * @return void
-	 */
-	function add_admin_meta_boxes() {
-
-		add_meta_box(
-			'itsec_lockouts',
-			__( 'Active Lockouts', 'better-wp-security' ),
-			array( $this, 'lockout_metabox' ),
-			'toplevel_page_itsec',
-			'bottom',
-			'core'
-		);
-
 	}
 
 	/**
@@ -761,120 +738,6 @@ final class ITSEC_Lockout {
 		do_action( 'itsec-new-blacklisted-ip', $ip );
 
 		return true;
-	}
-
-
-	/**
-	 * Active lockouts table and form for dashboard.
-	 *
-	 * @Since 4.0
-	 *
-	 * @return void
-	 */
-	public function lockout_metabox() {
-
-		global $itsec_globals;
-
-		?>
-		<form method="post" action="" id="itsec_release_lockout_form">
-			<?php wp_nonce_field( 'itsec_release_lockout', 'wp_nonce' ); ?>
-			<input type="hidden" name="itsec_release_lockout" value="true"/>
-			<?php //get locked out hosts and users from database
-			$host_locks     = $this->get_lockouts( 'host', true, 50 );
-			$user_locks     = $this->get_lockouts( 'user', true, 50 );
-			$username_locks = $this->get_lockouts( 'username', true, 50 );
-			?>
-			<table class="form-table">
-				<tr valign="top">
-					<th scope="row" class="settinglabel">
-						<?php _e( 'Locked out hosts', 'better-wp-security' ); ?>
-					</th>
-					<td class="settingfield">
-						<?php if ( sizeof( $host_locks ) > 0 ) { ?>
-							<ul>
-								<?php foreach ( $host_locks as $host ) { ?>
-									<li style="list-style: none;"><input type="checkbox"
-									                                     name="lo_<?php echo $host['lockout_id']; ?>"
-									                                     id="lo_<?php echo $host['lockout_id']; ?>"
-									                                     value="<?php echo $host['lockout_id']; ?>"/>
-										<label
-											for="lo_<?php echo $host['lockout_id']; ?>"><strong><?php echo esc_html( $host['lockout_host'] ); ?></strong>
-											- <?php _e( 'Expires in', 'better-wp-security' ); ?>
-											<em> <?php echo human_time_diff( $itsec_globals['current_time_gmt'], strtotime( $host['lockout_expire_gmt'] ) ); ?></em></label>
-									</li>
-								<?php } ?>
-							</ul>
-						<?php } else { //no host is locked out ?>
-							<ul>
-								<li style="list-style: none;">
-									<p><?php _e( 'Currently no hosts are locked out of this website.', 'better-wp-security' ); ?></p>
-								</li>
-							</ul>
-						<?php } ?>
-					</td>
-				</tr>
-				<tr valign="top">
-					<th scope="row" class="settinglabel">
-						<?php _e( 'Locked out users', 'better-wp-security' ); ?>
-					</th>
-					<td class="settingfield">
-						<?php if ( sizeof( $user_locks ) > 0 ) { ?>
-							<ul>
-								<?php foreach ( $user_locks as $user ) { ?>
-									<?php $userdata = get_userdata( $user['lockout_user'] ); ?>
-									<li style="list-style: none;"><input type="checkbox"
-									                                     name="lo_<?php echo $user['lockout_id']; ?>"
-									                                     id="lo_<?php echo $user['lockout_id']; ?>"
-									                                     value="<?php echo $user['lockout_id']; ?>"/>
-										<label
-											for="lo_<?php echo $user['lockout_id']; ?>"><strong><?php echo isset( $userdata->lockout ) ? $userdata->user_login : '';  ?></strong>
-											- <?php _e( 'Expires in', 'better-wp-security' ); ?>
-											<em> <?php echo human_time_diff( $itsec_globals['current_time_gmt'], strtotime( $user['lockout_expire_gmt'] ) ); ?></em></label>
-									</li>
-								<?php } ?>
-							</ul>
-						<?php } else { //no user is locked out ?>
-							<ul>
-								<li style="list-style: none;">
-									<p><?php _e( 'Currently no users are locked out of this website.', 'better-wp-security' ); ?></p>
-								</li>
-							</ul>
-						<?php } ?>
-					</td>
-				</tr>
-				<tr valign="top">
-					<th scope="row" class="settinglabel">
-						<?php _e( 'Locked out usernames (not real users)', 'better-wp-security' ); ?>
-					</th>
-					<td class="settingfield">
-						<?php if ( sizeof( $username_locks ) > 0 ) { ?>
-							<ul>
-								<?php foreach ( $username_locks as $user ) { ?>
-									<li style="list-style: none;"><input type="checkbox"
-									                                     name="lo_<?php echo $user['lockout_id']; ?>"
-									                                     id="lo_<?php echo $user['lockout_id']; ?>"
-									                                     value="<?php echo $user['lockout_id']; ?>"/>
-										<label
-											for="lo_<?php echo $user['lockout_id']; ?>"><strong><?php echo sanitize_text_field( $user['lockout_username'] ); ?></strong>
-											- <?php _e( 'Expires in', 'better-wp-security' ); ?>
-											<em> <?php echo human_time_diff( $itsec_globals['current_time_gmt'], strtotime( $user['lockout_expire_gmt'] ) ); ?></em></label>
-									</li>
-								<?php } ?>
-							</ul>
-						<?php } else { //no user is locked out ?>
-							<ul>
-								<li style="list-style: none;">
-									<p><?php _e( 'Currently no usernames are locked out of this website.', 'better-wp-security' ); ?></p>
-								</li>
-							</ul>
-						<?php } ?>
-					</td>
-				</tr>
-			</table>
-			<p class="submit"><input type="submit" class="button-primary"
-			                         value="<?php _e( 'Release Lockout', 'better-wp-security' ); ?>"/></p>
-		</form>
-	<?php
 	}
 
 	/**

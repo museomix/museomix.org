@@ -917,8 +917,24 @@ class WPImporter_includes_helper {
 				if (!empty ($smack_taxo)) {
 					foreach ($smack_taxo as $taxo_key => $taxo_value) {
 						if (!empty($taxo_value)) {
-							$split_line = explode('|', $taxo_value);
-							wp_set_object_terms($post_id, $split_line, $taxo_key);
+							#$split_line = explode('|', $taxo_value);
+							if (strpos($taxo_value, '|') !== false) {
+								$split_taxo = explode('|', $taxo_value);
+							} elseif (strpos($taxo_value, ',') !== false) {
+								$split_taxo = explode(',', $taxo_value);
+							} else {
+								$split_taxo = $taxo_value;
+							}
+
+							foreach ($split_taxo as $key => $val) {
+								$assigned_taxonomies[$val] = $val;
+							}
+							foreach ($assigned_taxonomies as $taxoKey => $taxoVal) {
+								$this->detailedLog[$currentLimit]['taxonomy'] .= $taxokey . "|";
+							}
+							$this->detailedLog[$currentLimit]['taxonomy'] = "<b>" . __('Taxonomy', 'wp-ultimate-csv-importer') . " - </b>" . substr($this->detailedLog[$currentLimit]['taxonomy'], 0, -1);
+
+							wp_set_object_terms($post_id, $split_taxo, $taxo_key);
 						}
 					}
 				}
@@ -937,7 +953,14 @@ class WPImporter_includes_helper {
 				if (!empty ($categories)) {
 					$this->detailedLog[$currentLimit]['category'] = "";
 					$assigned_categories = array();
-					$split_cate = explode('|', $categories ['post_category']);
+					#$split_cate = explode('|', $categories ['post_category']);
+					if (strpos($categories['post_category'], '|') !== false) {
+						$split_cate = explode('|', $categories['post_category']);
+					} elseif (strpos($categories['post_category'], ',') !== false) {
+						$split_cate = explode(',', $categories['post_category']);
+					} else {
+						$split_cate = $categories['post_category'];
+					}
 					foreach ($split_cate as $key => $val) {
 						if (is_numeric($val)) {
 							$split_cate[$key] = 'uncategorized';
@@ -1124,11 +1147,23 @@ class WPImporter_includes_helper {
 	/**
 	 * Delete uploaded file after import process
 	 */
-	function deletefileafterprocesscomplete($uploadDir) {
-		$files = array_diff(scandir($uploadDir), array('.', '..'));
+	function deletefileafterprocesscomplete($dir) {
+		if (is_dir($dir)) { 
+		     $objects = scandir($dir); 
+		     foreach ($objects as $object) { 
+		       if ($object != "." && $object != "..") { 
+			 if (is_dir($dir."/".$object))
+			   $this->deletefileafterprocesscomplete($dir."/".$object);
+			 else
+			   unlink($dir."/".$object); 
+		       } 
+		     }
+		     rmdir($dir); 
+		   } 
+		/*$files = array_diff(scandir($uploadDir), array('.', '..'));
 		foreach ($files as $file) {
 			(is_dir("$uploadDir/$file")) ? rmdir("$uploadDir/$file") : unlink("$uploadDir/$file");
-		}
+		}*/
 	}
 
 	// Function convert string to hash_key

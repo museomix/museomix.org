@@ -3,9 +3,9 @@ Contributors: smackcoders
 Donate link: http://www.smackcoders.com/donate.html
 Tags: csv importer, import csv, import woocommerce, import marketpress, import seo by yoast, import all in one seo, scheduled import, import remote file, export woocommerce, import types fields, import acf fields, import inline images
 Requires at least: 4.0 
-Tested up to: 4.5.2
-Stable tag: 3.10.0
-Version: 3.10.0
+Tested up to: 4.5.3
+Stable tag: 3.11.1
+Version: 3.11.1
 Author: smackcoders
 Author URI: http://profiles.wordpress.org/smackcoders/
 License: GPLv2 or later
@@ -62,7 +62,7 @@ Ultimate CSV Importer PRO has all the features of WP Ultimate CSV Importer and i
 = Helpful Links =
 [Documentation](https://www.smackcoders.com/documentation/ultimate-csv-importer-pro/how-to-import-csv).
 
-You can try the [live demo](http://demo.smackcoders.com/wordpressdemofour/wp-admin/admin.php?page=wp-ultimate-csv-importer-pro%2Findex.php&__module=dashboard) or request for free trial in [WordPress Ultimate CSV Importer](https://www.smackcoders.com/wp-ultimate-csv-importer-pro.html) page to generate your own WordPress test environment.  
+You can try the [live demo](http://demo.smackcoders.com/wp-ultimate-csv-importer/wp-admin) or request for free trial by clicking Try Now in [WordPress Ultimate CSV Importer](https://www.smackcoders.com/wp-ultimate-csv-importer-pro.html) page to generate your own WordPress test environment.  
 
 Read our [blog](https://www.smackcoders.com/blog/category/wordpress-products) to know more about the new [features](https://www.smackcoders.com/wp-ultimate-csv-importer-pro/features.html) of our WordPress plugins.
 
@@ -94,6 +94,16 @@ This will solve your issue or get support from hosting if you didn’t have suff
 For more FAQ, you can refer [here](https://www.smackcoders.com/wordpress-products-faq.html).
 
 == Changelog ==
+= 3.11.1 =
+* Fixed: Browse button disappears in 3.11.0 https://wordpress.org/support/topic/browse-button-disappears-in-3110
+= 3.11.0 =
+* Added: Compatibility for WordPress 4.5.3.
+* Added: menu_order field Import for Custom Post Type.
+* Added: [Support for comma and pipeline separation in multi category & taxonomies import](https://wordpress.org/support/topic/importing-a-taxonomy-field?replies=4).
+* Added: Compatibility to export WooCommerce fields with WooCommerce version 2.6.1.
+* Updated: Help links of Product page & Live Demo.
+* Fixed: Issues in Taxonomies, Categories & Tags export.
+* Fixed: Issue in export by status filter.
 = 3.10.0 =
 * Improvements: Can export any number of records from WordPress site.
 * Fixed: Issue in ACF relationship field export.
@@ -364,6 +374,8 @@ For more FAQ, you can refer [here](https://www.smackcoders.com/wordpress-product
 * Initial release version. Tested and found works well without any issues.
 
 == Upgrade Notice ==
+= 3.11.0 =
+* Upgrade now for WordPress 4.5.3 and WooCommerce 4.3.1 compatibility and other minor enhancements.
 = 3.10.0 =
 * Upgrade now to export ACF relationship field and improved export features.
 = 3.9.4 =
@@ -486,3 +498,6 @@ For more FAQ, you can refer [here](https://www.smackcoders.com/wordpress-product
 * Added features to import multiple tags and categories with different delimiters.
 = 1.0.0 =
 * Initial release of plugin.
+
+
+

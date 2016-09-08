@@ -3422,7 +3422,7 @@ class IWP_MMB_Backup_Multicall extends IWP_MMB_Core
 			foreach ($lines as $line) {
 				iwp_mmb_auto_print('restore_db_php');
 				// Skip it if it's a comment
-				if (substr($line, 0, 2) == '--' || $line == '')
+				if(substr($line, 0, 2) == '--' || $line == '' || substr($line, 0, 3) == '/*!')
 					continue;
 				
 				// Add this line to the current query
@@ -5137,7 +5137,7 @@ function ftp_backup($historyID,$args = '')
 		$requestParams = $this -> getRequiredData($historyID,"requestParams");
 		$upload_loop_break_time = $requestParams['account_info']['upload_loop_break_time'];			//darkcode changed
 		$upload_file_block_size = $requestParams['account_info']['upload_file_block_size'];
-		$upload_file_block_size = 1 *1024 *1024;
+		$upload_file_block_size = 5 *1024 *1024;
 		$del_host_file = $requestParams['args']['del_host_file'];
 		$iwp_folder_id = '';
 		$sub_folder_id = '';

@@ -408,3 +408,11 @@
 	New Feature: Added a new Security Check section on the settings page. This new feature adds a tool to quickly ensure that the recommended features are enabled and the recommended settings are used.
 	Bug Fix: Fixed the ability to remove the itsec_away.confg file in order to disable Away Mode.
 	Enhancement: The "Ban Lists" setting of Banned Users is now enabled by default.
+2.5.1 - 2016-07-12 - Chris Jean & Aaron D. Campbell
+	Enhancement: Improved styling of the two-factor authentication notice.
+2.5.2 - 2016-08-09 - Chris Jean & Aaron D. Campbell
+	Bug Fix: Fixed a potential logging issue that could prevent some lockout notices from being properly logged on non-English sites.
+	Bug Fix: Prevented some notices from displaying to users who do not need to see them.
+	Bug Fix: Limited notices to only display on specific pages on the dashboard.
+	Compatibility Fix: Changed name of the $HTTP_RAW_POST_DATA variable to avoid erroneously tripping PHP 7 compatibility checks.
+	Code Cleanup: Removed legacy code that is no longer needed.

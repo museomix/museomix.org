@@ -202,12 +202,19 @@ class IWP_MMB_Installer extends IWP_MMB_Core
         if (!empty($upgrade_plugins)) {
             $plugin_files = $plugin_details = $premium_plugin_details = array();
             foreach ($upgrade_plugins as $plugin) {
-                if (isset($plugin->file)) {
+                if ($GLOBALS['IWP_JSON_COMMUNICATION']) {
+                    $file_path = $plugin['file'];
+                    $plugin_name = $plugin['name'];
+                } else{
+                    $file_path = $plugin->file;
+                    $plugin_name = $plugin->name;
+                }
+                if (isset($file_path)) {
 					$plugin_details[] = $plugin;
-                    $plugin_files[$plugin->file] = $plugin->old_version;
+                    $plugin_files[$file_path] = $plugin->old_version;
                 } else {
 					$premium_plugin_details[] = $plugin;
-                    $premium_upgrades[md5($plugin->name)] = $plugin;
+                    $premium_upgrades[md5($plugin_name)] = $plugin;
 				}
             }
             if (!empty($plugin_files)) {
@@ -290,6 +297,9 @@ class IWP_MMB_Installer extends IWP_MMB_Core
     {
 		global $iwp_activities_log_post_type, $iwp_mmb_activities_log;		
         ob_start();
+         if ($GLOBALS['IWP_JSON_COMMUNICATION']) {
+            $current = (object)$current;
+         }
 
         if (!function_exists('wp_version_check') || !function_exists('get_core_checksums'))
             include_once(ABSPATH . '/wp-admin/includes/update.php');
@@ -471,13 +481,13 @@ class IWP_MMB_Installer extends IWP_MMB_Core
 		}
         $return = array();
         if (class_exists('Plugin_Upgrader') && class_exists('Bulk_Plugin_Upgrader_Skin')) {
-            $upgrader = new Plugin_Upgrader(new Bulk_Plugin_Upgrader_Skin(compact('nonce', 'url')));
-            $result   = $upgrader->bulk_upgrade(array_keys($plugins));
-			
+            
 			if (!function_exists('wp_update_plugins'))
                 include_once(ABSPATH . 'wp-includes/update.php');
             
             @wp_update_plugins();
+			$upgrader = new Plugin_Upgrader(new Bulk_Plugin_Upgrader_Skin(compact('nonce', 'url')));
+			$result = $upgrader->bulk_upgrade(array_keys($plugins));
 			$current = $this->iwp_mmb_get_transient('update_plugins');
 			
 			if (!empty($result)) {
@@ -751,6 +761,9 @@ class IWP_MMB_Installer extends IWP_MMB_Core
     
     function get_upgradable_plugins( $filter = array() )
     {
+		if (!function_exists('wp_update_plugins'))
+			include_once(ABSPATH . 'wp-includes/update.php');    
+		@wp_update_plugins();
         $current            = $this->iwp_mmb_get_transient('update_plugins');
 		
         $upgradable_plugins = array();

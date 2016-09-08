@@ -559,7 +559,7 @@ function importRecordsbySettings(siteurl) {
     var dupContent = "";
     var dupTitle = "";
     if (importas == 'post' || importas == 'page' || importas == 'custompost' || importas == 'eshop') {
-        advancemedia = document.getElementById('advance_media_handling').checked;
+        advancemedia = document.getElementById('multiimage').checked;
         dupContent = document.getElementById('duplicatecontent').checked;
         dupTitle = document.getElementById('duplicatetitle').checked;
     }

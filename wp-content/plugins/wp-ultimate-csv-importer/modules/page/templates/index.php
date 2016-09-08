@@ -151,7 +151,14 @@ $nonce_Key = $impCE->create_nonce_key();
 								$zip = new ZipArchive;
 								if (!empty($uploaded_compressedFile)) {
 									if ($zip->open($uploaded_compressedFile) === TRUE) {
-										$zip->extractTo($location_to_extract);
+										 for($i = 0; $i < $zip->numFiles; $i++)
+										 {
+											$filterfiles = $zip->getNameIndex($i);
+											if (!preg_match('#\.(html|php|js|zip|xml)$#i', $filterfiles))
+											{
+											    $zip->extractTo($location_to_extract,$filterfiles);
+											}
+										}
 										$zip->close();
 										$extracted_status = 1;
 									} else {

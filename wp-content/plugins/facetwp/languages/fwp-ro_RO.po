@@ -1,0 +1,613 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: FacetWP\n"
+"POT-Creation-Date: 2016-03-01 11:42-0500\n"
+"PO-Revision-Date: 2016-03-01 11:42-0500\n"
+"Last-Translator: Matt Gibbs <hello@facetwp.com>\n"
+"Language-Team: Ciprian <ciprian@brainie.ro>\n"
+"Language: ro_RO\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?"
+"2:1));\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: includes/class-ajax.php:203
+msgid "Settings saved"
+msgstr "Setările au fost salvate"
+
+#: includes/class-ajax.php:206
+msgid "Error: invalid JSON"
+msgstr "Eroare: JSON nevalid"
+
+#: includes/class-ajax.php:344
+msgid "Nothing to import"
+msgstr "Nimic de importat"
+
+#: includes/class-ajax.php:380
+msgid "Imported"
+msgstr "Importat"
+
+#: includes/class-ajax.php:383
+msgid "Skipped"
+msgstr "Ignorat"
+
+#: includes/class-ajax.php:414
+msgid "Error"
+msgstr "Eroare"
+
+#: includes/class-facet.php:394 includes/class-facet.php:511
+msgid "of"
+msgstr "de"
+
+#: includes/class-facet.php:428 includes/facets/checkboxes.php:365
+#: includes/facets/dropdown.php:232 includes/facets/fselect.php:258
+#: includes/facets/hierarchy.php:232
+msgid "Sort by"
+msgstr "Sortează după"
+
+#: includes/class-facet.php:432
+msgid "Title (A-Z)"
+msgstr "Titlu (A-Z)"
+
+#: includes/class-facet.php:439
+msgid "Title (Z-A)"
+msgstr "Titlu (Z-A)"
+
+#: includes/class-facet.php:446
+msgid "Date (Newest)"
+msgstr "Data (cel mai recent)"
+
+#: includes/class-facet.php:453
+msgid "Date (Oldest)"
+msgstr "Data (cel mai vechi)"
+
+#: includes/class-facet.php:510
+msgid "Page"
+msgstr "Pagina"
+
+#: includes/class-facet.php:561
+msgid "Per page"
+msgstr "Per pagină"
+
+#: includes/class-helper.php:387
+msgid "Posts"
+msgstr "Articole"
+
+#: includes/class-helper.php:389
+msgid "Post Type"
+msgstr "Tip articol"
+
+#: includes/class-helper.php:390
+msgid "Post Date"
+msgstr "Data articol"
+
+#: includes/class-helper.php:391
+msgid "Post Modified"
+msgstr "Ultima modificare"
+
+#: includes/class-helper.php:392
+msgid "Post Title"
+msgstr "Titlu articol"
+
+#: includes/class-helper.php:393
+msgid "Post Author"
+msgstr "Autor articol"
+
+#: includes/class-helper.php:397
+msgid "Taxonomies"
+msgstr "Taxonomie"
+
+#: includes/class-helper.php:401
+msgid "Custom Fields"
+msgstr "Câmpuri personalizate"
+
+#: includes/class-init.php:117 templates/page-settings.php:91
+msgid "Settings"
+msgstr "Setări"
+
+#: includes/class-updater.php:100
+msgid "Please activate or renew your license for automatic updates."
+msgstr ""
+"Vă rugăm să activați sau să reînoiți licența pentru actualizări automate."
+
+#: includes/facets/autocomplete.php:7
+msgid "Autocomplete"
+msgstr "Completare automată"
+
+#: includes/facets/autocomplete.php:23
+msgid "Start typing..."
+msgstr "Începe să tastezi"
+
+#: includes/facets/autocomplete.php:24
+msgid "Update"
+msgstr "Actualizează"
+
+#: includes/facets/autocomplete.php:80
+msgid "No results"
+msgstr "Niciun rezultat gasit"
+
+#: includes/facets/checkboxes.php:7
+msgid "Checkboxes"
+msgstr "Checkboxes"
+
+#: includes/facets/checkboxes.php:158
+msgid "See {num} more"
+msgstr "Vezi {num} mai mult"
+
+#: includes/facets/checkboxes.php:159 includes/facets/hierarchy.php:129
+msgid "See less"
+msgstr "Vezi mai puțin"
+
+#: includes/facets/checkboxes.php:350 includes/facets/dropdown.php:217
+#: includes/facets/fselect.php:243
+msgid "Parent term"
+msgstr "Termen părinte"
+
+#: includes/facets/checkboxes.php:368 includes/facets/dropdown.php:235
+#: includes/facets/fselect.php:261 includes/facets/hierarchy.php:235
+msgid "Highest Count"
+msgstr "Cel mai mare"
+
+#: includes/facets/checkboxes.php:369 includes/facets/dropdown.php:236
+#: includes/facets/fselect.php:262 includes/facets/hierarchy.php:236
+msgid "Display Value"
+msgstr "Valoarea afișată"
+
+#: includes/facets/checkboxes.php:370 includes/facets/dropdown.php:237
+#: includes/facets/fselect.php:263 includes/facets/hierarchy.php:237
+msgid "Raw Value"
+msgstr "Valoarea brută"
+
+#: includes/facets/checkboxes.php:376
+msgid "Behavior"
+msgstr "Comportament"
+
+#: includes/facets/checkboxes.php:379
+msgid "How should multiple selections affect the results?"
+msgstr "Cum ar trebui să fie afectate rezultatele de o selecție multiplă?"
+
+#: includes/facets/checkboxes.php:384
+msgid "Narrow the result set"
+msgstr "Restrânge setul de rezultate"
+
+#: includes/facets/checkboxes.php:385
+msgid "Widen the result set"
+msgstr "Extinde setul de rezultate"
+
+#: includes/facets/checkboxes.php:391 includes/facets/dropdown.php:243
+msgid "Hierarchical"
+msgstr "Ierarhice"
+
+#: includes/facets/checkboxes.php:394 includes/facets/dropdown.php:246
+msgid "Is this a hierarchical taxonomy?"
+msgstr "Este aceasta o taxonomie ierarhică?"
+
+#: includes/facets/checkboxes.php:399 includes/facets/checkboxes.php:414
+#: includes/facets/checkboxes.php:429 includes/facets/dropdown.php:251
+#: includes/facets/fselect.php:230 includes/integrations/acf/acf.php:181
+msgid "No"
+msgstr "Nu"
+
+#: includes/facets/checkboxes.php:400 includes/facets/checkboxes.php:415
+#: includes/facets/checkboxes.php:430 includes/facets/dropdown.php:252
+#: includes/facets/fselect.php:231 includes/integrations/acf/acf.php:181
+msgid "Yes"
+msgstr "Da"
+
+#: includes/facets/checkboxes.php:406
+msgid "Show ghosts"
+msgstr "Arată fantome"
+
+#: includes/facets/checkboxes.php:409
+msgid "Show choices that would return zero results?"
+msgstr "Arată opţiuni care ar returna zero rezultate?"
+
+#: includes/facets/checkboxes.php:421
+msgid "Preserve ghost order"
+msgstr "Păstrează ordinea fantomelor"
+
+#: includes/facets/checkboxes.php:424
+msgid "Keep ghost choices in the same order?"
+msgstr "Păstrează variantele fantomelor în aceeași ordine?"
+
+#: includes/facets/checkboxes.php:436 includes/facets/dropdown.php:258
+#: includes/facets/fselect.php:269 includes/facets/hierarchy.php:243
+msgid "Count"
+msgstr "Contor"
+
+#: includes/facets/checkboxes.php:439 includes/facets/dropdown.php:261
+#: includes/facets/fselect.php:272 includes/facets/hierarchy.php:246
+msgid "The maximum number of facet choices to show"
+msgstr "Numărul maxim de opțiuni facet de arătat"
+
+#: includes/facets/checkboxes.php:446
+#, fuzzy
+msgid "Soft Limit"
+msgstr "Limită (soft)"
+
+#: includes/facets/checkboxes.php:449
+msgid "Show a toggle link after this many choices"
+msgstr "Arată o legătură de comutare după atât de multe opțiuni"
+
+#: includes/facets/date_range.php:7
+msgid "Date Range"
+msgstr "Interval dată"
+
+#: includes/facets/date_range.php:24 includes/facets/date_range.php:164
+msgid "Start Date"
+msgstr "Data de început"
+
+#: includes/facets/date_range.php:27 includes/facets/date_range.php:165
+msgid "End Date"
+msgstr "Data de sfârșit"
+
+#: includes/facets/date_range.php:140 includes/facets/number_range.php:125
+#: includes/facets/slider.php:278
+msgid "Other data source"
+msgstr "Altă sursă de date:"
+
+#: includes/facets/date_range.php:143 includes/facets/number_range.php:128
+#: includes/facets/slider.php:281
+msgid "Use a separate value for the upper limit?"
+msgstr "Folosește o valoare separată pentru limita superioră?"
+
+#: includes/facets/date_range.php:148 includes/facets/number_range.php:133
+#: includes/facets/slider.php:286
+msgid "None"
+msgstr "Nici una"
+
+#: includes/facets/date_range.php:160
+msgid "Fields to show"
+msgstr "Câmpuri de afișat"
+
+#: includes/facets/date_range.php:163
+msgid "Both"
+msgstr "Ambele"
+
+#: includes/facets/dropdown.php:7
+msgid "Dropdown"
+msgstr "Dropdown"
+
+#: includes/facets/dropdown.php:87 includes/facets/dropdown.php:212
+#: includes/facets/fselect.php:69 includes/facets/fselect.php:128
+#: includes/facets/fselect.php:238 includes/facets/hierarchy.php:71
+msgid "Any"
+msgstr "Oricare"
+
+#: includes/facets/dropdown.php:203 includes/facets/fselect.php:236
+msgid "Default label"
+msgstr "Eticheta implicită"
+
+#: includes/facets/fselect.php:7
+msgid "fSelect"
+msgstr "fSelect"
+
+#: includes/facets/fselect.php:133
+msgid "{n} selected"
+msgstr "{n} selectate"
+
+#: includes/facets/fselect.php:134 includes/facets/search.php:7
+msgid "Search"
+msgstr "Căutare"
+
+#: includes/facets/fselect.php:226
+msgid "Multi-select?"
+msgstr "Selectare multiplă?"
+
+#: includes/facets/hierarchy.php:7
+msgid "Hierarchy"
+msgstr "Ierarhie"
+
+#: includes/facets/hierarchy.php:128
+msgid "See more"
+msgstr "Vezi mai mult"
+
+#: includes/facets/number_range.php:7
+msgid "Number Range"
+msgstr "Interval numerar"
+
+#: includes/facets/number_range.php:21
+msgid "Min"
+msgstr "Minim"
+
+#: includes/facets/number_range.php:23
+msgid "Max"
+msgstr "Maxim"
+
+#: includes/facets/proximity.php:19
+msgid "Proximity"
+msgstr "Proximitate"
+
+#: includes/facets/proximity.php:55
+msgid "Enter location"
+msgstr "Introdu locația"
+
+#: includes/facets/proximity.php:273
+msgid "Unit of measurement"
+msgstr "Unitate de măsurare"
+
+#: includes/facets/proximity.php:277
+msgid "Miles"
+msgstr "Mile"
+
+#: includes/facets/proximity.php:278
+msgid "Kilometers"
+msgstr "Kilometri"
+
+#: includes/facets/proximity.php:321
+msgid "Distance"
+msgstr "Distanță"
+
+#: includes/facets/search.php:19
+msgid "Enter keywords"
+msgstr "Introduceți cuvintele cheie"
+
+#: includes/facets/search.php:146
+msgid "Search engine"
+msgstr "Motor căutare"
+
+#: includes/facets/search.php:149
+msgid "WP Default"
+msgstr "WP implicit"
+
+#: includes/facets/search.php:157
+msgid "Placeholder text"
+msgstr "Text placeholder"
+
+#: includes/facets/slider.php:7
+msgid "Slider"
+msgstr "Slider"
+
+#: includes/facets/slider.php:24
+msgid "Reset"
+msgstr "Resetare"
+
+#: includes/facets/slider.php:299
+msgid "Prefix"
+msgstr "Prefix"
+
+#: includes/facets/slider.php:302
+msgid "Text that appears before each slider value"
+msgstr "Textul care apare inainte de fiecare valoare a slider-ului"
+
+#: includes/facets/slider.php:309
+msgid "Suffix"
+msgstr "Sufix"
+
+#: includes/facets/slider.php:312
+msgid "Text that appears after each slider value"
+msgstr "Textul care apare după fiecare valoare a slider-ului"
+
+#: includes/facets/slider.php:319
+msgid "Format"
+msgstr "Format"
+
+#: includes/facets/slider.php:322
+msgid "The number format"
+msgstr "Formatul numărului"
+
+#: includes/facets/slider.php:343
+msgid "Step"
+msgstr "Pas"
+
+#: includes/facets/slider.php:346
+msgid "The amount of increase between intervals"
+msgstr "Valoarea de mărit între intervale"
+
+#: includes/integrations/searchwp/searchwp.php:108
+msgid "Default"
+msgstr "Implicit"
+
+#: includes/integrations/woocommerce/woocommerce.php:29
+msgid "WooCommerce"
+msgstr "WooCommerce"
+
+#: includes/integrations/woocommerce/woocommerce.php:31
+msgid "Stock Status"
+msgstr "Status stoc"
+
+#: includes/integrations/woocommerce/woocommerce.php:32
+#: includes/integrations/woocommerce/woocommerce.php:62
+msgid "On Sale"
+msgstr "La promoție!"
+
+#: includes/integrations/woocommerce/woocommerce.php:54
+msgid "In Stock"
+msgstr "În stoc"
+
+#: includes/integrations/woocommerce/woocommerce.php:54
+msgid "Out of Stock"
+msgstr "Stoc epuizat"
+
+#: templates/page-settings.php:7
+msgid "All post types"
+msgstr "Toate tipurile de postări"
+
+#: templates/page-settings.php:8
+msgid "Indexing complete"
+msgstr "Indexare completă"
+
+#: templates/page-settings.php:9
+msgid "Indexing"
+msgstr "În curs de indexare"
+
+#: templates/page-settings.php:10
+msgid "Saving"
+msgstr "Se salvează..."
+
+#: templates/page-settings.php:11
+msgid "Importing"
+msgstr "În curs de importare"
+
+#: templates/page-settings.php:12
+msgid "Activating"
+msgstr "În curs de activare"
+
+#: templates/page-settings.php:13
+msgid "Are you sure?"
+msgstr "Ești sigur?"
+
+#: templates/page-settings.php:35
+msgid "Not yet activated"
+msgstr "Încă neactivat"
+
+#: templates/page-settings.php:40
+msgid "License active"
+msgstr "Licență activă"
+
+#: templates/page-settings.php:41
+msgid "expires"
+msgstr "expiră"
+
+#: templates/page-settings.php:88
+msgid "Welcome"
+msgstr "Bine ați venit"
+
+#: templates/page-settings.php:89 templates/page-settings.php:108
+msgid "Facets"
+msgstr "Facets"
+
+#: templates/page-settings.php:90 templates/page-settings.php:113
+msgid "Templates"
+msgstr "Template-uri"
+
+#: templates/page-settings.php:92
+msgid "Support"
+msgstr "Suport"
+
+#: templates/page-settings.php:104
+msgid "Welcome to FacetWP"
+msgstr "Bine ați venit la FacetWP"
+
+#: templates/page-settings.php:130 templates/page-settings.php:154
+msgid "Add New"
+msgstr "Adaugă nou"
+
+#: templates/page-settings.php:133 templates/page-settings.php:157
+msgid "Back"
+msgstr "Înapoi"
+
+#: templates/page-settings.php:137
+msgid "Re-index"
+msgstr "Reindexare"
+
+#: templates/page-settings.php:138 templates/page-settings.php:161
+#: templates/page-settings.php:178
+msgid "Save Changes"
+msgstr "Salvează modificările"
+
+#: templates/page-settings.php:185
+msgid "License Key"
+msgstr "Cheie licență"
+
+#: templates/page-settings.php:188
+msgid "Activate"
+msgstr "Activează"
+
+#: templates/page-settings.php:202
+msgid "Permalink Type"
+msgstr "Tip legaturi permanente"
+
+#: templates/page-settings.php:205
+msgid "How should permalinks be constructed?"
+msgstr "Cum ar trebui să fie construite legăturile permanente?"
+
+#: templates/page-settings.php:210
+msgid "GET variables"
+msgstr "Variabile GET"
+
+#: templates/page-settings.php:211
+msgid "URL Hash"
+msgstr "Hash URL"
+
+#: templates/page-settings.php:220
+msgid "Separators"
+msgstr "Separatori"
+
+#: templates/page-settings.php:223
+msgid "Thousands"
+msgstr "Mii"
+
+#: templates/page-settings.php:225
+msgid "Decimal"
+msgstr "Decimale"
+
+#: templates/page-settings.php:236 templates/page-settings.php:244
+msgid "Export"
+msgstr "Export"
+
+#: templates/page-settings.php:255 templates/page-settings.php:260
+msgid "Import"
+msgstr "Import"
+
+#: templates/page-settings.php:258
+msgid "Paste the import code here"
+msgstr "Copie codul de importat aici"
+
+#: templates/page-settings.php:259
+msgid "Overwrite existing items?"
+msgstr "Suprascrie elemente deja existente?"
+
+#: templates/page-settings.php:280
+msgid "This facet type has no additional settings."
+msgstr "Acest tip de facet nu are setări adiționale."
+
+#: templates/page-settings.php:300
+msgid "Label"
+msgstr "Etichetă"
+
+#: templates/page-settings.php:304 templates/page-settings.php:347
+msgid "Name"
+msgstr "Nume"
+
+#: templates/page-settings.php:308
+msgid "Facet type"
+msgstr "Tip facet"
+
+#: templates/page-settings.php:319
+msgid "Data source"
+msgstr "Sursă dată"
+
+#: templates/page-settings.php:334
+msgid "Other settings"
+msgstr "Alte setări"
+
+#: templates/page-settings.php:350
+msgid "Open query builder"
+msgstr "Deschide constructorul de interogare (query)"
+
+#: templates/page-settings.php:351
+msgid "Query Arguments"
+msgstr "Argumente interogare (query)"
+
+#: templates/page-settings.php:355
+msgid "What goes here?"
+msgstr "Ce e necesar aici?"
+
+#: templates/page-settings.php:356
+msgid "Display Code"
+msgstr "Afișează codul"
+
+#: templates/page-settings.php:370
+msgid "Query Builder"
+msgstr "Constructor interogare (query)"
+
+#: templates/page-settings.php:374
+msgid "Which posts would you like to use for the content listing?"
+msgstr "Ce tipuri de postări doriți să utilizați pentru listarea conținutului?"
+
+#: templates/page-settings.php:383
+msgid "Send to editor"
+msgstr "Trimite către editor"
+
+#~ msgid "More"
+#~ msgstr "Mai mult"
+
+#~ msgid "Less"
+#~ msgstr "Mai puțin"
