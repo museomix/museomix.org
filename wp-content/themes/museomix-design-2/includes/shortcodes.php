@@ -180,12 +180,12 @@ function ListePrototypes($atts){
 	
 	$out = '';
 	
-	/* We cut prototypes in groups of 4 elements */
-	$prototypes_groups = array_chunk($r, 4);
+	/* We cut prototypes in groups of 3 elements */
+	$prototypes_groups = array_chunk($r, 3);
 	foreach($prototypes_groups as $group) {
 		$out .= '<ul class="lst lst-bloc-lieux clearfix">';
 		foreach($group as $prototype) {
-			$out .= '<li class="elm-bloc-lieu span3 ">'.$prototype.'</li>';
+			$out .= '<li class="elm-bloc-lieu span4 ">'.$prototype.'</li>';
 		}
 		$out .= '</ul>';
 	}

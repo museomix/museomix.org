@@ -645,8 +645,8 @@ body#lieux .lst-bloc-lieux .elm-bloc-lieu,body#locations .lst-bloc-lieux .elm-bl
     width:100%;
     background-size:100% auto !important;
 }
-#les-prototypes .elm-bloc-lieu {
-width: 50%;
+#les-prototypes ul.lst-bloc-lieux {
+	max-width:100%;
 }
 #les-prototypes .elm-bloc-lieu>a {
     background-position: left top !important;
