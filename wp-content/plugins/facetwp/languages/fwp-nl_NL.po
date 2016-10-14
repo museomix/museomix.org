@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: FacetWP\n"
-"POT-Creation-Date: 2016-03-22 08:52-0400\n"
-"PO-Revision-Date: 2016-03-22 08:52-0400\n"
+"POT-Creation-Date: 2016-10-05 20:29-0400\n"
+"PO-Revision-Date: 2016-10-05 20:29-0400\n"
 "Last-Translator: Matt Gibbs <hello@facetwp.com>\n"
 "Language-Team: \n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 1.8.9\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-WPHeader: index.php\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -20,103 +20,103 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: includes/class-ajax.php:204
+#: includes/class-ajax.php:191
 msgid "Settings saved"
 msgstr "Instellingen zijn opgeslagen"
 
-#: includes/class-ajax.php:207
+#: includes/class-ajax.php:194
 msgid "Error: invalid JSON"
 msgstr "Fout: ongeldige JSON"
 
-#: includes/class-ajax.php:347
+#: includes/class-ajax.php:334
 msgid "Nothing to import"
 msgstr "Niets te importeren"
 
-#: includes/class-ajax.php:383
+#: includes/class-ajax.php:370
 msgid "Imported"
 msgstr "Geïmporteerd"
 
-#: includes/class-ajax.php:386
+#: includes/class-ajax.php:373
 msgid "Skipped"
 msgstr "Overgeslagen"
 
-#: includes/class-ajax.php:417
+#: includes/class-ajax.php:404
 msgid "Error"
 msgstr "Fout"
 
-#: includes/class-facet.php:435 includes/class-facet.php:552
+#: includes/class-facet.php:448 includes/class-facet.php:565
 msgid "of"
 msgstr "van"
 
-#: includes/class-facet.php:469 includes/facets/checkboxes.php:366
-#: includes/facets/dropdown.php:232 includes/facets/fselect.php:258
-#: includes/facets/hierarchy.php:232
+#: includes/class-facet.php:482 includes/facets/checkboxes.php:315
+#: includes/facets/dropdown.php:201 includes/facets/fselect.php:273
+#: includes/facets/hierarchy.php:192 includes/facets/radio.php:216
 msgid "Sort by"
 msgstr "Sorteer op"
 
-#: includes/class-facet.php:473
+#: includes/class-facet.php:486
 msgid "Title (A-Z)"
 msgstr "Titel (A-Z)"
 
-#: includes/class-facet.php:480
+#: includes/class-facet.php:493
 msgid "Title (Z-A)"
 msgstr "Titel (Z-A)"
 
-#: includes/class-facet.php:487
+#: includes/class-facet.php:500
 msgid "Date (Newest)"
 msgstr "Datum (Nieuwste eerst)"
 
-#: includes/class-facet.php:494
+#: includes/class-facet.php:507
 msgid "Date (Oldest)"
 msgstr "Datum (Oudste eerst)"
 
-#: includes/class-facet.php:551
+#: includes/class-facet.php:564
 msgid "Page"
 msgstr "Pagina"
 
-#: includes/class-facet.php:602
+#: includes/class-facet.php:615
 msgid "Per page"
 msgstr "Per pagina"
 
-#: includes/class-helper.php:387
+#: includes/class-helper.php:389
 msgid "Posts"
 msgstr "Berichten"
 
-#: includes/class-helper.php:389
+#: includes/class-helper.php:391
 msgid "Post Type"
 msgstr "Berichttype"
 
-#: includes/class-helper.php:390
+#: includes/class-helper.php:392
 msgid "Post Date"
 msgstr "Berichtdatum"
 
-#: includes/class-helper.php:391
+#: includes/class-helper.php:393
 msgid "Post Modified"
 msgstr "Datum bericht gewijzigd"
 
-#: includes/class-helper.php:392
+#: includes/class-helper.php:394
 msgid "Post Title"
 msgstr "Berichttitel"
 
-#: includes/class-helper.php:393
+#: includes/class-helper.php:395
 msgid "Post Author"
 msgstr "Auteur van bericht"
 
-#: includes/class-helper.php:397
+#: includes/class-helper.php:399
 msgid "Taxonomies"
 msgstr "Taxonomieën"
 
-#: includes/class-helper.php:401
+#: includes/class-helper.php:403
 msgid "Custom Fields"
 msgstr "Aangepaste Velden"
 
-#: includes/class-init.php:117 templates/page-settings.php:91
+#: includes/class-init.php:119 templates/page-settings.php:108
 msgid "Settings"
 msgstr "Instellingen"
 
-#: includes/class-updater.php:100
+#: includes/class-updater.php:109
 msgid "Please activate or renew your license for automatic updates."
-msgstr "Activeer of vernieuw uw licentie voor automatische updates."
+msgstr "Activeer of vernieuw je licentie voor automatische updates."
 
 #: includes/facets/autocomplete.php:7
 msgid "Autocomplete"
@@ -126,13 +126,17 @@ msgstr "Automatisch aanvullen"
 msgid "Start typing..."
 msgstr "Begin te typen …"
 
-#: includes/facets/autocomplete.php:24
+#: includes/facets/autocomplete.php:26
 msgid "Update"
 msgstr "Bijwerken"
 
-#: includes/facets/autocomplete.php:80
+#: includes/facets/autocomplete.php:83
 msgid "No results"
 msgstr "Geen resultaten"
+
+#: includes/facets/autocomplete.php:125 includes/facets/search.php:102
+msgid "Placeholder text"
+msgstr "Placeholder"
 
 #: includes/facets/checkboxes.php:7
 msgid "Checkboxes"
@@ -146,93 +150,100 @@ msgstr "Nog {num} tonen"
 msgid "See less"
 msgstr "Minder tonen"
 
-#: includes/facets/checkboxes.php:351 includes/facets/dropdown.php:217
-#: includes/facets/fselect.php:243
+#: includes/facets/checkboxes.php:300 includes/facets/dropdown.php:186
+#: includes/facets/fselect.php:258 includes/facets/radio.php:201
 msgid "Parent term"
 msgstr "Hoofdterm"
 
-#: includes/facets/checkboxes.php:369 includes/facets/dropdown.php:235
-#: includes/facets/fselect.php:261 includes/facets/hierarchy.php:235
+#: includes/facets/checkboxes.php:318 includes/facets/dropdown.php:204
+#: includes/facets/fselect.php:276 includes/facets/hierarchy.php:195
+#: includes/facets/radio.php:219
 msgid "Highest Count"
 msgstr "Hoogste Aantal"
 
-#: includes/facets/checkboxes.php:370 includes/facets/dropdown.php:236
-#: includes/facets/fselect.php:262 includes/facets/hierarchy.php:236
+#: includes/facets/checkboxes.php:319 includes/facets/dropdown.php:205
+#: includes/facets/fselect.php:277 includes/facets/hierarchy.php:196
+#: includes/facets/radio.php:220
 msgid "Display Value"
 msgstr "Schermnaam"
 
-#: includes/facets/checkboxes.php:371 includes/facets/dropdown.php:237
-#: includes/facets/fselect.php:263 includes/facets/hierarchy.php:237
+#: includes/facets/checkboxes.php:320 includes/facets/dropdown.php:206
+#: includes/facets/fselect.php:278 includes/facets/hierarchy.php:197
+#: includes/facets/radio.php:221
 msgid "Raw Value"
 msgstr "Ruwe waarde"
 
-#: includes/facets/checkboxes.php:377
+#: includes/facets/checkboxes.php:326 includes/facets/fselect.php:284
 msgid "Behavior"
 msgstr "Gedrag"
 
-#: includes/facets/checkboxes.php:380
+#: includes/facets/checkboxes.php:329 includes/facets/fselect.php:287
 msgid "How should multiple selections affect the results?"
 msgstr "Hoe moeten meerdere selecties de resultaten beïnvloeden?"
 
-#: includes/facets/checkboxes.php:385
+#: includes/facets/checkboxes.php:334 includes/facets/fselect.php:292
 msgid "Narrow the result set"
 msgstr "Verklein de resultaten"
 
-#: includes/facets/checkboxes.php:386
+#: includes/facets/checkboxes.php:335 includes/facets/fselect.php:293
 msgid "Widen the result set"
 msgstr "Verruim de resultaten"
 
-#: includes/facets/checkboxes.php:392 includes/facets/dropdown.php:243
+#: includes/facets/checkboxes.php:341 includes/facets/dropdown.php:212
 msgid "Hierarchical"
 msgstr "Hiërarchisch"
 
-#: includes/facets/checkboxes.php:395 includes/facets/dropdown.php:246
+#: includes/facets/checkboxes.php:344 includes/facets/dropdown.php:215
 msgid "Is this a hierarchical taxonomy?"
 msgstr "Is dit een hiërarchische taxonomie?"
 
-#: includes/facets/checkboxes.php:400 includes/facets/checkboxes.php:415
-#: includes/facets/checkboxes.php:430 includes/facets/dropdown.php:251
-#: includes/facets/fselect.php:230 includes/integrations/acf/acf.php:181
+#: includes/facets/checkboxes.php:349 includes/facets/checkboxes.php:364
+#: includes/facets/checkboxes.php:379 includes/facets/dropdown.php:220
+#: includes/facets/fselect.php:245 includes/facets/radio.php:235
+#: includes/facets/radio.php:250 includes/integrations/acf/acf.php:197
 msgid "No"
 msgstr "Nee"
 
-#: includes/facets/checkboxes.php:401 includes/facets/checkboxes.php:416
-#: includes/facets/checkboxes.php:431 includes/facets/dropdown.php:252
-#: includes/facets/fselect.php:231 includes/integrations/acf/acf.php:181
+#: includes/facets/checkboxes.php:350 includes/facets/checkboxes.php:365
+#: includes/facets/checkboxes.php:380 includes/facets/dropdown.php:221
+#: includes/facets/fselect.php:246 includes/facets/radio.php:236
+#: includes/facets/radio.php:251 includes/integrations/acf/acf.php:197
 msgid "Yes"
 msgstr "Ja"
 
-#: includes/facets/checkboxes.php:407
+#: includes/facets/checkboxes.php:356 includes/facets/radio.php:227
 msgid "Show ghosts"
 msgstr "Toon ghosts"
 
-#: includes/facets/checkboxes.php:410
+#: includes/facets/checkboxes.php:359 includes/facets/radio.php:230
 msgid "Show choices that would return zero results?"
 msgstr "Keuzes die geen resultaten hebben, laten zien?"
 
-#: includes/facets/checkboxes.php:422
+#: includes/facets/checkboxes.php:371 includes/facets/radio.php:242
 msgid "Preserve ghost order"
 msgstr "Bewaar ghost-volgorde"
 
-#: includes/facets/checkboxes.php:425
+#: includes/facets/checkboxes.php:374 includes/facets/radio.php:245
 msgid "Keep ghost choices in the same order?"
 msgstr "Ghost-keuzes in dezelfde volgorde behouden?"
 
-#: includes/facets/checkboxes.php:437 includes/facets/dropdown.php:258
-#: includes/facets/fselect.php:269 includes/facets/hierarchy.php:243
+#: includes/facets/checkboxes.php:386 includes/facets/dropdown.php:227
+#: includes/facets/fselect.php:299 includes/facets/hierarchy.php:203
+#: includes/facets/radio.php:257
 msgid "Count"
 msgstr "Aantal"
 
-#: includes/facets/checkboxes.php:440 includes/facets/dropdown.php:261
-#: includes/facets/fselect.php:272 includes/facets/hierarchy.php:246
+#: includes/facets/checkboxes.php:389 includes/facets/dropdown.php:230
+#: includes/facets/fselect.php:302 includes/facets/hierarchy.php:206
+#: includes/facets/radio.php:260
 msgid "The maximum number of facet choices to show"
 msgstr "Het maximum aantal te tonen facetkeuzes"
 
-#: includes/facets/checkboxes.php:447
+#: includes/facets/checkboxes.php:396
 msgid "Soft Limit"
 msgstr "Zachte limiet"
 
-#: includes/facets/checkboxes.php:450
+#: includes/facets/checkboxes.php:399
 msgid "Show a toggle link after this many choices"
 msgstr "Toon een toggle-link na dit aantal keuzes"
 
@@ -244,52 +255,119 @@ msgstr "Datumbereik"
 msgid "Date"
 msgstr "Datum"
 
-#: includes/facets/date_range.php:27 includes/facets/date_range.php:173
+#: includes/facets/date_range.php:27 includes/facets/date_range.php:183
 msgid "Start Date"
 msgstr "Startdatum"
 
-#: includes/facets/date_range.php:30 includes/facets/date_range.php:174
+#: includes/facets/date_range.php:30 includes/facets/date_range.php:184
 msgid "End Date"
 msgstr "Einddatum"
 
-#: includes/facets/date_range.php:148 includes/facets/number_range.php:125
-#: includes/facets/slider.php:274
+#: includes/facets/date_range.php:120
+msgid "January"
+msgstr "Januari"
+
+#: includes/facets/date_range.php:121
+msgid "February"
+msgstr "Februari"
+
+#: includes/facets/date_range.php:122
+msgid "March"
+msgstr "Maart"
+
+#: includes/facets/date_range.php:123
+msgid "April"
+msgstr "April"
+
+#: includes/facets/date_range.php:124
+msgid "May"
+msgstr "Mei"
+
+#: includes/facets/date_range.php:125
+msgid "June"
+msgstr "Juni"
+
+#: includes/facets/date_range.php:126
+msgid "July"
+msgstr "Juli"
+
+#: includes/facets/date_range.php:127
+msgid "August"
+msgstr "Augustus"
+
+#: includes/facets/date_range.php:128
+msgid "September"
+msgstr "September"
+
+#: includes/facets/date_range.php:129
+msgid "October"
+msgstr "Oktober"
+
+#: includes/facets/date_range.php:130
+msgid "November"
+msgstr "November"
+
+#: includes/facets/date_range.php:131
+msgid "December"
+msgstr "December"
+
+#: includes/facets/date_range.php:149 includes/facets/number_range.php:106
+#: includes/facets/slider.php:167
 msgid "Other data source"
 msgstr "Andere gegevensbron"
 
-#: includes/facets/date_range.php:151 includes/facets/number_range.php:128
-#: includes/facets/slider.php:277
+#: includes/facets/date_range.php:152 includes/facets/number_range.php:109
+#: includes/facets/slider.php:170
 msgid "Use a separate value for the upper limit?"
 msgstr "Een aparte waarde voor de bovengrens gebruiken?"
 
-#: includes/facets/date_range.php:156 includes/facets/number_range.php:133
-#: includes/facets/slider.php:282
+#: includes/facets/date_range.php:157 includes/facets/number_range.php:114
+#: includes/facets/slider.php:175
 msgid "None"
 msgstr "Geen"
 
-#: includes/facets/date_range.php:168
+#: includes/facets/date_range.php:169 includes/facets/number_range.php:126
+#: includes/facets/slider.php:187
+msgid "Compare type"
+msgstr "Type vergelijken"
+
+#: includes/facets/date_range.php:172 includes/facets/number_range.php:129
+#: includes/facets/slider.php:190
+msgid "Basic"
+msgstr "Standaard"
+
+#: includes/facets/date_range.php:173 includes/facets/number_range.php:130
+#: includes/facets/slider.php:191
+msgid "Intersect"
+msgstr "Doorsnede"
+
+#: includes/facets/date_range.php:178
 msgid "Fields to show"
 msgstr "Velden om te laten zien"
 
-#: includes/facets/date_range.php:171
+#: includes/facets/date_range.php:181
 msgid "Start + End Dates"
 msgstr "Start- en einddata"
 
-#: includes/facets/date_range.php:172
+#: includes/facets/date_range.php:182
 msgid "Exact Date"
 msgstr "Precieze datum"
+
+#: includes/facets/date_range.php:190
+msgid "Display format"
+msgstr "Laat format zien"
 
 #: includes/facets/dropdown.php:7
 msgid "Dropdown"
 msgstr "Keuzelijst"
 
-#: includes/facets/dropdown.php:87 includes/facets/dropdown.php:212
-#: includes/facets/fselect.php:69 includes/facets/fselect.php:128
-#: includes/facets/fselect.php:238 includes/facets/hierarchy.php:71
+#: includes/facets/dropdown.php:87 includes/facets/dropdown.php:181
+#: includes/facets/fselect.php:98 includes/facets/fselect.php:171
+#: includes/facets/fselect.php:253 includes/facets/hierarchy.php:71
 msgid "Any"
 msgstr "Eender welke"
 
-#: includes/facets/dropdown.php:203 includes/facets/fselect.php:236
+#: includes/facets/dropdown.php:172 includes/facets/fselect.php:251
 msgid "Default label"
 msgstr "Standaardlabel"
 
@@ -297,15 +375,15 @@ msgstr "Standaardlabel"
 msgid "fSelect"
 msgstr "fSelect"
 
-#: includes/facets/fselect.php:133
+#: includes/facets/fselect.php:176
 msgid "{n} selected"
 msgstr "{n} geselecteerd"
 
-#: includes/facets/fselect.php:134 includes/facets/search.php:7
+#: includes/facets/fselect.php:177 includes/facets/search.php:7
 msgid "Search"
 msgstr "Zoek"
 
-#: includes/facets/fselect.php:226
+#: includes/facets/fselect.php:241
 msgid "Multi-select?"
 msgstr "Meervoudige selectie?"
 
@@ -335,39 +413,39 @@ msgstr "Nabijheid"
 
 #: includes/facets/proximity.php:55
 msgid "Enter location"
-msgstr "Vul uw locatie in"
+msgstr "Vul je locatie in"
 
-#: includes/facets/proximity.php:273
+#: includes/facets/proximity.php:164
 msgid "Unit of measurement"
 msgstr "Meeteenheid"
 
-#: includes/facets/proximity.php:277
+#: includes/facets/proximity.php:168
 msgid "Miles"
 msgstr "Mijlen"
 
-#: includes/facets/proximity.php:278
+#: includes/facets/proximity.php:169
 msgid "Kilometers"
 msgstr "Kilometers"
 
-#: includes/facets/proximity.php:321
+#: includes/facets/proximity.php:212
 msgid "Distance"
 msgstr "Afstand"
+
+#: includes/facets/radio.php:7
+msgid "Radio"
+msgstr "Radio"
 
 #: includes/facets/search.php:19
 msgid "Enter keywords"
 msgstr "Voer trefwoorden in"
 
-#: includes/facets/search.php:146
+#: includes/facets/search.php:91
 msgid "Search engine"
 msgstr "Zoekmachine"
 
-#: includes/facets/search.php:149
+#: includes/facets/search.php:94
 msgid "WP Default"
 msgstr "WP Default"
-
-#: includes/facets/search.php:157
-msgid "Placeholder text"
-msgstr "Placeholder"
 
 #: includes/facets/slider.php:7
 msgid "Slider"
@@ -377,39 +455,39 @@ msgstr "Schuifregelaar"
 msgid "Reset"
 msgstr "Beginwaarden"
 
-#: includes/facets/slider.php:295
+#: includes/facets/slider.php:197
 msgid "Prefix"
 msgstr "Prefix"
 
-#: includes/facets/slider.php:298
+#: includes/facets/slider.php:200
 msgid "Text that appears before each slider value"
 msgstr "Tekst die voor elke waarde verschijnt"
 
-#: includes/facets/slider.php:305
+#: includes/facets/slider.php:207
 msgid "Suffix"
 msgstr "Suffix"
 
-#: includes/facets/slider.php:308
+#: includes/facets/slider.php:210
 msgid "Text that appears after each slider value"
 msgstr "Tekst die verschijnt na elke waarde"
 
-#: includes/facets/slider.php:315
+#: includes/facets/slider.php:217
 msgid "Format"
 msgstr "Opmaak"
 
-#: includes/facets/slider.php:318
+#: includes/facets/slider.php:220
 msgid "The number format"
 msgstr "Getalnotatie"
 
-#: includes/facets/slider.php:339
+#: includes/facets/slider.php:241
 msgid "Step"
 msgstr "Stap"
 
-#: includes/facets/slider.php:342
+#: includes/facets/slider.php:244
 msgid "The amount of increase between intervals"
 msgstr "De hoeveelheid stijging tussen intervallen"
 
-#: includes/integrations/searchwp/searchwp.php:72
+#: includes/integrations/searchwp/searchwp.php:108
 msgid "Default"
 msgstr "Standaard"
 
@@ -422,15 +500,15 @@ msgid "Stock Status"
 msgstr "Voorraadstatus"
 
 #: includes/integrations/woocommerce/woocommerce.php:32
-#: includes/integrations/woocommerce/woocommerce.php:62
+#: includes/integrations/woocommerce/woocommerce.php:66
 msgid "On Sale"
 msgstr "In verkoop"
 
-#: includes/integrations/woocommerce/woocommerce.php:54
+#: includes/integrations/woocommerce/woocommerce.php:58
 msgid "In Stock"
 msgstr "In Voorraad"
 
-#: includes/integrations/woocommerce/woocommerce.php:54
+#: includes/integrations/woocommerce/woocommerce.php:58
 msgid "Out of Stock"
 msgstr "Niet in voorraad"
 
@@ -451,167 +529,159 @@ msgid "Saving"
 msgstr "Wordt opgeslagen"
 
 #: templates/page-settings.php:11
+msgid "Loading"
+msgstr "Laden"
+
+#: templates/page-settings.php:12
 msgid "Importing"
 msgstr "Bezig met importeren…"
 
-#: templates/page-settings.php:12
+#: templates/page-settings.php:13
 msgid "Activating"
 msgstr "Bezig met activeren"
 
-#: templates/page-settings.php:13
+#: templates/page-settings.php:14
 msgid "Are you sure?"
-msgstr "Bent u zeker?"
+msgstr "Ben je zeker?"
 
-#: templates/page-settings.php:35
-msgid "Not yet activated"
-msgstr "Nog niet geactiveerd"
+#: templates/page-settings.php:15
+msgid "Select some items"
+msgstr "Items selecteren"
 
-#: templates/page-settings.php:40
-msgid "License active"
-msgstr "Licentie actief"
-
-#: templates/page-settings.php:41
-msgid "expires"
-msgstr "verloopt"
-
-#: templates/page-settings.php:88
-msgid "Welcome"
-msgstr "Welkom"
-
-#: templates/page-settings.php:89 templates/page-settings.php:108
-msgid "Facets"
-msgstr "Facetten"
-
-#: templates/page-settings.php:90 templates/page-settings.php:113
-msgid "Templates"
-msgstr "Templates"
-
-#: templates/page-settings.php:92
-msgid "Support"
-msgstr "Ondersteuning"
-
-#: templates/page-settings.php:104
-msgid "Welcome to FacetWP"
-msgstr "Welkom bij FacetWP"
-
-#: templates/page-settings.php:130 templates/page-settings.php:154
-msgid "Add New"
-msgstr "Voeg nieuwe toe"
-
-#: templates/page-settings.php:133 templates/page-settings.php:157
-msgid "Back"
-msgstr "Terug"
-
-#: templates/page-settings.php:137
-msgid "Re-index"
-msgstr "Herindexeer"
-
-#: templates/page-settings.php:138 templates/page-settings.php:161
-#: templates/page-settings.php:178
-msgid "Save Changes"
-msgstr "Wijzigingen opslaan"
-
-#: templates/page-settings.php:185
-msgid "License Key"
-msgstr "Licentiesleutel"
-
-#: templates/page-settings.php:188
-msgid "Activate"
-msgstr "Activeer"
-
-#: templates/page-settings.php:202
-msgid "Permalink Type"
-msgstr "Soort permalink"
-
-#: templates/page-settings.php:205
-msgid "How should permalinks be constructed?"
-msgstr "Hoe moeten permalinks worden opgebouwd?"
-
-#: templates/page-settings.php:210
-msgid "GET variables"
-msgstr "GET variabelen"
-
-#: templates/page-settings.php:211
-msgid "URL Hash"
-msgstr "URL Hash"
-
-#: templates/page-settings.php:220
-msgid "Separators"
-msgstr "Scheidingstekens"
-
-#: templates/page-settings.php:223
-msgid "Thousands"
-msgstr "Duizendtallen"
-
-#: templates/page-settings.php:225
-msgid "Decimal"
-msgstr "Decimaalteken"
-
-#: templates/page-settings.php:236 templates/page-settings.php:244
-msgid "Export"
-msgstr "Exporteer"
-
-#: templates/page-settings.php:255 templates/page-settings.php:260
-msgid "Import"
-msgstr "Importeer"
-
-#: templates/page-settings.php:258
-msgid "Paste the import code here"
-msgstr "Plak de importcode hier"
-
-#: templates/page-settings.php:259
-msgid "Overwrite existing items?"
-msgstr "Overschrijf bestaande items?"
-
-#: templates/page-settings.php:280
+#: templates/page-settings.php:39
 msgid "This facet type has no additional settings."
 msgstr "Dit type facet heeft geen extra instellingen."
 
-#: templates/page-settings.php:300
+#: templates/page-settings.php:48
+msgid "Not yet activated"
+msgstr "Nog niet geactiveerd"
+
+#: templates/page-settings.php:53
+msgid "License active"
+msgstr "Licentie actief"
+
+#: templates/page-settings.php:54
+msgid "expires"
+msgstr "verloopt"
+
+#: templates/page-settings.php:105
+msgid "Welcome"
+msgstr "Welkom"
+
+#: templates/page-settings.php:106
+msgid "Facets"
+msgstr "Facetten"
+
+#: templates/page-settings.php:107
+msgid "Templates"
+msgstr "Templates"
+
+#: templates/page-settings.php:109
+msgid "Support"
+msgstr "Ondersteuning"
+
+#: templates/page-settings.php:121
+msgid "Welcome to FacetWP"
+msgstr "Welkom bij FacetWP"
+
+#: templates/page-settings.php:136 templates/page-settings.php:160
+msgid "Add New"
+msgstr "Voeg nieuwe toe"
+
+#: templates/page-settings.php:139 templates/page-settings.php:163
+msgid "Back"
+msgstr "Terug"
+
+#: templates/page-settings.php:143
+msgid "Re-index"
+msgstr "Herindexeer"
+
+#: templates/page-settings.php:144 templates/page-settings.php:167
+#: templates/page-settings.php:184
+msgid "Save Changes"
+msgstr "Wijzigingen opslaan"
+
+#: templates/page-settings.php:191
+msgid "License Key"
+msgstr "Licentiesleutel"
+
+#: templates/page-settings.php:194
+msgid "Activate"
+msgstr "Activeer"
+
+#: templates/page-settings.php:205
+msgid "Separators"
+msgstr "Scheidingstekens"
+
+#: templates/page-settings.php:208
+msgid "Thousands"
+msgstr "Duizendtallen"
+
+#: templates/page-settings.php:210
+msgid "Decimal"
+msgstr "Decimaalteken"
+
+#: templates/page-settings.php:221 templates/page-settings.php:229
+msgid "Export"
+msgstr "Exporteer"
+
+#: templates/page-settings.php:237 templates/page-settings.php:242
+msgid "Import"
+msgstr "Importeer"
+
+#: templates/page-settings.php:240
+msgid "Paste the import code here"
+msgstr "Plak de importcode hier"
+
+#: templates/page-settings.php:241
+msgid "Overwrite existing items?"
+msgstr "Overschrijf bestaande items?"
+
+#: templates/page-settings.php:266
 msgid "Label"
 msgstr "Label"
 
-#: templates/page-settings.php:304 templates/page-settings.php:347
+#: templates/page-settings.php:270 templates/page-settings.php:313
 msgid "Name"
 msgstr "Naam"
 
-#: templates/page-settings.php:308
+#: templates/page-settings.php:274
 msgid "Facet type"
 msgstr "Soort facet"
 
-#: templates/page-settings.php:319
+#: templates/page-settings.php:285
 msgid "Data source"
 msgstr "Gegevensbron"
 
-#: templates/page-settings.php:334
+#: templates/page-settings.php:300
 msgid "Other settings"
 msgstr "Overige instellingen"
 
-#: templates/page-settings.php:350
+#: templates/page-settings.php:316
 msgid "Open query builder"
 msgstr "Query-builder openen"
 
-#: templates/page-settings.php:351
+#: templates/page-settings.php:317
 msgid "Query Arguments"
 msgstr "Query-argumenten"
 
-#: templates/page-settings.php:355
+#: templates/page-settings.php:321
 msgid "What goes here?"
 msgstr "Wat komt hier?"
 
-#: templates/page-settings.php:356
+#: templates/page-settings.php:322
 msgid "Display Code"
 msgstr "Toon code"
 
-#: templates/page-settings.php:370
+#: templates/page-settings.php:336
 msgid "Query Builder"
 msgstr "Query-builder"
 
-#: templates/page-settings.php:374
+#: templates/page-settings.php:340
 msgid "Which posts would you like to use for the content listing?"
-msgstr "Welke berichten zou u willen gebruiken voor de inhoudslijst?"
+msgstr "Welke berichten zou je willen gebruiken voor de inhoudslijst?"
 
-#: templates/page-settings.php:383
+#: templates/page-settings.php:349
 msgid "Send to editor"
 msgstr "Stuur naar redacteur"
 
@@ -619,23 +689,14 @@ msgstr "Stuur naar redacteur"
 msgid "FacetWP"
 msgstr "FacetWP"
 
-#. Plugin URI of the plugin/theme
-msgid "https://facetwp.com/"
-msgstr "https://facetwp.com/"
-
 #. Description of the plugin/theme
 msgid "Advanced Filtering for WordPress"
 msgstr "Geavanceerde filtering voor WordPress"
 
 #. Author of the plugin/theme
-msgid "Matt Gibbs"
-msgstr "Matt Gibbs"
+msgid "FacetWP, LLC"
+msgstr "FacetWP, LLC"
 
-#~ msgid "Both"
-#~ msgstr "Beide"
-
-#~ msgid "More"
-#~ msgstr "Meer"
-
-#~ msgid "Less"
-#~ msgstr "Minder"
+#. Author URI of the plugin/theme
+msgid "https://facetwp.com/"
+msgstr "https://facetwp.com/"

@@ -3,6 +3,9 @@
 class FacetWP_Integration_SearchWP
 {
 
+    public $search_terms;
+
+
     function __construct() {
 
         // Require SearchWP 2.6+
@@ -11,6 +14,7 @@ class FacetWP_Integration_SearchWP
         }
 
         add_filter( 'facetwp_query_args', array( $this, 'search_args' ), 10, 2 );
+        add_filter( 'facetwp_pre_filtered_post_ids', array( $this, 'search_page' ), 10, 2 );
         add_filter( 'facetwp_facet_filter_posts', array( $this, 'search_facet' ), 10, 2 );
         add_filter( 'facetwp_facet_search_engines', array( $this, 'search_engines' ) );
     }
@@ -23,6 +27,9 @@ class FacetWP_Integration_SearchWP
     function search_args( $args, $class ) {
 
         if ( $class->is_search ) {
+            $this->search_terms = $args['s'];
+            unset( $args['s'] );
+
             $args['suppress_filters'] = true;
             if ( empty( $args['post_type'] ) ) {
                 $args['post_type'] = 'any';
@@ -30,6 +37,35 @@ class FacetWP_Integration_SearchWP
         }
 
         return $args;
+    }
+
+
+    /**
+     * Use SWP_Query to retrieve matching post IDs
+     * @since 2.1.2
+     */
+    function search_page( $post_ids, $class ) {
+
+        if ( empty( $this->search_terms ) ) {
+            return $post_ids;
+        }
+
+        $swp_query = new SWP_Query( array(
+            's'                 => $this->search_terms,
+            'posts_per_page'    => 200,
+            'load_posts'        => false,
+            'facetwp'           => true,
+        ) );
+
+        $intersected_ids = array();
+        foreach ( $swp_query->posts as $post_id ) {
+            if ( in_array( $post_id, $post_ids ) ) {
+                $intersected_ids[] = $post_id;
+            }
+        }
+        $post_ids = $intersected_ids;
+
+        return empty( $post_ids ) ? array( 0 ) : $post_ids;
     }
 
 

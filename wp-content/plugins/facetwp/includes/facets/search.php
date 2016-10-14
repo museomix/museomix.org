@@ -82,61 +82,6 @@ class FacetWP_Facet_Search
 
 
     /**
-     * Output any front-end scripts
-     */
-    function front_scripts() {
-?>
-<script>
-(function($) {
-    wp.hooks.addAction('facetwp/refresh/search', function($this, facet_name) {
-        var val = $this.find('.facetwp-search').val() || '';
-        FWP.facets[facet_name] = val;
-    });
-
-    /**
-    * Event handlers
-    */
-    $(document).on('facetwp-loaded', function() {
-        $('.facetwp-search').trigger('keyup');
-    });
-
-    $(document).on('keyup', '.facetwp-facet .facetwp-search', function(e) {
-        var $facet = $(this).closest('.facetwp-facet');
-
-        if ('' == $(this).val()) {
-            $facet.find('.facetwp-btn').removeClass('reset');
-        }
-        else {
-            $facet.find('.facetwp-btn').addClass('reset');
-        }
-
-        if (13 == e.keyCode) {
-            FWP.autoload();
-        }
-    });
-
-    $('.facetwp-type-search').on('click', '.facetwp-btn', function(e) {
-        var $this = $(this);
-        var $facet = $this.closest('.facetwp-facet');
-        var facet_name = $facet.attr('data-name');
-
-        if ($this.hasClass('reset')) {
-            $facet.find('.facetwp-search').val('');
-            FWP.facets[facet_name] = [];
-            FWP.set_hash();
-            FWP.fetch_data();
-        }
-        else {
-            $facet.find('.facetwp-search').trigger('keyup');
-        }
-    });
-})(jQuery);
-</script>
-<?php
-    }
-
-
-    /**
      * Output admin settings HTML
      */
     function settings_html() {

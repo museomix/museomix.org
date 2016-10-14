@@ -2,28 +2,6 @@
     margin-bottom: 40px;
 }
 
-.facetwp-type-checkboxes {
-    overflow: auto;
-    max-height: 200px;
-}
-
-.facetwp-checkbox {
-    background: url(../images/checkbox.png) 0 50% no-repeat;
-    background-size: 14px 14px;
-    margin-bottom: 4px;
-    padding-left: 20px;
-    cursor: pointer;
-}
-
-.facetwp-checkbox.checked {
-    background-image: url(../images/checkbox-on.png);
-}
-
-.facetwp-checkbox.disabled {
-    opacity: 0.4;
-    cursor: default;
-}
-
 .facetwp-pager-label {
     display: inline-block;
     margin-right: 12px;
@@ -49,6 +27,60 @@
     -webkit-animation: rotate 700ms infinite linear;
     -moz-animation: rotate 700ms infinite linear;
     animation: rotate 700ms infinite linear;
+}
+
+/* Checkboxes */
+
+.facetwp-type-checkboxes .facetwp-depth {
+    display: none;
+}
+
+.facetwp-type-checkboxes .facetwp-depth.visible {
+    display: inherit;
+}
+
+.facetwp-checkbox {
+    background: url(../images/checkbox.png) 0 50% no-repeat;
+    background-size: 14px 14px;
+    margin-bottom: 4px;
+    padding-left: 20px;
+    cursor: pointer;
+}
+
+.facetwp-checkbox.checked {
+    background-image: url(../images/checkbox-on.png);
+}
+
+.facetwp-checkbox.disabled,
+.facetwp-radio.disabled {
+    opacity: 0.4;
+    cursor: default;
+}
+
+.facetwp-checkbox .facetwp-expand {
+    float: right;
+}
+
+/* Radio */
+
+.facetwp-radio {
+    background: url(../images/radio.png) 0 50% no-repeat;
+    background-size: 14px 14px;
+    margin-bottom: 4px;
+    padding-left: 20px;
+    cursor: pointer;
+}
+
+.facetwp-radio.checked {
+    background-image: url(../images/radio-on.png);
+}
+
+/* Date range */
+
+.flatpickr-clear {
+    text-align: center;
+    padding: 5px 0;
+    cursor: pointer;
 }
 
 /* fSelect */
@@ -128,7 +160,7 @@
     background-size: 20px 20px;
 }
 
-.facetwp-btn.reset:before {
+.facetwp-btn.f-reset:before {
     background: url(../images/icon-close.png) no-repeat;
     background-size: 20px 20px;
 }
@@ -161,7 +193,7 @@
     background-size: 20px 20px;
 }
 
-.locate-me.loading:before {
+.locate-me.f-loading:before {
     background: url(../images/loading.png) no-repeat;
     background-size: 20px 20px;
     -webkit-animation: rotate 700ms infinite linear;
@@ -169,7 +201,7 @@
     animation: rotate 700ms infinite linear;
 }
 
-.locate-me.reset:before {
+.locate-me.f-reset:before {
     background: url(../images/icon-close.png) no-repeat;
     background-size: 20px 20px;
 }

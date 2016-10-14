@@ -56,7 +56,7 @@ class FacetWP_Facet_Dropdown
         $where_clause = apply_filters( 'facetwp_facet_where', $where_clause, $facet );
 
         // Limit
-        $limit = ctype_digit( $facet['count'] ) ? $facet['count'] : 10;
+        $limit = ctype_digit( $facet['count'] ) ? $facet['count'] : 20;
 
         $sql = "
         SELECT f.facet_value, f.facet_display_value, f.term_id, f.parent_id, f.depth, COUNT(*) AS counter
@@ -163,37 +163,6 @@ class FacetWP_Facet_Dropdown
 
 
     /**
-     * Output any front-end scripts
-     */
-    function front_scripts() {
-?>
-<script>
-(function($) {
-    wp.hooks.addAction('facetwp/refresh/dropdown', function($this, facet_name) {
-        var val = $this.find('.facetwp-dropdown').val();
-        FWP.facets[facet_name] = val ? [val] : [];
-    });
-
-    wp.hooks.addFilter('facetwp/selections/dropdown', function(output, params) {
-        return params.el.find('.facetwp-dropdown option:selected').text();
-    });
-
-    wp.hooks.addAction('facetwp/ready', function() {
-        $(document).on('change', '.facetwp-type-dropdown select', function() {
-            var $facet = $(this).closest('.facetwp-facet');
-            if ('' != $facet.find(':selected').val()) {
-                FWP.static_facet = $facet.attr('data-name');
-            }
-            FWP.autoload();
-        });
-    });
-})(jQuery);
-</script>
-<?php
-    }
-
-
-    /**
      * Output admin settings HTML
      */
     function settings_html() {
@@ -261,7 +230,7 @@ class FacetWP_Facet_Dropdown
                     <div class="facetwp-tooltip-content"><?php _e( 'The maximum number of facet choices to show', 'fwp' ); ?></div>
                 </div>
             </td>
-            <td><input type="text" class="facet-count" value="10" /></td>
+            <td><input type="text" class="facet-count" value="20" /></td>
         </tr>
 <?php
     }

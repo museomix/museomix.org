@@ -15,7 +15,7 @@ class FacetWP_Integration_EDD
      * @since 2.0.4
      */
     function front_scripts() {
-        wp_enqueue_script( 'facetwp-edd', FACETWP_URL . '/includes/integrations/edd/edd.js', array( 'jquery' ), FACETWP_VERSION );
+        FWP()->display->assets['edd.js'] = FACETWP_URL . '/includes/integrations/edd/edd.js';
     }
 
 

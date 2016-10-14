@@ -40,7 +40,7 @@ class FacetWP_Facet_Number_Range
         $end = ( '' == $values[1] ) ? false : $values[1];
 
         $is_dual = ! empty( $facet['source_other'] ) && false !== $start && false !== $end;
-        $is_intersect = FWP()->helper->facet_setting_is( $facet, 'compare_type', 'intersect' );
+        $is_intersect = FWP()->helper->facet_is( $facet, 'compare_type', 'intersect' );
 
         /**
          * Intersect compare
@@ -88,34 +88,6 @@ class FacetWP_Facet_Number_Range
 
     wp.hooks.addAction('facetwp/change/number_range', function($this) {
         $this.closest('.facetwp-row').find('.facet-source-other').trigger('change');
-    });
-})(jQuery);
-</script>
-<?php
-    }
-
-
-    /**
-     * Output any front-end scripts
-     */
-    function front_scripts() {
-?>
-<script>
-(function($) {
-    wp.hooks.addAction('facetwp/refresh/number_range', function($this, facet_name) {
-        var min = $this.find('.facetwp-number-min').val() || '';
-        var max = $this.find('.facetwp-number-max').val() || '';
-        FWP.facets[facet_name] = ('' != min || '' != max) ? [min, max] : [];
-    });
-
-    wp.hooks.addFilter('facetwp/selections/number_range', function(output, params) {
-        return params.selected_values[0] + ' - ' + params.selected_values[1];
-    });
-
-    wp.hooks.addAction('facetwp/ready', function() {
-        $(document).on('blur', '.facetwp-number-min, .facetwp-number-max', function() {
-            FWP.autoload();
-        });
     });
 })(jQuery);
 </script>

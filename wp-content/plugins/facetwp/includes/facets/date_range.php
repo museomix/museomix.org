@@ -47,7 +47,7 @@ class FacetWP_Facet_Date_Range
         $end = empty( $values[1] ) ? false : $values[1];
 
         $is_dual = ! empty( $facet['source_other'] ) && $start && $end;
-        $is_intersect = FWP()->helper->facet_setting_is( $facet, 'compare_type', 'intersect' );
+        $is_intersect = FWP()->helper->facet_is( $facet, 'compare_type', 'intersect' );
 
         /**
          * Intersect compare
@@ -59,7 +59,7 @@ class FacetWP_Facet_Date_Range
         }
         elseif ( 'exact' == $facet['fields'] ) {
             if ( $start ) {
-                $where .= " AND LEFT(facet_value, 10) == '$start'";
+                $where .= " AND LEFT(facet_value, 10) = '$start'";
             }
         }
         else {
@@ -90,6 +90,7 @@ class FacetWP_Facet_Date_Range
         $this.find('.facet-source-other').val(obj.source_other);
         $this.find('.facet-compare-type').val(obj.compare_type);
         $this.find('.facet-date-fields').val(obj.fields);
+        $this.find('.facet-format').val(obj.format);
     });
 
     wp.hooks.addFilter('facetwp/save/date_range', function($this, obj) {
@@ -97,6 +98,7 @@ class FacetWP_Facet_Date_Range
         obj['source_other'] = $this.find('.facet-source-other').val();
         obj['compare_type'] = $this.find('.facet-compare-type').val();
         obj['fields'] = $this.find('.facet-date-fields').val();
+        obj['format'] = $this.find('.facet-format').val();
         return obj;
     });
 
@@ -113,38 +115,26 @@ class FacetWP_Facet_Date_Range
      * Output any front-end scripts
      */
     function front_scripts() {
-?>
-<link href="<?php echo FACETWP_URL; ?>/assets/js/bootstrap-datepicker/bootstrap-datepicker.css?ver=<?php echo FACETWP_VERSION; ?>" rel="stylesheet">
-<script src="<?php echo FACETWP_URL; ?>/assets/js/bootstrap-datepicker/bootstrap-datepicker.min.js?ver=<?php echo FACETWP_VERSION; ?>"></script>
-<script>
-(function($) {
-    wp.hooks.addAction('facetwp/refresh/date_range', function($this, facet_name) {
-        var min = $this.find('.facetwp-date-min').val() || '';
-        var max = $this.find('.facetwp-date-max').val() || '';
-        FWP.facets[facet_name] = ('' != min || '' != max) ? [min, max] : [];
-    });
+        $i18n = array(
+            'months' => array(
+                __( 'January', 'fwp' ),
+                __( 'February', 'fwp' ),
+                __( 'March', 'fwp' ),
+                __( 'April', 'fwp' ),
+                __( 'May', 'fwp' ),
+                __( 'June', 'fwp' ),
+                __( 'July', 'fwp' ),
+                __( 'August', 'fwp' ),
+                __( 'September', 'fwp' ),
+                __( 'October', 'fwp' ),
+                __( 'November', 'fwp' ),
+                __( 'December', 'fwp' ),
+            ),
+        );
 
-    wp.hooks.addFilter('facetwp/selections/date_range', function(output, params) {
-        return params.selected_values[0] + ' - ' + params.selected_values[1];
-    });
-
-    wp.hooks.addAction('facetwp/ready', function() {
-        $(document).on('facetwp-loaded', function() {
-
-            var opts = wp.hooks.applyFilters('facetwp/set_options/date_range', {
-                format: 'yyyy-mm-dd',
-                autoclose: true,
-                clearBtn: true
-            });
-
-            $('.facetwp-date').datepicker(opts).on('changeDate', function(e) {
-                FWP.autoload();
-            });
-        });
-    });
-})(jQuery);
-</script>
-<?php
+        FWP()->display->json['datepicker'] = $i18n;
+        FWP()->display->assets['flatpickr.css'] = FACETWP_URL . '/assets/js/flatpickr/flatpickr.min.css';
+        FWP()->display->assets['flatpickr.js'] = FACETWP_URL . '/assets/js/flatpickr/flatpickr.min.js';
     }
 
 
@@ -195,7 +185,26 @@ class FacetWP_Facet_Date_Range
                 </select>
             </td>
         </tr>
+        <tr>
+            <td>
+                <?php _e('Display format', 'fwp'); ?>:
+                <div class="facetwp-tooltip">
+                    <span class="icon-question">?</span>
+                    <div class="facetwp-tooltip-content">See available <a href="https://chmln.github.io/flatpickr/#dateformat" target="_blank">format characters</a></div>
+                </div>
+            </td>
+            <td><input type="text" class="facet-format" value="" placeholder="Y-m-d" /></td>
+        </tr>
 <?php
+    }
+
+
+    /**
+     * (Front-end) Attach settings to the AJAX response
+     */
+    function settings_js( $params ) {
+        $format = empty( $params['facet']['format'] ) ? 'Y-m-d' : $params['facet']['format'];
+        return array( 'format' => $format );
     }
 
 

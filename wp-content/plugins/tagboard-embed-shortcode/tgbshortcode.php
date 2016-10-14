@@ -3,7 +3,7 @@
  * Plugin Name: Tagboard Embed Shortcode
  * Plugin URI: http://tagboard.com
  * Description: A simple way to embed your tagboard into your Wordpress blog. It uses a shortcode and supports embedding into Pages/Posts/Widgets.
- * Version: 0.2
+ * Version: 0.3
  * Author: Jordan Larrigan
  * Author URI: http://tagboard.com
  * License: GPLv3 or later

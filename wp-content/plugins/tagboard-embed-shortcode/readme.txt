@@ -12,7 +12,7 @@ A simple way to embed your tagboard into your Wordpress blog. It uses a shortcod
 
 == Description ==
 
-[Tagboard](https://Tagboard.com/) allows users to display a hashtag and its posts from all the major social networks in one stream-lined embedded view. For FREE.  It uses a shortcode and supports embedding into Pages/Posts/Widgets.
+[Tagboard](https://Tagboard.com/) allows users to display a hashtag and its posts from all the major social networks in one stream-lined embedded view. It uses a shortcode and supports embedding into Pages/Posts/Widgets.
 
 **What is Tagboard:**
 
@@ -28,7 +28,7 @@ Hijacking, "bashtags", and obscenities are a natural part of social media and th
 
 == Upgrade Notice ==
 
-= 0.2 =
+= 0.3 =
 Update to support new Tagboard account based features
 
 

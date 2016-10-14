@@ -184,46 +184,6 @@ class FacetWP_Facet_Hierarchy
 
 
     /**
-     * Output any front-end scripts
-     */
-    function front_scripts() {
-?>
-<script>
-(function($) {
-    wp.hooks.addAction('facetwp/refresh/hierarchy', function($this, facet_name) {
-        var selected_values = [];
-        $this.find('.facetwp-link.checked').each(function() {
-            selected_values.push($(this).attr('data-value'));
-        });
-        FWP.facets[facet_name] = selected_values;
-    });
-
-    wp.hooks.addFilter('facetwp/selections/hierarchy', function(output, params) {
-        return params.el.find('.facetwp-link.checked').text();
-    });
-
-    wp.hooks.addAction('facetwp/ready', function() {
-        $(document).on('click', '.facetwp-facet .facetwp-link', function() {
-            $(this).closest('.facetwp-facet').find('.facetwp-link').removeClass('checked');
-            if ('' != $(this).attr('data-value')) {
-                $(this).addClass('checked');
-            }
-            FWP.autoload();
-        });
-
-        $(document).on('click', '.facetwp-type-hierarchy .facetwp-toggle', function() {
-            var $parent = $(this).closest('.facetwp-facet');
-            $parent.find('.facetwp-toggle').toggleClass('facetwp-hidden');
-            $parent.find('.facetwp-overflow').toggleClass('facetwp-hidden');
-        });
-    });
-})(jQuery);
-</script>
-<?php
-    }
-
-
-    /**
      * Output admin settings HTML
      */
     function settings_html() {

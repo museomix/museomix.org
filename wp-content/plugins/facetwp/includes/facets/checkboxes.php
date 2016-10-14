@@ -75,8 +75,8 @@ class FacetWP_Facet_Checkboxes
 
         $output = $wpdb->get_results( $sql, ARRAY_A );
 
-        // Show "ghost" facet choices (those that return zero results)
-        if ( 'yes' == $facet['ghosts'] && ! empty( FWP()->unfiltered_post_ids ) ) {
+        // Show "ghost" facet choices
+        if ( FWP()->helper->facet_is( $facet, 'ghosts', 'yes' ) && ! empty( FWP()->unfiltered_post_ids ) ) {
             $raw_post_ids = implode( ',', FWP()->unfiltered_post_ids );
 
             $sql = "
@@ -90,7 +90,7 @@ class FacetWP_Facet_Checkboxes
             $ghost_output = $wpdb->get_results( $sql, ARRAY_A );
 
             // Keep the facet placement intact
-            if ( isset( $facet['preserve_ghosts'] ) && 'yes' == $facet['preserve_ghosts'] ) {
+            if ( FWP()->helper->facet_is( $facet, 'preserve_ghosts', 'yes' ) ) {
                 $tmp = array();
                 foreach ( $ghost_output as $row ) {
                     $tmp[ $row['facet_value'] . ' ' ] = $row;
@@ -148,7 +148,7 @@ class FacetWP_Facet_Checkboxes
                 $output .= '<div class="facetwp-overflow facetwp-hidden">';
             }
             $selected = in_array( $result['facet_value'], $selected_values ) ? ' checked' : '';
-            $selected .= ( 0 == $result['counter'] ) ? ' disabled' : '';
+            $selected .= ( 0 == $result['counter'] && '' == $selected ) ? ' disabled' : '';
             $output .= '<div class="facetwp-checkbox' . $selected . '" data-value="' . $result['facet_value'] . '">';
             $output .= $result['facet_display_value'] . ' <span class="facetwp-counter">(' . $result['counter'] . ')</span>';
             $output .= '</div>';
@@ -188,7 +188,7 @@ class FacetWP_Facet_Checkboxes
             }
 
             $selected = in_array( $result['facet_value'], $selected_values ) ? ' checked' : '';
-            $selected .= ( 0 == $result['counter'] ) ? ' disabled' : '';
+            $selected .= ( 0 == $result['counter'] && '' == $selected ) ? ' disabled' : '';
             $output .= '<div class="facetwp-checkbox' . $selected . '" data-value="' . $result['facet_value'] . '">';
             $output .= $result['facet_display_value'] . ' <span class="facetwp-counter">(' . $result['counter'] . ')</span>';
             $output .= '</div>';
@@ -284,57 +284,6 @@ class FacetWP_Facet_Checkboxes
     });
 
 
-})(jQuery);
-</script>
-<?php
-    }
-
-
-    /**
-     * Output any front-end scripts
-     */
-    function front_scripts() {
-?>
-<script>
-(function($) {
-    wp.hooks.addAction('facetwp/refresh/checkboxes', function($this, facet_name) {
-        var selected_values = [];
-        $this.find('.facetwp-checkbox.checked').each(function() {
-            selected_values.push($(this).attr('data-value'));
-        });
-        FWP.facets[facet_name] = selected_values;
-    });
-
-    wp.hooks.addFilter('facetwp/selections/checkboxes', function(output, params) {
-        var labels = [];
-        $.each(params.selected_values, function(idx, val) {
-            var label = params.el.find('.facetwp-checkbox[data-value="' + val + '"]').clone();
-            label.find('.facetwp-counter').remove();
-            labels.push(label.text());
-        });
-        return labels.join(' / ');
-    });
-
-    wp.hooks.addAction('facetwp/ready', function() {
-        $(document).on('click', '.facetwp-type-checkboxes .facetwp-checkbox:not(.disabled)', function() {
-            $(this).toggleClass('checked');
-            FWP.autoload();
-        });
-
-        $(document).on('click', '.facetwp-type-checkboxes .facetwp-toggle', function() {
-            var $parent = $(this).closest('.facetwp-facet');
-            $parent.find('.facetwp-toggle').toggleClass('facetwp-hidden');
-            $parent.find('.facetwp-overflow').toggleClass('facetwp-hidden');
-        });
-
-        $(document).on('facetwp-loaded', function() {
-            $('.facetwp-type-checkboxes .facetwp-overflow').each(function() {
-                var num = $(this).find('.facetwp-checkbox').length;
-                var $el = $(this).siblings('.facetwp-toggle:first');
-                $el.text($el.text().replace('{num}', num));
-            });
-        });
-    });
 })(jQuery);
 </script>
 <?php

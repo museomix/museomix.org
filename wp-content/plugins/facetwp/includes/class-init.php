@@ -20,12 +20,13 @@ class FacetWP_Init
         include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 
         // classes
-        foreach ( array( 'helper', 'ajax', 'facet', 'indexer', 'display', 'upgrade' ) as $f ) {
+        foreach ( array( 'helper', 'ajax', 'api', 'facet', 'indexer', 'display', 'upgrade' ) as $f ) {
             include( FACETWP_DIR . "/includes/class-{$f}.php" );
         }
 
         new FacetWP_Upgrade();
         FWP()->helper       = new FacetWP_Helper();
+        FWP()->api          = new FacetWP_API();
         FWP()->facet        = new FacetWP_Facet();
         FWP()->indexer      = new FacetWP_Indexer();
         FWP()->display      = new FacetWP_Display();
@@ -36,6 +37,7 @@ class FacetWP_Init
             include( FACETWP_DIR . "/includes/integrations/{$f}/{$f}.php" );
         }
 
+        include( FACETWP_DIR . '/includes/libraries/github-updater.php' );
         include( FACETWP_DIR . '/includes/functions.php' );
 
         // hooks

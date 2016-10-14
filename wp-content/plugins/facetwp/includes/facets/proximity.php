@@ -36,7 +36,7 @@ class FacetWP_Facet_Proximity_Core
 
         $lat = empty( $value[0] ) ? '' : $value[0];
         $lng = empty( $value[1] ) ? '' : $value[1];
-        $chosen_radius = empty( $value[2] ) ? '' : (int) $value[2];
+        $chosen_radius = empty( $value[2] ) ? '' : (float) $value[2];
         $location_name = empty( $value[3] ) ? '' : urldecode( $value[3] );
 
         $radius_options = array( 10, 25, 50, 100, 250 );
@@ -87,7 +87,7 @@ class FacetWP_Facet_Proximity_Core
 
         $lat = (float) $selected_values[0];
         $lng = (float) $selected_values[1];
-        $radius = (int) $selected_values[2];
+        $radius = (float) $selected_values[2];
 
         $sql = "
         SELECT DISTINCT post_id,
@@ -143,123 +143,14 @@ class FacetWP_Facet_Proximity_Core
      */
     function front_scripts() {
         if ( apply_filters( 'facetwp_proximity_load_js', true ) ) {
-?>
-<script src="//maps.googleapis.com/maps/api/js?v=3.exp&amp;libraries=places"></script>
-<?php
+            $api_key = defined( 'GMAPS_API_KEY' ) ? GMAPS_API_KEY : '';
+            $api_key = apply_filters( 'facetwp_gmaps_api_key', $api_key );
+            FWP()->display->assets['gmaps'] = '//maps.googleapis.com/maps/api/js?libraries=places&key=' . $api_key;
         }
 
         // Pass extra options into Places Autocomplete
         $options = apply_filters( 'facetwp_proximity_autocomplete_options', array() );
-?>
-<script>
-
-(function($) {
-    $(document).on('facetwp-loaded', function() {
-        var $input = $('#facetwp-location');
-        if ($input.parent('.location-wrap').length < 1) {
-            var options = <?php echo json_encode( $options ); ?>;
-            var autocomplete = new google.maps.places.Autocomplete($input[0], options);
-
-            $input.wrap('<span class="location-wrap"></span>');
-            $input.before('<i class="locate-me"></i>');
-
-            google.maps.event.addListener(autocomplete, 'place_changed', function () {
-                var place = autocomplete.getPlace();
-                $('.facetwp-lat').val(place.geometry.location.lat());
-                $('.facetwp-lng').val(place.geometry.location.lng());
-                FWP.autoload();
-            });
-        }
-
-        $input.trigger('keyup');
-    });
-
-
-    /**
-     * Event handlers
-     */
-    $('.facetwp-type-proximity').on('click', '.locate-me', function(e) {
-        var $this = $(this);
-        var $input = $('#facetwp-location');
-        var $facet = $input.closest('.facetwp-facet');
-        var $lat = $('.facetwp-lat');
-        var $lng = $('.facetwp-lng');
-
-        // Reset
-        if ($this.hasClass('reset')) {
-            $facet.find('.facetwp-lat').val('');
-            $facet.find('.facetwp-lng').val('');
-            $facet.find('#facetwp-location').val('');
-            FWP.autoload();
-            return;
-        }
-
-        // Loading icon
-        $('.locate-me').addClass('loading');
-
-        // HTML5 geolocation
-        navigator.geolocation.getCurrentPosition(function(position) {
-            var lat = position.coords.latitude;
-            var lng = position.coords.longitude;
-
-            $lat.val(lat);
-            $lng.val(lng);
-
-            var geocoder = new google.maps.Geocoder();
-            var latlng = {lat: parseFloat(lat), lng: parseFloat(lng)};
-            geocoder.geocode({'location': latlng}, function(results, status) {
-                if (status === google.maps.GeocoderStatus.OK) {
-                    $input.val(results[0].formatted_address);
-                }
-                else {
-                    $input.val('Your location');
-                }
-                $('.locate-me').addClass('reset');
-                FWP.autoload();
-            });
-
-            $('.locate-me').removeClass('loading');
-        },
-        function() {
-            $('.locate-me').removeClass('loading');
-        });
-    });
-
-    $(document).on('keyup', '#facetwp-location', function() {
-        if ('' == $(this).val()) {
-            $('.locate-me').removeClass('reset');
-        }
-        else {
-            $('.locate-me').addClass('reset');
-        }
-    });
-
-    $(document).on('change', '#facetwp-radius', function() {
-        if ('' != $('#facetwp-location').val()) {
-            FWP.autoload();
-        }
-    });
-
-
-    /*
-     * WP-JS-Hooks
-     */
-    wp.hooks.addAction('facetwp/refresh/proximity', function($this, facet_name) {
-        var lat = $this.find('.facetwp-lat').val();
-        var lng = $this.find('.facetwp-lng').val();
-        var radius = $this.find('#facetwp-radius').val();
-        var location = encodeURIComponent($this.find('#facetwp-location').val());
-        FWP.facets[facet_name] = ('' != lat && 'undefined' != typeof lat) ?
-            [lat, lng, radius, location] : [];
-    });
-
-    wp.hooks.addFilter('facetwp/selections/proximity', function(label, params) {
-        return 'Clear location';
-    });
-})(jQuery);
-
-</script>
-<?php
+        FWP()->display->json['autocomplete_options'] = $options;
     }
 
 

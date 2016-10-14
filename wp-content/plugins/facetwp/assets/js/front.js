@@ -1,24 +1,30 @@
-var FWP = {
-    'facets': {},
-    'template': null,
-    'settings': {},
-    'is_reset': false,
-    'is_refresh': false,
-    'is_bfcache': false,
-    'auto_refresh': true,
-    'soft_refresh': false,
-    'static_facet': null,
-    'used_facets': {},
-    'loaded': false,
-    'jqXHR': false,
-    'extras': {},
-    'paged': 1
-};
-
-var FWP_Helper = {};
-
+var FWP = FWP || {};
 
 (function($) {
+
+    var defaults = {
+        'facets': {},
+        'template': null,
+        'settings': {},
+        'is_reset': false,
+        'is_refresh': false,
+        'is_bfcache': false,
+        'auto_refresh': true,
+        'soft_refresh': false,
+        'static_facet': null,
+        'used_facets': {},
+        'loaded': false,
+        'jqXHR': false,
+        'extras': {},
+        'helper': {},
+        'paged': 1
+    };
+
+    for (var prop in defaults) {
+        if ('undefined' === typeof FWP[prop]) {
+            FWP[prop] = defaults[prop];
+        }
+    }
 
     // Safari popstate fix
     $(window).on('load', function() {
@@ -40,13 +46,13 @@ var FWP_Helper = {};
     });
 
 
-    FWP_Helper.get_url_var = function(name) {
-        var name = ('get' == FWP.permalink_type) ? 'fwp_' + name : name;
+    FWP.helper.get_url_var = function(name) {
+        var name = 'fwp_' + name;
         var query_string = FWP.build_query_string();
         var url_vars = query_string.split('&');
         for (var i = 0; i < url_vars.length; i++) {
             var item = url_vars[i].split('=');
-            if (item[0] == name) {
+            if (item[0] === name) {
                 return item[1];
             }
         }
@@ -54,15 +60,27 @@ var FWP_Helper = {};
     }
 
 
-    FWP_Helper.serialize = function(obj, prefix) {
+    FWP.helper.serialize = function(obj, prefix) {
         var str = [];
-        var prefix = ('undefined' != typeof prefix) ? prefix : '';
+        var prefix = ('undefined' !== typeof prefix) ? prefix : '';
         for (var p in obj) {
-            if ('' != obj[p]) {
+            if ('' != obj[p]) { // This must be "!=" instead of "!=="
                 str.push(prefix + encodeURIComponent(p) + '=' + encodeURIComponent(obj[p]));
             }
         }
         return str.join('&');
+    }
+
+
+    FWP.helper.escape_html = function(text) {
+        var map = {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#039;'
+        };
+        return text.replace(/[&<>"']/g, function(m) { return map[m]; });
     }
 
 
@@ -121,7 +139,7 @@ var FWP_Helper = {};
             // Support custom loader
             var do_loader = true;
             if (FWP.loaded) {
-                if (FWP.soft_refresh || facet_name == FWP.static_facet || 'undefined' != typeof FWP.used_facets[facet_name]) {
+                if (FWP.soft_refresh || facet_name === FWP.static_facet || 'undefined' !== typeof FWP.used_facets[facet_name]) {
                     do_loader = false;
                 }
             }
@@ -141,12 +159,12 @@ var FWP_Helper = {};
         }
 
         // Add "per page" to the URL hash
-        if (FWP.extras.per_page && 'default' != FWP.extras.per_page) {
+        if (FWP.extras.per_page && 'default' !== FWP.extras.per_page) {
             FWP.facets['per_page'] = FWP.extras.per_page;
         }
 
         // Add sorting to the URL hash
-        if (FWP.extras.sort && 'default' != FWP.extras.sort) {
+        if (FWP.extras.sort && 'default' !== FWP.extras.sort) {
             FWP.facets['sort'] = FWP.extras.sort;
         }
     }
@@ -160,30 +178,25 @@ var FWP_Helper = {};
     FWP.build_query_string = function() {
         var query_string = '';
 
-        if ('get' == FWP.permalink_type) {
-            // Non-FacetWP URL variables
-            var hash = [];
-            var get_str = window.location.search.replace('?', '').split('&');
-            $.each(get_str, function(idx, val) {
-                var param_name = val.split('=')[0];
-                if ('fwp' != param_name.substr(0, 3)) {
-                    hash.push(val);
-                }
-            });
-            hash = hash.join('&');
-
-            // FacetWP URL variables
-            var fwp_vars = FWP_Helper.serialize(FWP.facets, 'fwp_');
-
-            if ('' != hash) {
-                query_string += hash;
+        // Non-FacetWP URL variables
+        var hash = [];
+        var get_str = window.location.search.replace('?', '').split('&');
+        $.each(get_str, function(idx, val) {
+            var param_name = val.split('=')[0];
+            if ('fwp' !== param_name.substr(0, 3)) {
+                hash.push(val);
             }
-            if ('' != fwp_vars) {
-                query_string += ('' != hash ? '&' : '') + fwp_vars;
-            }
+        });
+        hash = hash.join('&');
+
+        // FacetWP URL variables
+        var fwp_vars = FWP.helper.serialize(FWP.facets, 'fwp_');
+
+        if ('' !== hash) {
+            query_string += hash;
         }
-        else {
-            query_string = FWP_Helper.serialize(FWP.facets);
+        if ('' !== fwp_vars) {
+            query_string += ('' !== hash ? '&' : '') + fwp_vars;
         }
 
         return query_string;
@@ -193,36 +206,26 @@ var FWP_Helper = {};
     FWP.set_hash = function() {
         var query_string = FWP.build_query_string();
 
-        if ('get' == FWP.permalink_type) {
-            if ('' != query_string) {
-                query_string = '?' + query_string;
-            }
-
-            if (history.pushState) {
-                history.pushState(null, null, window.location.pathname + query_string);
-            }
+        if ('' !== query_string) {
+            query_string = '?' + query_string;
         }
-        else {
-            window.location.hash = '!/' + query_string;
+
+        if (history.pushState) {
+            history.pushState(null, null, window.location.pathname + query_string);
         }
     }
 
 
     FWP.load_from_hash = function() {
-        if ('get' == FWP.permalink_type) {
-            var hash = [];
-            var get_str = window.location.search.replace('?', '').split('&');
-            $.each(get_str, function(idx, val) {
-                var param_name = val.split('=')[0];
-                if ('fwp' == param_name.substr(0, 3)) {
-                    hash.push(val.replace('fwp_', ''));
-                }
-            });
-            hash = hash.join('&');
-        }
-        else {
-            var hash = window.location.hash.replace('#!/', '');
-        }
+        var hash = [];
+        var get_str = window.location.search.replace('?', '').split('&');
+        $.each(get_str, function(idx, val) {
+            var param_name = val.split('=')[0];
+            if ('fwp' === param_name.substr(0, 3)) {
+                hash.push(val.replace('fwp_', ''));
+            }
+        });
+        hash = hash.join('&');
 
         // Reset facet values
         $.each(FWP.facets, function(f) {
@@ -232,21 +235,21 @@ var FWP_Helper = {};
         FWP.paged = 1;
         FWP.extras.sort = 'default';
 
-        if ('' != hash) {
+        if ('' !== hash) {
             hash = hash.split('&');
             $.each(hash, function(idx, val) {
                 var pieces = val.split('=');
 
-                if ('paged' == pieces[0]) {
+                if ('paged' === pieces[0]) {
                     FWP.paged = pieces[1];
                 }
-                else if ('per_page' == pieces[0]) {
+                else if ('per_page' === pieces[0]) {
                     FWP.extras.per_page = pieces[1];
                 }
-                else if ('sort' == pieces[0]) {
+                else if ('sort' === pieces[0]) {
                     FWP.extras.sort = pieces[1];
                 }
-                else if ('' != pieces[1]) {
+                else if ('' !== pieces[1]) {
                     FWP.facets[pieces[0]] = decodeURIComponent(pieces[1]).split(',');
                 }
             });
@@ -260,7 +263,7 @@ var FWP_Helper = {};
             FWP.jqXHR.abort();
         }
 
-        FWP.ajaxurl = ('wp' == FWP.template) ? document.URL : ajaxurl;
+        FWP.ajaxurl = ('wp' === FWP.template) ? document.URL : ajaxurl;
 
         // dataType is "text" for better JSON error handling
         FWP.jqXHR = $.post(FWP.ajaxurl, {
@@ -326,11 +329,12 @@ var FWP_Helper = {};
 
     FWP.render = function(response) {
 
-        // Populate the template
-        if (! FWP.loaded && ! FWP.is_bfcache && 'get' == FWP.permalink_type) {
+        // Don't render CSS-based (or empty) templates on pageload
+        // The template has already been pre-loaded
+        if (('wp' === FWP.template || '' === response.template) && ! FWP.loaded && ! FWP.is_bfcache) {
             var inject = false;
         }
-        else if ('wp' == FWP.template) {
+        else if ('wp' === FWP.template) {
             var inject = $(response.template).find('.facetwp-template').html();
         }
         else {
@@ -338,7 +342,7 @@ var FWP_Helper = {};
         }
 
         if (false !== inject) {
-            if (! wp.hooks.applyFilters('facetwp/template_html', false, { 'response': response })) {
+            if (! wp.hooks.applyFilters('facetwp/template_html', false, { 'response': response, 'html': inject })) {
                 $('.facetwp-template').html(inject);
             }
         }
@@ -352,15 +356,15 @@ var FWP_Helper = {};
         $('.facetwp-counts').html(response.counts);
 
         // Populate the sort box
-        if ('undefined' != typeof response.sort) {
+        if ('undefined' !== typeof response.sort) {
             $('.facetwp-sort').html(response.sort);
             $('.facetwp-sort-select').val(FWP.extras.sort);
         }
 
         // Populate the "per page" box
-        if ('undefined' != typeof response.per_page) {
+        if ('undefined' !== typeof response.per_page) {
             $('.facetwp-per-page').html(response.per_page);
-            if ('default' != FWP.extras.per_page) {
+            if ('default' !== FWP.extras.per_page) {
                 $('.facetwp-per-page-select').val(FWP.extras.per_page);
             }
         }
@@ -423,26 +427,28 @@ var FWP_Helper = {};
             wp.hooks.addAction('facetwp/loaded', function() {
                 var selections = '';
                 $.each(FWP.facets, function(key, val) {
-                    var tmp_key = key.replace('fwp_', '');
-                    if (-1 < $.inArray(tmp_key, ['paged', 'per_page', 'sort'])) {
+                    if ('undefined' === typeof FWP.settings.labels[key]) {
                         return true; // skip this facet
                     }
 
                     if (val.length > 0) {
-                        var label = ('object' == typeof val) ? val.join(' / ') : val;
+                        var label = ('object' === typeof val) ? val.join(' / ') : val;
                         var facet_type = $('.facetwp-facet-' + key).attr('data-type');
                         label = wp.hooks.applyFilters('facetwp/selections/' + facet_type, label, {
                             'el': $('.facetwp-facet-' + key),
                             'selected_values': val
                         });
 
-                        if ('' != label) {
-                            selections += '<li data-facet="' + key + '">' + FWP.settings.labels[key] + ': ' + label + '</li>';
+                        if ('' !== label) {
+                            selections += '<li data-facet="' + key + '">' +
+                                '<span class="facetwp-selection-label">' + FWP.settings.labels[key] + ':</span> ' +
+                                '<span class="facetwp-selection-value">' + FWP.helper.escape_html(label) + '</span>' +
+                                '</li>';
                         }
                     }
                 });
 
-                if ('' != selections) {
+                if ('' !== selections) {
                     selections = '<ul>' + selections + '</ul>';
                 }
 
@@ -452,12 +458,16 @@ var FWP_Helper = {};
 
         // Click on a user selection
         $(document).on('click', '.facetwp-selections li', function() {
+            if (FWP.is_refresh) {
+                return;
+            }
+
             var facet_name = $(this).attr('data-facet');
 
             FWP.parse_facets();
             FWP.is_reset = true;
             FWP.facets[facet_name] = [];
-            if ('undefined' != typeof FWP.used_facets) {
+            if ('undefined' !== typeof FWP.used_facets) {
                 delete FWP.used_facets[facet_name]; // slider support
             }
             delete FWP.facets['paged']; // remove "paged" from URL

@@ -47,7 +47,7 @@
     margin: 10px 0;
     padding: 6px 12px;
     background-color: #fff;
-    border-left: 4px solid #7ad03a;
+    border-left: 4px solid #46b450;
     box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
 }
 
@@ -142,8 +142,17 @@
 
 .facetwp-region .facet-name,
 .facetwp-region .template-name {
-    background: #fffbcc;
-    padding: 0 4px;
+    display: inline-block;
+    margin-left: 4px;
+    color: #906DBE;
+}
+
+.facetwp-region .facet-name::after,
+.facetwp-region .template-name::after {
+    font: 400 16px/1 dashicons;
+    content: '\f464';
+    cursor: text;
+    vertical-align: top;
 }
 
 .table-row {
@@ -235,11 +244,6 @@
     display: block;
     line-height: 20px;
     color: #ed1c24;
-}
-
-.facetwp-row .dashicons-unlock {
-    cursor: pointer;
-    font-size: 18px;
 }
 
 /* Cards UI */
@@ -366,13 +370,8 @@
     padding-bottom: 20px;
 }
 
-.facetwp-region .export-code,
 .facetwp-region .import-code {
     height: 100px;
-}
-
-.facetwp-region .export-code {
-    display: none;
 }
 
 .field-notes {

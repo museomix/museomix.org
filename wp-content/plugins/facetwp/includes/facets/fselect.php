@@ -20,8 +20,11 @@ class FacetWP_Facet_fSelect
         $from_clause = $wpdb->prefix . 'facetwp_index f';
         $where_clause = $params['where_clause'];
 
-        // Preserve options when single-select
-        if ( ! FWP()->helper->facet_setting_is( $facet, 'multiple', 'yes' ) ) {
+        // Preserve options when single-select or when behavior = "OR"
+        $is_single = FWP()->helper->facet_is( $facet, 'multiple', 'no' );
+        $using_or = FWP()->helper->facet_is( $facet, 'operator', 'or' );
+
+        if ( $is_single || $using_or ) {
 
             // Apply filtering (ignore the facet's current selection)
             if ( isset( FWP()->or_values ) && ( 1 < count( FWP()->or_values ) || ! isset( FWP()->or_values[ $facet['name'] ] ) ) ) {
@@ -73,9 +76,7 @@ class FacetWP_Facet_fSelect
         ORDER BY $orderby
         LIMIT $limit";
 
-        $output = $wpdb->get_results( $sql, ARRAY_A );
-
-        return $output;
+        return $wpdb->get_results( $sql, ARRAY_A );
     }
 
 
@@ -140,8 +141,22 @@ class FacetWP_Facet_fSelect
             $facet['name']
         );
 
-        $selected_values = implode( "','", $selected_values );
-        $output = $wpdb->get_col( $sql . " AND facet_value IN ('$selected_values')" );
+        // Match ALL values
+        if ( 'and' == $facet['operator'] ) {
+            foreach ( $selected_values as $key => $value ) {
+                $results = $wpdb->get_col( $sql . " AND facet_value IN ('$value')" );
+                $output = ( $key > 0 ) ? array_intersect( $output, $results ) : $results;
+
+                if ( empty( $output ) ) {
+                    break;
+                }
+            }
+        }
+        // Match ANY value
+        else {
+            $selected_values = implode( "','", $selected_values );
+            $output = $wpdb->get_col( $sql . " AND facet_value IN ('$selected_values')" );
+        }
 
         return $output;
     }
@@ -177,6 +192,7 @@ class FacetWP_Facet_fSelect
         $this.find('.facet-label-any').val(obj.label_any);
         $this.find('.facet-parent-term').val(obj.parent_term);
         $this.find('.facet-orderby').val(obj.orderby);
+        $this.find('.facet-operator').val(obj.operator);
         $this.find('.facet-count').val(obj.count);
     });
 
@@ -186,8 +202,19 @@ class FacetWP_Facet_fSelect
         obj['label_any'] = $this.find('.facet-label-any').val();
         obj['parent_term'] = $this.find('.facet-parent-term').val();
         obj['orderby'] = $this.find('.facet-orderby').val();
+        obj['operator'] = $this.find('.facet-operator').val();
         obj['count'] = $this.find('.facet-count').val();
         return obj;
+    });
+
+    wp.hooks.addAction('facetwp/change/fselect', function($this) {
+        $this.closest('.facetwp-row').find('.facet-multiple').trigger('change');
+    });
+
+    $(document).on('change', '.facet-multiple', function() {
+        var $facet = $(this).closest('.facetwp-row');
+        var display = ('yes' == $(this).val()) ? 'table-row' : 'none';
+        $facet.find('.facet-operator').closest('tr').css({ 'display' : display });
     });
 })(jQuery);
 </script>
@@ -199,48 +226,8 @@ class FacetWP_Facet_fSelect
      * Output any front-end scripts
      */
     function front_scripts() {
-?>
-<link href="<?php echo FACETWP_URL; ?>/assets/js/fSelect/fSelect.css?ver=<?php echo FACETWP_VERSION; ?>" rel="stylesheet">
-<script src="<?php echo FACETWP_URL; ?>/assets/js/fSelect/fSelect.js?ver=<?php echo FACETWP_VERSION; ?>"></script>
-<script>
-
-(function($) {
-    wp.hooks.addAction('facetwp/refresh/fselect', function($this, facet_name) {
-        var val = $this.find('select').val();
-        if (null == val || '' == val) {
-            val = [];
-        }
-        else if (false === $.isArray(val)) {
-            val = [val];
-        }
-        FWP.facets[facet_name] = val;
-    });
-
-    wp.hooks.addFilter('facetwp/selections/fselect', function(output, params) {
-        return params.el.find('.fs-label').text();
-    });
-
-    $(document).on('facetwp-loaded', function() {
-        $('.facetwp-type-fselect select:not(.ready)').each(function() {
-            var facet_name = $(this).closest('.facetwp-facet').attr('data-name');
-            var settings = FWP.settings[facet_name];
-
-            $(this).fSelect({
-                placeholder: settings.placeholder,
-                overflowText: settings.overflowText,
-                searchText: settings.searchText
-            });
-            $(this).addClass('ready');
-        });
-    });
-
-    $(document).on('fs:changed', function(e, wrap) {
-        FWP.autoload();
-    });
-})(jQuery);
-
-</script>
-<?php
+        FWP()->display->assets['fSelect.css'] = FACETWP_URL . '/assets/js/fSelect/fSelect.css';
+        FWP()->display->assets['fSelect.js'] = FACETWP_URL . '/assets/js/fSelect/fSelect.js';
     }
 
 
@@ -289,6 +276,21 @@ class FacetWP_Facet_fSelect
                     <option value="count"><?php _e( 'Highest Count', 'fwp' ); ?></option>
                     <option value="display_value"><?php _e( 'Display Value', 'fwp' ); ?></option>
                     <option value="raw_value"><?php _e( 'Raw Value', 'fwp' ); ?></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <?php _e('Behavior', 'fwp'); ?>:
+                <div class="facetwp-tooltip">
+                    <span class="icon-question">?</span>
+                    <div class="facetwp-tooltip-content"><?php _e( 'How should multiple selections affect the results?', 'fwp' ); ?></div>
+                </div>
+            </td>
+            <td>
+                <select class="facet-operator">
+                    <option value="and"><?php _e( 'Narrow the result set', 'fwp' ); ?></option>
+                    <option value="or"><?php _e( 'Widen the result set', 'fwp' ); ?></option>
                 </select>
             </td>
         </tr>

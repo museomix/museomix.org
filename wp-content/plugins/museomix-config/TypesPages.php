@@ -170,6 +170,7 @@ function TypesPagesPrototype(){
 			'rewrite' => array('slug'=>'prototypes'),
 			'capability_type' => 'prototype',
 			'supports' => array('title', 'editor', 'author', 'thumbnail','revisions'),
+			'taxonomies' => array('theme', 'technology', 'post_tag'),
 			'capabilities' => array(
 				'read_post' => 'read_prototype',
 				'edit_post' => 'edit_prototype',

@@ -264,9 +264,12 @@ class FacetWP_Indexer
                 $this->is_overridden = false;
 
                 // Get rows to insert
-                $insert_data = $this->get_row_data( $defaults );
+                $rows = $this->get_row_data( $defaults );
+                $rows = apply_filters( 'facetwp_indexer_row_data', $rows, array(
+                    'defaults' => $defaults, 'facet' => $facet
+                ) );
 
-                foreach ( $insert_data as $row ) {
+                foreach ( $rows as $row ) {
                     $this->index_row( $row );
                 }
             }
@@ -292,9 +295,12 @@ class FacetWP_Indexer
         $source = $defaults['facet_source'];
 
         if ( 'tax/' == substr( $source, 0, 4 ) ) {
+            $used_terms = array();
             $taxonomy = substr( $source, 4 );
             $term_objects = wp_get_object_terms( $post_id, $taxonomy );
-            $used_terms = array();
+            if ( is_wp_error( $term_objects ) ) {
+                return $output;
+            }
 
             // Store the term depths
             $hierarchy = FWP()->helper->get_term_depths( $taxonomy );
@@ -364,12 +370,10 @@ class FacetWP_Indexer
             $source_noprefix = substr( $source, 3 );
             $values = get_post_meta( $post_id, $source_noprefix, false );
             foreach ( $values as $value ) {
-                if ( '' != $value ) {
-                    $params = $defaults;
-                    $params['facet_value'] = $value;
-                    $params['facet_display_value'] = $value;
-                    $output[] = $params;
-                }
+                $params = $defaults;
+                $params['facet_value'] = $value;
+                $params['facet_display_value'] = $value;
+                $output[] = $params;
             }
         }
         elseif ( 'post' == substr( $source, 0, 4 ) ) {

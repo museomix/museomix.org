@@ -8,9 +8,11 @@ $i18n = array(
     'Indexing complete' => __( 'Indexing complete', 'fwp' ),
     'Indexing' => __( 'Indexing', 'fwp' ),
     'Saving' => __( 'Saving', 'fwp' ),
+    'Loading' => __( 'Loading', 'fwp' ),
     'Importing' => __( 'Importing', 'fwp' ),
     'Activating' => __( 'Activating', 'fwp' ),
     'Are you sure?' => __( 'Are you sure?', 'fwp' ),
+    'Select some items' => __( 'Select some items', 'fwp' ),
 );
 
 // An array of facet type objects
@@ -29,6 +31,17 @@ $builder_post_types = array();
 $post_types = get_post_types( array( 'public' => true ), 'objects' );
 foreach ( $post_types as $type ) {
     $builder_post_types[ $type->name ] = $type->labels->name;
+}
+
+// Clone facet settings HTML
+$facet_clone = array();
+foreach ( $facet_types as $name => $class ) {
+    $facet_clone[ $name ] = __( 'This facet type has no additional settings.', 'fwp' );
+    if ( method_exists( $class, 'settings_html' ) ) {
+        ob_start();
+        $class->settings_html();
+        $facet_clone[ $name ] = ob_get_clean();
+    }
 }
 
 // Activation status
@@ -60,6 +73,9 @@ foreach ( $settings['templates'] as $template ) {
 // Data sources
 $sources = FWP()->helper->get_data_sources();
 
+// Settings
+$settings = FWP()->helper->settings;
+
 ?>
 
 <script src="<?php echo FACETWP_URL; ?>/assets/js/src/event-manager.js?ver=<?php echo FACETWP_VERSION; ?>"></script>
@@ -73,7 +89,8 @@ foreach ( $facet_types as $class ) {
 <script src="<?php echo FACETWP_URL; ?>/assets/js/admin.js?ver=<?php echo FACETWP_VERSION; ?>"></script>
 <script>
 FWP.i18n = <?php echo json_encode( $i18n ); ?>;
-
+FWP.settings = <?php echo json_encode( $settings ); ?>;
+FWP.clone = <?php echo json_encode( $facet_clone ); ?>;
 FWP.builder = {
     post_types: <?php echo json_encode( $builder_post_types ); ?>,
     taxonomies: <?php echo json_encode( $builder_taxonomies ); ?>
@@ -102,23 +119,12 @@ FWP.builder = {
 
     <div class="facetwp-region facetwp-region-welcome about-wrap">
         <h1><?php _e( 'Welcome to FacetWP', 'fwp' ); ?> <span class="version"><?php echo FACETWP_VERSION; ?></span></h1>
-        <div class="about-text">Thank you for choosing FacetWP. Below is a quick introduction to the plugin's key components - Facets and Templates.</div>
-        <div class="welcome-box-wrap">
-            <div class="welcome-box">
-                <h2><?php _e( 'Facets', 'fwp' ); ?></h2>
-                <p>Facets are interactive elements used to narrow lists of content.</p>
-                <a class="button" href="https://facetwp.com/documentation/facet-configuration/" target="_blank">Learn more</a>
-            </div>
-            <div class="welcome-box">
-                <h2><?php _e( 'Templates', 'fwp' ); ?></h2>
-                <p>Before facets will appear, FacetWP needs to know which posts to filter upon. There are two ways to do it:</p>
-                <p><strong>Option 1: CSS class method</strong></p>
-                <p>For existing <strong>search</strong> or <strong>archive</strong> templates, add the <code>facetwp-template</code> CSS class to a new (or existing) container element surrounding <a href="https://developer.wordpress.org/themes/basics/the-loop/" target="_blank">The Loop</a>.</p>
-                <p><strong>Option 2: Shortcode method</strong></p>
-                <p>This involves adding a new FacetWP template (<code>Settings > FacetWP</code>), then displaying it using a shortcode.</p>
-                <a class="button" href="https://facetwp.com/documentation/template-configuration/" target="_blank">Learn more</a>
-            </div>
-        </div>
+        <div class="about-text">Thank you for choosing FacetWP. Check out our intro screencast.</div>
+        <iframe src="https://player.vimeo.com/video/162724676?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+        <p>
+            <a class="button" href="https://facetwp.com/documentation/facet-configuration/" target="_blank">Learn more about facets</a>
+            <a class="button" href="https://facetwp.com/documentation/template-configuration/" target="_blank">Learn more about templates</a>
+        </p>
     </div>
 
     <!-- Facets tab -->
@@ -194,27 +200,6 @@ FWP.builder = {
             <!-- General settings -->
 
             <table>
-
-<?php if ( 'hash' == FWP()->helper->get_setting( 'permalink_type' ) ) : ?>
-
-                <tr>
-                    <td style="width:175px; vertical-align:top">
-                        <?php _e( 'Permalink Type', 'fwp' ); ?>
-                        <div class="facetwp-tooltip">
-                            <span class="icon-question">?</span>
-                            <div class="facetwp-tooltip-content"><?php _e( 'How should permalinks be constructed?', 'fwp' ); ?></div>
-                        </div>
-                    </td>
-                    <td>
-                        <select class="facetwp-setting" data-name="permalink_type">
-                            <option value="get"><?php _e( 'GET variables', 'fwp' ); ?></option>
-                            <option value="hash"><?php _e( 'URL Hash', 'fwp' ); ?></option>
-                        </select>
-                    </td>
-                </tr>
-
-<?php endif; ?>
-
                 <tr>
                     <td style="width:175px; vertical-align:top">
                         <?php _e( 'Separators', 'fwp' ); ?>
@@ -235,16 +220,13 @@ FWP.builder = {
                     <td style="width:175px; vertical-align:top">
                         <?php _e( 'Export', 'fwp' ); ?>
                     </td>
-                    <td valign="top" style="width:260px">
+                    <td valign="top">
                         <select class="export-items" multiple="multiple" style="width:250px; height:100px">
                             <?php foreach ( $export as $val => $label ) : ?>
                             <option value="<?php echo $val; ?>"><?php echo $label; ?></option>
                             <?php endforeach; ?>
                         </select>
-                        <div style="margin-top:5px"><a class="button export-submit"><?php _e( 'Export', 'fwp' ); ?></a></div>
-                    </td>
-                    <td valign="top">
-                        <textarea class="export-code" placeholder="Loading..."></textarea>
+                        <a class="button export-submit"><?php _e( 'Export', 'fwp' ); ?></a>
                     </td>
                 </tr>
             </table>
@@ -274,26 +256,10 @@ FWP.builder = {
 
     <!-- Hidden: clone settings -->
 
-<?php
-$settings = array();
-foreach ( $facet_types as $name => $class ) {
-    $settings[ $name ] = __( 'This facet type has no additional settings.', 'fwp' );
-    if ( method_exists( $class, 'settings_html' ) ) {
-        ob_start();
-        $class->settings_html();
-        $settings[ $name ] = ob_get_clean();
-    }
-}
-?>
-
-<script>
-var FWP_Clone = <?php echo json_encode( $settings ); ?>
-</script>
-
     <div class="hidden clone-facet">
         <div class="facetwp-row">
             <div class="table-row code-unlock">
-                This facet was added with PHP code. Click <span class="dashicons dashicons-unlock"></span> to enable changes.
+                This facet is locked to prevent changes. <button class="unlock">Unlock now</button>
             </div>
             <table>
                 <tr>
@@ -339,7 +305,7 @@ var FWP_Clone = <?php echo json_encode( $settings ); ?>
     <div class="hidden clone-template">
         <div class="facetwp-row">
             <div class="table-row code-unlock">
-                This template was added with PHP code. Click <span class="dashicons dashicons-unlock"></span> to enable changes.
+                This template is locked to prevent changes. <button class="unlock">Unlock now</button>
             </div>
             <div class="table-row">
                 <input type="text" class="template-label" value="New template" />

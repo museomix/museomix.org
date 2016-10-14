@@ -4,6 +4,7 @@ class FacetWP_Integration_ACF
 {
 
     public $fields = array();
+    public $repeater_row;
     public $acf_version;
 
 
@@ -54,7 +55,7 @@ class FacetWP_Integration_ACF
         $defaults = $params['defaults'];
         $facet = $params['facet'];
 
-        if ( 'acf/' == substr( $facet['source'], 0, 4 ) ) {
+        if ( isset( $facet['source'] ) && 'acf/' == substr( $facet['source'], 0, 4 ) ) {
             $hierarchy = explode( '/', substr( $facet['source'], 4 ) );
 
             // get values (for sub-fields, use the parent repeater)
@@ -69,7 +70,8 @@ class FacetWP_Integration_ACF
                 // get the sub-field properties
                 $sub_field = get_field_object( $hierarchy[0], $defaults['post_id'], array( 'load_value' => false ) );
 
-                foreach ( $value as $val ) {
+                foreach ( $value as $key => $val ) {
+                    $this->repeater_row = $key;
                     $this->index_field_value( $val, $sub_field, $defaults );
                 }
             }
@@ -158,6 +160,20 @@ class FacetWP_Integration_ACF
             }
         }
 
+        // user
+        elseif ( 'user' == $field['type'] ) {
+            if ( false !== $value )  {
+                foreach ( (array) $value as $val ) {
+                    $user = get_user_by( 'id', $val );
+                    if ( false !== $user ) {
+                        $params['facet_value'] = $val;
+                        $params['facet_display_value'] = $user->display_name;
+                        FWP()->indexer->index_row( $params );
+                    }
+                }
+            }
+        }
+
         // taxonomy
         elseif ( 'taxonomy' == $field['type'] ) {
             if ( ! empty( $value ) ) {
@@ -214,10 +230,9 @@ class FacetWP_Integration_ACF
 
             // handle repeater values
             if ( 1 < count( $hierarchy ) ) {
-
                 array_shift( $hierarchy );
                 $value = $this->process_field_value( $value, $hierarchy );
-                return reset( $value ); // return first element
+                return $value[ $this->repeater_row ];
             }
         }
 

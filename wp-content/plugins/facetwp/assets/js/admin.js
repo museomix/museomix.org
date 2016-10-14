@@ -1,5 +1,6 @@
 var FWP = {
-    is_indexing: false
+    is_indexing: false,
+    is_name_editable: false
 };
 
 (function($) {
@@ -7,15 +8,12 @@ var FWP = {
 
         var row_count = 0;
 
-        // Load
-        $.post(ajaxurl, {
-            action: 'facetwp_load'
-        }, function(response) {
-            $.each(response.facets, function(idx, obj) {
+        FWP.load_settings = function() {
+            $.each(FWP.settings.facets, function(idx, obj) {
                 var $row = $('.clone-facet .facetwp-row').clone();
                 $row.attr('data-id', row_count);
                 $row.attr('data-type', obj.type);
-                $row.find('.facet-fields').html(FWP_Clone[obj.type]);
+                $row.find('.facet-fields').html(FWP.clone[obj.type]);
                 $row.find('.facet-label').val(obj.label);
                 $row.find('.facet-name').text(obj.name);
                 $row.find('.facet-type').val(obj.type);
@@ -39,7 +37,7 @@ var FWP = {
                 row_count++;
             });
 
-            $.each(response.templates, function(idx, obj) {
+            $.each(FWP.settings.templates, function(idx, obj) {
                 var $row = $('.clone-template .facetwp-row').clone();
                 $row.attr('data-id', row_count);
                 $row.find('.template-label').val(obj.label);
@@ -62,7 +60,7 @@ var FWP = {
                 row_count++;
             });
 
-            $.each(response.settings, function(key, val) {
+            $.each(FWP.settings.settings, function(key, val) {
                 var $this = $('.facetwp-setting[data-name=' + key + ']');
                 $this.val(val);
             });
@@ -86,10 +84,14 @@ var FWP = {
                 placeholder: FWP.i18n['All post types']
             });
 
+            $('.export-items').fSelect({
+                placeholder: FWP.i18n['Select some items']
+            });
+
             // Hide the preloader
             $('.facetwp-loading').hide();
             $('.facetwp-header-nav a:first').click();
-        }, 'json');
+        }
 
 
         FWP.build_card = function(params) {
@@ -97,10 +99,10 @@ var FWP = {
             output += '<div class="facetwp-card">';
             output += '<div class="card-delete"></div>';
             output += '<div class="card-label">' + params.label + '</div>';
-            if ('facet' == params.card) {
+            if ('facet' === params.card) {
                 output += '<div class="card-type">' + params.type + '</div>';
             }
-            output += '<div class="card-shortcode">[facetwp ' + params.card + '="<span class="card-name">' + params.name + '</span>"]</div>';
+            output += '<div class="card-shortcode">[facetwp ' + params.card + '="' + params.name + '"]</div>';
             output += '</div>';
             output += '</li>';
             return output;
@@ -152,8 +154,8 @@ var FWP = {
             var $facet = $(this).closest('.facetwp-row');
             $facet.find('.facetwp-show').show();
 
-            if (val != $facet.attr('data-type')) {
-                $facet.find('.facet-fields').html(FWP_Clone[val]);
+            if (val !== $facet.attr('data-type')) {
+                $facet.find('.facet-fields').html(FWP.clone[val]);
                 $facet.attr('data-type', val);
             }
 
@@ -174,15 +176,11 @@ var FWP = {
             var facet_type = $facet.find('.facet-type').val();
             var display = (-1 < $(this).val().indexOf('tax/')) ? 'table-row' : 'none';
 
-            if ('checkboxes' == facet_type) {
+            if ('checkboxes' === facet_type || 'dropdown' === facet_type) {
                 $facet.find('.facet-parent-term').closest('tr').css({ 'display' : display });
                 $facet.find('.facet-hierarchical').closest('tr').css({ 'display' : display });
             }
-            else if ('dropdown' == facet_type) {
-                $facet.find('.facet-parent-term').closest('tr').css({ 'display' : display });
-                $facet.find('.facet-hierarchical').closest('tr').css({ 'display' : display });
-            }
-            else if ('fselect' == facet_type) {
+            else if ('fselect' === facet_type || 'radio' === facet_type) {
                 $facet.find('.facet-parent-term').closest('tr').css({ 'display' : display });
             }
         });
@@ -191,7 +189,7 @@ var FWP = {
         // Conditionals based on facet source_other
         $(document).on('change', '.facet-source-other', function() {
             var $facet = $(this).closest('.facetwp-row');
-            var display = ('' != $(this).val()) ? 'table-row' : 'none';
+            var display = ('' !== $(this).val()) ? 'table-row' : 'none';
             $facet.find('.facet-compare-type').closest('tr').css({ 'display' : display });
         });
 
@@ -200,8 +198,8 @@ var FWP = {
         $(document).on('click', '.facetwp-add', function() {
             var $parent = $(this).closest('.facetwp-region');
             var type = $parent.hasClass('facetwp-region-facets') ? 'facet' : 'template';
-            var label = ('facet' == type) ? 'New facet' : 'New template';
-            var name = ('facet' == type) ? 'new_facet' : 'new_template';
+            var label = ('facet' === type) ? 'New facet' : 'New template';
+            var name = ('facet' === type) ? 'new_facet' : 'new_template';
 
             var $row = $('.clone-' + type + ' .facetwp-row').clone();
             $row.attr('data-id', row_count);
@@ -235,7 +233,7 @@ var FWP = {
 
         // Edit item
         $(document).on('click', '.facetwp-card', function(e) {
-            if ('' != window.getSelection().toString()) {
+            if ('' !== window.getSelection().toString()) {
                 return;
             }
 
@@ -252,7 +250,7 @@ var FWP = {
             $el.show();
 
             // Trigger conditional settings
-            if ('facets' == type) {
+            if ('facets' === type) {
                 $el.find('.facet-type').trigger('change');
                 $el.find('.facet-source').fSelect();
             }
@@ -271,24 +269,44 @@ var FWP = {
         });
 
 
-        // Change the sidebar link label
+        // Focus on the label
+        $(document).on('focus', '.facet-label, .template-label', function() {
+            var type = $(this).hasClass('facet-label') ? 'facet' : 'template';
+            var name_val = $(this).siblings('.' + type + '-name').text();
+            FWP.is_name_editable = ('' === name_val || ('new_' + type) === name_val);
+        });
+
+
+        // Change the name
+        $(document).on('keyup', '.facet-name, .template-name', function() {
+            var val = $(this).text();
+            var type = $(this).hasClass('.facet-name') ? 'facet' : 'template';
+            var $row = $(this).closest('.facetwp-row');
+            var id = $row.attr('data-id');
+            $('.facetwp-cards li[data-id="'+ id +'"] .card-shortcode').text('[facetwp ' + type + '="' + val + '"]');
+        });
+
+
+        // Change the label
         $(document).on('keyup', '.facet-label, .template-label', function() {
             var label = $(this).val();
             var type = $(this).hasClass('facet-label') ? 'facet' : 'template';
             var $row = $(this).closest('.facetwp-row');
             var id = $row.attr('data-id');
 
-            var val = $.trim(label).toLowerCase();
-            val = val.replace(/[^\w- ]/g, ''); // strip invalid characters
-            val = val.replace(/[- ]/g, '_'); // replace space and hyphen with underscore
-            val = val.replace(/[_]{2,}/g, '_'); // strip consecutive underscores
+            if (FWP.is_name_editable) {
+                var val = $.trim(label).toLowerCase();
+                val = val.replace(/[^\w- ]/g, ''); // strip invalid characters
+                val = val.replace(/[- ]/g, '_'); // replace space and hyphen with underscore
+                val = val.replace(/[_]{2,}/g, '_'); // strip consecutive underscores
 
-            // Update the input field
-            $(this).siblings('.' + type + '-name').text(val);
+                // Update the input field
+                $(this).siblings('.' + type + '-name').text(val);
+                $('.facetwp-cards li[data-id="'+ id +'"] .card-shortcode').text('[facetwp ' + type + '="' + val + '"]');
+            }
 
-            // Update the card
+            // Edit the card
             $('.facetwp-cards li[data-id="'+ id +'"] .card-label').text(label);
-            $('.facetwp-cards li[data-id="'+ id +'"] .card-name').text(val);
         });
 
 
@@ -315,7 +333,7 @@ var FWP = {
 
 
         // Code unlock
-        $(document).on('click', '.dashicons-unlock', function() {
+        $(document).on('click', '.code-unlock .unlock', function() {
             $(this).closest('.facetwp-row').removeClass('in-code');
         });
 
@@ -372,15 +390,14 @@ var FWP = {
 
         // Export
         $(document).on('click', '.export-submit', function() {
-                $('.export-code').show();
-                $('.export-code').val('');
+                $('.import-code').val(FWP.i18n['Loading'] + '...');
                 $.post(ajaxurl, {
                     action: 'facetwp_migrate',
                     action_type: 'export',
                     items: $('.export-items').val()
                 },
                 function(response) {
-                    $('.export-code').val(response);
+                    $('.import-code').val(response);
                 });
         });
 
@@ -435,7 +452,7 @@ var FWP = {
 
         // Tooltips
         $(document).on('mouseover', '.facetwp-tooltip', function() {
-            if ('undefined' == typeof $(this).data('powertip')) {
+            if ('undefined' === typeof $(this).data('powertip')) {
                 var content = $(this).find('.facetwp-tooltip-content').html();
                 $(this).data('powertip', content);
                 $(this).powerTip({
@@ -445,5 +462,9 @@ var FWP = {
                 $.powerTip.show(this);
             }
         });
+
+
+        // Initialize
+        FWP.load_settings();
     });
 })(jQuery);

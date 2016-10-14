@@ -15,7 +15,6 @@ class FacetWP_Ajax
 
     function __construct() {
         // Ajax settings
-        add_action( 'wp_ajax_facetwp_load', array( $this, 'load_settings' ) );
         add_action( 'wp_ajax_facetwp_save', array( $this, 'save_settings' ) );
         add_action( 'wp_ajax_facetwp_refresh', array( $this, 'refresh' ) );
         add_action( 'wp_ajax_nopriv_facetwp_refresh', array( $this, 'refresh' ) );
@@ -178,18 +177,6 @@ class FacetWP_Ajax
     }
 
 
-
-    /**
-     * Load admin settings
-     */
-    function load_settings() {
-        if ( current_user_can( 'manage_options' ) ) {
-            echo json_encode( FWP()->helper->settings );
-        }
-        exit;
-    }
-
-
     /**
      * Save admin settings
      */
@@ -300,7 +287,7 @@ class FacetWP_Ajax
             'data' => $data
         ) );
 
-        exit;
+        wp_die();
     }
 
 
@@ -417,6 +404,7 @@ class FacetWP_Ajax
                 'message'   => __( 'Error', 'fwp' ) . ': ' . $request->get_error_message(),
             ) );
         }
+
         exit;
     }
 }

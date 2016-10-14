@@ -15,8 +15,8 @@ class FacetWP_Integration_WooCommerce
      * @since 2.0.9
      */
     function front_scripts() {
-        wp_enqueue_script( 'query-string', FACETWP_URL . '/assets/js/src/query-string.js', array(), FACETWP_VERSION );
-        wp_enqueue_script( 'facetwp-woocommerce', FACETWP_URL . '/includes/integrations/woocommerce/woocommerce.js', array( 'jquery' ), FACETWP_VERSION );
+        FWP()->display->assets['query-string.js'] = FACETWP_URL . '/assets/js/src/query-string.js';
+        FWP()->display->assets['woocommerce.js'] = FACETWP_URL . '/includes/integrations/woocommerce/woocommerce.js';
     }
 
 
@@ -44,8 +44,12 @@ class FacetWP_Integration_WooCommerce
         $facet = $params['facet'];
         $defaults = $params['defaults'];
 
+        if ( 'product' != get_post_type( $defaults['post_id'] ) ) {
+            return $return;
+        }
+
         if ( 0 === strpos( $facet['source'], 'woocommerce' ) ) {
-            $product = new WC_Product( $defaults['post_id'] );
+            $product = wc_get_product( $defaults['post_id'] );
 
             // Stock Status
             if ( 'woocommerce/stock_status' == $facet['source'] ) {
@@ -65,6 +69,25 @@ class FacetWP_Integration_WooCommerce
             }
 
             return true;
+        }
+
+        // Product Variations
+        elseif ( 0 === strpos( $facet['source'], 'cf/attribute_' ) ) {
+            $product = wc_get_product( $defaults['post_id'] );
+            $attribute_name = str_replace( 'cf/', '', $facet['source'] );
+
+            if ( 'variable' == $product->product_type ) {
+                $variations = $product->get_available_variations();
+
+                foreach ( $variations as $variation ) {
+                    $attribute_val = $variation['attributes'][ $attribute_name ];
+                    $defaults['facet_value'] = $attribute_val;
+                    $defaults['facet_display_value'] = $attribute_val;
+                    FWP()->indexer->index_row( $defaults );
+                }
+
+                return true;
+            }
         }
 
         return $return;
