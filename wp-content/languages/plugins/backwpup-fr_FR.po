@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2016-08-21 08:32:44+0000\n"
+"PO-Revision-Date: 2016-09-19 12:09:01+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -42,7 +42,7 @@ msgstr "Le signal \"%1$s\" (%2$s) a été envoyé au script !"
 
 #: inc/class-page-jobs.php:454
 msgid "Job \"%s\" has started, but not responded for 10 seconds. Please check <a href=\"%s\">information</a>."
-msgstr "L'opération \"%s\" a démarrée, mais pas de réponse depuis 10 seondes. Merci de vérifier les <a href=\"%s\">informations</a>."
+msgstr "L'opération \"%s\" a démarrée, mais pas de réponse depuis 10 secondes. Merci de vérifier les <a href=\"%s\">informations</a>."
 
 #: inc/class-job.php:2326
 msgctxt "SIGXCPU: Please see http://man7.org/linux/man-pages/man7/signal.7.html for details"
@@ -97,7 +97,7 @@ msgstr "Instruction incorrecte"
 #: inc/class-job.php:2290
 msgctxt "SIGABRT: Please see http://man7.org/linux/man-pages/man7/signal.7.html for details"
 msgid "Abort signal from abort(3)"
-msgstr "Signal d'interruption de type abort(3)"
+msgstr "Signal d'interruption de type abort (3)"
 
 #: inc/class-job.php:2294
 msgctxt "SIGBUS: Please see http://man7.org/linux/man-pages/man7/signal.7.html for details"
@@ -112,7 +112,7 @@ msgstr "Erreur de virgule flottante"
 #: inc/class-job.php:2274
 msgctxt "SIGHUP: Please see http://man7.org/linux/man-pages/man7/signal.7.html for details"
 msgid "Hangup detected on controlling terminal or death of controlling process"
-msgstr "Interruption détectée depuis le terminal ou bien fin du process père"
+msgstr "Interruption détectée depuis le terminal ou bien fin du processus père"
 
 #: inc/class-job.php:2278
 msgctxt "SIGINT: Please see http://man7.org/linux/man-pages/man7/signal.7.html for details"
@@ -185,7 +185,7 @@ msgstr "%s &rsaquo; Tableau de bord"
 
 #: inc/class-page-editjob.php:327
 msgid "%1$s &rsaquo; Job: %2$s"
-msgstr "%1$s &rsaquo; Opération: %2$s"
+msgstr "%1$s &rsaquo; Opération : %2$s"
 
 #: inc/class-page-editjob.php:478
 msgid "Disabled due to missing %s PHP class."
@@ -237,7 +237,7 @@ msgstr "Nombre maximum de fichiers journaux dans le dossier."
 
 #: inc/class-job.php:399
 msgid "Debug"
-msgstr "Déboguage"
+msgstr "Mise au point"
 
 #: inc/class-destination-email.php:64
 msgid "From email address"
@@ -257,7 +257,7 @@ msgstr "Utiliser les paramètres de WordPress"
 
 #: inc/class-job.php:396
 msgid "Normal"
-msgstr "Moyen"
+msgstr "Normal"
 
 #: inc/class-destination-s3.php:41
 msgid "Amazon S3: Asia Pacific (Seoul)"
@@ -330,11 +330,11 @@ msgstr "Sauvegarde du répertoire d&rsquo;installation de WordPress"
 
 #: inc/class-jobtype-file.php:296
 msgid "Use one folder above as WP install folder"
-msgstr "Utiliser un dossier ci-dessous comme dossier d’installation WP "
+msgstr "Utiliser un dossier d'un niveau supérieur comme étant le dossier d’installation WP "
 
 #: inc/class-jobtype-file.php:299
 msgid "Use one folder above as WordPress install folder! That can be helpful, if you would backup files and folder that are not in the WordPress installation folder. Or if you made a \"<a href=\"https://codex.wordpress.org/Giving_WordPress_Its_Own_Directory\">Giving WordPress Its Own Directory</a>\" installation. Excludes must be configured again."
-msgstr "Utiliser un dossier ci-dessous comme dossier d’installation WordPress ! Cela peut être utile si vous vouliez sauvegarder les fichiers et dossiers qui ne sont pas dans votre dossier WordPress. Ou si vous avez  \"<a href=\"https://codex.wordpress.org/fr:Donner_%C3%A0_WordPress_son_Propre_Dossier\">Donner à WordPress son propre dossier</a>\" d’installation. Vous devrez ensuite reconfigurer les dossiers exclus."
+msgstr "Utiliser un dossier d'un niveau supérieur comme étant le dossier d’installation WordPress ! Cela peut être utile si vous vouliez sauvegarder les fichiers et dossiers qui ne sont pas dans votre dossier WordPress. Ou si vous avez  \"<a href=\"https://codex.wordpress.org/fr:Donner_%C3%A0_WordPress_son_Propre_Dossier\">Donner à WordPress son propre dossier</a>\" d’installation. Vous devrez ensuite reconfigurer les dossiers exclus."
 
 #: inc/class-jobtype-wpplugin.php:141
 msgid "Can not open target file for writing."
@@ -370,7 +370,7 @@ msgstr "Vous pouvez utiliser des chemins absolus ou relatifs&nbsp;! Les chemins 
 
 #: inc/class-page-settings.php:213 inc/class-page-settings.php:216
 msgid "Logging Level"
-msgstr "Niveau de connexion"
+msgstr "Niveau de trace"
 
 #: inc/class-page-settings.php:225
 msgid "Debug log has much more informations than normal logs. It is for support and should be handled carefully. For support is the best to use a not translated log file. Usage of not translated logs can reduce the PHP memory usage too."
@@ -386,19 +386,19 @@ msgstr "Normal (non traduit)"
 
 #: inc/class-page-settings.php:221
 msgid "Debug (translated)"
-msgstr "Débogué (traduit)"
+msgstr "Mise au point (traduit)"
 
 #: inc/class-page-settings.php:222
 msgid "Debug (not translated)"
-msgstr "Debug (non traduit)"
+msgstr "Mise au point (non traduit)"
 
 #: inc/class-page-settings.php:282
 msgid "Empty output on working"
-msgstr "Champs vides pendant l&rsquo;exécution"
+msgstr "Résultat vide de l&rsquo;exécution"
 
 #: inc/class-page-settings.php:285 inc/class-page-settings.php:288
 msgid "Enable an empty Output on backup working."
-msgstr "Autorisé un résultat vide à la fin de la sauvegarde."
+msgstr "Autoriser un résultat vide à la fin de la sauvegarde."
 
 #: inc/class-page-settings.php:290
 msgid "This do an empty output on job working. This can help in some situations or can brake the working. You must test it."
@@ -468,15 +468,15 @@ msgstr "Stockage Google&nbsp;: EU"
 
 #: inc/class-destination-s3.php:47
 msgid "Google Storage: USA"
-msgstr "Google Storage : USA"
+msgstr "Google Storage&nbsp;: USA"
 
 #: inc/class-destination-s3.php:48
 msgid "Google Storage: Asia"
-msgstr "Google Storage : Asia"
+msgstr "Google Storage&nbsp;: Asia"
 
 #: inc/class-easycron.php:179
 msgid "EasyCron.com API returns (%s): %s"
-msgstr "EasyCron.com API retourne (%s): %s"
+msgstr "EasyCron.com API retourne (%s)&nbsp;: %s"
 
 #: inc/class-easycron.php:188
 msgid "EasyCron"
@@ -496,7 +496,7 @@ msgstr "Activer le cron WordPress&nbsp;:"
 
 #: inc/class-easycron.php:203
 msgid "If you check this box, a cron job will be created on EasyCron that all 5 Minutes calls the WordPress cron."
-msgstr "Si vous validez cette option, une opération cron sera créé sur EasyCron qui appellera toutes les 5 minutes le cron de WordPress."
+msgstr "Si vous validez cette option, une opération cron sera créée sur EasyCron qui appellera toutes les 5 minutes le cron de WordPress."
 
 #: inc/class-file.php:159
 msgid "Folder %1$s is not in open basedir, please use another folder."
@@ -530,7 +530,7 @@ msgstr "[INFO] L&rsquo;opération BackWPup commence avec EasyCron.com"
 
 #: inc/class-job.php:502
 msgid "Could not write log file"
-msgstr "Impossible d&rsquo;écrire le fichier de log"
+msgstr "Impossible d&rsquo;écrire le fichier de traces"
 
 #: inc/class-page-jobs.php:189
 msgid "Last log"
@@ -834,7 +834,7 @@ msgstr "La réponse au test est positive."
 
 #: inc/class-page-settings.php:423
 msgid "Temp folder:"
-msgstr "Répertoire temporaire:"
+msgstr "Répertoire temporaire&nbsp;:"
 
 #: inc/class-page-settings.php:425
 msgid "Temp folder %s doesn't exist."
@@ -846,7 +846,7 @@ msgstr "Le répertoire temporaire '%s' n'est pas inscriptible."
 
 #: inc/class-page-settings.php:434
 msgid "Log folder:"
-msgstr "Répertoire des fichiers journaux:"
+msgstr "Répertoire des fichiers journaux&nbsp;:"
 
 #: inc/class-page-settings.php:436
 msgid "Logs folder %s not exist."
@@ -918,7 +918,7 @@ msgstr "%s heures"
 
 #: inc/class-page-settings.php:469
 msgid "Blog language"
-msgstr "Langue du Blog"
+msgstr "Langue du site"
 
 #: inc/class-page-settings.php:470
 msgid "MySQL Client encoding"
@@ -926,7 +926,7 @@ msgstr "Type d'encodage du client MySql"
 
 #: inc/class-page-settings.php:473
 msgid "Blog charset"
-msgstr "Type de codage du blog"
+msgstr "Type de codage du site"
 
 #: inc/class-page-settings.php:474
 msgid "PHP Memory limit"
@@ -946,7 +946,7 @@ msgstr "Mémoire utilisée"
 
 #: inc/class-page-settings.php:482
 msgid "Disabled PHP Functions:"
-msgstr "Interdire les fonctions PHP:"
+msgstr "Fonctions PHP désactivées&nbsp;:"
 
 #: inc/class-page-settings.php:487
 msgid "Loaded PHP Extensions:"
@@ -954,7 +954,7 @@ msgstr "Extension PHP chargées:"
 
 #: inc/class-page-settings.php:499
 msgid "Save Changes"
-msgstr "Sauvegarder les changements"
+msgstr "Enregistrer les modifications"
 
 #: inc/class-page-settings.php:501
 msgid "Reset all settings to default"
@@ -1303,7 +1303,7 @@ msgstr "Export WordPress XML"
 
 #: inc/class-page-about.php:408
 msgid "You can choose the built-in WordPress export format in addition or exclusive to save your data. This works in automated backups too of course. The advantage is: you can import these files into a blog with the regular WordPress importer."
-msgstr "Vous pouvez choisir le format interne d'export WordPress en plus ou seulement pour sauvegarder vos données. Cela fonctionne aussi dans les sauvegardes programmées. L'avantage en est : vous pouvez restaurer ces fichiers dans votre installation avec l'importateur WordPress."
+msgstr "Vous pouvez choisir le format interne d'export WordPress en plus ou seulement pour sauvegarder vos données. Cela fonctionne aussi dans les sauvegardes programmées. L'avantage en est&nbsp;: vous pouvez restaurer ces fichiers dans votre installation avec l'importateur WordPress."
 
 #: inc/class-page-about.php:416
 msgid "Save all data from the webserver"
