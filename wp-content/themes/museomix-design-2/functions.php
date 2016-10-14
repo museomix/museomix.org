@@ -1,4 +1,4 @@
-<?php
+<?phpinclude_once('includes/taxonomies.php');
 if (!isset($SectionsPage) || !is_array($SectionsPage))
 	$SectionsPage = array();
 if (!isset($ContenusSections) || !is_array($ContenusSections))
@@ -90,9 +90,9 @@ function DateBillet($temps){
 			$nbH = (int)floor((date_i18n('U')-$temps)/3600);
 			if ($nbH===-1)
 				$nbH = 0;
-			$date = ($nbH ===0 ? 'กงก่ l\'instant' : __('il y a','museomix').' '.$nbH.' h');
+			$date = ($nbH ===0 ? 'กงก่ l\'instant' : __('since','museomix').' '.$nbH.' h');
 		}else{
-			$date = __('le','museomix').' '.date_i18n('d M',$temps);
+			$date = __('the','museomix').' '.date_i18n('d M',$temps);
 		}
 		return $date;	
 	}
@@ -226,7 +226,7 @@ function ContenuSection($id, $echo = true){
 											<h3 class="titre-section">'.$post->post_title.'</h3></a>
 											<span class="date-actualites" style="color: #888; margin: 0; text-decoration: none !important; background: #eee">le '.date_i18n('d M',strtotime($post->post_modified)).'</span>
 											<br /><div class="">'.get_the_excerpt().'</div>
-											<a class="small" href="'.get_permalink().'">'.__('En savoir plus','museomix').'</a></div></li>';
+											<a class="small" href="'.get_permalink().'">'.__('Read more','museomix').'</a></div></li>';
 								
 
 								$first = false;
@@ -239,7 +239,7 @@ function ContenuSection($id, $echo = true){
 							}
 						endwhile;
 						if ((int)$newsNumber>0)
-							$contenu .= '<li class="elm-bloc-actualites"><a href="'.get_category_link($catId).'">'.__('Tous les articles','museomix').'</a></li>';
+							$contenu .= '<li class="elm-bloc-actualites"><a href="'.get_category_link($catId).'">'.__('All articles','museomix').'</a></li>';
 						$contenu .= '</ul></div>';
 						wp_reset_postdata();
 					}
@@ -509,8 +509,8 @@ function ExtraitBillet($thePost = null){
 
 	}
 	elseif('equipe'==$id){
-		if($photo=get_field('photo_equipe')){
-			$contenu .= '<img style="margin:30px;" src="'.$photo.'">';
+		if($photo=get_field('photo_equipe')){			if (is_int($photo)) {				$url = wp_get_attachment_image_src($photo, 'thumbnail')[0];			} else {				$url = $photo;			}
+			$contenu .= '<img style="margin:30px;" src="'.$url.'">';
 		}
 		if($zone=get_field('descriptif_equipe')){
 			$contenu .= '<p>'.$zone.'</p>';

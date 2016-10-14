@@ -99,7 +99,12 @@ function ListeRelationsObjets($typeCible){
 					if($contenu=get_field('resume_du_projet')){
 						$photo=get_field('visuel_prototype');
 						if($photo){
-							echo '<img style="float:left;margin-right:20px;" class="logo-elm-part" src="'.wp_get_attachment_url($photo, 'thumbnail').'">';
+							if (is_int($photo)) {
+								$url = wp_get_attachment_image_src($photo, 'thumbnail');
+							} else {
+								$url = $photo;
+							}
+							echo '<img style="float:left;margin-right:20px;" class="logo-elm-part" src="'.$url.'">';
 						}
 						echo '<blockquote>'.$contenu.'</blockquote>';
 					}
