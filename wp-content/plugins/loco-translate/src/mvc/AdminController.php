@@ -10,10 +10,16 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
     private $view;
     
     /**
+     * Debugging timestamp (microseconds)
      * @var float
      */
     private $bench;
 
+    /**
+     * Base url to plugin folder for web access
+     * @var string
+     */
+    private $baseurl;
 
     /**
      * Pre-init call invoked by router
@@ -25,10 +31,56 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
         }
         $this->view = new Loco_mvc_View( $args );
         $this->auth();
+        
+        // check essential extensions on all pages so admin notices are shown
+        foreach( array('json','mbstring') as $ext ){
+            loco_check_extension($ext);
+        }
+
+        // add contextual help tabs to current screen if there are any
+        if( $screen = get_current_screen() ){
+            $this->view->cd('/admin/help');
+            $tabs = $this->getHelpTabs();
+            // always append common help tabs
+            $tabs[ __('Help & support','loco') ] = $this->view->render('tab-support');
+            // set all tabs and common side bar
+            $i = 0;
+            foreach( $tabs as $title => $content ){
+                $id = sprintf('loco-help-%u', $i++ );
+                $screen->add_help_tab( compact('id','title','content') );
+            }
+            $screen->set_help_sidebar( $this->view->render('side-bar') );
+            $this->view->cd('/');
+        }
+        
+        // helper properties for loading static resources
+        $this->baseurl = plugins_url( '', loco_plugin_self() );
+        
+        // add common admin page resources
+        $this->enqueueStyle('admin', array('wp-jquery-ui-dialog') );
+
+        // load colour scheme is user has non-default
+        $skin = get_user_option('admin_color');
+        if( $skin && 'fresh' !== $skin ){
+            $this->enqueueStyle( 'skins/'.$skin );
+        }
+        
+        // core minimized admin.js loaded on all pages before any other Loco scripts
+        $this->enqueueScript('min/admin', array('jquery-ui-dialog') );
+        
         $this->init();
         return $this;
     }
 
+
+
+    /**
+     * Post-construct initializer that may be overridden by child classes
+     * @return void
+     */
+    public function init(){
+        
+    }
 
 
     /**
@@ -90,53 +142,6 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
 
 
     /**
-     * {@inheritdoc}
-     */
-    public function init(){
-
-        // add contextual help tabs to current screen if there are any
-        if( $screen = get_current_screen() ){
-            $this->view->cd('/admin/help');
-            $tabs = $this->getHelpTabs();
-            // always append common help tabs
-            $tabs[ __('Help & support','loco') ] = $this->view->render('tab-support');
-            // set all tabs and common side bar
-            $i = 0;
-            foreach( $tabs as $title => $content ){
-                $id = sprintf('loco-help-%u', $i++ );
-                $screen->add_help_tab( compact('id','title','content') );
-            }
-            $screen->set_help_sidebar( $this->view->render('side-bar') );
-            $this->view->cd('/');
-        }
-        
-        // add common admin page resources
-        $this->enqueueStyle('admin', array('wp-jquery-ui-dialog') );
-
-        // js translations
-        if( ( $lang = get_locale() ) && 'en_US' !== $lang ){
-            if( file_exists( loco_plugin_root().'/pub/js/lang/'.$lang.'.js' ) ){
-                $this->enqueueScript('lang/'.$lang);
-            }
-        }
-        
-        // load colour scheme is user has non-default
-        $skin = get_user_option('admin_color');
-        if( $skin && 'fresh' !== $skin ){
-            $this->enqueueStyle( 'skins/'.$skin );
-        }
-        
-        // common js utils
-        $this->enqueueScript('min/admin', array('jquery-ui-dialog') );
-        
-        // check essential extensions on all pages so admin notices are shown
-        foreach( array('json','mbstring') as $ext ){
-            loco_check_extension($ext);
-        }
-    }
-
-
-    /**
      * All admin screens must define help tabs, eve if they return empty
      * @return array
      */
@@ -164,20 +169,43 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
 
 
     /**
-     * Shortcut for rending template from a simple array of arguments
+     * Render template for echoing into admin screen
      * @return string
      */
     public function view( $tpl, array $args = array() ){
+        $view = $this->view;
         foreach( $args as $prop => $value ){
-            $this->set( $prop, $value );
+            $view->set( $prop, $value );
         }
+        // ensure JavaScript config always present
+        if( $jsConf = $view->js ){
+            if( ! $jsConf instanceof Loco_mvc_ViewParams ){
+                throw new InvalidArgumentException('Bad "js" view parameter');
+            }
+        }
+        else {
+            $jsConf = new Loco_mvc_ViewParams;
+            $view->set( 'js', $jsConf );
+        }
+        // localize script if translations in memory
+        if( is_textdomain_loaded('loco') ){
+            $strings = new Loco_js_Strings;
+            $jsConf['wpl10n'] = $strings->compile();
+            $strings->unhook();
+            unset( $strings );
+            // add currently loaded locale for passing plural equation into js.
+            // note that plural rules come from our data, because MO is not trusted.
+            $tag = apply_filters( 'plugin_locale', get_locale(), 'loco' );
+            $jsConf['wplang'] = Loco_Locale::parse($tag);
+        }
+        // take benchmark for debugger to be rendered in footer
         if( $this->bench ){
             $this->set('debug', new Loco_mvc_ViewParams( array( 
                 'time' => microtime(true) - $this->bench,
             ) ) );
         }
 
-        return $this->view->render( $tpl );
+        return $view->render( $tpl );
     }
 
 
@@ -187,11 +215,9 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
      * @return Loco_mvc_Controller
      */
     public function enqueueStyle( $name, array $deps = array() ){
-        $plugin = loco_plugin_self();
-        $version = loco_debugging() ? time() : loco_plugin_version();
-        $url = plugins_url( 'pub/css/'.$name.'.css', $plugin );
-        wp_enqueue_style( 'loco-'.strtr($name,'/','-'), $url, $deps, $version, 'all' );
-        
+        $href = $this->baseurl.'/pub/css/'.$name.'.css';
+        $vers = apply_filters( 'loco_static_version', loco_plugin_version(), $href );
+        wp_enqueue_style( 'loco-'.strtr($name,'/','-'), $href, $deps, $vers, 'all' );
         return $this;
     }
 
@@ -202,12 +228,11 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
      * @return Loco_mvc_Controller
      */
     public function enqueueScript( $name, array $deps = array() ){
-        $plugin = loco_plugin_self();
-        $version = loco_debugging() ? time() : loco_plugin_version();
-        $url = plugins_url( 'pub/js/'.$name.'.js', $plugin );
-        wp_enqueue_script( 'loco-js-'.strtr($name,'/','-'), $url, $deps, $version, true );
-        
+        $href = $this->baseurl.'/pub/js/'.$name.'.js';
+        $vers = apply_filters( 'loco_static_version', loco_plugin_version(), $href );
+        wp_enqueue_script( 'loco-js-'.strtr($name,'/','-'), $href, $deps, $vers, true );
         return $this;
     }
+
 
 }

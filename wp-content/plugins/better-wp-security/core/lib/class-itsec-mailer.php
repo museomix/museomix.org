@@ -16,6 +16,7 @@ final class ITSEC_Mail {
 			'charset'      => esc_attr( get_bloginfo( 'charset' ) ),
 			'title_tag'    => $title,
 			'banner_title' => $banner_title,
+			'logo'         => ITSEC_Core::is_pro() ? 'https://ithemes.com/email_images/itsec-pro-logo-300x127.png' : 'https://ithemes.com/email_images/itsec-logo-300x127.png',
 			'title'        => $title,
 		);
 

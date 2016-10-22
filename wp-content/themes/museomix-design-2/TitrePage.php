@@ -109,14 +109,16 @@
 		
 ?>
 <?php if( ! is_front_page() ) : ?> 
-	<header class="jumbotron subhead "  style="border-bottom: 1px solid #ccc; position: relative; min-height: 241px; background:#ffffff url('<?php VisuelPage(); ?>') no-repeat left top; ">
+	<header class="jumbotron subhead <?php if (get_field('is_light_page')) { echo 'light'; } ?> "  style="border-bottom: 1px solid #ccc; position: relative; background:#ffffff url('<?php VisuelPage(); ?>') no-repeat left top; ">
 	
 	
 	  <div class="container" style="padding: 70px 0 0 0;  border: 1px none #ccc; position: relative; z-index: 3;
 	  ">
-		<h1 style="font-size: 60px; letter-spacing: 1px; margin: 0 40px 0 35px;"><?php TitrePage(); ?></h1>
-
-		<h2 class="lead" style="margin: 40px 40px 0 35px; "><?php AccrochePage(); ?>
+		<h1 style="font-size: 60px; letter-spacing: 1px; margin: 0 40px 0 35px;" class=""><?php TitrePage(); ?></h1>
+		<?php
+		if (!get_field('is_light_page')) { ?>
+			<h2 class="lead" style="margin: 40px 40px 0 35px; "><?php AccrochePage(); ?>
+		<?php } ?>
 			
 		<?php
 			$socialMedia = DisplaySocialMedia();

@@ -3,7 +3,7 @@ Contributors: ithemes, chrisjean, gerroald, mattdanner
 Tags: security, security plugin, malware, hack, secure, block, SSL, admin, htaccess, lockdown, login, protect, protection, anti virus, attack, injection, login security, maintenance, permissions, prevention, authentication, administration, password, brute force, ban, permissions, bots, user agents, xml rpc, security log
 Requires at least: 4.2
 Tested up to: 4.6.1
-Stable tag: 5.6.3
+Stable tag: 5.6.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -187,6 +187,12 @@ Free support may be available with the help of the community in the <a href="htt
 5. Free malware scan powered by Sucuri SiteCheck.
 
 == Changelog ==
+
+= 5.6.4 =
+ * Bug Fix: Fixed issue that reported invalid counts for host and user lockouts in the daily digest email.
+ * Bug Fix: Fixed issue that caused the daily digest email to be sent every day, even if no lockouts occurred and no file changes were found.
+ * Bug Fix: Fixed issue that could prevent saving of File Change settings, resulting in an error messages of "A validation function for file-change received data that did not have the required entry for latest_changes."
+ * Bug Fix: Fixed iThemes Security Pro logo appearing in daily digest emails.
 
 = 5.6.3 =
  * Bug Fix: Removed the "Wget" user agent from the Hack Repair blacklist as it can block wp-cron jobs on some hosts.
@@ -1584,5 +1590,5 @@ This release is a complete rewrite from the ground up. Special thanks to Cory Mi
 
 == Upgrade Notice ==
 
-= 5.6.3 =
-Version 5.6.3 contains bug fixes and a renewed Daily Digest email design. It is recommended for all users.
+= 5.6.4 =
+Version 5.6.4 contains a number of bug fixes. It is recommended for all users.

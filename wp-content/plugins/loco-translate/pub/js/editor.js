@@ -10,9 +10,8 @@
         saveParams = null,
         
         // UI translation
-        translator = loco.translator,
-        translate = translator._,
-        sprintf = translator.s,
+        translator = loco.l10n,
+        sprintf = loco.string.sprintf,
 
         // PO file data
         locale = conf.locale,
@@ -52,22 +51,37 @@
                  pot = loco.po.init().load( exp ),
                  done = doc.merge( pot ),
                  nadd = done.add.length,
-                 ndel = done.del.length;
+                 ndel = done.del.length,
+                 t = translator;
              // reload even if unchanged, cos indexes could be off
              editor.load( doc );
              // Show summary 
-             if( nadd || ndel ){                     
-                 info.push( src ? sprintf( translate('Merged from %s'), src ) : translate('Merged from source code') );
-                 nadd && info.push( sprintf( translate('1 new string added','%s new strings added', nadd ), nadd ) );
-                 ndel && info.push( sprintf( translate('1 obsolete string removed','%s obsolete strings removed', ndel ), ndel ) );
+             if( nadd || ndel ){
+                 if( src ){
+                    // Translators: Where %s is the name of the POT template file. Message appears after sync
+                    info.push( sprintf( t._('Merged from %s'), src ) );
+                 }   
+                 else {        
+                    // Translators: Message appears after sync operation     
+                    info.push( t._('Merged from source code') );
+                 }
+                 // Translators: Summary of new strings after running in-editor Sync
+                 nadd && info.push( sprintf( t._n('1 new string added','%s new strings added', nadd ), nadd ) );
+                 // Translators: Summary of existing strings that no longer exist after running in-editor Sync
+                 ndel && info.push( sprintf( t._n('1 obsolete string removed','%s obsolete strings removed', ndel ), ndel ) );
                  // editor thinks it's saved, but we want the UI to appear otherwise
                  $(innerDiv).trigger('poUnsaved',[]);
                  updateStatus();
                  // debug info in lieu of proper merge confirmation:
                  window.console && debugMerge( console, done );
              }
+             else if( src ){
+                 // Translators: Message appears after sync operation when nothing has changed. %s refers to a POT file.
+                 info.push( sprintf( t._('Already up to date with %s'), src ) );
+             }
              else {
-                 info.push( src ? sprintf( translate('Already up to date with %s'), src ) : translate('Already up to date with source code') );
+                 // Translators: Message appears after sync operation when nothing has changed
+                 info.push( t._('Already up to date with source code') );
              }
              loco.notices.success( info.join('. ') );
              $(innerDiv).trigger('poMerge',[result]);
@@ -118,7 +132,8 @@
     
 
     function onUnloadWarning(){
-        return translate("Your changes will be lost if you continue without saving");
+        // Translators: Warning appears when user tries to refresh or navigate away when editor work is unsaved
+        return translator._("Your changes will be lost if you continue without saving");
     }
     
 
@@ -204,7 +219,7 @@
                     doSyncAction( unthink );
                     return false;
                 } )
-                //.attr('title', syncPath ? sprintf( translate('Update from %s'), syncPath ) : translate('Update from source code') )
+                //.attr('title', syncPath ? sprintf( translator._('Update from %s'), syncPath ) : translator._('Update from source code') )
             ;
             enable();
         }
@@ -214,17 +229,34 @@
 
 
     function registerFuzzyButton( button ){
-        function redraw( state ){
-            button.disabled = ( null == state );
-            $(button)[ state ? 'addClass' : 'removeClass' ]('inverted');
+        var toggled = false, 
+            enabled = false
+        ;
+        function redraw( message, state ){
+            // fuzziness only makes sense when top-level string is translated
+            var allowed = message && message.translated(0) || false;
+            if( enabled !== allowed ){
+                button.disabled = ! allowed;
+                enabled = allowed;
+            }
+            // toggle on/off according to new fuzziness
+            if( state !== toggled ){
+                $(button)[ state ? 'addClass' : 'removeClass' ]('inverted');
+                toggled = state;
+            }
         }
         // state changes depending on whether an asset is selected and is fuzzy
         editor
             .on('poSelected', function( event, message ){
-                redraw( message && message.fuzzy() );
+                redraw( message, message && message.fuzzy() || false );
+            } )
+            .on( 'poEmpty', function( event, blank, message, pluralIndex ){
+                if( 0 === pluralIndex && blank === enabled ){
+                    redraw( message, toggled );
+                }
             } )
             .on( 'poFuzzy', function( event, message, newState ){
-                redraw( newState );
+                redraw( message, newState );
             } )
         ;
         // click toggles current state
@@ -252,6 +284,35 @@
         $(button).click( function( event ){
             event.preventDefault();
             location.reload();
+            return false;
+        } );
+        return true;
+    };
+
+
+
+    function registerInvisiblesButton( button ){
+        button.disabled = false;
+        editor.on('poInvs', function( event, state ){
+            $(button)[ state ? 'addClass' : 'removeClass' ]('inverted');
+        });
+        $(button).click( function( event ){
+            event.preventDefault();
+            editor.setInvs( ! editor.getInvs() );
+            return false;
+        } );
+        return true;
+    }
+
+
+
+    function registerCodeviewButton( button ){
+         button.disabled = false;
+         $(button).click( function(event){
+            event.preventDefault();
+            var state = ! editor.getMode();
+            editor.setMode( state );
+            $(button)[ state ? 'addClass' : 'removeClass' ]('inverted');
             return false;
         } );
         return true;
@@ -328,18 +389,21 @@
      * TODO implement progress bar, not just text.
      */
     function updateStatus(){
-        var t = translator._,
-            sprintf = translator.s,
+        var t = translator,
             stats = editor.stats(),
             total = stats.t,
             fuzzy = stats.f,
             empty = stats.u,
-            stext = sprintf( t('1 string','%s strings',total), total ),
+            // Translators: Shows total string count at top of editor
+            stext = sprintf( t._n('1 string','%s strings',total), total ),
             extra = [];
-        if( locale ){  
-            stext = sprintf( t('%s%% translated'), stats.p.replace('%','') ) +', '+ stext;
-            fuzzy && extra.push( sprintf( t('%s fuzzy'), fuzzy ) );
-            empty && extra.push( sprintf( t('%s untranslated'), empty ) );
+        if( locale ){
+            // Translators: Shows percentage translated at top of editor
+            stext = sprintf( t._('%s%% translated'), stats.p.replace('%','') ) +', '+ stext;
+            // Translators: Shows number of fuzzy strings at top of editor
+            fuzzy && extra.push( sprintf( t._('%s fuzzy'), fuzzy ) );
+            // Translators: Shows number of untranslated strings at top of editor
+            empty && extra.push( sprintf( t._('%s untranslated'), empty ) );
             if( extra.length ){
                 stext += ' ('+extra.join(', ')+')';
             }
@@ -410,13 +474,13 @@
     // initialize editor    
     innerDiv.innerHTML = '';
     editor = loco.po.ed
-        .localise( translator )
         .init( innerDiv )
+        .localise( translator )
     ;
     loco.po.kbd
         .init( editor )
         .add( 'save', saveIfDirty )
-        .enable('copy','clear','enter','next','prev','fuzzy','save')
+        .enable('copy','clear','enter','next','prev','fuzzy','save','invis')
     ;
 
     // initialize toolbar button actions
@@ -425,6 +489,9 @@
         save: editable && registerSaveButton,
         sync: editable && registerSyncButton,
         revert: registerRevertButton,
+        // editor mode togglers
+        invs: registerInvisiblesButton,
+        code: registerCodeviewButton,
         // downloads / post-throughs
         source: registerDownloadButton,
         binary: template ? null : registerDownloadButton
@@ -473,7 +540,8 @@
     // ok, editor ready
     updateStatus();
 
-    // clean up    
+    // clean up
+    delete window.locoConf;
     conf = buttons = null;
 
 

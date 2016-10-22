@@ -39,7 +39,7 @@ class FacetWP_Facet_Number_Range
         $start = ( '' == $values[0] ) ? false : $values[0];
         $end = ( '' == $values[1] ) ? false : $values[1];
 
-        $is_dual = ! empty( $facet['source_other'] ) && false !== $start && false !== $end;
+        $is_dual = ! empty( $facet['source_other'] );
         $is_intersect = FWP()->helper->facet_is( $facet, 'compare_type', 'intersect' );
 
         /**
@@ -47,6 +47,9 @@ class FacetWP_Facet_Number_Range
          * @link http://stackoverflow.com/a/325964
          */
         if ( $is_dual && $is_intersect ) {
+            $start = ( false !== $start ) ? $start : -999999999999;
+            $end = ( false !== $end ) ? $end : 999999999999;
+
             $where .= " AND (facet_value + 0) <= '$end'";
             $where .= " AND (facet_display_value + 0) >= '$start'";
         }

@@ -224,14 +224,7 @@ class Loco_mvc_View implements IteratorAggregate {
      */
     public function setTemplate( $tpl ){
         $file = new Loco_fs_File( $tpl.'.php' );
-        // allow path to begin "/" meaning relative to tpl root
-        if( '/' === $tpl ){
-            $file->normalize( loco_plugin_root().'/tpl' );
-        }
-        // else treat relative path according to current template directory
-        else {
-            $file->normalize( $this->cwd );
-        }
+        $file->normalize( $this->cwd );
         if( ! $file->exists() ){
             $debug = str_replace( loco_plugin_root().'/', '', $file->getPath() );
             throw new Loco_error_Exception( 'Template not found: '.$debug );
@@ -272,8 +265,21 @@ class Loco_mvc_View implements IteratorAggregate {
             'href' => Loco_mvc_AdminRouter::generate( $action, $args ),
         ) );
     }
-    
-    
+
+
+    /**
+     * Shorthand for `echo esc_html( sprintf( ...`
+     * @return void
+     */
+    private function e( $text ){
+        if( 1 < func_num_args() ){
+            $args = func_get_args();
+            $text = call_user_func_array( 'sprintf', $args );
+        }
+        echo htmlspecialchars( $text, ENT_COMPAT, 'UTF-8' );
+        return '';
+    }    
+
 }
 
 

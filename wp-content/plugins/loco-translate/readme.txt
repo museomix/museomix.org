@@ -3,7 +3,7 @@ Contributors: timwhitlock
 Tags: translation, translators, localization, localisation, l10n, i18n, Gettext, PO, MO, productivity
 Requires at least: 4.0
 Tested up to: 4.6.1
-Stable tag: 2.0.7
+Stable tag: 2.0.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -85,6 +85,14 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 
 == Changelog ==
 
+= 2.0.8 =
+* Source refs fix for files in unknown subsets
+* Downgrades PO formatting exceptions to PHP warnings
+* Renamed function prefixes to avoid PHP 7 warnings
+* Better support for php-format and no-php-format flag
+* PO source and editor UI tweaks
+* Localised strings and implemented in js
+
 = 2.0.7 =
 * Fixed prototype.js conflict
 * More Windows file path fixes
@@ -130,7 +138,7 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 
 == Upgrade Notice ==
 
-= 2.0.7 =
+= 2.0.8 =
 * Various bug fixes and improvements
 
 
@@ -163,12 +171,6 @@ The PO file editor supports the following keyboard shortcuts for faster translat
 * Clear translation: `Ctrl K`
 * Toggle Fuzzy: `Ctrl U`
 * Save PO / compile MO: `Ctrl S`
+* Toggle invisibles: `Shift Ctrl I`
 
 Mac users can use ⌘ Cmd instead of Ctrl.
-
-
-== Translators ==
-
-Many thanks to the translators of version 1.
-
-Please don’t submit translations for version 2 yet. English strings are still being finalised.

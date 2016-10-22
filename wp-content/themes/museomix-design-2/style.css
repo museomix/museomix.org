@@ -509,7 +509,6 @@ body.home .navbar {
     color: #00B7E8;
     margin-top: 0;
     margin-bottom: 5px;
-    max-width: 740px;
 }
 
 .section-1:first-child .page-header {
@@ -1458,4 +1457,42 @@ dd {
 }
 .moteur-recherche {
 	padding:10px;
+}
+header.jumbotron {
+	min-height:241px;
+}
+body.light header {
+	min-height:150px
+}
+body.light {
+	background-image:none;
+}
+.facetwp-pager {
+	margin-bottom:5px;
+}
+.facetwp-pager .facetwp-page {
+	display: inline-block;
+    margin: 2px;
+    border: 1px solid Silver;
+}
+.btn-action {
+	display: inline-block;
+    color: #000;
+    background-color: #FFEC00;
+    padding: 5px 10px;
+    border-radius: 5px;
+    float: right;
+    font-size: 1.5em;
+    font-weight: bold;
+    border: 1px solid rgba(100,100,100,0.5);
+    box-shadow: 1px 1px 1px rgba(0,0,0,0.15);
+}
+.text-center  .btn-action{
+	float:none;
+}
+.text-center {
+	text-align:center;
+}
+.partenaire {
+    display: inline-block;
 }

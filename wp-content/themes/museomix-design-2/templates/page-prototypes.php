@@ -30,6 +30,7 @@ get_template_part('TitrePage');
 			<!-- <h3>Rechercher</h3> -->
 			<?php //echo facetwp_display( 'facet', 'rechercher' ); ?>
 		</div><div class="bloc-page span9">
+			<?php echo facetwp_display( 'pager' ); ?>
 			<?php echo facetwp_display( 'template', 'prototypes' ); ?>
 			<?php echo facetwp_display( 'pager' ); ?>
 		</div>		

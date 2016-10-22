@@ -64,7 +64,11 @@ include_once('includes/shortcodes.php');
 		//We use here the ID of the "about page", 78, to get the translated URL
 		echo get_permalink(icl_object_id(78, 'page', false));
 		?>"><img src="<?php header_image(); ?>"  alt="Museomix" />
-		<img src="<?php echo get_template_directory_uri(); ?>/images/museomix_banner_circle.png" alt="People make museum" id="museomix_circle" /></a>
+		<?php
+		var_dump(get_field('is_light_page'));
+		if (!get_field('is_light_page')) { ?>
+			<img src="<?php echo get_template_directory_uri(); ?>/images/museomix_banner_circle.png" alt="People make museum" id="museomix_circle" /></a>
+		<?php } ?>
 	</div>
 <?php endif; ?>
 	<div class="navbar navbar-inverse navbar-fixed-top" style="">

@@ -241,11 +241,23 @@ class FacetWP_Integration_ACF
 
 
     /**
+     * We need to get field groups in ALL languages
+     */
+    function disable_wpml( $query ) {
+        $query->set( 'suppress_filters', true );
+    }
+
+
+    /**
      * Get field settings (ACF5)
      * @return array
      */
     function get_acf_fields_v5() {
+
+        add_action( 'pre_get_posts', array( $this, 'disable_wpml' ) );
         $field_groups = acf_get_field_groups();
+        remove_action( 'pre_get_posts', array( $this, 'disable_wpml' ) );
+
         foreach ( $field_groups as $field_group ) {
             $fields = acf_get_fields( $field_group );
             $this->recursive_get_fields( $fields, $field_group );

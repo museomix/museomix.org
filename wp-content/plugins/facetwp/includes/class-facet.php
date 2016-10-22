@@ -233,9 +233,10 @@ class FacetWP_Facet
             // Return the number of available choices
             if ( isset( $args['values'] ) ) {
                 $num_choices = 0;
+                $is_ghost = FWP()->helper->facet_is( $the_facet, 'ghosts', 'yes' );
 
                 foreach ( $args['values'] as $choice ) {
-                    if ( isset( $choice['counter'] ) && 0 < $choice['counter'] ) {
+                    if ( isset( $choice['counter'] ) && ( 0 < $choice['counter'] || $is_ghost ) ) {
                         $num_choices++;
                     }
                 }

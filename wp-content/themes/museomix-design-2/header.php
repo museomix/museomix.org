@@ -1,4 +1,11 @@
 <?php
+
+if (get_field('is_light_page')) {
+	add_filter( 'body_class', function( $classes ) {
+		return array_merge( $classes, array( 'light' ) );
+	} );
+}
+
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>

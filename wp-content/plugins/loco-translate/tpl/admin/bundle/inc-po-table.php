@@ -38,7 +38,8 @@
                             <span><?php $po->e('lname')?></span><?php
                             else:?> 
                             <span class="icon icon-file"></span>
-                            <span>English (Template)</span><?php
+                            <span><?php
+                            esc_html_e('English','loco')?> (<?php esc_html_e('Template','loco')?>)</span><?php
                             endif?> 
                         </a><?php
                         if( $domain ):?> 
@@ -98,7 +99,7 @@
     else:?> 
         <table class="wp-list-table widefat fixed striped">
             <tr>
-                <td><?php echo esc_html( sprintf( __('No translations found for "%s"','loco'), $domain ) )?></td>
+                <td><?php self::e( __('No translations found for "%s"','loco'), $domain )?></td>
             </tr>
         </table><?php    
     endif;

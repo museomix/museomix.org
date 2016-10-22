@@ -81,6 +81,9 @@ class ITSEC_Notify {
 		global $itsec_lockout;
 
 
+		$send_email = false;
+
+
 		require_once( ITSEC_Core::get_core_dir() . 'lib/class-itsec-mailer.php' );
 		$mail = new ITSEC_Mail();
 		$mail->add_header( esc_html__( 'Daily Security Digest', 'better-wp-security' ), sprintf( wp_kses( __( 'Your Daily Security Digest for <b>%s</b>', 'better-wp-security' ), array( 'b' => array() ) ), date_i18n( get_option( 'date_format' ) ) ) );
@@ -93,7 +96,8 @@ class ITSEC_Notify {
 		$user_count = sizeof( $itsec_lockout->get_lockouts( 'user', true ) );
 
 		if ( $host_count > 0 || $user_count > 0 ) {
-			$mail->add_lockouts_summary( 2, 1 );
+			$mail->add_lockouts_summary( $host_count, $user_count );
+			$send_email = true;
 		} else {
 			$mail->add_text( esc_html__( 'No lockouts since the last email check.', 'better-wp-security' ) );
 		}
@@ -103,6 +107,7 @@ class ITSEC_Notify {
 			if ( in_array( 'file-change', $this->queue['messages'] ) ) {
 				$mail->add_section_heading( esc_html__( 'File Changes', 'better-wp-security' ), 'folder' );
 				$mail->add_text( esc_html__( 'File changes detected on the site.', 'better-wp-security' ) );
+				$send_email = true;
 			}
 
 			$messages = array();
@@ -121,7 +126,14 @@ class ITSEC_Notify {
 				foreach ( $messages as $message ) {
 					$mail->add_text( $message );
 				}
+
+				$send_email = true;
 			}
+		}
+
+
+		if ( ! $send_email ) {
+			return;
 		}
 
 
