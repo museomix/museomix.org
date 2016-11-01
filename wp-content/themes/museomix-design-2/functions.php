@@ -594,4 +594,7 @@ function get_details($field, $array) {
 		return $array[$field];
 	}
 	return false;
-}/* Source : https://pippinsplugins.com/retrieve-attachment-id-from-image-url/ */function get_attachment_id_from_url($image_url) {	global $wpdb;	$attachment = $wpdb->get_col($wpdb->prepare("SELECT ID FROM $wpdb->posts WHERE guid='%s';", $image_url ));     if (isset($attachment[0])) {		return $attachment[0];	}	return 0;}
+}/* Source : https://pippinsplugins.com/retrieve-attachment-id-from-image-url/ */function get_attachment_id_from_url($image_url) {	global $wpdb;	$attachment = $wpdb->get_col($wpdb->prepare("SELECT ID FROM $wpdb->posts WHERE guid='%s';", $image_url ));     if (isset($attachment[0])) {		return $attachment[0];	}	return 0;}add_action('wp_login','wpdb_capture_user_last_login', 10, 2);
+function wpdb_capture_user_last_login($user_login, $user){
+    update_user_meta($user->ID, 'last_login', current_time('mysql'));
+}
