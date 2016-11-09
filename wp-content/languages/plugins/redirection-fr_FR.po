@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Redirection - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2016-10-30 16:52:33+0000\n"
+"PO-Revision-Date: 2016-11-03 10:46:13+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,7 +13,7 @@ msgstr ""
 
 #: view/options.php:108
 msgid "Are you sure you want to delete everything?"
-msgstr "Confirmez vous vouloir tout supprimer&nbsp;?"
+msgstr "Confirmez-vous vouloir tout supprimer&nbsp;?"
 
 #: view/item-edit.php:35
 msgid "Advanced Settings"
@@ -37,11 +37,11 @@ msgstr "http://urbangiraffe.com/plugins/redirection/"
 
 #: view/support.php:72
 msgid "Full details of producing a translation can be found in this <a href=\"http://urbangiraffe.com/articles/translating-wordpress-themes-and-plugins/\">guide to translating WordPress plugins</a>."
-msgstr "Tous les détails pour faire la traduction d'un plugin sont dans ce <a href=\"http://urbangiraffe.com/articles/translating-wordpress-themes-and-plugins/\">guide</a>."
+msgstr "Tous les détails pour traduire une extension sont dans ce <a href=\"http://urbangiraffe.com/articles/translating-wordpress-themes-and-plugins/\">guide</a>."
 
 #: view/support.php:64
 msgid "If you're multi-lingual then you may want to consider donating a translation:"
-msgstr "Si vous parlez plusieurs langue, vous pouvez aider en faisant une traductiob:"
+msgstr "Si vous parlez plusieurs langues, vous pouvez aider en faisant une traduction&nbsp;: "
 
 #: view/support.php:62
 msgid "Translations"
@@ -57,11 +57,11 @@ msgstr "Don<br />Individuel"
 
 #: view/support.php:15
 msgid "If you are using this plugin in a commercial setup, or feel that it's been particularly useful, then you may want to consider a <strong>commercial donation</strong>."
-msgstr "Si vous utilisez cette extension pour un site commercial, ou trouvez qu'il est particulièrement utile, vous pouvez songer à un <strong>don commercial</strong>."
+msgstr "Si vous utilisez cette extension pour un site commercial, ou trouvez qu&rsquo;elle est particulièrement utile, vous pouvez songer à un <strong>don commercial</strong>."
 
 #: view/support.php:13
 msgid "Please note that a donation is just a donation - it is not a payment for support. I am not a business, this is not a product, and I'm afraid I cannot provide paid support"
-msgstr "Veuillez noter qu’une donation est juste une donation, ce n’est pas un paiement pour du support. Je ne suis pas une entreprise, ce n’est pas un produit et je crains de ne pas pouvoir fournir un support payant."
+msgstr "Veuillez noter qu&rsquo;une donation est juste une donation, ce n&rsquo;est pas un paiement pour du support. Je ne suis pas une entreprise, ce n&rsquo;est pas un produit et je crains de ne pas pouvoir fournir un support payant."
 
 #: view/support.php:10
 msgid "This will act as an incentive for me to carry on developing. You get some useful software and I get to carry on making it.  Everybody wins."
@@ -69,7 +69,7 @@ msgstr "Cela m’incitera à continuer son développement. Vous obtenez un logic
 
 #: view/support.php:9
 msgid "Redirection is free to use - life is wonderful and lovely!  However, it has required a great deal of time and effort to develop and if it has been useful you can help support this development by <strong>making a small donation</strong>."
-msgstr "Redirection est utilisable gratuitement - la vie est belle! Cependant, il a nécessité un grand nombre d'heure et beaucoup d'effort pour être developpé. Donc si vous trouvez cette extension utile, vous pouvez contribuer à son développement en <strong>faisant un petit don</strong>."
+msgstr "Redirection est utilisable gratuitement - la vie est belle&nbsp;! Cependant, il a nécessité un grand nombre d’heures et beaucoup d’efforts pour être développé. Donc si vous trouvez cette extension utile, vous pouvez contribuer à son développement en <strong>faisant un petit don</strong>."
 
 #: view/support.php:5
 msgid "Redirection Support"
@@ -93,7 +93,7 @@ msgstr "Journaux"
 
 #: view/options.php:103
 msgid "Selecting this option will delete all redirections, all logs, and any options associated with the Redirection plugin.  Make sure this is what you want to do."
-msgstr "Sélectionner cette option supprimera toutes les redirections, les journaux et toutes les options associées à l'extension Redirection. Soyez sur que c'est ce que vous voulez!"
+msgstr "Sélectionner cette option supprimera toutes les redirections, les journaux et toutes les options associées à l&rsquo;extension Redirection. Soyez sûr que c&rsquo;est ce que vous voulez&nbsp;!"
 
 #: view/options.php:102
 msgid "Delete Redirection"
@@ -101,7 +101,7 @@ msgstr "Supprimer la redirection"
 
 #: view/options.php:97
 msgid "Upload"
-msgstr "Envoyer"
+msgstr "Mettre en ligne"
 
 #: view/options.php:94
 msgid "Import into"
@@ -117,7 +117,7 @@ msgstr "Importer"
 
 #: view/options.php:79
 msgid "Update"
-msgstr "Enregistrer"
+msgstr "Mettre à jour"
 
 #: view/options.php:74
 msgid "This will be used to auto-generate a URL if no URL is given.  You can use the special tags <code>$dec$</code> or <code>$hex$</code> to have a unique ID inserted (either decimal or hex)"
@@ -125,7 +125,7 @@ msgstr "Cela servira à générer automatiquement une URL si aucune URL n’est 
 
 #: view/options.php:70
 msgid "Auto-generate URL"
-msgstr "URL auto-générée"
+msgstr "URL auto-générée&nbsp;"
 
 #: view/options.php:66
 msgid "A unique token allowing feed readers access to Redirection log RSS (leave blank to auto-generate)"
@@ -133,7 +133,7 @@ msgstr "Un jeton unique permettant aux lecteurs de flux d’accéder au flux RSS
 
 #: view/options.php:63
 msgid "RSS Token"
-msgstr "Codage RSS&nbsp;"
+msgstr "Jeton RSS&nbsp;"
 
 #: view/options.php:57
 msgid "Don't monitor"
@@ -157,7 +157,7 @@ msgstr "Journaux de redirection&nbsp;"
 
 #: view/options.php:30
 msgid "I'm a nice person and I have helped support the author of this plugin"
-msgstr "Je suis un type bien et j'ai aidé l'auteur de cette extension"
+msgstr "Je suis un type bien et j&rsquo;ai aidé l&rsquo;auteur de cette extension."
 
 #: view/options.php:27
 msgid "Plugin Support"
@@ -217,7 +217,7 @@ msgstr "Journaux des redirections"
 
 #: view/item-edit.php:14
 msgid "optional"
-msgstr "optionnel"
+msgstr "facultatif"
 
 #: view/item-edit.php:11
 msgid "Description"
@@ -229,7 +229,7 @@ msgstr "Ajouter"
 
 #: view/group-list.php:24
 msgid "Use groups to organise your redirects. Groups are assigned to a module, which affects how the redirects in that group work. If you are unsure then stick to the WordPress module."
-msgstr "Utilisez les groupes pour organiser vos redirections. Les groupes sont assignés à un module qui affecte comment les redirections dans ce groupe fonctionnent. Si vous n’êtes pas sûr/e, tenez-vous en au module de WordPress."
+msgstr "Utilisez les groupes pour organiser vos redirections. Les groupes sont assignés à un module qui affecte la manière dont les redirections dans ce groupe fonctionnent. Si vous n’êtes pas sûr/e, tenez-vous en au module de WordPress."
 
 #: view/group-list.php:22
 msgid "Add Group"
@@ -237,7 +237,7 @@ msgstr "﻿Ajouter un groupe"
 
 #: view/group-list.php:13 view/item-list.php:12 view/log.php:13
 msgid "Search"
-msgstr "Chercher"
+msgstr "Rechercher"
 
 #: view/group-list.php:5 view/submenu.php:11
 msgid "Groups"
@@ -245,7 +245,7 @@ msgstr "Groupes"
 
 #: view/group-edit.php:21 view/item-edit.php:32 view/module-edit.php:12
 msgid "Save"
-msgstr "Sauvegarder"
+msgstr "Enregistrer"
 
 #: view/add.php:46
 msgid "Add Redirection"
@@ -286,7 +286,7 @@ msgstr "Télécharger"
 
 #: redirection-admin.php:490
 msgid "Invalid module"
-msgstr "Module invalide"
+msgstr "Module non valide"
 
 #: redirection-admin.php:484
 msgid "Sorry, but your redirection was not created"
@@ -305,7 +305,7 @@ msgstr "Veuillez spécifier un nom de groupe"
 
 #: redirection-admin.php:305
 msgid "Your group was added successfully"
-msgstr "Votre groupe a été ajouté avec succès"
+msgstr "Votre groupe a bien été ajouté"
 
 #: redirection-admin.php:271 redirection-admin.php:291
 msgid "Your logs have been deleted"
@@ -323,7 +323,7 @@ msgstr[1] "%d redirections ont été importées avec succès"
 
 #: redirection-admin.php:250
 msgid "Redirection data has been deleted and the plugin disabled"
-msgstr "Les donnée de Redirection ont été effacées et l&rsquo;extension est désactivée"
+msgstr "Les données de Redirection ont été effacées et l&rsquo;extension a été désactivée."
 
 #: redirection-admin.php:225 redirection-admin.php:241
 msgid "Your options were updated"
@@ -337,7 +337,7 @@ msgstr "Redirection"
 
 #: redirection-admin.php:153
 msgid "Sorry, unable to do that. Please try refreshing the page."
-msgstr "Désolé, impossible de faire cela. Merci d&rsquo;essayer de rafraîchir la page."
+msgstr "Désolé, impossible de faire cela. Veuillez essayer de rafraîchir la page."
 
 #: redirection-admin.php:147
 msgid "Log entries"
@@ -357,7 +357,7 @@ msgstr "WordPress"
 
 #: modules/nginx.php:45
 msgid "For use with Nginx server. Requires manual configuration. The redirect happens without loading WordPress. No tracking of hits. This is an experimental module."
-msgstr "Pour une utilisation sur un serveur Nginx. Nécessite une configuration manuelle. La redirection intervient sans que Wordpress ne soit lancé. Aucun suivi des vues. Il s&rquo;agit d&rsquo;un module expérimental."
+msgstr "Pour une utilisation sur un serveur Nginx. Nécessite une configuration manuelle. La redirection intervient sans que WordPress ne soit lancé. Aucun suivi des vues. Il s&rsquo;agit d&rsquo;un module expérimental."
 
 #: modules/nginx.php:41
 msgid "Nginx"
@@ -365,7 +365,7 @@ msgstr "Nginx"
 
 #: modules/apache.php:112
 msgid "Uses Apache <code>.htaccess</code> files. Requires further configuration. The redirect happens without loading WordPress. No tracking of hits."
-msgstr "Utilise les fichiers Apache <code>.htaccess</code>. Nécessite une configuration ultérieure. La redirection intervient sans que Wordpress ne soit lancé.. Aucun suivi des vues."
+msgstr "Utilise les fichiers Apache <code>.htaccess</code>. Nécessite une configuration ultérieure. La redirection intervient sans que WordPress ne soit lancé. Aucun suivi des vues."
 
 #: modules/apache.php:108
 msgid "Apache"
@@ -385,7 +385,7 @@ msgstr "Ajouter WWW (www.%s)"
 
 #: modules/apache.php:89
 msgid "Remove WWW (%s)"
-msgstr "Supprimer WWW (%s)"
+msgstr "Retirer WWW (%s)"
 
 #: modules/apache.php:88
 msgid "Default server"
@@ -397,7 +397,7 @@ msgstr "URL canonique"
 
 #: modules/apache.php:81
 msgid "WordPress is installed in: <code>%s</code>"
-msgstr "Wordpress est installé dans&nbsp;: <code>%s</code>"
+msgstr "WordPress est installé dans&nbsp;: <code>%s</code>"
 
 #: modules/apache.php:80
 msgid "If you want Redirection to automatically update your <code>.htaccess</code> file then enter the full path and filename here. You can also download the file and update it manually."
@@ -409,7 +409,7 @@ msgstr "Emplacement du .htaccess"
 
 #: modules/apache.php:63
 msgid "Cannot write to chosen location - check path and permissions."
-msgstr "Impossible d&rsquo;écrire à l&rsquo;emplacement spécifié - vérifiez le chemin et les permissions."
+msgstr "Impossible d&rsquo;écrire à l&rsquo;emplacement spécifié - vérifiez le chemin et les droits."
 
 #: models/redirect.php:398
 msgid "Do nothing"
@@ -437,7 +437,7 @@ msgstr "Impossible d&rsquo;ajouter une nouvelle redirection. Supprimez Redirecti
 
 #: models/redirect.php:177
 msgid "Invalid source URL when creating redirect for given match type"
-msgstr "URL source invalide à la création d&rsquo;une redirection pour un type de correspondance donné"
+msgstr "URL source non valide à la création d&rsquo;une redirection pour un type de correspondance donné."
 
 #: models/redirect.php:174
 msgid "Invalid group when creating redirect"
@@ -657,4 +657,4 @@ msgstr "L&rsquo;URL cible sera choisie parmi les URL suivantes, selon que l&rsqu
 
 #: matches/login.php:7
 msgid "URL and login status"
-msgstr "URL et statut de connexion"
+msgstr "URL et &eacute;tat de connexion"
