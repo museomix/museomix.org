@@ -427,7 +427,7 @@ class IWP_MMB_Helper
 			if( !function_exists('username_exists') )
 				include_once(ABSPATH . WPINC . '/registration.php');
 				
-            include_once(ABSPATH . 'wp-includes/pluggable.php');
+            //include_once(ABSPATH . 'wp-includes/pluggable.php');
             
             if (username_exists($username) == null) {
                 return false;

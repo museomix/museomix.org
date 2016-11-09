@@ -143,6 +143,7 @@ class IWP_MMB_Activities_log {
 			break;
 			case 'now':
 			case 'schedule':
+			case 'multiCallNow':
 				switch($iwp_type) {
 					case 'backup':
 					case 'scheduleBackup':

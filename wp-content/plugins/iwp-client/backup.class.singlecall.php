@@ -2056,6 +2056,7 @@ function ftp_backup($args)
 			CFCredentials::set(array('development' => array('key' => trim($as3_access_key), 'secret' => trim(str_replace(' ', '+', $as3_secure_key)), 'default_cache_config' => '', 'certificate_authority' => true, 'use_ssl'=>false, 'ssl_verification'=>false), '@default' => 'development'));
 			$s3 = new AmazonS3();
             $response = $s3->create_object($as3_bucket, $as3_file, array('fileUpload' => $backup_file));
+            $s3->set_object_acl($as3_bucket, $as3_file, AmazonS3::ACL_PRIVATE);
 			$upload = $response->isOk();
 			if($upload) {
                 return true;

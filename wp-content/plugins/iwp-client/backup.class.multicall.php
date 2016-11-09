@@ -85,7 +85,7 @@ class IWP_MMB_Backup_Multicall extends IWP_MMB_Core
 	var $backup_url;
 	var $backup_settings_vals = array();
 	var $iwpScriptStartTime;
-	
+        
     function __construct()
     {
         
@@ -1188,7 +1188,10 @@ class IWP_MMB_Backup_Multicall extends IWP_MMB_Core
 				echo "<br>iwpmsg Time taken in this call ".$fileNextTimeTaken."<br>";
 			if(($file_size_in_this_call == 0) && !(is_array($returnArr) && !empty($returnArr['error'])) && !(is_array($returnArr) && !empty($returnArr['isGetFileList'])))
 			{
-				return array( 'error' => 'Zip-error: Unable to zip', 'error_code' => 'zip_error_unable_to_zip');
+				if(isset($returnArr['files_with_error'])&&count($returnArr['files_with_error']>0)){
+					return $returnArr;
+				}
+				return array( 'error' => 'Zip-error: Unable to zip<br/>'.$error_files_string, 'error_code' => 'zip_error_unable_to_zip');
 			}
 			return $returnArr;
 		}
@@ -2046,6 +2049,7 @@ class IWP_MMB_Backup_Multicall extends IWP_MMB_Core
 		  'nextFunc' => 'backupFilesZIP',
 		  'status' => $status,
 		  'backupParentHID' => $this -> hisID,
+		  'files_with_error' => $files_with_error
 		);
 		if(($nextCount == 0)&&($nextCount != 'completed'))
 		{
@@ -5983,6 +5987,10 @@ function ftp_backup($historyID,$args = '')
 	
 	if( !function_exists('initialize_manual_debug') ){
 		function initialize_manual_debug($conditions = ''){
+			if(file_exists(WP_CONTENT_DIR . '/DE_clMemoryPeak.php')){ @unlink(WP_CONTENT_DIR . '/DE_clMemoryPeak.php');}
+			if(file_exists(WP_CONTENT_DIR . '/DE_clMemoryUsage.php')){ @unlink(WP_CONTENT_DIR . '/DE_clMemoryUsage.php');}
+			if(file_exists(WP_CONTENT_DIR . '/DE_clTimeTaken.php')){ @unlink(WP_CONTENT_DIR . '/DE_clTimeTaken.php');}
+			return true;
 			global $debug_count, $every_count;
 			$debug_count = 0;
 			$every_count = 0;
@@ -6058,7 +6066,7 @@ function ftp_backup($historyID,$args = '')
 	
 	if( !function_exists('refresh_iwp_files_db') ){
 		function refresh_iwp_files_db($this_file_id = 0, $field = 'thisFileDetails' ){
-			global $wpdb;
+			global $wpdb, $iwp_db_upgrade_error;
 			$this_table_name = $wpdb->base_prefix . 'iwp_file_list';			//in case, if we are changing table name.
 			$result = true;
                         
@@ -6067,15 +6075,15 @@ function ftp_backup($historyID,$args = '')
 			//write in db and refresh for_every_count,  all_files_detail;
 			if($wpdb->get_var("SHOW TABLES LIKE '$this_table_name'") == $this_table_name) {
 				$result = $wpdb->query('TRUNCATE TABLE ' . $this_table_name );
-				$error_msg = 'Unable to empty File list table : ' . $wpdb->last_error ;
+				$error_msg = 'Unable to empty File list table : <span style="font-weight:700;">' . $wpdb->last_error.'</span>' ;
 				if(version_compare($IWP_FILE_LIST_TABLE_VERSION, '1.1') == -1){
 					$result = iwp_create_file_list_table();
-					$error_msg = 'Unable to update File list table : ' . $wpdb->last_error ;
+					$error_msg = 'Unable to update File list table : <span style="font-weight:700;">' . $iwp_db_upgrade_error.'</span>' ;
 				}
 			}
 			else{
 				$result = iwp_create_file_list_table();
-				$error_msg = 'Unable to create File list table : ' . $wpdb->last_error ;
+				$error_msg = 'Unable to create File list table : <span style="font-weight:700;">'.$iwp_db_upgrade_error.'</span>';
 			}
 			
 			if($result === false){
@@ -6087,7 +6095,7 @@ function ftp_backup($historyID,$args = '')
 	
 	if(!function_exists('iwp_create_file_list_table')){
 		function iwp_create_file_list_table(){
-			global $wpdb;
+			global $wpdb, $iwp_db_upgrade_error;
 			if(method_exists($wpdb, 'get_charset_collate')){
 				$charset_collate = $wpdb->get_charset_collate();
 			}
@@ -6118,7 +6126,9 @@ function ftp_backup($historyID,$args = '')
 				";
 				require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 				dbDelta($sql);
-				
+				if($wpdb->last_error !== '') {
+					$iwp_db_upgrade_error = $wpdb->last_error;
+				}
 				if($wpdb->get_var("SHOW TABLES LIKE '$table_name'") == $table_name){
 					$table_created = true;
 					update_option( "iwp_file_list_table_version", '1.1');
@@ -6314,7 +6324,7 @@ function ftp_backup($historyID,$args = '')
 
 	if(!function_exists('alter_iwp_filelisttable_1_1')){
 		function alter_iwp_filelisttable_1_1(){
-			global $wpdb;
+			global $wpdb, $iwp_db_upgrade_error;
 			if(method_exists($wpdb, 'get_charset_collate')){
 				$charset_collate = $wpdb->get_charset_collate();
 			}	
@@ -6344,6 +6354,7 @@ function ftp_backup($historyID,$args = '')
 				foreach($sql as $v){
 					if(!$wpdb->query($v)){
 						$failed_alter = true;
+						$iwp_db_upgrade_error = $wpdb->last_error;
 					}
 				}
 				if(!$failed_alter){
