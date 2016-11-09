@@ -48,7 +48,7 @@ $cache_rebuild_files = 1; //Added by WP-Cache Manager
 // Disable the file locking system.
 // If you are experiencing problems with clearing or creating cache files
 // uncommenting this may help.
-$wp_cache_mutex_disabled = 0; //Added by WP-Cache Manager
+$wp_cache_mutex_disabled = 1; //Added by WP-Cache Manager
 
 // Just modify it if you have conflicts with semaphores
 $sem_id = 1283929781; //Added by WP-Cache Manager

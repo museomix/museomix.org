@@ -1,4 +1,4 @@
-$(document).ready(function(){
+jQuery(document).ready(function(){
 	/*$('.bs-docs-sidenav').affix({
 		offset: {
 			top: function () { return $(window).width() <= 980 ? 290 : 210 },
@@ -236,4 +236,6 @@ a.hide=function(){typeof this.timer==="number"&&(clearInterval(this.timer),delet
 	function fold_jquery(proc,acc){if(acc===undefined)acc=[];return fold(this,proc,acc);}
 	$.fn.eachAttr=each_attr;$.fn.foldAttr=fold_attr;$.fn.fold=fold_jquery;$.fold=fold;
 })(jQuery);		
-
+jQuery(document).ready(function(){
+	jQuery('.partage a').simpleShare();
+})

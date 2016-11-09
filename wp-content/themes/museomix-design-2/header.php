@@ -25,12 +25,9 @@ if (get_field('is_light_page')) {
       <script src="<?php echo get_template_directory_uri(); ?>/biblio/html5shiv.js"></script>
     <![endif]-->
     
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script type="text/javascript">
 		$ServUrl = '<?php echo network_site_url( '/' ); ?>';
-	</script>
-	<script src="<?php echo get_template_directory_uri(); ?>/scripts.js"></script>
-	
+	</script>	
 <?php wp_head(); ?>
 </head>
 

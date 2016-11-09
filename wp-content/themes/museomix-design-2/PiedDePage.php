@@ -53,22 +53,6 @@ function AfficheMenu($id){
 
 
 </footer>
-	<script src="<?php echo get_template_directory_uri(); ?>/biblio/bootstrap/js/bootstrap.js"></script>
-
-	<?php if(is_singular()): ?>
-	
-		<script src="<?php echo get_template_directory_uri(); ?>/biblio/jquery.simple-share.js"></script>
-		
-		<script type="text/javascript">
-		
-		jQuery(document).ready(function(){
-			jQuery('.partage a').simpleShare();
-		})
-		
-		</script>
-	
-	<?php endif; ?>
-
 	<?php wp_footer(); ?>
 
 	<?php VT(); ?>

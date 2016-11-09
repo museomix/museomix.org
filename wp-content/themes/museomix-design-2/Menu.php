@@ -65,7 +65,6 @@ include_once('includes/shortcodes.php');
 		echo get_permalink(icl_object_id(78, 'page', false));
 		?>"><img src="<?php header_image(); ?>"  alt="Museomix" />
 		<?php
-		var_dump(get_field('is_light_page'));
 		if (!get_field('is_light_page')) { ?>
 			<img src="<?php echo get_template_directory_uri(); ?>/images/museomix_banner_circle.png" alt="People make museum" id="museomix_circle" /></a>
 		<?php } ?>
