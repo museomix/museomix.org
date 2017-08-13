@@ -56,7 +56,7 @@ class FacetWP_Facet
         foreach ( $params['facets'] as $f ) {
             $facet = FWP()->helper->get_facet_by_name( $f['facet_name'] );
             if ( false !== $facet ) {
-                $facet['selected_values'] = FWP()->helper->sanitize( $f['selected_values'] );
+                $facet['selected_values'] = esc_sql( $f['selected_values'] );
                 $this->facets[ $f['facet_name'] ] = $facet;
             }
         }
@@ -112,7 +112,8 @@ class FacetWP_Facet
         }
 
         // Sort the results by relevancy
-        if ( $this->is_search && 'default' == $sort_value ) {
+        $use_relevancy = apply_filters( 'facetwp_use_search_relevancy', true, $this );
+        if ( $this->is_search && $use_relevancy && 'default' == $sort_value && empty( $this->http_params['get']['orderby'] ) ) {
             $this->query_args['orderby'] = 'post__in';
         }
 
@@ -131,10 +132,12 @@ class FacetWP_Facet
         $this->query = new WP_Query( $this->query_args );
 
         // Debug
-        if ( defined( 'FACETWP_DEBUG' ) && FACETWP_DEBUG ) {
+        if ( 'on' == FWP()->helper->get_setting( 'debug_mode', 'off' ) ) {
             $output['settings']['debug'] = array(
                 'query_args'    => $this->query_args,
-                'sql'           => $this->query->request
+                'sql'           => $this->query->request,
+                'facets'        => $this->facets,
+                'template'      => $this->template,
             );
         }
 
@@ -348,7 +351,7 @@ class FacetWP_Facet
             }
 
             // Handle each facet
-            if ( isset( $this->facet_types[ $facet_type ] ) && ! empty( $selected_values ) ) {
+            if ( isset( $this->facet_types[ $facet_type ] ) ) {
 
                 $hook_params = array(
                     'facet' => $the_facet,
@@ -367,6 +370,9 @@ class FacetWP_Facet
             if ( 'continue' == $matches ) {
                 continue;
             }
+
+            // Force array
+            $matches = (array) $matches;
 
             // Store post IDs per facet
             // Required for dropdowns and checkboxes in "or" mode

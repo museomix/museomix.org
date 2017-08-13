@@ -55,7 +55,20 @@ class Loco_package_Debugger implements IteratorAggregate {
         // self-declarations provided by author in file headers
         $native = $bundle->getHeaderInfo();
         if( $value = $native->TextDomain ){
-            $this->good('Primary text domain declared by author as "%s"', $value);
+            $this->info('WordPress says primary text domain is "%s"', $value);
+            // WordPress 4.6 changes mean this header could be a fallback and not actually declared by author
+            if( $bundle->isPlugin() ){
+                $map = array ( 'TextDomain' => 'Text Domain' );
+                $raw = get_file_data( $bundle->getBootstrapPath(), $map, 'plugin' );
+                if( empty($raw['TextDomain']) ){
+                    $this->warn('Author doesn\'t define the TextDomain header, WordPress guessed it');
+                }
+            }
+            // Warn if WordPress-assumed text domain is not configured. plugin/theme headers won't be translated
+            $domains = $bundle->getDomains();
+            if( ! isset($domains[$value]) && ! isset($domains['*']) ){
+                $this->warn('Expected text domain "%s" is not configured', $value );
+            }
         }
         else {
             $this->warn("Author doesn't define the TextDomain header");
@@ -85,6 +98,10 @@ class Loco_package_Debugger implements IteratorAggregate {
             foreach( $bundle as $project ){
                 $id = $project->getId();
                 $domain = (string) $project->getDomain();
+                if( '*' === $domain ){
+                    $this->devel('Wildcard text domain configured for %s', $project );
+                    $domain = '';
+                }
                 $domains[$domain] = true;
                 // Domain path[s] within bundle directory
                 $targets = array();
@@ -164,12 +181,13 @@ class Loco_package_Debugger implements IteratorAggregate {
             // $this->good("%u string[s] can be extracted from source code for %s", $total, $this->implodeKeys($counts) );
             foreach( array_intersect_key($counts, $domains) as $domain => $count ){
                 if( isset($realCounts[$domain]) ){
+                    $count = $counts[$domain];
                     $realCount = $realCounts[$domain];
-                    $str = _n( 'One string extracted from source code for "%2$s"', '%s strings extracted from source code for "%s"', $realCount, 'loco' );
-                    $this->good( $str, number_format($realCount), $domain );
+                    $str = _n( 'One string extracted from source code for "%2$s"', '%s strings extracted from source code for "%s"', $realCount, 'loco-translate' );
+                    $this->good( $str.' (%s including metadata)', number_format($realCount), $domain?$domain:'*', number_format($count) );
                 }
                 else {
-                    $this->warn('No strings extracted from source code for "%s"', $domain );
+                    $this->warn('No strings extracted from source code for "%s"', $domain?$domain:'*' );
                 }
                 // check POT agrees with extracted count, but only if domain has single POT (i.e. not split across files on purpose)
                 if( isset($templates[$domain]) && 1 === count($templates[$domain]) ){
@@ -183,7 +201,7 @@ class Loco_package_Debugger implements IteratorAggregate {
             // with extracted strings we can check for domain mismatches
             if( $missing = array_diff_key($domains, $realCounts) ){
                 $num = count($missing);
-                $str = _n( 'Configured domain has no extractable strings', '%u configured domains have no extractable strings', $num, 'loco' );
+                $str = _n( 'Configured domain has no extractable strings', '%u configured domains have no extractable strings', $num, 'loco-translate' );
                 $this->warn( $str.': %2$s', $num, $this->implodeKeys($missing) );
             }
             if( $extra = array_diff_key($realCounts,$domains) ){

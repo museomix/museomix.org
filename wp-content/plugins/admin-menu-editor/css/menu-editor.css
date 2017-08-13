@@ -11,10 +11,11 @@
   float: left;
   display: block;
   border: 1px solid #cdd5d5;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
   background-color: #FFFFFF;
-  border-radius: 3px;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px; }
+  border-radius: 0px;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px; }
 
 .ws_box {
   min-height: 30px;
@@ -143,6 +144,9 @@
   width: 290px;
   padding: 3px;
   margin: 2px 0 2px 6px; }
+  body.rtl .ws_container {
+    margin-right: 6px;
+    margin-left: 0; }
 
 .ws_submenu {
   min-height: 2em; }
@@ -529,8 +533,8 @@ select.ws_dropdown optgroup option {
     margin-bottom: 0; }
   .ws_tool_tab_nav li.ui-tabs-active {
     border-color: #dfdfdf;
-    background-color: #FDFDFD;
-    border-bottom-color: #FDFDFD; }
+    border-bottom-color: #FDFDFD;
+    background: #FDFDFD none; }
   .ws_tool_tab_nav a {
     text-decoration: none; }
   .ws_tool_tab_nav li.ui-tabs-active a {
@@ -836,6 +840,9 @@ a#ws-ame-delete-color-preset:hover {
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   border-radius: 5px; }
+  .ui-dialog .ui-dialog-content {
+    padding: 8px 8px 8px 8px;
+    font-size: 1.1em; }
 
 .ui-dialog-titlebar {
   display: block;
@@ -871,10 +878,6 @@ a#ws-ame-delete-color-preset:hover {
 .ui-dialog-titlebar-close:hover {
   /*background-image: url(../images/x-light.png);*/
   background-color: #a6c2f5; }
-
-.ui-dialog-content {
-  padding: 8px 8px 8px 8px;
-  font-size: 1.1em; }
 
 #export_dialog .ws_dialog_panel {
   height: 50px; }
@@ -1270,6 +1273,11 @@ a#ws-ame-delete-color-preset:hover {
 #ws_plugin_settings_form .ws_tooltip_trigger .dashicons {
   font-size: 18px; }
 
+.ws_ame_custom_postbox .ws_tooltip_trigger .dashicons {
+  font-size: 18px;
+  height: 18px;
+  vertical-align: bottom; }
+
 .ws_wide_tooltip {
   max-width: 450px; }
 
@@ -1308,14 +1316,14 @@ a#ws-ame-delete-color-preset:hover {
   list-style-position: inside;
   margin-left: 0.5em; }
 
-.ws_ame_doc_box .hndle {
+.ws_ame_doc_box .hndle, .ws_ame_custom_postbox .hndle {
   cursor: default !important; }
-.ws_ame_doc_box ul {
+.ws_ame_doc_box ul, .ws_ame_custom_postbox ul {
   list-style: disc outside;
   margin-left: 1em; }
-.ws_ame_doc_box li > ul {
+.ws_ame_doc_box li > ul, .ws_ame_custom_postbox li > ul {
   margin-top: 6px; }
-.ws_ame_doc_box .button-link .toggle-indicator::before {
+.ws_ame_doc_box .button-link .toggle-indicator::before, .ws_ame_custom_postbox .button-link .toggle-indicator::before {
   margin-top: 4px;
   width: 20px;
   -webkit-border-radius: 50%;
@@ -1327,8 +1335,12 @@ a#ws-ame-delete-color-preset:hover {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-decoration: none !important; }
-.ws_ame_doc_box.closed .button-link .toggle-indicator::before {
+.ws_ame_doc_box.closed .button-link .toggle-indicator::before, .ws_ame_custom_postbox.closed .button-link .toggle-indicator::before {
   content: "\f140"; }
+
+.ws_basic_container .ws_ame_custom_postbox {
+  margin-left: 2px;
+  margin-right: 2px; }
 
 /************************************
       Copy Permissions dialog
@@ -1360,6 +1372,17 @@ a#ws-ame-delete-color-preset:hover {
     #ws_capability_suggestions .ws_ame_suggested_capability:hover {
       background-color: #d0f2d0; }
 
+/*********************************************
+      Settings page stuff
+**********************************************/
+#ws_plugin_settings_form figure {
+  margin-left: 0;
+  margin-top: 0;
+  margin-bottom: 1em; }
+
+/*********************************************
+      Miscellaneous
+**********************************************/
 #ws_sidebar_pro_ad {
   min-width: 225px;
   margin-top: 5px;

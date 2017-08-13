@@ -1,50 +1,80 @@
 <?php
 
 class Red_Csv_File extends Red_FileIO {
-	function export( array $items ) {
+	const CSV_SOURCE = 0;
+	const CSV_TARGET = 1;
+	const CSV_REGEX = 2;
+	const CSV_TYPE = 3;
+	const CSV_CODE = 4;
+
+	public function force_download() {
+		parent::force_download();
+
 		$filename = 'redirection-'.date_i18n( get_option( 'date_format' ) ).'.csv';
 
 		header( 'Content-Type: text/csv' );
-		header( 'Cache-Control: no-cache, must-revalidate' );
-		header( 'Expires: Mon, 26 Jul 1997 05:00:00 GMT' );
 		header( 'Content-Disposition: attachment; filename="'.$filename.'"' );
-
-		$stdout = fopen( 'php://output', 'w' );
-
-		fputcsv( $stdout, array( 'source', 'target', 'regex', 'type', 'code', 'match', 'hits', 'title' ) );
-
-		foreach ( $items as $line ) {
-			$csv = array(
-				$line->get_url(),
-				$line->get_action_data(),
-				$line->is_regex(),
-				$line->get_action_type(),
-				$line->get_action_code(),
-				$line->get_action_type(),
-				$line->get_hits(),
-				$line->get_title(),
-			);
-
-			fputcsv( $stdout, $csv );
-		}
 	}
 
-	function load( $group, $data, $filename = '' ) {
-		$count = 0;
-		$file  = fopen( $filename, 'r' );
+	public function get_data( array $items, array $groups ) {
+		$lines[] = implode( ',', array( 'source', 'target', 'regex', 'type', 'code', 'match', 'hits', 'title' ) );
+
+		foreach ( $items as $line ) {
+			$lines[] = $this->item_as_csv( $line );
+		}
+
+		return implode( PHP_EOL, $lines ).PHP_EOL;
+	}
+
+	public function item_as_csv( $item ) {
+		$data = $item->get_action_data();
+		if ( is_array( maybe_unserialize( $data ) ) ) {
+			$data = '*';
+		}
+
+		$csv = array(
+			$item->get_url(),
+			$data,
+			$item->is_regex() ? 1 : 0,
+			$item->get_action_type(),
+			$item->get_action_code(),
+			$item->get_action_type(),
+			$item->get_hits(),
+			$item->get_title(),
+		);
+
+		$csv = array_map( array( $this, 'escape_csv' ), $csv );
+		return join( $csv, ',' );
+	}
+
+	public function escape_csv( $item ) {
+		return '"'.str_replace( '"', '""', $item ).'"';
+	}
+
+	public function load( $group, $filename, $data ) {
+		ini_set( 'auto_detect_line_endings', true );
+
+		$file = fopen( $filename, 'r' );
+
+		ini_set( 'auto_detect_line_endings', false );
 
 		if ( $file ) {
-			while ( ( $csv = fgetcsv( $file, 1000, ',' ) ) ) {
-				if ( $csv[0] !== 'source' && $csv[1] !== 'target' ) {
-					Red_Item::create( array(
-						'source' => trim( $csv[0] ),
-						'target' => trim( $csv[1] ),
-						'regex'  => $this->is_regex( $csv[0] ),
-						'group_id'  => $group,
-						'match'  => 'url',
-						'red_action' => 'url',
-					) );
+			return $this->load_from_file( $group, $file );
+		}
 
+		return 0;
+	}
+
+	public function load_from_file( $group_id, $file ) {
+		$count = 0;
+
+		while ( ( $csv = fgetcsv( $file, 5000, ',' ) ) ) {
+			$item = $this->csv_as_item( $csv, $group_id );
+
+			if ( $item ) {
+				$created = Red_Item::create( $item );
+
+				if ( ! is_wp_error( $created ) ) {
 					$count++;
 				}
 			}
@@ -53,11 +83,40 @@ class Red_Csv_File extends Red_FileIO {
 		return $count;
 	}
 
-	function is_regex( $url ) {
+	private function get_valid_code( $code ) {
+		if ( get_status_header_desc( $code ) !== '' ) {
+			return intval( $code, 10 );
+		}
+
+		return 301;
+	}
+
+	public function csv_as_item( $csv, $group ) {
+		if ( $csv[ self::CSV_SOURCE ] !== 'source' && $csv[ self::CSV_TARGET ] !== 'target' && count( $csv ) > 1 ) {
+			return array(
+				'url'         => trim( $csv[ self ::CSV_SOURCE ] ),
+				'action_data' => trim( $csv[ self ::CSV_TARGET ] ),
+				'regex'       => isset( $csv[ self::CSV_REGEX ] ) ? $this->parse_regex( $csv[ self::CSV_REGEX ] ) : $this->is_regex( $csv[ self::CSV_SOURCE ] ),
+				'group_id'    => $group,
+				'match_type'  => 'url',
+				'action_type' => 'url',
+				'action_code' => isset( $csv[ self::CSV_CODE ] ) ? $this->get_valid_code( $csv[ self::CSV_CODE ] ) : 301,
+			);
+		}
+
+		return false;
+	}
+
+	private function parse_regex( $value ) {
+		return intval( $value, 10 ) === 1 ? true : false;
+	}
+
+	private function is_regex( $url ) {
 		$regex = '()[]$^*';
 
-		if ( strpbrk( $url, $regex ) === false )
+		if ( strpbrk( $url, $regex ) === false ) {
 			return false;
+		}
 
 		return true;
 	}

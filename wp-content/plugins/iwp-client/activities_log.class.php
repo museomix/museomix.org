@@ -27,6 +27,7 @@ class IWP_MMB_Activities_log {
 			add_action('upgrader_process_complete', array( &$this, 'iwp_mmb_upgrader_process_complete'), 1, 2); // It is available from wordpress 3.7. It is for plugins upgrade, themes upgrade, plugins install and themes install.	
 			add_action('automatic_updates_complete', array( &$this, 'iwp_mmb_automatic_updates_complete'), 10, 1); // It is available since wordpress 3.8. It is for automatic translation updates.
 			add_action('updated_option', array( &$this, 'iwp_mmb_check_and_update_all_plugins_themes_history'), 10, 3);  
+			add_action( 'init', array( &$this, 'iwp_mmb_register_custom_post_type' ),10,1,1 ); 
 		}
 
 		if(function_exists('add_filter')) {
@@ -698,6 +699,10 @@ class IWP_MMB_Activities_log {
 	function iwp_mmb_do_remove_core_updated_successfully() {
 		remove_action('_core_updated_successfully', array( &$this, 'iwp_mmb_core_updated_successfully'),1);
 	}	
+
+	function iwp_mmb_register_custom_post_type(){
+		register_post_type('iwp-log');	
+	}
 }
 
 if(!function_exists('iwp_make_values_as_zero')) {

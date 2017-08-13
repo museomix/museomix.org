@@ -1,10 +1,10 @@
 <?php
 /*
 Plugin Name: FacetWP - WPML
-Plugin URI: https://facetwp.com/
 Description: WPML support for FacetWP
-Version: 1.2
+Version: 1.2.2
 Author: FacetWP, LLC
+Author URI: https://facetwp.com/
 GitHub URI: facetwp/facetwp-wpml
 */
 
@@ -22,7 +22,7 @@ class FWP_WPML
      * Initialize
      */
     function init() {
-        if ( defined( 'ICL_SITEPRESS_VERSION' ) ) {
+        if ( defined( 'ICL_SITEPRESS_VERSION' ) && function_exists( 'FWP' ) ) {
             add_action( 'wp_footer', array( $this, 'wp_footer' ), 30 );
             add_filter( 'facetwp_query_args', array( $this, 'facetwp_query_args' ), 10, 2 );
             add_filter( 'facetwp_indexer_query_args', array( $this, 'indexer_query_args' ) );
@@ -61,7 +61,14 @@ class FWP_WPML
      * Index all languages
      */
     function indexer_query_args( $args ) {
-        $GLOBALS['sitepress']->switch_lang( 'all' );
+        if ( function_exists( 'is_checkout' ) && is_checkout() ) {
+            return $args;
+        }
+
+        if ( -1 == $args['posts_per_page'] ) {
+            $GLOBALS['sitepress']->switch_lang( 'all' );
+        }
+
         $args['suppress_filters'] = true; // query posts in all languages
         return $args;
     }

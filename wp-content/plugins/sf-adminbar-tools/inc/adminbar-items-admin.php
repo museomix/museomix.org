@@ -299,18 +299,35 @@ function sfabt_add_admin_nodes_inside( $wp_admin_bar ) {
 
 function sfabt_get_action_num( $hook, $params = false ) {
 	global $wp_actions, $wp_filter;
+	/**
+	 * WP 4.7 introduced the `WP_Hook` class.
+	 * This static var will tell if `$wp_filter` holds the old hooks (an array of arrays) or the new ones (an array of `WP_Hook` objects).
+	 * We need to do this test only once, the result will be the same for all hooks.
+	 */
+	static $hook_is_array;
 
 	if ( is_array( $hook ) ) {
 		$params = $hook[1];
 		$hook   = $hook[0];
 	}
+
 	if ( isset( $wp_actions[ $hook ] ) ) {
-		$num = ! empty( $wp_filter[ $hook ] ) ? array_sum( array_map( 'count', $wp_filter[ $hook ] ) ) : 0;
+		if ( empty( $wp_filter[ $hook ] ) ) {
+			$num = 0;
+		} elseif ( ! isset( $hook_is_array ) ) {
+			$hook_is_array = is_array( $wp_filter[ $hook ] );
+		}
+
+		if ( ! isset( $num ) ) {
+			if ( $hook_is_array ) {
+				$num = array_sum( array_map( 'count', $wp_filter[ $hook ] ) );
+			} else {
+				$num = array_sum( array_map( 'count', $wp_filter[ $hook ]->callbacks ) );
+			}
+		}
 	} else {
 		$num = '&times;';
 	}
-
-	//$len = min( 20, round( strlen( $hook ) * .7, 1 ) );
 
 	$params_span = '';
 	$data_attr   = '';

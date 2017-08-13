@@ -24,7 +24,7 @@ class FacetWP_Integration_EDD
      * @since 2.0.4
      */
     function edd_downloads_query( $query ) {
-        if ( ! empty( FWP()->facet->query_args ) ) {
+        if ( ! empty( FWP()->facet->query_args ) && 'wp' == FWP()->facet->template['name'] ) {
             $query = array_merge( $query, FWP()->facet->query_args );
         }
 

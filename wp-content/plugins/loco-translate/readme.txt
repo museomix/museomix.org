@@ -1,9 +1,9 @@
 === Plugin Name ===
 Contributors: timwhitlock
-Tags: translation, translators, localization, localisation, l10n, i18n, Gettext, PO, MO, productivity
+Tags: translation, translators, localization, localisation, l10n, i18n, Gettext, PO, MO, productivity, multilingual
 Requires at least: 4.1
-Tested up to: 4.6.1
-Stable tag: 2.0.9
+Tested up to: 4.8.1
+Stable tag: 2.0.15
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -80,10 +80,55 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 
 1. Translating strings in the browser with the Loco PO Editor
 2. Showing translation progress for theme language files
+3. PO source view with text filter and clickable file references
 
 
 
 == Changelog ==
+
+= 2.0.15 =
+* Permanently removed legacy version 1.x
+* Fixed bug where editor code view was not redrawn on resize
+* Fixed bug where fuzzy flag caused format flag to be ignored
+* Fixed bug where autoloader responded to very long class names
+* Purging WP object cache when active plugin list changes
+* Added experimental source word count into POT info tab
+* Bumped WP compatibility to 4.8.1
+
+= 2.0.14 =
+* Editor improvements inc. column sorting
+* Added warnings that legacy version will be removed
+* Added PO source view text filtering
+* Added _fs_nonce for 4.7.5 compatibility
+* Migrated to canonical text domain 
+* Removed wp class autoloading
+
+= 2.0.13 =
+* CSS conflict fixes
+* Added option for UTF-8 byte order mark
+* Printf highlighting observes no-php-format flag
+* Fixed issue with translator role losing “read” permission
+
+= 2.0.12 =
+* Minor fix for root path configs
+* Added alternative PHP extensions setting
+* Bumped WP version to 4.7.3
+* LoadHelper fix for core files
+* Allow revoking of permissions from translator role
+* Allow network admins to deny access to site admins
+
+= 2.0.11 =
+* Extra debug logging and error diagnostics
+* Forcefully clear output buffers before Ajax flush
+* Bumped WordPress version to 4.7
+* Experimental wildcard text domain support
+
+= 2.0.10 =
+* Allows missing domain argument in plugin_locale filter
+* Reverted editor changes that disabled readonly text
+* Added invisibles and coding editor switches
+* Added table filtering via text query
+* Added Last-Translator user preference
 
 = 2.0.9 =
 * Bumped minimum WordPress version to 4.1
@@ -143,7 +188,7 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 
 == Upgrade Notice ==
 
-= 2.0.8 =
+= 2.0.15 =
 * Various bug fixes and improvements
 
 

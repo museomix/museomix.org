@@ -5,8 +5,6 @@ class FacetWP_Facet_Radio_Core
 
     function __construct() {
         $this->label = __( 'Radio', 'fwp' );
-
-        add_filter( 'facetwp_store_unfiltered_post_ids', array( $this, 'store_unfiltered_post_ids' ) );
     }
 
 
@@ -59,7 +57,7 @@ class FacetWP_Facet_Radio_Core
         $limit = ctype_digit( $facet['count'] ) ? $facet['count'] : 20;
 
         $sql = "
-        SELECT f.facet_value, f.facet_display_value, f.term_id, f.parent_id, f.depth, COUNT(*) AS counter
+        SELECT f.facet_value, f.facet_display_value, f.term_id, f.parent_id, f.depth, COUNT(DISTINCT f.post_id) AS counter
         FROM $from_clause
         WHERE f.facet_name = '{$facet['name']}' $where_clause
         GROUP BY f.facet_value
@@ -134,8 +132,8 @@ class FacetWP_Facet_Radio_Core
         foreach ( $values as $key => $result ) {
             $selected = in_array( $result['facet_value'], $selected_values ) ? ' checked' : '';
             $selected .= ( 0 == $result['counter'] && '' == $selected ) ? ' disabled' : '';
-            $output .= '<div class="facetwp-radio' . $selected . '" data-value="' . $result['facet_value'] . '">';
-            $output .= $result['facet_display_value'] . ' <span class="facetwp-counter">(' . $result['counter'] . ')</span>';
+            $output .= '<div class="facetwp-radio' . $selected . '" data-value="' . esc_attr( $result['facet_value'] ) . '">';
+            $output .= esc_html( $result['facet_display_value'] ) . ' <span class="facetwp-counter">(' . $result['counter'] . ')</span>';
             $output .= '</div>';
         }
 
@@ -156,7 +154,7 @@ class FacetWP_Facet_Radio_Core
         $sql = "
         SELECT DISTINCT post_id FROM {$wpdb->prefix}facetwp_index
         WHERE facet_name = '{$facet['name']}' AND facet_value IN ('$selected_values')";
-        return $wpdb->get_col( $sql );
+        return facetwp_sql( $sql, $facet );
     }
 
 
@@ -202,8 +200,7 @@ class FacetWP_Facet_Radio_Core
                 <div class="facetwp-tooltip">
                     <span class="icon-question">?</span>
                     <div class="facetwp-tooltip-content">
-                        If <strong>Data source</strong> is a taxonomy, enter the
-                        parent term's ID if you want to show child terms.
+                        To show only child terms, enter the parent <a href="https://facetwp.com/how-to-find-a-wordpress-terms-id/" target="_blank">term ID</a>.
                         Otherwise, leave blank.
                     </div>
                 </div>
@@ -263,17 +260,5 @@ class FacetWP_Facet_Radio_Core
             <td><input type="text" class="facet-count" value="20" /></td>
         </tr>
 <?php
-    }
-
-
-    /**
-     * Store unfiltered post IDs if a dropdown facet exists
-     */
-    function store_unfiltered_post_ids( $boolean ) {
-        if ( FWP()->helper->facet_setting_exists( 'type', 'radio' ) ) {
-            return true;
-        }
-
-        return $boolean;
     }
 }

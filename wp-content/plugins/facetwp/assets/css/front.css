@@ -24,9 +24,15 @@
     height: 20px;
     background: url(../images/loading.png) no-repeat;
     background-size: 20px 20px;
-    -webkit-animation: rotate 700ms infinite linear;
-    -moz-animation: rotate 700ms infinite linear;
-    animation: rotate 700ms infinite linear;
+    -webkit-animation: spin 700ms infinite linear;
+    -moz-animation: spin 700ms infinite linear;
+    animation: spin 700ms infinite linear;
+}
+
+.facetwp-overlay {
+    position: absolute;
+    background-color: #fff;
+    opacity: 0.6;
 }
 
 /* Checkboxes */
@@ -196,9 +202,9 @@
 .locate-me.f-loading:before {
     background: url(../images/loading.png) no-repeat;
     background-size: 20px 20px;
-    -webkit-animation: rotate 700ms infinite linear;
-    -moz-animation: rotate 700ms infinite linear;
-    animation: rotate 700ms infinite linear;
+    -webkit-animation: spin 700ms infinite linear;
+    -moz-animation: spin 700ms infinite linear;
+    animation: spin 700ms infinite linear;
 }
 
 .locate-me.f-reset:before {
@@ -208,7 +214,7 @@
 
 /* CSS animations */
 
-@-o-keyframes rotate {
+@-o-keyframes spin {
     from {
         -o-transform: rotate(0deg);
     }
@@ -217,7 +223,7 @@
     }
 }
 
-@-moz-keyframes rotate {
+@-moz-keyframes spin {
     from {
         -moz-transform: rotate(0deg);
     }
@@ -226,7 +232,7 @@
     }
 }
 
-@-ms-keyframes rotate {
+@-ms-keyframes spin {
     from {
         -ms-transform: rotate(0deg);
     }
@@ -235,7 +241,7 @@
     }
 }
 
-@-webkit-keyframes rotate {
+@-webkit-keyframes spin {
     from {
         -webkit-transform: rotate(0deg);
     }
@@ -244,7 +250,7 @@
     }
 }
 
-@-keyframes rotate {
+@-keyframes spin {
     from {
         transform: rotate(0deg);
     }
@@ -257,18 +263,17 @@
 
 .facetwp-selections li {
     display: inline-block;
-    font-size: 12px;
     line-height: 1;
-    margin-right: 20px;
-    cursor: pointer;
 }
 
-.facetwp-selections li::after {
+.facetwp-selections .facetwp-selection-value {
     display: inline-block;
-    content: '';
-    width: 12px;
-    height: 12px;
-    margin-left: 5px;
-    background: url(../images/icon-close.png) no-repeat;
+    margin-right: 10px;
+    cursor: pointer;
+
+    padding-right: 16px;
+    background-image: url(../images/icon-close.png);
     background-size: 12px 12px;
+    background-repeat: no-repeat;
+    background-position: right center;
 }

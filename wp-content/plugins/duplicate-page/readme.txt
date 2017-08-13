@@ -4,8 +4,8 @@ Contributors: mndpsingh287
 Donate link: http://www.webdesi9.com/donate/?plugin=duplicate-page
 Tags: Page Duplicate, Post duplicate, duplicate custom posts, duplicate page, duplicate post, duplicate ,custom posts, post, page, duplicate this, duplicate, content duplicate, duplicate content, data duplicate, duplicate data, copy page, clone page,wordpress page duplicate, wordpress post duplicate, Copy post, wordpress page duplicator, wordpress post duplicator, Cloner
 Requires at least: 3.4
-Tested up to: 4.6
-Stable tag: 2.1
+Tested up to: 4.7.2
+Stable tag: 2.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -59,6 +59,14 @@ https://www.youtube.com/watch?v=Fj8BHxvebXs&feature=youtu.be
 = 2.1 (25th Aug, 2016) =
 
 * New Text field added in settings page for duplicate post title suffix to remove confusion of currently duplicate page.
+
+= 2.2 (28th Jan, 2017) =
+
+* Strings Translations
+
+= 2.3 (27st april, 2017) =
+
+* Minor Fixes
 
 == Other Notes ==
 

@@ -2,7 +2,7 @@
 Contributors: infinitewp
 Tags: admin, administration, amazon, api, authentication, automatic, dashboard, dropbox, events, integration, manage, multisite, multiple, notification, performance, s3, security, seo, stats, tracking, infinitewp, updates, backup, restore, iwp, infinite
 Requires at least: 3.1
-Tested up to: 4.5.3
+Tested up to: 4.7
 Stable tag: trunk
 
 Install this plugin on unlimited sites and manage them all from a central dashboard.
@@ -47,6 +47,23 @@ Credits: [Vladimir Prelovac](http://prelovac.com/vladimir) for his worker plugin
 5. One-click updates
 
 == Changelog ==
+= 1.6.3.2 - Jan 4th 2017 =
+* Improvement: JSON communication between Admin Panel and Client plugin has been implemented.
+* Improvement: If the PHP version of WordPress site is less than 5.4.0 then the single call backups will fail with "Fatal error: Cannot use string offset as an array in /home/asogerb6/public_html/wp-content/plugins/iwp-client/backup.class.singlecall.php on line 340".
+* Improvement: Debug files DE_clMemoryPeak.php, DE_clMemoryUsage.php and DE_clTimeTaken.php have been removed.
+* Improvement: Security patches have been applied for sites backed up to Amazon S3 storage.
+* Fix: Backups having size greater than 2GB could not be uploaded to Google Drive in certain scenarios throwing a bad request error.
+* Fix: "Failed to zip files. pclZip error (-4): File '/wp-content/plugins/wordfence/tmp/configCache.php' does not exist" has been fixed.
+* Fix: Pluggable.php shouldn't be included before loading all plugins.
+* Fix: MySQL error wouldn't show accurately during failed table creation.
+* Fix: If the default auto_increment_increment value is set to 2 in the user's server the backup will fail for all sites on that server.
+* Fix: If the value for integer field is EMPTY then instead of considering default value as NULL, the plugin creates a duplicate entry during cloning.
+
+= 1.6.1.1 - August 12th 2016 =
+* Fix: Bug Fix.
+* Fix: Plugins were not updated but were showing incorrectly as updated in the Process Queue.
+* Fix: Failed to restore: Error performing query "/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */; ": Variable 'character_set_client' can't be set to the value of 'NULL' error message would show during restore.
+* Fix: PHP Notice: Undefined index error would show while taking backups.
 
 = 1.6.0 - June 27th 2016 =
 * Feature: Activity log for updates and backups to be used in new version of client reporting beta will be saved and retrieved from the WP Admin instead of the IWP Admin Panel, provided the client reporting addon is active.

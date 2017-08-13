@@ -10,8 +10,7 @@ class FacetWP_Updater
         $this->slug = 'facetwp';
         $this->version = FACETWP_VERSION;
         $this->license = get_option( 'facetwp_license' );
-
-        add_action( 'init', array( $this, 'init' ) );
+        $this->init();
     }
 
 
@@ -39,6 +38,7 @@ class FacetWP_Updater
                 'slug'      => $this->slug,
                 'license'   => $this->license,
                 'host'      => FWP()->helper->get_http_host(),
+                'php_v'     => phpversion(),
             )
         ) );
 

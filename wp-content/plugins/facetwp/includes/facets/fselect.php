@@ -5,8 +5,6 @@ class FacetWP_Facet_fSelect
 
     function __construct() {
         $this->label = __( 'fSelect', 'fwp' );
-
-        add_filter( 'facetwp_store_unfiltered_post_ids', array( $this, 'store_unfiltered_post_ids' ) );
     }
 
 
@@ -69,7 +67,7 @@ class FacetWP_Facet_fSelect
         $where_clause = apply_filters( 'facetwp_facet_where', $where_clause, $facet );
 
         $sql = "
-        SELECT f.facet_value, f.facet_display_value, f.term_id, f.parent_id, f.depth, COUNT(*) AS counter
+        SELECT f.facet_value, f.facet_display_value, f.term_id, f.parent_id, f.depth, COUNT(DISTINCT f.post_id) AS counter
         FROM $from_clause
         WHERE f.facet_name = '{$facet['name']}' $where_clause
         GROUP BY f.facet_value
@@ -99,7 +97,7 @@ class FacetWP_Facet_fSelect
         $label_any = facetwp_i18n( $label_any );
 
         $output .= '<select class="facetwp-dropdown"' . $multiple . '>';
-        $output .= '<option value="">' . esc_attr( $label_any ) . '</option>';
+        $output .= '<option value="">' . esc_html( $label_any ) . '</option>';
 
         foreach ( $values as $result ) {
             $selected = in_array( $result['facet_value'], $selected_values ) ? ' selected' : '';
@@ -110,14 +108,14 @@ class FacetWP_Facet_fSelect
             }
 
             // Determine whether to show counts
-            $display_value .= $result['facet_display_value'];
+            $display_value .= esc_html( $result['facet_display_value'] );
             $show_counts = apply_filters( 'facetwp_facet_dropdown_show_counts', true, array( 'facet' => $facet ) );
 
             if ( $show_counts ) {
                 $display_value .= ' (' . $result['counter'] . ')';
             }
 
-            $output .= '<option value="' . $result['facet_value'] . '"' . $selected . '>' . $display_value . '</option>';
+            $output .= '<option value="' . esc_attr( $result['facet_value'] ) . '"' . $selected . '>' . $display_value . '</option>';
         }
 
         $output .= '</select>';
@@ -144,7 +142,7 @@ class FacetWP_Facet_fSelect
         // Match ALL values
         if ( 'and' == $facet['operator'] ) {
             foreach ( $selected_values as $key => $value ) {
-                $results = $wpdb->get_col( $sql . " AND facet_value IN ('$value')" );
+                $results = facetwp_sql( $sql . " AND facet_value IN ('$value')", $facet );
                 $output = ( $key > 0 ) ? array_intersect( $output, $results ) : $results;
 
                 if ( empty( $output ) ) {
@@ -155,7 +153,7 @@ class FacetWP_Facet_fSelect
         // Match ANY value
         else {
             $selected_values = implode( "','", $selected_values );
-            $output = $wpdb->get_col( $sql . " AND facet_value IN ('$selected_values')" );
+            $output = facetwp_sql( $sql . " AND facet_value IN ('$selected_values')", $facet );
         }
 
         return $output;
@@ -259,8 +257,7 @@ class FacetWP_Facet_fSelect
                 <div class="facetwp-tooltip">
                     <span class="icon-question">?</span>
                     <div class="facetwp-tooltip-content">
-                        If <strong>Data source</strong> is a taxonomy, enter the
-                        parent term's ID if you want to show child terms.
+                        To show only child terms, enter the parent <a href="https://facetwp.com/how-to-find-a-wordpress-terms-id/" target="_blank">term ID</a>.
                         Otherwise, leave blank.
                     </div>
                 </div>
@@ -305,17 +302,5 @@ class FacetWP_Facet_fSelect
             <td><input type="text" class="facet-count" value="10" /></td>
         </tr>
 <?php
-    }
-
-
-    /**
-     * Store unfiltered post IDs if a dropdown facet exists
-     */
-    function store_unfiltered_post_ids( $boolean ) {
-        if ( FWP()->helper->facet_setting_exists( 'type', 'fselect' ) ) {
-            return true;
-        }
-
-        return $boolean;
     }
 }

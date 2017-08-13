@@ -103,7 +103,12 @@ class Loco_package_Project {
         $this->name = $name;
         $this->bundle = $bundle;
         $this->domain = $domain;
-        $this->slug = $domain->getName();
+        // take default slug from domain, avoiding wildcard
+        $slug = $domain->getName();
+        if( '*' === $slug ){
+            $slug = '';
+        }
+        $this->slug = $slug;
         // sources
         $this->sfiles = new Loco_fs_FileList;
         $this->spaths = new Loco_fs_FileList;
@@ -194,7 +199,7 @@ class Loco_package_Project {
         $name = $this->getDomain()->getName();
         // default if slug matches text domain.
         // else special case for Core "default" domain which has empty slug
-        return $slug === $name || ( 'default' === $name && '' === $slug );
+        return $slug === $name || ( 'default' === $name && '' === $slug ) || 1 === count($this->bundle);
     }
 
 
@@ -317,7 +322,11 @@ class Loco_package_Project {
     private function getSourceFinder(){
         if( ! $this->source ){    
             $source = new Loco_fs_FileFinder;
-            $source->setRecursive(true)->group('php');
+            // .php extensions configured in plugin options
+            $conf = Loco_data_Settings::get();
+            $exts = $conf->php_alias or $exts = array('php');
+            $source->setRecursive(true)->groupBy( $exts );
+            /* @var $file Loco_fs_File */
             foreach( $this->spaths as $file ){
                 $path = realpath( (string) $file );    
                 if( $path && is_dir($path) ){
@@ -536,8 +545,8 @@ class Loco_package_Project {
                 }
             }
         }
-        // Failed to find correctly named POT file.
-        // if a single POT file is found letuse it
+        // Failed to find correctly named POT file,
+        // but if a single POT file is found we'll use it.
         if( 1 === count($files['pot']) ){
             return $files['pot'][0];
         }
@@ -575,8 +584,10 @@ class Loco_package_Project {
         // augment file list from directories unless already done so
         if( ! $source->isCached() ){
             $crawled = $source->exportGroups();
-            foreach( $crawled['php'] as $file ){
-                $this->sfiles->add($file);
+            foreach( $crawled as $ext => $files ){
+                foreach( $files as $file ){
+                    $this->sfiles->add($file);
+                }
             }
         }
         return $this->sfiles;

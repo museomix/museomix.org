@@ -307,7 +307,7 @@ class IWP_MMB_S3_MULTICALL extends IWP_MMB_Backup_Multicall
 								$partNumber++;
 							}
 						}
-						fclose($file);
+						@fclose($file);
 					}
 					catch (S3Exception $e) {
 						$this->statusLog($this -> hisID, array('stage' => 's3MultiCall', 'status' => 'partiallyCompleted', 'statusMsg' => 'retracingValues','nextFunc' => 'amazons3_backup', 'task_result' => $task_result, 'responseParams' => $result_arr));

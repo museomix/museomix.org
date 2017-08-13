@@ -40,6 +40,7 @@ global $SectionsPage, $ContenusSections;
 					'experience'=> __('Things learned...', 'museomix'),
 					'faq'=> __('FAQ', 'museomix'),
 					'equipe'=> __('Team', 'museomix'),
+					'galerie'=> __('Gallery', 'museomix')
 				);
 				foreach($menu_default_items as $t => $v):
 					if ($t === "equipe"):

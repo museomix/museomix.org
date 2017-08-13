@@ -38,19 +38,17 @@ echo $header;
                     </button>
                 </fieldset><?php
                 endif?> 
-                <fieldset>
-                    <div class="loco-clearable">
-                        <input type="text" maxlength="100" name="q" id="loco-search" placeholder="<?php $ui->e('filter')?>" autocomplete="off" disabled />
-                    </div>
+                <fieldset class="loco-clearable">
+                    <input type="text" maxlength="100" name="q" id="loco-search" placeholder="<?php $ui->e('filter')?>" autocomplete="off" disabled />
                 </fieldset>
-                <!--fieldset>
+                <fieldset>
                     <button class="button has-icon only-icon icon-pilcrow" data-loco="invs" disabled title="<?php $ui->e('invs')?>">
                         <span><?php $ui->e('invs')?></span>
                     </button>
                     <button class="button has-icon only-icon icon-code" data-loco="code" disabled title="<?php $ui->e('code')?>">
                         <span><?php $ui->e('code')?></span>
                     </button>
-                </fieldset-->
+                </fieldset>
             </form>
             <form action="<?php $params->e('dlAction')?>" method="post" target="_blank" id="loco-download" class="aux">
                 <fieldset>
@@ -67,8 +65,8 @@ echo $header;
             </form>
         </nav>
         
-        <div id="loco-editor-inner" class="loco-editor loading">
-            <span>Loading..</span>
+        <div id="loco-editor-inner">
+            <div class="loco-loading"></div>
         </div>
         
     </div>

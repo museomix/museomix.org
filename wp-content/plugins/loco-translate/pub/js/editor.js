@@ -38,7 +38,6 @@
     ;
 
 
-
     /**
      * 
      */
@@ -94,14 +93,14 @@
 
 
     function debugMerge( console, result ){
-         var i = -1;
-         while( ++i < result.add.length ){
+         var i = -1, t = result.add.length;
+         while( ++i < t ){
              console.log(' + '+result.add[i].source() );
          }
-         i = -1;
-         while( ++i < result.del.length ){
+         i = -1, t = result.del.length;
+         while( ++i < t ){
              console.log(' - '+result.del[i].source() );
-         }        
+         }
     }
 
 
@@ -159,11 +158,11 @@
         }        
         function think(){
             disable();
-            $(button).addClass('loading');
+            $(button).addClass('loco-loading');
         }
         function unthink(){
             enable();
-            $(button).removeClass('loading');
+            $(button).removeClass('loco-loading');
         }
         saveParams = $.extend( { path: filePath }, conf.project||{} );
 
@@ -189,11 +188,11 @@
             }
             function think(){
                 disable();
-                $(button).addClass('loading');
+                $(button).addClass('loco-loading');
             }
             function unthink(){
                 enable();
-                $(button).removeClass('loading');
+                $(button).removeClass('loco-loading');
             }
             // Only permit sync when document is saved
             editor
@@ -292,29 +291,33 @@
 
 
     function registerInvisiblesButton( button ){
+        var $button = $(button);
         button.disabled = false;
         editor.on('poInvs', function( event, state ){
-            $(button)[ state ? 'addClass' : 'removeClass' ]('inverted');
+            $button[ state ? 'addClass' : 'removeClass' ]('inverted');
         });
-        $(button).click( function( event ){
+        $button.click( function( event ){
             event.preventDefault();
             editor.setInvs( ! editor.getInvs() );
             return false;
         } );
+        locoScope.tooltip.init($button);
         return true;
     }
 
 
 
     function registerCodeviewButton( button ){
+         var $button = $(button);
          button.disabled = false;
-         $(button).click( function(event){
+         $button.click( function(event){
             event.preventDefault();
-            var state = ! editor.getMode();
-            editor.setMode( state );
-            $(button)[ state ? 'addClass' : 'removeClass' ]('inverted');
+            var state = ! editor.getMono();
+            editor.setMono( state );
+            $button[ state ? 'addClass' : 'removeClass' ]('inverted');
             return false;
         } );
+        locoScope.tooltip.init($button);
         return true;
     };
 

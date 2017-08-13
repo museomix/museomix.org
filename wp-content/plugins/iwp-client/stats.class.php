@@ -415,11 +415,11 @@ class IWP_MMB_Stats extends IWP_MMB_Core
             $current = $this->iwp_mmb_get_transient('update_core');
             if (isset($current->last_checked) || get_option('iwp_client_forcerefresh')) {
 				update_option('iwp_client_forcerefresh', false);
-                if (time() - $current->last_checked > 14400) {
+               // if (time() - $current->last_checked > 7200) { No need to check the wordpess 4hr once 
                     @wp_version_check();
                     @wp_update_plugins();
                     @wp_update_themes();
-                }
+                //}
             }
         }
         

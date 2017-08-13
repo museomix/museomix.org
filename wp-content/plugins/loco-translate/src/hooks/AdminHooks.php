@@ -21,11 +21,10 @@ class Loco_hooks_AdminHooks extends Loco_hooks_Hookable {
      */
     private static function init_l10n(){
         $domainPath = dirname( loco_plugin_self() ).'/languages';
-        return load_plugin_textdomain( 'loco', false, $domainPath );
+        return load_plugin_textdomain( 'loco-translate', false, $domainPath );
     }
 
 
-    
     /**
      * {@inheritdoc}
      */
@@ -80,13 +79,45 @@ class Loco_hooks_AdminHooks extends Loco_hooks_Hookable {
              if( $plugin && current_user_can('loco_admin') && Loco_package_Plugin::get_plugin($plugin) ){
                 // ok to add "translate" link into meta row
                 $href = Loco_mvc_AdminRouter::generate('plugin-view', array( 'bundle' => $plugin) );
-                $links[] = '<a href="'.esc_attr($href).'">'.esc_html__('Translate','loco').'</a>';
+                $links[] = '<a href="'.esc_attr($href).'">'.esc_html__('Translate','loco-translate').'</a>';
              }
          }
          catch( Exception $e ){
              // $links[] = esc_html( 'Debug: '.$e->getMessage() );
          }
          return $links;
+    }
+
+
+
+    /**
+     * Purge in-memory caches that may be persisted by object caching plugins
+     */
+    private function purge_wp_cache(){
+        global $wp_object_cache;
+        if( function_exists('wp_cache_delete') && method_exists($wp_object_cache,'delete') ){
+            wp_cache_delete('plugins','loco');
+        }
+    }
+
+
+
+    /**
+     * pre_update_option_{$option} filter callback for $option = "active_plugins"
+     */
+    public function filter_pre_update_option_active_plugins( $value = null ){
+        $this->purge_wp_cache();
+        return $value;
+    }
+
+
+
+    /**
+     * pre_update_site_option_{$option} filter callback for $option = "active_sitewide_plugins"
+     */
+    public function filter_pre_update_site_option_active_sitewide_plugins( $value = null ){
+        $this->purge_wp_cache();
+        return $value;
     }
 
 
@@ -100,6 +131,7 @@ class Loco_hooks_AdminHooks extends Loco_hooks_Hookable {
             // "DELETE FROM ___ WHERE `option_name` LIKE '_transient_loco_%' OR `option_name` LIKE '_transient_timeout_loco_%'";
         }
     }*/
+
 
 
     /*public function filter_all( $hook ){

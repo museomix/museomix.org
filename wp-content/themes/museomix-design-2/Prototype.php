@@ -115,7 +115,7 @@ function ListeRelationsObjets($typeCible){
 	 				<?php
 					$section = ContenuSectionProto($id);
 					if(!empty($section)): ?>
-					<section class="section-1 liste-prototype-lieu" id="<?php echo $id; ?>" style="min-height: 300px; position: relative;"> 
+					<section class="section-1 liste-prototype-lieu" id="<?php echo $id; ?>" style="position: relative;"> 
 						
 						<?php #if('presentation'!=$id&&'participer'!=$id): ?>
 						

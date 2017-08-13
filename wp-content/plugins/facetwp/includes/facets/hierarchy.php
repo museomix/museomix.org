@@ -87,7 +87,7 @@ class FacetWP_Facet_Hierarchy
         $where_clause = apply_filters( 'facetwp_facet_where', $where_clause, $facet );
 
         $sql = "
-        SELECT f.facet_value, f.facet_display_value, COUNT(*) AS counter
+        SELECT f.facet_value, f.facet_display_value, COUNT(DISTINCT f.post_id) AS counter
         FROM $from_clause
         WHERE f.facet_name = '{$facet['name']}' $where_clause
         GROUP BY f.facet_value
@@ -116,13 +116,13 @@ class FacetWP_Facet_Hierarchy
 
         $output = '';
         $num_visible = ctype_digit( $facet['count'] ) ? $facet['count'] : 10;
-        $last_depth = 0;
         $num = 0;
 
         if ( ! empty( $values ) ) {
             foreach ( $values as $data ) {
+                $last_depth = isset( $last_depth ) ? $last_depth : $data['depth'];
 
-                $label = $data['facet_display_value'];
+                $label = esc_html( $data['facet_display_value'] );
                 $is_checked = ( ! empty( $selected_values ) && $data['facet_value'] == $selected_values[0] );
                 $class = $is_checked ? ' checked' : '';
 
@@ -143,7 +143,7 @@ class FacetWP_Facet_Hierarchy
                     }
                 }
 
-                $output .= '<div class="facetwp-link' . $class . '" data-value="' . $data['facet_value'] . '">' . $label . '</div>';
+                $output .= '<div class="facetwp-link' . $class . '" data-value="' . esc_attr( $data['facet_value'] ) . '">' . $label . '</div>';
 
                 if ( isset( $data['is_choice'] ) ) {
                     $num++;
@@ -180,7 +180,7 @@ class FacetWP_Facet_Hierarchy
         $sql = "
         SELECT DISTINCT post_id FROM {$wpdb->prefix}facetwp_index
         WHERE facet_name = '{$facet['name']}' AND facet_value IN ('$selected_values')";
-        return $wpdb->get_col( $sql );
+        return facetwp_sql( $sql, $facet );
     }
 
 

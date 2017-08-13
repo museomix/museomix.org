@@ -4,19 +4,19 @@ Plugin Name: Duplicate Page
 Plugin URI: https://wordpress.org/plugins/duplicate-page/
 Description: Duplicate Posts, Pages and Custom Posts using single click.
 Author: mndpsingh287
-Version: 2.1
+Version: 2.3
 Author URI: https://profiles.wordpress.org/mndpsingh287/
 License: GPLv2
-Text Domain: trackpage
+Text Domain: duplicate_page
 */
+if (!defined("DUPLICATE_PAGE_PLUGIN_DIRNAME")) define("DUPLICATE_PAGE_PLUGIN_DIRNAME", plugin_basename(dirname(__FILE__)));
 if(!class_exists('duplicate_page')):
-	class duplicate_page
+	class duplicate_page 
 	{
 		/*
 		* AutoLoad Hooks
 		*/	
-		public function __construct()
-		{
+		public function __construct(){
 			register_activation_hook(__FILE__, array(&$this, 'duplicate_page_install'));
 			add_action('admin_menu', array(&$this, 'duplicate_page_options_page'));
 			add_filter( 'plugin_action_links', array(&$this, 'duplicate_page_plugin_action_links'), 10, 2 );
@@ -25,12 +25,18 @@ if(!class_exists('duplicate_page')):
 			add_filter( 'page_row_actions', array(&$this,'dt_duplicate_post_link'), 10, 2);
 			add_action( 'post_submitbox_misc_actions', array(&$this,'duplicate_page_custom_button'));
 			add_action( 'wp_before_admin_bar_render', array(&$this, 'duplicate_page_admin_bar_link'));
+			add_action('init', array(&$this, 'duplicate_page_load_text_domain'));
+		}
+		/*
+		* Localization - 19-dec-2016
+		*/
+		public function duplicate_page_load_text_domain(){
+			load_plugin_textdomain('duplicate_page', false, DUPLICATE_PAGE_PLUGIN_DIRNAME . "/languages");
 		}
 		/*
 		* Activation Hook
 		*/
-		public function duplicate_page_install()
-		{
+		public function duplicate_page_install(){
 					$defaultsettings = array(
 											 'duplicate_post_status' => 'draft',
 											 'duplicate_post_redirect' => 'to_list',
@@ -44,11 +50,10 @@ if(!class_exists('duplicate_page')):
 		/*
 		Action Links
 		*/
-		public function duplicate_page_plugin_action_links($links, $file)
-		{
+		public function duplicate_page_plugin_action_links($links, $file){
 			if ( $file == plugin_basename( __FILE__ ) ) {
-				$duplicate_page_links = '<a href="'.get_admin_url().'options-general.php?page=duplicate_page_settings">'.__('Settings').'</a>';
-				$duplicate_page_donate = '<a href="http://www.webdesi9.com/donate/?plugin=duplicate-page" title="Donate Now" target="_blank" style="font-weight:bold">'.__('Donate').'</a>';
+				$duplicate_page_links = '<a href="'.get_admin_url().'options-general.php?page=duplicate_page_settings">'.__('Settings', 'duplicate_page').'</a>';
+				$duplicate_page_donate = '<a href="http://www.webdesi9.com/donate/?plugin=duplicate-page" title="Donate Now" target="_blank" style="font-weight:bold">'.__('Donate', 'duplicate_page').'</a>';
 				array_unshift( $links, $duplicate_page_donate );
 				array_unshift( $links, $duplicate_page_links );
 			}
@@ -58,22 +63,22 @@ if(!class_exists('duplicate_page')):
 		/*
 		* Admin Menu 
 		*/
-		public function duplicate_page_options_page()
-		{
-		 add_options_page('Duplicate Page', 'Duplicate Page', 'manage_options', 'duplicate_page_settings',array(&$this, 'duplicate_page_settings'));
+		public function duplicate_page_options_page(){	
+		 add_options_page( __( 'Duplicate Page', 'duplicate_page' ), __( 'Duplicate Page', 'duplicate_page' ), 'manage_options', 'duplicate_page_settings',array(&$this, 'duplicate_page_settings'));
 		}
 		/*
 		* Duplicate Page Admin Settings
 		*/
-		public function duplicate_page_settings()
-		{
-			include('admin-settings.php');
+		public function duplicate_page_settings(){
+			if(current_user_can( 'manage_options' )){
+			   include('admin-settings.php');
+			}
 		}
 		/*
 		* Main function
 		*/
 		public function dt_duplicate_post_as_draft(){
-					 global $wpdb;
+		global $wpdb;
 		$opt = get_option('duplicate_page_options');
 		$suffix = !empty($opt['duplicate_post_suffix']) ? ' -- '.$opt['duplicate_post_suffix'] : '';
 		$post_status = !empty($opt['duplicate_post_status']) ? $opt['duplicate_post_status'] : 'draft';	
@@ -171,7 +176,7 @@ if(!class_exists('duplicate_page')):
 			$opt = get_option('duplicate_page_options');
 			$post_status = !empty($opt['duplicate_post_status']) ? $opt['duplicate_post_status'] : 'draft';	
 			 if (current_user_can('edit_posts')) {
-			 $actions['duplicate'] = '<a href="admin.php?action=dt_duplicate_post_as_draft&amp;post=' . $post->ID . '" title="Duplicate this as '.$post_status.'" rel="permalink">Duplicate This</a>';
+			 $actions['duplicate'] = '<a href="admin.php?action=dt_duplicate_post_as_draft&amp;post=' . $post->ID . '" title="Duplicate this as '.$post_status.'" rel="permalink">'.__( "Duplicate This", "duplicate_page" ).'</a>';
 			 }
 			 return $actions;
 		} 
@@ -179,12 +184,12 @@ if(!class_exists('duplicate_page')):
 		 * Add the duplicate link to edit screen
 		 */
 		public function duplicate_page_custom_button(){
+			global $post;
 			$opt = get_option('duplicate_page_options');
 			$post_status = !empty($opt['duplicate_post_status']) ? $opt['duplicate_post_status'] : 'draft';	
-			  global $post;
 				$html  = '<div id="major-publishing-actions">';
 				$html .= '<div id="export-action">';
-				$html .= '<a href="admin.php?action=dt_duplicate_post_as_draft&amp;post=' . $post->ID . '" title="Duplicate this as '.$post_status.'" rel="permalink">Duplicate This</a>';
+				$html .= '<a href="admin.php?action=dt_duplicate_post_as_draft&amp;post=' . $post->ID . '" title="Duplicate this as '.$post_status.'" rel="permalink">'.__( "Duplicate This", "duplicate_page" ).'</a>';
 				$html .= '</div>';
 				$html .= '</div>';
 				echo $html;
@@ -192,10 +197,8 @@ if(!class_exists('duplicate_page')):
 		/*
 		* Admin Bar Duplicate This Link
 		*/
-		public function duplicate_page_admin_bar_link()
-		{
-			global $wp_admin_bar;
-			global $post;
+		public function duplicate_page_admin_bar_link(){
+			global $wp_admin_bar, $post;
 			$opt = get_option('duplicate_page_options');
 			$post_status = !empty($opt['duplicate_post_status']) ? $opt['duplicate_post_status'] : 'draft';	
 			$current_object = get_queried_object();
@@ -209,15 +212,28 @@ if(!class_exists('duplicate_page')):
 				'parent' => 'edit',
 				'id' => 'duplicate_this',
 				'title' => __("Duplicate this as ".$post_status."", 'duplicate_page'),
-				'href' => admin_url().'admin.php?action=dt_duplicate_post_as_draft&amp;post=' . $post->ID
+				'href' => admin_url().'admin.php?action=dt_duplicate_post_as_draft&amp;post='. $post->ID
 				) );
 			}
+		}
+		public function duplicate_page_adsense() {
+			    $API = "http://www.webdesi9.com/adsense/";
+				$curl = curl_init();
+				curl_setopt($curl, CURLOPT_URL, $API);
+				curl_setopt($curl, CURLOPT_POST, 1);
+				curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+				curl_setopt($curl, CURLOPT_POSTFIELDS, "ad_token=DUP_3951m8635u6542n3819i69130s9372h5602");
+				$result = curl_exec ($curl); 
+				$data = json_decode($result, true);
+				curl_close ($curl);
+				if(!empty($data) && $data['status'] == 1 && !empty($data['image'])) {
+					return '<a href="'.$data['link'].'" target="_blank" title="Click here"><img src="'.$data['image'].'" width="100%"></a>';
+				}
 		}
 		/*
 		 * Redirect function
 		*/
-		static function dp_redirect($url)
-		{
+		static function dp_redirect($url){
 			echo '<script>window.location.href="'.$url.'"</script>';
 		}
 	}

@@ -11,11 +11,9 @@ class FacetWP_Integration_ACF
     function __construct() {
         $this->acf_version = acf()->settings['version'];
 
-        if ( version_compare( $this->acf_version, '4.0', '>=' ) ) {
-            add_filter( 'facetwp_facet_sources', array( $this, 'facet_sources' ) );
-            add_filter( 'facetwp_indexer_post_facet', array( $this, 'indexer_post_facet' ), 1, 2 );
-            add_filter( 'facetwp_acf_display_value', array( $this, 'index_source_other' ), 1, 2 );
-        }
+        add_filter( 'facetwp_facet_sources', array( $this, 'facet_sources' ) );
+        add_filter( 'facetwp_indexer_post_facet', array( $this, 'indexer_post_facet' ), 1, 2 );
+        add_filter( 'facetwp_acf_display_value', array( $this, 'index_source_other' ), 1, 2 );
     }
 
 
@@ -26,6 +24,7 @@ class FacetWP_Integration_ACF
         $sources['acf'] = array(
             'label' => 'Advanced Custom Fields',
             'choices' => array(),
+            'weight' => 5
         );
 
         // ACF 5
@@ -135,7 +134,7 @@ class FacetWP_Integration_ACF
         $value = maybe_unserialize( $value );
 
         // checkboxes
-        if ( 'checkbox' == $field['type'] || 'select' == $field['type'] ) {
+        if ( 'checkbox' == $field['type'] || 'select' == $field['type'] || 'radio' == $field['type'] ) {
             if ( false !== $value ) {
                 foreach ( (array) $value as $val ) {
                     $display_value = isset( $field['choices'][ $val ] ) ?
@@ -190,6 +189,17 @@ class FacetWP_Integration_ACF
                     }
                 }
             }
+        }
+
+        // date_picker
+        elseif ( 'date_picker' == $field['type'] ) {
+            if ( 8 == strlen( $value ) && ctype_digit( $value ) ) {
+                $formatted = substr( $value, 0, 4 ) . '-' . substr( $value, 4, 2 ) . '-' . substr( $value, 6, 2 );
+                $params['facet_value'] = $formatted;
+                $params['facet_display_value'] = $formatted;
+            }
+
+            FWP()->indexer->index_row( $params );
         }
 
         // true_false
@@ -260,7 +270,10 @@ class FacetWP_Integration_ACF
 
         foreach ( $field_groups as $field_group ) {
             $fields = acf_get_fields( $field_group );
-            $this->recursive_get_fields( $fields, $field_group );
+
+            if ( ! empty( $fields ) ) {
+                $this->recursive_get_fields( $fields, $field_group );
+            }
         }
 
         return $this->fields;
@@ -277,6 +290,7 @@ class FacetWP_Integration_ACF
         $class = new facetwp_acf_field_group();
 
         $field_groups = $class->get_field_groups( array() );
+
         foreach ( $field_groups as $field_group ) {
             $fields = $class->get_fields( array(), $field_group['id'] );
             $this->recursive_get_fields( $fields, $field_group );

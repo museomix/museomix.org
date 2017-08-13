@@ -51,6 +51,22 @@
     box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
 }
 
+.facetwp-alert {
+    margin: 5px 0 15px 0;
+}
+
+.facetwp-alert::before {
+    content: '!';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    margin-right: 5px;
+    border-radius: 50%;
+    background: #F15A29;
+    color: #fff;
+}
+
 /* Loading animation */
 
 .facetwp-loading {
@@ -160,7 +176,7 @@
 }
 
 .table-row .row-label {
-    font-size: 18px;
+    font-size: 16px;
     margin-bottom: 15px;
 }
 
@@ -176,8 +192,10 @@
     color: #906DBE;
 }
 
-.facetwp-row table td:first-child {
-    width: 175px;
+.facetwp-row table td:first-child,
+.facetwp-region-settings table td:first-child {
+    vertical-align: top;
+    width: 200px;
 }
 
 .hidden {
@@ -254,7 +272,7 @@
 
 .facetwp-cards li {
     display: inline-block;
-    border-left: 8px solid #906DBE;
+    border-left: 6px solid #906DBE;
     margin: 6px;
     width: 240px;
     cursor: pointer;
@@ -319,8 +337,8 @@
 }
 
 .facetwp-region-welcome .about-text {
-    margin: 15px 0 0 0;
-    max-width: none;
+    margin: 0 0 15px 0;
+    min-height: initial;
 }
 
 .facetwp-region-welcome .welcome-box-wrap {
@@ -340,6 +358,16 @@
     font-size: 24px;
     line-height: 1;
     padding: 0;
+}
+
+/* Support tab */
+
+.facetwp-region-support {
+    border: none;
+}
+
+.facetwp-region-support .facetwp-content-wrap {
+    background: none;
 }
 
 /* Action buttons */
@@ -379,6 +407,32 @@
     font-style: italic;
 }
 
+.facetwp-settings-nav a {
+    display: inline-block;
+    line-height: 28px;
+    padding: 0 10px;
+    cursor: pointer;
+}
+
+.facetwp-settings-nav a.active {
+    background: #906DBE;
+    border-radius: 3px;
+    text-shadow: 1px 1px #555;
+    color: #fff;
+}
+
+.facetwp-settings-section {
+    display: none;
+}
+
+.facetwp-settings-section.active {
+    display: block;
+}
+
+.facetwp-setting.slim {
+    width: 100px;
+}
+
 /* Tooltips */
 
 .facetwp-tooltip {
@@ -416,6 +470,22 @@
     margin-top: -5px;
     border-right: 10px solid #333;
     border-right: 10px solid rgba(0, 0, 0, 0.8);
+}
+
+/* Horizontal rule */
+
+.facetwp-content hr {
+    border: 0;
+    height: 1px;
+    background-image: -webkit-linear-gradient(left, #f0f0f0, #ccc, #f0f0f0);
+    background-image: -moz-linear-gradient(left, #f0f0f0, #ccc, #f0f0f0);
+    background-image: -ms-linear-gradient(left, #f0f0f0, #ccc, #f0f0f0);
+    background-image: -o-linear-gradient(left, #f0f0f0, #ccc, #f0f0f0);
+    margin: 20px 0;
+}
+
+.facetwp-content table tr:last-child td {
+    padding-bottom: 0;
 }
 
 /* Query builder */

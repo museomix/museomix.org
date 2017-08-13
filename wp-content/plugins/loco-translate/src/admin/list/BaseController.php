@@ -47,7 +47,7 @@ abstract class Loco_admin_list_BaseController extends Loco_mvc_AdminController {
      */
     public function getHelpTabs(){
         return array (
-            __('Overview','default') => $this->view('tab-list-bundles'),
+            __('Overview','default') => $this->viewSnippet('tab-list-bundles'),
         );
     }
 
@@ -64,9 +64,9 @@ abstract class Loco_admin_list_BaseController extends Loco_mvc_AdminController {
         
         /*/ tab between the types of bundles
         $types = array (
-            '' => __('Home','loco'),
-            'theme'  => __('Themes','loco'),
-            'plugin' => __('Plugins','loco'),
+            '' => __('Home','loco-translate'),
+            'theme'  => __('Themes','loco-translate'),
+            'plugin' => __('Plugins','loco-translate'),
         );
         $current = $this->get('_route');
         $tabs = new Loco_admin_Navigation;

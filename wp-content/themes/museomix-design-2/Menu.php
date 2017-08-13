@@ -80,9 +80,9 @@ include_once('includes/shortcodes.php');
 
 				echo home_url();  
 
-				echo '"><img src="'.get_template_directory_uri().'/images/logo-museomix-2.png" alt="Museomix 2016" class="logoHeader"/>';
+				echo '"><img src="'.get_template_directory_uri().'/images/logo-museomix-2.png" alt="Museomix 2017" class="logoHeader"/>';
 
-				echo '&nbsp'.__('11-13 nov. 2016','museomix'); 
+				echo '&nbsp'.__('10-12 nov. 2017','museomix'); 
 				
 				echo '</a>';
 
@@ -91,7 +91,8 @@ include_once('includes/shortcodes.php');
 				<?php
 				 wp_nav_menu(
 					array(
-						'menu' => 'Menu_principal',
+						'menu' => 'Menu_principal_site',
+						'theme_location' => 'Menu_principal_site',
 						'menu_class' => 'bouton-nav nav'
 					)
 				);

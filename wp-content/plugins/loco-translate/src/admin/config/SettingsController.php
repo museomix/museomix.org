@@ -11,9 +11,10 @@ class Loco_admin_config_SettingsController extends Loco_admin_config_BaseControl
     public function init(){
         parent::init();
         
-        // plugin settings
+        // set current plugin options and defaults for placeholders
         $opts = Loco_data_Settings::get();
         $this->set( 'opts', $opts );
+        $this->set( 'dflt', Loco_data_Settings::create() );
         
         // roles and capabilities
         $perms = new Loco_data_Permissions;
@@ -27,7 +28,7 @@ class Loco_admin_config_SettingsController extends Loco_admin_config_BaseControl
                     $opts->populate( $post->opts )->persist();
                     $perms->populate( $post->has('caps') ? $post->caps : array() );
                     // done update
-                    Loco_error_AdminNotices::success( __('Settings saved','loco') );
+                    Loco_error_AdminNotices::success( __('Settings saved','loco-translate') );
                     // remove saved params if persistant options unset
                     if( ! $opts['fs_persist'] ){
                         $session = Loco_data_Session::get();
@@ -44,13 +45,21 @@ class Loco_admin_config_SettingsController extends Loco_admin_config_BaseControl
         }
 
         $this->set('caps', $caps = new Loco_mvc_ViewParams );
+        // there is no distinct role for network admin, so we'll fake it for UI
+        if( is_multisite() ){
+            $caps[''] = new Loco_mvc_ViewParams( array(
+                'label' => __('Super Admin','default'),
+                'name' => 'dummy-admin-cap',
+                'attrs' => 'checked disabled'
+            ) );
+        }
         /* @var $role WP_Role */
         foreach( $perms->getRoles() as $id => $role ){
             $caps[$id] = new Loco_mvc_ViewParams( array(
                 'value' => '1',
                 'label' => $perms->getRoleName($id),
                 'name' => 'caps['.$id.'][loco_admin]',
-                'attrs'  => $role->has_cap('manage_options') ? 'checked disabled ' : ( $role->has_cap('loco_admin') ? 'checked ' : '' ),
+                'attrs' => $perms->isProtectedRole($role) ? 'checked disabled ' : ( $role->has_cap('loco_admin') ? 'checked ' : '' ),
             ) );
         }
         
@@ -65,7 +74,7 @@ class Loco_admin_config_SettingsController extends Loco_admin_config_BaseControl
      */
     public function render(){
         
-        $title = __('Plugin settings','loco');
+        $title = __('Plugin settings','loco-translate');
         $breadcrumb = new Loco_admin_Navigation;
         $breadcrumb->add( $title );
         

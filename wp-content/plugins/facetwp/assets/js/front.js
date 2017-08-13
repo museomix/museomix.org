@@ -80,7 +80,24 @@ var FWP = FWP || {};
             '"': '&quot;',
             "'": '&#039;'
         };
-        return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+        return text.replace(/[&<>"']/g, function(m) { return map[m]; }).trim();
+    }
+
+
+    FWP.helper.detect_loop = function(node) {
+        var iterator = document.createNodeIterator(node, NodeFilter.SHOW_COMMENT, FWP.helper.node_filter, false);
+        while (curNode = iterator.nextNode()) {
+            if (8 === curNode.nodeType && 'fwp-loop' === curNode.nodeValue) {
+                return curNode.parentNode;
+            }
+        }
+
+        return false;
+    }
+
+
+    FWP.helper.node_filter = function() {
+        return NodeFilter.FILTER_ACCEPT;
     }
 
 
@@ -171,7 +188,25 @@ var FWP = FWP || {};
 
 
     FWP.loading_handler = function(args) {
-        args.element.html('<div class="facetwp-loading"></div>');
+        if ('fade' == FWP_JSON.loading_animation) {
+            if (! FWP.loaded) {
+                var $el = args.element;
+                $(document).on('facetwp-refresh', function() {
+                    $el.prepend('<div class="facetwp-overlay">');
+                    $el.find('.facetwp-overlay').css({
+                        width: $el.width(),
+                        height: $el.height()
+                    });
+                });
+
+                $(document).on('facetwp-loaded', function() {
+                    $el.find('.facetwp-overlay').remove();
+                });
+            }
+        }
+        else if ('' == FWP_JSON.loading_animation) {
+            args.element.html('<div class="facetwp-loading"></div>');
+        }
     }
 
 
@@ -213,6 +248,13 @@ var FWP = FWP || {};
         if (history.pushState) {
             history.pushState(null, null, window.location.pathname + query_string);
         }
+
+        // Update FWP_HTTP.get
+        FWP_HTTP.get = {};
+        window.location.search.replace('?', '').split('&').forEach(function(el) {
+            var item = el.split('=');
+            FWP_HTTP.get[item[0]] = item[1];
+        });
     }
 
 
@@ -263,67 +305,70 @@ var FWP = FWP || {};
             FWP.jqXHR.abort();
         }
 
-        FWP.ajaxurl = ('wp' === FWP.template) ? document.URL : ajaxurl;
+        var endpoint = ('wp' === FWP.template) ? document.URL : FWP_JSON.ajaxurl;
 
         // dataType is "text" for better JSON error handling
-        FWP.jqXHR = $.post(FWP.ajaxurl, {
-            'action': 'facetwp_refresh',
-            'data': {
-                'facets': JSON.stringify(FWP.facets),
-                'static_facet': FWP.static_facet,
-                'used_facets': FWP.used_facets,
-                'http_params': FWP_HTTP,
-                'template': FWP.template,
-                'extras': FWP.extras,
-                'soft_refresh': FWP.soft_refresh ? 1 : 0,
-                'is_bfcache': FWP.is_bfcache ? 1 : 0,
-                'first_load': FWP.loaded ? 0 : 1,
-                'paged': FWP.paged
-            }
-        }, function(response) {
-
-            try {
-                var json_object = $.parseJSON(response);
-                FWP.render(json_object);
-            }
-            catch(e) {
-                var pos = response.indexOf('{"facets');
-                if (-1 < pos) {
-                    var error = response.substr(0, pos);
-                    var json_object = $.parseJSON(response.substr(pos));
+        FWP.jqXHR = $.ajax(endpoint, {
+            type: 'POST',
+            dataType: 'text',
+            data: {
+                action: 'facetwp_refresh',
+                data: {
+                    'facets': JSON.stringify(FWP.facets),
+                    'static_facet': FWP.static_facet,
+                    'used_facets': FWP.used_facets,
+                    'http_params': FWP_HTTP,
+                    'template': FWP.template,
+                    'extras': FWP.extras,
+                    'soft_refresh': FWP.soft_refresh ? 1 : 0,
+                    'is_bfcache': FWP.is_bfcache ? 1 : 0,
+                    'first_load': FWP.loaded ? 0 : 1,
+                    'paged': FWP.paged
+                }
+            },
+            success: function(response) {
+                try {
+                    var json_object = $.parseJSON(response);
                     FWP.render(json_object);
-
-                    // Log the error
-                    console.log(error);
                 }
-                else {
-                    $('.facetwp-template').text('FacetWP was unable to auto-detect the post listing');
+                catch(e) {
+                    var pos = response.indexOf('{"facets');
+                    if (-1 < pos) {
+                        var error = response.substr(0, pos);
+                        var json_object = $.parseJSON(response.substr(pos));
+                        FWP.render(json_object);
 
-                    // Log the error
-                    console.log(response);
+                        // Log the error
+                        console.log(error);
+                    }
+                    else {
+                        $('.facetwp-template').text('FacetWP was unable to auto-detect the post listing');
+
+                        // Log the error
+                        console.log(response);
+                    }
                 }
+
+                // WP Playlist support
+                if ('function' === typeof WPPlaylistView) {
+                    $('.facetwp-template .wp-playlist').each(function() {
+                        return new WPPlaylistView({ el: this });
+                    });
+                }
+
+                // Fire a notification event
+                $(document).trigger('facetwp-loaded');
+
+                // Allow final actions
+                wp.hooks.doAction('facetwp/loaded');
+
+                // Detect "back-forward" cache
+                FWP.is_bfcache = true;
+
+                // Done loading?
+                FWP.loaded = true;
             }
-
-            // WP Playlist support
-            if ('function' === typeof WPPlaylistView) {
-                $('.facetwp-template .wp-playlist').each(function() {
-                    return new WPPlaylistView({ el: this });
-                });
-            }
-
-            // Fire a notification event
-            $(document).trigger('facetwp-loaded');
-
-            // Allow final actions
-            wp.hooks.doAction('facetwp/loaded');
-
-            // Detect "back-forward" cache
-            FWP.is_bfcache = true;
-
-            // Done loading?
-            FWP.loaded = true;
-
-        }, 'text');
+        });
     }
 
 
@@ -334,11 +379,30 @@ var FWP = FWP || {};
         if (('wp' === FWP.template || '' === response.template) && ! FWP.loaded && ! FWP.is_bfcache) {
             var inject = false;
         }
-        else if ('wp' === FWP.template) {
-            var inject = $(response.template).find('.facetwp-template').html();
-        }
         else {
             var inject = response.template;
+
+            if ('wp' === FWP.template) {
+                var $tpl = $(response.template).find('.facetwp-template');
+
+                if (1 > $tpl.length) {
+                    var wrap = document.createElement('div');
+                    wrap.innerHTML = response.template;
+                    var loop = FWP.helper.detect_loop(wrap);
+
+                    if (loop) {
+                        $tpl = $(loop).addClass('facetwp-template');
+                    }
+                }
+
+                if (0 < $tpl.length) {
+                    var inject = $tpl.html();
+                }
+                else {
+                    // Fallback until "loop_no_results" action is added to WP core
+                    var inject = 'No results found.';
+                }
+            }
         }
 
         if (false !== inject) {
@@ -412,12 +476,25 @@ var FWP = FWP || {};
         }
 
         // Make sure there's a template
-        if (1 > $('.facetwp-template').length) {
-            return;
+        var has_template = $('.facetwp-template').length > 0;
+
+        if (! has_template) {
+            var has_loop = FWP.helper.detect_loop(document.body);
+
+            if (has_loop) {
+                $(has_loop).addClass('facetwp-template');
+            }
+            else {
+                return;
+            }
         }
-        else {
-            var $div = $('.facetwp-template:first');
-            FWP.template = $div.is('[data-name]') ? $div.attr('data-name') : 'wp';
+
+        var $div = $('.facetwp-template:first');
+        FWP.template = $div.is('[data-name]') ? $div.attr('data-name') : 'wp';
+
+        // Facets inside the template?
+        if (0 < $div.find('.facetwp-facet').length) {
+            console.error('Facets should not be inside the "facetwp-template" container');
         }
 
         wp.hooks.doAction('facetwp/ready');
@@ -427,25 +504,30 @@ var FWP = FWP || {};
             wp.hooks.addAction('facetwp/loaded', function() {
                 var selections = '';
                 $.each(FWP.facets, function(key, val) {
-                    if ('undefined' === typeof FWP.settings.labels[key]) {
+                    if (val.length < 1 || 'undefined' === typeof FWP.settings.labels[key]) {
                         return true; // skip this facet
                     }
 
-                    if (val.length > 0) {
-                        var label = ('object' === typeof val) ? val.join(' / ') : val;
-                        var facet_type = $('.facetwp-facet-' + key).attr('data-type');
-                        label = wp.hooks.applyFilters('facetwp/selections/' + facet_type, label, {
-                            'el': $('.facetwp-facet-' + key),
-                            'selected_values': val
-                        });
+                    var choices = val;
+                    var facet_type = $('.facetwp-facet-' + key).attr('data-type');
+                    choices = wp.hooks.applyFilters('facetwp/selections/' + facet_type, choices, {
+                        'el': $('.facetwp-facet-' + key),
+                        'selected_values': choices
+                    });
 
-                        if ('' !== label) {
-                            selections += '<li data-facet="' + key + '">' +
-                                '<span class="facetwp-selection-label">' + FWP.settings.labels[key] + ':</span> ' +
-                                '<span class="facetwp-selection-value">' + FWP.helper.escape_html(label) + '</span>' +
-                                '</li>';
-                        }
+                    if ('string' === typeof choices) {
+                        choices = [{ value: '', label: choices }];
                     }
+                    else if ('undefined' === typeof choices[0].label) {
+                        choices = [{ value: '', label: choices[0] }];
+                    }
+
+                    var values = '';
+                    $.each(choices, function(idx, choice) {
+                        values += '<span class="facetwp-selection-value" data-value="' + choice.value + '">' + FWP.helper.escape_html(choice.label) + '</span>';
+                    });
+
+                    selections += '<li data-facet="' + key + '"><span class="facetwp-selection-label">' + FWP.settings.labels[key] + ':</span> ' + values + '</li>';
                 });
 
                 if ('' !== selections) {
@@ -457,16 +539,29 @@ var FWP = FWP || {};
         }
 
         // Click on a user selection
-        $(document).on('click', '.facetwp-selections li', function() {
+        $(document).on('click', '.facetwp-selections .facetwp-selection-value', function() {
             if (FWP.is_refresh) {
                 return;
             }
 
-            var facet_name = $(this).attr('data-facet');
+            var facet_name = $(this).closest('li').attr('data-facet');
+            var facet_value = $(this).attr('data-value');
 
             FWP.parse_facets();
             FWP.is_reset = true;
-            FWP.facets[facet_name] = [];
+
+            if ('' != facet_value) {
+                var arr = FWP.facets[facet_name];
+                var arr_idx = arr.indexOf(facet_value);
+                if (-1 < arr_idx) {
+                    arr.splice(arr_idx, 1);
+                    FWP.facets[facet_name] = arr;
+                }
+            }
+            else {
+                FWP.facets[facet_name] = [];
+            }
+
             if ('undefined' !== typeof FWP.used_facets) {
                 delete FWP.used_facets[facet_name]; // slider support
             }

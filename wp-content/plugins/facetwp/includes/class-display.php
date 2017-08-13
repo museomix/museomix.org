@@ -18,8 +18,20 @@ class FacetWP_Display
 
     function __construct() {
         add_filter( 'widget_text', 'do_shortcode' );
+        add_action( 'loop_start', array( $this, 'add_template_tag' ) );
+        add_action( 'loop_no_results', array( $this, 'add_template_tag' ) );
         add_action( 'wp_footer', array( $this, 'front_scripts' ), 25 );
         add_shortcode( 'facetwp', array( $this, 'shortcode' ) );
+    }
+
+
+    /**
+     * Detect the loop container if the "facetwp-template" class is missing
+     */
+    function add_template_tag( $wp_query ) {
+        if ( true === $wp_query->get( 'facetwp' ) ) {
+            echo '<!--fwp-loop-->';
+        }
     }
 
 
@@ -97,6 +109,12 @@ class FacetWP_Display
             $this->assets['front.js'] = FACETWP_URL . '/assets/js/front.js';
             $this->assets['front-facets.js'] = FACETWP_URL . '/assets/js/front-facets.js';
 
+            // Use the REST API?
+            $ajaxurl = admin_url( 'admin-ajax.php' );
+            if ( function_exists( 'get_rest_url' ) && apply_filters( 'facetwp_use_rest_api', true ) ) {
+                $ajaxurl = get_rest_url() . 'facetwp/v1/refresh';
+            }
+
             // Pass GET and URI params
             $http_params = array(
                 'get' => $_GET,
@@ -107,6 +125,10 @@ class FacetWP_Display
             if ( ! empty( FWP()->facet->archive_args ) ) {
                 $http_params['archive_args'] = FWP()->facet->archive_args;
             }
+
+            // Set the loading animation
+            $this->json['loading_animation'] = FWP()->helper->get_setting( 'loading_animation' );
+            $this->json['ajaxurl'] = $ajaxurl;
 
             ob_start();
 
@@ -139,7 +161,6 @@ class FacetWP_Display
 <script>
 var FWP_JSON = <?php echo json_encode( $this->json ); ?>;
 var FWP_HTTP = <?php echo json_encode( $http_params ); ?>;
-var ajaxurl = '<?php echo admin_url( 'admin-ajax.php' ); ?>';
 </script>
 <?php
         }

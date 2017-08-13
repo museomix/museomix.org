@@ -12,7 +12,7 @@ class Loco_data_Settings extends Loco_data_Serializable {
     
 
     /**
-     * Available optipons and their defaults
+     * Available options and their defaults
      * @var array
      */
     private static $defaults = array (
@@ -26,10 +26,14 @@ class Loco_data_Settings extends Loco_data_Serializable {
         'num_backups' => 1,
         // alternative names for POT files in priority order
         'pot_alias' => array( 'default.po', 'en_US.po', 'en.po' ),
+        // alternative file extensions for PHP files
+        'php_alias' => array( 'php' ),
         // whether to remember file system credentials in session
         'fs_persist' => false,
         // skip PHP source files this size or larger
         'max_php_size' => '100K',
+        // whether to prepend PO and POT files with UTF-8 byte order mark
+        'po_utf8_bom' => false,
         /*/ Legacy options from 1.x branch:
         // whether to use external msgfmt command (1), or internal (default)
         'use_msgfmt' => false,
@@ -108,7 +112,7 @@ class Loco_data_Settings extends Loco_data_Serializable {
         else if( is_array($default) ){
             if( ! is_array($value) ){
                 // TODO use a standard CSV split for array values?
-                $value = preg_split( '/\s+/', trim($value), -1, PREG_SPLIT_NO_EMPTY );
+                $value = preg_split( '/[\s,]+/', trim($value), -1, PREG_SPLIT_NO_EMPTY );
             }
         }
         else {
@@ -154,20 +158,25 @@ class Loco_data_Settings extends Loco_data_Serializable {
 
 
     /**
-     * Run migration in case plugin has been upgraded since settings last saved
+     * Run migration in case plugin has been upgraded from 1.x => 2.x since settings last saved
      * @return bool whether upgrade has occured
      */
     public function migrate(){
         $existed = (bool) get_option('loco_settings');
-        // Populate new format from legacy 1.x options, but only on first run
+        // migrate 1.x branch settings if first run of 2.x
         if( ! $existed ){
             $this->gen_hash = get_option('loco-translate-gen_hash','0');
             $this->use_fuzzy = get_option('loco-translate-use_fuzzy', '1' );
             $this->num_backups = get_option('loco-translate-num_backups','1');
             $this->persist();
         }
-        // currently the only upgrade could be 1.x => 2.0
-        // deliberately keeping the old options due to legacy switching feature
+        // running of plugin in 1.x legacy mode is disabled as of 2.0.15
+        if( false !== get_option('loco-branch',false) ){
+            delete_option('loco-branch');
+            delete_option('loco-translate-gen_hash');
+            delete_option('loco-translate-use_fuzzy');
+            delete_option('loco-translate-num_backups');
+        }
         return ! $existed;
     }
     
@@ -196,13 +205,14 @@ class Loco_data_Settings extends Loco_data_Serializable {
                 
             }
         }
+        // enforce missing values that must have default
+        foreach( array('php_alias','max_php_size') as $prop ){
+            if( isset($data[$prop]) && '' === $data[$prop] ){
+                parent::offsetSet( $prop, self::$defaults[$prop] );
+            }
+        }
+
         return $this;
     }
 
 }
-
-
-
-
-
-

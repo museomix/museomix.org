@@ -18,7 +18,7 @@ function my_theme_setup(){
 /* initiation des menus personnalis¨¦s 
    ================================== */
 register_nav_menus( array(
-        'Menu_principal' => 'Navigation principale',
+        'Menu_principal_site' => 'Navigation principale',
 ) );
 
 /* configuration ordre selon type
@@ -507,10 +507,10 @@ function ExtraitBillet($thePost = null){
 			$contenu .= $zone;
 		}
 
-	}
+	}	elseif('galerie'==$id){		if($zone=get_field('galerie')){			$contenu .= '<div id="proto_gallery">';			foreach($zone as $i) {				$contenu .= '<a class="fancybox" target="_new" href="'.wp_get_attachment_url( $i['ID']).'">';				$contenu .= wp_get_attachment_image($i['ID'], 'thumbnail');				$contenu .= '</a>';			}			$contenu .= '</div>';		}	}
 	elseif('equipe'==$id){
-		if($photo=get_field('photo_equipe')){			if (is_int($photo)) {				$url = wp_get_attachment_image_src($photo, 'thumbnail')[0];			} else {				$url = $photo;			}
-			$contenu .= '<img style="margin:30px;" src="'.$url.'">';
+		if($photo=get_field('photo_equipe')){			if (is_int($photo)) {				$url = wp_get_attachment_image_src($photo, 'thumbnail')[0];				$full_url = wp_get_attachment_url($photo);			} else {				$url = $photo;				$full_url = $url;			}
+			$contenu .= '<a href="'.$full_url.'" target="_blank" class="fancybox"><img style="margin:30px;" src="'.$url.'"></a>';
 		}
 		if($zone=get_field('descriptif_equipe')){
 			$contenu .= '<p>'.$zone.'</p>';
@@ -597,4 +597,4 @@ function get_details($field, $array) {
 }/* Source : https://pippinsplugins.com/retrieve-attachment-id-from-image-url/ */function get_attachment_id_from_url($image_url) {	global $wpdb;	$attachment = $wpdb->get_col($wpdb->prepare("SELECT ID FROM $wpdb->posts WHERE guid='%s';", $image_url ));     if (isset($attachment[0])) {		return $attachment[0];	}	return 0;}add_action('wp_login','wpdb_capture_user_last_login', 10, 2);
 function wpdb_capture_user_last_login($user_login, $user){
     update_user_meta($user->ID, 'last_login', current_time('mysql'));
-}function msx_enqueue() {	wp_enqueue_script( 'msx-scripts', get_template_directory_uri().'/biblio/bootstrap/js/bootstrap.js', array('jquery'));	wp_enqueue_script( 'msx-scripts', get_template_directory_uri().'/biblio/jquery.simple-share.js', array('jquery'));    wp_enqueue_script( 'msx-scripts', get_template_directory_uri().'/scripts.js', array('jquery'));}add_action( 'wp_enqueue_scripts', 'msx_enqueue' );
+}function msx_enqueue() {	wp_enqueue_script( 'msx-scripts', get_template_directory_uri().'/biblio/bootstrap/js/bootstrap.js', array('jquery'));	wp_enqueue_script( 'msx-scripts', get_template_directory_uri().'/biblio/jquery.simple-share.js', array('jquery'));    wp_enqueue_script( 'msx-scripts', get_template_directory_uri().'/scripts.js', array('jquery'));}add_action( 'wp_enqueue_scripts', 'msx_enqueue' );// allow script & iframe tag within postsfunction allow_post_tags( $allowedposttags ){    $allowedposttags['script'] = array(        'type' => true,        'src' => true,        'height' => true,        'width' => true,    );    $allowedposttags['iframe'] = array(        'src' => true,        'width' => true,        'height' => true,        'class' => true,        'frameborder' => true,        'webkitAllowFullScreen' => true,        'mozallowfullscreen' => true,        'allowFullScreen' => true    );    return $allowedposttags;}add_filter('wp_kses_allowed_html','allow_post_tags', 1);

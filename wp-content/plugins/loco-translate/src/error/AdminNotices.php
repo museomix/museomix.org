@@ -19,7 +19,6 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
     private $inline = false;
 
 
-
     /**
      * @return Loco_error_AdminNotices
      */
@@ -42,6 +41,19 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
         }
         if( did_action('admin_notices') ){
             $notices->on_admin_notices();
+        }
+        // if exception wasn't thrown we have to do some work to establish where it was invoked
+        if( __FILE__ === $error->getFile() ){
+            $stack = debug_backtrace();
+            $error->setCallee( $stack[1] );
+        }
+        // Log everything of debug verbosity level or lower if enabled
+        if( $error->getLevel() < Loco_error_Exception::LEVEL_INFO ){
+            if( loco_debugging() && ini_get('error_log') ){
+                $file = new Loco_fs_File( $error->getRealFile() );
+                $path = $file->getRelativePath( loco_plugin_root() );
+                error_log( sprintf('[Loco.%s] "%s" in %s:%u', $error->getType(), $error->getMessage(), $path, $error->getRealLine() ), 0 );
+            }
         }
         return $error;
     }
@@ -66,7 +78,7 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
 
 
     /**
-     * Raise a generic warning message
+     * Raise a generic info message
      * @return Loco_error_Notice
      */
     public static function info( $message ){
@@ -113,7 +125,6 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
         }
         return $data;
     }
-
 
     
     /**
@@ -170,11 +181,14 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
 
 
     /**
+     * @internal
      * Make sure we always see notices if hooks didn't fire
      */
     public function __destruct(){
         $this->inline = false;
-        $this->flush();
+        if( ! loco_doing_ajax() ){
+            $this->flush();
+        }
     }
 
 }

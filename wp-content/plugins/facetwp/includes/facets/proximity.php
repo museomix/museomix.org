@@ -52,7 +52,7 @@ class FacetWP_Facet_Proximity_Core
 
         ob_start();
 ?>
-        <input type="text" id="facetwp-location" value="<?php echo $location_name; ?>" placeholder="<?php _e( 'Enter location', 'fwp' ); ?>" />
+        <input type="text" id="facetwp-location" value="<?php echo esc_attr( $location_name ); ?>" placeholder="<?php _e( 'Enter location', 'fwp' ); ?>" />
 
         <select id="facetwp-radius">
             <?php foreach ( $radius_options as $radius ) : ?>
@@ -62,8 +62,8 @@ class FacetWP_Facet_Proximity_Core
         </select>
 
         <div style="display:none">
-            <input type="text" class="facetwp-lat" value="<?php echo $lat; ?>" />
-            <input type="text" class="facetwp-lng" value="<?php echo $lng; ?>" />
+            <input type="text" class="facetwp-lat" value="<?php echo esc_attr( $lat ); ?>" />
+            <input type="text" class="facetwp-lng" value="<?php echo esc_attr( $lng ); ?>" />
         </div>
 <?php
         return ob_get_clean();
@@ -124,13 +124,19 @@ class FacetWP_Facet_Proximity_Core
 (function($) {
     wp.hooks.addAction('facetwp/load/proximity', function($this, obj) {
         $this.find('.facet-source').val(obj.source);
+        $this.find('.facet-source-other').val(obj.source_other);
         $this.find('.facet-unit').val(obj.unit);
     });
 
     wp.hooks.addFilter('facetwp/save/proximity', function($this, obj) {
         obj['source'] = $this.find('.facet-source').val();
+        obj['source_other'] = $this.find('.facet-source-other').val();
         obj['unit'] = $this.find('.facet-unit').val();
         return obj;
+    });
+
+    wp.hooks.addAction('facetwp/change/proximity', function($this) {
+        $this.closest('.facetwp-row').find('.facet-source-other').trigger('change');
     });
 })(jQuery);
 </script>
@@ -143,8 +149,17 @@ class FacetWP_Facet_Proximity_Core
      */
     function front_scripts() {
         if ( apply_filters( 'facetwp_proximity_load_js', true ) ) {
+
+            // hard-coded
             $api_key = defined( 'GMAPS_API_KEY' ) ? GMAPS_API_KEY : '';
+
+            // admin ui
+            $tmp_key = FWP()->helper->get_setting( 'gmaps_api_key' );
+            $api_key = empty( $tmp_key ) ? $api_key : $tmp_key;
+
+            // hook
             $api_key = apply_filters( 'facetwp_gmaps_api_key', $api_key );
+
             FWP()->display->assets['gmaps'] = '//maps.googleapis.com/maps/api/js?libraries=places&key=' . $api_key;
         }
 
@@ -158,7 +173,29 @@ class FacetWP_Facet_Proximity_Core
      * Output admin settings HTML
      */
     function settings_html() {
+        $sources = FWP()->helper->get_data_sources();
 ?>
+        <tr>
+            <td>
+                <?php _e('Other data source', 'fwp'); ?>:
+                <div class="facetwp-tooltip">
+                    <span class="icon-question">?</span>
+                    <div class="facetwp-tooltip-content"><?php _e( 'Use a separate value for the longitude?', 'fwp' ); ?></div>
+                </div>
+            </td>
+            <td>
+                <select class="facet-source-other">
+                    <option value=""><?php _e( 'None', 'fwp' ); ?></option>
+                    <?php foreach ( $sources as $group ) : ?>
+                    <optgroup label="<?php echo $group['label']; ?>">
+                        <?php foreach ( $group['choices'] as $val => $label ) : ?>
+                        <option value="<?php echo esc_attr( $val ); ?>"><?php echo esc_html( $label ); ?></option>
+                        <?php endforeach; ?>
+                    </optgroup>
+                    <?php endforeach; ?>
+                </select>
+            </td>
+        </tr>
         <tr>
             <td>
                 <?php _e( 'Unit of measurement', 'fwp' ); ?>:
@@ -187,8 +224,19 @@ class FacetWP_Facet_Proximity_Core
 
             // Only handle "lat, lng" strings
             if ( is_string( $latlng ) ) {
-                $latlng = trim( $latlng, '()' ); // no parentheses
-                $latlng = str_replace( ' ', '', $latlng ); // no spaces
+                $latlng = preg_replace( '/[^0-9.,-]/', '', $latlng );
+
+                if ( ! empty( $facet['source_other'] ) ) {
+                    $other_params = $params;
+                    $other_params['facet_source'] = $facet['source_other'];
+                    $rows = $class->get_row_data( $other_params );
+
+                    if ( false === strpos( $latlng, ',' ) ) {
+                        $lng = $rows[0]['facet_display_value'];
+                        $lng = preg_replace( '/[^0-9.,-]/', '', $lng );
+                        $latlng .= ',' . $lng;
+                    }
+                }
 
                 if ( preg_match( "/^([\d.-]+),([\d.-]+)$/", $latlng ) ) {
                     $latlng = explode( ',', $latlng );

@@ -10,6 +10,7 @@
 
 $mainContainerWidth: 310px;
 $mainContainerBorderWidth: 1px;
+$mainContainerBorderRadius: 0px;
 
 .ws_main_container {
 	margin: 2px;
@@ -18,11 +19,12 @@ $mainContainerBorderWidth: 1px;
 	display:block;
 
 	border: $mainContainerBorderWidth solid #cdd5d5;
+	box-shadow: 0 1px 1px rgba(0,0,0,0.04);
 	background-color: #FFFFFF;
 
-	border-radius: 3px;
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
+	border-radius: $mainContainerBorderRadius;
+	-moz-border-radius: $mainContainerBorderRadius;
+	-webkit-border-radius: $mainContainerBorderRadius;
 }
 
 .ws_box {
@@ -213,6 +215,11 @@ $mainContainerBorderWidth: 1px;
 	
 	padding : $itemPadding;
 	margin: 2px 0 2px $itemHorizontalMargin;
+
+	body.rtl & {
+		margin-right: $itemHorizontalMargin;
+		margin-left: 0;
+	}
 }
 
 .ws_active { }
@@ -729,8 +736,8 @@ $activeToolTabBackground: #FDFDFD;
 
 	li.ui-tabs-active {
 		border-color: #dfdfdf;
-		background-color: #FDFDFD;
 		border-bottom-color: $activeToolTabBackground;
+		background: #FDFDFD none;
 	}
 
 	a {
@@ -1128,6 +1135,11 @@ a#ws-ame-delete-color-preset:hover {
 	-moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
+
+	.ui-dialog-content {
+		padding: 8px 8px 8px 8px;
+		font-size: 1.1em;
+	}
 }
 
 .ui-dialog-titlebar {
@@ -1177,11 +1189,6 @@ a#ws-ame-delete-color-preset:hover {
 
 .ui-icon-closethick {
 	
-}
-
-.ui-dialog-content {
-	padding: 8px 8px 8px 8px;
-	font-size: 1.1em;
 }
 
 #export_dialog .ws_dialog_panel {
@@ -1790,6 +1797,13 @@ $userSelectionPanelPadding: 10px;
 	font-size: 18px;
 }
 
+//And in other boxes.
+.ws_ame_custom_postbox .ws_tooltip_trigger .dashicons {
+	font-size: 18px;
+	height: 18px;
+	vertical-align: bottom;
+}
+
 .ws_wide_tooltip {
 	max-width: 450px;
 }
@@ -1837,7 +1851,7 @@ $userSelectionPanelPadding: 10px;
 	margin-left: 0.5em;
 }
 
-.ws_ame_doc_box {
+.ws_ame_doc_box, .ws_ame_custom_postbox {
 	.hndle {
 		cursor: default !important;
 	}
@@ -1870,6 +1884,12 @@ $userSelectionPanelPadding: 10px;
 	&.closed .button-link .toggle-indicator::before {
 		content: "\f140";
 	}
+}
+
+.ws_basic_container .ws_ame_custom_postbox {
+	//Match .ws_main_container's horizontal margins for proper alignment.
+	margin-left: 2px;
+	margin-right: 2px;
 }
 
 /************************************
@@ -1918,6 +1938,19 @@ $userSelectionPanelPadding: 10px;
 	}
 }
 
+/*********************************************
+      Settings page stuff
+**********************************************/
+
+#ws_plugin_settings_form figure {
+	margin-left: 0;
+	margin-top: 0;
+	margin-bottom: 1em;
+}
+
+/*********************************************
+      Miscellaneous
+**********************************************/
 
 #ws_sidebar_pro_ad {
     min-width: 225px;

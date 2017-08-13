@@ -1496,3 +1496,6 @@ body.light {
 .partenaire {
     display: inline-block;
 }
+#proto_gallery img {
+	margin-right:10px;
+}

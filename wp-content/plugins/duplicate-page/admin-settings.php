@@ -84,6 +84,7 @@ $duplicate_post_status = array('draft','publish','private','pending');
     </form>
       <hr />
     </div>
+<?php echo $this->duplicate_page_adsense();?>    
 </div>
 </div>
 </div>

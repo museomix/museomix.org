@@ -5,8 +5,6 @@ class FacetWP_Facet_Date_Range
 
     function __construct() {
         $this->label = __( 'Date Range', 'fwp' );
-
-        add_filter( 'facetwp_index_row', array( $this, 'index_row' ), 5, 2 );
     }
 
 
@@ -21,13 +19,13 @@ class FacetWP_Facet_Date_Range
         $fields = empty( $params['facet']['fields'] ) ? 'both' : $params['facet']['fields'];
 
         if ( 'exact' == $fields ) {
-            $output .= '<input type="text" class="facetwp-date facetwp-date-min" value="' . $value[0] . '" placeholder="' . __( 'Date', 'fwp' ) . '" />';
+            $output .= '<input type="text" class="facetwp-date facetwp-date-min" value="' . esc_attr( $value[0] ) . '" placeholder="' . __( 'Date', 'fwp' ) . '" />';
         }
         if ( 'both' == $fields || 'start_date' == $fields ) {
-            $output .= '<input type="text" class="facetwp-date facetwp-date-min" value="' . $value[0] . '" placeholder="' . __( 'Start Date', 'fwp' ) . '" />';
+            $output .= '<input type="text" class="facetwp-date facetwp-date-min" value="' . esc_attr( $value[0] ) . '" placeholder="' . __( 'Start Date', 'fwp' ) . '" />';
         }
         if ( 'both' == $fields || 'end_date' == $fields ) {
-            $output .= '<input type="text" class="facetwp-date facetwp-date-max" value="' . $value[1] . '" placeholder="' . __( 'End Date', 'fwp' ) . '" />';
+            $output .= '<input type="text" class="facetwp-date facetwp-date-max" value="' . esc_attr( $value[1] ) . '" placeholder="' . __( 'End Date', 'fwp' ) . '" />';
         }
         return $output;
     }
@@ -47,24 +45,44 @@ class FacetWP_Facet_Date_Range
         $end = empty( $values[1] ) ? false : $values[1];
 
         $is_dual = ! empty( $facet['source_other'] );
-        $is_intersect = FWP()->helper->facet_is( $facet, 'compare_type', 'intersect' );
+        $compare_type = isset( $facet['compare_type'] ) ? $facet['compare_type'] : '';
 
-        /**
-         * Intersect compare
-         * @link http://stackoverflow.com/a/325964
-         */
-        if ( $is_dual && $is_intersect ) {
+        if ( $is_dual ) {
             $start = ( false !== $start ) ? $start : '0000-00-00';
             $end = ( false !== $end ) ? $end : '3000-12-31';
 
-            $where .= " AND (LEFT(facet_value, 10) <= '$end')";
-            $where .= " AND (LEFT(facet_display_value, 10) >= '$start')";
+            /**
+             * Intersect compare
+             * @link http://stackoverflow.com/a/325964
+             */
+            if ( 'intersect' == $compare_type ) {
+                $where .= " AND (LEFT(facet_value, 10) <= '$end')";
+                $where .= " AND (LEFT(facet_display_value, 10) >= '$start')";
+            }
+
+            /**
+             * Enclose compare
+             * The post's range must fully enclose the user-defined range
+             */
+            elseif ( 'enclose' == $compare_type ) {
+                $where .= " AND LEFT(facet_value, 10) <= '$start'";
+                $where .= " AND LEFT(facet_display_value, 10) >= '$end'";
+            }
         }
+
+        /**
+         * Exact match
+         */
         elseif ( 'exact' == $facet['fields'] ) {
             if ( $start ) {
                 $where .= " AND LEFT(facet_value, 10) = '$start'";
             }
         }
+
+        /**
+         * Basic compare
+         * The post's range must be fully inside the user-defined range
+         */
         else {
             if ( $start ) {
                 $where .= " AND LEFT(facet_value, 10) >= '$start'";
@@ -77,7 +95,7 @@ class FacetWP_Facet_Date_Range
         $sql = "
         SELECT DISTINCT post_id FROM {$wpdb->prefix}facetwp_index
         WHERE facet_name = '{$facet['name']}' $where";
-        return $wpdb->get_col( $sql );
+        return facetwp_sql( $sql, $facet );
     }
 
 
@@ -118,26 +136,19 @@ class FacetWP_Facet_Date_Range
      * Output any front-end scripts
      */
     function front_scripts() {
-        $i18n = array(
-            'months' => array(
-                __( 'January', 'fwp' ),
-                __( 'February', 'fwp' ),
-                __( 'March', 'fwp' ),
-                __( 'April', 'fwp' ),
-                __( 'May', 'fwp' ),
-                __( 'June', 'fwp' ),
-                __( 'July', 'fwp' ),
-                __( 'August', 'fwp' ),
-                __( 'September', 'fwp' ),
-                __( 'October', 'fwp' ),
-                __( 'November', 'fwp' ),
-                __( 'December', 'fwp' ),
-            ),
-        );
+        $locale = get_locale();
+        $locale = empty( $locale ) ? 'en' : substr( $locale, 0, 2 );
 
-        FWP()->display->json['datepicker'] = $i18n;
-        FWP()->display->assets['flatpickr.css'] = FACETWP_URL . '/assets/js/flatpickr/flatpickr.min.css';
+        FWP()->display->json['datepicker'] = array(
+            'locale'    => $locale,
+            'clearText' => __( 'Clear', 'fwp' ),
+        );
+        FWP()->display->assets['flatpickr.css'] = FACETWP_URL . '/assets/js/flatpickr/flatpickr.css';
         FWP()->display->assets['flatpickr.js'] = FACETWP_URL . '/assets/js/flatpickr/flatpickr.min.js';
+
+        if ( 'en' != $locale ) {
+            FWP()->display->assets['flatpickr-l10n.js'] = FACETWP_URL . "/assets/js/flatpickr/l10n/$locale.js";
+        }
     }
 
 
@@ -173,6 +184,7 @@ class FacetWP_Facet_Date_Range
             <td>
                 <select class="facet-compare-type">
                     <option value=""><?php _e( 'Basic', 'fwp' ); ?></option>
+                    <option value="enclose"><?php _e( 'Enclose', 'fwp' ); ?></option>
                     <option value="intersect"><?php _e( 'Intersect', 'fwp' ); ?></option>
                 </select>
             </td>
@@ -193,7 +205,7 @@ class FacetWP_Facet_Date_Range
                 <?php _e('Display format', 'fwp'); ?>:
                 <div class="facetwp-tooltip">
                     <span class="icon-question">?</span>
-                    <div class="facetwp-tooltip-content">See available <a href="https://chmln.github.io/flatpickr/#dateformat" target="_blank">format characters</a></div>
+                    <div class="facetwp-tooltip-content">See available <a href="https://chmln.github.io/flatpickr/formatting/" target="_blank">formatting tokens</a></div>
                 </div>
             </td>
             <td><input type="text" class="facet-format" value="" placeholder="Y-m-d" /></td>
@@ -208,27 +220,5 @@ class FacetWP_Facet_Date_Range
     function settings_js( $params ) {
         $format = empty( $params['facet']['format'] ) ? 'Y-m-d' : $params['facet']['format'];
         return array( 'format' => $format );
-    }
-
-
-    /**
-     * Index the 2nd data source
-     * @since 2.1.1
-     */
-    function index_row( $params, $class ) {
-        if ( $class->is_overridden ) {
-            return $params;
-        }
-
-        $facet = FWP()->helper->get_facet_by_name( $params['facet_name'] );
-
-        if ( 'date_range' == $facet['type'] && ! empty( $facet['source_other'] ) ) {
-            $other_params = $params;
-            $other_params['facet_source'] = $facet['source_other'];
-            $rows = $class->get_row_data( $other_params );
-            $params['facet_display_value'] = $rows[0]['facet_display_value'];
-        }
-
-        return $params;
     }
 }

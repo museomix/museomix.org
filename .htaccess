@@ -1,4 +1,34 @@
+# BEGIN SecuPress readme_discloses
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    RewriteRule (/|^)(readme|changelog)\.(txt|md|html)$ - [R=404,L,NC]
+</IfModule>
+# END SecuPress
+
+# BEGIN SecuPress directory_index
+<IfModule mod_dir.c>
+    DirectoryIndex index.php index.html index.htm index.cgi index.pl index.xhtml
+</IfModule>
+# END SecuPress
+
+# BEGIN SecuPress bad_url_access
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    RewriteCond %{REQUEST_URI} !wp-includes/js/tinymce/wp-tinymce\.php$
+    RewriteRule ^(php\.ini|wp-config\.php|wp-includes/.+\.php|wp-admin/(admin-functions|install|menu-header|setup-config|([^/]+/)?menu|upgrade-functions|includes/.+)\.php)$ [R=404,L,NC]
+</IfModule>
+# END SecuPress
+
+# BEGIN SecuPress directory_listing
+<IfModule mod_autoindex.c>
+    Options -Indexes
+</IfModule>
+# END SecuPress
+
 RewriteEngine On
+RewriteRule ^.*\.git.* - [R=404]
 RewriteCond %{HTTP_HOST} !^www\.
 RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
 

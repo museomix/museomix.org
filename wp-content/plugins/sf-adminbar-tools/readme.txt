@@ -2,7 +2,7 @@
 Contributors: GregLone
 Tags: admin, admin bar, bar, query, screen, tool, dev, template
 Requires at least: 3.1
-Tested up to: 4.5.0
+Tested up to: 4.7.0
 Stable tag: trunk
 License: GPLv3
 
@@ -10,13 +10,18 @@ Adds some small interesting tools to the admin bar for Developers.
 
 == Description ==
 The plugin adds a new tab in your admin bar with simple but useful indications and tools.
+
 * Displays the number of queries in your page and the amount of time to generate the page.
 * Displays php memory usage, php memory limit, and php version.
 * Display WP_DEBUG state and error reporting value.
+
 **In your site front-end:**
+
 * List the template and all template parts used in the current page (template parts added with <code>get_template_part()</code>). Compatible with WooCommerce.
 * WP_Query: click the *$wp_query* item will open a lightbox with the content of $wp_query. Click the lightbox title to reload the value, click outside the lightbox to close it.
+
 **In your site administration:**
+
 * Current screen: a dropdown containing lots of things:
 1. Three lists of useful hooks (actions). The indicator to the right of the line tells you how many times the hook has been triggered (a "x" means the plugin doesn't know, because the hook occurs after the admin bar). A "P" means the hook has a parameter: hover it for more details. Click a hook (on its text) to auto-select its code, for example: click *admin_init* to select <code>add_action( 'admin_init', '' );</code>.
 2. $...now: this dropdown contains the value of the well-known variables $pagenow, $typenow and $taxnow.
@@ -54,6 +59,11 @@ Check out [the plugin page on my blog](https://www.screenfeed.fr/plugin-wp/sf-ad
 6. The settings in your profile page.
 
 == Changelog ==
+
+= 3.0.4 =
+* 2016/11/27
+* Ready for WP 4.7.
+* Fixed php warnings related to the new `WP_Hook` class. Thanks Sébastien Serre for alerting me.
 
 = 3.0.3 =
 * 2016/04/03

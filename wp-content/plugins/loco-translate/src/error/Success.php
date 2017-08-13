@@ -16,7 +16,15 @@ class Loco_error_Success extends Loco_error_Exception {
      * {@inheritdoc}
      */
     public function getTitle(){
-        return __('OK','loco');
+        return __('OK','loco-translate');
+    }
+
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLevel(){
+        return Loco_error_Exception::LEVEL_INFO;
     }
 
 }

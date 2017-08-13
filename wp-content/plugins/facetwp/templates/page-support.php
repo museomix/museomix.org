@@ -26,7 +26,7 @@ ob_start();
 ?>
 Home URL:                   <?php echo home_url(); ?>
 
-FacetWP License:            <?php echo '~' . substr( get_option( 'facetwp_license' ), -8 ); ?>
+Payment ID:                 <?php echo empty( $activation['payment_id'] ) ? '' : $activation['payment_id']; ?>
 
 WordPress Version:          <?php echo get_bloginfo( 'version' ); ?>
 
@@ -40,8 +40,6 @@ PHP Version:                <?php echo phpversion(); ?>
 MySQL Version:              <?php echo $wpdb->get_var( "SELECT VERSION()" ); ?>
 
 Web Server Info:            <?php echo $_SERVER['SERVER_SOFTWARE']; ?>
-
-PHP Memory Limit:           <?php echo ini_get( 'memory_limit' ); ?>
 
 
 <?php
@@ -62,7 +60,7 @@ $sysinfo = urlencode( $sysinfo );
     $(function() {
         $(document).on('click', '.facetwp-tab[rel="support"]', function() {
             if ( 1 > $('.fwp-iframe-wrapper iframe').length) {
-                var iframe = '<iframe src="https://facetwp.com/create-ticket/?sysinfo=<?php echo $sysinfo; ?>" style="width:100%; height:600px"></iframe>';
+                var iframe = '<iframe src="https://facetwp.com/support/create-ticket/?sysinfo=<?php echo $sysinfo; ?>" style="width:100%; height:600px"></iframe>';
                 $('.fwp-iframe-wrapper').html(iframe);
             }
         });

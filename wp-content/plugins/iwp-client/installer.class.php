@@ -174,7 +174,14 @@ class IWP_MMB_Installer extends IWP_MMB_Core
                 'error' => 'Failed, please add FTP details', 'error_code' => 'failed_please_add_ftp_do_upgrade'
             );
         }
-
+        $WPTC_response = apply_filters('backup_and_update_wptc', $params);
+        if ($WPTC_response == 'WPTC_TAKES_CARE_OF_IT') {
+            return array('success' => 'The update will now be handled by WP Time Capsule. Check the WPTC page for its status.', 'success_code' => 'WPTC_TAKES_CARE_OF_IT');
+        }elseif (!empty($WPTC_response['error_code'])) {
+            return $WPTC_response;
+        }elseif (!empty($WPTC_response['success'])) {
+            return $WPTC_response;
+        }
         $params = isset($params['upgrades_all']) ? $params['upgrades_all'] : $params;
         
         $core_upgrade    = isset($params['wp_upgrade']) ? $params['wp_upgrade'] : array();
@@ -202,13 +209,8 @@ class IWP_MMB_Installer extends IWP_MMB_Core
         if (!empty($upgrade_plugins)) {
             $plugin_files = $plugin_details = $premium_plugin_details = array();
             foreach ($upgrade_plugins as $plugin) {
-                if ($GLOBALS['IWP_JSON_COMMUNICATION']) {
-                    $file_path = $plugin['file'];
-                    $plugin_name = $plugin['name'];
-                } else{
-                    $file_path = $plugin->file;
-                    $plugin_name = $plugin->name;
-                }
+                $file_path = $plugin['file'];
+                $plugin_name = $plugin['name'];
                 if (isset($file_path)) {
 					$plugin_details[] = $plugin;
                     $plugin_files[$file_path] = $plugin->old_version;
@@ -297,9 +299,7 @@ class IWP_MMB_Installer extends IWP_MMB_Core
     {
 		global $iwp_activities_log_post_type, $iwp_mmb_activities_log;		
         ob_start();
-         if ($GLOBALS['IWP_JSON_COMMUNICATION']) {
-            $current = (object)$current;
-         }
+        $current = (object)$current;
 
         if (!function_exists('wp_version_check') || !function_exists('get_core_checksums'))
             include_once(ABSPATH . '/wp-admin/includes/update.php');

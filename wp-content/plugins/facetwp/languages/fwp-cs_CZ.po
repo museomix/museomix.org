@@ -1,0 +1,742 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: FacetWP\n"
+"POT-Creation-Date: 2017-06-17 22:11-0400\n"
+"PO-Revision-Date: 2017-06-17 22:11-0400\n"
+"Last-Translator: Matt Gibbs <hello@facetwp.com>\n"
+"Language-Team: webees.cz s.r.o. <webees@webees.cz>\n"
+"Language: cs_CZ\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.2\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: includes/class-ajax.php:180
+#, fuzzy
+msgid "FacetWP was unable to auto-detect the post listing"
+msgstr "FacetWP se nepodařilo detekovat post výpis"
+
+#: includes/class-ajax.php:208
+msgid "Settings saved"
+msgstr "Nastavení uloženo"
+
+#: includes/class-ajax.php:211
+msgid "Error: invalid JSON"
+msgstr "Chyba: Neplatný JSON"
+
+#: includes/class-ajax.php:330
+msgid "Nothing to import"
+msgstr "Nic k importu"
+
+#: includes/class-ajax.php:366
+msgid "Imported"
+msgstr "Importováno"
+
+#: includes/class-ajax.php:369
+msgid "Skipped"
+msgstr "Přeskočeno"
+
+#: includes/class-ajax.php:400
+msgid "Error"
+msgstr "Chyba"
+
+#: includes/class-facet.php:455 includes/class-facet.php:572
+msgid "of"
+msgstr "z"
+
+#: includes/class-facet.php:489 includes/facets/checkboxes.php:328
+#: includes/facets/dropdown.php:198 includes/facets/fselect.php:270
+#: includes/facets/hierarchy.php:218 includes/facets/radio.php:213
+msgid "Sort by"
+msgstr "Seřadit podle"
+
+#: includes/class-facet.php:493
+msgid "Title (A-Z)"
+msgstr "Název (A-Z)"
+
+#: includes/class-facet.php:500
+msgid "Title (Z-A)"
+msgstr "Název (Z-A)"
+
+#: includes/class-facet.php:507
+msgid "Date (Newest)"
+msgstr "Datum (Nejnovější)"
+
+#: includes/class-facet.php:514
+msgid "Date (Oldest)"
+msgstr "Datum (Nejstarší)"
+
+#: includes/class-facet.php:571
+msgid "Page"
+msgstr "Stránka"
+
+#: includes/class-facet.php:622
+msgid "Per page"
+msgstr "Na stránku"
+
+#: includes/class-helper.php:380
+msgid "Posts"
+msgstr "Příspěvky"
+
+#: includes/class-helper.php:382
+msgid "Post Type"
+msgstr "Typ příspěvku"
+
+#: includes/class-helper.php:383
+msgid "Post Date"
+msgstr "Datum příspěvku"
+
+#: includes/class-helper.php:384
+msgid "Post Modified"
+msgstr "Úprava příspěvku"
+
+#: includes/class-helper.php:385
+msgid "Post Title"
+msgstr "Název příspěvku"
+
+#: includes/class-helper.php:386
+msgid "Post Author"
+msgstr "Autor příspěvku"
+
+#: includes/class-helper.php:391
+msgid "Taxonomies"
+msgstr "Taxonomie"
+
+#: includes/class-helper.php:396
+msgid "Custom Fields"
+msgstr "Vlastní pole"
+
+#: includes/class-init.php:135 templates/page-settings.php:108
+msgid "Settings"
+msgstr "Nastavení"
+
+#: includes/class-init.php:167
+#, fuzzy
+msgid "integration add-on"
+msgstr "doplněk integrace"
+
+#: includes/class-init.php:168
+#, fuzzy, php-format
+msgid "To use FacetWP with %s, please install the %s, then re-index."
+msgstr "Chcete-li použít FacetWP s %s, nainstalovat %s, pak index znovu."
+
+#: includes/class-updater.php:109
+msgid "Please activate or renew your license for automatic updates."
+msgstr "Pro automatické aktualizace prosím aktivujte nebo obnovte licenci."
+
+#: includes/facets/autocomplete.php:7
+msgid "Autocomplete"
+msgstr "Automatické dokončení"
+
+#: includes/facets/autocomplete.php:26
+msgid "Start typing..."
+msgstr "Začněte psát..."
+
+#: includes/facets/autocomplete.php:29
+msgid "Update"
+msgstr "Aktualizovat"
+
+#: includes/facets/autocomplete.php:85
+msgid "No results"
+msgstr "Žádné výsledky"
+
+#: includes/facets/autocomplete.php:130 includes/facets/search.php:102
+msgid "Placeholder text"
+msgstr "Text placeholderu"
+
+#: includes/facets/checkboxes.php:7
+msgid "Checkboxes"
+msgstr "Zatržítka"
+
+#: includes/facets/checkboxes.php:157
+msgid "See {num} more"
+msgstr "Zobrazit {num} dalších"
+
+#: includes/facets/checkboxes.php:158 includes/facets/hierarchy.php:158
+msgid "See less"
+msgstr "Zobrazit méně"
+
+#: includes/facets/checkboxes.php:314 includes/facets/dropdown.php:184
+#: includes/facets/fselect.php:256 includes/facets/radio.php:199
+msgid "Parent term"
+msgstr "Nadřazený termín"
+
+#: includes/facets/checkboxes.php:331 includes/facets/dropdown.php:201
+#: includes/facets/fselect.php:273 includes/facets/hierarchy.php:221
+#: includes/facets/radio.php:216
+msgid "Highest Count"
+msgstr "Nejvyšší počet"
+
+#: includes/facets/checkboxes.php:332 includes/facets/dropdown.php:202
+#: includes/facets/fselect.php:274 includes/facets/hierarchy.php:222
+#: includes/facets/radio.php:217
+msgid "Display Value"
+msgstr "Zobrazit hodnotu"
+
+#: includes/facets/checkboxes.php:333 includes/facets/dropdown.php:203
+#: includes/facets/fselect.php:275 includes/facets/hierarchy.php:223
+#: includes/facets/radio.php:218
+msgid "Raw Value"
+msgstr "Surová hodnota"
+
+#: includes/facets/checkboxes.php:339 includes/facets/fselect.php:281
+msgid "Behavior"
+msgstr "Chování"
+
+#: includes/facets/checkboxes.php:342 includes/facets/fselect.php:284
+msgid "How should multiple selections affect the results?"
+msgstr "Jak by měl vícenásobný výběr ovlivnit výsledky?"
+
+#: includes/facets/checkboxes.php:347 includes/facets/fselect.php:289
+msgid "Narrow the result set"
+msgstr "Zúžit sestavu výsledků"
+
+#: includes/facets/checkboxes.php:348 includes/facets/fselect.php:290
+msgid "Widen the result set"
+msgstr "Rozšířit sestavu výsledků"
+
+#: includes/facets/checkboxes.php:354 includes/facets/dropdown.php:209
+msgid "Hierarchical"
+msgstr "Hierarchické"
+
+#: includes/facets/checkboxes.php:357 includes/facets/dropdown.php:212
+msgid "Is this a hierarchical taxonomy?"
+msgstr "Jde o hierarchickou taxonomii?"
+
+#: includes/facets/checkboxes.php:362 includes/facets/checkboxes.php:377
+#: includes/facets/checkboxes.php:392 includes/facets/checkboxes.php:407
+#: includes/facets/dropdown.php:217 includes/facets/fselect.php:243
+#: includes/facets/radio.php:232 includes/facets/radio.php:247
+#: includes/integrations/acf/acf.php:207 templates/page-settings.php:281
+#: templates/page-settings.php:298
+msgid "No"
+msgstr "Ne"
+
+#: includes/facets/checkboxes.php:363 includes/facets/checkboxes.php:378
+#: includes/facets/checkboxes.php:393 includes/facets/checkboxes.php:408
+#: includes/facets/dropdown.php:218 includes/facets/fselect.php:244
+#: includes/facets/radio.php:233 includes/facets/radio.php:248
+#: includes/integrations/acf/acf.php:207 templates/page-settings.php:282
+#: templates/page-settings.php:299
+msgid "Yes"
+msgstr "Ano"
+
+#: includes/facets/checkboxes.php:369
+#, fuzzy
+msgid "Show expanded"
+msgstr "Zobrazit rozšířené"
+
+#: includes/facets/checkboxes.php:372
+#, fuzzy
+msgid "Should child terms be visible by default?"
+msgstr "By měl být viditelný ve výchozím nastavení podřízených termínů?"
+
+#: includes/facets/checkboxes.php:384 includes/facets/radio.php:224
+msgid "Show ghosts"
+msgstr "Zobrazit duchy"
+
+#: includes/facets/checkboxes.php:387 includes/facets/radio.php:227
+msgid "Show choices that would return zero results?"
+msgstr "Zobrazit možnosti vracející nula výsledků?"
+
+#: includes/facets/checkboxes.php:399 includes/facets/radio.php:239
+msgid "Preserve ghost order"
+msgstr "Zachovat pořadí duchů"
+
+#: includes/facets/checkboxes.php:402 includes/facets/radio.php:242
+msgid "Keep ghost choices in the same order?"
+msgstr "Ponechat duchy ve stejném pořadí?"
+
+#: includes/facets/checkboxes.php:414 includes/facets/dropdown.php:224
+#: includes/facets/fselect.php:296 includes/facets/hierarchy.php:229
+#: includes/facets/radio.php:254
+msgid "Count"
+msgstr "Počet"
+
+#: includes/facets/checkboxes.php:417 includes/facets/dropdown.php:227
+#: includes/facets/fselect.php:299 includes/facets/hierarchy.php:232
+#: includes/facets/radio.php:257
+msgid "The maximum number of facet choices to show"
+msgstr "Maximální počet zobrazených možností facetů"
+
+#: includes/facets/checkboxes.php:424
+msgid "Soft Limit"
+msgstr "Lehký limit"
+
+#: includes/facets/checkboxes.php:427
+msgid "Show a toggle link after this many choices"
+msgstr "Zobrazit rozkliknutí po tomto množství možností"
+
+#: includes/facets/date_range.php:7
+msgid "Date Range"
+msgstr "Rozsah data"
+
+#: includes/facets/date_range.php:22
+msgid "Date"
+msgstr "Datum"
+
+#: includes/facets/date_range.php:25 includes/facets/date_range.php:198
+msgid "Start Date"
+msgstr "Počáteční datum"
+
+#: includes/facets/date_range.php:28 includes/facets/date_range.php:199
+msgid "End Date"
+msgstr "Konečné datum"
+
+#: includes/facets/date_range.php:144
+msgid "Clear"
+msgstr "Vyčistit"
+
+#: includes/facets/date_range.php:163 includes/facets/number_range.php:108
+#: includes/facets/proximity.php:180 includes/facets/slider.php:166
+msgid "Other data source"
+msgstr "Další zdroj dat"
+
+#: includes/facets/date_range.php:166 includes/facets/number_range.php:111
+#: includes/facets/slider.php:169
+msgid "Use a separate value for the upper limit?"
+msgstr "Použít oddělenou hodnotu pro horní limit?"
+
+#: includes/facets/date_range.php:171 includes/facets/number_range.php:116
+#: includes/facets/proximity.php:188 includes/facets/slider.php:174
+#: templates/page-settings.php:247
+msgid "None"
+msgstr "Žádný"
+
+#: includes/facets/date_range.php:183 includes/facets/number_range.php:128
+#: includes/facets/slider.php:186
+msgid "Compare type"
+msgstr "Typ porovnání"
+
+#: includes/facets/date_range.php:186 includes/facets/number_range.php:131
+#: includes/facets/slider.php:189
+msgid "Basic"
+msgstr "Základní"
+
+#: includes/facets/date_range.php:187
+#, fuzzy
+msgid "Enclose"
+msgstr "Uzavřete"
+
+#: includes/facets/date_range.php:188 includes/facets/number_range.php:132
+#: includes/facets/slider.php:190
+msgid "Intersect"
+msgstr "Průnik"
+
+#: includes/facets/date_range.php:193
+msgid "Fields to show"
+msgstr "Pole k zobrazení"
+
+#: includes/facets/date_range.php:196
+msgid "Start + End Dates"
+msgstr "Počáteční + konečná data"
+
+#: includes/facets/date_range.php:197
+msgid "Exact Date"
+msgstr "Přesné datum"
+
+#: includes/facets/date_range.php:205
+msgid "Display format"
+msgstr "Formát zobrazení"
+
+#: includes/facets/dropdown.php:7
+msgid "Dropdown"
+msgstr "Rozbalovací nabídka"
+
+#: includes/facets/dropdown.php:85 includes/facets/dropdown.php:179
+#: includes/facets/fselect.php:96 includes/facets/fselect.php:169
+#: includes/facets/fselect.php:251 includes/facets/hierarchy.php:73
+msgid "Any"
+msgstr "Jakékoliv"
+
+#: includes/facets/dropdown.php:170 includes/facets/fselect.php:249
+msgid "Default label"
+msgstr "Výchozí název"
+
+#: includes/facets/fselect.php:7
+msgid "fSelect"
+msgstr "fSelect"
+
+#: includes/facets/fselect.php:174
+msgid "{n} selected"
+msgstr "{n} vybraných"
+
+#: includes/facets/fselect.php:175 includes/facets/search.php:7
+msgid "Search"
+msgstr "Hledat"
+
+#: includes/facets/fselect.php:239
+msgid "Multi-select?"
+msgstr "Vícenásobný výběr?"
+
+#: includes/facets/hierarchy.php:7
+msgid "Hierarchy"
+msgstr "Hierarchie"
+
+#: includes/facets/hierarchy.php:157
+msgid "See more"
+msgstr "Zobrazit více"
+
+#: includes/facets/number_range.php:7
+msgid "Number Range"
+msgstr "Číselný rozsah"
+
+#: includes/facets/number_range.php:19
+msgid "Min"
+msgstr "Minimum"
+
+#: includes/facets/number_range.php:21
+msgid "Max"
+msgstr "Maximum"
+
+#: includes/facets/number_range.php:23
+#, fuzzy
+msgid "OK"
+msgstr "OK"
+
+#: includes/facets/proximity.php:19
+msgid "Proximity"
+msgstr "Blízkost"
+
+#: includes/facets/proximity.php:55
+msgid "Enter location"
+msgstr "Zadejte umístění"
+
+#: includes/facets/proximity.php:183
+#, fuzzy
+#| msgid "Use a separate value for the upper limit?"
+msgid "Use a separate value for the longitude?"
+msgstr "Použít samostatnou hodnotu pro délky?"
+
+#: includes/facets/proximity.php:201
+msgid "Unit of measurement"
+msgstr "Jednotka měření"
+
+#: includes/facets/proximity.php:205
+msgid "Miles"
+msgstr "Míle"
+
+#: includes/facets/proximity.php:206
+msgid "Kilometers"
+msgstr "Kilometry"
+
+#: includes/facets/proximity.php:260
+msgid "Distance"
+msgstr "Vzdálenost"
+
+#: includes/facets/radio.php:7
+msgid "Radio"
+msgstr "Radio"
+
+#: includes/facets/search.php:19
+msgid "Enter keywords"
+msgstr "Vložte klíčová slova"
+
+#: includes/facets/search.php:91
+msgid "Search engine"
+msgstr "Vyhledávací engine"
+
+#: includes/facets/search.php:94
+msgid "WP Default"
+msgstr "Výchozí WP"
+
+#: includes/facets/slider.php:7
+msgid "Slider"
+msgstr "Posuvník"
+
+#: includes/facets/slider.php:20
+msgid "Reset"
+msgstr "Obnovit"
+
+#: includes/facets/slider.php:196
+msgid "Prefix"
+msgstr "Předpona"
+
+#: includes/facets/slider.php:199
+msgid "Text that appears before each slider value"
+msgstr "Text zobrazený před každou hodnotou posuvníku"
+
+#: includes/facets/slider.php:206
+msgid "Suffix"
+msgstr "Přípona"
+
+#: includes/facets/slider.php:209
+msgid "Text that appears after each slider value"
+msgstr "Text zobrazený za každou hodnotou posuvníku"
+
+#: includes/facets/slider.php:216
+msgid "Format"
+msgstr "Formát"
+
+#: includes/facets/slider.php:219
+msgid "The number format"
+msgstr "Číselný formát"
+
+#: includes/facets/slider.php:240
+msgid "Step"
+msgstr "Krok"
+
+#: includes/facets/slider.php:243
+msgid "The amount of increase between intervals"
+msgstr "Množství zvýšení mezi intervaly"
+
+#: includes/integrations/searchwp/searchwp.php:105
+msgid "Default"
+msgstr "Výchozí"
+
+#: includes/integrations/woocommerce/woocommerce.php:48
+msgid "WooCommerce"
+msgstr "WooCommerce"
+
+#: includes/integrations/woocommerce/woocommerce.php:50
+msgid "Price"
+msgstr "Cena"
+
+#: includes/integrations/woocommerce/woocommerce.php:51
+msgid "Sale Price"
+msgstr "Prodejní cena"
+
+#: includes/integrations/woocommerce/woocommerce.php:52
+msgid "Regular Price"
+msgstr "Obvyklá cena"
+
+#: includes/integrations/woocommerce/woocommerce.php:53
+msgid "Average Rating"
+msgstr "Průměrné hodnocení"
+
+#: includes/integrations/woocommerce/woocommerce.php:54
+msgid "Stock Status"
+msgstr "Stav skladu"
+
+#: includes/integrations/woocommerce/woocommerce.php:55
+#: includes/integrations/woocommerce/woocommerce.php:416
+msgid "On Sale"
+msgstr "Výprodej"
+
+#: includes/integrations/woocommerce/woocommerce.php:408
+msgid "In Stock"
+msgstr "Skladem"
+
+#: includes/integrations/woocommerce/woocommerce.php:408
+msgid "Out of Stock"
+msgstr "Není skladem"
+
+#: index.php:72
+#, fuzzy, php-format
+msgid ""
+"FacetWP requires PHP %s or above. Please contact your host and request a PHP "
+"upgrade."
+msgstr ""
+"FacetWP vyžaduje PHP %s nebo vyšší. Prosím obraťte se na svého hostitele a "
+"požádat o PHP upgrade."
+
+#: templates/page-settings.php:7
+msgid "All post types"
+msgstr "Všechny typy příspěvku"
+
+#: templates/page-settings.php:8
+msgid "Indexing complete"
+msgstr "Indexování hotovo"
+
+#: templates/page-settings.php:9
+msgid "Indexing"
+msgstr "Indexuji"
+
+#: templates/page-settings.php:10
+msgid "Saving"
+msgstr "Ukládám"
+
+#: templates/page-settings.php:11
+msgid "Loading"
+msgstr "Nahrávám"
+
+#: templates/page-settings.php:12
+msgid "Importing"
+msgstr "Importuji"
+
+#: templates/page-settings.php:13
+msgid "Activating"
+msgstr "Aktivuji"
+
+#: templates/page-settings.php:14
+msgid "Are you sure?"
+msgstr "Jste si jisti?"
+
+#: templates/page-settings.php:15
+msgid "Select some items"
+msgstr "Vyberte některé položky"
+
+#: templates/page-settings.php:39
+msgid "This facet type has no additional settings."
+msgstr "Tento facet nemá žádná další nastavení."
+
+#: templates/page-settings.php:48
+msgid "Not yet activated"
+msgstr "Zatím neaktivováno"
+
+#: templates/page-settings.php:53
+msgid "License active"
+msgstr "Licence aktivní"
+
+#: templates/page-settings.php:54
+msgid "expires"
+msgstr "expiruje"
+
+#: templates/page-settings.php:105
+msgid "Welcome"
+msgstr "Vítejte"
+
+#: templates/page-settings.php:106
+msgid "Facets"
+msgstr "Facety"
+
+#: templates/page-settings.php:107
+msgid "Templates"
+msgstr "Šablony"
+
+#: templates/page-settings.php:109
+msgid "Support"
+msgstr "Podpora"
+
+#: templates/page-settings.php:121
+msgid "Welcome to FacetWP"
+msgstr "Vítejte ve FacetWP"
+
+#: templates/page-settings.php:134 templates/page-settings.php:158
+msgid "Add New"
+msgstr "Přidat nový"
+
+#: templates/page-settings.php:137 templates/page-settings.php:161
+msgid "Back"
+msgstr "Zpět"
+
+#: templates/page-settings.php:141
+msgid "Re-index"
+msgstr "Re-indexovat"
+
+#: templates/page-settings.php:142 templates/page-settings.php:165
+#: templates/page-settings.php:192
+msgid "Save Changes"
+msgstr "Uložit změny"
+
+#: templates/page-settings.php:203
+msgid "License Key"
+msgstr "Licenční klíč"
+
+#: templates/page-settings.php:206
+msgid "Activate"
+msgstr "Aktivovat"
+
+#: templates/page-settings.php:214
+#, fuzzy
+msgid "Google Maps API Key"
+msgstr "API klíč Google maps"
+
+#: templates/page-settings.php:229
+msgid "Separators"
+msgstr "Oddělovače"
+
+#: templates/page-settings.php:241
+#, fuzzy
+msgid "Loading Animation"
+msgstr "Nahrávám animaci"
+
+#: templates/page-settings.php:245
+#, fuzzy
+msgid "Spin"
+msgstr "Rotovat"
+
+#: templates/page-settings.php:246
+#, fuzzy
+msgid "Fade"
+msgstr "Slábnutí"
+
+#: templates/page-settings.php:253
+#, fuzzy
+msgid "Debug Mode"
+msgstr "Ladící mód"
+
+#: templates/page-settings.php:257
+#, fuzzy
+msgid "Off"
+msgstr "Vypnout"
+
+#: templates/page-settings.php:258
+#, fuzzy
+msgid "On"
+msgstr "Zapnout"
+
+#: templates/page-settings.php:271
+#, fuzzy
+msgid "Support product variations?"
+msgstr "Podpora produktu varianty?"
+
+#: templates/page-settings.php:288
+#, fuzzy
+msgid "Include all products?"
+msgstr "Chcete zahrnout všechny výrobky?"
+
+#: templates/page-settings.php:312 templates/page-settings.php:320
+msgid "Export"
+msgstr "Export"
+
+#: templates/page-settings.php:327 templates/page-settings.php:332
+msgid "Import"
+msgstr "Import"
+
+#: templates/page-settings.php:330
+msgid "Paste the import code here"
+msgstr "Sem vložte importovaný kód"
+
+#: templates/page-settings.php:331
+msgid "Overwrite existing items?"
+msgstr "Přepsat existující položky?"
+
+#: templates/page-settings.php:357
+msgid "Label"
+msgstr "Název"
+
+#: templates/page-settings.php:361 templates/page-settings.php:404
+msgid "Name"
+msgstr "Jméno"
+
+#: templates/page-settings.php:365
+msgid "Facet type"
+msgstr "Typ Facetu"
+
+#: templates/page-settings.php:376
+msgid "Data source"
+msgstr "Zdroj dat"
+
+#: templates/page-settings.php:407
+msgid "Open query builder"
+msgstr "Otevřít query sestavovač"
+
+#: templates/page-settings.php:408
+msgid "Query Arguments"
+msgstr "Argumenty query"
+
+#: templates/page-settings.php:412
+msgid "What goes here?"
+msgstr "Co půjde sem?"
+
+#: templates/page-settings.php:413
+msgid "Display Code"
+msgstr "Kód zobrazení"
+
+#: templates/page-settings.php:427
+msgid "Query Builder"
+msgstr "Query Sestavovač"
+
+#: templates/page-settings.php:431
+msgid "Which posts would you like to use for the content listing?"
+msgstr "Které příspěvky chcete použít pro výpis obsahu?"
+
+#: templates/page-settings.php:440
+msgid "Send to editor"
+msgstr "Poslat do editoru"

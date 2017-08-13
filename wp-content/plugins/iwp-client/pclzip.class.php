@@ -748,10 +748,13 @@ endif;
 	  static $info = array();
 	  
 	  static $this_result;
-	  
+	 $exclude_data = $v_options[IWP_PCLZIP_OPT_IWP_EXCLUDE];
 	  if(empty($this_result)){
 		  if( is_dir( $dir = rtrim( $dir, "/\\" ) ) ) {
 			foreach( scandir( $dir) as $item ) {
+        if ($this->excludeDirFromScan($dir, $exclude_data)) {
+          return;
+        }
 			  if(true){
 				  if( $item != "." && $item != ".." ) {
 					$absPath = $dir . DIRECTORY_SEPARATOR . $item;
@@ -806,7 +809,17 @@ endif;
 		return $this_result;
   }
   
-  
+  function excludeDirFromScan($exclude_dir, $exclude_data){
+    if (empty($exclude_data)) {
+      return false;
+    }
+    foreach ($exclude_data as $dir=>$name) {
+        if ($name != '/' && strrpos($exclude_dir, $name)) {
+            return true;
+        } 
+    }
+    return false;
+  }
   
   //---------------------------------------------------------------------------------
   // --------------------------------------------------------------------------------
@@ -3580,7 +3593,12 @@ endif;
 	//$timeTak = microtime(true) - $tempLoopStart;
 	
     // ----- Check the minimum file size
-    if (iwp_mmb_get_file_size($v_gzip_temp_name) < 18) {
+    if (version_compare(phpversion(), '7','<')) {
+        $version_bytes = 18;
+    }else{
+        $version_bytes = 0;
+    }
+    if (iwp_mmb_get_file_size($v_gzip_temp_name) < $version_bytes) {
 	  echo "Check the minimum file size error";
       IWPPclZip::privErrorLog(IWP_PCLZIP_ERR_BAD_FORMAT, 'gzip temporary file \''.$v_gzip_temp_name.'\' has invalid filesize - should be minimum 18 bytes');
 	  //return array( 'error' => 'Zip-error: Error compressing the file "'.$p_filedescr['filename'].'".Try excluding this file and try again.');

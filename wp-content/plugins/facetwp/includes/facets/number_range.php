@@ -5,8 +5,6 @@ class FacetWP_Facet_Number_Range
 
     function __construct() {
         $this->label = __( 'Number Range', 'fwp' );
-
-        add_filter( 'facetwp_index_row', array( $this, 'index_row' ), 5, 2 );
     }
 
 
@@ -19,9 +17,10 @@ class FacetWP_Facet_Number_Range
         $value = $params['selected_values'];
         $value = empty( $value ) ? array( '', '', ) : $value;
         $output .= '<label>' . __( 'Min', 'fwp' ) . '</label>';
-        $output .= '<input type="text" class="facetwp-number facetwp-number-min" value="' . $value[0] . '" />';
+        $output .= '<input type="text" class="facetwp-number facetwp-number-min" value="' . esc_attr( $value[0] ) . '" />';
         $output .= '<label>' . __( 'Max', 'fwp' ) . '</label>';
-        $output .= '<input type="text" class="facetwp-number facetwp-number-max" value="' . $value[1] . '" />';
+        $output .= '<input type="text" class="facetwp-number facetwp-number-max" value="' . esc_attr( $value[1] ) . '" />';
+        $output .= '<input type="button" class="facetwp-submit" value="' . __( 'OK', 'fwp' ) . '" />';
         return $output;
     }
 
@@ -65,7 +64,7 @@ class FacetWP_Facet_Number_Range
         $sql = "
         SELECT DISTINCT post_id FROM {$wpdb->prefix}facetwp_index
         WHERE facet_name = '{$facet['name']}' $where";
-        return $wpdb->get_col( $sql );
+        return facetwp_sql( $sql, $facet );
     }
 
 
@@ -135,27 +134,5 @@ class FacetWP_Facet_Number_Range
             </td>
         </tr>
 <?php
-    }
-
-
-    /**
-     * Index the 2nd data source
-     * @since 2.1.1
-     */
-    function index_row( $params, $class ) {
-        if ( $class->is_overridden ) {
-            return $params;
-        }
-
-        $facet = FWP()->helper->get_facet_by_name( $params['facet_name'] );
-
-        if ( 'number_range' == $facet['type'] && ! empty( $facet['source_other'] ) ) {
-            $other_params = $params;
-            $other_params['facet_source'] = $facet['source_other'];
-            $rows = $class->get_row_data( $other_params );
-            $params['facet_display_value'] = $rows[0]['facet_display_value'];
-        }
-
-        return $params;
     }
 }

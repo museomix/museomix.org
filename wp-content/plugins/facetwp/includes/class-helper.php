@@ -278,39 +278,11 @@ final class FacetWP_Helper
 
         // Sort the array based on the new "order" element
         // Since this is a dot-separated hierarchy string, treat it like version_compare
-        usort( $values, array( $this, 'compare_order' ) );
+        usort( $values, function( $a, $b ) {
+            return version_compare( $a['order'], $b['order'] );
+        });
 
         return $values;
-    }
-
-
-    /**
-     * Sort the "order" string using version_compare
-     * @since 1.6.1
-     */
-    function compare_order( $a, $b ) {
-        return version_compare( $a['order'], $b['order'] );
-    }
-
-
-    /**
-     * Sanitize SQL data
-     * @return mixed The sanitized value(s)
-     * @since 0.9.1
-     */
-    function sanitize( $input ) {
-        if ( is_array( $input ) ) {
-            $output = array();
-
-            foreach ( $input as $key => $val ) {
-                $output[ $key ] = $this->sanitize( $val );
-            }
-        }
-        else {
-            $output = addslashes( $input );
-        }
-
-        return $output;
     }
 
 
@@ -353,13 +325,32 @@ final class FacetWP_Helper
      * @since 2.1
      */
     function safe_value( $value ) {
-        if ( preg_match( '/[^a-z0-9.\- ]/i', $value ) ) {
+        $value = remove_accents( $value );
+
+        if ( preg_match( '/[^a-z0-9_.\- ]/i', $value ) ) {
             if ( ! preg_match( '/^\d{4}-(0[1-9]|1[012])-([012]\d|3[01])/', $value ) ) {
                 $value = md5( $value );
             }
         }
         $value = str_replace( ' ', '-', strtolower( $value ) );
         return preg_replace( '/[-]{2,}/', '-', $value );
+    }
+
+
+    /**
+     * Properly format numbers, taking separators into account
+     * @return number
+     * @since 2.7.5
+     */
+    function format_number( $num ) {
+        $sep_decimal = $this->get_setting( 'decimal_separator' );
+        $sep_thousands = $this->get_setting( 'thousands_separator' );
+
+        $num = str_replace( $sep_thousands, '', $num );
+        $num = ( ',' == $sep_decimal ) ? str_replace( ',', '.', $num ) : $num;
+        $num = preg_replace( '/[^0-9-.]/', '', $num );
+
+        return $num;
     }
 
 
@@ -393,15 +384,18 @@ final class FacetWP_Helper
                     'post_modified'     => __( 'Post Modified', 'fwp' ),
                     'post_title'        => __( 'Post Title', 'fwp' ),
                     'post_author'       => __( 'Post Author', 'fwp' )
-                )
+                ),
+                'weight' => 10
             ),
             'taxonomies' => array(
                 'label' => __( 'Taxonomies', 'fwp' ),
-                'choices' => array()
+                'choices' => array(),
+                'weight' => 20
             ),
             'custom_fields' => array(
                 'label' => __( 'Custom Fields', 'fwp' ),
-                'choices' => array()
+                'choices' => array(),
+                'weight' => 30
             )
         );
 
@@ -410,9 +404,31 @@ final class FacetWP_Helper
         }
 
         foreach ( $custom_fields as $cf ) {
-            $sources['custom_fields']['choices'][ 'cf/' . $cf ] = $cf;
+            if ( 0 !== strpos( $cf, '_oembed_' ) ) {
+                $sources['custom_fields']['choices'][ 'cf/' . $cf ] = $cf;
+            }
         }
 
-        return apply_filters( 'facetwp_facet_sources', $sources );
+        $sources = apply_filters( 'facetwp_facet_sources', $sources );
+
+        uasort( $sources, array( $this, 'sort_by_weight' ) );
+
+        return $sources;
+    }
+
+
+    /**
+     * Sort facetwp_facet_sources by weight
+     * @since 2.7.5
+     */
+    function sort_by_weight( $a, $b ) {
+        $a['weight'] = isset( $a['weight'] ) ? $a['weight'] : 10;
+        $b['weight'] = isset( $b['weight'] ) ? $b['weight'] : 10;
+
+        if ( $a['weight'] == $b['weight'] ) {
+            return 0;
+        }
+
+        return ( $a['weight'] < $b['weight'] ) ? -1 : 1;
     }
 }

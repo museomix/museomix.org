@@ -9,7 +9,7 @@ class Loco_admin_RootController extends Loco_admin_list_BaseController {
      */
     public function getHelpTabs(){
         return array (
-            __('Overview','default') => $this->view('tab-home'),
+            __('Overview','default') => $this->viewSnippet('tab-home'),
         );
     }
 
@@ -20,8 +20,8 @@ class Loco_admin_RootController extends Loco_admin_list_BaseController {
     public function render(){
         
         // translators: home screen title where %s is the version number
-        $this->set('title', sprintf( __('Loco Translate %s','loco'), loco_plugin_version() ) );
-        
+        $this->set('title', sprintf( __('Loco Translate %s','loco-translate'), loco_plugin_version() ) );
+
         // Show currently active theme on home page
         $theme = Loco_package_Theme::create(null);
         $this->set('theme', $this->bundleParam($theme) );
